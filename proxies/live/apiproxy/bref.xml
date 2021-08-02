@@ -1,0 +1,4 @@
+<APIProxy name="bref">
+  <!-- This is the root of the application -->
+  <Description>Proxy to Booking and Referral FHIR API endpoints.</Description>
+</APIProxy>
