@@ -1,5 +1,5 @@
 openapi: "3.0.0"
-x-nhs-api-spec-guid: 660570a2-970c-4167-aa88-6a445f4e3fa8
+x-nhs-api-spec-guid: a302b2a5-5c98-4fab-bd84-b32a437ccd1e
 x-meta:
   service_name: "booking-and-referral"
   short_service_name: "bref"
