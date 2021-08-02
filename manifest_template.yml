@@ -21,9 +21,9 @@ APIGEE_ENVIRONMENTS:
 meta:
   api:
     name: booking-and-referral
-    guid: 660570a2-970c-4167-aa88-6a445f4e3fa8
+    guid: c7f450fb-ae5b-402b-9640-7adf22770108
     spec_guids:
-      - 660570a2-970c-4167-aa88-6a445f4e3fa8
+      - a302b2a5-5c98-4fab-bd84-b32a437ccd1e
   schema_version: 1.1
 apigee:
   environments:
