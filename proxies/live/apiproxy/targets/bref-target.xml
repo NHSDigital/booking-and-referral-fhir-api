@@ -21,6 +21,15 @@
       <Step>
         <Name>SpikeArrest</Name>
       </Step>
+      <Step>
+          <Name>KeyValueMapOperations.GetBookingAndReferralConfig</Name>
+      </Step>
+      <Step>
+          <Name>Javascript.UnpackVars</Name>
+      </Step>
+      <Step>
+          <Name>Javascript.setTargetUrl</Name>
+      </Step>
     </Request>
   </PreFlow>
   <HTTPTargetConnection>

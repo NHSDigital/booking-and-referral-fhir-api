@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KeyValueMapOperations.GetBookingAndReferralConfig" mapIdentifier="secret-squirrel" encrypted="true">
+    <Get assignTo="private.config_raw">
+        <Key>
+            <Parameter>booking_and_referral_variables</Parameter>
+        </Key>
+    </Get>
+</KeyValueMapOperations>
