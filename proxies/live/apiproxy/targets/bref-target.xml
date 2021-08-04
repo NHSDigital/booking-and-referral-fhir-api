@@ -1,15 +1,4 @@
 <TargetEndpoint name="booking-and-referral-target">
-  <FaultRules>
-    <FaultRule name="access_token_expired">
-      <Step>
-        <Name>ExtractVariables.OAuthErrorFaultString</Name>
-      </Step>
-      <Step>
-        <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
-      </Step>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
-    </FaultRule>
-  </FaultRules>
   <PreFlow>
     <Request>
       <Step>
@@ -30,8 +19,28 @@
       <Step>
           <Name>Javascript.setTargetUrl</Name>
       </Step>
+      <Step>
+          <Name>RaiseFault.400BadRequest</Name>
+          <Condition>isError = true</Condition>
+      </Step>
     </Request>
   </PreFlow>
+  <FaultRules>
+    <FaultRule name="access_token_expired">
+      <Step>
+        <Name>ExtractVariables.OAuthErrorFaultString</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
+      </Step>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+    </FaultRule>
+  </FaultRules>
+  <DefaultFaultRule>
+      <Step>
+          <Name>AssignMessage.Errors.CatchAllMessage</Name>
+      </Step>
+  </DefaultFaultRule>
   <HTTPTargetConnection>
     <URL>http://mocktarget.apigee.net</URL>
     <Properties>
