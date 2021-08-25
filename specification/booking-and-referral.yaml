@@ -13,7 +13,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-- url: https://api.nhs.uk/Appointments-and-referrals/v1/
+- url: https://api.nhs.uk/Appointments-and-referrals/v1
   description: Dev
 tags:
 - name: Meta
