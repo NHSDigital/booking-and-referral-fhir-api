@@ -16,13 +16,13 @@ servers:
 - url: https://api.nhs.uk/Appointments-and-referrals/v1
   description: Dev
 tags:
-- name: Meta
-- name: Message
-- name: Slots
 - name: Booking
+- name: Events
+- name: Message
+- name: Meta
 - name: Referral
 - name: Registry
-- name: Events
+- name: Slots
 security:
 - BasicAuth: []
 - BearerAuth: []
