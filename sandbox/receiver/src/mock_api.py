@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response
 import os
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def response_builder(http_code_response, env_name):
                '"http://hl7.org/fhir/STU3/operationoutcome" ] }, "issue": [ { "severity": "error", "code": "invalid", ' \
                '"details": { "coding": [ { "system": "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1", ' \
                '"code": "BAD_REQUEST" } ] }, "diagnostics": "Any further internal debug details i.e. stack trace ' \
-               'details etc." } ] } '% env_name
+               'details etc." } ] } ' % env_name
     elif http_code_response == '403':
         return '{"providerName": "%s", "resourceType": "OperationOutcome", "meta": {"profile": [ ' \
                '"http://hl7.org/fhir/STU3/operationoutcome" ] }, "issue": [ { "severity": "error", "code": "invalid", ' \
