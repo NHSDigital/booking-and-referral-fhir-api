@@ -4,7 +4,7 @@
       <Request>
         <Step>
           <Name>RaiseFault.400BadRequest</Name>
-          <Condition>(request.header.NHSD-ServiceIdentifie = null)</Condition>
+          <Condition>(request.header.NHSD-ServiceIdentifier = null)</Condition>
         </Step>
       </Request>
       <Condition>(proxy.pathsuffix MatchesPath "/meta") and (request.verb = "GET")</Condition>
