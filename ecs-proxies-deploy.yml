@@ -1,9 +1,9 @@
 docker_service:
-  - name: sandbox
+  - name: mock-receiver
     expose: true
     environment:
-      - name: NODE_ENV
-        value: production
+      - name: ENV_NAME
+        value: provider_one
       - name: LOG_LEVEL
         value: "{{ 'debug' if APIGEE_ENVIRONMENT == 'internal-dev' else 'info' }}"
       - name: VERSION_INFO
