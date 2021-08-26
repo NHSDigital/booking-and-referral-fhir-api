@@ -1,5 +1,5 @@
 var queryParamaters = context.getVariable("request.querystring");
-var serviceId = context.getVariable("request.header.service-id");
+var serviceId = context.getVariable("request.header.NHSD-ServiceIdentifie");
 var kvmValue = "booking-and-referral-config.id." + serviceId;
 var url = context.getVariable(kvmValue);
 var isError = false;
