@@ -6,6 +6,6 @@ COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt
 
-COPY ./src .
+COPY src .
 
 CMD ["python", "mock_api.py"]
