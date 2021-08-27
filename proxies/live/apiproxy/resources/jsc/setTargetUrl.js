@@ -1,5 +1,5 @@
 
-function get_url(serviceId, endpoint) {
+function get_target_url_from_kvm(serviceId, endpoint) {
   /*
     Get a url value from the booking-and-referral kvm.
     the valid endpoints at the moment are:
@@ -13,22 +13,46 @@ function get_url(serviceId, endpoint) {
     return url
 }
 
-//////////////////////////////////
-// Geting context variables...
-//////////////////////////////////
+function get_endpoint_from_pathsuffix(pathsuffix) {
+  /*
+    Get a the endpoint  value from the pathsuffix.
+    the valid endpoints at the moment are:
+    - meta
+    - Slots
+    - Appointment
+    - ServiceRequest
+    - registry
+    
+    If there is no match in the pathsuffix returns null
+  */
+    if (pathsuffix.includes('/meta')) {
+      return 'meta'
+    }
+    if (pathsuffix.includes('/Slots')) {
+      return 'Slots'
+    }
+    if (pathsuffix.includes('/Appointment')) {
+      return 'Appointment'
+    }
+    if (pathsuffix.includes('/ServiceRequest')) {
+      return 'ServiceRequest'
+    }
+    if (pathsuffix.includes('/registry')) {
+      return 'registry'
+    }
+}
 
-var queryParamaters = context.getVariable("request.querystring");
 var serviceId = context.getVariable("request.header.NHSD-ServiceIdentifier");
-var endpoint = context.getVariable("proxy.pathsuffix")
-
+var pathSuffix = context.getVariable("proxy.pathsuffix")
 var isError = false;
 
-var targetUrl = get_url(serviceId,endpoint)
+var endpoint = get_endpoint_from_pathsuffix(pathSuffix)
+var targetUrl = get_target_url_from_kvm(serviceId,endpoint)
 
 if(url === null | serviceId === null){
     isError = true
 }
 
 context.setVariable("isError", isError)
-context.setVariable("target.url", targetUrl + "?" + queryParamaters);
+context.setVariable("target.url", targetUrl);
 
