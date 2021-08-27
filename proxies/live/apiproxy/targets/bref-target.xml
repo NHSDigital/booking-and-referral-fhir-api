@@ -17,7 +17,7 @@
           <Name>Javascript.UnpackVars</Name>
       </Step>
       <Step>
-          <Name>Javascript.setTargetUrl</Name>
+          <Name>Javascript.SetTargetUrl</Name>
       </Step>
       <Step>
           <Name>RaiseFault.400BadRequest</Name>

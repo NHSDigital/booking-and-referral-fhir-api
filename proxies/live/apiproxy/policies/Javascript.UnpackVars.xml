@@ -3,4 +3,5 @@
     <DisplayName>Javascript.UnpackVars</DisplayName>
     <Properties/>
     <ResourceURL>jsc://UnpackVars.js</ResourceURL>
+    <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
 </Javascript>
