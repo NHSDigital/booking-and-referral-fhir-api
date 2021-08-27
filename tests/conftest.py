@@ -16,8 +16,8 @@ def api_test_config() -> APITestSessionConfig:
         which builds the proxy uri
     """
     return APITestSessionConfig()
-    
-@pytest.fixture(scope="session", autouse=True)
+
+@pytest.fixture(scope="class")
 async def default_app():
     """This fixture is automatically called once at the start of pytest execution.
     The default app created here should not be modified by your tests.
@@ -66,7 +66,7 @@ async def default_app():
     await apigee_product.destroy_product()
 
 
-@pytest.yield_fixture(scope="session")
+@pytest.yield_fixture(scope="class")
 def event_loop(request):
     loop = asyncio.new_event_loop()
     yield loop
