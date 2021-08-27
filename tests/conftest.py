@@ -19,7 +19,7 @@ def api_test_config() -> APITestSessionConfig:
 
 @pytest.fixture(scope="class")
 async def default_app():
-    """This fixture is automatically called once at the start of pytest execution.
+    """This fixture is automatically called once when used inside a class.
     The default app created here should not be modified by your tests.
     The default app has a default product associated.
     If your test requires specific app config then please create your own"""
