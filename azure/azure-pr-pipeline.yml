@@ -39,7 +39,7 @@ extends:
       - environment: internal-dev
         make_spec_visible: true
         post_deploy:
-          - template: ./templates/run-smoke-tests.yml
+          - template: ./templates/run-tests.yml
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         post_deploy:
