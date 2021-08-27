@@ -17,6 +17,8 @@ keywords = ["healthcare", "uk", "nhs"] #TODO add additional keywords
 
 [tool.poetry.dependencies]
 python = "^3.8"
+requests = "^2.26.0"
+assertpy = "^1.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.9"
@@ -32,6 +34,6 @@ pytest = "^6.1.2"
 coverage = "^5.5"
 aiohttp = "^3.7.3"
 pytest-asyncio = "^0.14.0"
-api-test-utils = {url = "https://github.com/NHSDigital/apim-test-utils/releases/download/v1.0.92-alpha/api_test_utils-1.0.92a0-py3-none-any.whl"}
+api-test-utils = {url = "https://github.com/NHSDigital/apim-test-utils/releases/download/v1.1.12-alpha/api_test_utils-1.1.12a0-py3-none-any.whl"}
 
 [tool.poetry.scripts]

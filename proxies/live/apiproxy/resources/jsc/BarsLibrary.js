@@ -67,13 +67,13 @@ function get_endpoint_from_pathsuffix(pathsuffix) {
     return 'meta'
     }
     if (pathsuffix.includes('/Slots')) {
-    return 'Slots'
+    return 'slots'
     }
     if (pathsuffix.includes('/Appointment')) {
-    return 'Appointment'
+    return 'appointment'
     }
     if (pathsuffix.includes('/ServiceRequest')) {
-    return 'ServiceRequest'
+    return 'serviceRequest'
     }
     if (pathsuffix.includes('/registry')) {
     return 'registry'
