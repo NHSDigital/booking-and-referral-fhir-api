@@ -8,7 +8,7 @@ function get_target_url_from_kvm(serviceId, endpoint) {
     
     If there is no value in the kvm it returns null
   */
-    var location = "booking-and-referral-config.NHSD-ServiceIdentifier." + serviceId + endpoint;
+    var location = "booking-and-referral-config.NHSD-ServiceIdentifier." + serviceId + "." + endpoint;
     var url = context.getVariable(location);
     return url
 }
@@ -40,6 +40,7 @@ function get_endpoint_from_pathsuffix(pathsuffix) {
     if (pathsuffix.includes('/registry')) {
       return 'registry'
     }
+    return null
 }
 
 var serviceId = context.getVariable("request.header.NHSD-ServiceIdentifier");
@@ -49,7 +50,7 @@ var isError = false;
 var endpoint = get_endpoint_from_pathsuffix(pathSuffix)
 var targetUrl = get_target_url_from_kvm(serviceId,endpoint)
 
-if(url === null | serviceId === null){
+if(targetUrl === null | serviceId === null){
     isError = true
 }
 
