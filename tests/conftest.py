@@ -10,7 +10,6 @@ from api_test_utils.oauth_helper import OauthHelper
 from .configuration import config
 
 
-
 @pytest.fixture(scope="session", autouse=True)
 async def default_app():
     """This fixture is automatically called once at the start of pytest execution.
@@ -24,7 +23,9 @@ async def default_app():
     await apigee_product.update_proxies(
         [config.BASE_PATH, "identity-service-internal-dev"]
     )
-    await apigee_product.update_scopes(["urn:nhsd:apim:app:level3:booking-and-referral"])
+    await apigee_product.update_scopes(
+        ["urn:nhsd:apim:app:level3:booking-and-referral"]
+    )
 
     apigee_app = ApigeeApiDeveloperApps()
     await apigee_app.create_new_app()
