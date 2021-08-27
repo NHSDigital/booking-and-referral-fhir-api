@@ -1,7 +1,4 @@
 docker_containers:
-  - name: mock-receiver-one
+  - name: mock-receiver
     dockerfile: "sandbox/receiver/Dockerfile"
     path: "sandbox/receiver"
-  - name: mock-receiver-two
-    dockerfile: "sandbox/receiver/Dockerfile"
-    path: "sandbox/receiver

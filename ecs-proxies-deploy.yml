@@ -1,22 +1,9 @@
 docker_service:
-  - name: mock-receiver-one
+  - name: mock-receiver
     expose: true
     environment:
       - name: ENV_NAME
         value: provider_one
-      - name: LOG_LEVEL
-        value: "{{ 'debug' if APIGEE_ENVIRONMENT == 'internal-dev' else 'info' }}"
-      - name: VERSION_INFO
-        value: "{{ version_info | to_json }}"
-    health_check:
-      matcher: "200"
-      path: "/_ping"
-
-  - name: mock-receiver-two
-    expose: true
-    environment:
-      - name: ENV_NAME
-        value: provider_two
       - name: LOG_LEVEL
         value: "{{ 'debug' if APIGEE_ENVIRONMENT == 'internal-dev' else 'info' }}"
       - name: VERSION_INFO
