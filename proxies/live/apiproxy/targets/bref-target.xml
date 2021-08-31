@@ -2,6 +2,17 @@
   <PreFlow>
     <Request>
       <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+      </Step>
+      <Condition>
+                  (proxy.pathsuffix Not Matches "/meta")
+                  AND (proxy.pathsuffix Not Matches "/$process-message")
+                  AND (proxy.pathsuffix Not Matches "/Slot*")
+                  AND (proxy.pathsuffix Not Matches "/Apointment*")
+                  AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
+                  AND (proxy.pathsuffix Not Matches "/registry*")
+      </Condition>
+      <Step>
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
       <Step>
@@ -34,19 +45,6 @@
         <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
       </Step>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
-    </FaultRule>
-    <FaultRule name="invalid_path">
-      <Step>
-        <Name>AssignMessage.InvalidPathErrorResponse</Name>
-      </Step>
-      <Condition>
-                  (proxy.pathsuffix Not Matches "/meta")
-                  or (proxy.pathsuffix Not Matches "/$process-message")
-                  or (proxy.pathsuffix Not Matches "/Slot*")
-                  or (proxy.pathsuffix Not Matches "/Apointment*")
-                  or (proxy.pathsuffix Not Matches "/ServiceRequest*")
-                  or (proxy.pathsuffix Not Matches "/registry*")
-      </Condition>
     </FaultRule>
   </FaultRules>
   <DefaultFaultRule>
