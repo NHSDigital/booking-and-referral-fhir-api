@@ -38,7 +38,7 @@ steps:
       export OAUTH_BASE_URI="https://$(ENVIRONMENT).api.service.nhs.uk"
       export OAUTH_PROXY="oauth2"
       export JWT_PRIVATE_KEY_ABSOLUTE_PATH="$(Pipeline.Workspace)/secrets/$(JWT_TESTING_PRIVATE_KEY)"
-      export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
+      export SERVICE_BASE_PATH="$(FULLY_QUALIFIED_SERVICE_NAME)"
       poetry run pytest -v tests/test_endpoints.py --junitxml=tests/patient-access-test-report.xml 
     displayName: Run integration tests
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
