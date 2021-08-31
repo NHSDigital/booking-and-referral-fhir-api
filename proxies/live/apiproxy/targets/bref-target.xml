@@ -1,17 +1,17 @@
 <TargetEndpoint name="booking-and-referral-target">
-  <FaultRules>
-    <FaultRule name="access_token_expired">
-      <Step>
-        <Name>ExtractVariables.OAuthErrorFaultString</Name>
-      </Step>
-      <Step>
-        <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
-      </Step>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
-    </FaultRule>
-  </FaultRules>
   <PreFlow>
     <Request>
+      <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+        <Condition>
+                  (proxy.pathsuffix Not Matches "/meta")
+                  AND (proxy.pathsuffix Not Matches "/$process-message")
+                  AND (proxy.pathsuffix Not Matches "/Slot*")
+                  AND (proxy.pathsuffix Not Matches "/Apointment*")
+                  AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
+                  AND (proxy.pathsuffix Not Matches "/registry*")
+        </Condition>
+      </Step>
       <Step>
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
@@ -28,10 +28,30 @@
           <Name>Javascript.UnpackVars</Name>
       </Step>
       <Step>
-          <Name>Javascript.setTargetUrl</Name>
+          <Name>Javascript.SetTargetUrl</Name>
+      </Step>
+      <Step>
+          <Name>RaiseFault.400BadRequest</Name>
+          <Condition>isError = true</Condition>
       </Step>
     </Request>
   </PreFlow>
+  <FaultRules>
+    <FaultRule name="access_token_expired">
+      <Step>
+        <Name>ExtractVariables.OAuthErrorFaultString</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
+      </Step>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+    </FaultRule>
+  </FaultRules>
+  <DefaultFaultRule>
+      <Step>
+          <Name>AssignMessage.Errors.CatchAllMessage</Name>
+      </Step>
+  </DefaultFaultRule>
   <HTTPTargetConnection>
     <URL>http://mocktarget.apigee.net</URL>
     <Properties>
