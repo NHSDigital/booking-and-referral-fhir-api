@@ -4,7 +4,12 @@ from .configuration import config
 
 
 class TestEndpoints:
-    def test_meta_endpoint(self, get_token_client_credentials):
+
+# This tests are only asserting status codes since we still do not have 'mock-recievers' in place
+# Lets dont forget to add assertions fot the response body whenever is possible :)
+
+    def test_happy_path(self, get_token_client_credentials):
+        # This test should be parametrized using all the valid endpoints whenever the finish the OAS spec.
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
