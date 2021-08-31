@@ -1,5 +1,5 @@
 docker_service:
-  - name: mock-receiver
+  - name: sandbox
     expose: true
     environment:
       - name: ENV_NAME
