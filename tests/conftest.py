@@ -22,7 +22,7 @@ async def default_app():
     apigee_product = ApigeeApiProducts()
     await apigee_product.create_new_product()
     await apigee_product.update_proxies(
-        [config.BASE_PATH, "identity-service-internal-dev"]
+        [config.PROXY_NAME, "identity-service-internal-dev"]
     )
     await apigee_product.update_scopes(
         ["urn:nhsd:apim:app:level3:booking-and-referral"]
