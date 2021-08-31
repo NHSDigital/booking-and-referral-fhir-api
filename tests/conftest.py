@@ -4,6 +4,7 @@ import asyncio
 from uuid import uuid4
 from time import time
 from api_test_utils.api_test_session_config import APITestSessionConfig
+from api_test_utils.api_session_client import APISessionClient
 from api_test_utils.apigee_api_products import ApigeeApiProducts
 from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
@@ -16,6 +17,14 @@ def api_test_config() -> APITestSessionConfig:
         which builds the proxy uri
     """
     return APITestSessionConfig()
+
+@pytest.fixture(scope='session')
+def api_client() -> APISessionClient:
+    """
+        this imports a 'standard' test session client
+    """
+    return APISessionClient()
+
 
 @pytest.fixture(scope="class")
 async def default_app():
