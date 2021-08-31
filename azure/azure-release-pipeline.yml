@@ -37,7 +37,7 @@ extends:
       - environment: internal-dev
         make_spec_visible: true  # Off by default. Turn on to allow expose API developers can subscribe their Apps to
         post_deploy:
-          - template: ./templates/run-smoke-tests.yml
+          - template: ./templates/run-tests.yml
       - environment: internal-qa
         make_spec_visible: true
         post_deploy:
