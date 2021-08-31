@@ -10,21 +10,6 @@ from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
 from .configuration import config
 
-@pytest.fixture(scope='session')
-def api_test_config() -> APITestSessionConfig:
-    """
-        this imports a 'standard' test session config,
-        which builds the proxy uri
-    """
-    return APITestSessionConfig()
-
-@pytest.fixture(scope='session')
-def api_client() -> APISessionClient:
-    """
-        this imports a 'standard' test session client
-    """
-    return APISessionClient()
-
 
 @pytest.fixture(scope="class")
 async def default_app():

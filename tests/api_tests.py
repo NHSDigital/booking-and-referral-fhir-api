@@ -6,6 +6,14 @@ from api_test_utils.api_session_client import APISessionClient
 from api_test_utils.api_test_session_config import APITestSessionConfig
 from api_test_utils import poll_until, env
 
+@pytest.fixture(scope='session')
+def api_test_config() -> APITestSessionConfig:
+    """
+        this imports a 'standard' test session config,
+        which builds the proxy uri
+    """
+    return APITestSessionConfig()
+
 
 async def _is_deployed(resp: ClientResponse, api_test_config: APITestSessionConfig) -> bool:
 
