@@ -11,7 +11,7 @@ class TestEndpoints:
 
         # When
         response = requests.get(
-            url=f"https://internal-dev.api.service.nhs.uk/{config.BASE_PATH}/meta",
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/meta",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-ServiceIdentifier": "NHS0001",
@@ -20,14 +20,46 @@ class TestEndpoints:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
-    def test_slots_endpoint(self, get_token_client_credentials):
+    def test_slot_endpoint(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
 
         # When
         response = requests.get(
-            url=f"https://internal-dev.api.service.nhs.uk/{config.BASE_PATH}/Slots",
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slots",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-ServiceIdentifier": "NHS0001",
+            },
+        )
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+
+    def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 400
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/meta",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-ServiceIdentifier": "invalid",
+            },
+        )
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+
+    def test_invalid_path(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 404
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/invalid",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-ServiceIdentifier": "NHS0001",
