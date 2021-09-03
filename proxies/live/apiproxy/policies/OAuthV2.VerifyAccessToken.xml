@@ -1,3 +1,4 @@
 <OAuthV2 async="false" continueOnError="false" enabled="true" name="OauthV2.VerifyAccessToken">
+  <Scope>urn:nhsd:apim:app:level3:booking-and-referral</Scope>
   <Operation>VerifyAccessToken</Operation>
 </OAuthV2>
