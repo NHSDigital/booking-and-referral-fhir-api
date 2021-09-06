@@ -59,4 +59,4 @@ extends:
           - internal_qa
           - internal_qa_sandbox
         post_deploy:
-          - template: ./templates/run-smoke-tests.yml
+          - template: ./templates/run-tests.yml
