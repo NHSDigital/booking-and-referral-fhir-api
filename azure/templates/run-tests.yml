@@ -10,9 +10,9 @@ steps:
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
       export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
       export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
-      export CLIENT_ID=""
-      export CLIENT_SECRET=""
-      export REDIRECT_URL=""
+      export CLIENT_ID="something"
+      export CLIENT_SECRET="something"
+      export REDIRECT_URL="something"
 
       make smoketest
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
