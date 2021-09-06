@@ -16,7 +16,7 @@ class TestEndpoints:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/meta",
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slots",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-ServiceIdentifier": "NHS0001",
@@ -32,7 +32,7 @@ class TestEndpoints:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/meta",
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slots",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-ServiceIdentifier": "invalid",

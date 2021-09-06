@@ -10,9 +10,9 @@ steps:
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
       export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
       export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
-      export CLIENT_ID="something"
-      export CLIENT_SECRET="something"
-      export REDIRECT_URL="something"
+      export CLIENT_ID="not-used-on-smoketest"
+      export CLIENT_SECRET="not-used-on-smoketest"
+      export REDIRECT_URL="not-used-on-smoketest"
 
       make smoketest
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
@@ -34,6 +34,9 @@ steps:
     parameters:
      secret_file_ids:
       - ptl/app-credentials/jwt_testing/non-prod/JWT_TESTING_PRIVATE_KEY
+     config_ids:
+       - /ptl/azure-devops/env-int/test-app/internal-testing-int/CLIENT_ID_INT
+       - /ptl/azure-devops/env-int/test-app/internal-testing-int/CLIENT_SECRET_INT
 
   - bash: |
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
@@ -43,9 +46,9 @@ steps:
       export JWT_PRIVATE_KEY_ABSOLUTE_PATH="$(Pipeline.Workspace)/secrets/$(JWT_TESTING_PRIVATE_KEY)"
       export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
       export FULLY_QUALIFIED_SERVICE_NAME="$(FULLY_QUALIFIED_SERVICE_NAME)"
-      export CLIENT_ID="Too5BdPayTQACdw1AJK1rD4nKUD0Ag7J"
-      export CLIENT_SECRET="wi7sCuFSgQg34ZWO"
-      export REDIRECT_URL="https://nhsd-apim-testing-internal-dev.herokuapp.com/callback"
+      export CLIENT_ID="$(CLIENT_ID_INT)"
+      export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
+      export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
       poetry run pytest -v tests/test_endpoints.py --junitxml=tests/patient-access-test-report.xml 
     displayName: Run integration tests
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
