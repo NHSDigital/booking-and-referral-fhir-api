@@ -34,7 +34,7 @@ steps:
     parameters:
      secret_file_ids:
       - ptl/app-credentials/jwt_testing/non-prod/JWT_TESTING_PRIVATE_KEY
-     config_ids:
+     secret_ids:
       - ptl/app-credentials/booking-and-referral/non-prod/CLIENT_ID_INT
       - ptl/app-credentials/booking-and-referral/non-prod/CLIENT_SECRET_INT
 
