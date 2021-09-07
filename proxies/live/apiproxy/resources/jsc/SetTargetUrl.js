@@ -13,5 +13,9 @@ if(targetUrl === null | serviceId === null){
 context.setVariable("isError", isError)
 
 // Override target url
-context.setVariable("target.url", targetUrl + pathSuffix + "?" + queryString);
+if(queryString !== ""){
+    context.setVariable("target.url", targetUrl + pathSuffix + "?" + queryString);
+}else{
+    context.setVariable("target.url", targetUrl + pathSuffix);
+}
 
