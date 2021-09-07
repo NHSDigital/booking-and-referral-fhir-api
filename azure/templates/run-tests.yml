@@ -35,8 +35,8 @@ steps:
      secret_file_ids:
       - ptl/app-credentials/jwt_testing/non-prod/JWT_TESTING_PRIVATE_KEY
      config_ids:
-       - /ptl/azure-devops/env-int/test-app/internal-testing-int/CLIENT_ID_INT
-       - /ptl/azure-devops/env-int/test-app/internal-testing-int/CLIENT_SECRET_INT
+       - ptl/app-credentials/booking-and-referral/non-prod/CLIENT_ID_INT
+       - ptl/app-credentials/booking-and-referral/non-prod/CLIENT_SECRET_INT
 
   - bash: |
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
