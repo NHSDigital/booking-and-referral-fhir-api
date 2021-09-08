@@ -1,0 +1,18 @@
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.ServiceCallout.GetTargetsKvm">
+  <!-- This is the default (55 seconds). Including it to make explicit. -->
+  <Timeout>55000</Timeout>
+  <Request>
+    <Set>
+      <Verb>GET</Verb>
+      <Path>NHSDigital/booking-and-referral-targets/master/internal-dev/targets.json</Path>
+    </Set>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+  </Request>
+  <Response>private.config_raw</Response>
+  <HTTPTargetConnection>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+    </SSLInfo>
+    <URL>https://raw.githubusercontent.com</URL>
+  </HTTPTargetConnection>
+</ServiceCallout>
