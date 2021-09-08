@@ -55,7 +55,9 @@
   <HTTPTargetConnection>
     <SSLInfo>
       <Enabled>true</Enabled>
-      <TrustStore>ref://api_service-20210303-000000</TrustStore>
+      <KeyStore>ref://api_service-20210303-000000</KeyStore>
+      <ClientAuthEnabled>true</ClientAuthEnabled>
+      <KeyAlias>cert</KeyAlias>
     </SSLInfo>
     <URL>http://mocktarget.apigee.net</URL>
     <Properties>
