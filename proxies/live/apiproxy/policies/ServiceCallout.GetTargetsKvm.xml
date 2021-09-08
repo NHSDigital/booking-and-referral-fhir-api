@@ -1,4 +1,4 @@
-<ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.ServiceCallout.GetTargetsKvm">
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.GetTargetsKvm">
   <!-- This is the default (55 seconds). Including it to make explicit. -->
   <Timeout>55000</Timeout>
   <Request>
