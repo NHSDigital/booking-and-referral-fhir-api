@@ -57,7 +57,7 @@
       <Enabled>true</Enabled>
       <TrustStore>barsKeystore</TrustStore>
     </SSLInfo>
-    <URL>http://mocktarget.apigee.net</URL>
+    <URL>https://mocktarget.apigee.net</URL>
     <Properties>
       <Property name="supports.http10">true</Property>
       <Property name="request.retain.headers">User-Agent,Referer,Accept-Language</Property>
