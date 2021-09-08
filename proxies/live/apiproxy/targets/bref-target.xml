@@ -61,9 +61,7 @@
     </Properties>
     <SSLInfo>
       <Enabled>true</Enabled>
-      <ClientAuthEnabled>true</ClientAuthEnabled>
-      <KeyAlias>cert</KeyAlias>
-      <KeyStore>ref://api_service</KeyStore>
+      <TrustStore>ref://api_service</TrustStore>
     </SSLInfo>
   </HTTPTargetConnection>
 </TargetEndpoint>
