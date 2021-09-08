@@ -22,7 +22,7 @@
         <Name>SpikeArrest</Name>
       </Step>
       <Step>
-          <Name>KeyValueMapOperations.GetBookingAndReferralConfig</Name>
+          <Name>ServiceCallout.GetTargetsKvm</Name>
       </Step>
       <Step>
           <Name>Javascript.UnpackVars</Name>
