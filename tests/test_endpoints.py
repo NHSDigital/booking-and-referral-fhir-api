@@ -86,7 +86,7 @@ class TestEndpoints:
     async def test_proxy_routing(self, get_token_client_credentials, debug, path_suffix):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_target = f"https://internal-dev.api.service.nhs.uk/bars-mock-receiver-proxy/{path_suffix}"
+        expected_target = f"https://{config.ENVIRONMENT}.api.service.nhs.uk/bars-mock-receiver-proxy/{path_suffix}"
 
         await debug.start_trace()
 
