@@ -102,4 +102,4 @@ class TestEndpoints:
         target = await debug.get_apigee_variable_from_trace(name='target.url')
 
         # Then
-        assert_that(expected_target).is_equal_to(target)
+        assert_that(target).is_equal_to(expected_target)
