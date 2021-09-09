@@ -9,7 +9,8 @@ class TestEndpoints:
 
     # This tests are only asserting status codes since we still do not have 'mock-recievers' in place
     # Lets dont forget to add assertions fot the response body whenever is possible :)
-
+    @pytest.mark.integration
+    @pytest.mark.amb_811
     def test_happy_path(self, get_token_client_credentials):
         # This test should be parametrized using all the valid endpoints whenever they finish the OAS spec.
         # Given
@@ -27,6 +28,8 @@ class TestEndpoints:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
+    @pytest.mark.integration
+    @pytest.mark.amb_811
     def test_invalid_access_token(self):
         expected_status_code = 401
 
@@ -41,6 +44,8 @@ class TestEndpoints:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
+    @pytest.mark.integration
+    @pytest.mark.amb_811
     def test_invalid_access_token_auth_code(self, default_oauth_helper):
         # This test checks that when trying to authenticate using auth_code flow
         # an exemption is rised. Sadly the method get_token_response doesn't return
@@ -49,6 +54,8 @@ class TestEndpoints:
             assert asyncio.run(default_oauth_helper.get_token_response(
                 grant_type="authorization_code"))
 
+    @pytest.mark.integration
+    @pytest.mark.amb_811
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -65,6 +72,8 @@ class TestEndpoints:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
+    @pytest.mark.integration
+    @pytest.mark.amb_811
     def test_invalid_path(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -82,6 +91,7 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
     @pytest.mark.asyncio
+    @pytest.mark.amb_833
     @pytest.mark.parametrize("path_suffix", ("Appointment", "Appointment/some-id", "Appointment/some-id?param=value"))
     async def test_proxy_routing(self, get_token_client_credentials, debug, path_suffix):
         # Given
