@@ -4,6 +4,7 @@ import asyncio
 from api_test_utils.apigee_api_products import ApigeeApiProducts
 from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
+from api_test_utils.apigee_api_trace import ApigeeApiTraceDebug
 from .configuration import config
 
 
@@ -73,6 +74,14 @@ def event_loop(request):
     loop = asyncio.new_event_loop()
     yield loop
     loop.close()
+
+@pytest.fixture()
+def debug():
+    """
+    Import the test utils module to be able to:
+        - Use the trace tool and get context variables after making a request to Apigee
+    """
+    return ApigeeApiTraceDebug(proxy=config.PROXY_NAME)
 
 
 @pytest.fixture()
