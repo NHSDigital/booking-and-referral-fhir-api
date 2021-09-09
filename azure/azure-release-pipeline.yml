@@ -41,22 +41,22 @@ extends:
       - environment: internal-qa
         make_spec_visible: true
         post_deploy:
-          - template: ./templates/run-smoke-tests.yml
+          - template: ./templates/run-tests.yml
       - environment: internal-qa-sandbox
         proxy_path: sandbox
         make_spec_visible: true
         post_deploy:
-          - template: ./templates/run-smoke-tests.yml
+          - template: ./templates/run-tests.yml
     # make_spec_visible is false for sandbox environment
     # (App subscription make sense for most sandbox implementations)
       - environment: sandbox
         proxy_path: sandbox
         post_deploy:
-          - template: ./templates/run-smoke-tests.yml
+          - template: ./templates/run-tests.yml
       - environment: int
         make_spec_visible: true
         depends_on:
           - internal_qa
           - internal_qa_sandbox
         post_deploy:
-          - template: ./templates/run-int-tests.yml
+          - template: ./templates/run-tests.yml
