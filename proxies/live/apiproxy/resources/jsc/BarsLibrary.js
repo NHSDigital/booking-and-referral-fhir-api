@@ -47,6 +47,9 @@ function get_target_url_from_kvm(serviceId) {
     */
       var location = "booking-and-referral-config.NHSD-ServiceIdentifier." + serviceId + ".target";
       var url = context.getVariable(location);
+      if(url.endsWith('/')){
+        url = url.replace(/\/$/,"")
+      }
       return url
   }
 
