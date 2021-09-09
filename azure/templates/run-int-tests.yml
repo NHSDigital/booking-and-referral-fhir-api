@@ -14,7 +14,7 @@ steps:
       export CLIENT_SECRET="not-used-on-smoketest"
       export REDIRECT_URL="not-used-on-smoketest"
 
-      make smoketest
+      poetry run pytest -v tests/api_tests.py --junitxml=tests/api_tests.xml 
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: run smoketests
 
