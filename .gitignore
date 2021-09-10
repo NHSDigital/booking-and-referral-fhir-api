@@ -8,6 +8,10 @@ newman/
 .DS_Store
 .#*
 
+**/.env
+**/venv
+**/*.key
+
 __pycache__/
 .envrc
 .idea/
