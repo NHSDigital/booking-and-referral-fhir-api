@@ -52,7 +52,7 @@ class TestAppointment:
     def test_create_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 200
+        expected_status_code = 201
         expected_body = load_example("appointment/POST-success.txt")
 
         # When
