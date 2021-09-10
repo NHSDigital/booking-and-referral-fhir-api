@@ -44,7 +44,7 @@ steps:
         poetry run pytest -v --junitxml=tests/api_tests.xml
       fi
 
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
+    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
     displayName: Run tests
 
   - task: PublishTestResults@2
