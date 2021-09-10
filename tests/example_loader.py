@@ -10,4 +10,3 @@ def load_example(path: str):
             return json.load(f)
         else:
             return f.read().strip()
-

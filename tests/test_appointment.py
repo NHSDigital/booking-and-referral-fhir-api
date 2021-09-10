@@ -110,7 +110,6 @@ class TestAppointment:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.content.decode('utf-8'))
 
-
     @pytest.mark.appointment
     @pytest.mark.debug
     def test_delete_appointment(self, get_token_client_credentials):
