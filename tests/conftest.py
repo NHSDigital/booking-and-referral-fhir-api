@@ -68,7 +68,7 @@ async def default_oauth_helper():
         await apigee_product.destroy_product()
 
 
-@pytest.yield_fixture(scope="class")
+@pytest.fixture(scope="class")
 def event_loop(request):
     loop = asyncio.new_event_loop()
     yield loop
