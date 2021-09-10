@@ -111,7 +111,6 @@ class TestAppointment:
         assert_that(expected_body).is_equal_to(response.content.decode('utf-8'))
 
     @pytest.mark.appointment
-    @pytest.mark.debug
     def test_delete_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
