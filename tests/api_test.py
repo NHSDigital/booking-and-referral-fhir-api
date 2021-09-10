@@ -31,13 +31,11 @@ async def is_401(resp: ClientResponse) -> bool:
     return resp.status == 401
 
 
-@pytest.mark.e2e
 @pytest.mark.smoketest
 def test_output_test_config(api_test_config: APITestSessionConfig):
     print(api_test_config)
 
 
-@pytest.mark.e2e
 @pytest.mark.smoketest
 @pytest.mark.asyncio
 async def test_wait_for_ping(api_test_config: APITestSessionConfig):
@@ -53,7 +51,6 @@ async def test_wait_for_ping(api_test_config: APITestSessionConfig):
     )
 
 
-@pytest.mark.e2e
 @pytest.mark.smoketest
 @pytest.mark.asyncio
 async def test_check_status_is_secured(api_test_config):
@@ -63,7 +60,6 @@ async def test_check_status_is_secured(api_test_config):
     )
 
 
-@pytest.mark.e2e
 @pytest.mark.smoketest
 @pytest.mark.asyncio
 async def test_wait_for_status(api_test_config: APITestSessionConfig):
