@@ -9,6 +9,7 @@ class TestServiceRequest:
     existing_referral_id = "some-id"
 
     @pytest.mark.service_request
+    @pytest.mark.integration
     def test_get_referrals(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -29,6 +30,7 @@ class TestServiceRequest:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.service_request
+    @pytest.mark.integration
     def test_get_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -49,6 +51,7 @@ class TestServiceRequest:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.service_request
+    @pytest.mark.integration
     def test_create_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -69,6 +72,7 @@ class TestServiceRequest:
         assert_that(expected_body).is_equal_to(response.content.decode("utf-8"))
 
     @pytest.mark.service_request
+    @pytest.mark.integration
     def test_put_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -89,6 +93,7 @@ class TestServiceRequest:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.service_request
+    @pytest.mark.integration
     def test_patch_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -109,6 +114,7 @@ class TestServiceRequest:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.service_request
+    @pytest.mark.integration
     def test_delete_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

@@ -9,6 +9,7 @@ class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
 
     @pytest.mark.appointment
+    @pytest.mark.integration
     def test_get_appointments(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -29,6 +30,7 @@ class TestAppointment:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.appointment
+    @pytest.mark.integration
     def test_get_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -49,6 +51,7 @@ class TestAppointment:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.appointment
+    @pytest.mark.integration
     def test_create_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -71,6 +74,7 @@ class TestAppointment:
         assert_that(expected_body).is_equal_to(actual_content)
 
     @pytest.mark.appointment
+    @pytest.mark.integration
     def test_put_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -91,6 +95,7 @@ class TestAppointment:
         assert_that(expected_body).is_equal_to(response.content.decode('utf-8'))
 
     @pytest.mark.appointment
+    @pytest.mark.integration
     def test_patch_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -111,6 +116,7 @@ class TestAppointment:
         assert_that(expected_body).is_equal_to(response.content.decode('utf-8'))
 
     @pytest.mark.appointment
+    @pytest.mark.integration
     def test_delete_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
