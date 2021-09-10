@@ -4,27 +4,6 @@ steps:
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Setup pytests
 
-  - bash: |
-      export RELEASE_RELEASEID=$(Build.BuildId)
-      export SOURCE_COMMIT_ID=$(Build.SourceVersion)
-      export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
-      export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
-      export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
-      export CLIENT_ID="not-used-on-smoketest"
-      export CLIENT_SECRET="not-used-on-smoketest"
-      export REDIRECT_URL="not-used-on-smoketest"
-
-      make smoketest
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
-    displayName: run smoketests
-
-  - task: PublishTestResults@2
-    displayName: 'Publish smoketest results'
-    condition: always()
-    inputs:
-      testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/smoketest-report.xml'
-      failTaskOnFailedTests: true
-
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
       role: "auto-ops"
@@ -39,6 +18,11 @@ steps:
       - ptl/app-credentials/booking-and-referral/non-prod/CLIENT_SECRET_INT
 
   - bash: |
+      export RELEASE_RELEASEID=$(Build.BuildId)
+      export SOURCE_COMMIT_ID=$(Build.SourceVersion)
+      export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
+      export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
+      export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
       export APIGEE_API_TOKEN="$(secret.AccessToken)"
       export OAUTH_BASE_URI="https://$(ENVIRONMENT).api.service.nhs.uk"
@@ -49,13 +33,23 @@ steps:
       export CLIENT_ID="$(CLIENT_ID_INT)"
       export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
       export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
-      poetry run pytest -v tests/test_endpoints.py --junitxml=tests/patient-access-test-report.xml 
-    displayName: Run integration tests
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
+
+      if [[ $APIGEE_ENVIRONMENT == "internal-dev-sandbox" || $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "internal-qa-sandbox" || $APIGEE_ENVIRONMENT == "sandbox" || $APIGEE_ENVIRONMENT == "prod" ]]
+      then
+        poetry run pytest -v -m smoketest --junitxml=tests/api_tests.xml 
+      elif [[ $APIGEE_ENVIRONMENT == "int" ]]
+      then
+        poetry run pytest -v -m integration --junitxml=tests/api_tests.xml
+      else
+        poetry run pytest -v --junitxml=tests/api_tests.xml
+      fi
+
+    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
+    displayName: Run tests
 
   - task: PublishTestResults@2
-    displayName: 'Publish integration tests results'
+    displayName: 'Publish tests results'
     condition: always()
     inputs:
-      testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/integration-tests-report.xml'
+      testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/test-report.xml'
       failTaskOnFailedTests: true
