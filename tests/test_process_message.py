@@ -8,6 +8,7 @@ from .example_loader import load_example
 class TestProcessMessage:
     @pytest.mark.process_message
     @pytest.mark.integration
+    @pytest.mark.debug
     def test_create_process_message(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -15,7 +16,7 @@ class TestProcessMessage:
         expected_body = load_example("process_message/POST-success.json")
 
         # When
-        response = requests.get(
+        response = requests.post(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/$process-message",
             headers={
                 "Authorization": f"Bearer {token}",
