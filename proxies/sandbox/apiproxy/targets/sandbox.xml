@@ -13,12 +13,6 @@
           AND (proxy.pathsuffix Not Matches "/DocumentReference*")
         </Condition>
       </Step>
-      <Step>
-        <Name>Quota</Name>
-      </Step>
-      <Step>
-        <Name>SpikeArrest</Name>
-      </Step>
     </Request>
     <Response>
       <Step>
