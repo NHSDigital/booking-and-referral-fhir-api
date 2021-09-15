@@ -1,4 +1,0 @@
-spec: './*.spec.js'
-ui: bdd
-watch-files:
-  - '**/*.js'
