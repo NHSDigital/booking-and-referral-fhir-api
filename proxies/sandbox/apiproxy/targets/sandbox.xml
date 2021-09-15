@@ -1,4 +1,4 @@
-<TargetEndpoint name="booking-and-referral-target">
+<TargetEndpoint name="sandbox">
   <PreFlow>
     <Request>
       <Step>
