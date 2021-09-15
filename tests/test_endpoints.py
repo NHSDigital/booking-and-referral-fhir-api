@@ -48,8 +48,9 @@ class TestEndpoints:
         # an exemption is rised. Sadly the method get_token_response doesn't return
         # the 401 error from apigee and raises and error instead.
         with pytest.raises(Exception):
-            assert asyncio.run(default_oauth_helper.get_token_response(
-                grant_type="authorization_code"))
+            assert asyncio.run(
+                default_oauth_helper.get_token_response(grant_type="authorization_code")
+            )
 
     @pytest.mark.integration
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
@@ -86,8 +87,13 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
     @pytest.mark.asyncio
-    @pytest.mark.parametrize("path_suffix", ("Appointment", "Appointment/some-id", "Appointment/some-id?param=value"))
-    async def test_proxy_routing(self, get_token_client_credentials, debug, path_suffix):
+    @pytest.mark.parametrize(
+        "path_suffix",
+        ("Appointment", "Appointment/some-id", "Appointment/some-id?param=value"),
+    )
+    async def test_proxy_routing(
+        self, get_token_client_credentials, debug, path_suffix
+    ):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_target = f"https://{config.ENVIRONMENT}.api.service.nhs.uk/bars-mock-receiver-proxy/{path_suffix}"
@@ -103,7 +109,7 @@ class TestEndpoints:
             },
         )
 
-        target = await debug.get_apigee_variable_from_trace(name='target.url')
+        target = await debug.get_apigee_variable_from_trace(name="target.url")
 
         # Then
         assert_that(target).is_equal_to(expected_target)

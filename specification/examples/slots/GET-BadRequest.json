@@ -1,0 +1,23 @@
+{
+    "resourceType": "OperationOutcome",
+    "meta": {
+      "profile": [
+        "http://hl7.org/fhir/STU3/operationoutcome"
+      ]
+    },
+    "issue": [
+      {
+        "severity": "error",
+        "code": "invalid",
+        "details": {
+          "coding": [
+            {
+              "system": "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1",
+              "code": "BAD_REQUEST"
+            }
+          ]
+        },
+        "diagnostics": "Any further internal debug details i.e. stack trace details etc."
+      }
+    ]
+  }
