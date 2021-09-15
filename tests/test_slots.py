@@ -6,7 +6,7 @@ from .example_loader import load_example
 from datetime import datetime
 
 
-class TestServiceRequest:
+class TestSlots:
     currentTime = datetime.now()
 
     @pytest.mark.slots
