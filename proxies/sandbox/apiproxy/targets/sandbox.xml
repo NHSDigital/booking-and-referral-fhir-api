@@ -4,7 +4,8 @@
       <Step>
         <Name>RaiseFault.404PageNotFound</Name>
         <Condition>
-          (proxy.pathsuffix Not Matches "/metadata")
+          (proxy.pathsuffix Not Matches "/_status")
+          AND (proxy.pathsuffix Not Matches "/metadata")
           AND (proxy.pathsuffix Not Matches "/$process-message")
           AND (proxy.pathsuffix Not Matches "/Slot*")
           AND (proxy.pathsuffix Not Matches "/Appointment*")
