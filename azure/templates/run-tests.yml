@@ -36,12 +36,15 @@ steps:
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
-        poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml
-      elif [[ $APIGEE_ENVIRONMENT =~ ".*-*sandbox" ]]
+       echo "poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml"
+       poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml
+      elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
+       echo "poetry run pytest --reruns 3 --reruns-delay 1 -v -m integration --junitxml=tests/api_tests.xml"
        poetry run pytest --reruns 3 --reruns-delay 1 -v -m integration --junitxml=tests/api_tests.xml
       else
-        poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
+       echo "poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml"
+       poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
       fi
 
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
