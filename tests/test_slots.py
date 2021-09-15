@@ -26,7 +26,7 @@ class TestServiceRequest:
                 "status": ["free", "busy"],
                 "start ": "2020-03-31T14:00:00",
                 "end": "2020-03-31T16:00:00",
-                "_include": ["Schedule", "Practitioner"],
+                "_include": ["Schedule", "Schedule:actor:Practitioner", "Schedule:actor:PractitionerRole", "Schedule:actor:HealthcareService", "HealthcareService.providedBy", "HealthcareService.location"],
             },
         )
 
@@ -45,7 +45,7 @@ class TestServiceRequest:
                     "status": ["free", "busy"],
                     "start ": "2020-03-31T14:00:00",
                     "end": "2020-03-31T16:00:00",
-                    "_include": ["Schedule", "Practitioner"],
+                    "_include": ["Schedule", "Schedule:actor:Practitioner", "Schedule:actor:PractitionerRole", "Schedule:actor:HealthcareService", "HealthcareService.providedBy", "HealthcareService.location"],
                 }
             ),
             # Scenario 2: missing status query
@@ -54,7 +54,7 @@ class TestServiceRequest:
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "start ": "2020-03-31T14:00:00",
                     "end": "2020-03-31T16:00:00",
-                    "_include": ["Schedule", "Practitioner"],
+                    "_include": ["Schedule", "Schedule:actor:Practitioner", "Schedule:actor:PractitionerRole", "Schedule:actor:HealthcareService", "HealthcareService.providedBy", "HealthcareService.location"],
                 }
             ),
             # Scenario 3: invalid status query
@@ -63,7 +63,7 @@ class TestServiceRequest:
                     "status": "",
                     "start ": "2020-03-31T14:00:00",
                     "end": "2020-03-31T16:00:00",
-                    "_include": ["Schedule", "Practitioner"],
+                    "_include": ["Schedule", "Schedule:actor:Practitioner", "Schedule:actor:PractitionerRole", "Schedule:actor:HealthcareService", "HealthcareService.providedBy", "HealthcareService.location"],
                 }
             ),
             # Scenario 4: missing start query
@@ -72,7 +72,7 @@ class TestServiceRequest:
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
                     "end": "2020-03-31T16:00:00",
-                    "_include": ["Schedule", "Practitioner"],
+                    "_include": ["Schedule", "Schedule:actor:Practitioner", "Schedule:actor:PractitionerRole", "Schedule:actor:HealthcareService", "HealthcareService.providedBy", "HealthcareService.location"],
                 }
             ),
             # Scenario 5: missing end query
@@ -81,7 +81,7 @@ class TestServiceRequest:
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
                     "start ": "2020-03-31T14:00:00",
-                    "_include": ["Schedule", "Practitioner"],
+                    "_include": ["Schedule", "Schedule:actor:Practitioner", "Schedule:actor:PractitionerRole", "Schedule:actor:HealthcareService", "HealthcareService.providedBy", "HealthcareService.location"],
                 }
             ),
             # Scenario 6: missing _include query
