@@ -7,6 +7,8 @@ from datetime import datetime
 
 
 class TestServiceRequest:
+    currentTime = datetime.now()
+
     @pytest.mark.slots
     @pytest.mark.integration
     def test_get_slots_happy_path(self, get_token_client_credentials):
@@ -24,17 +26,10 @@ class TestServiceRequest:
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                "status": ["free", "busy"],
-                "start ": datetime.now(),
-                "end": datetime.now(),
-                "_include": [
-                    "Schedule",
-                    "Schedule:actor:Practitioner",
-                    "Schedule:actor:PractitionerRole",
-                    "Schedule:actor:HealthcareService",
-                    "HealthcareService.providedBy",
-                    "HealthcareService.location",
-                ],
+                "status": ["free"],
+                "start": self.currentTime,
+                "end": self.currentTime,
+                "_include": ["Schedule"],
             },
         )
 
@@ -50,90 +45,55 @@ class TestServiceRequest:
             # Scenario 1: missing healthcareService query
             (
                 {
-                    "status": ["free", "busy"],
-                    "start ": datetime.now(),
-                    "end": datetime.now(),
-                    "_include": [
-                        "Schedule",
-                        "Schedule:actor:Practitioner",
-                        "Schedule:actor:PractitionerRole",
-                        "Schedule:actor:HealthcareService",
-                        "HealthcareService.providedBy",
-                        "HealthcareService.location",
-                    ],
+                    "status": ["free"],
+                    "start ": currentTime,
+                    "end": currentTime,
+                    "_include": ["Schedule"],
                 }
             ),
             # Scenario 2: missing status query
             (
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                    "start ": datetime.now(),
-                    "end": datetime.now(),
-                    "_include": [
-                        "Schedule",
-                        "Schedule:actor:Practitioner",
-                        "Schedule:actor:PractitionerRole",
-                        "Schedule:actor:HealthcareService",
-                        "HealthcareService.providedBy",
-                        "HealthcareService.location",
-                    ],
+                    "start ": currentTime,
+                    "end": currentTime,
+                    "_include": ["Schedule"],
                 }
             ),
             # Scenario 3: invalid status query
             (
                 {
-                    "status": "",
-                    "start ": datetime.now(),
-                    "end": datetime.now(),
-                    "_include": [
-                        "Schedule",
-                        "Schedule:actor:Practitioner",
-                        "Schedule:actor:PractitionerRole",
-                        "Schedule:actor:HealthcareService",
-                        "HealthcareService.providedBy",
-                        "HealthcareService.location",
-                    ],
+                    "status": ["invalid"],
+                    "start ": currentTime,
+                    "end": currentTime,
+                    "_include": ["Schedule"],
                 }
             ),
             # Scenario 4: missing start query
             (
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                    "status": ["free", "busy"],
-                    "end": datetime.now(),
-                    "_include": [
-                        "Schedule",
-                        "Schedule:actor:Practitioner",
-                        "Schedule:actor:PractitionerRole",
-                        "Schedule:actor:HealthcareService",
-                        "HealthcareService.providedBy",
-                        "HealthcareService.location",
-                    ],
+                    "status": ["free"],
+                    "end": currentTime,
+                    "_include": ["Schedule"],
                 }
             ),
             # Scenario 5: missing end query
             (
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                    "status": ["free", "busy"],
-                    "start ": datetime.now(),
-                    "_include": [
-                        "Schedule",
-                        "Schedule:actor:Practitioner",
-                        "Schedule:actor:PractitionerRole",
-                        "Schedule:actor:HealthcareService",
-                        "HealthcareService.providedBy",
-                        "HealthcareService.location",
-                    ],
+                    "status": ["free"],
+                    "start ": currentTime,
+                    "_include": ["Schedule"],
                 }
             ),
             # Scenario 6: missing _include query
             (
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                    "status": ["free", "busy"],
-                    "start ": datetime.now(),
-                    "end": datetime.now(),
+                    "status": ["free"],
+                    "start ": currentTime,
+                    "end": currentTime,
                 }
             ),
             # Scenario 7: invalid _include query
@@ -141,9 +101,9 @@ class TestServiceRequest:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
-                    "start ": datetime.now(),
-                    "end": datetime.now(),
-                    "_include": "",
+                    "start ": currentTime,
+                    "end": currentTime,
+                    "_include": ["invalid"],
                 }
             ),
         ],
