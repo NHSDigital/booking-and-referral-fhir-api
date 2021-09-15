@@ -1,8 +1,8 @@
 {
-    "resourceType": "ServiceRequest",
-    "meta": {
-      "profile": [
-        "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-ServiceRequest"
-      ]
-    }
+  "resourceType": "ServiceRequest",
+  "meta": {
+    "profile": [
+      "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-ServiceRequest"
+    ]
   }
+}

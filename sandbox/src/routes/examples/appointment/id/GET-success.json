@@ -1,8 +1,8 @@
 {
-    "resourceType": "Appointment",
-    "meta": {
-      "profile": [
-        "https://www.hl7.org/fhir/appointment"
-      ]
-    }
+  "resourceType": "Appointment",
+  "meta": {
+    "profile": [
+      "https://www.hl7.org/fhir/appointment"
+    ]
   }
+}
