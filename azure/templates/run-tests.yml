@@ -34,12 +34,12 @@ steps:
       export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
       export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
 
-      if [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "internal-qa-sandbox" || $APIGEE_ENVIRONMENT == "sandbox" || $APIGEE_ENVIRONMENT == "prod" ]]
+      if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
         poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml
-      elif [[ $APIGEE_ENVIRONMENT == "int" ]]
+      elif [[ $APIGEE_ENVIRONMENT =~ ".*-*sandbox" ]]
       then
-        poetry run pytest --reruns 3 --reruns-delay 1 -v -m integration --junitxml=tests/api_tests.xml
+       poetry run pytest --reruns 3 --reruns-delay 1 -v -m integration --junitxml=tests/api_tests.xml
       else
         poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
       fi

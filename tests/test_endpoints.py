@@ -7,27 +7,7 @@ import pytest
 
 class TestEndpoints:
 
-    # This tests are only asserting status codes since we still do not have 'mock-recievers' in place
-    # Lets dont forget to add assertions fot the response body whenever is possible :)
-    @pytest.mark.integration
-    def test_happy_path(self, get_token_client_credentials):
-        # This test should be parametrized using all the valid endpoints whenever they finish the OAS spec.
-        # Given
-        token = get_token_client_credentials["access_token"]
-        expected_status_code = 200
-
-        # When
-        response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
-            headers={
-                "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
-            },
-        )
-        # Then
-        assert_that(expected_status_code).is_equal_to(response.status_code)
-
-    @pytest.mark.integration
+    @pytest.mark.auth
     def test_invalid_access_token(self):
         expected_status_code = 401
 
@@ -42,7 +22,7 @@ class TestEndpoints:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
-    @pytest.mark.integration
+    @pytest.mark.auth
     def test_invalid_access_token_auth_code(self, default_oauth_helper):
         # This test checks that when trying to authenticate using auth_code flow
         # an exemption is rised. Sadly the method get_token_response doesn't return
@@ -52,7 +32,7 @@ class TestEndpoints:
                 default_oauth_helper.get_token_response(grant_type="authorization_code")
             )
 
-    @pytest.mark.integration
+    @pytest.mark.broker
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -70,7 +50,7 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
     @pytest.mark.integration
-    def test_invalid_path(self, get_token_client_credentials):
+    def test_endpoint_not_found(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
@@ -87,12 +67,13 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
     @pytest.mark.asyncio
+    @pytest.mark.broker
     @pytest.mark.parametrize(
         "path_suffix",
         ("Appointment", "Appointment/some-id", "Appointment/some-id?param=value"),
     )
     async def test_proxy_routing(
-        self, get_token_client_credentials, debug, path_suffix
+            self, get_token_client_credentials, debug, path_suffix
     ):
         # Given
         token = get_token_client_credentials["access_token"]
