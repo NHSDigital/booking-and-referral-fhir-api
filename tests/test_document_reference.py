@@ -99,7 +99,6 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
-    @pytest.mark.debug
     def test_post_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
