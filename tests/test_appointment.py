@@ -10,7 +10,6 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
-    @pytest.mark.debug
     def test_get_appointments(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -100,6 +99,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.debug
     def test_create_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -120,6 +120,9 @@ class TestAppointment:
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
         actual_content = response.content.decode("utf-8").strip()
+        print(f"act {actual_content}")
+        print(f"exp {expected_res_body}")
+
         assert_that(expected_res_body).is_equal_to(actual_content)
 
     @pytest.mark.appointment

@@ -26,15 +26,7 @@
           <Condition>request.header.apikey = null or private.common.status-endpoint-api-key != request.header.apikey</Condition>
           <Name>RaiseFault.401Unauthorized</Name>
         </Step>
-        <Step>
-          <Name>ServiceCallout.CallHealthcheckEndpoint</Name>
-        </Step>
       </Request>
-      <Response>
-        <Step>
-          <Name>javascript.SetStatusResponse</Name>
-        </Step>
-      </Response>
       <Condition>(proxy.pathsuffix MatchesPath "/_status") and ((request.verb = "GET") or (request.verb = "HEAD"))
       </Condition>
     </Flow>
