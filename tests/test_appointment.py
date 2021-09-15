@@ -20,7 +20,7 @@ class TestAppointment:
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
-            params={'patientIdentifier': patient_id},
+            params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-ServiceIdentifier": "NHS0001",
@@ -33,7 +33,9 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
-    def test_get_appointments_missing_param_patient_id(self, get_token_client_credentials):
+    def test_get_appointments_missing_param_patient_id(
+        self, get_token_client_credentials
+    ):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -47,7 +49,6 @@ class TestAppointment:
                 "NHSD-ServiceIdentifier": "NHS0001",
             },
         )
-        print(response.text)
 
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
@@ -117,7 +118,7 @@ class TestAppointment:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
-        actual_content = response.content.decode('utf-8').strip()
+        actual_content = response.content.decode("utf-8").strip()
         assert_that(expected_res_body).is_equal_to(actual_content)
 
     @pytest.mark.appointment
@@ -126,7 +127,7 @@ class TestAppointment:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = "\"\""
+        expected_body = '""'
 
         # When
         response = requests.put(
@@ -140,7 +141,7 @@ class TestAppointment:
 
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
-        assert_that(expected_body).is_equal_to(response.content.decode('utf-8'))
+        assert_that(expected_body).is_equal_to(response.content.decode("utf-8"))
 
     @pytest.mark.appointment
     @pytest.mark.integration
@@ -148,7 +149,7 @@ class TestAppointment:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = "\"\""
+        expected_body = '""'
 
         # When
         response = requests.patch(
@@ -162,7 +163,7 @@ class TestAppointment:
 
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
-        assert_that(expected_body).is_equal_to(response.content.decode('utf-8'))
+        assert_that(expected_body).is_equal_to(response.content.decode("utf-8"))
 
     @pytest.mark.appointment
     @pytest.mark.integration
@@ -170,7 +171,7 @@ class TestAppointment:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = "\"\""
+        expected_body = '""'
 
         # When
         response = requests.delete(
@@ -183,7 +184,7 @@ class TestAppointment:
 
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
-        assert_that(expected_body).is_equal_to(response.content.decode('utf-8'))
+        assert_that(expected_body).is_equal_to(response.content.decode("utf-8"))
 
     @pytest.mark.appointment
     @pytest.mark.integration

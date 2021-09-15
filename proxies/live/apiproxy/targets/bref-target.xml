@@ -10,6 +10,7 @@
                   AND (proxy.pathsuffix Not Matches "/Appointment*")
                   AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
                   AND (proxy.pathsuffix Not Matches "/registry*")
+                  AND (proxy.pathsuffix Not Matches "/DocumentReference*")
         </Condition>
       </Step>
       <Step>

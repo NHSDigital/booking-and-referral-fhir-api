@@ -8,7 +8,7 @@ from api_test_utils.apigee_api_trace import ApigeeApiTraceDebug
 from .configuration import config
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="session")
 async def default_oauth_helper():
     """This fixture is automatically called once when used inside a class.
     The default app created here should not be modified by your tests.
@@ -19,7 +19,7 @@ async def default_oauth_helper():
         oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
         yield oauth
 
-    if config.ENVIRONMENT == 'internal-dev':
+    if config.ENVIRONMENT == "internal-dev":
         print("\nCreating Default App and Product..")
         apigee_product = ApigeeApiProducts()
         await apigee_product.create_new_product()
@@ -69,11 +69,12 @@ async def default_oauth_helper():
         await apigee_product.destroy_product()
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="session")
 def event_loop(request):
     loop = asyncio.new_event_loop()
     yield loop
     loop.close()
+
 
 @pytest.fixture()
 def debug():
