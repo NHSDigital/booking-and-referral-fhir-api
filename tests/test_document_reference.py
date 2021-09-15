@@ -5,7 +5,7 @@ from assertpy import assert_that
 from .example_loader import load_example
 
 
-class TestAppointment:
+class TestDocumentReference:
     existing_document_reference_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
 
     @pytest.mark.appointment
