@@ -6,7 +6,6 @@ from .example_loader import load_example
 
 
 class TestServiceRequest:
-
     @pytest.mark.slots
     @pytest.mark.integration
     def test_get_slots_happy_path(self, get_token_client_credentials):
@@ -27,8 +26,8 @@ class TestServiceRequest:
                 "status": ["free", "busy"],
                 "start ": "2020-03-31T14:00:00",
                 "end": "2020-03-31T16:00:00",
-                "_include": ["Schedule", "Practitioner"]
-            }
+                "_include": ["Schedule", "Practitioner"],
+            },
         )
 
         # Then
@@ -43,68 +42,68 @@ class TestServiceRequest:
             # Scenario 1: missing healthcareService query
             (
                 {
-                "status": ["free", "busy"],
-                "start ": "2020-03-31T14:00:00",
-                "end": "2020-03-31T16:00:00",
-                "_include": ["Schedule", "Practitioner"]
+                    "status": ["free", "busy"],
+                    "start ": "2020-03-31T14:00:00",
+                    "end": "2020-03-31T16:00:00",
+                    "_include": ["Schedule", "Practitioner"],
                 }
             ),
             # Scenario 2: missing status query
             (
                 {
-                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                "start ": "2020-03-31T14:00:00",
-                "end": "2020-03-31T16:00:00",
-                "_include": ["Schedule", "Practitioner"]
+                    "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                    "start ": "2020-03-31T14:00:00",
+                    "end": "2020-03-31T16:00:00",
+                    "_include": ["Schedule", "Practitioner"],
                 }
             ),
             # Scenario 3: invalid status query
             (
                 {
-                "status": "",
-                "start ": "2020-03-31T14:00:00",
-                "end": "2020-03-31T16:00:00",
-                "_include": ["Schedule", "Practitioner"]
+                    "status": "",
+                    "start ": "2020-03-31T14:00:00",
+                    "end": "2020-03-31T16:00:00",
+                    "_include": ["Schedule", "Practitioner"],
                 }
             ),
             # Scenario 4: missing start query
             (
                 {
-                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                "status": ["free", "busy"],
-                "end": "2020-03-31T16:00:00",
-                "_include": ["Schedule", "Practitioner"]
+                    "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                    "status": ["free", "busy"],
+                    "end": "2020-03-31T16:00:00",
+                    "_include": ["Schedule", "Practitioner"],
                 }
             ),
             # Scenario 5: missing end query
             (
                 {
-                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                "status": ["free", "busy"],
-                "start ": "2020-03-31T14:00:00",
-                "_include": ["Schedule", "Practitioner"]
+                    "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                    "status": ["free", "busy"],
+                    "start ": "2020-03-31T14:00:00",
+                    "_include": ["Schedule", "Practitioner"],
                 }
             ),
             # Scenario 6: missing _include query
             (
                 {
-                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                "status": ["free", "busy"],
-                "start ": "2020-03-31T14:00:00",
-                "end": "2020-03-31T16:00:00"
+                    "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                    "status": ["free", "busy"],
+                    "start ": "2020-03-31T14:00:00",
+                    "end": "2020-03-31T16:00:00",
                 }
             ),
             # Scenario 7: invalid _include query
             (
                 {
-                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                "status": ["free", "busy"],
-                "start ": "2020-03-31T14:00:00",
-                "end": "2020-03-31T16:00:00",
-                "_include": ""
+                    "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                    "status": ["free", "busy"],
+                    "start ": "2020-03-31T14:00:00",
+                    "end": "2020-03-31T16:00:00",
+                    "_include": "",
                 }
             ),
-        ]
+        ],
     )
     def test_get_slots_bad_request(self, get_token_client_credentials, data):
         # Given
