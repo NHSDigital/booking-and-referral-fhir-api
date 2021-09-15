@@ -34,17 +34,25 @@ steps:
       export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
       export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
 
+      run_pytest() {
+        if [ -z "$1" ]
+        then
+          echo "poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml"
+          poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
+        else
+          echo "poetry run pytest --reruns 3 --reruns-delay 1 -v -m $1 --junitxml=tests/api_tests.xml"
+          poetry run pytest --reruns 3 --reruns-delay 1 -v -m $1 --junitxml=tests/api_tests.xml
+        fi
+      }
+
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
-       echo "poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml"
-       poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml
+       run_pytest smoketest
       elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
-       echo "poetry run pytest --reruns 3 --reruns-delay 1 -v -m integration --junitxml=tests/api_tests.xml"
-       poetry run pytest --reruns 3 --reruns-delay 1 -v -m integration --junitxml=tests/api_tests.xml
+       run_pytest integration
       else
-       echo "poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml"
-       poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
+       run_pytest
       fi
 
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
