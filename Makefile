@@ -40,11 +40,13 @@ start-sandbox:
 build-proxy:
 	scripts/build_proxy.sh
 
+copy-examples:
+	cp -r sandbox/src/routes/examples specification
+
 _dist_include="pytest.ini poetry.lock poetry.toml pyproject.toml Makefile build/. tests specification"
 
-release: clean publish build-proxy
+release: clean copy-examples publish build-proxy
 	mkdir -p dist
-	cp -r sandbox/src/routes/examples specification
 	for f in $(_dist_include); do cp -r $$f dist; done
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml

@@ -10,4 +10,4 @@ docker_service:
         value: "{{ version_info | to_json }}"
     health_check:
       matcher: "200"
-      path: "/_ping"
+      path: "/_status"
