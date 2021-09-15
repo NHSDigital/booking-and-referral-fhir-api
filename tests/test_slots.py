@@ -3,6 +3,7 @@ import requests
 from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
+from datetime import datetime
 
 
 class TestServiceRequest:
@@ -24,8 +25,8 @@ class TestServiceRequest:
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                 "status": ["free", "busy"],
-                "start ": "2020-03-31T14:00:00",
-                "end": "2020-03-31T16:00:00",
+                "start ": datetime.now(),
+                "end": datetime.now(),
                 "_include": [
                     "Schedule",
                     "Schedule:actor:Practitioner",
@@ -50,8 +51,8 @@ class TestServiceRequest:
             (
                 {
                     "status": ["free", "busy"],
-                    "start ": "2020-03-31T14:00:00",
-                    "end": "2020-03-31T16:00:00",
+                    "start ": datetime.now(),
+                    "end": datetime.now(),
                     "_include": [
                         "Schedule",
                         "Schedule:actor:Practitioner",
@@ -66,8 +67,8 @@ class TestServiceRequest:
             (
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
-                    "start ": "2020-03-31T14:00:00",
-                    "end": "2020-03-31T16:00:00",
+                    "start ": datetime.now(),
+                    "end": datetime.now(),
                     "_include": [
                         "Schedule",
                         "Schedule:actor:Practitioner",
@@ -82,8 +83,8 @@ class TestServiceRequest:
             (
                 {
                     "status": "",
-                    "start ": "2020-03-31T14:00:00",
-                    "end": "2020-03-31T16:00:00",
+                    "start ": datetime.now(),
+                    "end": datetime.now(),
                     "_include": [
                         "Schedule",
                         "Schedule:actor:Practitioner",
@@ -99,7 +100,7 @@ class TestServiceRequest:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
-                    "end": "2020-03-31T16:00:00",
+                    "end": datetime.now(),
                     "_include": [
                         "Schedule",
                         "Schedule:actor:Practitioner",
@@ -115,7 +116,7 @@ class TestServiceRequest:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
-                    "start ": "2020-03-31T14:00:00",
+                    "start ": datetime.now(),
                     "_include": [
                         "Schedule",
                         "Schedule:actor:Practitioner",
@@ -131,8 +132,8 @@ class TestServiceRequest:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
-                    "start ": "2020-03-31T14:00:00",
-                    "end": "2020-03-31T16:00:00",
+                    "start ": datetime.now(),
+                    "end": datetime.now(),
                 }
             ),
             # Scenario 7: invalid _include query
@@ -140,8 +141,8 @@ class TestServiceRequest:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
-                    "start ": "2020-03-31T14:00:00",
-                    "end": "2020-03-31T16:00:00",
+                    "start ": datetime.now(),
+                    "end": datetime.now(),
                     "_include": "",
                 }
             ),
