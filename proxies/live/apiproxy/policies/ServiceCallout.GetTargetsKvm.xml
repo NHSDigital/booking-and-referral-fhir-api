@@ -8,7 +8,7 @@
     </Set>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   </Request>
-  <Response>private.config_raw<</Response>
+  <Response>private.config_raw</Response>
   <HTTPTargetConnection>
     <SSLInfo>
       <Enabled>true</Enabled>
