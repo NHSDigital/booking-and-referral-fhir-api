@@ -3,6 +3,7 @@ import requests
 from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
+import re
 
 
 class TestAppointment:
@@ -99,6 +100,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.debug
     def test_create_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -118,9 +120,8 @@ class TestAppointment:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
-        actual_content = response.content.decode("utf-8").strip()
-        print(f"act {actual_content}")
-        print(f"exp {expected_res_body}")
+        response = response.content.decode("utf-8").strip()
+        actual_content = re.sub("\"", "", response)  # FastApi adds double quote to text response
 
         assert_that(expected_res_body).is_equal_to(actual_content)
 
