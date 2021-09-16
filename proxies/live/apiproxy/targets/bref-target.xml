@@ -23,7 +23,19 @@
         <Name>SpikeArrest</Name>
       </Step>
       <Step>
+          <Name>LookupCache.Targets</Name>
+      </Step>
+      <Step>
           <Name>ServiceCallout.GetTargetsKvm</Name>
+          <Condition>targets = null</Condition>
+      </Step>
+      <Step>
+          <Name>PopulateCache.Targets</Name>
+          <Condition>targets = null</Condition>
+      </Step>
+      <Step>
+          <Name>AssignMessage.Targets</Name>
+          <Condition>targets = null</Condition>
       </Step>
       <Step>
           <Name>Javascript.UnpackVars</Name>

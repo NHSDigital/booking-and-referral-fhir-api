@@ -1,0 +1,7 @@
+<AssignMessage name='AssignMessage.Targets'>
+  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+  <AssignVariable>
+    <Name>targets</Name>
+    <Ref>ServiceCallout.response</Ref>
+  </AssignVariable>
+</AssignMessage>

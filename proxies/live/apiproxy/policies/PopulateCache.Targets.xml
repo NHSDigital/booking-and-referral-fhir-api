@@ -1,0 +1,10 @@
+<PopulateCache name='PopulateCache.Targets'>
+  <Source>ServiceCallout.response</Source>
+  <Scope>Application</Scope>
+  <CacheKey>
+    <KeyFragment>cached_targets</KeyFragment>
+  </CacheKey>
+  <ExpirySettings>
+    <TimeoutInSeconds>900</TimeoutInSeconds>
+  </ExpirySettings>
+</PopulateCache>
