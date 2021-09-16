@@ -12,7 +12,6 @@ from routes import (
 )
 from routes.examples.example_loader import load_example
 
-
 app = FastAPI()
 
 
@@ -33,6 +32,12 @@ app.include_router(document_reference.route)
 @app.get("/_status")
 def status():
     return load_example("_status.json")
+
+
+@app.get("/")
+def index():
+    # This is the endpoint that proxy calls to get health status
+    pass
 
 
 if __name__ == "__main__":
