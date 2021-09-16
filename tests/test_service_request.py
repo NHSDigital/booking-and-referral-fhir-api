@@ -11,6 +11,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_referrals(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -33,6 +34,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -54,6 +56,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_referral_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -76,6 +79,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_create_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -98,6 +102,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -119,6 +124,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_patch_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -140,6 +146,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_referral(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -161,6 +168,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_referral_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -183,6 +191,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_patch_referral_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -205,6 +214,7 @@ class TestServiceRequest:
 
     @pytest.mark.service_request
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_referral_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

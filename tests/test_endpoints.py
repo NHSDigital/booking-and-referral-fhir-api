@@ -50,6 +50,7 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_endpoint_not_found(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

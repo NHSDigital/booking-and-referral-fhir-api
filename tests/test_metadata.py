@@ -8,6 +8,7 @@ from .example_loader import load_example
 class TestMetadata:
     @pytest.mark.metadata
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_metadata(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

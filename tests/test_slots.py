@@ -11,6 +11,7 @@ class TestSlots:
 
     @pytest.mark.slots
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_slots_happy_path(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -39,6 +40,7 @@ class TestSlots:
 
     @pytest.mark.slots
     @pytest.mark.integration
+    @pytest.mark.sandbox
     @pytest.mark.parametrize(
         "data",
         [

@@ -11,6 +11,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointments(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -34,6 +35,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointments_missing_param_patient_id(
         self, get_token_client_credentials
     ):
@@ -57,6 +59,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -78,6 +81,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -100,7 +104,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
-    @pytest.mark.debug
+    @pytest.mark.sandbox
     def test_create_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -127,6 +131,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -149,6 +154,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_patch_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -171,6 +177,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -192,6 +199,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -215,6 +223,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_patch_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -238,6 +247,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

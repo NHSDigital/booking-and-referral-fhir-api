@@ -50,7 +50,7 @@ steps:
        run_pytest smoketest
       elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
-       run_pytest integration
+       run_pytest sandbox
       else
        run_pytest
       fi

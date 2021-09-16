@@ -10,6 +10,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -33,6 +34,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference_missing_param_patient_id(
         self, get_token_client_credentials
     ):
@@ -56,6 +58,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -77,6 +80,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -99,6 +103,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_post_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -119,6 +124,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -141,6 +147,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -162,6 +169,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_document_reference_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -185,6 +193,7 @@ class TestDocumentReference:
 
     @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_document_reference_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
