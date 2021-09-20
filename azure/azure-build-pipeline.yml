@@ -20,17 +20,17 @@ resources:
       ref: refs/heads/edge
       endpoint: NHSDigital
 
-steps:
-  - bash: |
-      echo "COPY EXAMPLES"
-      ls
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)
-    displayName: copy examples
 
 variables:
   - template: project.yml
 extends:
   template: azure/common/apigee-build.yml@common
+  steps:
+    - bash: |
+        echo "COPY EXAMPLES"
+        ls
+      workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)
+      displayName: copy examples
   parameters:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
