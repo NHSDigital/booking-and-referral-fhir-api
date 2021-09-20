@@ -8,7 +8,6 @@ newman/
 .DS_Store
 .#*
 
-specification/examples
 **/.env
 **/venv
 **/*.key

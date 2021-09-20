@@ -7,10 +7,10 @@ install-node:
 	npm install
 	cd sandbox && npm install
 
-.git/hooks/pre-commit:
+pre-commit-hook:
 	cp scripts/pre-commit .git/hooks/pre-commit
 
-install: install-node install-python .git/hooks/pre-commit
+install: install-node install-python pre-commit-hook
 
 lint:
 	npm run lint
@@ -41,7 +41,7 @@ build-proxy:
 	scripts/build_proxy.sh
 
 copy-examples:
-	cp -r sandbox/src/routes/examples specification
+	cp -r  specification/examples sandbox/src/routes/examples
 
 _dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml Makefile build/. tests specification"
 
