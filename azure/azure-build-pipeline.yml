@@ -20,6 +20,13 @@ resources:
       ref: refs/heads/edge
       endpoint: NHSDigital
 
+steps:
+  - bash: |
+      echo "COPY EXAMPLES"
+      ls
+    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)
+    displayName: copy examples
+
 variables:
   - template: project.yml
 extends:

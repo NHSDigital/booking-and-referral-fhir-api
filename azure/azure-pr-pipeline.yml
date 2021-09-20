@@ -26,12 +26,6 @@ pool:
 variables:
   - template: project.yml
 
-steps:
-  - bash: |
-      echo "COPY EXAMPLES"
-      ls
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)
-    displayName: copy examples
 
 extends:
   template: azure/common/apigee-deployment.yml@common
