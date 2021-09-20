@@ -2,9 +2,9 @@ FROM python:3.7
 
 WORKDIR /opt/app
 
-COPY requirements.txt .
+COPY sandbox/requirements.txt .
 
-RUN pip3 install -r sandbox/requirements.txt
+RUN pip3 install -r requirements.txt
 
 COPY sandbox/src .
 COPY specification/booking-and-referral.yaml .
