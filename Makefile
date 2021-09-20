@@ -42,6 +42,8 @@ build-proxy:
 
 copy-examples:
 	cp -r  specification/examples sandbox/src/routes/examples
+git-add-examples:
+	git add ../../sandbox/src/routes/examples/.
 
 _dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml Makefile build/. tests specification"
 
