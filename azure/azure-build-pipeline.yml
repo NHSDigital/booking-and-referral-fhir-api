@@ -26,11 +26,5 @@ variables:
 extends:
   template: azure/common/apigee-build.yml@common
   parameters:
-    pre_template:
-      - bash: |
-          echo "Copy examples"
-          ls
-        displayName: Copy examples
-        workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
