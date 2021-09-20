@@ -1,4 +1,4 @@
 #!/bin/sh
 make lint
 make copy-examples
-git add sandbox/src/routes/examples/*
+git add sandbox/src/routes/examples/.
