@@ -2,6 +2,8 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from starlette.responses import Response
+from starlette.status import HTTP_200_OK
 from routes import (
     slots,
     appointment,
@@ -31,13 +33,7 @@ app.include_router(document_reference.route)
 
 @app.get("/_status")
 def status():
-    return load_example("_status.json")
-
-
-@app.get("/")
-def index():
-    # This is the endpoint that proxy calls to get health status
-    pass
+    return Response(HTTP_200_OK)
 
 
 if __name__ == "__main__":
