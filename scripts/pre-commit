@@ -1,4 +1,2 @@
 #!/bin/sh
 make lint
-make copy-examples
-make git-add-examples
