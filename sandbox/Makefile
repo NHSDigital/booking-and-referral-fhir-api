@@ -1,23 +1,6 @@
-SHELL := /bin/bash
-dirname := $(notdir $(patsubst %/,%,$(CURDIR)))
+docker-build:
+	docker build -t bars-sandbox .
 
-list:
-	@grep '^[^#[:space:]].*:' Makefile
 
-build:
-	docker build .
-
-clean:
-	rm -rf ./node_modules
-
-install:
-	npm install --dev
-
-update:
-	npm update
-
-test:
-	NODE_ENV=test npx mocha --reporter spec
-
-test-report:
-	NODE_ENV=test npx mocha --reporter mocha-junit-reporter --reporter-options mochaFile=../../reports/tests/$(dirname).xml || true
+docker-run:
+	docker run -it -p 9000:9000 bars-sandbox

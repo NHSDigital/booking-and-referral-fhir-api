@@ -1,11 +1,12 @@
-FROM node:12
+FROM python:3.7
 
-COPY . /sandbox
+WORKDIR /opt/app
 
-WORKDIR /sandbox
+COPY requirements.txt .
 
-RUN npm install
+RUN pip3 install -r requirements.txt
+
+COPY src .
 
 EXPOSE 9000
-
-CMD ["npm", "start"]
+CMD ["python", "main.py"]

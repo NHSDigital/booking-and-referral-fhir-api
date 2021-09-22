@@ -8,8 +8,9 @@ from .example_loader import load_example
 class TestDocumentReference:
     existing_document_reference_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -31,8 +32,9 @@ class TestDocumentReference:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference_missing_param_patient_id(
         self, get_token_client_credentials
     ):
@@ -54,8 +56,9 @@ class TestDocumentReference:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -75,8 +78,9 @@ class TestDocumentReference:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_document_reference_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -97,8 +101,9 @@ class TestDocumentReference:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_post_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -117,8 +122,9 @@ class TestDocumentReference:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -139,8 +145,9 @@ class TestDocumentReference:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.content.decode("utf-8"))
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_document_reference(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -160,8 +167,9 @@ class TestDocumentReference:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.content.decode("utf-8"))
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_document_reference_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -183,8 +191,9 @@ class TestDocumentReference:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
-    @pytest.mark.appointment
+    @pytest.mark.document_reference
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_document_reference_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

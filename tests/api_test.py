@@ -52,6 +52,7 @@ async def test_wait_for_ping(api_test_config: APITestSessionConfig):
 
 
 @pytest.mark.smoketest
+@pytest.mark.sandbox
 @pytest.mark.asyncio
 async def test_check_status_is_secured(api_test_config):
     api_client = APISessionClient(api_test_config.base_uri)
@@ -61,6 +62,7 @@ async def test_check_status_is_secured(api_test_config):
 
 
 @pytest.mark.smoketest
+@pytest.mark.sandbox
 @pytest.mark.asyncio
 async def test_wait_for_status(api_test_config: APITestSessionConfig):
 

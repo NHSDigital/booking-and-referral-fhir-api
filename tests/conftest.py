@@ -19,7 +19,7 @@ async def default_oauth_helper():
         oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
         yield oauth
 
-    if config.ENVIRONMENT == "internal-dev":
+    if config.ENVIRONMENT == "internal-dev" or config.ENVIRONMENT == "internal-dev-sandbox":
         print("\nCreating Default App and Product..")
         apigee_product = ApigeeApiProducts()
         await apigee_product.create_new_product()

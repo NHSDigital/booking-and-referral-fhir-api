@@ -8,6 +8,7 @@ from .example_loader import load_example
 class TestProcessMessage:
     @pytest.mark.process_message
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_create_process_message(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

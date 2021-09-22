@@ -3,13 +3,17 @@ import requests
 from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
+import re
+import uuid
 
 
 class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
+    non_existing_appointment_id = str(uuid.uuid4())
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointments(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -33,8 +37,9 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointments_missing_param_patient_id(
-        self, get_token_client_credentials
+            self, get_token_client_credentials
     ):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -56,6 +61,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -77,6 +83,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_get_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -99,6 +106,29 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
+    def test_get_appointment_entity_not_found(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 403
+        expected_body = load_example("entity-not-found.json")
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-ServiceIdentifier": "NHS0001",
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.appointment
+    @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_create_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -118,11 +148,14 @@ class TestAppointment:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
-        actual_content = response.content.decode("utf-8").strip()
+        response = response.content.decode("utf-8").strip()
+        actual_content = re.sub("\"", "", response)  # FastApi adds double quote to text response
+
         assert_that(expected_res_body).is_equal_to(actual_content)
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -145,6 +178,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_patch_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -167,6 +201,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -188,6 +223,7 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_put_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -211,6 +247,30 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
+    def test_put_appointment_entity_not_found(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 403
+        expected_body = load_example("entity-not-found.json")
+
+        # When
+        response = requests.put(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
+            json=load_example("appointment/id/PUT-body.json"),
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-ServiceIdentifier": "NHS0001",
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.appointment
+    @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_patch_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -234,6 +294,30 @@ class TestAppointment:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.sandbox
+    def test_patch_appointment_entity_not_found(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 403
+        expected_body = load_example("entity-not-found.json")
+
+        # When
+        response = requests.patch(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
+            json=load_example("appointment/id/PATCH-body.json"),
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-ServiceIdentifier": "NHS0001",
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.appointment
+    @pytest.mark.integration
+    @pytest.mark.sandbox
     def test_delete_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -244,6 +328,28 @@ class TestAppointment:
         # When
         response = requests.delete(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-ServiceIdentifier": "NHS0001",
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.appointment
+    @pytest.mark.integration
+    @pytest.mark.sandbox
+    def test_delete_appointment_entity_not_found(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 403
+        expected_body = load_example("entity-not-found.json")
+
+        # When
+        response = requests.delete(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-ServiceIdentifier": "NHS0001",

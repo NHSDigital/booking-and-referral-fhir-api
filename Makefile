@@ -7,10 +7,10 @@ install-node:
 	npm install
 	cd sandbox && npm install
 
-.git/hooks/pre-commit:
+pre-commit-hook:
 	cp scripts/pre-commit .git/hooks/pre-commit
 
-install: install-node install-python .git/hooks/pre-commit
+install: install-node install-python pre-commit-hook
 
 lint:
 	npm run lint
@@ -40,9 +40,12 @@ start-sandbox:
 build-proxy:
 	scripts/build_proxy.sh
 
-_dist_include="pytest.ini poetry.lock poetry.toml pyproject.toml Makefile build/. tests specification"
+copy-examples:
+	cp -r  specification/examples sandbox/src/routes/examples
 
-release: clean publish build-proxy
+_dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml Makefile build/. tests specification"
+
+release: clean copy-examples publish build-proxy
 	mkdir -p dist
 	for f in $(_dist_include); do cp -r $$f dist; done
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
