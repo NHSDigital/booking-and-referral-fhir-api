@@ -16,7 +16,7 @@ async def default_oauth_helper():
     The default app has a default product associated.
     If your test requires specific app config then please create your own"""
 
-    if config.ENVIRONMENT == "int":
+    if ENVIRONMENT == "int" or ENVIRONMENT == "sandbox":
         oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
         yield oauth
 
