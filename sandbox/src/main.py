@@ -33,7 +33,7 @@ app.include_router(document_reference.route)
 
 @app.get("/_status")
 def status():
-    return Response(HTTP_200_OK)
+    return Response(status_code=HTTP_200_OK)
 
 
 if __name__ == "__main__":
