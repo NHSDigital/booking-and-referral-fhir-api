@@ -91,6 +91,10 @@ def debug():
 @pytest.fixture()
 async def get_token_client_credentials(default_oauth_helper):
     """Call identity server to get an access token"""
+    if "sandbox" in ENVIRONMENT:
+        # Sandbox environments doesn't need access_token. Fake one
+        return {"access_token": "not_needed"}
+
     jwt = default_oauth_helper.create_jwt(kid="test-1")
     token_resp = await default_oauth_helper.get_token_response(
         grant_type="client_credentials", _jwt=jwt
