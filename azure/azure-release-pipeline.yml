@@ -45,6 +45,7 @@ extends:
           - template: ./templates/run-tests.yml
       - environment: internal-qa-sandbox
         proxy_path: sandbox
+        enable_status_monitoring: true
         make_spec_visible: true
         post_deploy:
           - template: ./templates/run-tests.yml
