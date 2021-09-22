@@ -6,6 +6,7 @@ from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
 from api_test_utils.apigee_api_trace import ApigeeApiTraceDebug
 from .configuration import config
+from .configuration.config import ENVIRONMENT
 
 
 @pytest.fixture(scope="session")
@@ -19,7 +20,9 @@ async def default_oauth_helper():
         oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
         yield oauth
 
-    if config.ENVIRONMENT == "internal-dev" or config.ENVIRONMENT == "internal-dev-sandbox":
+    is_internal_env = ENVIRONMENT == "internal-dev" or ENVIRONMENT == "internal-dev-sandbox" or \
+                      ENVIRONMENT == "internal-qa" or ENVIRONMENT == "internal-qa-sandbox"
+    if is_internal_env:
         print("\nCreating Default App and Product..")
         apigee_product = ApigeeApiProducts()
         await apigee_product.create_new_product()
