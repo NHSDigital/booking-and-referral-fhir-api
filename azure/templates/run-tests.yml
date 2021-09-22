@@ -40,8 +40,8 @@ steps:
           echo "poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml"
           poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
         else
-          echo "poetry run pytest --reruns 3 --reruns-delay 1 -v -m $1 --junitxml=tests/api_tests.xml"
-          poetry run pytest --reruns 3 --reruns-delay 1 -v -m $1 --junitxml=tests/api_tests.xml
+          echo "poetry run pytest --reruns 3 --reruns-delay 1 -v -m \"$1\" --junitxml=tests/api_tests.xml"
+          poetry run pytest --reruns 3 --reruns-delay 1 -v -m "$1" --junitxml=tests/api_tests.xml
         fi
       }
 
@@ -51,6 +51,10 @@ steps:
       elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
        run_pytest sandbox
+      elif [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "int" ]]
+       # exclude tests which need apigee trace
+       run_pytest "not broker"
+      then
       else
        run_pytest
       fi
