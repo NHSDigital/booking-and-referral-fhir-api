@@ -47,16 +47,15 @@ steps:
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
-       run_pytest "smoketest"
+       poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml
       elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
-       run_pytest "sandbox"
+       poetry run pytest --reruns 3 --reruns-delay 1 -v -m sandbox --junitxml=tests/api_tests.xml
       elif [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "int" ]]
       then
-       # exclude tests which need apigee trace
-       run_pytest "not broker"
+       poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not broker" --junitxml=tests/api_tests.xml
       else
-       run_pytest
+       poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
       fi
 
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
