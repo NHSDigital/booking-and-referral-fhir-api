@@ -27,6 +27,7 @@ variables:
 extends:
   template: azure/common/apigee-deployment.yml@common
   parameters:
+    enable_status_monitoring: false
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
     service_base_path: ${{ variables.service_base_path }}
@@ -51,6 +52,7 @@ extends:
     # (App subscription make sense for most sandbox implementations)
       - environment: sandbox
         proxy_path: sandbox
+        enable_status_monitoring: true
         post_deploy:
           - template: ./templates/run-tests.yml
       - environment: int
