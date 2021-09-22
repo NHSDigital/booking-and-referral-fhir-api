@@ -52,9 +52,9 @@ steps:
       then
        run_pytest sandbox
       elif [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "int" ]]
+      then
        # exclude tests which need apigee trace
        run_pytest "not broker"
-      then
       else
        run_pytest
       fi
