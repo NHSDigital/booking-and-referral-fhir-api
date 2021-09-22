@@ -47,10 +47,10 @@ steps:
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
-       run_pytest smoketest
+       run_pytest "smoketest"
       elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
-       run_pytest sandbox
+       run_pytest "sandbox"
       elif [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "int" ]]
       then
        # exclude tests which need apigee trace
