@@ -92,7 +92,7 @@ def debug():
 async def get_token_client_credentials(default_oauth_helper):
     """Call identity server to get an access token"""
     if "sandbox" in ENVIRONMENT:
-        # Sandbox environments doesn't need access_token. Fake one
+        # Sandbox environments don't need access_token. Return fake one
         return {"access_token": "not_needed"}
 
     jwt = default_oauth_helper.create_jwt(kid="test-1")
