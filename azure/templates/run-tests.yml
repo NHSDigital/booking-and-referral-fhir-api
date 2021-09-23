@@ -42,9 +42,9 @@ steps:
        poetry run pytest --reruns 3 --reruns-delay 1 -v -m sandbox --junitxml=tests/api_tests.xml
       elif [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "int" ]]
       then
-       poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not broker" --junitxml=tests/api_tests.xml
+       poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not broker and not status" --junitxml=tests/api_tests.xml
       else
-       poetry run pytest --reruns 3 --reruns-delay 1 -v --junitxml=tests/api_tests.xml
+       poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not status" --junitxml=tests/api_tests.xml
       fi
 
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
