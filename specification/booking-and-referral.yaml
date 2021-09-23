@@ -1,124 +1,934 @@
-openapi: "3.0.0"
-x-nhs-api-spec-guid: a302b2a5-5c98-4fab-bd84-b32a437ccd1e
-x-meta:
-  service_name: "booking-and-referral"
-  short_service_name: "bref"
-  product_display_name: "Booking and Referral FHIR API"
-  service_base_path: "booking-and-referral"
-  product_description: "This proxy function as a centralized router for bookings and referrals services"
-  pipeline_name_prefix: "Booking-and-Referral-FHIR-API"
+---
+openapi: 3.0.0
 info:
-  version: 1.0.0
-  title: Generated Template API
-  license:
-    name: MIT
+  description: This is a work in progress NHS Booking and Referral API </br> **Do NOT build against this specification**
+  version: 1.0.3
+  title: Booking and Referral API
+  termsOfService: https://developer.nhs.uk/apis/uec-appointments
   contact:
-    email: api.management@nhs.net
-tags:
-  - name: api
-  - name: example
+    email: uec.appointmentbooking@nhs.net
+    url: https://developer.nhs.uk/apis/uec-appointments
+    name: NHS Digital
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: http://petstore.swagger.io
+- url: https://api.nhs.uk/Appointments-and-referrals/v1
+  description: Dev
+tags:
+- name: Booking
+- name: Events
+- name: Message
+- name: Meta
+- name: Referral
+- name: Registry
+- name: Slots
+security:
+- BasicAuth: []
+- BearerAuth: []
 paths:
-  /pets:
+  "/meta":
+    parameters:
+    - "$ref": "#/components/parameters/ServiceId_HParam"
     get:
-      summary: List all pets
-      operationId: listPets
       tags:
-        - pets
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            format: int32
+      - Meta
+      summary: Get capability statement
+      description: Get capability statement
+      operationId: getMeta
       responses:
         '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
+          description: Success
           content:
-            application/json:   
+            application/fhir+json:
               schema:
-                $ref: "#/components/schemas/Pets"
-        default:
-          description: unexpected error
-          content:
-            application/json:
+                "$ref": "#/components/schemas/Capability"
+            application/fhir+xml:
               schema:
-                $ref: "#/components/schemas/Error"
+                "$ref": "#/components/schemas/Capability"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/$process-message":
+    parameters:
+    - "$ref": "#/components/parameters/ServiceId_HParam"
     post:
-      summary: Create a pet
-      operationId: createPets
       tags:
-        - pets
+      - Message
+      summary: Process a message
+      description: Process a message
+      operationId: processMessage
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                "$ref": "#/components/schemas/MessageBundle"
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/MessageBundle"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/Slot":
+    parameters:
+    - "$ref": "#/components/parameters/ServiceId_HParam"
+    get:
+      tags:
+      - Slots
+      summary: Get slots
+      description: Get slots
+      operationId: getSlots
+      parameters:
+      - name: healthcareService
+        description: The  service id of the service for which Slots are being requested
+        in: query
+        schema:
+          type: string
+          example: '09a01679-2564-0fb4-5129-aecc81ea2706'
+        required: true
+        allowEmptyValue: false
+      - name: status
+        in: query
+        description: Status values that need to be considered for filter
+        required: true
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - free
+            - busy
+            default: free
+      - name: start
+        in: query
+        required: true
+        description: |
+          Slot end date/time (yyyy-mm-ddThh:mm:ss+hh:mm)
+          __Start and end represent the definition of the time window within which Slots must start__
+        schema:
+          format: datetime
+          type: string
+          example: '2020-03-31T14:00:00'
+      - name: end
+        in: query
+        required: true
+        description: |
+          Slot end date/time (yyyy-mm-ddThh:mm:ss+hh:mm)
+          __Start and end represent the definition of the time window within which Slots must start__
+        schema:
+          format: datetime
+          type: string
+          example: '2020-03-31T16:00:00'
+      - name: _include
+        in: query
+        description: tbc
+        schema:
+          type: string
+      - name: inclusions
+        in: query
+        description: |
+          Inclusions that drive the rescusive depth of the search
+          |Inclusion           |Description|
+          |-------             | --------|
+          | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
+          | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
+          | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
+          | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
+          | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
+          | Location           | Include Location Resources referenced within the  HealthcareService Resources|
+        required: true
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - Schedule
+            - Practitioner
+            - PractitionerRole
+            - HealthcareService
+            - ProvidedBy
+            - Location
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+              example:
+                resourceType: Bundle
+                id: a56382a1-dce2-483a-8426-65b727b66809
+                meta:
+                  lastUpdated: '2019-05-09T09:26:12.010+00:00'
+                type: searchset
+                total: 2
+                link:
+                - relation: self
+                  url: http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot?_format=json&_include=Slot%3Aschedule&_include=Schedule%3Aactor%3APractitioner&_include=Schedule%3Aactor%3APractitionerRole&_include=Schedule%3Aactor%3AHealthcareService&_include=HealthcareService.location&schedule.actor%3Ahealthcareservice=918999198999&start=ge2019-05-09T10%3A00%3A00%2000%3A00&start=le2019-05-09T10%3A30%3A00%2000%3A00&status=free
+                entry:
+                - fullUrl: http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot/slot005
+                  resource:
+                    resourceType: Slot
+                    id: slot005
+                    meta:
+                      profile:
+                      - https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Slot-1
+                    identifier:
+                    - system: https://tools.ietf.org/html/rfc4122
+                      value: 5a889965-3db4-4c29-8003-676c247a763e
+                    schedule:
+                      reference: Schedule/sched1111
+                    status: free
+                    start: '2019-05-09T10:00:00.000+00:00'
+                    end: '2019-05-09T10:15:00.000+00:00'
+                - fullUrl: http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot/slot006
+                  resource:
+                    resourceType: Slot
+                    id: slot006
+                    meta:
+                      profile:
+                      - https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Slot-1
+                    identifier:
+                    - system: https://tools.ietf.org/html/rfc4122
+                      value: d939f0e0-d434-4962-a327-7ed52fde2b2e
+                    schedule:
+                      reference: Schedule/sched1111
+                    status: free
+                    start: '2019-05-09T10:15:00.000+00:00'
+                    end: '2019-05-09T10:30:00.000+00:00'
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/Appointment":
+    parameters:
+    - "$ref": "#/components/parameters/ServiceId_HParam"
+    get:
+      tags:
+      - Booking
+      summary: Get bookings for a patient
+      description: Get Bookings for a patient
+      operationId: getBookingByPatient
+      parameters:
+      - "$ref": "#/components/parameters/PatientId_QParam"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/Appointment/{id}":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    - "$ref": "#/components/parameters/ServiceId_HParam"
+    get:
+      tags:
+      - Booking
+      summary: Get a specific booking
+      description: Get a specific booking
+      operationId: getBooking
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                "$ref": "#/components/schemas/Appointment"
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/Appointment"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+    delete:
+      tags:
+      - Booking
+      summary: Delete a specific booking
+      description: Delete a specific booking
+      operationId: deleteBooking
+      responses:
+        '200':
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/ServiceRequest":
+    parameters:
+    - "$ref": "#/components/parameters/ServiceId_HParam"
+    get:
+      tags:
+      - Referral
+      summary: Get referral/s for a patient
+      description: Get referral/s for a patient
+      operationId: getReferralByPatient
+      parameters:
+      - "$ref": "#/components/parameters/PatientId_QParam"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/ServiceRequest/{id}":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    - "$ref": "#/components/parameters/ServiceId_HParam"
+    get:
+      tags:
+      - Referral
+      summary: Get a specific referral
+      description: Get a specific referral
+      operationId: getReferral
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                "$ref": "#/components/schemas/ServiceRequest"
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/ServiceRequest"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+    delete:
+      tags:
+      - Referral
+      summary: Delete a specific referral
+      description: Delete a specific referral
+      operationId: deleteReferral
+      responses:
+        '200':
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/ServiceRequest/{id}/validation-response":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    - "$ref": "#/components/parameters/ServiceId_HParam"
+  "/registry":
+    post:
+      tags:
+      - Registry
+      summary: Create a registry entry
+      description: Create a registry entry
+      operationId: createRegistryEntry
+      requestBody:
+        description: Regisrty entry details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              "$ref": "#/components/schemas/DocumentReference"
+          application/fhir+xml:
+            schema:
+              "$ref": "#/components/schemas/DocumentReference"
       responses:
         '201':
-          description: Null response
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /pets/{petId}:
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
     get:
-      summary: Info for a specific pet
-      operationId: showPetById
       tags:
-        - pets
+      - Registry
+      summary: Get entries for a patient
+      description: Get entries for a patient
+      operationId: getRegistryByPatient
       parameters:
-        - name: petId
-          in: path
-          required: true
-          description: The id of the pet to retrieve
-          schema:
-            type: string
+      - "$ref": "#/components/parameters/PatientId_QParam"
       responses:
         '200':
-          description: Expected response to a valid request
+          description: Success
           content:
-            application/json:
+            application/fhir+json:
               schema:
-                $ref: "#/components/schemas/Pet"
-        default:
-          description: unexpected error
+                "$ref": "#/components/schemas/SearchBundle"
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/registry/{id}":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    get:
+      tags:
+      - Registry
+      summary: Get a specific registry entry
+      description: Get a specific registry entry
+      operationId: getRegistry
+      responses:
+        '200':
+          description: Success
           content:
-            application/json:
+            application/fhir+json:
               schema:
-                $ref: "#/components/schemas/Error"
+                "$ref": "#/components/schemas/SearchBundle"
+            application/fhir+xml:
+              schema:
+                "$ref": "#/components/schemas/SearchBundle"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+    put:
+      tags:
+      - Registry
+      summary: Update a specific registry entry
+      description: Update a specific regisrty entry
+      operationId: putRegistry
+      requestBody:
+        description: Registry Entry
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              "$ref": "#/components/schemas/DocumentReference"
+          application/fhir+xml:
+            schema:
+              "$ref": "#/components/schemas/DocumentReference"
+      responses:
+        '200':
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+    delete:
+      tags:
+      - Registry
+      summary: Delete a specific registry entry
+      description: Delete a specific registry entry
+      operationId: deleteRegistry
+      responses:
+        '200':
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/registry/events/subscriber":
+    post:
+      tags:
+      - Events
+      summary: Create an event subscriber
+      description: Create an event subscriber
+      operationId: createSubscriper
+      requestBody:
+        description: Subscriber Details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              "$ref": "#/components/schemas/Subscriber"
+          application/fhir+xml:
+            schema:
+              "$ref": "#/components/schemas/Subscriber"
+      responses:
+        '201':
+          "$ref": "#/components/responses/201"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/registry/events/subscriber/{id}":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    delete:
+      tags:
+      - Events
+      summary: Delete a subscriber
+      description: Delete an event subscriber
+      operationId: deleteSubscriber
+      responses:
+        '200':
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/registry/events/subscriber/{id}/subscription":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    post:
+      tags:
+      - Events
+      summary: Create an event subscription
+      description: Create an event subscription
+      operationId: createSubscription
+      requestBody:
+        description: Subscription Details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              "$ref": "#/components/schemas/Subscriptions"
+          application/fhir+xml:
+            schema:
+              "$ref": "#/components/schemas/Subscriptions"
+      responses:
+        '201':
+          "$ref": "#/components/responses/201"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/registry/events/subscriber/{id}/subscription/{subscriptionId}":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    delete:
+      tags:
+      - Events
+      summary: Delete an event subscription
+      description: Delete an event subscription
+      operationId: deleteSubscription
+      parameters:
+      - in: path
+        name: subscriptionId
+        schema:
+          type: string
+          format: uuid
+          example: be9bfb28-a2ac-4cd8-a20d-ede38ac33f17
+        required: true
+        description: The unique ID of the subscription
+      responses:
+        '200':
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
+  "/registry/{id}/events":
+    parameters:
+    - "$ref": "#/components/parameters/Id_Param"
+    post:
+      tags:
+      - Events
+      summary: Create a registry event
+      description: Create an event for the specific registry entry
+      operationId: createRegistryEvent
+      requestBody:
+        description: Event Details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              "$ref": "#/components/schemas/RegistryEvent"
+          application/fhir+xml:
+            schema:
+              "$ref": "#/components/schemas/RegistryEvent"
+      responses:
+        '201':
+          description: Success
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '403':
+          "$ref": "#/components/responses/403"
+        '404':
+          "$ref": "#/components/responses/404"
+        '500':
+          "$ref": "#/components/responses/500"
 components:
+  parameters:
+    Id_Param:
+      name: id
+      description: The identifier of the registry object.
+      in: path
+      schema:
+        type: string
+        format: uuid
+        example: 5dfbbdb8-f94b-4113-b3ff-249cac7f0694
+      required: true
+      allowEmptyValue: false
+    PatientId_QParam:
+      name: patientIdentifier
+      description: The identifier of a patient.
+      required: true
+      in: query
+      schema:
+        type: string
+        example: 485 777 3456
+    ServiceId_QParam:
+      name: serviceIdentifier
+      description: The identifier of a healthcare service
+      required: true
+      in: query
+      schema:
+        type: string
+        example: 123344556677
+    ServiceId_HParam:
+      name: NHSD-ServiceIdentifier
+      description: The identifier of a healthcare service
+      required: true
+      in: header
+      schema:
+        type: string
+        example: 123344556677
+  responses:
+    '201':
+      description: Success.
+      content:
+        application/json:
+          schema:
+            type: string
+            format: uuid
+            description: UUID of the created resource
+            example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+        application/fhir+xml:
+          schema:
+            type: string
+            format: uuid
+            description: UUID of the created resource
+            example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+    '400':
+      description: Illegal input for operation.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/OperationalOutcome"
+    '401':
+      description: Unauthorized access.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/OperationalOutcome"
+    '403':
+      description: Entity not found.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/OperationalOutcome"
+    '404':
+      description: Forbidden.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/OperationalOutcome"
+    '500':
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/OperationalOutcome"
   schemas:
-    Pet:
+    Appointment:
+      type: object
+      example:
+        resourceType: Appointment
+        meta:
+          profile:
+          - https://www.hl7.org/fhir/appointment
+    Capability:
+      type: object
+      example:
+        resourceType: CapabilityStatement
+        meta:
+          profile:
+          - https://www.hl7.org/fhir/CapabilityStatement
+        fhirVersion: 4.0.1
+        status: active
+    DocumentReference:
+      type: object
+      example:
+        resourceType: DocumentReference
+        meta:
+          profile:
+          - https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-DocumentReference
+    OperationalOutcome:
+      type: object
+      example:
+        resourceType: OperationOutcome
+        meta:
+          profile:
+          - http://hl7.org/fhir/STU3/operationoutcome
+        issue:
+        - severity: error
+          code: invalid
+          details:
+            coding:
+            - system: https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1
+              code: BAD_REQUEST
+          diagnostics: Any further internal debug details i.e. stack trace details  etc.
+    ServiceRequest:
+      type: object
+      example:
+        resourceType: ServiceRequest
+        meta:
+          profile:
+          - https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-ServiceRequest
+    PatientIdentifier:
+      type: string
+      example: 485 777 3456
+    Subscriber:
       type: object
       required:
-        - id
-        - name
+      - name
+      - url
       properties:
-        id:
-          type: integer
-          format: int64
         name:
           type: string
-        tag:
+          example: Cottage Systems Ltd
+        url:
           type: string
-    Pets:
-      type: array
-      items:
-        $ref: "#/components/schemas/Pet"
-    Error:
+          example: https://cottage.systems.uk/fhir_base/events
+        subscriptions:
+          "$ref": "#/components/schemas/Subscriptions"
+    Subscription:
+      oneOf:
+      - "$ref": "#/components/schemas/PatientSubscription"
+      - "$ref": "#/components/schemas/AppointmentSubscription"
+      - "$ref": "#/components/schemas/ServiceRequestSubscription"
+    PatientSubscription:
       type: object
       required:
-        - code
-        - message
+      - patientIdentifier
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        patientIdentifier:
+          "$ref": "#/components/schemas/PatientIdentifier"
+    AppointmentSubscription:
+      type: object
+      required:
+      - identifier
+      properties:
+        identifier:
           type: string
+          format: uuid
+          example: 172a932f-4789-41e2-9afe-ea311def4f15
+    ServiceRequestSubscription:
+      type: object
+      required:
+      - identifier
+      properties:
+        identifier:
+          type: string
+          format: uuid
+          example: d3606450-2b8c-4f24-b931-c7f796517059
+    Subscriptions:
+      type: array
+      items:
+        "$ref": "#/components/schemas/Subscription"
+    RegistryEntry:
+      type: object
+      required:
+      - identifier
+      - url
+      - type
+      - patientIdentifier
+      properties:
+        identifier:
+          type: string
+          example: 1234577600
+        url:
+          type: string
+          example: https://cottage.systems.uk/fhir_base/service_request/1234577600
+        type:
+          type: string
+          enum:
+          - Booking
+          - ServiceRequest
+        patientIdentifier:
+          "$ref": "#/components/schemas/PatientIdentifier"
+    RegistryEvent:
+      type: object
+      required:
+      - identifier
+      - eventType
+      - eventTopic
+      - eventTimeStamp
+      properties:
+        identifier:
+          description: This unique identifier for owning registry object
+          type: string
+          example: 5dfbbdb8-f94b-4113-b3ff-249cac7f0694
+        eventType:
+          type: string
+          enum:
+          - CREATE
+          - SUPERCEED
+          - UPDATE
+          - DELETE
+        eventTopic:
+          type: string
+          example: DNA
+        eventTimeStamp:
+          type: string
+          format: datetime
+          example: '2021-07-27T15:30:00.000Z'
+    Bundle:
+      type: object
+      example:
+        resourceType: Bundle
+        meta:
+          profile:
+          - https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-Bundle
+    SearchBundle:
+      type: object
+      example:
+        resourceType: Bundle
+        meta:
+          profile:
+          - https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-Bundle
+          type: searchset
+    MessageBundle:
+      type: object
+      example:
+        resourceType: Bundle
+        meta:
+          profile:
+          - https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-Bundle
+          type: message
+    ValidationBundle:
+      allOf:
+      - "$ref": "#/components/schemas/MessageBundle"
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
