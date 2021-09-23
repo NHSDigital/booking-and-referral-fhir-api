@@ -6,6 +6,7 @@ from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
 from api_test_utils.apigee_api_trace import ApigeeApiTraceDebug
 from .configuration import config
+from .configuration.config import ENVIRONMENT
 
 
 @pytest.fixture(scope="session")
@@ -15,11 +16,13 @@ async def default_oauth_helper():
     The default app has a default product associated.
     If your test requires specific app config then please create your own"""
 
-    if config.ENVIRONMENT == "int":
+    if ENVIRONMENT == "int" or ENVIRONMENT == "sandbox":
         oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
         yield oauth
 
-    if config.ENVIRONMENT == "internal-dev" or config.ENVIRONMENT == "internal-dev-sandbox":
+    is_internal_env = ENVIRONMENT == "internal-dev" or ENVIRONMENT == "internal-dev-sandbox" or \
+                      ENVIRONMENT == "internal-qa" or ENVIRONMENT == "internal-qa-sandbox"
+    if is_internal_env:
         print("\nCreating Default App and Product..")
         apigee_product = ApigeeApiProducts()
         await apigee_product.create_new_product()
@@ -88,6 +91,10 @@ def debug():
 @pytest.fixture()
 async def get_token_client_credentials(default_oauth_helper):
     """Call identity server to get an access token"""
+    if "sandbox" in ENVIRONMENT:
+        # Sandbox environments don't need access_token. Return fake one
+        return {"access_token": "not_needed"}
+
     jwt = default_oauth_helper.create_jwt(kid="test-1")
     token_resp = await default_oauth_helper.get_token_response(
         grant_type="client_credentials", _jwt=jwt
