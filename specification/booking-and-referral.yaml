@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.0
 info:
-  description: This is a work in progress NHS Booking and Referral API specification </br> **Do NOT build against this specification**
+  description: This is a work in progress NHS Booking and Referral API specification. </br> **Do NOT build against this specification**
   version: 1.0.3
   title: Booking and Referral API
   termsOfService: https://developer.nhs.uk/apis/uec-appointments
