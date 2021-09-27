@@ -17,6 +17,9 @@
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
       <Step>
+        <Name>FlowCallout.ApplyRateLimiting</Name>
+      </Step>
+      <Step>
         <Name>Quota</Name>
       </Step>
       <Step>
