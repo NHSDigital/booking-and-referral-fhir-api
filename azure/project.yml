@@ -23,7 +23,7 @@ variables:
           "enabled": false
         },
         "spikeArrest": {
-          "ratelimit": "300000pm",
+          "ratelimit": "3pm",
           "enabled": true
         }
       }
