@@ -20,12 +20,6 @@
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
-        <Name>Quota</Name>
-      </Step>
-      <Step>
-        <Name>SpikeArrest</Name>
-      </Step>
-      <Step>
           <Name>LookupCache.Targets</Name>
       </Step>
       <Step>
