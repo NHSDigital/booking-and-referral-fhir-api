@@ -5,3 +5,26 @@ variables:
   product_display_name: Booking and Referral FHIR API
   product_description: This proxy function as a centralized router for bookings and referrals services
   spec_file: booking-and-referral.json
+  ratelimiting: |
+    {
+      "app": {
+        "quota": {
+          "limit": 300,
+          "interval": 1,
+          "timeunit": "minute",
+          "enabled": true
+        },
+        "spikeArrest": {
+          "enabled": false
+        }
+      },
+      "proxy": {
+        "quota": {
+          "enabled": false
+        },
+        "spikeArrest": {
+          "ratelimit": "300000pm",
+          "enabled": true
+        }
+      }
+    }
