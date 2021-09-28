@@ -7,24 +7,14 @@ variables:
   spec_file: booking-and-referral.json
   ratelimiting: |
     {
-      "app": {
-        "quota": {
-          "limit": 300,
-          "interval": 1,
-          "timeunit": "minute",
-          "enabled": true
-        },
-        "spikeArrest": {
-          "enabled": false
-        }
+      "quota": {
+        "limit": 300,
+        "interval": 1,
+        "timeunit": "minute",
+        "enabled": true
       },
-      "proxy": {
-        "quota": {
-          "enabled": false
-        },
-        "spikeArrest": {
-          "ratelimit": "300000pm",
-          "enabled": true
-        }
-      }
+      "spikeArrest": {
+        "ratelimit": "5ps",
+        "enabled": true
+      }      
     }
