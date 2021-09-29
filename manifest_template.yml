@@ -37,7 +37,7 @@ apigee:
         attributes:
           - name: ratelimiting
             value:
-              booking-and-referrals-{{ env.name }}:
+              booking-and-referrals-{{ ENV.name }}:
                 quota:
                   limit: 1
                   enabled: true
