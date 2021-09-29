@@ -36,16 +36,7 @@ apigee:
         approvalType: auto
         attributes:
           - name: ratelimiting
-            value:
-              booking-and-referrals-{{ ENV.name }}:
-                quota:
-                  limit: 1
-                  enabled: true
-                  interval: 1
-                  timeunit: "minute"
-                spikeArrest:
-                  ratelimit: "300pm"
-                  enabled: true
+            value: '{"ratelimiting":{"booking-and-referral-{{ENV.name}}":{"quota":{"limit":1,"enabled":true,"interval":1,"timeunit":"minute"}}}}'
           - name: access
             value: public
           - name: ratelimit
