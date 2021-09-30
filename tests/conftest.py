@@ -88,7 +88,6 @@ async def default_oauth_helper():
         yield oauth
 
         # Teardown
-        print(apigee_app.client_id)
         print("\nDestroying Default App and Product..")
         await apigee_app.destroy_app()
         await apigee_product.destroy_product()
