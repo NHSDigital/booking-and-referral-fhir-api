@@ -17,10 +17,7 @@
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
       <Step>
-        <Name>Quota</Name>
-      </Step>
-      <Step>
-        <Name>SpikeArrest</Name>
+        <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
           <Name>LookupCache.Targets</Name>

@@ -1,6 +1,7 @@
 # flake8: noqa
 import pytest
 import asyncio
+import json
 from api_test_utils.apigee_api_products import ApigeeApiProducts
 from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
@@ -20,8 +21,12 @@ async def default_oauth_helper():
         oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
         yield oauth
 
-    is_internal_env = ENVIRONMENT == "internal-dev" or ENVIRONMENT == "internal-dev-sandbox" or \
-                      ENVIRONMENT == "internal-qa" or ENVIRONMENT == "internal-qa-sandbox"
+    is_internal_env = (
+        ENVIRONMENT == "internal-dev"
+        or ENVIRONMENT == "internal-dev-sandbox"
+        or ENVIRONMENT == "internal-qa"
+        or ENVIRONMENT == "internal-qa-sandbox"
+    )
     if is_internal_env:
         print("\nCreating Default App and Product..")
         apigee_product = ApigeeApiProducts()
@@ -32,31 +37,47 @@ async def default_oauth_helper():
         await apigee_product.update_scopes(
             ["urn:nhsd:apim:app:level3:booking-and-referral"]
         )
+        # Product ratelimit
+        product_ratelimit = {
+            f"{config.PROXY_NAME}": {
+                "quota": {
+                    "limit": "300",
+                    "enabled": True,
+                    "interval": 1,
+                    "timeunit": "minute",
+                },
+                "spikeArrest": {"ratelimit": "100ps", "enabled": True},
+            }
+        }
+        await apigee_product.update_attributes({"ratelimiting": json.dumps(product_ratelimit)})
+
         await apigee_product.update_environments([config.ENVIRONMENT])
 
         apigee_app = ApigeeApiDeveloperApps()
         await apigee_app.create_new_app()
 
-        # Set default JWT Testing resource url
+        # Set default JWT Testing resource url and app ratelimit
+        app_ratelimit = {
+            f"{config.PROXY_NAME}": {
+                "quota": {
+                    "limit": "300",
+                    "enabled": True,
+                    "interval": 1,
+                    "timeunit": "minute",
+                },
+                "spikeArrest": {"ratelimit": "100ps", "enabled": True},
+            }
+        }
         await apigee_app.set_custom_attributes(
             {
                 "jwks-resource-url": "https://raw.githubusercontent.com/NHSDigital/"
                 "identity-service-jwks/main/jwks/internal-dev/"
-                "9baed6f4-1361-4a8e-8531-1f8426e3aba8.json"
+                "9baed6f4-1361-4a8e-8531-1f8426e3aba8.json",
+                "ratelimiting": json.dumps(app_ratelimit),
             }
         )
 
         await apigee_app.add_api_product(api_products=[apigee_product.name])
-
-        [
-            await product.update_ratelimits(
-                quota=60000,
-                quota_interval="1",
-                quota_time_unit="minute",
-                rate_limit="1000ps",
-            )
-            for product in [apigee_product]
-        ]
 
         oauth = OauthHelper(
             client_id=apigee_app.client_id,
