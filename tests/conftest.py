@@ -73,7 +73,7 @@ async def default_oauth_helper():
                 "jwks-resource-url": "https://raw.githubusercontent.com/NHSDigital/"
                 "identity-service-jwks/main/jwks/internal-dev/"
                 "9baed6f4-1361-4a8e-8531-1f8426e3aba8.json",
-                "ratelimiting": json.dumps(product_ratelimit),
+                "ratelimiting": json.dumps(app_ratelimit),
             }
         )
 
@@ -90,8 +90,8 @@ async def default_oauth_helper():
         # Teardown
         print(apigee_app.client_id)
         print("\nDestroying Default App and Product..")
-        # await apigee_app.destroy_app()
-        # await apigee_product.destroy_product()
+        await apigee_app.destroy_app()
+        await apigee_product.destroy_product()
 
 
 @pytest.fixture(scope="session")
