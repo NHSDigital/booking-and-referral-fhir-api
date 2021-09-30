@@ -1,6 +1,7 @@
 # flake8: noqa
 import pytest
 import asyncio
+import json
 from api_test_utils.apigee_api_products import ApigeeApiProducts
 from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
@@ -40,7 +41,7 @@ async def default_oauth_helper():
         product_ratelimit = {
             f"{config.PROXY_NAME}": {
                 "quota": {
-                    "limit": "300pm",
+                    "limit": "300",
                     "enabled": True,
                     "interval": 1,
                     "timeunit": "minute",
@@ -48,7 +49,7 @@ async def default_oauth_helper():
                 "spikeArrest": {"ratelimit": "100ps", "enabled": True},
             }
         }
-        await apigee_product.update_attributes({"ratelimiting": str(product_ratelimit)})
+        await apigee_product.update_attributes({"ratelimiting": json.dumps(product_ratelimit)})
 
         await apigee_product.update_environments([config.ENVIRONMENT])
 
@@ -59,7 +60,7 @@ async def default_oauth_helper():
         app_ratelimit = {
             f"{config.PROXY_NAME}": {
                 "quota": {
-                    "limit": "300pm",
+                    "limit": "300",
                     "enabled": True,
                     "interval": 1,
                     "timeunit": "minute",
@@ -72,7 +73,7 @@ async def default_oauth_helper():
                 "jwks-resource-url": "https://raw.githubusercontent.com/NHSDigital/"
                 "identity-service-jwks/main/jwks/internal-dev/"
                 "9baed6f4-1361-4a8e-8531-1f8426e3aba8.json",
-                "ratelimiting": str(app_ratelimit),
+                "ratelimiting": json.dumps(product_ratelimit),
             }
         )
 
@@ -87,9 +88,10 @@ async def default_oauth_helper():
         yield oauth
 
         # Teardown
+        print(apigee_app.client_id)
         print("\nDestroying Default App and Product..")
-        await apigee_app.destroy_app()
-        await apigee_product.destroy_product()
+        # await apigee_app.destroy_app()
+        # await apigee_product.destroy_product()
 
 
 @pytest.fixture(scope="session")
