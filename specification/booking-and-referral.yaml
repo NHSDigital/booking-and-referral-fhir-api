@@ -15,13 +15,13 @@ servers:
   - url: https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4
     description: Int Server
 tags:
-  - name: Metadata
-  - name: Message
-  - name: Slots
   - name: Booking
+  - name: Events
+  - name: Message
+  - name: Metadata
   - name: Referral
   - name: Registry
-  - name: Events
+  - name: Slots
 security:
   - BasicAuth: []
   - BearerAuth: []
