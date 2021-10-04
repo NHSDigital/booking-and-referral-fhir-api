@@ -206,63 +206,26 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
               example:
-                resourceType: Bundle
-                id: a56382a1-dce2-483a-8426-65b727b66809
-                meta:
-                  lastUpdated: '2019-05-09T09:26:12.010+00:00'
-                type: searchset
-                total: 2
-                link:
-                  - relation: self
-                    url: http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot?_format=json&_include=Slot%3Aschedule&_include=Schedule%3Aactor%3APractitioner&_include=Schedule%3Aactor%3APractitionerRole&_include=Schedule%3Aactor%3AHealthcareService&_include=HealthcareService.location&schedule.actor%3Ahealthcareservice=918999198999&start=ge2019-05-09T10%3A00%3A00%2000%3A00&start=le2019-05-09T10%3A30%3A00%2000%3A00&status=free
-                entry:
-                  - fullUrl: http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot/slot005
-                    resource:
-                      resourceType: Slot
-                      id: slot005
-                      meta:
-                        profile:
-                          - https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Slot-1
-                      identifier:
-                        - system: https://tools.ietf.org/html/rfc4122
-                          value: 5a889965-3db4-4c29-8003-676c247a763e
-                      schedule:
-                        reference: Schedule/sched1111
-                      status: free
-                      start: '2019-05-09T10:00:00.000+00:00'
-                      end: '2019-05-09T10:15:00.000+00:00'
-                  - fullUrl: http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot/slot006
-                    resource:
-                      resourceType: Slot
-                      id: slot006
-                      meta:
-                        profile:
-                          - https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Slot-1
-                      identifier:
-                        - system: https://tools.ietf.org/html/rfc4122
-                          value: d939f0e0-d434-4962-a327-7ed52fde2b2e
-                      schedule:
-                        reference: Schedule/sched1111
-                      status: free
-                      start: '2019-05-09T10:15:00.000+00:00'
-                      end: '2019-05-09T10:30:00.000+00:00'
+                success:
+                  value:
+                    $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
         '400':
-          $ref: '#/components/responses/400'
+          $ref: examples/bad-request.json
         '401':
-          $ref: '#/components/responses/401'
+          $ref: examples/bad-request.json
         '403':
-          $ref: '#/components/responses/403'
+          $ref: examples/bad-request.json
         '404':
-          $ref: '#/components/responses/404'
+          $ref: examples/bad-request.json
         '405':
-          $ref: '#/components/responses/405'
+          $ref: examples/bad-request.json
         '500':
-          $ref: '#/components/responses/500'
+          $ref: examples/bad-request.json
   /Appointment:
     parameters:
       - $ref: '#/components/parameters/ServiceId_HParam'
