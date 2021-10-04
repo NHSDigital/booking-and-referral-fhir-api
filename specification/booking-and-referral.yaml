@@ -1376,21 +1376,61 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/DocumentReference'
+              example:
+                success:
+                  value:
+                    $ref: examples/document_reference/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/DocumentReference'
         '400':
-          $ref: '#/components/responses/400'
+          description: Illegal input for operation
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '401':
-          $ref: '#/components/responses/401'
+          description: Unauthorized access
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '403':
-          $ref: '#/components/responses/403'
+          description: Forbidden
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '404':
-          $ref: '#/components/responses/404'
+          description: Entity Not Found
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '405':
-          $ref: '#/components/responses/405'
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '500':
-          $ref: '#/components/responses/500'
+          description: Server Error
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
     put:
       tags:
         - Registry
@@ -1404,6 +1444,10 @@ paths:
           application/fhir+json:
             schema:
               $ref: '#/components/schemas/DocumentReference'
+            example:
+              success:
+                value:
+                  $ref: examples/document_reference/id/PUT-body.json
           application/fhir+xml:
             schema:
               $ref: '#/components/schemas/DocumentReference'
@@ -1411,17 +1455,53 @@ paths:
         '200':
           description: Success
         '400':
-          $ref: '#/components/responses/400'
+          description: Illegal input for operation
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '401':
-          $ref: '#/components/responses/401'
+          description: Unauthorized access
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '403':
-          $ref: '#/components/responses/403'
+          description: Forbidden
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '404':
-          $ref: '#/components/responses/404'
+          description: Entity Not Found
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '405':
-          $ref: '#/components/responses/405'
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '500':
-          $ref: '#/components/responses/500'
+          description: Server Error
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
     delete:
       tags:
         - Registry
@@ -1432,17 +1512,53 @@ paths:
         '200':
           description: Success
         '400':
-          $ref: '#/components/responses/400'
+          description: Illegal input for operation
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '401':
-          $ref: '#/components/responses/401'
+          description: Unauthorized access
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '403':
-          $ref: '#/components/responses/403'
+          description: Forbidden
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '404':
-          $ref: '#/components/responses/404'
+          description: Entity Not Found
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '405':
-          $ref: '#/components/responses/405'
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '500':
-          $ref: '#/components/responses/500'
+          description: Server Error
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
 components:
   parameters:
     Id_Param:
