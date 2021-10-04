@@ -1,5 +1,5 @@
 type: object
-  example:
+properties:
     resourceType: Bundle
     meta:
       profile:
