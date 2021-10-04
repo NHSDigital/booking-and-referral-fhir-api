@@ -2,7 +2,7 @@
   "resourceType": "ServiceRequest",
   "meta": {
     "profile": [
-      "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-ServiceRequest"
+      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-ServiceRequest"
     ]
   }
 }
