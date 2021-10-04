@@ -395,24 +395,70 @@ paths:
           application/fhir+json:
             schema:
               $ref: '#/components/schemas/Appointment'
+            example:
+              success:
+                value:
+                  $ref: examples/appointment/POST-body.json
           application/fhir+xml:
             schema:
               $ref: '#/components/schemas/Appointment'
       responses:
         '201':
-          $ref: '#/components/responses/201'
+          description: Success
+          content:
+            application/fhir+json:
+              example:
+                success:
+                  value:
+                    $ref: examples/appointment/POST-success.txt
         '400':
-          $ref: '#/components/responses/400'
+          description: Illegal input for operation
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '401':
-          $ref: '#/components/responses/401'
+          description: Unauthorized access
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '403':
-          $ref: '#/components/responses/403'
+          description: Forbidden
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '404':
-          $ref: '#/components/responses/404'
+          description: Entity Not Found
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '405':
-          $ref: '#/components/responses/405'
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '500':
-          $ref: '#/components/responses/500'
+          description: Server Error
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
     get:
       tags:
         - Booking
@@ -428,21 +474,61 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/SearchBundle'
+              example:
+                success:
+                  value:
+                    $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundle'
         '400':
-          $ref: '#/components/responses/400'
+          description: Illegal input for operation
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '401':
-          $ref: '#/components/responses/401'
+          description: Unauthorized access
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '403':
-          $ref: '#/components/responses/403'
+          description: Forbidden
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '404':
-          $ref: '#/components/responses/404'
+          description: Entity Not Found
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '405':
-          $ref: '#/components/responses/405'
+          description: Method Not Allowed
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
         '500':
-          $ref: '#/components/responses/500'
+          description: Server Error
+          content:
+            application/fhir+json:
+              example:
+                error:
+                  value:
+                    $ref: examples/bad-request.json
   /Appointment/{id}:
     parameters:
       - $ref: '#/components/parameters/Id_Param'

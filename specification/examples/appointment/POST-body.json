@@ -2,7 +2,7 @@
   "resourceType": "Appointment",
   "meta": {
     "profile": [
-      "https://www.hl7.org/fhir/appointment"
+      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Appointment"
     ]
   }
 }
