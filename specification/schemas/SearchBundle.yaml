@@ -1,5 +1,6 @@
-type: object
-properties:
+SearchBundle:
+  type: object
+  example:
     resourceType: Bundle
     meta:
       profile:
