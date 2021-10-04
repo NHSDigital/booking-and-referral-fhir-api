@@ -206,14 +206,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: '#/components/schemas/SearchBundle'
               example:
                 success:
                   value:
                     $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: '#/components/schemas/SearchBundle'
         '400':
           $ref: examples/bad-request.json
         '401':
