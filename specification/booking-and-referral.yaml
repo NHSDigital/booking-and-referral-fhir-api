@@ -41,14 +41,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Capability'
+                $ref: schemas/Capability.yaml
               example:
                 success:
                   value:
                     $ref: examples/metadata/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/Capability'
+                $ref: schemas/Capability.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -112,10 +112,10 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/MessageDefinition'
+                $ref: schemas/MessageDefinition.yaml
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/MessageDefinition'
+                $ref: schemas/MessageDefinition.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -180,14 +180,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/MessageBundle'
+                $ref: schemas/MessageBundle.yaml
               example:
                 success:
                   value:
                     $ref: examples/process_message/POST-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/MessageBundle'
+                $ref: schemas/MessageBundle.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -394,14 +394,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              $ref: schemas/Appointment.yaml
             example:
               success:
                 value:
                   $ref: examples/appointment/POST-body.json
           application/fhir+xml:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              $ref: schemas/Appointment.yaml
       responses:
         '201':
           description: Success
@@ -473,14 +473,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
               example:
                 success:
                   value:
                     $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -546,14 +546,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                $ref: schemas/Appointment.yaml
               example:
                 success:
                   value:
                     $ref: examples/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                $ref: schemas/Appointment.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -614,14 +614,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              $ref: schemas/Appointment.yaml
             example:
               success:
                 value:
                   $ref: examples/appointment/id/PATCH-body.json
           application/fhir+xml:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              $ref: schemas/Appointment.yaml
       responses:
         '200':
           description: Success
@@ -685,14 +685,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              $ref: schemas/Appointment.yaml
             example:
               success:
                 value:
                   $ref: examples/appointment/id/PUT-body.json
           application/fhir+xml:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              $ref: schemas/Appointment.yaml
       responses:
         '200':
           description: Success
@@ -817,14 +817,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/ServiceRequest'
+              $ref: schemas/ServiceRequest.yaml
             example:
               success:
                 value:
                   $ref: examples/service_request/POST-body.json
           application/fhir+xml:
             schema:
-              $ref: '#/components/schemas/ServiceRequest'
+              $ref: schemas/ServiceRequest.yaml
       responses:
         '201':
           description: Success
@@ -890,14 +890,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
               example:
                 success:
                   value:
                     $ref: examples/service_request/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -963,14 +963,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/ServiceRequest'
+                $ref: schemas/ServiceRequest.yaml
               example:
                 error:
                   value:
                     $ref: examples/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/ServiceRequest'
+                $ref: schemas/ServiceRequest.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -1031,14 +1031,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/ServiceRequest'
+                $ref: schemas/ServiceRequest.yaml
               example:
                 error:
                   value:
                     $ref: examples/service_request/id/PATCH-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/ServiceRequest'
+                $ref: schemas/ServiceRequest.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -1099,14 +1099,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/ServiceRequest'
+                $ref: schemas/ServiceRequest.yaml
               example:
                 error:
                   value:
                     $ref: examples/service_request/id/PUT-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/ServiceRequest'
+                $ref: schemas/ServiceRequest.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -1228,14 +1228,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/DocumentReference'
+              $ref: schemas/DocumentReference.yaml
             example:
               success:
                 value:
                   $ref: examples/document_reference/POST-body.json
           application/fhir+xml:
             schema:
-              $ref: '#/components/schemas/DocumentReference'
+              $ref: schemas/DocumentReference.yaml
       responses:
         '201':
           description: Success
@@ -1301,14 +1301,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
               example:
                 success:
                   value:
                     $ref: examples/document_reference/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -1375,14 +1375,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/DocumentReference'
+                $ref: schemas/DocumentReference.yaml
               example:
                 success:
                   value:
                     $ref: examples/document_reference/id/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/DocumentReference'
+                $ref: schemas/DocumentReference.yaml
         '400':
           description: Illegal input for operation
           content:
@@ -1443,14 +1443,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/DocumentReference'
+              $ref: schemas/DocumentReference.yaml
             example:
               success:
                 value:
                   $ref: examples/document_reference/id/PUT-body.json
           application/fhir+xml:
             schema:
-              $ref: '#/components/schemas/DocumentReference'
+              $ref: schemas/DocumentReference.yaml
       responses:
         '200':
           description: Success

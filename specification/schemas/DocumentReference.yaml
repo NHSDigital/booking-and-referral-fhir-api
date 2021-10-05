@@ -1,0 +1,13 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: "DocumentReference"
+  meta:
+    type: object
+    properties:
+      profile:
+        type: array
+        items:
+          type: string
+          example: "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-DocumentReference"
