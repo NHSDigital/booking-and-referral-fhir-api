@@ -322,14 +322,14 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
               example:
                 success:
                   value:
                     $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: '#/components/schemas/SearchBundle'
+                $ref: schemas/SearchBundle.yaml
         '400':
           description: Illegal input for operation
           content:
