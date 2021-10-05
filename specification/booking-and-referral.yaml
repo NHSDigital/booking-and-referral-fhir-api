@@ -1601,7 +1601,7 @@ components:
       required: true
       in: header
       schema:
-        $ref: '#/components/schemas/Service'
+        $ref: schemas/Service.yaml
     Token_HParam:
       name: NHSD-Token
       description: Authorisation token
@@ -1609,153 +1609,7 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/Token'
-  responses:
-    '201':
-      description: Success.
-      content:
-        application/json:
-          schema:
-            type: string
-            format: uuid
-            description: UUID of the created resource
-            example: c3f6145e-1a26-4345-b3f2-dccbcba62049
-        application/fhir+xml:
-          schema:
-            type: string
-            format: uuid
-            description: UUID of the created resource
-            example: c3f6145e-1a26-4345-b3f2-dccbcba62049
-    '400':
-      description: Illegal input for operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OperationalOutcome'
-    '401':
-      description: Unauthorized access.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OperationalOutcome'
-    '403':
-      description: Forbidden.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OperationalOutcome'
-    '404':
-      description: Entity Not Found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OperationalOutcome'
-    '405':
-      description: Method Not Allowed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OperationalOutcome'
-    '500':
-      description: Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OperationalOutcome'
   schemas:
-    Appointment:
-      type: object
-      example:
-        resourceType: Appointment
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Appointment
-    Capability:
-      type: object
-      example:
-        resourceType: CapabilityStatement
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-CapabilityStatement
-        fhirVersion: 4.0.1
-        status: active
-    DocumentReference:
-      type: object
-      example:
-        resourceType: DocumentReference
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-DocumentReference
-    OperationalOutcome:
-      type: object
-      example:
-        resourceType: OperationOutcome
-        meta:
-          profile:
-            - https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome
-        issue:
-          - severity: error
-            code: invalid
-            details:
-              coding:
-                - system: https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1
-                  code: BAD_REQUEST
-            diagnostics: Any further internal debug details i.e. stack trace details etc.
-    ServiceRequest:
-      type: object
-      example:
-        resourceType: ServiceRequest
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-ServiceRequest
-    PatientIdentifier:
-      type: string
-      example: 485 777 3456
-
-    Bundle:
-      type: object
-      example:
-        resourceType: Bundle
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle
-    SearchBundle:
-      type: object
-      example:
-        resourceType: Bundle
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle
-          type: searchset
-    MessageBundle:
-      type: object
-      example:
-        resourceType: Bundle
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle
-          type: message
-    ValidationBundle:
-      allOf:
-        - $ref: '#/components/schemas/MessageBundle'
-        
-    MessageDefinition:
-      type: object
-      description: Message Definition
-      example:
-        resourceType: MessageDefinition
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-MessageDefinition
-    
-    Organisation:
-      type: object
-      description: Organisation
-      example:
-        resourceType: Organisation
-        meta:
-          profile:
-            - https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Organization
-    
     Token:
       type: object
       description: Authorisation token
@@ -1767,16 +1621,7 @@ components:
           type: string
           example: 91122
         organisation:
-          $ref: '#/components/schemas/Organisation'
-
-    Service:
-      type: object
-      description: Service
-      example:
-        resourceType: Service
-        meta:
-          profile:
-            -https://simplifier.net/guide/NHSBookingandReferrals/UKCore-HealthcareService   
+          $ref: schemas/Organisation.yaml
     
           
           
