@@ -11,3 +11,6 @@ properties:
         items:
           type: string
           example: "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle"
+      type:
+        type: string
+        example: "searchset"
