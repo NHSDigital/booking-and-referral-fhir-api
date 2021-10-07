@@ -2,7 +2,7 @@
   "resourceType": "OperationOutcome",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/STU3/operationoutcome"
+      "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
     ]
   },
   "issue": [

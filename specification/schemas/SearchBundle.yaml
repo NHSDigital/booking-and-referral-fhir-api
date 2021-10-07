@@ -1,0 +1,16 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: "Bundle"
+  meta:
+    type: object
+    properties:
+      profile:
+        type: array
+        items:
+          type: string
+          example: "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle"
+      type:
+        type: string
+        example: "searchset"

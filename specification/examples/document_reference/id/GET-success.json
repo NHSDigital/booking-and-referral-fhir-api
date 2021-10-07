@@ -1,8 +1,8 @@
 {
-    "resourceType": "DocumentReference",
-    "meta": {
-      "profile": [
-        "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-DocumentReference"
-      ]
-    }
+  "resourceType": "DocumentReference",
+  "meta": {
+    "profile": [
+      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-DocumentReference"
+    ]
   }
+}

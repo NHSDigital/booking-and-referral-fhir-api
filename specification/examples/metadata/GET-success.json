@@ -2,7 +2,7 @@
   "resourceType": "CapabilityStatement",
   "meta": {
     "profile": [
-      "https://simplifier.net/guide/UKCoreDevelopment2/CapabilityStatements"
+      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-CapabilityStatement"
     ]
   },
   "fhirVersion": "4.0.1",
