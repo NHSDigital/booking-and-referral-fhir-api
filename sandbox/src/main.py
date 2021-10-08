@@ -31,6 +31,8 @@ def validation_exception_handler(request, exc):
         response = load_example("bad-request.json")
     if "Slot" in str(request.url.path):
         response = load_example("bad-request.json")
+    if "DocumentReference" in str(request.url.path):
+        response = load_example("bad-request.json")
     return JSONResponse(response, status_code=400)
 
 
