@@ -27,7 +27,7 @@ class TestAppointment:
             params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -51,7 +51,7 @@ class TestAppointment:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -73,7 +73,7 @@ class TestAppointment:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -96,7 +96,7 @@ class TestAppointment:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -118,7 +118,7 @@ class TestAppointment:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -141,7 +141,7 @@ class TestAppointment:
             json=load_example("appointment/POST-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -168,7 +168,7 @@ class TestAppointment:
             json=load_example("appointment/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -191,7 +191,7 @@ class TestAppointment:
             json=load_example("appointment/id/PATCH-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -213,7 +213,7 @@ class TestAppointment:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -237,7 +237,7 @@ class TestAppointment:
             json=load_example("appointment/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -260,7 +260,7 @@ class TestAppointment:
             json=load_example("appointment/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -284,7 +284,7 @@ class TestAppointment:
             json=load_example("appointment/id/PATCH-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -307,7 +307,7 @@ class TestAppointment:
             json=load_example("appointment/id/PATCH-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -330,7 +330,7 @@ class TestAppointment:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -352,7 +352,7 @@ class TestAppointment:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 

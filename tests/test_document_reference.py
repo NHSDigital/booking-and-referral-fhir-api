@@ -24,7 +24,7 @@ class TestDocumentReference:
             params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -48,7 +48,7 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -70,7 +70,7 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{self.existing_document_reference_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -93,7 +93,7 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -115,7 +115,7 @@ class TestDocumentReference:
             json=load_example("document_reference/POST-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -137,7 +137,7 @@ class TestDocumentReference:
             json=load_example("document_reference/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -159,7 +159,7 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{self.existing_document_reference_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -183,7 +183,7 @@ class TestDocumentReference:
             json=load_example("document_reference/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
@@ -206,7 +206,7 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
