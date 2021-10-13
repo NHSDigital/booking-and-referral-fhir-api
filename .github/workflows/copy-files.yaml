@@ -29,5 +29,10 @@ jobs:
       - name: Run a one-line script
         run: |
             git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/NHSDigital/test-sync
-            cd test-sync && ls 
+            cd test-sync && touch test.txt
+            git add .
+            git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
+            git push origin master
+
+
 
