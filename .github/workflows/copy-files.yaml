@@ -25,14 +25,26 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: |
-            git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/NHSDigital/test-sync
-            cd test-sync && touch test.txt
-            git add .
-            git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
-            git push origin master
-
-
-
+      - name: Copy files to another repository
+        # You may pin to the exact commit or the version.
+        # uses: nkoppel/push-files-to-another-repository@5c4c8b7a71453112ad1a7b596d1aa163a700d852
+        uses: nkoppel/push-files-to-another-repository@v1.1.0
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          # The files/directories to copy to the destination repository. Can have multiple space-separated filenames and globbing.
+          source-files: 'sandbox/'
+          # Name of the destination username/organization
+          destination-username: 'NHSDigital'
+          # Name of the destination repository
+          destination-repository: 'test-sync'
+          # [Optional] set target branch name for the destination repository.
+          # destination-branch: # optional, default is master
+          # [Opitonal] Directory to copy files into in the destination repository
+          # destination-directory: # optional, default is .
+          # [Optional] Username for the commit. Defaults to the destination username
+          commit-username: 'bot-test'# optional, default is 
+          # Email for the commit
+          commit-email: 'bot@email.com'
+          # [Optional] commit message for the output repository. ORIGIN_COMMIT is replaced by the URL@commit in the origin repo
+          commit-message: 'automatically commited by github action on bars' # optional, default is Update from ORIGIN_COMMIT
