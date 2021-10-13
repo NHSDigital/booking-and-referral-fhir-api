@@ -30,7 +30,7 @@ jobs:
         # uses: nkoppel/push-files-to-another-repository@5c4c8b7a71453112ad1a7b596d1aa163a700d852
         uses: nkoppel/push-files-to-another-repository@v1.1.0
         env:
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+          API_TOKEN_GITHUB: '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'
         with:
           # The files/directories to copy to the destination repository. Can have multiple space-separated filenames and globbing.
           source-files: 'sandbox/'
