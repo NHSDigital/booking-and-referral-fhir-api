@@ -33,7 +33,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
           # The files/directories to copy to the destination repository. Can have multiple space-separated filenames and globbing.
-          source-files: 'sanbox/'
+          source-files: 'sandbox/'
           # Name of the destination username/organization
           destination-username: 'NHSDigital'
           # Name of the destination repository
