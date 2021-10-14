@@ -10,6 +10,7 @@ import uuid
 class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_appointment_id = str(uuid.uuid4())
+    nhsd_token = "nhsd-token"
 
     @pytest.mark.appointment
     @pytest.mark.integration
@@ -28,6 +29,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -52,6 +54,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -74,6 +77,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -97,6 +101,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -119,6 +124,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -142,6 +148,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -169,6 +176,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -192,6 +200,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -214,6 +223,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -238,6 +248,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -261,6 +272,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -285,6 +297,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -308,6 +321,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -331,6 +345,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -353,6 +368,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 

@@ -6,6 +6,8 @@ from .example_loader import load_example
 
 
 class TestProcessMessage:
+    nhsd_token = "nhsd-token"
+
     @pytest.mark.process_message
     @pytest.mark.integration
     @pytest.mark.sandbox
@@ -21,6 +23,7 @@ class TestProcessMessage:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 

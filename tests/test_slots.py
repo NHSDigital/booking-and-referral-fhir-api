@@ -8,6 +8,7 @@ from datetime import datetime
 
 class TestSlots:
     currentTime = datetime.now()
+    nhsd_token = "nhsd-token"
 
     @pytest.mark.slots
     @pytest.mark.integration
@@ -24,6 +25,7 @@ class TestSlots:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -122,6 +124,7 @@ class TestSlots:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
             params=data,
         )
