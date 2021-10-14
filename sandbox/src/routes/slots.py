@@ -27,7 +27,7 @@ def slot(
         start: datetime,
         end: datetime,
         _include: Include,
-        NHSD_ServiceIdentifier: str = Header(...),
+        NHSD_Service: str = Header(...),
         NHSD_Token: str = Header(...)
 ):
     return load_example("slots/GET-success.json")
