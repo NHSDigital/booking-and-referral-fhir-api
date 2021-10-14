@@ -1,7 +1,14 @@
 from fastapi import APIRouter, Header, Response, status
 from uuid import UUID
+from pydantic import BaseModel
 from .example_loader import load_example
-from .models import AppointmentBody
+from .models import Profile
+
+
+class AppointmentBody(BaseModel):
+    resourceType: str
+    meta: Profile
+
 
 route = APIRouter()
 

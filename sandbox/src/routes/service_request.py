@@ -1,9 +1,15 @@
 from fastapi import APIRouter, Header
 from uuid import UUID
+from pydantic import BaseModel
 from .example_loader import load_example
-from .models import ServiceRequestBody
+from .models import Profile
 
 route = APIRouter()
+
+
+class ServiceRequestBody(BaseModel):
+    resourceType: str
+    meta: Profile
 
 
 @route.get("/ServiceRequest")
