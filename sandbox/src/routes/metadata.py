@@ -6,5 +6,5 @@ route = APIRouter()
 
 
 @route.get("/metadata")
-def get_appointment(NHSD_Service: str = Header(...)):
+def get_metadata(NHSD_Service: str = Header(...)):
     return load_example("metadata/GET-success.json")

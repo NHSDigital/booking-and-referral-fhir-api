@@ -1,17 +1,7 @@
 from fastapi import APIRouter
 from uuid import UUID
 from .example_loader import load_example
-from pydantic import BaseModel
-
-
-class Profile(BaseModel):
-    profile: list
-
-
-class DocumentReferenceRequestBody(BaseModel):
-    resourceType: str
-    meta: Profile
-
+from .models import DocumentReferenceRequestBody
 
 route = APIRouter()
 
