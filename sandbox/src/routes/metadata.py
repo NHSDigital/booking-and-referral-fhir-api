@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Header
-from .examples.example_loader import load_example
+from .example_loader import load_example
 
 
 route = APIRouter()

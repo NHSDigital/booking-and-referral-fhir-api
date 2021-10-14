@@ -12,7 +12,7 @@ from routes import (
     process_message,
     document_reference,
 )
-from routes.examples.example_loader import load_example
+from routes.example_loader import load_example
 
 app = FastAPI()
 

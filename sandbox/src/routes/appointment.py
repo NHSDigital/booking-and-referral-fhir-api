@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Header, Response, status
 from uuid import UUID
-from .examples.example_loader import load_example
+from .example_loader import load_example
 from pydantic import BaseModel
 
 route = APIRouter()
