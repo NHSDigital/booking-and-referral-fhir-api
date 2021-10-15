@@ -1,1 +1,215 @@
-c3f6145e-1a26-4345-b3f2-dccbcba62049
+{
+	"resourceType": "Bundle",
+	"meta": {
+		"profile": [
+			"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Bundle"
+		]
+	},
+	"type": "transaction-response",
+	"entry": [
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"resourceType": "Appointment",
+				"id": "c3f6145e-1a26-4345-b3f2-dccbcba62049",
+				"status": "booked",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Appointment"
+					]
+				},
+				"slot": {
+					"reference": "Slot/c3f6145e-1a26-4345-b3f2-dccbcba62049"
+				},
+				"participant": {
+					"actor": {
+						"reference": "Patient/1234567890"
+					}
+				}
+			}
+		},
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient"
+					]
+				},
+				"resourceType": "Patient",
+				"identifier": [
+					{
+						"extension": [
+							{
+								"url": "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-NHSNumberVerificationStatus",
+								"valueCodeableConcept": {
+									"coding": [
+										{
+											"system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-NHSNumberVerificationStatus",
+											"code": "number-present-and-verified",
+											"display": "Number present and verified"
+										}
+									]
+								}
+							}
+						],
+						"use": "official",
+						"system": "https://fhir.nhs.uk/Id/nhs-number",
+						"value": "9476719931"
+					}
+				]
+			}
+		},
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"resourceType": "Slot",
+				"id": "c3f6145e-1a26-4345-b3f2-dccbcba62049",
+				"ServiceCategory": "Emergency Department",
+				"appointmentType": "EMERGENCY",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
+					]
+				},
+				"Schedule": {
+					"reference": "Schedule/{ScheduleItem}"
+				},
+				"status": "busy",
+				"start": "2021-10-06T10:00:00.000+00:00",
+				"end": "2021-10-06T11:00:00.000+00:00"
+			}
+		},
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"resourceType": "Schedule",
+				"id": "{ScheduleItem}",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Schedule"
+					]
+				},
+				"identifier": [
+					{
+						"system": "https://system.supplier.co.uk/Diary/id",
+						"value": "8622dfdb-dc6a-47b6-b3a7-2eb2829db287"
+					}
+				],
+				"actor": [
+					{
+						"reference": "HealthcareService/{HealcareServiceid}"
+					},
+					{
+						"reference": "PractitionerRole/{PractitionerRoleid}"
+					},
+					{
+						"reference": "Practitioner/{Practitionerid}"
+					}
+				]
+			}
+		},
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"resourceType": "HealthcareService",
+				"id": "[HealcareServiceid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Healthservice"
+					]
+				},
+				"identifier": [
+					{
+						"system": "https://system.supplier.co.uk/My/Healthcare/Services",
+						"value": "100"
+					}
+				],
+				"location": [
+					{
+						"reference": "Location/Locationid"
+					}
+				],
+				"name": "Healthcare Service Name"
+			}
+		},
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"resourceType": "Practitioner",
+				"id": "[Practitionerid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Practitioner"
+					]
+				},
+				"name": [
+					{
+						"family": "Bloggs",
+						"given": [
+							"Joe"
+						],
+						"prefix": [
+							"Dr"
+						]
+					}
+				]
+			}
+		},
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"resourceType": "PractitionerRole",
+				"id": "[PractitionerRoleid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-PractitionerRole"
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "https://fhir.hl7.org.uk/ValueSet/UKCore-PractitionerRoleCode",
+							"version": "4.0.1",
+							"code": "doctor",
+							"display": "Doctor"
+						}
+					]
+				}
+			}
+		},
+		{
+			"response": {
+				"status": "200 OK"
+			},
+			"resource": {
+				"resourceType": "Location",
+				"id": "[Locationid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Location"
+					]
+				},
+				"position": {
+					"longitude": "143.20196",
+					"latitude": "-37.22866"
+				},
+				"name": "Healthcare Service Location"
+			}
+		}
+	]
+}
