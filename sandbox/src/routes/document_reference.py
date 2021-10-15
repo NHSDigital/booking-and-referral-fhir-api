@@ -1,19 +1,15 @@
 from fastapi import APIRouter
 from uuid import UUID
-from .examples.example_loader import load_example
 from pydantic import BaseModel
+from .example_loader import load_example
+from .models import Profile
 
-
-class Profile(BaseModel):
-    profile: list
+route = APIRouter()
 
 
 class DocumentReferenceRequestBody(BaseModel):
     resourceType: str
     meta: Profile
-
-
-route = APIRouter()
 
 
 @route.post("/DocumentReference", status_code=201)

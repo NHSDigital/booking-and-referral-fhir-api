@@ -11,8 +11,9 @@ from routes import (
     service_request,
     process_message,
     document_reference,
+    message_definition,
 )
-from routes.examples.example_loader import load_example
+from routes.example_loader import load_example
 
 app = FastAPI()
 
@@ -20,6 +21,24 @@ app = FastAPI()
 @app.exception_handler(RequestValidationError)
 def validation_exception_handler(request, exc):
     response = load_example("bad-request.json")
+
+    if "Appointment" in str(request.url.path):
+        response = load_example("bad-request.json")
+    if "registry" in str(request.url.path):
+        response = load_example("bad-request.json")
+    if "$process-message" in str(request.url.path):
+        response = load_example("bad-request.json")
+    if "meta" in str(request.url.path):
+        response = load_example("bad-request.json")
+    if "ServiceRequest" in str(request.url.path):
+        response = load_example("bad-request.json")
+    if "Slot" in str(request.url.path):
+        response = load_example("bad-request.json")
+    if "DocumentReference" in str(request.url.path):
+        response = load_example("bad-request.json")
+    if "MessageDefinition" in str(request.url.path):
+        response = load_example("bad-request.json")
+
     return JSONResponse(response, status_code=400)
 
 
@@ -29,6 +48,7 @@ app.include_router(metadata.route)
 app.include_router(service_request.route)
 app.include_router(process_message.route)
 app.include_router(document_reference.route)
+app.include_router(message_definition.route)
 
 
 @app.get("/_status")

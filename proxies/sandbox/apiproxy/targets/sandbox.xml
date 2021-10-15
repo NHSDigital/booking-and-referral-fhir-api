@@ -12,6 +12,7 @@
           AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
           AND (proxy.pathsuffix Not Matches "/registry*")
           AND (proxy.pathsuffix Not Matches "/DocumentReference*")
+          AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
         </Condition>
       </Step>
     </Request>

@@ -8,6 +8,7 @@ from .example_loader import load_example
 class TestServiceRequest:
     existing_referral_id = "5dfbbdb8-f94b-4113-b3ff-249cac7f0694"
     existing_patient_id = "4857773456"
+    nhsd_token = "nhsd-token"
 
     @pytest.mark.service_request
     @pytest.mark.integration
@@ -24,7 +25,8 @@ class TestServiceRequest:
             params={"patientIdentifier": self.existing_patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -46,7 +48,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{self.existing_referral_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -69,7 +72,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -92,7 +96,8 @@ class TestServiceRequest:
             json=load_example("service_request/POST-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -114,7 +119,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{self.existing_referral_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -136,7 +142,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{self.existing_referral_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -158,7 +165,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{self.existing_referral_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -181,7 +189,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -204,7 +213,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 
@@ -227,7 +237,8 @@ class TestServiceRequest:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
             },
         )
 

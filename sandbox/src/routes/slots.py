@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Header
 from enum import Enum
 from datetime import datetime
-from .examples.example_loader import load_example
-
+from .example_loader import load_example
 
 route = APIRouter()
 
@@ -22,12 +21,13 @@ class Include(Enum):
 
 
 @route.get("/Slot")
-def Slot(
-    healthcareService: str,
-    status: Status,
-    start: datetime,
-    end: datetime,
-    _include: Include,
-    NHSD_ServiceIdentifier: str = Header(...),
+def slot(
+        healthcareService: str,
+        status: Status,
+        start: datetime,
+        end: datetime,
+        _include: Include,
+        NHSD_Service: str = Header(...),
+        NHSD_Token: str = Header(...)
 ):
     return load_example("slots/GET-success.json")

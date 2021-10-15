@@ -1,5 +1,5 @@
 // Get context variables
-var serviceId = context.getVariable("request.header.NHSD-ServiceIdentifier");
+var serviceId = context.getVariable("request.header.NHSD-Service");
 var pathSuffix = context.getVariable("proxy.pathsuffix")
 var queryString = context.getVariable("request.querystring")
 var isError = false;

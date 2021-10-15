@@ -16,7 +16,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": "Bearer invalid_token",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
         # Then
@@ -43,7 +43,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "invalid",
+                "NHSD-Service": "invalid",
             },
         )
         # Then
@@ -61,7 +61,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/invalid",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
         # Then
@@ -87,7 +87,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/{path_suffix}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 

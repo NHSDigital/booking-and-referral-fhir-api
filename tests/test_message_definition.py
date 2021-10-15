@@ -5,25 +5,22 @@ from assertpy import assert_that
 from .example_loader import load_example
 
 
-class TestProcessMessage:
-    nhsd_token = "nhsd-token"
-
-    @pytest.mark.process_message
+class TestMessageDefinition:
+    @pytest.mark.message_definition
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_create_process_message(self, get_token_client_credentials):
+    def test_get_message_definition(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = load_example("process_message/POST-success.json")
+        expected_body = load_example("message_definition/GET-success.json")
 
         # When
-        response = requests.post(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/$process-message",
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/MessageDefinition",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
-                "NHSD-Token": self.nhsd_token,
             },
         )
 

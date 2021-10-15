@@ -20,7 +20,7 @@ class TestMetadata:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-ServiceIdentifier": "NHS0001",
+                "NHSD-Service": "NHS0001",
             },
         )
 
