@@ -6,7 +6,6 @@ var isError = false;
 
 // Get target url from KVM
 var targetUrl = get_target_url_from_kvm(serviceId)
-targetUrl = "https://internal-dev.api.service.nhs.uk/bars-mock-receiver-proxy-pr-23"
 if(targetUrl === null | serviceId === null){
     isError = true
 }
