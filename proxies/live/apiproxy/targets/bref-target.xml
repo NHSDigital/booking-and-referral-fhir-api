@@ -59,7 +59,7 @@
     </FaultRule>
   </FaultRules>
   <HTTPTargetConnection>
-    <URL>http://mocktarget.apigee.net</URL>
+    <URL>https://mocktarget.apigee.net</URL>
     <SSLInfo>
       <Enabled>true</Enabled>
       <ClientAuthEnabled>true</ClientAuthEnabled>
