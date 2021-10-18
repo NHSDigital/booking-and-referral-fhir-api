@@ -59,11 +59,12 @@
     </FaultRule>
   </FaultRules>
   <HTTPTargetConnection>
-    <URL>http://mocktarget.apigee.net</URL>
-    <Properties>
-      <Property name="supports.http10">true</Property>
-      <Property name="request.retain.headers">User-Agent,Referer,Accept-Language</Property>
-      <Property name="retain.queryparams">apikey</Property>
-    </Properties>
+    <URL>https://mocktarget.apigee.net</URL>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+      <ClientAuthEnabled>true</ClientAuthEnabled>
+      <KeyStore>ref://bars-client</KeyStore>
+      <KeyAlias>cert</KeyAlias>
+    </SSLInfo>
   </HTTPTargetConnection>
 </TargetEndpoint>
