@@ -14,9 +14,12 @@ APIGEE_ENVIRONMENTS:
     display_name: Reference
   - name: sandbox
     display_name: Sandbox
+    make_spec_visible: true
+    requireCallbackUrl: false
 # Enable int environment when ready by uncommenting:
   - name: int
     display_name: Integration Testing
+    make_spec_visible: true
 ---
 meta:
   api:
@@ -59,8 +62,8 @@ apigee:
       - edgeAPIProductName: {{ NAME }}
         anonAllowed: true
         description: {{ DESCRIPTION }}
-        requireCallbackUrl: false
+        requireCallbackUrl: {{ ENV.require_callback_url | default(true) }}
         title: {{ TITLE }}
-        visibility: false
+        visibility: {{ ENV.make_spec_visible | default(false) }}
         specId: {{ NAME }}
 {% endfor %}
