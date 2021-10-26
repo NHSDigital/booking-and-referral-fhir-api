@@ -51,14 +51,3 @@ release: clean copy-examples publish build-proxy
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
-
-test:
-#	this target should be used for local unit tests ..  runs as part of the build pipeline
-	make --no-print-directory -C sandbox test
-
-sandbox-test:
-	poetry run pytest -m sandbox 
-
-smoketest:
-#	this target is for end to end smoketests this would be run 'post deploy' to verify an environment is working
-	poetry run pytest -v --junitxml=smoketest-report.xml -s -m smoketest
