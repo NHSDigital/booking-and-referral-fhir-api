@@ -2,6 +2,8 @@
 
 ![Build](https://github.com/NHSDigital/booking-and-referral/workflows/Build/badge.svg?branch=master)
 
+The bookings and service requests API is defining a standard API for booking of appointments and management of service requests (referrals) between organisations
+
 This is a RESTful HL7® FHIR® API specification for the *Template API*.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
@@ -10,6 +12,13 @@ This is a RESTful HL7® FHIR® API specification for the *Template API*.
 * `proxies/` Live (connecting to another service) and sandbox (using the sandbox container) Apigee API Proxy definitions.
 
 Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://developer.digital.nhs.uk/).
+
+## Table of Contents
+1. [Contributing](#Contributing)
+2. [Development](#Development)
+3. [Environment Variables](#Environment-Variables)
+4. [Caveats](#Caveats)
+
 
 ## Contributing
 Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/booking-and-referral/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/booking-and-referral/blob/master/CODE_OF_CONDUCT.md).
@@ -43,16 +52,22 @@ $ make install-hooks
 ### Environment Variables
 Various scripts and commands rely on environment variables being set. These are documented with the commands.
 
-:bulb: Consider using [direnv](https://direnv.net/) to manage your environment variables during development and maintaining your own `.envrc` file - the values of these variables will be specific to you and/or sensitive.
+Consider using [direnv](https://direnv.net/) to manage your environment variables during development and maintaining your own `.envrc` file - the values of these variables will be specific to you and/or sensitive.
+
+Or consider filling the script ```/test/configuration/env-variables.sh``` Follow the steps described in the script.
 
 ### Make commands
+
 There are `make` commands that alias some of this functionality:
+
+Make sure you have run `make install` [here](###Install).
+
  * `lint` -- Lints the spec and code
  * `publish` -- Outputs the specification as a **single file** into the `build/` directory
  * `serve` -- Serves a preview of the specification in human-readable format
 
 ### Testing
-Each API and team is unique. We encourage you to use a `test/` folder in the root of the project, and use whatever testing frameworks or apps your team feels comfortable with. It is important that the URL your test points to be configurable. We have included some stubs in the Makefile for running tests.
+Each API and team is unique. We encourage you to use a `test/` folder in the root of the project, and use whatever testing frameworks or apps your team feels comfortable with. It is important that the URL your test points to be configurable. We have included a dedicated [README](tests/README.md) file in the `test/` folder for further tests details.
 
 ### VS Code Plugins
 
