@@ -12,8 +12,8 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4
-    description: Int Server
+  - url: https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4
+    description: Sandbox Server
 tags:
   - name: Booking
   - name: Events
@@ -1624,8 +1624,8 @@ components:
           $ref: schemas/Organisation.yaml
     
           
-       
-          
+
+
           
   securitySchemes:
     BasicAuth:
