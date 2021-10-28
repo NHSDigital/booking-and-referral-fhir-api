@@ -25,6 +25,10 @@
 					"actor": {
 						"reference": "Patient/1234567890"
 					}
+				},
+				"basedOn": {
+					"reference": "serviceRequest/f3d3e399-54d4-4d23-9e78-39c71821ddda",
+					"type": "serviceRequest"
 				}
 			}
 		},
@@ -63,14 +67,28 @@
 			"resource": {
 				"resourceType": "Slot",
 				"id": "c3f6145e-1a26-4345-b3f2-dccbcba62049",
-				"ServiceCategory": "Emergency Department",
-				"appointmentType": "EMERGENCY",
+				"serviceCategory": {
+					"coding": [
+						{
+							"code": "14",
+							"display": "Emergency Department"
+						}
+					]
+				},
+				"appointmentType": {
+					"coding": [
+						{
+							"code": "EMERGENCY",
+							"display": "Emergency appointment"
+						}
+					]
+				},
 				"meta": {
 					"profile": [
 						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
 					]
 				},
-				"Schedule": {
+				"schedule": {
 					"reference": "Schedule/{ScheduleItem}"
 				},
 				"status": "busy",

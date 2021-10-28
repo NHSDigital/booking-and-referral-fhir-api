@@ -6,14 +6,28 @@
 		]
 	},
 	"type": "searchset",
-	"total": 7,
+	"total": 8,
 	"entry": [
 		{
 			"resource": {
 				"resourceType": "Slot",
 				"id": "c3f6145e-1a26-4345-b3f2-dccbcba62049",
-				"ServiceCategory": "Emergency Department",
-				"appointmentType": "EMERGENCY",
+				"serviceCategory": {
+					"coding": [
+						{
+							"code": "14",
+							"display": "Emergency Department"
+						}
+					]
+				},
+				"appointmentType": {
+					"coding": [
+						{
+							"code": "EMERGENCY",
+							"display": "Emergency appointment"
+						}
+					]
+				},
 				"meta": {
 					"profile": [
 						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
@@ -31,8 +45,22 @@
 			"resource": {
 				"resourceType": "Slot",
 				"id": "8d7629cb-8ad6-4f89-a042-46e26a37113e",
-				"ServiceCategory": "Emergency Department",
-				"appointmentType": "EMERGENCY",
+				"serviceCategory": {
+					"coding": [
+						{
+							"code": "14",
+							"display": "Emergency Department"
+						}
+					]
+				},
+				"appointmentType": {
+					"coding": [
+						{
+							"code": "EMERGENCY",
+							"display": "Emergency appointment"
+						}
+					]
+				},
 				"meta": {
 					"profile": [
 						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
