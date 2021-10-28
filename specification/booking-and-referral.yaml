@@ -1214,8 +1214,8 @@ paths:
                     $ref: examples/bad-request.json
   /DocumentReference:
     servers:
-      - url: https://int.api.service.nhs.uk/booking-and-referral/registry/FHIR/R4
-        description: Int Server
+      - url: https://sandbox.api.service.nhs.uk/booking-and-referral/registry/FHIR/R4
+        description: sandbox Server
     post:
       tags:
         - Registry
@@ -1359,8 +1359,8 @@ paths:
                     $ref: examples/bad-request.json
   /DocumentReference/{id}:
     servers:
-      - url: https://int.api.nhs.uk/bookings-and-referrals/registry/FHIR/R4
-        description: Int Server
+      - url: https://sandbox.api.nhs.uk/bookings-and-referrals/registry/FHIR/R4
+        description: sandbox Server
     parameters:
       - $ref: '#/components/parameters/Id_Param'
     get:
