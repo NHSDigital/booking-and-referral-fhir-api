@@ -65,7 +65,7 @@
 					}
 				},
 				"basedOn":{
-					"reference":"serviceRequest/f3d3e399-54d4-4d23-9e78-39c71821ddda",
+					"reference":"urn:uuid:f3d3e399-54d4-4d23-9e78-39c71821ddda",
 					"type":"serviceRequest"
 				}
 			}
