@@ -12,7 +12,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: https://internal-dev-sandbox.api.service.nhs.uk/booking-and-referral-pr-46/FHIR/R4
+  - url: https://internal-dev-sandbox.api.service.nhs.uk/booking-and-referral-pr-46
     description: Sandbox Server
 tags:
   - name: Booking
@@ -1213,9 +1213,6 @@ paths:
                   value:
                     $ref: examples/bad-request.json
   /DocumentReference:
-    servers:
-      - url: https://internal-dev-sandbox.api.service.nhs.uk/booking-and-referral-pr-46/registry/FHIR/R4
-        description: sandbox Server
     post:
       tags:
         - Registry
@@ -1358,9 +1355,6 @@ paths:
                   value:
                     $ref: examples/bad-request.json
   /DocumentReference/{id}:
-    servers:
-      - url: https://internal-dev-sandbox.api.nhs.uk/bookings-and-referrals-pr-46/registry/FHIR/R4
-        description: sandbox Server
     parameters:
       - $ref: '#/components/parameters/Id_Param'
     get:
