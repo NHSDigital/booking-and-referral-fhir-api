@@ -1,6 +1,63 @@
 openapi: 3.0.0
 info:
-  description: This is a work in progress NHS Booking and Referral API </br> **Do NOT build against this specification**
+  description: |
+    ## Overview
+    Use this API to redirect requests to the appropriate backend based on an identifier header.
+    
+    The API is synchronous.
+    
+    The following describes the end-to-end process:
+    1. The sending system sends the payload to the Booking and Referrals API, along with an identifier header.
+    2. The Booking and Referrals API directs the payload to the target backend associated with the identifier header.
+    3. The sending system recieves the response.
+    
+    ## Who can use this API
+    This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live (see ‘Onboarding’ below).
+    
+    ## API status and roadmap
+    This API is in [alpha](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status), meaning:
+      * it is available for testing in integration environment
+      * we expect to make breaking changes based on developer feedback
+    
+    ### Roadmap
+    To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=fhir-converter&deleted=0#controls).
+    If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
+    
+    ## Technology
+    This API uses HTTP POST to submit data.
+    
+    The data payload conforms to the [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#fhir) global standard for health care data exchange.
+    Specifically, it is aligned with [FHIR UK Core](https://digital.nhs.uk/services/fhir-uk-core), which is built on FHIR Release 4, or [FHIR GP Connect](https://digital.nhs.uk/services/gp-connect), which is built on FHIR STU3.
+    
+    ## Network access
+    This API is available on the internet.
+    
+    For more details, see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
+    
+    ## Security and authorisation
+    
+    ### Application-restricted access
+    This access mode is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
+    meaning we authenticate the calling application but not the end user.
+    
+    You can use this access mode as follows:
+    * unattended (end user not present)
+    
+    To use this access mode, use the following security pattern:
+    * [Application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
+    
+    ### Environments and testing
+    | Environment       | Base URL                                                               |
+    | ----------------- | ---------------------------------------------------------------------- |
+    | Integration test  | `https://int.api.service.nhs.uk/fhir-converter`                        |
+    | Production        | Not yet available                                                      |
+    
+    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
+    - is for formal integration testing
+    - is for receiving data quality reports of test data
+    
+    For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
+
   version: 1.0.6
   title: Booking and Referral API
   termsOfService: https://developer.nhs.uk/apis/uec-appointments
