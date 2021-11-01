@@ -4,15 +4,15 @@ info:
     ## Overview
     Use this API to redirect requests to the appropriate backend based on an identifier header.
     
-    The API is synchronous.
     
     The following describes the end-to-end process:
-    1. The sending system sends the payload to the Booking and Referrals API, along with an identifier header.
-    2. The Booking and Referrals API directs the payload to the target backend associated with the identifier header.
-    3. The sending system recieves the response.
+    1. The sending system sends a request to the Booking and Referrals API, along with an identifier header.
+    2. The Booking and Referrals API redirects the request to the target backend associated with the identifier header.
+    3. The target backend handles the request and sends a response back to the API.
+    4. The API returns the response to the sending system.
     
     ## Who can use this API
-    This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live (see ‘Onboarding’ below).
+    This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
     
     ## API status and roadmap
     This API is in [alpha](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status), meaning:
@@ -24,6 +24,8 @@ info:
     If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
     
     ## Technology
+    The API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest).
+
     This API uses HTTP POST to submit data.
     
     The data payload conforms to the [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#fhir) global standard for health care data exchange.
@@ -36,8 +38,7 @@ info:
     
     ## Security and authorisation
     
-    ### Application-restricted access
-    This access mode is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
+    This API is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
     meaning we authenticate the calling application but not the end user.
     
     You can use this access mode as follows:
@@ -54,7 +55,6 @@ info:
     
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
     - is for formal integration testing
-    - is for receiving data quality reports of test data
     
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
