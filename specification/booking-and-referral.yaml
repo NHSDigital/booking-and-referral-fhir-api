@@ -571,7 +571,7 @@ paths:
         description: Booking Details
         required: true
         content:
-          application/fhir+json-patch:
+          application/json-patch+json:
             schema:
               $ref: schemas/Appointment.yaml
             example:
@@ -906,7 +906,7 @@ paths:
         '200':
           description: Success
           content:
-            application/fhir+json-patch:
+            application/json-patch+json:
               schema:
                 $ref: schemas/ServiceRequest.yaml
               example:
