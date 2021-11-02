@@ -1,0 +1,23 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "429",
+      "details": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+            "code": "SEND_TOO_MANY_REQUESTS"
+          }
+        ]
+      },
+      "diagnostics": "Too many requests have been made by this source in a given amount of time: <further diagnostics information, error message/error text>"
+    }
+  ]
+}
