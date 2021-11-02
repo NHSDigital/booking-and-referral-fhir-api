@@ -3,8 +3,10 @@
 	"meta": {
 		"profile": [
 			"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Bundle"
-		]
+		],
+		"lastUpdated": "2021-10-11T15:23:30+00:00"
 	},
+	"timestamp": "2021-10-11T12:15:10+00:00",
 	"type": "message",
 	"entry": [
 		{
@@ -26,6 +28,16 @@
 							"code": "???"
 						}
 					]
+				},
+				"destination": [
+					{
+						"receiver": {
+							"reference": "urn:uuid:07939a0c-2854-46ff-9282-ad906bc93679"
+						}
+					}
+				],
+				"sender": {
+					"reference": "urn:uuid:10397afd-479c-42ea-9d5d-e4024481e0f8"
 				},
 				"source": {
 					"name": "My organisation name",
@@ -64,9 +76,9 @@
 						"reference": "Patient/1234567890"
 					}
 				},
-				"basedOn":{
-					"reference":"urn:uuid:f3d3e399-54d4-4d23-9e78-39c71821ddda",
-					"type":"serviceRequest"
+				"basedOn": {
+					"reference": "urn:uuid:f3d3e399-54d4-4d23-9e78-39c71821ddda",
+					"type": "serviceRequest"
 				}
 			}
 		},
