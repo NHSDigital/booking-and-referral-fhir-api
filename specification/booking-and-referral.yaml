@@ -1,6 +1,63 @@
 openapi: 3.0.0
 info:
-  description: This is a work in progress NHS Booking and Referral API </br> **Do NOT build against this specification**
+  description: |
+    ## Overview
+    Use this API to redirect requests to the appropriate backend based on an identifier header.
+    
+    
+    The following describes the end-to-end process:
+    1. The sending system sends a request to the Booking and Referrals API, along with an identifier header.
+    2. The Booking and Referrals API redirects the request to the target backend associated with the identifier header.
+    3. The target backend handles the request and sends a response back to the API.
+    4. The API returns the response to the sending system.
+    
+    ## Who can use this API
+    This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
+    
+    ## API status and roadmap
+    This API is in [alpha](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status), meaning:
+      * it is available for testing in integration environment
+      * we expect to make breaking changes based on developer feedback
+    
+    ### Roadmap
+    To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=fhir-converter&deleted=0#controls).
+    If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
+    
+    ## Technology
+    The API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#basic-rest).
+
+    This API uses HTTP POST to submit data.
+    
+    The data payload conforms to the [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#fhir) global standard for health care data exchange.
+    Specifically, it is aligned with [FHIR UK Core](https://digital.nhs.uk/services/fhir-uk-core), which is built on FHIR Release 4, or [FHIR GP Connect](https://digital.nhs.uk/services/gp-connect), which is built on FHIR STU3.
+    
+    ## Network access
+    This API is available on the internet.
+    
+    For more details, see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
+    
+    ## Security and authorisation
+    
+    This API is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
+    meaning we authenticate the calling application but not the end user.
+    
+    You can use this access mode as follows:
+    * unattended (end user not present)
+    
+    To use this access mode, use the following security pattern:
+    * [Application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
+    
+    ### Environments and testing
+    | Environment       | Base URL                                                               |
+    | ----------------- | ---------------------------------------------------------------------- |
+    | Integration test  | `https://int.api.service.nhs.uk/fhir-converter`                        |
+    | Production        | Not yet available                                                      |
+    
+    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
+    - is for formal integration testing
+    
+    For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
+
   version: 1.0.6
   title: Booking and Referral API
   termsOfService: https://developer.nhs.uk/apis/uec-appointments
@@ -12,7 +69,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4
+  - url: https://sandbox.api.service.nhs.uk/booking-and-referral
     description: Sandbox Server
 tags:
   - name: Booking
@@ -43,8 +100,6 @@ paths:
               schema:
                 $ref: schemas/Capability.yaml
               example:
-                success:
-                  value:
                     $ref: examples/metadata/GET-success.json
             application/fhir+xml:
               schema:
@@ -54,48 +109,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /MessageDefinition:
     parameters:
@@ -121,48 +164,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /$process-message:
     parameters:
@@ -182,8 +213,6 @@ paths:
               schema:
                 $ref: schemas/MessageBundle.yaml
               example:
-                success:
-                  value:
                     $ref: examples/process_message/POST-success.json
             application/fhir+xml:
               schema:
@@ -193,48 +222,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /Slot:
     parameters:
@@ -324,8 +341,6 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
               example:
-                success:
-                  value:
                     $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
@@ -335,48 +350,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/slots/GET-BadRequest.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/slots/GET-BadRequest.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/slots/GET-BadRequest.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/slots/GET-BadRequest.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/slots/GET-BadRequest.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/slots/GET-BadRequest.json
   /Appointment:
     parameters:
@@ -396,8 +399,6 @@ paths:
             schema:
               $ref: schemas/Appointment.yaml
             example:
-              success:
-                value:
                   $ref: examples/appointment/POST-body.json
           application/fhir+xml:
             schema:
@@ -408,56 +409,42 @@ paths:
           content:
             application/fhir+json:
               example:
-                success:
-                  value:
                     $ref: examples/appointment/POST-success.txt
         '400':
           description: Illegal input for operation
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     get:
       tags:
@@ -475,8 +462,6 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
               example:
-                success:
-                  value:
                     $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
@@ -486,48 +471,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /Appointment/{id}:
     parameters:
@@ -548,8 +521,6 @@ paths:
               schema:
                 $ref: schemas/Appointment.yaml
               example:
-                success:
-                  value:
                     $ref: examples/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
@@ -559,48 +530,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     patch:
       tags:
@@ -612,12 +571,10 @@ paths:
         description: Booking Details
         required: true
         content:
-          application/fhir+json:
+          application/json-patch+json:
             schema:
               $ref: schemas/Appointment.yaml
             example:
-              success:
-                value:
                   $ref: examples/appointment/id/PATCH-body.json
           application/fhir+xml:
             schema:
@@ -630,48 +587,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     put:
       tags:
@@ -687,8 +632,6 @@ paths:
             schema:
               $ref: schemas/Appointment.yaml
             example:
-              success:
-                value:
                   $ref: examples/appointment/id/PUT-body.json
           application/fhir+xml:
             schema:
@@ -701,48 +644,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     delete:
       tags:
@@ -758,48 +689,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /ServiceRequest:
     parameters:
@@ -819,8 +738,6 @@ paths:
             schema:
               $ref: schemas/ServiceRequest.yaml
             example:
-              success:
-                value:
                   $ref: examples/service_request/POST-body.json
           application/fhir+xml:
             schema:
@@ -833,48 +750,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     get:
       tags:
@@ -892,8 +797,6 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
               example:
-                success:
-                  value:
                     $ref: examples/service_request/GET-success.json
             application/fhir+xml:
               schema:
@@ -903,48 +806,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /ServiceRequest/{id}:
     parameters:
@@ -965,8 +856,6 @@ paths:
               schema:
                 $ref: schemas/ServiceRequest.yaml
               example:
-                error:
-                  value:
                     $ref: examples/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
@@ -976,48 +865,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     patch:
       tags:
@@ -1029,12 +906,10 @@ paths:
         '200':
           description: Success
           content:
-            application/fhir+json:
+            application/json-patch+json:
               schema:
                 $ref: schemas/ServiceRequest.yaml
               example:
-                error:
-                  value:
                     $ref: examples/service_request/id/PATCH-success.json
             application/fhir+xml:
               schema:
@@ -1044,48 +919,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     put:
       tags:
@@ -1101,8 +964,6 @@ paths:
               schema:
                 $ref: schemas/ServiceRequest.yaml
               example:
-                error:
-                  value:
                     $ref: examples/service_request/id/PUT-success.json
             application/fhir+xml:
               schema:
@@ -1112,48 +973,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     delete:
       tags:
@@ -1169,53 +1018,38 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /DocumentReference:
-    servers:
-      - url: https://sandbox.api.service.nhs.uk/booking-and-referral/registry/FHIR/R4
-        description: sandbox Server
     post:
       tags:
         - Registry
@@ -1230,8 +1064,6 @@ paths:
             schema:
               $ref: schemas/DocumentReference.yaml
             example:
-              success:
-                value:
                   $ref: examples/document_reference/POST-body.json
           application/fhir+xml:
             schema:
@@ -1244,48 +1076,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     get:
       tags:
@@ -1303,8 +1123,6 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
               example:
-                success:
-                  value:
                     $ref: examples/document_reference/GET-success.json
             application/fhir+xml:
               schema:
@@ -1314,53 +1132,38 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
   /DocumentReference/{id}:
-    servers:
-      - url: https://sandbox.api.nhs.uk/bookings-and-referrals/registry/FHIR/R4
-        description: sandbox Server
     parameters:
       - $ref: '#/components/parameters/Id_Param'
     get:
@@ -1377,8 +1180,6 @@ paths:
               schema:
                 $ref: schemas/DocumentReference.yaml
               example:
-                success:
-                  value:
                     $ref: examples/document_reference/id/GET-success.json
             application/fhir+xml:
               schema:
@@ -1388,48 +1189,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     put:
       tags:
@@ -1445,8 +1234,6 @@ paths:
             schema:
               $ref: schemas/DocumentReference.yaml
             example:
-              success:
-                value:
                   $ref: examples/document_reference/id/PUT-body.json
           application/fhir+xml:
             schema:
@@ -1459,48 +1246,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
     delete:
       tags:
@@ -1516,48 +1291,36 @@ paths:
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '401':
           description: Unauthorized access
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '403':
           description: Forbidden
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '404':
           description: Entity Not Found
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '405':
           description: Method Not Allowed
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
         '500':
           description: Server Error
           content:
             application/fhir+json:
               example:
-                error:
-                  value:
                     $ref: examples/bad-request.json
 components:
   parameters:
@@ -1568,7 +1331,7 @@ components:
       schema:
         type: string
         format: uuid
-        example: 5dfbbdb8-f94b-4113-b3ff-249cac7f0694
+        example: c3f6145e-1a26-4345-b3f2-dccbcba62049
       required: true
       allowEmptyValue: false
     PatientId_QParam:
