@@ -383,7 +383,7 @@ paths:
                     $ref: examples/slots/GET-BadRequest.json
   /Appointment:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
       - $ref: '#/components/parameters/Token_HParam'
     post:
       tags:
