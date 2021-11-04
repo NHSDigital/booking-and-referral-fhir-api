@@ -1156,7 +1156,42 @@
 					}
 				]
 			}
-		}
-        
+		}, {
+		    "fullUrl": "urn:uuid:1e91008e-96d0-438b-873c-c6d2c007fc29",
+            "resource": {
+				"resourceType": "Consent",
+				"id": "1e91008e-96d0-438b-873c-c6d2c007fc29",
+				"meta": {
+					"profile":  [
+						{
+							"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Consent"
+						}
+					]
+				},
+				"status": "active",
+				"scope": {
+					"coding":  [
+						{
+							"system": "http://terminology.hl7.org/CodeSystem/consentscope",
+							"code": "patient-privacy"
+						}
+					]
+				},
+				"category":  [
+					{
+						"coding":  [
+							{
+								"system": "http://loinc.org",
+								"code": "59284-0"
+							}
+						]
+					}
+				],
+				"patient": {
+					"reference": "urn:uuid:41e591ab-d333-4fb8-87b4-d35f740b6bfc"
+				},
+				"dateTime": "2020-01-13",
+				}
+			}       
     ]
 }
