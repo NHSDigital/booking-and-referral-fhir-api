@@ -697,17 +697,12 @@
 			"fullUrl": "urn:uuid:65508934-c9e6-46d2-a393-af096b502daf",
 			"resource": {
 				"resourceType": "QuestionnaireResponse",
-				"reason": [
+				"extension": [
 					{
-						"extension": [
-							{
-								"url": "http://hl7.org/fhir/StructureDefinition/questionnaireresponse-reason <TBC>",
-								"valueCodeableConcept": {
-									"text": "Rejected Services - Patient Choice in Service Selection"
-								}
-							}
-						],
-						"text": "Rejected Services - Patient Choice in Service Selection"
+						"url": "http://hl7.org/fhir/StructureDefinition/questionnaireresponse-reason <TBC>",
+						"valueCodeableConcept": {
+							"text": "Rejected Services - Patient Choice in Service Selection"
+						}
 					}
 				],
 				"id": "65508934-c9e6-46d2-a393-af096b502daf",
@@ -718,10 +713,7 @@
 				"subject": {
 					"reference": "urn:uuid:41e591ab-d333-4fb8-87b4-d35f740b6bfc"
 				},
-				"context": {
-					"reference": "urn:uuid:8c63d621-4d86-4f57-8699-e8e22d49935d"
-				},
-				"authoredOn": "2021-10-13T16:28:00+07:00",
+				"authored": "2021-10-13T16:28:00+07:00",
 				"author": {
 					"reference": "urn:uuid:7d948662-bade-450e-b6c5-9bb6ee39cb56"
 				},
@@ -868,12 +860,8 @@
 				"encounter": {
 					"reference": "urn:uuid:8c63d621-4d86-4f57-8699-e8e22d49935d"
 				},
-				"note": {
-					"author": [
-						{
-							"authorString": "BLAKE, Marcy"
-						}
-					],
+				"note":{
+					"authorString": "BLAKE, Marcy",
 					"text": "The patient has symptoms concerning the chest which need physical examination"
 				}
 			}
@@ -953,10 +941,10 @@
 			}
 		},
 		{
-			"fullUrl": "urn:uuid:e53b2595-7875-4687-80e9-23a0c8cb8ea0",
+			"fullUrl": "urn:uuid:f2d2a6f8-1ef5-40a6-a697-849bb1264a91",
 			"resource": {
 				"resourceType": "Observation",
-				"id": "e53b2595-7875-4687-80e9-23a0c8cb8ea0",
+				"id": "f2d2a6f8-1ef5-40a6-a697-849bb1264a91",
 				"meta": {
 					"profile": [
 						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Observation"
@@ -988,11 +976,7 @@
 				},
 				"effectiveDateTime": "2021-10-23",
 				"note": {
-					"author": [
-						{
-							"authorString": "Mrs Julie Jones"
-						}
-					],
+					"authorString": "Mrs Julie Jones",
 					"text": "Chest pain on and off for several days. Advised to contact 111"
 				}
 			}
@@ -1036,11 +1020,7 @@
 				},
 				"effectiveDateTime": "2021-10-23",
 				"note": {
-					"author": [
-						{
-							"authorString": "BLAKE, Marcy"
-						}
-					],
+					"authorString": "BLAKE, Marcy",
 					"text": "The patient wishes to not be admitted to hospital unless deemed completely necessary. They have long term conditions which are better managed at home"
 				}
 			}
@@ -1049,17 +1029,12 @@
 			"fullUrl": "urn:uuid:75f0e2c7-79db-4518-8a03-edcf096fccbb",
 			"resource": {
 				"resourceType": "QuestionnaireResponse",
-				"reason": [
+				"extension": [
 					{
-						"extension": [
-							{
-								"url": "http://hl7.org/fhir/StructureDefinition/questionnaireresponse-reason <TBC>",
-								"valueCodeableConcept": {
-									"text": "Additional Information Sources"
-								}
-							}
-						],
-						"text": "Additional Information Sources - Reviewed as part of assessment"
+						"url": "http://hl7.org/fhir/StructureDefinition/questionnaireresponse-reason <TBC>",
+						"valueCodeableConcept": {
+							"text": "Additional Information Sources"
+						}
 					}
 				],
 				"id": "75f0e2c7-79db-4518-8a03-edcf096fccbb",
@@ -1067,10 +1042,7 @@
 					"reference": "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
 				},
 				"status": "completed",
-				"context": {
-					"reference": "urn:uuid:8c63d621-4d86-4f57-8699-e8e22d49935d"
-				},
-				"authoredOn": "2021-10-13T16:28:00+07:00",
+				"authored": "2021-10-13T16:28:00+07:00",
 				"author": {
 					"reference": "urn:uuid:7d948662-bade-450e-b6c5-9bb6ee39cb56"
 				},
