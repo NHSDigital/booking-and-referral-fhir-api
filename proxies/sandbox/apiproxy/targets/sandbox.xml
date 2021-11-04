@@ -23,6 +23,12 @@
     </Response>
   </PreFlow>
   <HTTPTargetConnection>
-    {{ HOSTED_TARGET_CONNECTION }}
+    <URL>https://mocktarget.apigee.net</URL>
+      <SSLInfo>
+        <Enabled>true</Enabled>
+        <ClientAuthEnabled>true</ClientAuthEnabled>
+        <KeyStore>bref</KeyStore>
+        <KeyAlias>cert</KeyAlias>
+      </SSLInfo>
   </HTTPTargetConnection>
 </TargetEndpoint>
