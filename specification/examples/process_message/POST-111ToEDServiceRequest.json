@@ -1176,8 +1176,18 @@
 					}
 				],
 				"patient": {
-					"reference": "urn:uuid:41e591ab-d333-4fb8-87b4-d35f740b6bfc"
+					"reference": "urn:uuid:9589fb37-87a2-48d8-968f-b371429208a8"
 				},
+				"policyRule": [
+					{
+						"coding": [
+							{
+								"system": "http://hl7.org/fhir/ValueSet/consent-policy ",
+								"code": "cric"
+							}
+						]
+					}
+				],
 				"dateTime": "2020-01-13"
 			}
 		}
