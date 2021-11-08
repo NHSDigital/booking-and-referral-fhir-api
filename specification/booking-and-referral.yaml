@@ -85,7 +85,7 @@ security:
 paths:
   /metadata:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
     get:
       tags:
         - Metadata
@@ -142,7 +142,7 @@ paths:
                     $ref: examples/bad-request.json
   /MessageDefinition:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
     get:
       tags:
         - Metadata
@@ -197,7 +197,7 @@ paths:
                     $ref: examples/bad-request.json
   /$process-message:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
       - $ref: '#/components/parameters/Token_HParam'
     post:
       tags:
@@ -255,7 +255,7 @@ paths:
                     $ref: examples/bad-request.json
   /Slot:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
       - $ref: '#/components/parameters/Token_HParam'
     get:
       tags:
@@ -383,7 +383,7 @@ paths:
                     $ref: examples/slots/GET-BadRequest.json
   /Appointment:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
       - $ref: '#/components/parameters/Token_HParam'
     post:
       tags:
@@ -505,7 +505,7 @@ paths:
   /Appointment/{id}:
     parameters:
       - $ref: '#/components/parameters/Id_Param'
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
       - $ref: '#/components/parameters/Token_HParam'
     get:
       tags:
@@ -722,7 +722,7 @@ paths:
                     $ref: examples/bad-request.json
   /ServiceRequest:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
       - $ref: '#/components/parameters/Token_HParam'
     post:
       tags:
@@ -840,7 +840,7 @@ paths:
   /ServiceRequest/{id}:
     parameters:
       - $ref: '#/components/parameters/Id_Param'
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/ServiceId_HParam2'
       - $ref: '#/components/parameters/Token_HParam'
     get:
       tags:
@@ -1351,13 +1351,13 @@ components:
         type: string
         example: 123344556677
     ServiceId_HParam2:
-      name: NHSD-ServiceIdentifier
+      name: NHSD-Service
       description: The identifier of a healthcare service
       required: true
       in: header
       schema:
         type: string
-        example: 123344556677
+        example: 'NHS0001'
     ServiceId_HParam:
       name: NHSD-Service
       description: Service attributes
