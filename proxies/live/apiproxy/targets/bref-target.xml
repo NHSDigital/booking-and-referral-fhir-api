@@ -38,8 +38,11 @@
       <Step>
           <Name>Javascript.UnpackVars</Name>
       </Step>
-      <Step>
+      <!--<Step>
           <Name>Javascript.SetTargetUrl</Name>
+      </Step>-->
+      <Step>
+          <Name>Javascript.SetTargetUrlOnPr</Name>
       </Step>
       <Step>
           <Name>RaiseFault.400BadRequest</Name>
