@@ -9,6 +9,18 @@
             <StatusCode>404</StatusCode>
             <ReasonPhrase>Not Found</ReasonPhrase>
         </Set>
+        <AssignVariable>
+            <Name>bref.error.code</Name>
+            <Value>value</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.coding.code</Name>
+            <Value>PROXY_FORBIDDEN</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.diagnostics</Name>
+            <Value>The resource was not found within BaRS: <further diagnostics information, error message/error text></Value>
+        </AssignVariable>
     </FaultResponse>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
 </RaiseFault>
