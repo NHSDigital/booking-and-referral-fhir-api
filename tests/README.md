@@ -18,6 +18,30 @@ Make install will install all the requirements in your local machine that you ca
  * `serve` -- Serves a preview of the specification in human-readable format
 ```
 
+## Test flow to test new develops
+By default this proxy it's pointing to bars mock receiver which is pointing to a docker container as a backend. This backend it's responsible
+to manage the requests made through this proxy.
+
+In order to run the tests you need to follow this further configurations:
+
+1. Create a branch on the [Booking and Referral api](https://github.com/NHSDigital/booking-and-referral-fhir-api) repo.
+
+2. After all your changes, please, commit and push them into the repo.
+
+3. Then open [Booking and Referral api](https://github.com/NHSDigital/booking-and-referral-fhir-api) repo UI on Github and raise a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
+
+4. Open a pull request on [bars-mock-receiver-proxy](https://github.com/NHSDigital/bars-mock-receiver-proxy).
+5. After both pull request being deployed please follow these steps:
+   1. Go to Apigee and find your deploy. must be in: `booking-and-referral-pr-` your PR number from Github on step 4.
+   2. Navigate to developer mode and at the bottom change the file `SetTargetUrl.js`.
+   3. On this file add the follow line:
+      1. `targetUrl = "https://internal-dev.api.service.nhs.uk/bars-mock-receiver-proxy-pr` + your PR number on the mock receiver repo. This value come from the step 4.
+   4. After set the targetUrl your current PR on mock receiver, you need to set the other way around. On Apigee open the deploy of your PR but this time on the mock receiver.
+   5. Go to develop and click on `bars-mock-receiver-target`. A xml will be presented and you need to edit the element `<Path>/bref-X</Path>` and the X must the number of your PR on the step 3.
+
+
+
+
 To run the tests you need to set a variety of environment variables. One of them has a dependency of an utility from Apigee that must be installed.
 
 Please, follow the further steps to install, [get_token](https://docs.apigee.com/api-platform/system-administration/auth-tools#install).
