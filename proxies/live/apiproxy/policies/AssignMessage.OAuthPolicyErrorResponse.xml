@@ -21,7 +21,7 @@
                 }
               ]
             },
-            "diagnostics": "A BaRS internal component deemed you unauthorized to make this request.: <further diagnostics information, error message/error text>"
+            "diagnostics": "A BaRS internal component deemed you unauthorized to make this request.: (further diagnostics information, error message/error text)"
           }
         ]
       }
