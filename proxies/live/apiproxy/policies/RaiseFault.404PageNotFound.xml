@@ -19,7 +19,7 @@
         </AssignVariable>
         <AssignVariable>
             <Name>bref.error.diagnostics</Name>
-            <Value>The resource was not found within BaRS: <further diagnostics information, error message/error text></Value>
+            <Value>The resource was not found within BaRS: (further diagnostics information, error message/error text)</Value>
         </AssignVariable>
     </FaultResponse>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>

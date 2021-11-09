@@ -19,7 +19,7 @@
         </AssignVariable>
         <AssignVariable>
             <Name>bref.error.diagnostics</Name>
-            <Value>BaRS was unable to process the request: <further diagnostics information, error message/error text></Value>
+            <Value>BaRS was unable to process the request: (further diagnostics information, error message/error text)</Value>
         </AssignVariable>
     </FaultResponse>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
