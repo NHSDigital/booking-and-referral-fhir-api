@@ -1,23 +1,22 @@
-{
-  "resourceType": "OperationOutcome",
-  "meta": {
-    "profile": [
-      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
-    ]
-  },
-  "issue": [
-    {
-      "severity": "error",
-      "code": "400",
-      "details": {
-        "coding": [
-          {
-            "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
-            "code": "REC_BAD_REQUEST"
-          }
-        ]
-      },
-      "diagnostics": "The API was unable to process the request: <further diagnostics information, error message/error text>"
-    }
+"resourceType": "OperationOutcome",
+"meta": {
+  "profile": [
+    "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
   ]
+},
+"issue": [
+  {
+    "severity": "error",
+    "code": "invalid",
+    "details": {
+      "coding": [
+        {
+          "system": "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1",
+          "code": "BAD_REQUEST"
+        }
+      ]
+    },
+    "diagnostics": "Any further internal debug details i.e. stack trace details etc."
+  }
+]
 }

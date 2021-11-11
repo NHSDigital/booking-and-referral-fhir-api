@@ -15,7 +15,7 @@
         </AssignVariable>
         <AssignVariable>
             <Name>bref.error.coding.code</Name>
-            <Value>PROXY_FORBIDDEN</Value>
+            <Value>PROXY_NOT_FOUND</Value>
         </AssignVariable>
         <AssignVariable>
             <Name>bref.error.diagnostics</Name>
