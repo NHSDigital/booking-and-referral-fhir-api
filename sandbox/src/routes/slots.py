@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Header
-# from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse
 from enum import Enum
 from datetime import datetime
 from .example_loader import load_example
@@ -34,9 +34,9 @@ def slot(
     return load_example("slots/GET-success.json")
 
 
-# @route.post("/Slot")
-# @route.put("/Slot")
-# @route.patch("/Slot")
-# @route.delete("/Slot")
-# def method_not_allowed():
-#     return JSONResponse(load_example("method-not-allowed.json"), status_code=405)
+@route.post("/Slot")
+@route.put("/Slot")
+@route.patch("/Slot")
+@route.delete("/Slot")
+def method_not_allowed():
+    return JSONResponse(load_example("method-not-allowed.json"), status_code=405)
