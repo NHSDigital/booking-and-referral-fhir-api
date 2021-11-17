@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Header
 from .example_loader import load_example
+from fastapi.responses import JSONResponse
 
 route = APIRouter()
 
@@ -7,3 +8,12 @@ route = APIRouter()
 @route.get("/MessageDefinition")
 def get_message_definition(NHSD_Service: str = Header(...)):
     return load_example("message_definition/GET-success.json")
+
+
+@route.post("/MessageDefinition")
+@route.put("/MessageDefinition")
+@route.patch("/MessageDefinition")
+@route.delete("/MessageDefinition")
+def message_definition_method_not_allowed():
+    headers = {"Allow": "GET"}
+    return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)

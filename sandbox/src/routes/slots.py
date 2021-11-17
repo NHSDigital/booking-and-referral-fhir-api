@@ -38,6 +38,6 @@ def slot(
 @route.put("/Slot")
 @route.patch("/Slot")
 @route.delete("/Slot")
-def method_not_allowed():
-    headers = {"Allow": "*"}
+def slot_method_not_allowed():
+    headers = {"Allow": "GET"}
     return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
