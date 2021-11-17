@@ -140,7 +140,7 @@ class TestSlots:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
-        # expected_body = load_example("slots/GET-success.json")
+        expected_body = load_example("method-not-allowed.json")
 
         # When
         response = requests.post(
@@ -161,4 +161,4 @@ class TestSlots:
 
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
-        # assert_that(expected_body).is_equal_to(response.json())
+        assert_that(expected_body).is_equal_to(response.json())
