@@ -36,7 +36,7 @@ class TestEndpoints:
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 400
+        expected_status_code = 500
 
         # When
         response = requests.get(

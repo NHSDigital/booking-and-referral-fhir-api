@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.400BadRequest">
-    <DisplayName>RaiseFault.400BadRequest</DisplayName>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.500ProxyBadRequest">
+    <DisplayName>RaiseFault.500ProxyBadRequest</DisplayName>
     <Properties/>
     <FaultResponse>
         <Set>
             <Headers/>
             <Payload contentType="text/plain"/>
-            <StatusCode>400</StatusCode>
+            <StatusCode>500</StatusCode>
             <ReasonPhrase>Invalid service identifier</ReasonPhrase>
         </Set>
         <AssignVariable>
