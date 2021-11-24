@@ -48,16 +48,17 @@
     </Request>
   </PreFlow>
   <FaultRules>
-    <FaultRule name="access_token_errors">
+    <FaultRule name="access_token_invalid_error">
       <Step>
         <Name>AssignMessage.403ForbiddenErrorResponse</Name>
-        <Condition>oauthV2.VerifyAccessToken.fault.name = "keymanagement.service.invalid_access_token"</Condition>
       </Step>
+      <Condition>oauthV2.VerifyAccessToken.fault.name = "keymanagement.service.invalid_access_token"</Condition>
+    </FaultRule>
+    <FaultRule name="access_token_missing_error">
       <Step>
         <Name>AssignMessage.401UnauthorizedErrorResponse</Name>
-        <Condition>oauthV2.VerifyAccessToken.fault.name = "oauth.v2.InvalidAccessToken"</Condition>
       </Step>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+      <Condition>oauthV2.VerifyAccessToken.fault.name = "oauth.v2.InvalidAccessToken"</Condition>
     </FaultRule>
     <FaultRule name="rate_limiting_error">
       <Step>
