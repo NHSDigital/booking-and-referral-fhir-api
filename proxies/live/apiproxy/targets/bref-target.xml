@@ -50,12 +50,18 @@
   <FaultRules>
     <FaultRule name="access_token_expired">
       <Step>
-        <Name>ExtractVariables.OAuthErrorFaultString</Name>
-      </Step>
-      <Step>
         <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
       </Step>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+    </FaultRule>
+    <FaultRule name="rate_limiting_error">
+      <Step>
+        <Name>ExtractVariables.OAuthErrorFaultString</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.RateLimitingErrorResponse</Name>
+      </Step>
+      <Condition>flowcallout.FlowCallout.ApplyRateLimiting.failed</Condition>
     </FaultRule>
   </FaultRules>
   <HTTPTargetConnection>
