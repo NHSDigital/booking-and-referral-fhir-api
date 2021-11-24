@@ -1,4 +1,4 @@
-<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.RateLimitingErrorResponse">
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.429RateLimitingErrorResponse">
   <Set>
     <StatusCode>429</StatusCode>
     <Payload contentType="application/json">
