@@ -48,18 +48,20 @@
     </Request>
   </PreFlow>
   <FaultRules>
-    <FaultRule name="access_token_expired">
+    <FaultRule name="access_token_errors">
       <Step>
-        <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
+        <Name>AssignMessage.403ForbiddenErrorResponse</Name>
+        <Condition>oauthV2.VerifyAccessToken.fault.name = "keymanagement.service.invalid_access_token"</Condition>
+      </Step>
+      <Step>
+        <Name>AssignMessage.401UnauthorizedErrorResponse</Name>
+        <Condition>oauthV2.VerifyAccessToken.fault.name = "oauth.v2.InvalidAccessToken"</Condition>
       </Step>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
     </FaultRule>
     <FaultRule name="rate_limiting_error">
       <Step>
-        <Name>ExtractVariables.OAuthErrorFaultString</Name>
-      </Step>
-      <Step>
-        <Name>AssignMessage.RateLimitingErrorResponse</Name>
+        <Name>AssignMessage.429RateLimitingErrorResponse</Name>
       </Step>
       <Condition>flowcallout.FlowCallout.ApplyRateLimiting.failed</Condition>
     </FaultRule>

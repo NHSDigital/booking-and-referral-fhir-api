@@ -1,4 +1,4 @@
-<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.OAuthPolicyErrorResponse">
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.401UnauthorizedErrorResponse">
   <Set>
     <StatusCode>401</StatusCode>
     <Payload contentType="application/json">
