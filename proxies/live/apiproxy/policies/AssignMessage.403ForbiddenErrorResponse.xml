@@ -21,7 +21,7 @@
                 }
                 ]
             },
-            "diagnostics": "Failed to Authenticate with <Receiver Identifier (ODS?)>: <further diagnostics information, error message/error text>"
+            "diagnostics": "Failed to Authenticate with (Receiver Identifier (ODS?)): (further diagnostics information, error message/error text)"
             }
         ]
         }

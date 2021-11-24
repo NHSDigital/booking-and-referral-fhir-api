@@ -21,7 +21,7 @@
                     }
                     ]
                 },
-                "diagnostics": "Too many requests have been made by this source in a given amount of time: <further diagnostics information, error message/error text>"
+                "diagnostics": "Too many requests have been made by this source in a given amount of time: (further diagnostics information, error message/error text)"
                 }
             ]
         }
