@@ -1,0 +1,23 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "400",
+      "details": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+            "code": "PROXY_BAD_REQUEST"
+          }
+        ]
+      },
+      "diagnostics": "BaRS was unable to process the request: <further diagnostics information, error message/error text>"
+    }
+  ]
+}

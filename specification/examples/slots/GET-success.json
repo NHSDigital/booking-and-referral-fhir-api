@@ -1,65 +1,188 @@
 {
-  "resourceType": "Bundle",
-  "id": "a56382a1-dce2-483a-8426-65b727b66809",
-  "meta": {
-    "lastUpdated": "2019-05-09T09:26:12.010+00:00"
-  },
-  "type": "searchset",
-  "total": 2,
-  "link": [
-    {
-      "relation": "self",
-      "url": "http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot?_format=json&_include=Slot%3Aschedule&_include=Schedule%3Aactor%3APractitioner&_include=Schedule%3Aactor%3APractitionerRole&_include=Schedule%3Aactor%3AHealthcareService&_include=HealthcareService.location&schedule.actor%3Ahealthcareservice=918999198999&start=ge2019-05-09T10%3A00%3A00%2000%3A00&start=le2019-05-09T10%3A30%3A00%2000%3A00&status=free"
-    }
-  ],
-  "entry": [
-    {
-      "fullUrl": "http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot/slot005",
-      "resource": {
-        "resourceType": "Slot",
-        "id": "slot005",
-        "meta": {
-          "profile": [
-            "https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Slot-1"
-          ]
-        },
-        "identifier": [
-          {
-            "system": "https://tools.ietf.org/html/rfc4122",
-            "value": "5a889965-3db4-4c29-8003-676c247a763e"
-          }
-        ],
-        "schedule": {
-          "reference": "Schedule/sched1111"
-        },
-        "status": "free",
-        "start": "2019-05-09T10:00:00.000+00:00",
-        "end": "2019-05-09T10:15:00.000+00:00"
-      }
-    },
-    {
-      "fullUrl": "http://a2sibookingprovidertest.directoryofservices.nhs.uk:443/poc/Slot/slot006",
-      "resource": {
-        "resourceType": "Slot",
-        "id": "slot006",
-        "meta": {
-          "profile": [
-            "https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Slot-1"
-          ]
-        },
-        "identifier": [
-          {
-            "system": "https://tools.ietf.org/html/rfc4122",
-            "value": "d939f0e0-d434-4962-a327-7ed52fde2b2e"
-          }
-        ],
-        "schedule": {
-          "reference": "Schedule/sched1111"
-        },
-        "status": "free",
-        "start": "2019-05-09T10:15:00.000+00:00",
-        "end": "2019-05-09T10:30:00.000+00:00"
-      }
-    }
-  ]
+	"resourceType": "Bundle",
+	"meta": {
+		"profile": [
+			"https://fhir.nhs.uk/StructureDefinition/BARSUKCoreBundle"
+		]
+	},
+	"type": "searchset",
+	"total": 8,
+	"entry": [
+		{
+			"resource": {
+				"resourceType": "Slot",
+				"id": "c3f6145e-1a26-4345-b3f2-dccbcba62049",
+				"serviceCategory": {
+					"coding": [
+						{
+							"code": "14",
+							"display": "Emergency Department"
+						}
+					]
+				},
+				"appointmentType": {
+					"coding": [
+						{
+							"code": "EMERGENCY",
+							"display": "Emergency appointment"
+						}
+					]
+				},
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
+					]
+				},
+				"Schedule": {
+					"reference": "Schedule/{ScheduleItem}"
+				},
+				"status": "free",
+				"start": "2021-10-06T10:00:00.000+00:00",
+				"end": "2021-10-06T11:00:00.000+00:00"
+			}
+		},
+		{
+			"resource": {
+				"resourceType": "Slot",
+				"id": "8d7629cb-8ad6-4f89-a042-46e26a37113e",
+				"serviceCategory": {
+					"coding": [
+						{
+							"code": "14",
+							"display": "Emergency Department"
+						}
+					]
+				},
+				"appointmentType": {
+					"coding": [
+						{
+							"code": "EMERGENCY",
+							"display": "Emergency appointment"
+						}
+					]
+				},
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
+					]
+				},
+				"Schedule": {
+					"reference": "Schedule/{ScheduleItem}"
+				},
+				"status": "free",
+				"start": "2021-10-06T11:00:00.000+00:00",
+				"end": "2021-10-06T12:00:00.000+00:00"
+			}
+		},
+		{
+			"resource": {
+				"resourceType": "Schedule",
+				"id": "{ScheduleItem}",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Schedule"
+					]
+				},
+				"identifier": [
+					{
+						"system": "https://system.supplier.co.uk/Diary/id",
+						"value": "8622dfdb-dc6a-47b6-b3a7-2eb2829db287"
+					}
+				],
+				"actor": [
+					{
+						"reference": "HealthcareService/{HealcareServiceid}"
+					},
+					{
+						"reference": "PractitionerRole/{PractitionerRoleid}"
+					},
+					{
+						"reference": "Practitioner/{Practitionerid}"
+					}
+				]
+			}
+		},
+		{
+			"resource": {
+				"resourceType": "HealthcareService",
+				"id": "[HealcareServiceid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Healthservice"
+					]
+				},
+				"identifier": [
+					{
+						"system": "https://system.supplier.co.uk/My/Healthcare/Services",
+						"value": "100"
+					}
+				],
+				"location": [
+					{
+						"reference": "Location/Locationid"
+					}
+				],
+				"name": "Healthcare Service Name"
+			}
+		},
+		{
+			"resource": {
+				"resourceType": "Practitioner",
+				"id": "[Practitionerid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Practitioner"
+					]
+				},
+				"name": [
+					{
+						"family": "Bloggs",
+						"given": [
+							"Joe"
+						],
+						"prefix": [
+							"Dr"
+						]
+					}
+				]
+			}
+		},
+		{
+			"resource": {
+				"resourceType": "PractitionerRole",
+				"id": "[PractitionerRoleid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-PractitionerRole"
+					]
+				},
+				"code": {
+					"coding": [
+						{
+							"system": "https://fhir.hl7.org.uk/ValueSet/UKCore-PractitionerRoleCode",
+							"version": "4.0.1",
+							"code": "doctor",
+							"display": "Doctor"
+						}
+					]
+				}
+			}
+		},
+		{
+			"resource": {
+				"resourceType": "Location",
+				"id": "[Locationid]",
+				"meta": {
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Location"
+					]
+				},
+				"position": {
+					"longitude": "143.20196",
+					"latitude": "-37.22866"
+				},
+				"name": "Healthcare Service Location"
+			}
+		}
+	]
 }

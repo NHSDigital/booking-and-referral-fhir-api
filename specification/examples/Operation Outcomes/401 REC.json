@@ -1,0 +1,23 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "401",
+      "details": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+            "code": "REC_UNAUTHORIZED"
+          }
+        ]
+      },
+      "diagnostics": "<Receiver Identifier (ODS?)> deemed you unauthorized to make this request: <further diagnostics information, error message/error text>"
+    }
+  ]
+}

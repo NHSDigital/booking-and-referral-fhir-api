@@ -1,0 +1,23 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "422",
+      "details": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+            "code": "SEND_UNPROCESSABLE_ENTITY"
+          }
+        ]
+      },
+      "diagnostics": "Message was not malformed but deemed unprocessable.: <further diagnostics information, error message/error text>"
+    }
+  ]
+}
