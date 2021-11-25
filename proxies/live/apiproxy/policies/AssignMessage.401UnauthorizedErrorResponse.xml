@@ -1,0 +1,32 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.401UnauthorizedErrorResponse">
+  <Set>
+    <StatusCode>401</StatusCode>
+    <Payload contentType="application/json">
+      {
+        "resourceType": "OperationOutcome",
+        "meta": {
+          "profile": [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+          ]
+        },
+        "issue": [
+          {
+            "severity": "error",
+            "code": "401",
+            "details": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+                  "code": "PROXY_UNAUTHORIZED"
+                }
+              ]
+            },
+            "diagnostics": "A BaRS internal component deemed you unauthorized to make this request.: (further diagnostics information, error message/error text)"
+          }
+        ]
+      }
+    </Payload>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="response" />
+</AssignMessage>

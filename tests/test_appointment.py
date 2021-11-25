@@ -375,3 +375,51 @@ class TestAppointment:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.appointment
+    @pytest.mark.integration
+    @pytest.mark.sandbox
+    def test_appointments_method_not_allowed(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 405
+        expected_body = load_example("method-not-allowed.json")
+        patient_id = "4857773456"
+
+        # When
+        response = requests.put(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
+            params={"patientIdentifier": patient_id},
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.appointment
+    @pytest.mark.integration
+    @pytest.mark.sandbox
+    def test_appointment_id_method_not_allowed(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 405
+        expected_body = load_example("method-not-allowed.json")
+
+        # When
+        response = requests.post(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Service": "NHS0001",
+                "NHSD-Token": self.nhsd_token,
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())

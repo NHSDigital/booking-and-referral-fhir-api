@@ -3,6 +3,7 @@ from uuid import UUID
 from pydantic import BaseModel
 from .example_loader import load_example
 from .models import Profile
+from fastapi.responses import JSONResponse
 
 
 class AppointmentBody(BaseModel):
@@ -64,3 +65,17 @@ def delete_appointment_id(response: Response, id: UUID, NHSD_Service: str = Head
     else:
         response.status_code = ENTITY_NOT_FOUND
         return load_example("entity-not-found.json")
+
+
+@route.put("/Appointment")
+@route.patch("/Appointment")
+@route.delete("/Appointment")
+def appointment_method_not_allowed():
+    headers = {"Allow": "GET, POST"}
+    return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
+
+
+@route.post("/Appointment/{id}")
+def appointment_id_method_not_allowed():
+    headers = {"Allow": "GET, PATCH, PUT, DELETE"}
+    return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)

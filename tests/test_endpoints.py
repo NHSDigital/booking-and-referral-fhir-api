@@ -9,13 +9,28 @@ class TestEndpoints:
 
     @pytest.mark.auth
     def test_invalid_access_token(self):
-        expected_status_code = 401
+        expected_status_code = 403
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": "Bearer invalid_token",
+                "NHSD-Service": "NHS0001",
+            },
+        )
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+
+    @pytest.mark.auth
+    def test_missing_access_token(self):
+        expected_status_code = 401
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
+            headers={
+                "Authorization": "",
                 "NHSD-Service": "NHS0001",
             },
         )
@@ -36,7 +51,7 @@ class TestEndpoints:
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 400
+        expected_status_code = 500
 
         # When
         response = requests.get(
