@@ -46,8 +46,8 @@ def document_reference_method_not_allowed():
     return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
 
 
-@route.post("/DocumnetReference/{id}")
-@route.patch("/DocumnetReference/{id}")
-def document_refernce_id_method_not_allowed():
+@route.post("/DocumentReference/{id}")
+@route.patch("/DocumentReference/{id}")
+def document_reference_id_method_not_allowed():
     headers = {"Allow": "GET, PUT, DELETE"}
     return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
