@@ -20,26 +20,36 @@ app = FastAPI()
 
 @app.exception_handler(RequestValidationError)
 def validation_exception_handler(request, exc):
-    response = load_example("bad-request.json")
 
     if "Appointment" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "registry" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "$process-message" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "meta" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "ServiceRequest" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "Slot" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "DocumentReference" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "MessageDefinition" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
+    if "NHS0001-401" in str(request.header['NHSD-Serivce']):
+        response = load_example("unauthorized.json")
+        status_code = 401
 
-    return JSONResponse(response, status_code=400)
+    return JSONResponse(response=response, status_code=status_code)
 
 
 app.include_router(slots.route)
