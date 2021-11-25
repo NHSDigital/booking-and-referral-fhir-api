@@ -52,7 +52,7 @@
       <Step>
         <Name>AssignMessage.429RateLimitingErrorResponse</Name>
       </Step>
-      <Condition>flowcallout.FlowCallout.ApplyRateLimiting.failed</Condition>
+      <Condition>raisefault.RaiseFault.QuotaPerApp.failed</Condition>
     </FaultRule>
   </FaultRules>
   <DefaultFaultRule>
