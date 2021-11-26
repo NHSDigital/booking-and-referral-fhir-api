@@ -37,7 +37,9 @@ def get_appointment_id(response: Response, id: UUID, NHSD_Service: str = Header(
 
 
 @route.patch("/Appointment/{id}")
-def patch_appointment_id(response: Response, body: AppointmentBody, id: UUID, NHSD_Service: str = Header(...), NHSD_Token: str = Header(...)):
+def patch_appointment_id(response: Response,
+                         body: AppointmentBody, id: UUID, NHSD_Service: str = Header(...), NHSD_Token: str = Header(...)
+                         ):
     if str(id) == existing_appointment_id:
         return ""
     else:
