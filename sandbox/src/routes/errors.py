@@ -16,5 +16,8 @@ def errors(NHSD_Service: str = Header(...)):
     if str(NHSD_Service) == "NHS0001-409":
         response = load_example("conflict.json")
         status_code = 409
+    if str(NHSD_Service) == "NHS0001-422":
+        response = load_example("unprocessable-entity.json")
+        status_code = 422
 
     return JSONResponse(response, status_code=status_code)
