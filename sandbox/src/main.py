@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from starlette.responses import Response
 from starlette.status import HTTP_200_OK
 from routes import (
+    errors,
     slots,
     appointment,
     metadata,
@@ -45,13 +46,11 @@ def validation_exception_handler(request, exc):
     if "MessageDefinition" in str(request.url.path):
         response = load_example("bad-request.json")
         status_code = 400
-    if "NHS0001-401" in str(request.headers['NHSD-Service']):
-        response = load_example("unauthorized.json")
-        status_code = 401
 
     return JSONResponse(response, status_code=status_code)
 
 
+app.include_router(errors.route)
 app.include_router(slots.route)
 app.include_router(appointment.route)
 app.include_router(metadata.route)
