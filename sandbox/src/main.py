@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, Header
+from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.responses import Response
@@ -45,7 +45,7 @@ def validation_exception_handler(request, exc):
     if "MessageDefinition" in str(request.url.path):
         response = load_example("bad-request.json")
         status_code = 400
-    if "NHS0001-401" in str(request.headers['NHSD_Service']):
+    if "NHS0001-401" in str(request.headers['NHSD-Service']):
         response = load_example("unauthorized.json")
         status_code = 401
 
