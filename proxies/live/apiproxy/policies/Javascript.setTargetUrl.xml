@@ -3,5 +3,5 @@
     <DisplayName>Javascript.SetTargetUrl</DisplayName>
     <Properties/>
     <ResourceURL>jsc://SetTargetUrl.js</ResourceURL>
-    <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
+    <IncludeURL>jsc://BarsLib.js</IncludeURL>
 </Javascript>
