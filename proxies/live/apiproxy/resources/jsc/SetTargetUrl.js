@@ -17,4 +17,3 @@ if(queryString !== ""){
 }else{
     context.setVariable("target.url", targetUrl + pathSuffix);
 }
-

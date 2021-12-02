@@ -7,7 +7,6 @@
     https://www.googlecloudcommunity.com/gc/Apigee/Can-you-include-a-Javascript-in-another-Javascript/m-p/59862#M51664
 
 */
-
 function set_variables(location, vars) {
     /*
       Unpacks the values from a kvm and publish them as context variables.
@@ -35,14 +34,13 @@ function set_variables(location, vars) {
     }
 }
 
-
 function get_target_url_from_kvm(serviceId) {
     /*
       Get a url value from the booking-and-referral kvm.
       the valid endpoints at the moment are:
       - meta
       - slots
-      
+
       If there is no value in the kvm it returns null
     */
       var location = "booking-and-referral-config.NHSD-ServiceIdentifier." + serviceId + ".target";
@@ -63,7 +61,7 @@ function get_endpoint_from_pathsuffix(pathsuffix) {
     - Appointment
     - ServiceRequest
     - registry
-    
+
     If there is no match in the pathsuffix returns null
 */
     if (pathsuffix.includes('/meta')) {
