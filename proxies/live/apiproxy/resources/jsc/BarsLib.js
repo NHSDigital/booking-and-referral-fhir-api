@@ -15,7 +15,7 @@ function set_variables(location, vars) {
     vars: JSON object
 
   */
-  if (typeof vars !== 'object') {
+  if (typeof vars !== "object") {
     return;
   }
 
@@ -23,9 +23,9 @@ function set_variables(location, vars) {
   {
     if (!vars.hasOwnProperty(key))
       continue;
-    variable = location + '.' + key;
+    variable = location + "." + key;
     value = vars[key];
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       set_variables(variable, value);
     }
     else {
@@ -45,7 +45,7 @@ function get_target_url_from_kvm(serviceId) {
   */
   var location = "booking-and-referral-config.NHSD-ServiceIdentifier." + serviceId + ".target";
   var url = context.getVariable(location);
-  if(url && url.endsWith('/')){
+  if(url && url.endsWith("/")){
     url = url.replace(/\/$/,"")
   }
   return url
@@ -63,22 +63,20 @@ function get_endpoint_from_pathsuffix(pathsuffix) {
 
       If there is no match in the pathsuffix returns null
   */
-  if (pathsuffix.includes('/meta')) {
-    return 'meta'
+  if (pathsuffix.includes("/meta")) {
+    return "meta"
   }
-  if (pathsuffix.includes('/Slots')) {
-    return 'slots'
+  if (pathsuffix.includes("/Slots")) {
+    return "slots"
   }
-  if (pathsuffix.includes('/Appointment')) {
-    return 'appointment'
+  if (pathsuffix.includes("/Appointment")) {
+    return "appointment"
   }
-  if (pathsuffix.includes('/ServiceRequest')) {
-    return 'serviceRequest'
+  if (pathsuffix.includes("/ServiceRequest")) {
+    return "serviceRequest"
   }
-  if (pathsuffix.includes('/registry')) {
-    return 'registry'
+  if (pathsuffix.includes("/registry")) {
+    return "registry"
   }
   return null
 }
-
-
