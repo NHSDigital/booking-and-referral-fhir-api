@@ -51,7 +51,6 @@ function get_target_url_from_kvm(serviceId) {
       return url
   }
 
-
 function get_endpoint_from_pathsuffix(pathsuffix) {
 /*
     Get a the endpoint  value from the pathsuffix.
