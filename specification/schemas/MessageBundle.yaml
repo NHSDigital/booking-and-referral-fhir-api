@@ -10,7 +10,7 @@ properties:
         type: array
         items:
           type: string
-          example: "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle"
+          example: "https://simplifier.net/nhsbookingandreferrals/barsukcorebundle"
       type:
         type: string
         example: "message"
