@@ -97,80 +97,26 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/Capability.yaml
+                $ref: '#/components/schemas/Capability'
               example:
-                $ref: examples/metadata/GET-success.json
+                $ref: '#/components/examples/MetaDataGetSuccess'
             application/fhir+xml:
               schema:
-                $ref: schemas/Capability.yaml
+                $ref: '#/components/schemas/Capability'
           headers:
             header-0:
               schema:
                 type: string
             X-Correlation-Id:
-              $ref: schemas/XCorrelationId.yaml
+              $ref: '#/components/schemas/CorrelationId'
             X-Request-Id:
-              $ref: schemas/XRequestId.yaml 
+              $ref: '#/components/schemas/RequestId'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
 
-        '4XX':
-          description: |
-            An error occurred as follows:
-            | HTTP status | Error code                 | Description |
-            | ----------- | -------------------------- | --------------------------------------------- |
-            | 400         | SEND_BAD_REQUEST           | The API was unable to process the request. |
-            | 400         | REC_BAD_REQUEST            | The Receiver has responded stating the message was malformed. |
-            | 401         | SEND_UNAUTHORIZED          | The API deemed you unauthorized to make this request. |
-            | 401         | REC_UNAUTHORIZED           | The receiver deemed you unauthorized to make request. |
-            | 403         | SEND_FORBIDDEN             | Missing or Expired Token. |
-            | 404         | PROXY_NOT_FOUND            | No related people exist for given NHS number. |
-            | 404         | REC_NOT_FOUND              | Patient record for given NHS number has been invalidated and not superseded by another NHS number. |
-            | 405         | SEND_METHOD_NOT_ALLOWED    | HTTP Verb is not correct for this scenario.|
-            | 405         | REC_METHOD_NOT_ALLOWED     | Receiver does not allow this.|
-            | 405         | PROXY_METHOD_NOT_ALLOWED   | Proxy does not allow this.|
-            | 406         | SEND_NOT_ACCEPTABLE        | Senders message had an incorrect content type defined for a response.|
-            | 408         | REC_TIMEOUT                | The downstream domain processing has not completed within the configured timeout period. |
-            | 409         | SEND_CONFLICT              |  |
-            | 409         | REC_CONFLICT               |  |
-            | 409         | PROXY_CONFLICT             |  |
-            | 422         | SEND_UNPROCESSABLE_ENTITY  | Message was not malformed but deemed unprocessable. |
-            | 422         | REC_UNPROCESSABLE_ENTITY   | Message was not malformed but deemed unprocessable. |         
-            | 422         | PROXY_UNPROCESSABLE_ENTITY | Message was not malformed but deemed unprocessable. |         
-            | 429         | SEND_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
-            | 429         | REC_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
-            
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-          headers:
-            X-Correlation-Id:
-              $ref: schemas/XCorrelationId.yaml
-            X-Request-Id:
-              $ref: schemas/XRequestId.yaml 
-        
-        '5XX':
-          description: |
-            An error occurred as follows:
-            | HTTP status | Error code                 | Description |
-            | ----------- | -------------------------- | --------------------------------------------- |
-            | 500         | REC_SERVER_ERROR           | The receiver server has encountered an Error processing the request. |
-            | 500         | PROXY_SERVER_ERROR         | Proxy Error. |
-            | 501         | SEND_NOT_IMPLEMENTED       | The Request was not recognized. |
-            | 501         | REC_NOT_IMPLEMENTED        | The Receiver did not recognize the request. |
-            | 501         | PROXY_NOT_IMPLEMENTED      | The Proxy did not recognize the request. |
-            | 503         | REC_UNAVAILABLE            | The Receiver was unavailable to service the request.|
-            | 503         | PROXY_UNAVAILABLE          | The Proxy was unavailable to service the request. |
-            
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-          headers:
-            X-Correlation-Id:
-              $ref: schemas/XCorrelationId.yaml
-            X-Request-Id:
-              $ref: schemas/XRequestId.yaml 
-
+          
   /MessageDefinition:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -188,52 +134,19 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/MessageDefinition.yaml
+                $ref: '#/components/schemas/MessageDefinition'
             application/fhir+xml:
               schema:
-                $ref: schemas/MessageDefinition.yaml
+                $ref: '#/components/schemas/MessageDefinition'
           headers:
             X-Correlation-Id:
-              $ref: schemas/XCorrelationId.yaml
+              $ref: '#/components/schemas/CorrelationId'
             X-Request-Id:
-              $ref: schemas/XRequestId.yaml
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+              $ref: '#/components/schemas/RequestId'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /$process-message:
     parameters:
       - $ref: '#/components/parameters/ServiceId_HParam'
@@ -245,74 +158,39 @@ paths:
       summary: Process a message
       description: Process a message
       operationId: processMessage
-
       requestBody:
         description: Message Details
         required: true
         content:
           application/fhir+json:
             schema:
-              $ref: schemas/MessageBundle.yaml
+              $ref: '#/components/schemas/MessageBundle'
             example:
-              $ref: examples/process_message/POST-body.json
+              $ref: '#/components/examples/ProcessMessagePostBody'
           application/fhir+xml:
             schema:
-              $ref: schemas/MessageBundle.yaml
-
+              $ref: '#/components/schemas/MessageBundle'
       responses:
         '200':
           description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/MessageBundle.yaml
+                $ref: '#/components/schemas/MessageBundle'
               example:
-                $ref: examples/process_message/POST-success.json
+                $ref: '#components/examples/ProcessMessagePostSuccess'
             application/fhir+xml:
               schema:
-                $ref: schemas/MessageBundle.yaml
+                $ref: '#/components/schemas/MessageBundle'
           headers:
             X-Correlation-Id:
-              $ref: schemas/XCorrelationId.yaml
+              $ref: '#/components/schemas/CorrelationId'
             X-Request-Id:
-              $ref: schemas/XRequestId.yaml
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+              $ref: '#/components/schemas/RequestId'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /Slot:
     parameters:
       - $ref: '#/components/parameters/ServiceId_HParam'
@@ -406,7 +284,6 @@ paths:
             application/fhir+xml:
               schema:
                 $ref: schemas/SearchBundle.yaml
-            
           headers:
             X-Request-ID:
               description: Message Identifier
@@ -421,44 +298,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/slots/GET-BadRequest.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/slots/GET-BadRequest.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/slots/GET-BadRequest.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/slots/GET-BadRequest.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/slots/GET-BadRequest.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/slots/GET-BadRequest.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /Appointment:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -482,7 +326,6 @@ paths:
           application/fhir+xml:
             schema:
               $ref: schemas/Appointment.yaml
-  
       responses:
         '201':
           description: Success
@@ -504,44 +347,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     get:
       tags:
         - Booking
@@ -576,44 +386,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   '/Appointment/{id}':
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -652,44 +429,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     patch:
       tags:
         - Booking
@@ -725,44 +469,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     put:
       tags:
         - Booking
@@ -798,44 +509,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     delete:
       tags:
         - Booking
@@ -859,44 +537,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /ServiceRequest:
     parameters:
       - $ref: '#/components/parameters/ServiceId_HParam'
@@ -937,44 +582,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     get:
       tags:
         - Referral
@@ -1009,44 +621,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   '/ServiceRequest/{id}':
     parameters:
       - $ref: '#/components/parameters/Id_Param'
@@ -1085,44 +664,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     patch:
       tags:
         - Referral
@@ -1155,44 +701,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     put:
       tags:
         - Referral
@@ -1225,44 +738,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
     delete:
       tags:
         - Referral
@@ -1286,44 +766,11 @@ paths:
               schema:
                 type: string
                 format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689   
-
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
 components:
   parameters:
     Id_Param:
@@ -1353,7 +800,7 @@ components:
         type: string
         example: '123344556677'
     ServiceId_HParam:
-      name: NHSD-Service-ID
+      name: NHSD-HealthcareService-ID
       description: The identifier of a healthcare service
       required: true
       in: header
@@ -1361,7 +808,7 @@ components:
         type: string
         example: NHS0001
     ServiceId_HParam2:
-      name: NHSD-Service
+      name: NHSD-HealthcareService
       description: Service attributes
       required: true
       in: header
@@ -1392,12 +839,73 @@ components:
         type: string
         format: uuid
         example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-
-
-
-    
-        
+  responses:
+    4XX-BARS:
+      description: |
+        An error occurred as follows:
+        | HTTP status | Error code                 | Description |
+        | ----------- | -------------------------- | --------------------------------------------- |
+        | 400         | SEND_BAD_REQUEST           | The API was unable to process the request. |
+        | 400         | REC_BAD_REQUEST            | The Receiver has responded stating the message was malformed. |
+        | 401         | SEND_UNAUTHORIZED          | The API deemed you unauthorized to make this request. |
+        | 401         | REC_UNAUTHORIZED           | The receiver deemed you unauthorized to make request. |
+        | 403         | SEND_FORBIDDEN             | Missing or Expired Token. |
+        | 404         | PROXY_NOT_FOUND            | No related people exist for given NHS number. |
+        | 404         | REC_NOT_FOUND              | Patient record for given NHS number has been invalidated and not superseded by another NHS number. |
+        | 405         | SEND_METHOD_NOT_ALLOWED    | HTTP Verb is not correct for this scenario.|
+        | 405         | REC_METHOD_NOT_ALLOWED     | Receiver does not allow this.|
+        | 405         | PROXY_METHOD_NOT_ALLOWED   | Proxy does not allow this.|
+        | 406         | SEND_NOT_ACCEPTABLE        | Senders message had an incorrect content type defined for a response.|
+        | 408         | REC_TIMEOUT                | The downstream domain processing has not completed within the configured timeout period. |
+        | 409         | SEND_CONFLICT              |  |
+        | 409         | REC_CONFLICT               |  |
+        | 409         | PROXY_CONFLICT             |  |
+        | 422         | SEND_UNPROCESSABLE_ENTITY  | Message was not malformed but deemed unprocessable. |
+        | 422         | REC_UNPROCESSABLE_ENTITY   | Message was not malformed but deemed unprocessable. |         
+        | 422         | PROXY_UNPROCESSABLE_ENTITY | Message was not malformed but deemed unprocessable. |         
+        | 429         | SEND_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
+        | 429         | REC_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
+      content:
+        application/fhir+json:
+          example:
+            $ref: examples/400-SEND.json
+      headers:
+        X-Correlation-Id:
+          $ref: schemas/XCorrelationId.yaml
+        X-Request-Id:
+          $ref: schemas/XRequestId.yaml
+    5XX-BARS:
+      description: |
+        An error occurred as follows:
+        | HTTP status | Error code                 | Description |
+        | ----------- | -------------------------- | --------------------------------------------- |
+        | 500         | REC_SERVER_ERROR           | The receiver server has encountered an Error processing the request. |
+        | 500         | PROXY_SERVER_ERROR         | Proxy Error. |
+        | 501         | SEND_NOT_IMPLEMENTED       | The Request was not recognized. |
+        | 501         | REC_NOT_IMPLEMENTED        | The Receiver did not recognize the request. |
+        | 501         | PROXY_NOT_IMPLEMENTED      | The Proxy did not recognize the request. |
+        | 503         | REC_UNAVAILABLE            | The Receiver was unavailable to service the request.|
+        | 503         | PROXY_UNAVAILABLE          | The Proxy was unavailable to service the request. |
+      content:
+        application/fhir+json:
+          example:
+            $ref: examples/500-REC.json
+      headers:
+        X-Correlation-Id:
+          $ref: schemas/XCorrelationId.yaml
+        X-Request-Id:
+          $ref: schemas/XRequestId.yaml
   schemas:
+    Capability:
+      $ref: schemas/Capability.yaml
+    CorrelationId:
+      $ref: schemas/XCorrelationId.yaml
+    MessageBundle:
+      $ref: schemas/MessageBundle.yaml
+    MessageDefinition:
+      $ref: schemas/MessageDefinition.yaml
+    RequestId:
+      $ref: schemas/XRequestId.yaml
     Token:
       type: object
       description: Authorisation token
@@ -1417,3 +925,10 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+  examples:
+    MetaDataGetSuccess:
+      $ref: examples/metadata/GET-success.json
+    ProcessMessagePostBody:
+      $ref: examples/process_message/POST-body.json
+
+      
