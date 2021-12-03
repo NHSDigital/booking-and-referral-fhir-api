@@ -22,5 +22,14 @@ def errors(NHSD_Service: str = Header(...)):
     if str(NHSD_Service) == "NHS0001-422":
         response = load_example("unprocessable-entity.json")
         status_code = 422
+    if str(NHSD_Service) == "NHS0001-500":
+        response = load_example("server-error.json")
+        status_code = 500
+    if str(NHSD_Service) == "NHS0001-501":
+        response = load_example("not-implemented.json")
+        status_code = 501
+    if str(NHSD_Service) == "NHS0001-503":
+        response = load_example("unavailable.json")
+        status_code = 503
 
     return JSONResponse(response, status_code=status_code)
