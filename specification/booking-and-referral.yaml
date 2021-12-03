@@ -170,21 +170,6 @@ paths:
               $ref: schemas/XCorrelationId.yaml
             X-Request-Id:
               $ref: schemas/XRequestId.yaml 
-        
-        
-        
-        
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                $ref: examples/bad-request.json
-          headers:
-            X-Correlation-Id:
-              $ref: schemas/XCorrelationId.yaml
-            X-Request-Id:
-              $ref: schemas/XRequestId.yaml 
 
   /MessageDefinition:
     parameters:
