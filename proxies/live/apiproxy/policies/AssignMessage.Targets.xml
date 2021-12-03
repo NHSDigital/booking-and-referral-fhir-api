@@ -2,6 +2,6 @@
   <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   <AssignVariable>
     <Name>targets</Name>
-    <Ref>ServiceCallout.response</Ref>
+    <Ref>private.config_raw.content</Ref>
   </AssignVariable>
 </AssignMessage>

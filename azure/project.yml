@@ -1,7 +1,7 @@
 variables:
   service_name: booking-and-referral
   short_service_name: bref
-  service_base_path: booking-and-referral
+  service_base_path: booking-and-referral/FHIR/R4
   product_display_name: Booking and Referral FHIR API
   product_description: This proxy function as a centralized router for bookings and referrals services
   spec_file: booking-and-referral.json
