@@ -1,5 +1,5 @@
 <PopulateCache name='PopulateCache.Targets'>
-  <Source>ServiceCallout.response</Source>
+  <Source>private.config_raw.content</Source>
   <Scope>Application</Scope>
   <CacheKey>
     <KeyFragment>cached_targets</KeyFragment>
