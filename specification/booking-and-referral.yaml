@@ -116,7 +116,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
 
-          
+
   /MessageDefinition:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
