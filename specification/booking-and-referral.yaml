@@ -84,7 +84,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
     get:
       tags:
         - Metadata
@@ -807,13 +807,15 @@ components:
       schema:
         type: string
         example: NHS0001
-    ServiceId_HParam2:
-      name: NHSD-HealthcareService
-      description: Service attributes
+
+    TargetIdentifier_HParam:
+      name: NHSD-Target-Identifier
+      description: The idnetifier of the Target system
       required: true
       in: header
       schema:
-        $ref: schemas/Service.yaml
+        $ref: '#/components/schemas/Identifier'
+
     Token_HParam:
       name: NHSD-Token
       description: Authorisation token
@@ -821,6 +823,7 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/Token'
+
     RequestId_HParam:
       name: X-Request-ID
       description: Message Identifier
@@ -839,6 +842,7 @@ components:
         type: string
         format: uuid
         example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+
   responses:
     4XX-BARS:
       description: |
@@ -864,7 +868,7 @@ components:
         | 422         | REC_UNPROCESSABLE_ENTITY   | Message was not malformed but deemed unprocessable. |         
         | 422         | PROXY_UNPROCESSABLE_ENTITY | Message was not malformed but deemed unprocessable. |         
         | 429         | SEND_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
-        | 429         | REC_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
+        | 429         | REC_TOO_MANY_REQUESTS      | The user has sent too many requests in a given amount of time|
       content:
         application/fhir+json:
           example:
@@ -900,6 +904,24 @@ components:
       $ref: schemas/Capability.yaml
     CorrelationId:
       $ref: schemas/XCorrelationId.yaml
+    HealthcareService:
+      $ref: schemas/HealthcareService.yaml   
+    
+    Identifier:
+      type: object
+      description: Identifier
+      required:
+        - value
+        - system
+      properties:
+        value:
+          type: string
+          example: 'A1001'
+        syatem:
+          type: string
+          example: 'https://fhir.nhs.uk/Id/ods-organization-code'
+
+
     MessageBundle:
       $ref: schemas/MessageBundle.yaml
     MessageDefinition:
@@ -918,6 +940,8 @@ components:
           example: '91122'
         organisation:
           $ref: schemas/Organisation.yaml
+
+
   securitySchemes:
     BasicAuth:
       type: http
