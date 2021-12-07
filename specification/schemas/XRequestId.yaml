@@ -2,5 +2,5 @@ schema:
   type: string
   format: uuid
   example: 11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA
-description: |
-  The X-Request-ID from the request header, if supplied, mirrored back.
+  description: |
+    The X-Request-ID from the request header, if supplied, mirrored back.

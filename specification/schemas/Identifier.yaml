@@ -1,0 +1,13 @@
+title: Identifier
+type: object
+description: Identifier
+required:
+  - value
+  - system
+properties:
+  value:
+    type: string
+    example: 'A1001'
+  system:
+    type: string
+    example: 'https://fhir.nhs.uk/Id/ods-organization-code'    

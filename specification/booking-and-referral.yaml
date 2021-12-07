@@ -121,7 +121,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/ServiceId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
     get:
       tags:
         - Metadata
@@ -147,6 +147,7 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+          
   /$process-message:
     parameters:
       - $ref: '#/components/parameters/ServiceId_HParam'
@@ -178,7 +179,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
               example:
-                $ref: '#components/examples/ProcessMessagePostSuccess'
+                $ref: '#/components/examples/ProcessMessagePostSuccess'
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
@@ -791,14 +792,7 @@ components:
       schema:
         type: string
         example: 485 777 3456
-    ServiceId_QParam:
-      name: serviceIdentifier
-      description: The identifier of a healthcare service
-      required: true
-      in: query
-      schema:
-        type: string
-        example: '123344556677'
+    
     ServiceId_HParam:
       name: NHSD-HealthcareService-ID
       description: The identifier of a healthcare service
@@ -810,7 +804,7 @@ components:
 
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
-      description: The idnetifier of the Target system
+      description: The identifier of the Target system
       required: true
       in: header
       schema:
@@ -871,6 +865,8 @@ components:
         | 429         | REC_TOO_MANY_REQUESTS      | The user has sent too many requests in a given amount of time|
       content:
         application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationOutcome'
           example:
             $ref: examples/400-SEND.json
       headers:
@@ -904,28 +900,17 @@ components:
       $ref: schemas/Capability.yaml
     CorrelationId:
       $ref: schemas/XCorrelationId.yaml
-    HealthcareService:
-      $ref: schemas/HealthcareService.yaml   
-    
+   
     Identifier:
-      type: object
-      description: Identifier
-      required:
-        - value
-        - system
-      properties:
-        value:
-          type: string
-          example: 'A1001'
-        syatem:
-          type: string
-          example: 'https://fhir.nhs.uk/Id/ods-organization-code'
-
+      $ref: schemas/Identifier.yaml
 
     MessageBundle:
       $ref: schemas/MessageBundle.yaml
     MessageDefinition:
       $ref: schemas/MessageDefinition.yaml
+    OperationOutcome:
+      $ref: components/schemas/OperationOutcome.yaml
+    
     RequestId:
       $ref: schemas/XRequestId.yaml
     Token:
@@ -949,10 +934,14 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+      
   examples:
     MetaDataGetSuccess:
       $ref: examples/metadata/GET-success.json
     ProcessMessagePostBody:
       $ref: examples/process_message/POST-body.json
+    ProcessMessagePostSuccess:
+      $ref: examples/process_message/POST-success.json
+      
 
       
