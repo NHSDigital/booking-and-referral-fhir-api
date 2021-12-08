@@ -333,7 +333,7 @@ paths:
           content:
             application/fhir+json:
               example:
-                $ref: examples/appointment/POST-success.txt
+                $ref: examples/appointment/POST-success.json
           headers:
             X-Request-ID:
               description: Message Identifier
@@ -909,7 +909,7 @@ components:
     MessageDefinition:
       $ref: schemas/MessageDefinition.yaml
     OperationOutcome:
-      $ref: components/schemas/OperationOutcome.yaml
+      $ref: components/schemas/OperationalOutcome.yaml
     
     RequestId:
       $ref: schemas/XRequestId.yaml

@@ -1,0 +1,5 @@
+title: OperationalOutcome
+type: object
+properties:
+  id:
+    type: string
