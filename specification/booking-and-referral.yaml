@@ -909,7 +909,7 @@ components:
     MessageDefinition:
       $ref: schemas/MessageDefinition.yaml
     OperationOutcome:
-      $ref: components/schemas/OperationalOutcome.yaml
+      $ref: schemas/OperationalOutcome.yaml
     
     RequestId:
       $ref: schemas/XRequestId.yaml

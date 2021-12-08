@@ -1,5 +1,33 @@
-title: OperationalOutcome
-type: object
-properties:
-  id:
-    type: string
+  type: object
+  description: Operation outcome
+  properties:
+    resourceType:
+      type: string
+      description: FHIR Resource Type.
+      default: OperationOutcome
+    issue:
+      type: array
+      description: List of issues that have occurred.
+      minItems: 1
+      items:
+        type: object
+        required:
+          - severity
+          - code
+        properties:
+          severity:
+            type: string
+            enum: [ fatal, error, warning, information ]
+            description: Severity of the error.
+            example: error
+          code:
+            type: string
+            description: error code.
+            example: invalid
+          details:
+            type: object
+            properties:
+              text:
+                type: string
+                description: detailed information
+                example: NHS number missing
