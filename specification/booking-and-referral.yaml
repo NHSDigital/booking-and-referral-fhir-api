@@ -68,8 +68,10 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/booking-and-referral'
+  - url: 'https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4'
     description: Sandbox Server
+  - url: 'https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4'
+    description: Integration Server
 tags:
   - name: Booking
   - name: Message
@@ -78,7 +80,6 @@ tags:
   - name: Slots
 security:
   - BasicAuth: []
-  - BearerAuth: []
 paths:
   /metadata:
     parameters:
@@ -115,8 +116,6 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
-
-
   /MessageDefinition:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -147,7 +146,6 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
-          
   /$process-message:
     parameters:
       - $ref: '#/components/parameters/ServiceId_HParam'
@@ -286,20 +284,13 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
           headers:
-            X-Request-ID:
-              description: Message Identifier
-              required: true
+            header-0:
               schema:
                 type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-            X-Correlation-ID:
-              description: Message Identifier
-              required: true
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Correlation-Id:
+                $ref: '#/components/schemas/CorrelationId'
+            X-Request-Id:
+                $ref: '#/components/schemas/RequestId'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -335,20 +326,13 @@ paths:
               example:
                 $ref: examples/appointment/POST-success.txt
           headers:
-            X-Request-ID:
-              description: Message Identifier
-              required: true
+            header-0:
               schema:
                 type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-            X-Correlation-ID:
-              description: Message Identifier
-              required: true
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Correlation-Id:
+                $ref: '#/components/schemas/CorrelationId'
+            X-Request-Id:
+                $ref: '#/components/schemas/RequestId'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -374,20 +358,13 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
           headers:
-            X-Request-ID:
-              description: Message Identifier
-              required: true
+            header-0:
               schema:
                 type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-            X-Correlation-ID:
-              description: Message Identifier
-              required: true
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Correlation-Id:
+                $ref: '#/components/schemas/CorrelationId'
+            X-Request-Id:
+                $ref: '#/components/schemas/RequestId'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -417,20 +394,13 @@ paths:
               schema:
                 $ref: schemas/Appointment.yaml
           headers:
-            X-Request-ID:
-              description: Message Identifier
-              required: true
+            header-0:
               schema:
                 type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-            X-Correlation-ID:
-              description: Message Identifier
-              required: true
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Correlation-Id:
+                $ref: '#/components/schemas/CorrelationId'
+            X-Request-Id:
+                $ref: '#/components/schemas/RequestId'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -609,20 +579,13 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
           headers:
-            X-Request-ID:
-              description: Message Identifier
-              required: true
+            header-0:
               schema:
                 type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-            X-Correlation-ID:
-              description: Message Identifier
-              required: true
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Correlation-Id:
+                $ref: '#/components/schemas/CorrelationId'
+            X-Request-Id:
+                $ref: '#/components/schemas/RequestId'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -652,20 +615,13 @@ paths:
               schema:
                 $ref: schemas/ServiceRequest.yaml
           headers:
-            X-Request-ID:
-              description: Message Identifier
-              required: true
+            header-0:
               schema:
                 type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-            X-Correlation-ID:
-              description: Message Identifier
-              required: true
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Correlation-Id:
+                $ref: '#/components/schemas/CorrelationId'
+            X-Request-Id:
+                $ref: '#/components/schemas/RequestId'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -792,7 +748,6 @@ components:
       schema:
         type: string
         example: 485 777 3456
-    
     ServiceId_HParam:
       name: NHSD-HealthcareService-ID
       description: The identifier of a healthcare service
@@ -801,7 +756,6 @@ components:
       schema:
         type: string
         example: NHS0001
-
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system
@@ -809,7 +763,6 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/Identifier'
-
     Token_HParam:
       name: NHSD-Token
       description: Authorisation token
@@ -817,7 +770,6 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/Token'
-
     RequestId_HParam:
       name: X-Request-ID
       description: Message Identifier
@@ -836,7 +788,6 @@ components:
         type: string
         format: uuid
         example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-
   responses:
     4XX-BARS:
       description: |
@@ -888,6 +839,8 @@ components:
         | 503         | PROXY_UNAVAILABLE          | The Proxy was unavailable to service the request. |
       content:
         application/fhir+json:
+          schema:
+            $ref: '#components/schemas/OperationOutcome'
           example:
             $ref: examples/500-REC.json
       headers:
@@ -900,17 +853,14 @@ components:
       $ref: schemas/Capability.yaml
     CorrelationId:
       $ref: schemas/XCorrelationId.yaml
-   
     Identifier:
       $ref: schemas/Identifier.yaml
-
     MessageBundle:
       $ref: schemas/MessageBundle.yaml
     MessageDefinition:
       $ref: schemas/MessageDefinition.yaml
     OperationOutcome:
-      $ref: components/schemas/OperationOutcome.yaml
-    
+      $ref: schemas/OperationOutcome.yaml
     RequestId:
       $ref: schemas/XRequestId.yaml
     Token:
@@ -925,16 +875,10 @@ components:
           example: '91122'
         organisation:
           $ref: schemas/Organisation.yaml
-
-
   securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
-    BearerAuth:
+    OAuth_Token:
       type: http
       scheme: bearer
-      
   examples:
     MetaDataGetSuccess:
       $ref: examples/metadata/GET-success.json
@@ -942,6 +886,3 @@ components:
       $ref: examples/process_message/POST-body.json
     ProcessMessagePostSuccess:
       $ref: examples/process_message/POST-success.json
-      
-
-      
