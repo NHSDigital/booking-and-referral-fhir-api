@@ -10,4 +10,4 @@ properties:
     example: 'A1001'
   system:
     type: string
-    example: 'https://fhir.nhs.uk/Id/ods-organization-code'    
+    example: "https://fhir.nhs.uk/Id/ods-organization-code"
