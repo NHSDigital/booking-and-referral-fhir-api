@@ -90,6 +90,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Metadata
@@ -128,6 +129,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Metadata
@@ -161,6 +163,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     post:
       tags:
         - Message
@@ -180,7 +183,7 @@ paths:
             schema:
               $ref: '#/components/schemas/MessageBundle'
       responses:
-        '200/201':
+        '200':
           description: Success
           content:
             application/fhir+json:
@@ -208,6 +211,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Slots
@@ -308,6 +312,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Booking
@@ -349,6 +354,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Booking
@@ -386,6 +392,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Referral
@@ -426,6 +433,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Referral
@@ -483,6 +491,13 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/TargetIdentifier'
+    RequestingDevice_HParam:
+      name: NHSD-RequestingDevice
+      description: The identifer of the Sending System (to be Base64 encoded).
+      required: false
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingDeviceToken'
     RequestingPerson_HParam:
       name: NHSD-RequestingPerson
       description: The identifer of the Sending Person (to be Base64 encoded).
@@ -492,7 +507,7 @@ components:
         $ref: '#/components/schemas/RequestingPersonToken'
     RequestingOrganisation_HParam:
       name: NHSD-RequestingOrganisation
-      description: The identifer of the Sending system (to be Base64 encoded).
+      description: The identifer of the Sending Organisation (to be Base64 encoded).
       required: true
       in: header
       schema:
@@ -603,6 +618,8 @@ components:
       $ref: schemas/RequestingPractitioner.yaml
     RequestingPersonToken:
       $ref: schemas/RequestingPerson.yaml
+    RequestingDeviceToken:
+      $ref: schemas/RequestingDevice.yaml
   securitySchemes:
     OAuth_Token:
       type: http

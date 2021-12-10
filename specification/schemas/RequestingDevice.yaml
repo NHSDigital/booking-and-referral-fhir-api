@@ -1,8 +1,15 @@
 title: RequestingDevice
 type: object
 description: Requesting device (Base64 encoded).
-required:
-  - requesting_device
+x-examples:
+  example:
+    requesting_device:
+      resourceType: Device
+      identifier:
+        - system: 'https://consumersupplier.com/Id/device-identifier'
+          value: SUPP-APP-1
+      model: Supplier product name
+      version: 1.0.0
 properties:
   requesting_device:
     type: object
@@ -13,14 +20,11 @@ properties:
     properties:
       resourceType:
         type: string
-        example: 'Device'
+        example: Device
       identifier:
         type: array
-        uniqueitems: true
+        uniqueItems: true
         items:
-          required:
-          - system
-          - value
           type: object
           properties:
             system:
@@ -28,19 +32,15 @@ properties:
               example: 'https://consumersupplier.com/Id/device-identifier'
             value:
               type: string
-              example: 'SUPP-APP-1'
+              example: SUPP-APP-1
+          required:
+            - system
+            - value
       model:
         type: string
-        example: 'Supplier product name'
+        example: Supplier product name
       version:
         type: string
-        example: '1.0.0'
-x-examples:
-  example:
-    requesting_device:
-      resourceType: Device
-      identifier:
-        - system: 'https://consumersupplier.com/Id/device-identifier'
-          value: 'SUPP-APP-1'
-      model: 'Supplier product name'
-      version: 1.0.0
+        example: 1.0.0
+required:
+  - requesting_device
