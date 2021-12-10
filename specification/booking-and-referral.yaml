@@ -88,6 +88,8 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     get:
       tags:
         - Metadata
@@ -124,6 +126,8 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     get:
       tags:
         - Metadata
@@ -155,6 +159,8 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     post:
       tags:
         - Message
@@ -200,6 +206,8 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     get:
       tags:
         - Slots
@@ -298,6 +306,8 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     get:
       tags:
         - Booking
@@ -337,6 +347,8 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RegistryId_Param'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     get:
       tags:
         - Booking
@@ -372,6 +384,8 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     get:
       tags:
         - Referral
@@ -410,6 +424,8 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
     get:
       tags:
         - Referral
@@ -468,20 +484,27 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/TargetIdentifier'
+    RequestingPerson_HParam:
+      name: NHSD-RequestingPerson
+      description: The identifer of the Sending Person (to be Base64 encoded).
+      required: false
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingPersonToken'
     RequestingOrganisation_HParam:
       name: NHSD-RequestingOrganisation
-      description: The indentifer of the Sending system (to be Base64 encoded)
+      description: The identifer of the Sending system (to be Base64 encoded).
       required: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingOrganisationToken'
-    Token_HParam:
-      name: NHSD-Token
-      description: Authorisation token
-      required: true
+    RequestingPractitioner_HParam:
+      name: NHSD-RequestingPractitioner
+      description: The identifer of the Sending System User (to be Base64 encoded).
+      required: false
       in: header
       schema:
-        $ref: '#/components/schemas/Token'
+        $ref: '#/components/schemas/RequestingPractitionerToken'
     RequestId_HParam:
       name: X-Request-ID
       description: Message Identifier
@@ -577,18 +600,10 @@ components:
       $ref: schemas/XRequestId.yaml
     RequestingOrganisationToken:
       $ref: schemas/RequestingOrganisation.yaml
-    Token:
-      type: object
-      description: Authorisation token
-      required:
-        - subject
-        - organisation
-      properties:
-        subject:
-          type: string
-          example: '91122'
-        organisation:
-          $ref: schemas/Organisation.yaml
+    RequestingPractitionerToken:
+      $ref: schemas/RequestingPractitioner.yaml
+    RequestingPersonToken:
+      $ref: schemas/RequestingPerson.yaml
   securitySchemes:
     OAuth_Token:
       type: http

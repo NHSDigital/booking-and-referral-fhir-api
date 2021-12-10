@@ -1,0 +1,15 @@
+title: RequestingPerson
+type: object
+properties:
+  requesting_person:
+    type: array
+    uniqueItems: true
+    items:
+      type: object
+      properties:
+        value:
+          type: string
+          example: '12345'
+        system:
+          type: string
+          example: 'urn:oid:1.2.36.146.595.217.0.1'

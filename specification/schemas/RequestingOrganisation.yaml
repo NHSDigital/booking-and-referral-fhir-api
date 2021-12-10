@@ -15,7 +15,7 @@ properties:
         example: Organisation
       identifier:
         type: array
-        uniqueItems: false
+        uniqueItems: true
         items:
           type: object
           properties:
