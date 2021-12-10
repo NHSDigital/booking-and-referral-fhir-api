@@ -180,7 +180,7 @@ paths:
             schema:
               $ref: '#/components/schemas/MessageBundle'
       responses:
-        '200':
+        '200/201':
           description: Success
           content:
             application/fhir+json:
@@ -456,7 +456,6 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
-
 components:
   parameters:
     RegistryId_Param:

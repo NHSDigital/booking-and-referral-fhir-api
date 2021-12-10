@@ -1,11 +1,17 @@
 title: RequestingPerson
 type: object
+description: Requesting Person (Base64 encoded).
+required:
+  - requesting_person
 properties:
   requesting_person:
     type: array
     uniqueItems: true
     items:
       type: object
+      required:
+        - value
+        - system
       properties:
         value:
           type: string

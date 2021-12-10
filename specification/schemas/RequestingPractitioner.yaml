@@ -9,10 +9,11 @@ properties:
     required:
       - identifier
       - name
+      - code
     properties:
       resourceType:
         type: string
-        example: Practitioner
+        example: 'Practitioner'
       identifier:
         type: array
         uniqueItems: true
@@ -44,7 +45,7 @@ properties:
               type: string
               example: 'General Practitioner'
           required:
-            - value
+            - code
             - system
 x-examples:
   example:

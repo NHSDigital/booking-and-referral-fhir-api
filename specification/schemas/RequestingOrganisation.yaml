@@ -12,7 +12,7 @@ properties:
     properties:
       resourceType:
         type: string
-        example: Organisation
+        example: 'Organisation'
       identifier:
         type: array
         uniqueItems: true
