@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from starlette.responses import Response
 from starlette.status import HTTP_200_OK
 from routes import (
+    errors,
     slots,
     appointment,
     metadata,
@@ -20,28 +21,36 @@ app = FastAPI()
 
 @app.exception_handler(RequestValidationError)
 def validation_exception_handler(request, exc):
-    response = load_example("bad-request.json")
 
     if "Appointment" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "registry" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "$process-message" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "meta" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "ServiceRequest" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "Slot" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "DocumentReference" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
     if "MessageDefinition" in str(request.url.path):
         response = load_example("bad-request.json")
+        status_code = 400
 
-    return JSONResponse(response, status_code=400)
+    return JSONResponse(response, status_code=status_code)
 
 
+app.include_router(errors.route)
 app.include_router(slots.route)
 app.include_router(appointment.route)
 app.include_router(metadata.route)
