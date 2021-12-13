@@ -12,7 +12,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_401_unauthorized_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -42,7 +41,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_403_forbidden_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -72,7 +70,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_406_not_acceptable_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -102,7 +99,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_409_conflict_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -132,7 +128,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_422_unprocessable_entity_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -162,7 +157,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_500_server_error_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -192,7 +186,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_501_not_implemented_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -222,7 +215,6 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    @pytest.mark.sandbox
     def test_503_unavailable_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
