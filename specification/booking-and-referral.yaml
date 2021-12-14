@@ -278,8 +278,9 @@ paths:
                 - 'Schedule:actor:Practitioner'
                 - 'Schedule:actor:PractitionerRole'
                 - 'Schedule:actor:HealthcareService'
-                - HealthcareService.providedBy
-                - HealthcareService.location
+                - 'HealthcareService:providedBy'
+                - 'HealthcareService:location'
+                - 'Slot:*'
       responses:
         '200':
           description: Success
@@ -492,28 +493,28 @@ components:
       schema:
         $ref: '#/components/schemas/TargetIdentifier'
     RequestingDevice_HParam:
-      name: NHSD-RequestingDevice
+      name: NHSD-Requesting-Software
       description: The identifer of the Sending System (to be Base64 encoded).
       required: false
       in: header
       schema:
-        $ref: '#/components/schemas/RequestingDeviceToken'
+        $ref: '#/components/schemas/RequestingsoftwareToken'
     RequestingPerson_HParam:
-      name: NHSD-RequestingPerson
+      name: NHSD-Requesting-Person
       description: The identifer of the Sending Person (to be Base64 encoded).
       required: false
       in: header
       schema:
         $ref: '#/components/schemas/RequestingPersonToken'
     RequestingOrganisation_HParam:
-      name: NHSD-RequestingOrganisation
+      name: NHSD-End-User-Organisation
       description: The identifer of the Sending Organisation (to be Base64 encoded).
       required: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingOrganisationToken'
     RequestingPractitioner_HParam:
-      name: NHSD-RequestingPractitioner
+      name: NHSD-Requesting-Practitioner
       description: The identifer of the Sending System User (to be Base64 encoded).
       required: false
       in: header

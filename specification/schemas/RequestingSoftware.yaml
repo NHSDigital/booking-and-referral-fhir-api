@@ -1,6 +1,6 @@
 title: RequestingDevice
 type: object
-description: Requesting device (Base64 encoded).
+description: Requesting Software (Base64 encoded).
 x-examples:
   example:
     requesting_device:
