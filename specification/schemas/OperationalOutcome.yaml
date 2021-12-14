@@ -10,4 +10,4 @@ properties:
         type: array
         items:
           type: string
-          example: "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-OperationalOutcome"
+          example: "https://fhir.nhs.uk/StructureDefinition/BARSOperationalOutcome"
