@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.404PageNotFound">
-    <DisplayName>RaiseFault.404PageNotFound</DisplayName>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.500ProxyBadRequest">
+    <DisplayName>RaiseFault.500ProxyBadRequest</DisplayName>
     <Properties/>
     <FaultResponse>
         <Set>
             <Headers/>
             <Payload contentType="text/plain"/>
-            <StatusCode>404</StatusCode>
-            <ReasonPhrase>Not Found</ReasonPhrase>
+            <StatusCode>500</StatusCode>
+            <ReasonPhrase>Invalid service identifier</ReasonPhrase>
         </Set>
         <AssignVariable>
             <Name>bref.error.code</Name>
@@ -15,11 +15,11 @@
         </AssignVariable>
         <AssignVariable>
             <Name>bref.error.coding.code</Name>
-            <Value>PROXY_NOT_FOUND</Value>
+            <Value>PROXY_BAD_REQUEST</Value>
         </AssignVariable>
         <AssignVariable>
             <Name>bref.error.diagnostics</Name>
-            <Value>The resource was not found within BaRS: (further diagnostics information, error message/error text)</Value>
+            <Value>BaRS was unable to process the request: (further diagnostics information, error message/error text)</Value>
         </AssignVariable>
     </FaultResponse>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
