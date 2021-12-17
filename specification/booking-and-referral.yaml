@@ -80,7 +80,7 @@ tags:
   - name: Referral
   - name: Slots
 security:
-  - BasicAuth: []
+  - OAuth_token: []
 paths:
   /metadata:
     parameters:
