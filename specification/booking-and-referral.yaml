@@ -58,7 +58,7 @@ info:
     - is for formal integration testing
 
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
-  version: 1.0.7
+  version: 1.0.8
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -80,7 +80,7 @@ tags:
   - name: Referral
   - name: Slots
 security:
-  - OAuth_token: []
+  - OAuth_Token: []
 paths:
   /metadata:
     parameters:
