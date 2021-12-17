@@ -1,0 +1,43 @@
+title: RequestingOrganisation
+type: object
+description: Requesting Organisation (Base64 encoded).
+required:
+  - requesting_organisation
+properties:
+  requesting_organisation:
+    type: object
+    required:
+      - identifier
+      - name
+    properties:
+      resourceType:
+        type: string
+        example: 'Organisation'
+      identifier:
+        type: array
+        uniqueItems: true
+        items:
+          type: object
+          properties:
+            value:
+              type: string
+              example: A1001
+            system:
+              type: string
+              example: 'https://fhir.nhs.uk/Id/ods-organization-code'
+          required:
+            - value
+            - system
+      name:
+        type: string
+        example: My service provider name
+## Examples will not show correctly so explicitly defining them for now:
+x-examples:
+  example:
+    requesting_organization:
+      resourceType: Organization
+      identifier:
+        - system: 'https://fhir.nhs.uk/Id/ods-organization-code'
+          value: A1001
+      name: 111 North East Service
+

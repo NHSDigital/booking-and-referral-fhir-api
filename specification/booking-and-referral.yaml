@@ -50,42 +50,47 @@ info:
     ### Environments and testing
     | Environment       | Base URL                                                               |
     | ----------------- | ---------------------------------------------------------------------- |
-    | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`                        |
+    | Sandbox           | `https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4`        | 
+    | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`          |
     | Production        | Not yet available                                                      |
 
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
     - is for formal integration testing
 
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
-
-  version: 1.0.6
+  version: 1.0.8
   title: Booking and Referral API
-  termsOfService: https://developer.nhs.uk/apis/uec-appointments
+  termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
     email: uec.appointmentbooking@nhs.net
-    url: https://developer.nhs.uk/apis/uec-appointments
+    url: 'https://developer.nhs.uk/apis/uec-appointments'
     name: NHS Digital
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 servers:
-  - url: https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4
+  - url: 'https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4'
     description: Sandbox Server
+  - url: 'https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4'
+    description: Integration Server
 tags:
   - name: Booking
-  - name: Events
   - name: Message
   - name: Metadata
   - name: Referral
-  - name: Registry
   - name: Slots
 security:
-  - BasicAuth: []
-  - BearerAuth: []
+  - OAuth_Token: []
 paths:
   /metadata:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam2'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Metadata
@@ -98,56 +103,43 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/Capability.yaml
+                $ref: '#/components/schemas/Capability'
               example:
-                    $ref: examples/metadata/GET-success.json
+                $ref: examples/metadata/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/Capability.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
+                $ref: '#/components/schemas/Capability'
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /MessageDefinition:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam2'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Metadata
-      summary: Get TBC
-      description: Get TBC
+      summary: Get Message Definition
+      description: Get Message Definition
       operationId: getMessageDefinition
       responses:
         '200':
@@ -155,108 +147,92 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/MessageDefinition.yaml
+                $ref: '#/components/schemas/MessageDefinition'
             application/fhir+xml:
               schema:
-                $ref: schemas/MessageDefinition.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
+                $ref: '#/components/schemas/MessageDefinition'
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /$process-message:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam2'
-      - $ref: '#/components/parameters/Token_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     post:
       tags:
         - Message
       summary: Process a message
       description: Process a message
       operationId: processMessage
+      requestBody:
+        description: Message Details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/MessageBundle'
+            example:
+              $ref: examples/process_message/POST-body.json
+          application/fhir+xml:
+            schema:
+              $ref: '#/components/schemas/MessageBundle'
       responses:
         '200':
           description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/MessageBundle.yaml
+                $ref: '#/components/schemas/MessageBundle'
               example:
-                    $ref: examples/process_message/POST-success.json
+                $ref: examples/process_message/POST-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/MessageBundle.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
+                $ref: '#/components/schemas/MessageBundle'
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /Slot:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam2'
-      - $ref: '#/components/parameters/Token_HParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Slots
@@ -264,14 +240,6 @@ paths:
       description: Get slots
       operationId: getSlots
       parameters:
-        - name: healthcareService
-          description: The  service id of the service for which Slots are being requested
-          in: query
-          schema:
-            type: string
-            example: 09a01679-2564-0fb4-5129-aecc81ea2706
-          required: true
-          allowEmptyValue: false
         - name: status
           in: query
           description: Status values that need to be considered for filter
@@ -328,11 +296,12 @@ paths:
               type: string
               enum:
                 - Schedule
-                - Schedule:actor:Practitioner
-                - Schedule:actor:PractitionerRole
-                - Schedule:actor:HealthcareService
-                - HealthcareService.providedBy
-                - HealthcareService.location
+                - 'Schedule:actor:Practitioner'
+                - 'Schedule:actor:PractitionerRole'
+                - 'Schedule:actor:HealthcareService'
+                - 'HealthcareService:providedBy'
+                - 'HealthcareService:location'
+                - 'Slot:*'
       responses:
         '200':
           description: Success
@@ -341,111 +310,36 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
               example:
-                    $ref: examples/slots/GET-success.json
+                $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: schemas/SearchBundle.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/slots/GET-BadRequest.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/slots/GET-BadRequest.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/slots/GET-BadRequest.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/slots/GET-BadRequest.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/slots/GET-BadRequest.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/slots/GET-BadRequest.json
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /Appointment:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam2'
-      - $ref: '#/components/parameters/Token_HParam'
-    post:
-      tags:
-        - Booking
-      summary: Create a booking
-      description: Create a booking
-      operationId: createBooking
-      requestBody:
-        description: Booking Details
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              $ref: schemas/Appointment.yaml
-            example:
-                  $ref: examples/appointment/POST-body.json
-          application/fhir+xml:
-            schema:
-              $ref: schemas/Appointment.yaml
-      responses:
-        '201':
-          description: Success
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/appointment/POST-success.txt
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Booking
@@ -462,51 +356,37 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
               example:
-                    $ref: examples/appointment/GET-success.json
+                $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: schemas/SearchBundle.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-  /Appointment/{id}:
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/Appointment/{id}':
     parameters:
-      - $ref: '#/components/parameters/Id_Param'
-      - $ref: '#/components/parameters/ServiceId_HParam2'
-      - $ref: '#/components/parameters/Token_HParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Booking
@@ -521,266 +401,35 @@ paths:
               schema:
                 $ref: schemas/Appointment.yaml
               example:
-                    $ref: examples/appointment/id/GET-success.json
+                $ref: examples/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: schemas/Appointment.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    patch:
-      tags:
-        - Booking
-      summary: Update a specific booking
-      description: Update a specific booking
-      operationId: patchBooking
-      requestBody:
-        description: Booking Details
-        required: true
-        content:
-          application/json-patch+json:
-            schema:
-              $ref: schemas/Appointment.yaml
-            example:
-                  $ref: examples/appointment/id/PATCH-body.json
-          application/fhir+xml:
-            schema:
-              $ref: schemas/Appointment.yaml
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    put:
-      tags:
-        - Booking
-      summary: Update a specific booking
-      description: Update a specific booking
-      operationId: putBooking
-      requestBody:
-        description: Booking Details
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              $ref: schemas/Appointment.yaml
-            example:
-                  $ref: examples/appointment/id/PUT-body.json
-          application/fhir+xml:
-            schema:
-              $ref: schemas/Appointment.yaml
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    delete:
-      tags:
-        - Booking
-      summary: Delete a specific booking
-      description: Delete a specific booking
-      operationId: deleteBooking
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /ServiceRequest:
     parameters:
-      - $ref: '#/components/parameters/ServiceId_HParam2'
-      - $ref: '#/components/parameters/Token_HParam'
-    post:
-      tags:
-        - Referral
-      summary: Create a referral
-      description: Create a referral
-      operationId: createReferral
-      requestBody:
-        description: Referral Details
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              $ref: schemas/ServiceRequest.yaml
-            example:
-                  $ref: examples/service_request/POST-body.json
-          application/fhir+xml:
-            schema:
-              $ref: schemas/ServiceRequest.yaml
-      responses:
-        '201':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Referral
@@ -797,51 +446,36 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
               example:
-                    $ref: examples/service_request/GET-success.json
+                $ref: examples/service_request/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: schemas/SearchBundle.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-  /ServiceRequest/{id}:
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/ServiceRequest/{id}':
     parameters:
-      - $ref: '#/components/parameters/Id_Param'
-      - $ref: '#/components/parameters/ServiceId_HParam2'
-      - $ref: '#/components/parameters/Token_HParam'
+      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingPerson_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
         - Referral
@@ -856,475 +490,30 @@ paths:
               schema:
                 $ref: schemas/ServiceRequest.yaml
               example:
-                    $ref: examples/service_request/id/GET-success.json
+                $ref: examples/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: schemas/ServiceRequest.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    patch:
-      tags:
-        - Referral
-      summary: Update a specific referral
-      description: Update a specific referral
-      operationId: patchReferral
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json-patch+json:
+          headers:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
               schema:
-                $ref: schemas/ServiceRequest.yaml
-              example:
-                    $ref: examples/service_request/id/PATCH-success.json
-            application/fhir+xml:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
               schema:
-                $ref: schemas/ServiceRequest.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    put:
-      tags:
-        - Referral
-      summary: Update a specific referral
-      description: Update a specific referral
-      operationId: putReferral
-      responses:
-        '200':
-          description: Success
-          content:
-            application/fhir+json:
-              schema:
-                $ref: schemas/ServiceRequest.yaml
-              example:
-                    $ref: examples/service_request/id/PUT-success.json
-            application/fhir+xml:
-              schema:
-                $ref: schemas/ServiceRequest.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    delete:
-      tags:
-        - Referral
-      summary: Delete a specific referral
-      description: Delete a specific referral
-      operationId: deleteReferral
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-  /DocumentReference:
-    post:
-      tags:
-        - Registry
-      summary: Create a registry entry
-      description: Create a registry entry
-      operationId: createRegistryEntry
-      requestBody:
-        description: Regisrty entry details
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              $ref: schemas/DocumentReference.yaml
-            example:
-                  $ref: examples/document_reference/POST-body.json
-          application/fhir+xml:
-            schema:
-              $ref: schemas/DocumentReference.yaml
-      responses:
-        '201':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    get:
-      tags:
-        - Registry
-      summary: Get entries for a patient
-      description: Get entries for a patient
-      operationId: getRegistryByPatient
-      parameters:
-        - $ref: '#/components/parameters/PatientId_QParam'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/fhir+json:
-              schema:
-                $ref: schemas/SearchBundle.yaml
-              example:
-                    $ref: examples/document_reference/GET-success.json
-            application/fhir+xml:
-              schema:
-                $ref: schemas/SearchBundle.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-  /DocumentReference/{id}:
-    parameters:
-      - $ref: '#/components/parameters/Id_Param'
-    get:
-      tags:
-        - Registry
-      summary: Get a specific registry entry
-      description: Get a specific registry entry
-      operationId: getRegistry
-      responses:
-        '200':
-          description: Success
-          content:
-            application/fhir+json:
-              schema:
-                $ref: schemas/DocumentReference.yaml
-              example:
-                    $ref: examples/document_reference/id/GET-success.json
-            application/fhir+xml:
-              schema:
-                $ref: schemas/DocumentReference.yaml
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    put:
-      tags:
-        - Registry
-      summary: Update a specific registry entry
-      description: Update a specific regisrty entry
-      operationId: putRegistry
-      requestBody:
-        description: Registry Entry
-        required: true
-        content:
-          application/fhir+json:
-            schema:
-              $ref: schemas/DocumentReference.yaml
-            example:
-                  $ref: examples/document_reference/id/PUT-body.json
-          application/fhir+xml:
-            schema:
-              $ref: schemas/DocumentReference.yaml
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-    delete:
-      tags:
-        - Registry
-      summary: Delete a specific registry entry
-      description: Delete a specific registry entry
-      operationId: deleteRegistry
-      responses:
-        '200':
-          description: Success
-        '400':
-          description: Illegal input for operation
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '401':
-          description: Unauthorized access
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '403':
-          description: Forbidden
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '404':
-          description: Entity Not Found
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '405':
-          description: Method Not Allowed
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
-        '500':
-          description: Server Error
-          content:
-            application/fhir+json:
-              example:
-                    $ref: examples/bad-request.json
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
 components:
   parameters:
-    Id_Param:
+    RegistryId_Param:
       name: id
       description: The identifier of the registry object.
       in: path
@@ -1342,56 +531,155 @@ components:
       schema:
         type: string
         example: 485 777 3456
-    ServiceId_QParam:
-      name: serviceIdentifier
-      description: The identifier of a healthcare service
+    TargetIdentifier_HParam:
+      name: NHSD-Target-Identifier
+      description: The identifier of the Target system
       required: true
-      in: query
+      in: header
       schema:
-        type: string
-        example: 123344556677
-    ServiceId_HParam2:
-      name: NHSD-Service
-      description: The identifier of a healthcare service
+        $ref: '#/components/schemas/TargetIdentifier'
+    RequestingDevice_HParam:
+      name: NHSD-Requesting-Software
+      description: The identifer of the Sending System (to be Base64 encoded).
+      required: false
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingSoftwareToken'
+    RequestingPerson_HParam:
+      name: NHSD-Requesting-Person
+      description: The identifer of the Sending Person (to be Base64 encoded).
+      required: false
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingPersonToken'
+    RequestingOrganisation_HParam:
+      name: NHSD-End-User-Organisation
+      description: The identifer of the Sending Organisation (to be Base64 encoded).
+      required: true
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingOrganisationToken'
+    RequestingPractitioner_HParam:
+      name: NHSD-Requesting-Practitioner
+      description: The identifer of the Sending System User (to be Base64 encoded).
+      required: false
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingPractitionerToken'
+    RequestId_HParam:
+      name: X-Request-ID
+      description: The X-Request-ID from the request header, if supplied, mirrored back.
       required: true
       in: header
       schema:
         type: string
-        example: 'NHS0001'
-    ServiceId_HParam:
-      name: NHSD-Service
-      description: Service attributes
+        format: uuid
+        example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    CorrelationId_HParam:
+      name: X-Correlation-ID
+      description: The X-Correlation-ID from the request header, if supplied, mirrored back.
       required: true
       in: header
       schema:
-        $ref: schemas/Service.yaml
-    Token_HParam:
-      name: NHSD-Token
-      description: Authorisation token
-      required: true
-      in: header
-      schema:
-        $ref: '#/components/schemas/Token'
+        type: string
+        format: uuid
+        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+  responses:
+    4XX-BARS:
+      description: |
+        An error occurred as follows:
+        | HTTP status | Error code                 | Description |
+        | ----------- | -------------------------- | --------------------------------------------- |
+        | 400         | SEND_BAD_REQUEST           | The API was unable to process the request. |
+        | 400         | REC_BAD_REQUEST            | The Receiver has responded stating the message was malformed. |
+        | 401         | SEND_UNAUTHORIZED          | The API deemed you unauthorized to make this request. |
+        | 401         | REC_UNAUTHORIZED           | The receiver deemed you unauthorized to make request. |
+        | 403         | SEND_FORBIDDEN             | Missing or Expired Token. |
+        | 404         | PROXY_NOT_FOUND            | No related people exist for given NHS number. |
+        | 404         | REC_NOT_FOUND              | Patient record for given NHS number has been invalidated and not superseded by another NHS number. |
+        | 405         | SEND_METHOD_NOT_ALLOWED    | HTTP Verb is not correct for this scenario.|
+        | 405         | REC_METHOD_NOT_ALLOWED     | Receiver does not allow this.|
+        | 405         | PROXY_METHOD_NOT_ALLOWED   | Proxy does not allow this.|
+        | 406         | SEND_NOT_ACCEPTABLE        | Senders message had an incorrect content type defined for a response.|
+        | 408         | REC_TIMEOUT                | The downstream domain processing has not completed within the configured timeout period. |
+        | 409         | SEND_CONFLICT              |  |
+        | 409         | REC_CONFLICT               |  |
+        | 409         | PROXY_CONFLICT             |  |
+        | 422         | SEND_UNPROCESSABLE_ENTITY  | Message was not malformed but deemed unprocessable. |
+        | 422         | REC_UNPROCESSABLE_ENTITY   | Message was not malformed but deemed unprocessable. |         
+        | 422         | PROXY_UNPROCESSABLE_ENTITY | Message was not malformed but deemed unprocessable. |         
+        | 429         | SEND_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
+        | 429         | REC_TOO_MANY_REQUESTS      | The user has sent too many requests in a given amount of time|
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationalOutcome'
+          example:
+            $ref: examples/400-SEND.json
+      headers:
+        X-Correlation-Id:
+          description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: The X-Request-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    5XX-BARS:
+      description: |
+        An error occurred as follows:
+        | HTTP status | Error code                 | Description |
+        | ----------- | -------------------------- | --------------------------------------------- |
+        | 500         | REC_SERVER_ERROR           | The receiver server has encountered an Error processing the request. |
+        | 500         | PROXY_SERVER_ERROR         | Proxy Error. |
+        | 501         | SEND_NOT_IMPLEMENTED       | The Request was not recognized. |
+        | 501         | REC_NOT_IMPLEMENTED        | The Receiver did not recognize the request. |
+        | 501         | PROXY_NOT_IMPLEMENTED      | The Proxy did not recognize the request. |
+        | 503         | REC_UNAVAILABLE            | The Receiver was unavailable to service the request.|
+        | 503         | PROXY_UNAVAILABLE          | The Proxy was unavailable to service the request. |
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationalOutcome'
+          example:
+            $ref: examples/500-REC.json
+      headers:
+        X-Correlation-Id:
+          description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: The X-Request-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
   schemas:
-    Token:
-      type: object
-      description: Authorisation token
-      required:
-        - subject
-        - organisation
-      properties:
-        subject:
-          type: string
-          example: 91122
-        organisation:
-          $ref: schemas/Organisation.yaml
-
-
-
+    Capability:
+      $ref: schemas/Capability.yaml
+    TargetIdentifier:
+      $ref: schemas/TargetIdentifier.yaml
+    MessageBundle:
+      $ref: schemas/MessageBundle.yaml
+    MessageDefinition:
+      $ref: schemas/MessageDefinition.yaml
+    OperationalOutcome:
+      $ref: schemas/OperationalOutcome.yaml
+    RequestingOrganisationToken:
+      $ref: schemas/RequestingOrganisation.yaml
+    RequestingPractitionerToken:
+      $ref: schemas/RequestingPractitioner.yaml
+    RequestingPersonToken:
+      $ref: schemas/RequestingPerson.yaml
+    RequestingSoftwareToken:
+      $ref: schemas/RequestingSoftware.yaml
   securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
-    BearerAuth:
+    OAuth_Token:
       type: http
       scheme: bearer

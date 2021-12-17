@@ -2,7 +2,7 @@
   "resourceType": "CapabilityStatement",
   "meta": {
     "profile": [
-      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-CapabilityStatement"
+      "https://fhir.nhs.uk/StructureDefinition/BARSMessageDefinition-ServiceRequest-Response"
     ]
   },
   "fhirVersion": "4.0.1",

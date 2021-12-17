@@ -2,7 +2,7 @@ type: object
 properties:
   resourceType:
     type: string
-    example: "Bundle"
+    example: "OperationalOutcome"
   meta:
     type: object
     properties:
@@ -10,7 +10,4 @@ properties:
         type: array
         items:
           type: string
-          example: "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle"
-      type:
-        type: string
-        example: "message"
+          example: "https://fhir.nhs.uk/StructureDefinition/BARSOperationalOutcome"

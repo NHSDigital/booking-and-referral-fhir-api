@@ -1,0 +1,64 @@
+title: RequestingPractitioner
+type: object
+description: Requesting Practitioner (Base64 encoded).
+required:
+  - requesting_practitioner
+properties:
+  requesting_Practitioner:
+    type: object
+    required:
+      - identifier
+      - name
+      - code
+    properties:
+      resourceType:
+        type: string
+        example: 'Practitioner'
+      identifier:
+        type: array
+        uniqueItems: true
+        items:
+          type: object
+          properties:
+            value:
+              type: string
+              example: '100334993514'
+            system:
+              type: string
+              example: 'https://fhir.nhs.uk/Id/sds-role-profile-id'
+          required:
+            - value
+            - system
+      code:
+        type: array
+        uniqueItems: true
+        items:
+          type: object
+          properties:
+            code:
+              type: string
+              example: '62247001'
+            system:
+              type: string
+              example: 'http://snomed.info/sct'
+            display:
+              type: string
+              example: 'General Practitioner'
+          required:
+            - code
+            - system
+x-examples:
+  example:
+    requesting_organization:
+      resourceType: PractitionerRole
+      identifier:
+        - system: 'https://fhir.nhs.uk/Id/sds-role-profile-id'
+          value: '100334993514'
+      code:
+        - system: 'http://snomed.info/sct'
+          code: '62247001'
+          display: 'General Practitioner'
+
+
+
+
