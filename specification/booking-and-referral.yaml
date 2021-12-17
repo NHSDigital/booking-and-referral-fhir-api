@@ -105,18 +105,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/Capability'
               example:
-                $ref: '#/components/examples/MetaDataGetSuccess'
+                $ref: examples/metadata/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Capability'
           headers:
-            header-0:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
               schema:
                 type: string
-            X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -148,9 +153,17 @@ paths:
                 $ref: '#/components/schemas/MessageDefinition'
           headers:
             X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -178,7 +191,7 @@ paths:
             schema:
               $ref: '#/components/schemas/MessageBundle'
             example:
-              $ref: '#/components/examples/ProcessMessagePostBody'
+              $ref: examples/process_message/POST-body.json
           application/fhir+xml:
             schema:
               $ref: '#/components/schemas/MessageBundle'
@@ -190,15 +203,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
               example:
-                $ref: '#/components/examples/ProcessMessagePostSuccess'
+                $ref: examples/process_message/POST-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
           headers:
             X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -294,13 +315,18 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
           headers:
-            header-0:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
               schema:
                 type: string
-            X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -335,13 +361,18 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
           headers:
-            header-0:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
               schema:
                 type: string
-            X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -375,13 +406,18 @@ paths:
               schema:
                 $ref: schemas/Appointment.yaml
           headers:
-            header-0:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
               schema:
                 type: string
-            X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -415,13 +451,18 @@ paths:
               schema:
                 $ref: schemas/SearchBundle.yaml
           headers:
-            header-0:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
               schema:
                 type: string
-            X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -454,13 +495,18 @@ paths:
               schema:
                 $ref: schemas/ServiceRequest.yaml
           headers:
-            header-0:
+            X-Correlation-Id:
+              description: The X-Correlation-ID from the request header, if supplied, mirrored back.
               schema:
                 type: string
-            X-Correlation-Id:
-              $ref: '#/components/schemas/CorrelationId'
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              $ref: '#/components/schemas/RequestId'
+              description: The X-Request-ID from the request header, if supplied, mirrored back.
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -522,7 +568,7 @@ components:
         $ref: '#/components/schemas/RequestingPractitionerToken'
     RequestId_HParam:
       name: X-Request-ID
-      description: Message Identifier
+      description: The X-Request-ID from the request header, if supplied, mirrored back.
       required: true
       in: header
       schema:
@@ -531,7 +577,7 @@ components:
         example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     CorrelationId_HParam:
       name: X-Correlation-ID
-      description: Message Identifier
+      description: The X-Correlation-ID from the request header, if supplied, mirrored back.
       required: true
       in: header
       schema:
@@ -572,9 +618,17 @@ components:
             $ref: examples/400-SEND.json
       headers:
         X-Correlation-Id:
-          $ref: schemas/XCorrelationId.yaml
+          description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
         X-Request-Id:
-          $ref: schemas/XRequestId.yaml
+          description: The X-Request-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     5XX-BARS:
       description: |
         An error occurred as follows:
@@ -595,14 +649,20 @@ components:
             $ref: examples/500-REC.json
       headers:
         X-Correlation-Id:
-          $ref: schemas/XCorrelationId.yaml
+          description: The X-Correlation-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
         X-Request-Id:
-          $ref: schemas/XRequestId.yaml
+          description: The X-Request-ID from the request header, if supplied, mirrored back.
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
   schemas:
     Capability:
       $ref: schemas/Capability.yaml
-    CorrelationId:
-      $ref: schemas/XCorrelationId.yaml
     TargetIdentifier:
       $ref: schemas/TargetIdentifier.yaml
     MessageBundle:
@@ -611,8 +671,6 @@ components:
       $ref: schemas/MessageDefinition.yaml
     OperationalOutcome:
       $ref: schemas/OperationalOutcome.yaml
-    RequestId:
-      $ref: schemas/XRequestId.yaml
     RequestingOrganisationToken:
       $ref: schemas/RequestingOrganisation.yaml
     RequestingPractitionerToken:
@@ -625,10 +683,3 @@ components:
     OAuth_Token:
       type: http
       scheme: bearer
-  examples:
-    MetaDataGetSuccess:
-      $ref: examples/metadata/GET-success.json
-    ProcessMessagePostBody:
-      $ref: examples/process_message/POST-body.json
-    ProcessMessagePostSuccess:
-      $ref: examples/process_message/POST-success.json
