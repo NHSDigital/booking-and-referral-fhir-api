@@ -25,6 +25,7 @@
       </Step>
       <Step>
           <Name>Javascript.UnpackVars</Name>
+          <Condition>targets != null</Condition>
       </Step>
       <Step>
           <Name>Javascript.CheckTargets</Name>
@@ -41,6 +42,9 @@
       <Step>
           <Name>AssignMessage.Targets</Name>
           <Condition>targets = null or idNotFound = false</Condition>
+      </Step>
+      <Step>
+          <Name>Javascript.UnpackVars</Name>
       </Step>
        <Step>
           <Name>Javascript.SetTargetUrl</Name>
