@@ -24,21 +24,29 @@
           <Name>LookupCache.Targets</Name>
       </Step>
       <Step>
+          <Name>Javascript.UnpackVars</Name>
+          <Condition>targets != null</Condition>
+      </Step>
+      <Step>
+          <Name>Javascript.CheckTargets</Name>
+          <Condition>targets != null</Condition>
+      </Step>
+      <Step>
           <Name>ServiceCallout.GetTargetsKvm</Name>
-          <Condition>targets = null</Condition>
+          <Condition>targets = null or idNotFound = true</Condition>
       </Step>
       <Step>
           <Name>PopulateCache.Targets</Name>
-          <Condition>targets = null</Condition>
+          <Condition>targets = null or idNotFound = true</Condition>
       </Step>
       <Step>
           <Name>AssignMessage.Targets</Name>
-          <Condition>targets = null</Condition>
+          <Condition>targets = null or idNotFound = true</Condition>
       </Step>
       <Step>
           <Name>Javascript.UnpackVars</Name>
       </Step>
-      <Step>
+       <Step>
           <Name>Javascript.SetTargetUrl</Name>
       </Step>
       <Step>
