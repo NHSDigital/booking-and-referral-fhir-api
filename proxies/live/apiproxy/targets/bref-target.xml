@@ -33,15 +33,15 @@
       </Step>
       <Step>
           <Name>ServiceCallout.GetTargetsKvm</Name>
-          <Condition>targets = null or idNotFound = false</Condition>
+          <Condition>targets = null or idNotFound = true</Condition>
       </Step>
       <Step>
           <Name>PopulateCache.Targets</Name>
-          <Condition>targets = null or idNotFound = false</Condition>
+          <Condition>targets = null or idNotFound = true</Condition>
       </Step>
       <Step>
           <Name>AssignMessage.Targets</Name>
-          <Condition>targets = null or idNotFound = false</Condition>
+          <Condition>targets = null or idNotFound = true</Condition>
       </Step>
       <Step>
           <Name>Javascript.UnpackVars</Name>
