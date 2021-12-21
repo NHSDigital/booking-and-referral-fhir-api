@@ -75,6 +75,7 @@ servers:
     description: Integration Server
 tags:
   - name: Booking
+  - name: Events
   - name: Message
   - name: Metadata
   - name: Referral
@@ -382,7 +383,7 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
-      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/Id_Param'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
@@ -469,7 +470,7 @@ paths:
           $ref: '#/components/responses/5XX-BARS'
   '/ServiceRequest/{id}':
     parameters:
-      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/Id_Param'
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
@@ -511,9 +512,102 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+
+  /Subscription:
+    parameters:
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+    post:
+      tags:
+        - Events
+      summary: Create a subscription
+      description: Create a subscription
+      operationId: createSubscription
+      requestBody:
+        description: Subscriber Details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+          application/fhir+xml:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+
+      responses:
+        '201':
+          $ref: '#/components/responses/201'  
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+
+  /Subscription/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id_Param'
+    get:
+      tags:
+        - Events
+      summary: Get a subscription
+      description: Get a subscription
+      operationId: getSubscription
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'  
+    
+    delete:
+      tags:
+        - Events
+      summary: Delete a subscription
+      description: Delete a subscription
+      operationId: deleteSubscription
+      responses:
+        '201':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'  
+
+  /Event:
+    post:
+      tags:
+        - Events
+      summary: Create an event
+      description: Create an event
+      operationId: createEvent
+      requestBody:
+        description: Event details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/Event'
+          application/fhir+xml:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '201':
+          $ref: '#/components/responses/201'  
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'    
+
+
 components:
   parameters:
-    RegistryId_Param:
+    Id_Param:
       name: id
       description: The identifier of the registry object.
       in: path
@@ -523,6 +617,8 @@ components:
         example: c3f6145e-1a26-4345-b3f2-dccbcba62049
       required: true
       allowEmptyValue: false
+
+
     PatientId_QParam:
       name: patientIdentifier
       description: The identifier of a patient.
@@ -585,6 +681,22 @@ components:
         format: uuid
         example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
   responses:
+    '201':
+      description: Success.
+      content:
+        application/json:
+          schema:
+            type: string
+            format: uuid
+            description: UUID of the created resource
+            example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+        application/fhir+xml:
+          schema:
+            type: string
+            format: uuid
+            description: UUID of the created resource
+            example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+
     4XX-BARS:
       description: |
         An error occurred as follows:
@@ -661,8 +773,12 @@ components:
             format: uuid
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
   schemas:
+    Appointment:
+      $ref: schemas/Appointment.yaml
     Capability:
       $ref: schemas/Capability.yaml
+    Event:
+      $ref: schemas/Event.yaml
     TargetIdentifier:
       $ref: schemas/TargetIdentifier.yaml
     MessageBundle:
@@ -679,6 +795,10 @@ components:
       $ref: schemas/RequestingPerson.yaml
     RequestingSoftwareToken:
       $ref: schemas/RequestingSoftware.yaml
+    ServiceRequest:
+      $ref: schemas/ServiceRequest.yaml
+    Subscription:
+      $ref: schemas/Subscription.yaml
   securitySchemes:
     OAuth_Token:
       type: http

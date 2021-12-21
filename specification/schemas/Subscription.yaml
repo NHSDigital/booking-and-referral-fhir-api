@@ -1,0 +1,12 @@
+title: Subscription
+type: object
+properties:
+  resourceType:
+    type: string
+    example: "Subscription"
+  meta:
+    type: object
+    properties:
+      profile:
+        type: string
+        example: "https://www.hl7.org/fhir/subscription"

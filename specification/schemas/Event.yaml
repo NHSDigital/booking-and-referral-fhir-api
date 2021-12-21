@@ -1,0 +1,22 @@
+title: Event
+type: object
+required:
+  - eventType
+  - eventSubject
+  - eventTimeStamp
+properties:
+  eventType:
+  type: string
+  enum: 
+    - CREATE
+    - SUPERCEED
+    - UPDATE
+    - DELETE
+  eventSubject:
+    oneOf:
+      - $ref: 'Appointment.yaml'
+      - $ref: 'ServiceRequest.yaml'
+  eventTimeStamp:
+    type: string
+    format: datetime
+    example : "2021-07-27T15:30:00.000Z"
