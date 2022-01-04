@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     ## Overview
-    Use this API to redirect requests to the appropriate backend based on an identifier header.
+    Use this API to send booking and referral information between NHS service providers.
 
     You can:
       * Get a specific booking
@@ -15,10 +15,10 @@ info:
       * Get slots
 
     The following describes the end-to-end process:
-    1. Send a request from your sender application to the Booking and Referrals API, along with a service identifier header.
-    2. The Booking and Referrals API redirects the request to the service associated with the service identifier header.
-    3. The target backend handles the request and sends a response back to the API.
-    4. The API returns the response to your sender application.
+    1. Send a request from your sender application to this API, along with a service identifier header.
+    2. This API redirects the request to the service associated with the service identifier header.
+    3. The target backend handles the request and sends a response back to this API.
+    4. This API returns the response to your sender application.
 
     ## Who can use this API
     This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
