@@ -1,0 +1,47 @@
+parameters:
+  - name: terraform_directory
+    type: string
+    default: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform
+  - name: module
+    type: string
+    values: [
+      test
+    ]
+  - name: command
+    type: string
+    values: [
+      init,
+      plan,
+      apply
+    ]
+  - name: vars
+    type: string
+  - name: version
+    type: string
+    default: 0.13.6
+  - name: save_output
+    type: boolean
+    default: false
+
+steps:
+
+  - bash: |
+      tfenv use ${{ parameters.version }}
+
+    displayName: setup terraform
+
+  - bash: |
+      /home/agent/.tfenv/bin/terraform ${{ parameters.command }} \
+      -input=false \
+      ${{ parameters.vars }}
+
+    workingDirectory: ${{ parameters.terraform_directory }}/${{ parameters.module }}
+    displayName: Running terraform ${{ parameters.command }} for ${{ parameters.module }} module
+
+  - bash: |
+      /home/agent/.tfenv/bin/terraform output -json > $(Agent.TempDirectory)/${{ parameters.module }}_terraform_output.json
+      echo 'Saved terraform output to $(Agent.TempDirectory)/${{ parameters.module }}_terraform_output.json'
+
+    workingDirectory: ${{ parameters.terraform_directory }}/${{ parameters.module }}
+    condition: and(eq('${{ parameters.save_output }}', true), eq('${{ parameters.command }}', 'apply'))
+    displayName: Saving output for ${{ parameters.module }} ${{ parameters.command }}

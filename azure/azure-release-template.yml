@@ -1,0 +1,67 @@
+parameters:
+  - name: service_name
+    type: string
+  - name: short_service_name
+    type: string
+  - name: service_base_path
+    type: string
+  - name: apigee_deployments
+    type: object
+  - name: enable_status_monitoring
+    type: boolean
+
+extends:
+  template: azure/common/apigee-deployment.yml@common
+  parameters:
+    service_name: $(SERVICE_NAME)
+    short_service_name: ${{ parameters.short_service_name }}
+    service_base_path: ${{ parameters.service_base_path }}
+    enable_status_monitoring: ${{ parameters.enable_status_monitoring }}
+    apigee_deployments: ${{ parameters.apigee_deployments }}
+    pre_template:
+
+      - bash: |
+          account_lookup=dev
+          account_alias=ptl
+
+          echo "##vso[task.setvariable variable=PIPELINE_PROFILE]bars-${account_lookup}-deploy"
+          echo "##vso[task.setvariable variable=PIPELINE_ACCOUNT_ALIAS]${account_alias}"
+
+          account_id="$(aws ssm get-parameter --name /account-ids/bars/${account_lookup} --query Parameter.Value --output text --region eu-west-2)"
+          echo "##vso[task.setvariable variable=PIPELINE_AWS_ROLE]arn:aws:iam::${account_id}:role/DevOps"
+
+        displayName: Get role for environment
+
+      - template: azure/components/aws-assume-role.yml@common
+        parameters:
+          role: $(PIPELINE_AWS_ROLE)
+          profile: $(PIPELINE_PROFILE)
+
+      - bash: |
+          echo "##vso[task.setvariable variable=AWS_DEFAULT_REGION]eu-west-2"
+
+        displayName: Set AWS default region
+
+      # Environment terraform deploy
+      - template: run-terraform.yml
+        parameters:
+          command: init
+          module: test
+          vars: |
+            -backend-config="profile=$(PIPELINE_PROFILE)"
+
+      - template: run-terraform.yml
+        parameters:
+          command: plan
+          module: test
+          vars: |
+            -var="aws-profile=$(PIPELINE_PROFILE)" \
+            -var="environment-name=$(APIGEE_ENVIRONMENT)"
+            -out=test.tfplan
+
+      - template: run-terraform.yml
+        parameters:
+          command: apply
+          module: test
+          vars: test.tfplan
+          save_output: true
