@@ -24,11 +24,11 @@ extends:
           account_lookup=dev
           account_alias=ptl
 
-          echo "##vso[task.setvariable variable=PIPELINE_PROFILE]bars-${account_lookup}-deploy"
+          echo "##vso[task.setvariable variable=PIPELINE_PROFILE]nhsd-identities-${account_lookup}-deploy"
           echo "##vso[task.setvariable variable=PIPELINE_ACCOUNT_ALIAS]${account_alias}"
 
-          account_id="$(aws ssm get-parameter --name /account-ids/bars/${account_lookup} --query Parameter.Value --output text --region eu-west-2)"
-          echo "##vso[task.setvariable variable=PIPELINE_AWS_ROLE]arn:aws:iam::${account_id}:role/DevOps"
+          account_id="$(aws ssm get-parameter --name /account-ids/nhsd-identities/${account_lookup} --query Parameter.Value --output text --region eu-west-2)"
+          echo "##vso[task.setvariable variable=PIPELINE_AWS_ROLE]arn:aws:iam::${account_id}:role/NHSDAdminRole"
 
         displayName: Get role for environment
 
