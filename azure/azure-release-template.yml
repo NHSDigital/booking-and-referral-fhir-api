@@ -21,7 +21,7 @@ extends:
     pre_template:
 
       - bash: |
-          account_lookup=dev
+          account_lookup=APIM-PTL-DEV
           account_alias=ptl
 
           echo "##vso[task.setvariable variable=PIPELINE_PROFILE]nhsd-identities-${account_lookup}-deploy"
