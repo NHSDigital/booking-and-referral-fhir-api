@@ -38,7 +38,7 @@ info:
     This API uses HTTP POST to submit data.
 
     The data payload conforms to the [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/api-technologies-at-nhs-digital#fhir) global standard for health care data exchange.
-    Specifically, it is aligned with [FHIR UK Core](https://digital.nhs.uk/services/fhir-uk-core), which is built on FHIR Release 4, or [FHIR GP Connect](https://digital.nhs.uk/services/gp-connect), which is built on FHIR STU3.
+    Specifically, it is aligned with [FHIR UK Core](https://digital.nhs.uk/services/fhir-uk-core), which is built on FHIR Release 4.
 
     ## Network access
     This API is available on the internet.
@@ -70,7 +70,6 @@ info:
 
     ## Onboarding
     Details on the onboarding process can be found [here](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#security-and-authorisation).
-
   version: 1.0.8
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
@@ -124,13 +123,13 @@ paths:
                 $ref: '#/components/schemas/Capability'
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -166,13 +165,13 @@ paths:
                 $ref: '#/components/schemas/MessageDefinition'
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -222,13 +221,13 @@ paths:
                 $ref: '#/components/schemas/MessageBundle'
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -329,13 +328,13 @@ paths:
                 $ref: schemas/SearchBundle.yaml
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -375,13 +374,13 @@ paths:
                 $ref: schemas/SearchBundle.yaml
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -420,13 +419,13 @@ paths:
                 $ref: schemas/Appointment.yaml
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -465,13 +464,13 @@ paths:
                 $ref: schemas/SearchBundle.yaml
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -509,13 +508,13 @@ paths:
                 $ref: schemas/ServiceRequest.yaml
           headers:
             X-Correlation-Id:
-              description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
                 example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
             X-Request-Id:
-              description: The X-Request-Id from the request header, if supplied, mirrored back.
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
               schema:
                 type: string
                 format: uuid
@@ -546,7 +545,7 @@ components:
         example: 485 777 3456
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
-      description: The identifier of the Target system
+      description: The identifier of the Target system (to be Base64 encoded).
       required: true
       in: header
       schema:
@@ -581,7 +580,7 @@ components:
         $ref: '#/components/schemas/RequestingPractitionerToken'
     RequestId_HParam:
       name: X-Request-Id
-      description: The X-Request-Id from the request header, if supplied, mirrored back.
+      description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
       required: true
       in: header
       schema:
@@ -590,7 +589,7 @@ components:
         example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     CorrelationId_HParam:
       name: X-Correlation-Id
-      description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+      description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
       required: true
       in: header
       schema:
@@ -632,13 +631,13 @@ components:
             $ref: examples/400-SEND.json
       headers:
         X-Correlation-Id:
-          description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
           schema:
             type: string
             format: uuid
             example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
         X-Request-Id:
-          description: The X-Request-Id from the request header, if supplied, mirrored back.
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
           schema:
             type: string
             format: uuid
@@ -664,13 +663,13 @@ components:
             $ref: examples/500-REC.json
       headers:
         X-Correlation-Id:
-          description: The X-Correlation-Id from the request header, if supplied, mirrored back.
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
           schema:
             type: string
             format: uuid
             example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
         X-Request-Id:
-          description: The X-Request-Id from the request header, if supplied, mirrored back.
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
           schema:
             type: string
             format: uuid
