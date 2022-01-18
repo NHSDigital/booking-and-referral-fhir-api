@@ -26,7 +26,7 @@ extends:
           echo "##vso[task.setvariable variable=PIPELINE_ACCOUNT_ALIAS]${account_alias}"
 
           account_id="$(aws ssm get-parameter --name /account-ids/${account_lookup} --query Parameter.Value --output text --region eu-west-2)"
-          echo "##vso[task.setvariable variable=PIPELINE_AWS_ROLE]arn:aws:iam::$(account_id):role/BarsTestRole"
+          echo "##vso[task.setvariable variable=PIPELINE_AWS_ROLE]arn:aws:iam::${account_id}:role/BarsTestRole"
 
         displayName: Get role for environment
 
