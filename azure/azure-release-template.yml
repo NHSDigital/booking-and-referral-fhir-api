@@ -46,5 +46,5 @@ extends:
           terraform init
           terraform plan
           terraform apply -auto-approve
-      workingDirectory: $(SERVICE_DIR)
-      displayName: Run Terraform
+        workingDirectory: $(SERVICE_DIR)
+        displayName: Run Terraform
