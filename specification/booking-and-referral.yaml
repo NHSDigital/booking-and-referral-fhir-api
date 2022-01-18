@@ -623,6 +623,7 @@ components:
         | 422         | PROXY_UNPROCESSABLE_ENTITY | Message was not malformed but deemed unprocessable. |         
         | 429         | SEND_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
         | 429         | REC_TOO_MANY_REQUESTS      | The user has sent too many requests in a given amount of time|
+
       content:
         application/fhir+json:
           schema:
@@ -645,7 +646,7 @@ components:
     5XX-BARS:
       description: |
         An error occurred as follows:
-          
+
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
         | 500         | REC_SERVER_ERROR           | The receiver server has encountered an Error processing the request. |
@@ -655,6 +656,7 @@ components:
         | 501         | PROXY_NOT_IMPLEMENTED      | The Proxy did not recognize the request. |
         | 503         | REC_UNAVAILABLE            | The Receiver was unavailable to service the request.|
         | 503         | PROXY_UNAVAILABLE          | The Proxy was unavailable to service the request. |
+
       content:
         application/fhir+json:
           schema:
