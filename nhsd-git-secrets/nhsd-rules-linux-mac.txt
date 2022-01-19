@@ -19,3 +19,4 @@ dynamodb\.[a-z]{2}-[a-z-]*-[1,2,3]\.amazonaws\.com
 (CLIENT|client|Client)(_|\s)(SECRET|secret|Secret)\s*(:|=>|=)\s*("|')?(\{)?[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\})?("|')?
 password\s*(=|:)\s*.+
 token\s*(=|:)\s*.+
+^aws_secret_key$
