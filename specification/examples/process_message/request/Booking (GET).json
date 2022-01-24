@@ -1,0 +1,31 @@
+{
+  "created": "2021-10-11T15:01:30+00:00",
+  "slot": [
+    {
+      "reference": "Slot/c3f6145e-1a26-4345-b3f2-dccbcba62049"
+    }
+  ],
+  "start": "2021-10-12T12:30:30+00:00",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Appointment"
+    ],
+    "lastUpdated": "2021-10-11T15:01:30+00:00"
+  },
+  "resourceType": "Appointment",
+  "description": "Reason for calling-",
+  "basedOn": {
+    "reference": "ServiceRequest/71d2b38e-b81c-4894-a522-6a65265b1d58",
+    "type": "serviceRequest"
+  },
+  "participant": [
+    {
+      "actor": {
+        "reference": "Patient/9476719931"
+      }
+    }
+  ],
+  "status": "booked",
+  "end": "2021-10-12T12:40:30+00:00",
+  "id": "e284470a-6695-4c95-b2ad-fa26b3a486c7"
+}
