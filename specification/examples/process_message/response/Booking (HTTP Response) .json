@@ -29,7 +29,8 @@
 					{
 						"receiver": {
 							"reference": ":uuid:43a42f7a-a6f2-42a5-a8f0-fc85abf8c3fa"
-						}
+						},
+						"endpoint": "[ODSCode]:[DoSId]"
 					}
 				],
 				"sender": {
@@ -38,7 +39,7 @@
 				"source": {
 					"name": "My organisation name",
 					"software": "My software name",
-					"endpoint": "https://My.System.nhs.uk"
+					"endpoint": "[ODSCode]:[DoSId]"
 				},
 				"reason": {
 					"coding": [
@@ -188,7 +189,7 @@
 							"display": "Emergency appointment"
 						}
 					]
-				},				
+				},
 				"Schedule": {
 					"reference": "Schedule/{ScheduleItem}"
 				},
