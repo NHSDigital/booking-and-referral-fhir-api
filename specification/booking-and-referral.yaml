@@ -4,7 +4,6 @@ info:
     ## Overview
     Use this API to send booking and referral information between NHS service providers.
 
-
     You can:
       * Get a specific booking
       * Get bookings for a patient
