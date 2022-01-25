@@ -1,0 +1,346 @@
+{
+	"resourceType": "Bundle",
+	"id": "99173438-ebba-453a-998d-8f1ef006d76e",
+	"meta": {
+		"lastUpdated": "2021-10-11T15:01:30+00:00",
+		"profile": [
+			"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Bundle"
+		]
+	},
+	"type": "message",
+	"timestamp": "2021-10-11T12:15:10+00:00",
+	"entry": [
+		{
+			"fullUrl": "urn:uuid:c5957fdd-097b-409d-a406-49c52ceef2cd",
+			"resource": {
+				"resourceType": "MessageHeader",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-MessageHeader"
+					]
+				},
+				"eventCoding": {
+					"system": "https://fhir.nhs.uk/CodeSystem/message-event-servicerequest",
+					"code": "booking-request"
+				},
+				"destination": [
+					{
+						"receiver": {
+							"reference": ":uuid:43a42f7a-a6f2-42a5-a8f0-fc85abf8c3fa"
+						}
+					}
+				],
+				"sender": {
+					"reference": "urn:uuid:6324587b-eb70-4333-9db2-22d48f64c9ba"
+				},
+				"source": {
+					"name": "My organisation name",
+					"software": "My software name",
+					"endpoint": "https://My.System.nhs.uk"
+				},
+				"reason": {
+					"coding": [
+						{
+							"system": "https://fhir.nhs.uk/CodeSystem/message-reason-servicerequest",
+							"code": "new"
+						}
+					]
+				},
+				"focus": [
+					{
+						"reference": "urn:uuid:aca94bdb-2e38-4399-9ece-2ba083ce65b5",
+						"type": "Appointment"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:aca94bdb-2e38-4399-9ece-2ba083ce65b5",
+			"resource": {
+				"resourceType": "Appointment",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Appointment"
+					]
+				},
+				"status": "booked",
+				"description": "Reason for calling-",
+				"start": "2021-10-12T12:30:30+00:00",
+				"end": "2021-10-12T12:40:30+00:00",
+				"slot": [
+					{
+						"reference": "Slot/c3f6145e-1a26-4345-b3f2-dccbcba62049"
+					}
+				],
+				"created": "2021-10-11T15:01:30+00:00",
+				"basedOn": [
+					{
+						"reference": "ServiceRequest/71d2b38e-b81c-4894-a522-6a65265b1d58",
+						"type": "serviceRequest"
+					}
+				],
+				"participant": [
+					{
+						"actor": {
+							"reference": "Patient/9476719931"
+						}
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:788660eb-d2c9-4773-abd4-318484673fb2",
+			"resource": {
+				"resourceType": "Patient",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Patient"
+					]
+				},
+				"identifier": [
+					{
+						"extension": [
+							{
+								"url": "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-NHSNumberVerificationStatus",
+								"valueCodeableConcept": {
+									"coding": [
+										{
+											"system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-NHSNumberVerificationStatus",
+											"code": "number-present-and-verified",
+											"display": "Number present and verified"
+										}
+									]
+								}
+							}
+						],
+						"use": "official",
+						"system": "https://fhir.nhs.uk/Id/nhs-number",
+						"value": "9476719931"
+					}
+				],
+				"name": [
+					{
+						"use": "official",
+						"family": "Chalmers",
+						"given": [
+							"Peter"
+						],
+						"prefix": [
+							"Mr"
+						]
+					}
+				],
+				"telecom": [
+					{
+						"system": "phone",
+						"value": "01234 567 890",
+						"use": "home",
+						"rank": 1
+					}
+				],
+				"gender": "male",
+				"birthDate": "1974-12-25",
+				"address": [
+					{
+						"use": "home",
+						"text": "123 High Street, Leeds LS1 4HR",
+						"line": [
+							"123 High Street",
+							"Leeds"
+						],
+						"city": "Leeds",
+						"postalCode": "LS1 4HR"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:deb4c4b3-870b-4599-84df-5e54cef7afda",
+			"resource": {
+				"resourceType": "Slot",
+				"id": "c3f6145e-1a26-4345-b3f2-dccbcba62049",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
+					]
+				},
+				"serviceCategory": [
+					{
+						"coding": [
+							{
+								"code": "14",
+								"display": "Emergency Department"
+							}
+						]
+					}
+				],
+				"appointmentType": {
+					"coding": [
+						{
+							"code": "EMERGENCY",
+							"display": "Emergency appointment"
+						}
+					]
+				},
+				"Schedule": {
+					"reference": "Schedule/{ScheduleItem}"
+				},
+				"status": "busy",
+				"start": "2021-10-06T10:00:00.000+00:00",
+				"end": "2021-10-06T11:00:00.000+00:00"
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:3a62607b-df65-4932-940c-14262787f62d",
+			"resource": {
+				"resourceType": "Schedule",
+				"id": "{ScheduleItem}",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Schedule"
+					]
+				},
+				"identifier": [
+					{
+						"system": "https://system.supplier.co.uk/Diary/id",
+						"value": "8622dfdb-dc6a-47b6-b3a7-2eb2829db287"
+					}
+				],
+				"actor": [
+					{
+						"reference": "HealthcareService/{HealcareServiceid}"
+					},
+					{
+						"reference": "PractitionerRole/{PractitionerRoleid}"
+					},
+					{
+						"reference": "Practitioner/{Practitionerid}"
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:e5fd53eb-7b1d-496d-bbf8-5c9dc7bd761b",
+			"resource": {
+				"resourceType": "HealthcareService",
+				"id": "[HealcareServiceid]",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Healthservice"
+					]
+				},
+				"identifier": [
+					{
+						"system": "https://system.supplier.co.uk/My/Healthcare/Services",
+						"value": "100"
+					}
+				],
+				"location": [
+					{
+						"reference": "Location/Locationid"
+					}
+				],
+				"name": "Healthcare Service Name"
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:6daaadd8-56e0-4d74-8350-1632331c5452",
+			"resource": {
+				"resourceType": "Practitioner",
+				"id": "[Practitionerid]",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Practitioner"
+					]
+				},
+				"name": [
+					{
+						"family": "Bloggs",
+						"given": [
+							"Joe"
+						],
+						"prefix": [
+							"Dr"
+						]
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:52428e73-0a5c-455d-8ff5-cd080e557082",
+			"resource": {
+				"resourceType": "PractitionerRole",
+				"id": "[PractitionerRoleid]",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-PractitionerRole"
+					]
+				},
+				"code": [
+					{
+						"coding": [
+							{
+								"system": "https://fhir.hl7.org.uk/ValueSet/UKCore-PractitionerRoleCode",
+								"version": "4.0.1",
+								"code": "doctor",
+								"display": "Doctor"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:860e4c37-4e36-45fb-8fca-41132cd937a5",
+			"resource": {
+				"resourceType": "Location",
+				"id": "[Locationid]",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:01:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Location"
+					]
+				},
+				"name": "Healthcare Service Location",
+				"position": {
+					"longitude": 143.20196,
+					"latitude": -37.22866
+				}
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:43a42f7a-a6f2-42a5-a8f0-fc85abf8c3fa",
+			"resource": {
+				"resourceType": "Organization",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:23:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Organization"
+					]
+				},
+				"name": "ORIGINAL Receiving/performing Organization"
+			}
+		},
+		{
+			"fullUrl": "urn:uuid:6324587b-eb70-4333-9db2-22d48f64c9ba",
+			"resource": {
+				"resourceType": "Organization",
+				"meta": {
+					"lastUpdated": "2021-10-11T15:23:30+00:00",
+					"profile": [
+						"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Organization"
+					]
+				},
+				"name": "ORIGINAL Sender Organization"
+			}
+		}
+	]
+}
