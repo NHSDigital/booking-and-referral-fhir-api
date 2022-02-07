@@ -138,8 +138,8 @@ paths:
     get:
       tags:
         - Metadata
-      summary: Get a Message Definition
-      description: Get a Message Definition
+      summary: Get a message definition
+      description: Get a message definition
       operationId: getMessageDefinition
       responses:
         '200':
@@ -344,7 +344,7 @@ paths:
       tags:
         - Booking
       summary: Get bookings for a patient
-      description: Get Bookings for a patient
+      description: Get bookings for a patient
       operationId: getBookingByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
