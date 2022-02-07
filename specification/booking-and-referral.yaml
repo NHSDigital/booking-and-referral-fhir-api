@@ -45,7 +45,7 @@ info:
     * unattended (end user not present)
 
     To use this access mode, use the following security pattern:
-    * [Application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
+    * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
     ### Environments and testing
     | Environment       | Base URL                                                               |
@@ -94,8 +94,8 @@ paths:
     get:
       tags:
         - Metadata
-      summary: Get capability statement
-      description: Get capability statement
+      summary: Get a capability statement
+      description: Get a capability statement
       operationId: getMeta
       responses:
         '200':
@@ -138,8 +138,8 @@ paths:
     get:
       tags:
         - Metadata
-      summary: Get Message Definition
-      description: Get Message Definition
+      summary: Get a Message Definition
+      description: Get a Message Definition
       operationId: getMessageDefinition
       responses:
         '200':
@@ -433,8 +433,8 @@ paths:
     get:
       tags:
         - Referral
-      summary: Get referral/s for a patient
-      description: Get referral/s for a patient
+      summary: Get referrals for a patient
+      description: Get referrals for a patient
       operationId: getReferralByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
