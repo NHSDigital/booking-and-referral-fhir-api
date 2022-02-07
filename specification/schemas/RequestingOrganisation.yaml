@@ -1,10 +1,10 @@
-title: RequestingOrganisation
+title: requestingOrganization
 type: object
-description: Requesting Organisation (Base64 encoded).
+description: Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
 required:
-  - requesting_organisation
+  - requesting_organization
 properties:
-  requesting_organisation:
+  requesting_organization:
     type: object
     required:
       - identifier
@@ -12,7 +12,7 @@ properties:
     properties:
       resourceType:
         type: string
-        example: 'Organisation'
+        example: 'Organization'
       identifier:
         type: array
         uniqueItems: true

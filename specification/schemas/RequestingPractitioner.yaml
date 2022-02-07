@@ -1,6 +1,6 @@
-title: RequestingPractitioner
+title: requestingPractitioner
 type: object
-description: Requesting Practitioner (Base64 encoded).
+description: Requesting Practitioner described in an object based on a FHIR 'Practitioner' resource (Standard Base64 encoded JSON).
 required:
   - requesting_practitioner
 properties:
