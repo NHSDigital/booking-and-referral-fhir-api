@@ -561,7 +561,7 @@ components:
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
       description: The identifer of the Sending Organisation (to be Base64 encoded).
-      required: true
+      required: false
       in: header
       schema:
         $ref: '#/components/schemas/RequestingOrganisationToken'
@@ -618,6 +618,118 @@ components:
         | 429         | SEND_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
         | 429         | REC_TOO_MANY_REQUESTS      | The user has sent too many requests in a given amount of time|
 
+        <table>
+          <thead>
+            <tr>
+              <th>HTTP status</th>
+              <th>Error code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>400</td>
+              <td>SEND_BAD_REQUEST</td>
+              <td>The API was unable to process the request.</td>
+            </tr>
+            <tr>
+              <td>400</td>
+              <td>REC_BAD_REQUEST</td>
+              <td>The Receiver has responded stating the message was malformed.</td>
+            </tr>
+            <tr>
+              <td>401</td>
+              <td>SEND_UNAUTHORIZED</td>
+              <td>The API deemed you unauthorized to make this request.</td>
+            </tr>
+            <tr>
+              <td>401</td>
+              <td>REC_UNAUTHORIZED</td>
+              <td>The receiver deemed you unauthorized to make request.</td>
+            </tr>
+            <tr>
+              <td>403</td>
+              <td>SEND_FORBIDDEN</td>
+              <td>Missing or Expired Token.</td>
+            </tr>
+            <tr>
+              <td>404</td>
+              <td>PROXY_NOT_FOUND</td>
+              <td>No related people exist for given NHS number.</td>
+            </tr>
+            <tr>
+              <td>404</td>
+              <td>REC_NOT_FOUND</td>
+              <td>Patient record for given NHS number has been invalidated and not superseded by another NHS number.</td>
+            </tr>
+            <tr>
+              <td>405</td>
+              <td>SEND_METHOD_NOT_ALLOWED</td>
+              <td>HTTP Verb is not correct for this scenario.</td>
+            </tr>
+            <tr>
+              <td>405</td>
+              <td>REC_METHOD_NOT_ALLOWED</td>
+              <td>Receiver does not allow this.</td>
+            </tr>
+            <tr>
+              <td>405</td>
+              <td>PROXY_METHOD_NOT_ALLOWED</td>
+              <td>Proxy does not allow this.</td>
+            </tr>
+            <tr>
+              <td>406</td>
+              <td>SEND_NOT_ACCEPTABLE</td>
+              <td>Senders message had an incorrect content type defined for a response.</td>
+            </tr>
+            <tr>
+              <td>408</td>
+              <td>REC_TIMEOUT</td>
+              <td>The downstream domain processing has not completed within the configured timeout period.</td>
+            </tr>
+            <tr>
+              <td>409</td>
+              <td>SEND_CONFLICT</td>
+              <td>Senders message has content which conflicts with existing data.</td>
+            </tr>
+            <tr>
+              <td>409</td>
+              <td>REC_CONFLICT</td>
+              <td>Senders message has content which conflicts with existing data.</td>
+            </tr>
+            <tr>
+              <td>409</td>
+              <td>PROXY_CONFLICT</td>
+              <td>Senders message has content which conflicts with existing data.</td>
+            </tr>
+            <tr>
+              <td>422</td>
+              <td>SEND_UNPROCESSABLE_ENTITY</td>
+              <td>&nbsp;Message was not malformed but deemed unprocessable.</td>
+            </tr>
+            <tr>
+              <td>422</td>
+              <td>REC_UNPROCESSABLE_ENTITY</td>
+              <td>&nbsp;Message was not malformed but deemed unprocessable.</td>
+            </tr>
+            <tr>
+              <td>422</td>
+              <td>PROXY_UNPROCESSABLE_ENTITY</td>
+              <td>&nbsp;Message was not malformed but deemed unprocessable.</td>
+            </tr>
+            <tr>
+              <td>429</td>
+              <td>SEND_TOO_MANY_REQUESTS</td>
+              <td>The user has sent too many requests in a given amount of time</td>
+            </tr>
+            <tr>
+              <td>429</td>
+              <td>REC_TOO_MANY_REQUESTS</td>
+              <td>The user has sent too many requests in a given amount of time</td>
+            </tr>
+          </tbody>
+        </table>
+
       content:
         application/fhir+json:
           schema:
@@ -650,6 +762,53 @@ components:
         | 501         | PROXY_NOT_IMPLEMENTED      | The Proxy did not recognize the request. |
         | 503         | REC_UNAVAILABLE            | The Receiver was unavailable to service the request.|
         | 503         | PROXY_UNAVAILABLE          | The Proxy was unavailable to service the request. |
+
+        <table>
+          <thead>
+            <tr>
+              <th>HTTP status</th>
+              <th>Error code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+            <tbody>
+            <tr>
+              <td>500</td>
+              <td>REC_SERVER_ERROR</td>
+              <td>The receiver server has encountered an Error processing the request.</td>
+            </tr>
+            <tr>
+              <td>500</td>
+              <td>PROXY_SERVER_ERROR</td>
+              <td>Proxy Error.</td>
+            </tr>
+            <tr>
+              <td>501</td>
+              <td>SEND_NOT_IMPLEMENTED</td>
+              <td>The Request was not recognized.</td>
+            </tr>
+            <tr>
+              <td>501</td>
+              <td>REC_NOT_IMPLEMENTED</td>
+              <td>The Receiver did not recognize the request.&nbsp;</td>
+            </tr>
+            <tr>
+              <td>501</td>
+              <td>PROXY_NOT_IMPLEMENTED</td>
+              <td>The Proxy did not recognize the request</td>
+            </tr>
+            <tr>
+              <td>503</td>
+              <td>REC_UNAVAILABLE</td>
+              <td>The Receiver was unavailable to service the request.</td>
+            </tr>
+            <tr>
+              <td>503</td>
+              <td>PROXY_UNAVAILABLE</td>
+              <td>The Proxy was unavailable to service the request.</td>
+            </tr>
+          </tbody>
+        </table>
 
       content:
         application/fhir+json:
