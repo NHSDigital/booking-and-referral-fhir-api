@@ -105,7 +105,10 @@ paths:
       tags:
         - Metadata
       summary: Get capability statement
-      description: Get capability statement
+      description: |
+        The sender must request the receiver's capability statement (GET /metadata) to establish how to interact with the receivers API (its capabilities).
+        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
+
       operationId: getMeta
       responses:
         '200':
@@ -145,7 +148,11 @@ paths:
       tags:
         - Metadata
       summary: Get Message Definition
-      description: Get Message Definition
+      description: |
+        The request for Message Definition is the next step for a Sender following the metadata acquisition. 
+        The sender must request the Message Definition for the Service Identifier obtained previously, along with the workflow type e.g. booking-request, servicerequest-request.
+
+        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
       operationId: getMessageDefinition
       responses:
         '200':
@@ -187,7 +194,19 @@ paths:
       tags:
         - Message
       summary: Process a message
-      description: Process a message
+      description: |
+        The inherent flexibility of the various workflows supported by BaRS is facilitated by the $process-message endpoint. This endpoint can be used for:
+        
+          * Making a Booking
+          * Responding to a booking
+          * Cancelling and recreating a booking
+          * Making a referral request
+          * Cancelling a referral
+          * Responding to a referral
+          * Updating a referral
+
+        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
+
       operationId: processMessage
       requestBody:
         description: Message Details
@@ -243,7 +262,10 @@ paths:
       tags:
         - Slots
       summary: Get slots
-      description: Get slots
+      description: |
+        A call to Slots is for querying a given services endpoint for suitable slots to book a new Appointment into for a patient. A request for slots support various filter parameters but requires the service identifier, slot status(es) and a timeframe to limit the search.
+
+        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
       operationId: getSlots
       parameters:
         - name: status
