@@ -372,7 +372,8 @@ paths:
       tags:
         - Booking
       summary: Get bookings for a patient
-      description: Get Bookings for a patient
+      description: |
+        Use this endpoint to get bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned.
       operationId: getBookingByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
