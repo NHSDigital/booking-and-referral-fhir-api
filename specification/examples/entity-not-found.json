@@ -12,7 +12,7 @@
         "details": {
           "coding": [
             {
-              "system": "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1",
+              "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
               "code": "REC_BAD_REQUEST"
             }
           ]
