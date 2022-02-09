@@ -71,7 +71,7 @@ info:
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
     ## Register on our platform    
-    Details on the onboarding process can be found [here](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide#quick-start-guide) in our Quick start guide.
+    Details on the onboarding process can be found in our [Quick start guide](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide#quick-start-guide).
   version: 1.0.8
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
@@ -106,9 +106,14 @@ paths:
         - Metadata
       summary: Get capability statement
       description: |
-        The sender must request the receiver's capability statement (GET /metadata) to establish how to interact with the receivers API (its capabilities).
-        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
+        
+        ### Returns the target endpoints capability statement 
 
+        The sender must initially request the receiver's capability statement (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response indicating this and the sender pursues an alternative workflow. 
+
+        A receiver can only implement a subset of the functionality within the standard and the capability statement will make this clear to a sender. 
+
+        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it. 
       operationId: getMeta
       responses:
         '200':
@@ -149,10 +154,23 @@ paths:
         - Metadata
       summary: Get Message Definition
       description: |
-        The request for Message Definition is the next step for a Sender following the metadata acquisition. 
-        The sender must request the Message Definition for the Service Identifier obtained previously, along with the workflow type e.g. booking-request, servicerequest-request.
+        
+        ### Returns MessageDefinitions supported by the target endpoint.
 
-        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
+        The Message Definition retrieval is required to inform a Sender on building the payload. A request is made using the Service Identifier and workflow type values, linking to the useContext and event elements, respectively, in the Message Definition resource, returning a list of FHIR resources. 
+        
+        The order of workflow beyond this point is relatively flexible, the only stipulation being responses occurring after requests.
+
+        ### Sender
+        
+        The request for Message Definition is the next step for a Sender following the metadata acquisition. 
+        The sender must request the Message Definition for the Service Identifier obtained previously, along with the type of workflow type e.g. booking-request, servicerequest-request. The Message Definition will contain a list of FHIR resources which the sender must include when making a booking or referral. 
+        
+        ### Receiver
+
+        A receiver dictates what they need from a sender making a request and the MessageDefinition is the mechanism to support this. The Message Definition details what FHIR resources need to be included in the body (payload).
+        The receiver may support multiple services e.g. Out-of-Hours, Clinical Assessment Service under one organisation (on the same system) and consideration should be given to maintaining service identifiers and workflow type against Message Definitions.  It's advisable to make this a configurable option which providers can maintain themselves as new services come onboard.
+                
       operationId: getMessageDefinition
       responses:
         '200':
@@ -195,17 +213,21 @@ paths:
         - Message
       summary: Process a message
       description: |
-        The inherent flexibility of the various workflows supported by BaRS is facilitated by the $process-message endpoint. This endpoint can be used for:
         
-          * Making a Booking
-          * Responding to a booking
-          * Cancelling and recreating a booking
-          * Making a referral request
-          * Cancelling a referral
-          * Responding to a referral
-          * Updating a referral
+        ### Using $process-message
+        The inherent flexibility of the various workflows supported by BaRS is facilitated by the $process-message endpoint.
 
-        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
+        ### Function
+        |function| API Call|Description
+        |----                             |----                  |----                 |
+        |Making a referral request        |POST /$process-message|The sender will POST a FHIR Bundle, including the FHIR resources defined in MessageDefinition requested previously, the 'focus' being a ServiceRequest resource, supported by Encounter, Observation, Flag etc. The MessageHeader resource will indicate the activity required through use of 'event', 'reason' and 'focus' data elements.<cr> The MessageHeader resource will indicate the activity required.|
+        |Respond to a referral            |POST /$process-message|A receiver wanting to respond to a request will direct their response to the Sender's $process-message endpoint, reversing the previous request/response roles. All implementers (senders or receivers) of BaRS must build a $process-message endpoint to be able to support the asynchronous workflows which involve such feedback responses.|
+        |Cancelling a referral            |POST /$process-message|An updated payload request ensuring the status of the service request is set to 'revoked', as a minimum.|
+        |Making a booking                 |POST /$process-message|Once a slot has been identified, the sender makes a request to book through the $process-message endpoint. The receivers MessageDefinition defines the required FHIR resources and must including reference to the service request, if applicable. The MessageHeader resource will indicate the activity required.|
+        |Respond to a booking             |POST /$process-message|A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA.|
+        |Cancelling a booking (and rebook)|POST /$process-message|An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
+
+        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow) documentation.
 
       operationId: processMessage
       requestBody:
@@ -263,9 +285,15 @@ paths:
         - Slots
       summary: Get slots
       description: |
-        A call to Slots is for querying a given services endpoint for suitable slots to book a new Appointment into for a patient. A request for slots support various filter parameters but requires the service identifier, slot status(es) and a timeframe to limit the search.
 
-        For more information on this endpoint's usage please see the [End-to-End workflow implementation guidance](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow).
+        ### Get available slots.
+
+        A call to Slots is for querying a target endpoint for suitable slots to book a new Appointment into for a patient. 
+        A request for slots support various filter parameters but requires the service identifier, slot status(es) and a timeframe to limit the search. 
+        
+        As documented in the [NHS Booking Standard](https://developer.nhs.uk/apis/uec-appointments/fs_slotmanagement.html), a receiver assigns the service identifier to groups of slots, under a schedule, which ties schedules together for a particular service.
+
+        
       operationId: getSlots
       parameters:
         - name: status
@@ -373,7 +401,11 @@ paths:
         - Booking
       summary: Get bookings for a patient
       description: |
-        Use this endpoint to get bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned.
+        
+        ### Returns bookings for a specified patient.
+        Use this endpoint to get all bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned. 
+        
+        If a sender wants to cancel a particular booking, they must perform a read first, comparing and amending the details prior to performing the update.
       operationId: getBookingByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
@@ -420,7 +452,13 @@ paths:
       tags:
         - Booking
       summary: Get a specific booking
-      description: Get a specific booking
+      description: | 
+        
+        ### Returns specific booking by id
+        Use this endpoint to get a specific booking by its unique id. A booking with the specified identifier at the specified target endpoint will be returned, should it exist. 
+        
+        If a sender wants to cancel a booking, they must perform a read first, comparing and amending the details prior to performing the update.
+
       operationId: getBooking
       responses:
         '200':
@@ -463,7 +501,13 @@ paths:
       tags:
         - Referral
       summary: Get referral/s for a patient
-      description: Get referral/s for a patient
+      description: |
+        
+        ### Returns service requests for a specified patient.
+        
+        Use this endpoint to get all service requests for a given patient. All service requests for the specified patient at the specified target endpoint will be returned. 
+        
+        If a sender wants to cancel a service request, they must perform a read first and amend the response version when updating.
       operationId: getReferralByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
@@ -509,7 +553,13 @@ paths:
       tags:
         - Referral
       summary: Get a specific referral
-      description: Get a specific referral
+      description: | 
+        
+        ### Returns specific service request by id
+        Use this endpoint to get a specific service request by its unique id. A service request with the specified identifier at the specified target endpoint will be returned, should it exist. 
+        
+        If a sender wants to cancel a service request, they must perform a read first, comparing and amending the details prior to performing the update.
+
       operationId: getReferral
       responses:
         '200':
