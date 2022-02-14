@@ -34,11 +34,13 @@ $ export AWS_PROFILE=NHSDAdminRole
 
 Run Terraform using the following:
 ```
+$ cd terraform
 $ terraform init
 ```
 ```
 $ terraform plan
 ```
+This will prompt you to enter a region, e.g. "eu-west-2"
 ```
 $ terraform apply
 ```
