@@ -628,7 +628,6 @@ components:
       name: NHSD-Requesting-Person
       description: The identifer of the Sending Person (Standard Base64 encoded JSON).
       required: false
-      deprecated: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingPersonToken'
