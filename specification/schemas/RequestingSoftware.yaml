@@ -1,9 +1,9 @@
-title: RequestingDevice
+title: requestingSoftware
 type: object
-description: Requesting Software (Base64 encoded).
+description: Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
 x-examples:
   example:
-    requesting_device:
+    requestingSoftware:
       resourceType: Device
       identifier:
         - system: 'https://consumersupplier.com/Id/device-identifier'
@@ -11,7 +11,7 @@ x-examples:
       model: Supplier product name
       version: 1.0.0
 properties:
-  requesting_device:
+  requestingSoftware:
     type: object
     required:
       - identifier
@@ -43,4 +43,4 @@ properties:
         type: string
         example: 1.0.0
 required:
-  - requesting_device
+  - requestingSoftware

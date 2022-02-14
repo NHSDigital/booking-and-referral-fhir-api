@@ -1,6 +1,6 @@
-title: RequestingPerson
+title: requestingPerson
 type: object
-description: Requesting Person (Base64 encoded).
+description: Requesting Person described in an object based on a FHIR 'Person' resource (Standard Base64 encoded JSON).
 required:
   - requesting_person
 properties:

@@ -12,7 +12,7 @@
         "details": {
           "coding": [
             {
-              "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+              "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
               "code": "REC_UNPROCESSABLE_ENTITY"
             }
           ]

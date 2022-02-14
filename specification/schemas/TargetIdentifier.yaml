@@ -7,7 +7,7 @@ required:
 properties:
   value:
     type: string
-    example: 'A1001'
+    example: '1122334455'
   system:
     type: string
-    example: "https://fhir.nhs.uk/Id/ods-organization-code"
+    example: "https://fhir.nhs.uk/Id/dos-service-id"
