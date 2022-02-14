@@ -11,7 +11,7 @@ terraform {
 
 provider aws {
   region  = "eu-west-2"
-  profile = var.aws-profile
+  profile = "${AWS_PROFILE}"
 }
 
 module "s3" {
