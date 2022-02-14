@@ -628,6 +628,7 @@ components:
       name: NHSD-Requesting-Person
       description: The identifer of the Sending Person (Standard Base64 encoded JSON).
       required: false
+      deprecated: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingPersonToken'
@@ -666,7 +667,8 @@ components:
   responses:
     4XX-BARS:
       description: |
-        An error occurred as follows:
+        Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
+        Guidance on error handling within BaRS can be found [here](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#error-handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
@@ -712,7 +714,8 @@ components:
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     5XX-BARS:
       description: |
-        An error occurred as follows:
+        Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
+        Guidance on error handling within BaRS can be found [here](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#error-handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
