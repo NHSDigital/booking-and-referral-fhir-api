@@ -13,7 +13,7 @@ class TestMessageDefinition:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = load_example("message_definition/GET-success.json")
+        expected_body = load_example("message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json")
 
         # When
         response = requests.get(
