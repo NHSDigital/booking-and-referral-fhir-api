@@ -1,11 +1,11 @@
 // Get context variables
-var b64Ddecoded = context.getVariable("b64decoded");
+var b64decoded = JSON.parse(context.getVariable("b64decoded"));
 var pathSuffix = context.getVariable("proxy.pathsuffix")
 var queryString = context.getVariable("request.querystring")
 var isError = false;
 
-var system = b64Ddecoded.system
-var value = b64Ddecoded.value
+var system = b64decoded.system
+var value = b64decoded.value
 
 // Get target url from KVM
 var targetUrl = get_target_url_from_kvm(system, value)
