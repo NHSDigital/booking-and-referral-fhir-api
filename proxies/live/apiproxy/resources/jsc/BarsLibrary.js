@@ -36,7 +36,7 @@ function set_variables(location, vars) {
 }
 
 
-function get_target_url_from_kvm(serviceId) {
+function get_target_url_from_kvm(system, value) {
     /*
       Get a url value from the booking-and-referral kvm.
       the valid endpoints at the moment are:
@@ -45,7 +45,7 @@ function get_target_url_from_kvm(serviceId) {
       
       If there is no value in the kvm it returns null
     */
-      var location = "booking-and-referral-config.NHSD-ServiceIdentifier." + serviceId + ".target";
+      var location = "booking-and-referral-config.NHSD-Target-Identifier." + system + "." + value;
       var url = context.getVariable(location);
       if(url && url.endsWith('/')){
         url = url.replace(/\/$/,"")

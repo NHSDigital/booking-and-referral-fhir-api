@@ -1,6 +1,6 @@
 import base64
 
-a = 'eW91ciB0ZXh0'
-decoded = base64.b64decode(a)
+b64encoded = flow.getVariable("request.header.NHSD-Target-Identifier")
+b64Ddecoded = base64.b64decode(b64encoded)
 
-print(decoded)
+flow.setVariable("b64Ddecoded", b64Ddecoded)
