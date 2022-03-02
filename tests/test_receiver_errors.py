@@ -4,6 +4,8 @@ from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
 from datetime import datetime
+import base64
+import json
 
 
 class TestReceiverErrors:
@@ -17,6 +19,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 401
         expected_body = load_example("unauthorized.json")
+        target_identifier = json.dumps({"value": "NHS0001-401", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -24,6 +28,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-401",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
@@ -46,6 +51,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
         expected_body = load_example("forbidden.json")
+        target_identifier = json.dumps({"value": "NHS0001-403", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -53,6 +60,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-403",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
@@ -75,6 +83,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 406
         expected_body = load_example("not-acceptable.json")
+        target_identifier = json.dumps({"value": "NHS0001-406", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -82,6 +92,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-406",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
@@ -104,6 +115,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 409
         expected_body = load_example("conflict.json")
+        target_identifier = json.dumps({"value": "NHS0001-409", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -111,6 +124,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-409",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
@@ -133,6 +147,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 422
         expected_body = load_example("unprocessable-entity.json")
+        target_identifier = json.dumps({"value": "NHS0001-422", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -140,6 +156,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-422",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
@@ -162,6 +179,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
         expected_body = load_example("server-error.json")
+        target_identifier = json.dumps({"value": "NHS0001-500", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -169,6 +188,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-500",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
@@ -191,6 +211,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 501
         expected_body = load_example("not-implemented.json")
+        target_identifier = json.dumps({"value": "NHS0001-501", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -198,6 +220,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-501",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
@@ -220,6 +243,8 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 503
         expected_body = load_example("unavailable.json")
+        target_identifier = json.dumps({"value": "NHS0001-503", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -227,6 +252,7 @@ class TestReceiverErrors:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001-503",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
             params={
