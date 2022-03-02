@@ -3,6 +3,8 @@ import requests
 from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
+import base64
+import json
 
 
 class TestServiceRequest:
@@ -18,6 +20,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("service_request/GET-success.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -26,6 +30,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -42,6 +47,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("service_request/id/GET-success.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -49,6 +56,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -66,6 +74,8 @@ class TestServiceRequest:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -73,6 +83,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -89,6 +100,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 201
         expected_body = '""'
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
@@ -97,6 +110,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -113,6 +127,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("service_request/id/PUT-success.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -120,6 +136,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -136,6 +153,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("service_request/id/PATCH-success.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.patch(
@@ -143,6 +162,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -159,6 +179,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = '""'
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.delete(
@@ -166,6 +188,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -183,6 +206,8 @@ class TestServiceRequest:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -190,6 +215,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -207,6 +233,8 @@ class TestServiceRequest:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.patch(
@@ -214,6 +242,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -231,6 +260,8 @@ class TestServiceRequest:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.delete(
@@ -238,6 +269,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -254,6 +286,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -262,6 +296,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -278,6 +313,8 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
@@ -285,6 +322,7 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
