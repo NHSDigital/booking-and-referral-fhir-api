@@ -24,6 +24,9 @@
           <Name>LookupCache.Targets</Name>
       </Step>
       <Step>
+          <Name>Javascript.DecodeBase64</Name>
+      </Step>
+      <Step>
           <Name>Javascript.UnpackVars</Name>
           <Condition>targets != null</Condition>
       </Step>
