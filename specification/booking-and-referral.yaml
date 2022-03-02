@@ -177,6 +177,7 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
+
               example: 
                 $ref: examples/message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json
             application/fhir+xml:

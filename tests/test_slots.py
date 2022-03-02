@@ -116,7 +116,7 @@ class TestSlots:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
-        expected_body = load_example("slots/GET-BadRequest.json")
+        expected_body = load_example("bad-request.json")
 
         # When
         response = requests.get(
