@@ -177,7 +177,6 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
-
               example: 
                 $ref: examples/message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json
             application/fhir+xml:
@@ -323,7 +322,7 @@ paths:
             format: datetime
             type: string
             example: '2020-03-31T14:00:00'
-        - name: schedule.actor:healthcareservice
+        - name: Schedule.actor:HealthcareService
           in: query
           required: true
           description: |
