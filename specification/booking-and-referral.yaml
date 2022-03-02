@@ -317,7 +317,7 @@ paths:
             To search for time windows within which Slots must start, use “greater than” and “less than” searching.
             
             For example "GET [base]Slot?start=ge2022-03-01T12:00:00+00&start=le2022-03-01T13:30:00+00". 
-            The definition of the time window within which Slots must is provided by using this parameter twice.
+            The definition of the time window within which Slots are requested is provided by using this parameter twice.
           schema:
             format: datetime
             type: string
@@ -492,6 +492,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
@@ -544,6 +545,7 @@ paths:
       - $ref: '#/components/parameters/RegistryId_Param'
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
@@ -606,8 +608,8 @@ components:
       description: |
        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
 
-       |Type      | Expression |
-       |----- | --------|
+       |Type           |Expression|
+       |-------             | --------|
        |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
       required: true
       in: query
