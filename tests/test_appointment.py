@@ -1,4 +1,3 @@
-from black import T
 import pytest
 import requests
 from .configuration import config
