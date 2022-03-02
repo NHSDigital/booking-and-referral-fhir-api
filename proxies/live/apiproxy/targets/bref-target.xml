@@ -24,7 +24,7 @@
           <Name>LookupCache.Targets</Name>
       </Step>
       <Step>
-          <Name>Javascript.DecodeBase64</Name>
+          <Name>Python.DecodeBase64</Name>
       </Step>
       <Step>
           <Name>Javascript.UnpackVars</Name>
