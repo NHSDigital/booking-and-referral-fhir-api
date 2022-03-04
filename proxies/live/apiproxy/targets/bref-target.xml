@@ -25,6 +25,7 @@
       </Step>
       <Step>
           <Name>Python.DecodeBase64</Name>
+          <Condition>request.header.NHSD-Target-Identifier != null</Condition>
       </Step>
       <Step>
           <Name>Javascript.UnpackVars</Name>
