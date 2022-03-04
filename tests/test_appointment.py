@@ -5,6 +5,8 @@ from assertpy import assert_that
 from .example_loader import load_example
 import re
 import uuid
+import base64
+import json
 
 
 class TestAppointment:
@@ -21,6 +23,8 @@ class TestAppointment:
         expected_status_code = 200
         expected_body = load_example("appointment/GET-success.json")
         patient_id = "4857773456"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -29,6 +33,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -47,6 +52,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -54,6 +61,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -70,6 +78,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("appointment/id/GET-success.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -77,6 +87,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -94,6 +105,8 @@ class TestAppointment:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -101,6 +114,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -117,6 +131,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
         expected_body = load_example("entity-not-found.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -124,6 +140,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -140,6 +157,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 201
         expected_res_body = load_example("appointment/POST-success.txt")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
@@ -148,6 +167,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -168,6 +188,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = '""'
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -176,6 +198,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -192,6 +215,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = '""'
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.patch(
@@ -200,6 +225,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -216,6 +242,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = '""'
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.delete(
@@ -223,6 +251,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -240,6 +269,8 @@ class TestAppointment:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -248,6 +279,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -264,6 +296,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
         expected_body = load_example("entity-not-found.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -272,6 +306,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -289,6 +324,8 @@ class TestAppointment:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.patch(
@@ -297,6 +334,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -313,6 +351,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
         expected_body = load_example("entity-not-found.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.patch(
@@ -321,6 +361,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -338,6 +379,8 @@ class TestAppointment:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.delete(
@@ -345,6 +388,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -361,6 +405,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
         expected_body = load_example("entity-not-found.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.delete(
@@ -368,6 +414,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -385,6 +432,8 @@ class TestAppointment:
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
         patient_id = "4857773456"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -393,6 +442,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )
@@ -409,6 +459,8 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
@@ -416,6 +468,7 @@ class TestAppointment:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
             },
         )

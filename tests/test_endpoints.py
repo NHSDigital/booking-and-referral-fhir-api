@@ -3,6 +3,8 @@ from assertpy import assert_that
 from .configuration import config
 import asyncio
 import pytest
+import base64
+import json
 
 
 class TestEndpoints:
@@ -10,6 +12,8 @@ class TestEndpoints:
     @pytest.mark.auth
     def test_invalid_access_token(self):
         expected_status_code = 403
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -17,6 +21,7 @@ class TestEndpoints:
             headers={
                 "Authorization": "Bearer invalid_token",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
         # Then
@@ -25,6 +30,8 @@ class TestEndpoints:
     @pytest.mark.auth
     def test_missing_access_token(self):
         expected_status_code = 401
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -32,6 +39,7 @@ class TestEndpoints:
             headers={
                 "Authorization": "",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
         # Then
@@ -52,6 +60,8 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
+        target_identifier = json.dumps({"value": "invalid", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -59,6 +69,7 @@ class TestEndpoints:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "invalid",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
         # Then
@@ -70,6 +81,8 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -77,6 +90,7 @@ class TestEndpoints:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
         # Then
@@ -94,6 +108,8 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_target = f"https://{config.ENVIRONMENT}.api.service.nhs.uk/bars-mock-receiver-proxy/{path_suffix}"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         await debug.start_trace()
 
@@ -103,6 +119,7 @@ class TestEndpoints:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 

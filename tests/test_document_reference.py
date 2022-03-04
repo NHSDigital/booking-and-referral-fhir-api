@@ -3,6 +3,8 @@ import requests
 from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
+import base64
+import json
 
 
 class TestDocumentReference:
@@ -17,6 +19,8 @@ class TestDocumentReference:
         expected_status_code = 200
         expected_body = load_example("document_reference/GET-success.json")
         patient_id = "4857773456"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -25,6 +29,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -42,6 +47,8 @@ class TestDocumentReference:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -49,6 +56,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -64,6 +72,8 @@ class TestDocumentReference:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("document_reference/id/GET-success.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -71,6 +81,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -86,6 +97,8 @@ class TestDocumentReference:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
         bad_id = "non-uuid"
 
         # When
@@ -94,6 +107,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -108,6 +122,8 @@ class TestDocumentReference:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 201
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
@@ -116,6 +132,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -130,6 +147,8 @@ class TestDocumentReference:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = '""'
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -138,6 +157,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -153,6 +173,8 @@ class TestDocumentReference:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = '""'
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.delete(
@@ -160,6 +182,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -176,6 +199,8 @@ class TestDocumentReference:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -184,6 +209,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -200,6 +226,8 @@ class TestDocumentReference:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.delete(
@@ -207,6 +235,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -223,6 +252,8 @@ class TestDocumentReference:
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
         patient_id = "4857773456"
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -231,6 +262,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
@@ -246,6 +278,8 @@ class TestDocumentReference:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
+        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
@@ -253,6 +287,7 @@ class TestDocumentReference:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
+                "NHSD-Target-Identifier": target_identifier_encoded,
             },
         )
 
