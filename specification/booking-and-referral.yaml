@@ -177,7 +177,8 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
-              example: /examples/message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json
+              example: 
+                $ref: examples/message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
@@ -312,24 +313,23 @@ paths:
           in: query
           required: true
           description: |
-            Slot end date/time (yyyy-mm-ddThh:mm:ss+hh:mm)
-
-            __Start and end represent the definition of the time window within which Slots must start__
+            Slot start date/time (yyyy-mm-ddThh:mm:ss).
+            To search for time windows within which Slots must start, use “greater than” and “less than” searching.
+            
+            For example "GET [base]Slot?start=ge2022-03-01T12:00:00+00&start=le2022-03-01T13:30:00+00". 
+            The definition of the time window within which Slots are requested is provided by using this parameter twice.
           schema:
             format: datetime
             type: string
             example: '2020-03-31T14:00:00'
-        - name: end
+        - name: Schedule.actor:HealthcareService
           in: query
           required: true
           description: |
-            Slot end date/time (yyyy-mm-ddThh:mm:ss+hh:mm)
-
-            __Start and end represent the definition of the time window within which Slots must start__
+            Identifier for the intended healthcare service
           schema:
-            format: datetime
             type: string
-            example: '2020-03-31T16:00:00'
+            example: '918999198999'
         - name: _include
           in: query
           description: |
@@ -492,6 +492,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
@@ -544,6 +545,7 @@ paths:
       - $ref: '#/components/parameters/RegistryId_Param'
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingPerson_HParam'
@@ -601,14 +603,19 @@ components:
         example: c3f6145e-1a26-4345-b3f2-dccbcba62049
       required: true
       allowEmptyValue: false
-    PatientId_QParam:
-      name: patientIdentifier
-      description: The identifier of a patient.
+    PatientId_QParam: 
+      name: patient:identifier
+      description: |
+       The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
+
+       |Type           |Expression|
+       |-------             | --------|
+       |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
       required: true
       in: query
       schema:
         type: string
-        example: 485 777 3456
+        example: https://fhir.nhs.uk/Id/nhs-number:4857773456
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system (to be Base64 encoded).
