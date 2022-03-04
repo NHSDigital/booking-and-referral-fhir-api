@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header
+from fastapi import APIRouter
 from .example_loader import load_example
 from fastapi.responses import JSONResponse
 
