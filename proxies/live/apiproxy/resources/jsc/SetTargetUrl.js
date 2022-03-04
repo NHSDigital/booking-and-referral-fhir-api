@@ -12,14 +12,14 @@ var value = b64decoded.value
 if(b64decoded != null){
     var targetUrl = get_target_url_from_kvm_nhsd_target_identifier(system, value)
     if(targetUrl === null | system === null | value === null){
-        idNotFound = true;
+        isError = true;
     }
 }
 
 // Get target url from KVM (NHSD-Service header)
 var targetUrl = get_target_url_from_kvm_nhsd_service(serviceId)
 if(targetUrl === null | serviceId === null){
-    idNotFound = true;
+    isError = true;
 }
 
 context.setVariable("isError", isError)
