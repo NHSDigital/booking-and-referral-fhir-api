@@ -38,7 +38,7 @@ class TestSlots:
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                 "status": ["free"],
                 "start": self.currentTime,
-                "end": self.currentTime,
+                "Schedule.actor:HealthcareService": "918999198999",
                 "_include": ["Schedule"],
             },
         )
@@ -58,7 +58,7 @@ class TestSlots:
                 {
                     "status": ["free"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -67,7 +67,7 @@ class TestSlots:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -76,7 +76,7 @@ class TestSlots:
                 {
                     "status": ["invalid"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -85,7 +85,7 @@ class TestSlots:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free"],
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -104,7 +104,7 @@ class TestSlots:
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                 }
             ),
             # Scenario 7: invalid _include query
@@ -113,7 +113,7 @@ class TestSlots:
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["invalid"],
                 }
             ),
@@ -171,7 +171,7 @@ class TestSlots:
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                 "status": ["free"],
                 "start": self.currentTime,
-                "end": self.currentTime,
+                "Schedule.actor:HealthcareService": "918999198999",
                 "_include": ["Schedule"],
             },
         )
