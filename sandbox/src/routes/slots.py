@@ -26,7 +26,8 @@ def slot(
         healthcareService: str,
         status: Status,
         start: datetime,
-        end: datetime,
+        # end: datetime,
+        Schedule.actor:HealthcareService: str,
         _include: Include,
         NHSD_Token: str = Header(...)
 ):
