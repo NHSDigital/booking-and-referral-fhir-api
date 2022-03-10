@@ -28,7 +28,7 @@ def slot(
     start: datetime,
     _include: Include,
     schedule_actor_healthcareService: str = Query(
-        alias="Schedule.actor:HealthcareService"
+        ..., alias="Schedule.actor:HealthcareService"
     ),
     NHSD_Token: str = Header(...),
 ):
