@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Header, Query
 from fastapi.responses import JSONResponse
 from enum import Enum
 from datetime import datetime
@@ -23,12 +23,14 @@ class Include(Enum):
 
 @route.get("/Slot")
 def slot(
-        healthcareService: str,
-        status: Status,
-        start: datetime,
-        end: datetime,
-        _include: Include,
-        NHSD_Token: str = Header(...)
+    healthcareService: str,
+    status: Status,
+    start: datetime,
+    _include: Include,
+    schedule_actor_healthcareService: str = Query(
+        ..., alias="Schedule.actor:HealthcareService"
+    ),
+    NHSD_Token: str = Header(...),
 ):
     return load_example("slots/GET-success.json")
 
@@ -39,4 +41,6 @@ def slot(
 @route.delete("/Slot")
 def slot_method_not_allowed():
     headers = {"Allow": "GET"}
-    return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
+    return JSONResponse(
+        load_example("method-not-allowed.json"), status_code=405, headers=headers
+    )

@@ -30,6 +30,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-401",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -62,6 +64,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-403",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -94,6 +98,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-406",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -126,6 +132,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-409",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -158,6 +166,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-422",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -190,6 +200,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-500",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -222,6 +234,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-501",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
@@ -254,6 +268,8 @@ class TestReceiverErrors:
                 "NHSD-Service": "NHS0001-503",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",

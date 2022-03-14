@@ -8,7 +8,6 @@ import json
 
 
 class TestEndpoints:
-
     @pytest.mark.auth
     def test_invalid_access_token(self):
         expected_status_code = 403
@@ -70,6 +69,8 @@ class TestEndpoints:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "invalid",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
         )
         # Then
@@ -91,6 +92,8 @@ class TestEndpoints:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
         )
         # Then
@@ -103,7 +106,7 @@ class TestEndpoints:
         ("Appointment", "Appointment/some-id", "Appointment/some-id?param=value"),
     )
     async def test_proxy_routing(
-            self, get_token_client_credentials, debug, path_suffix
+        self, get_token_client_credentials, debug, path_suffix
     ):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -120,6 +123,8 @@ class TestEndpoints:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
         )
 

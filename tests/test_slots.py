@@ -31,12 +31,14 @@ class TestSlots:
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                 "status": ["free"],
                 "start": self.currentTime,
-                "end": self.currentTime,
+                "Schedule.actor:HealthcareService": "918999198999",
                 "_include": ["Schedule"],
             },
         )
@@ -56,7 +58,7 @@ class TestSlots:
                 {
                     "status": ["free"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -65,7 +67,7 @@ class TestSlots:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -74,7 +76,7 @@ class TestSlots:
                 {
                     "status": ["invalid"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -83,7 +85,7 @@ class TestSlots:
                 {
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free"],
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["Schedule"],
                 }
             ),
@@ -102,7 +104,7 @@ class TestSlots:
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                 }
             ),
             # Scenario 7: invalid _include query
@@ -111,7 +113,7 @@ class TestSlots:
                     "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                     "status": ["free", "busy"],
                     "start ": currentTime,
-                    "end": currentTime,
+                    "Schedule.actor:HealthcareService": "918999198999",
                     "_include": ["invalid"],
                 }
             ),
@@ -133,6 +135,8 @@ class TestSlots:
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
             params=data,
         )
@@ -160,12 +164,14 @@ class TestSlots:
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "NHSD-Token": self.nhsd_token,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
             params={
                 "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
                 "status": ["free"],
                 "start": self.currentTime,
-                "end": self.currentTime,
+                "Schedule.actor:HealthcareService": "918999198999",
                 "_include": ["Schedule"],
             },
         )

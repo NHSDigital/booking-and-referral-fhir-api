@@ -30,6 +30,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -57,6 +59,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -82,6 +86,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -108,6 +114,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -133,6 +141,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -158,6 +168,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -183,6 +195,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -210,6 +224,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -236,6 +252,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -263,6 +281,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
@@ -288,6 +308,8 @@ class TestDocumentReference:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
 
