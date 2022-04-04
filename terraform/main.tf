@@ -13,6 +13,10 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-2"
+  profile = "default"
+#  assume_role {
+#    role_arn = "arn:aws:iam::${var.aws_account_id}:role/${var.aws_role_name}"
+#  }
 }
 
 provider "aws" {
