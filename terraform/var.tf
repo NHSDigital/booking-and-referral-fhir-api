@@ -4,6 +4,11 @@ variable "app_name" {
 variable "environment" {
     default = "dev"
 }
+
+variable "region" {
+    default = "eu-west-2"
+}
+
 variable "aws_account_id" {
     description = "AWS account ID"
 }
