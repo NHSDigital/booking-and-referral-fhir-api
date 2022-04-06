@@ -7,6 +7,11 @@ resource "aws_vpc" "bars_vpc" {
 }
 
 ### VPC Network Setup
+resource "aws_internet_gateway" "bars_vpc_gw" {
+  vpc_id = aws_vpc.bars_vpc.id
+
+  tags = merge(local.tags, { Name = "${var.app_name}-${var.environment}-vpc-igw" })
+}
 
 # Create the private subnets
 resource "aws_subnet" "private_subnets" {

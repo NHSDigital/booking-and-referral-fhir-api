@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "jalal"
+  profile = "apim-dev"
   region  = "eu-west-2"
 }
 

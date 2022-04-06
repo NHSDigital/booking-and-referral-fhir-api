@@ -7,6 +7,7 @@ resource "aws_alb" "bars_application_load_balancer" {
 
   tags = local.tags
 }
+
 resource "aws_security_group" "alb_security_group" {
   vpc_id = aws_vpc.bars_vpc.id
 

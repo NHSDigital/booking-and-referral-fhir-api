@@ -16,7 +16,6 @@ resource "aws_iam_role" "task_role" {
   ]
 }
 EOF
-  tags               = local.tags
 }
 
 resource "aws_iam_role" "main_ecs_tasks" {
@@ -36,7 +35,6 @@ resource "aws_iam_role" "main_ecs_tasks" {
   ]
 }
 EOF
-  tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "main_ecs_tasks" {
@@ -75,5 +73,4 @@ resource "aws_iam_role_policy" "main_ecs_tasks" {
 
 }
 EOF
-  tags   = local.tags
 }
