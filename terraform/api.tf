@@ -30,6 +30,12 @@ resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
   tags = merge(local.tags, { Name = "${local.name_prefix}-api-domain-name" })
 }
 
+resource "aws_apigatewayv2_api_mapping" "example" {
+  api_id      = aws_apigatewayv2_api.service_api.id
+  domain_name = aws_apigatewayv2_domain_name.service_api_domain_name.id
+  stage       = aws_apigatewayv2_stage.default.id
+}
+
 resource "aws_apigatewayv2_stage" "default" {
   api_id      = aws_apigatewayv2_api.service_api.id
   name        = var.environment
