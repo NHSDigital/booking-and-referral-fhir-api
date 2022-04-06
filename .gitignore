@@ -1,4 +1,5 @@
 **/.aws
+**/.terraform
 
 node_modules/
 bin/
