@@ -11,7 +11,7 @@ plan:
 	AWS_PROFILE=apim-dev terraform plan
 
 apply:
-	AWS_PROFILE=apim-dev terraform apply
+	AWS_PROFILE=apim-dev terraform apply -auto-approve
 
 destroy:
 	AWS_PROFILE=apim-dev terraform destroy

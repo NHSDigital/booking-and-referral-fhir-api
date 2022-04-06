@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "nhsd-apim-bars-terraform"
+    bucket = "nhsd-apim-bars-min-terraform"
     region = "eu-west-2"
   }
 }
