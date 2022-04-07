@@ -51,7 +51,7 @@ resource "aws_apigatewayv2_stage" "default" {
 
 resource "aws_apigatewayv2_route" "this" {
   api_id    = aws_apigatewayv2_api.service_api.id
-  route_key = "GET /hello"
+  route_key = "ANY /${var.service}/{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.route.id}"
 
   #  api_key_required                    = try(each.value.api_key_required, null)
