@@ -1,37 +1,45 @@
 import json
 import os
 import re
-from dataclasses import dataclass
-
-current_directory = os.path.dirname(os.path.realpath(__file__))
+from dataclasses import dataclass, field
 
 
 @dataclass
 class EventMatch:
+    # Request matching
     path: str
     method: str
+    # Response fields
     example_path: str
+    status_code: int = 200
+    headers: dict = field(default_factory=lambda: {"Content-Type": "application/json"})
+
+    __current_dir = os.path.dirname(os.path.realpath(__file__))
 
     def match(self, e) -> bool:
         return re.match(self.path, e["pathParameters"]["proxy"]) and self.method == e["httpMethod"]
 
+    def make_response(self):
+        return {
+            "statusCode": self.status_code,
+            "headers": self.headers,
+            "body": self.__load_example()
+        }
 
-routes_to_examples = [
+    def __load_example(self):
+        with open(f'{self.__current_dir}/examples/{self.example_path}') as f:
+            return f.read().strip()
+
+
+event_to_response = [
     EventMatch(path="^Appointment$", method="GET", example_path="appointment/GET-success.json")
 ]
 
 
-def process_event(event):
-    for route in routes_to_examples:
-        if route.match(event):
-            example = load_example(route.example_path)
-            return {
-                "statusCode": 200,
-                "headers": {
-                    "Content-Type": "application/json"
-                },
-                "body": json.dumps(example)
-            }
+def process_event(request_event):
+    for event in event_to_response:
+        if event.match(request_event):
+            return event.make_response()
 
     return {
         "statusCode": 404,
@@ -42,14 +50,5 @@ def process_event(event):
     }
 
 
-def load_example(path: str):
-    with open(f'{current_directory}/examples/{path}') as f:
-        if path.endswith('json'):
-            return json.load(f)
-        else:
-            return f.read().strip()
-
-
 def handler(event, context):
-    print(json.dumps(event))
     return process_event(event)
