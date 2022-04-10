@@ -1,9 +1,30 @@
 resource "aws_apigatewayv2_api" "service_api" {
-  name          = "${local.name_prefix}-api"
-  description   = "BaRS mock-receiver service backend api - ${local.environment}"
-  protocol_type = "HTTP"
-  body          = templatefile("api.yaml", {})
+  name                         = "${local.name_prefix}-api"
+  description                  = "BaRS mock-receiver service backend api - ${local.environment}"
+  protocol_type                = "HTTP"
+  disable_execute_api_endpoint = true
 
+  body = templatefile("api.yaml", {})
+}
+
+locals {
+  # Make sure this file exists. For per-user environment, create your own certs. See key.sh for commands.
+  truststore_file_name = "truststore.pem"
+}
+resource "aws_s3_bucket" "truststore_bucket" {
+  bucket = "${local.name_prefix}-trustore"
+}
+resource "aws_s3_bucket_versioning" "truststore_versioning" {
+  bucket = aws_s3_bucket.truststore_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_object" "upload_key_to_truststore" {
+  bucket = aws_s3_bucket_versioning.truststore_versioning.bucket
+  key    = local.truststore_file_name
+  source = local.truststore_file_name
 }
 
 resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
@@ -15,17 +36,10 @@ resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
     security_policy = "TLS_1_2"
   }
 
-  /*
-    dynamic "mutual_tls_authentication" {
-      for_each = length(keys(var.mutual_tls_authentication)) == 0 ? [] : [var.mutual_tls_authentication]
+  mutual_tls_authentication {
+    truststore_uri = "s3://${aws_s3_bucket.truststore_bucket.bucket}/${aws_s3_object.upload_key_to_truststore.key}"
+  }
 
-      content {
-        truststore_uri     = mutual_tls_authentication.value.truststore_uri
-        truststore_version = try(mutual_tls_authentication.value.truststore_version, null)
-      }
-    }
-
-  */
   tags = {
     Name = "${local.name_prefix}-api-domain-name"
   }
@@ -52,18 +66,6 @@ resource "aws_apigatewayv2_route" "this" {
   api_id    = aws_apigatewayv2_api.service_api.id
   route_key = "ANY /${var.service}/{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.route.id}"
-
-  #  api_key_required                    = try(each.value.api_key_required, null)
-  #  authorization_type                  = try(each.value.authorization_type, "NONE")
-  #  authorizer_id                       = try(aws_apigatewayv2_authorizer.this[each.value.authorizer_key].id, each.value.authorizer_id, null)
-  #  model_selection_expression          = try(each.value.model_selection_expression, null)
-  #  operation_name                      = try(each.value.operation_name, null)
-  #  route_response_selection_expression = try(each.value.route_response_selection_expression, null)
-  #  target                              = "integrations/${aws_apigatewayv2_integration.this[each.key].id}"
-  #
-  # Not sure what structure is allowed for these arguments...
-  #  authorization_scopes = try(each.value.authorization_scopes, null)
-  #  request_models  = try(each.value.request_models, null)
 }
 
 resource "aws_apigatewayv2_integration" "route" {
@@ -74,7 +76,7 @@ resource "aws_apigatewayv2_integration" "route" {
 }
 
 resource "aws_lambda_permission" "apigw" {
-  statement_id  = "AllowAPIGatewayInvoke"
+  statement_id  = "AllowAPIGatewayInvoke-${local.environment}"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.mock_receiver_endpoint_function.function_name
   principal     = "apigateway.amazonaws.com"
@@ -85,7 +87,7 @@ resource "aws_lambda_permission" "apigw" {
 }
 
 resource "aws_apigatewayv2_deployment" "deployment" {
-  depends_on  = [aws_apigatewayv2_integration.route]
+  depends_on  = [aws_apigatewayv2_route.this, aws_apigatewayv2_integration.route]
   api_id      = aws_apigatewayv2_api.service_api.id
   description = "BaRS api deployment"
 

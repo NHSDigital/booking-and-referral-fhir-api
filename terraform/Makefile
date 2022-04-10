@@ -22,6 +22,7 @@ apply: workspace
 destroy: workspace
 	AWS_PROFILE=$(aws_profile) terraform destroy
 
+# Docker - lambda
 docker-build:
 	cp -r ../specification/examples ../mock-receiver
 	docker build --platform linux/amd64 -t mock-receiver-$(environment):latest -f ../mock-receiver/Dockerfile ../mock-receiver
@@ -37,4 +38,4 @@ docker-push: docker-tag docker-login
 
 
 clean:
-	rm -rf build .terraform
+	rm -rf build .terraform upload-key
