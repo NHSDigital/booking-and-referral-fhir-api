@@ -2,10 +2,6 @@ variable "project" {
   default = "bars"
 }
 
-variable "environment" {
-  default = "dev"
-}
-
 variable "service" {
   default = "mock-receiver"
 }
@@ -15,12 +11,13 @@ variable "domain_name" {
 }
 
 locals {
-  name_prefix         = "${var.project}-${var.service}-${var.environment}"
-  service_domain_name = "${var.environment}.${var.project}.${var.domain_name}"
+  environment         = terraform.workspace
+  name_prefix         = "${var.project}-${var.service}-${local.environment}"
+  service_domain_name = "${local.environment}.${var.project}.${var.domain_name}"
 
   tags = {
     Project     = var.project
-    Environment = var.environment
+    Environment = local.environment
     Service     = var.service
   }
 }

@@ -1,6 +1,6 @@
 resource "aws_apigatewayv2_api" "service_api" {
   name          = "${local.name_prefix}-api"
-  description   = "BaRS mock-receiver service backend api - ${var.environment}"
+  description   = "BaRS mock-receiver service backend api - ${local.environment}"
   protocol_type = "HTTP"
   body          = templatefile("api.yaml", {})
 
@@ -39,7 +39,7 @@ resource "aws_apigatewayv2_api_mapping" "example" {
 
 resource "aws_apigatewayv2_stage" "default" {
   api_id      = aws_apigatewayv2_api.service_api.id
-  name        = var.environment
+  name        = local.environment
   auto_deploy = true
 
   # Bug in terraform-aws-provider with perpetual diff

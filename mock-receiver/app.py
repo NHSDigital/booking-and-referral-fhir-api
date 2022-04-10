@@ -89,6 +89,7 @@ event_to_response = [
 
 
 def process_event(request_event):
+    # TODO: Validate headers here
     for _event in event_to_response:
         response = _event.get_example_response(request_event)
         if response:
