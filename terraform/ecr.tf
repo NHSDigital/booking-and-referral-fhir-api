@@ -1,6 +1,5 @@
 resource "aws_ecr_repository" "bars-ecr-repository" {
   name = "${local.name_prefix}-ecr-repo"
-  tags = local.tags
 }
 
 data "archive_file" "mock_receiver_archive" {
@@ -21,7 +20,7 @@ resource "null_resource" "image_push" {
   }
 }
 
-data aws_ecr_image lambda_image {
+data "aws_ecr_image" "lambda_image" {
   depends_on = [
     null_resource.image_push
   ]

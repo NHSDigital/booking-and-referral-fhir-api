@@ -4,7 +4,6 @@ resource "aws_apigatewayv2_api" "service_api" {
   protocol_type = "HTTP"
   body          = templatefile("api.yaml", {})
 
-  tags = local.tags
 }
 
 resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
@@ -27,7 +26,9 @@ resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
     }
 
   */
-  tags = merge(local.tags, { Name = "${local.name_prefix}-api-domain-name" })
+  tags = {
+    Name = "${local.name_prefix}-api-domain-name"
+  }
 }
 
 resource "aws_apigatewayv2_api_mapping" "example" {
@@ -40,8 +41,6 @@ resource "aws_apigatewayv2_stage" "default" {
   api_id      = aws_apigatewayv2_api.service_api.id
   name        = var.environment
   auto_deploy = true
-
-  tags = local.tags
 
   # Bug in terraform-aws-provider with perpetual diff
   lifecycle {
@@ -69,7 +68,7 @@ resource "aws_apigatewayv2_route" "this" {
 
 resource "aws_apigatewayv2_integration" "route" {
   api_id             = aws_apigatewayv2_api.service_api.id
-  integration_uri    = aws_lambda_function.debug_endpoint_function.invoke_arn
+  integration_uri    = aws_lambda_function.mock_receiver_endpoint_function.invoke_arn
   integration_type   = "AWS_PROXY"
   integration_method = "POST"
 }
@@ -77,7 +76,7 @@ resource "aws_apigatewayv2_integration" "route" {
 resource "aws_lambda_permission" "apigw" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.debug_endpoint_function.function_name
+  function_name = aws_lambda_function.mock_receiver_endpoint_function.function_name
   principal     = "apigateway.amazonaws.com"
 
   # The /*/* portion grants access from any method on any resource
@@ -86,6 +85,7 @@ resource "aws_lambda_permission" "apigw" {
 }
 
 resource "aws_apigatewayv2_deployment" "deployment" {
+  depends_on  = [aws_apigatewayv2_integration.route]
   api_id      = aws_apigatewayv2_api.service_api.id
   description = "BaRS api deployment"
 

@@ -14,6 +14,13 @@ terraform {
 provider "aws" {
   region  = "eu-west-2"
   profile = "apim-dev"
+  default_tags {
+    tags = {
+      Project     = var.project
+      Environment = var.environment
+      Service     = var.service
+    }
+  }
 }
 
 provider "aws" {
