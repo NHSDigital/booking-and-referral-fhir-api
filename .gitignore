@@ -15,7 +15,11 @@ get_token/
 install/
 **/.env
 **/venv
+
 **/*.key
+**/*.pem
+**/*.csr
+**/*.crt
 
 __pycache__/
 .envrc
