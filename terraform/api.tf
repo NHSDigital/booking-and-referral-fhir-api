@@ -3,8 +3,6 @@ resource "aws_apigatewayv2_api" "service_api" {
   description                  = "BaRS mock-receiver service backend api - ${local.environment}"
   protocol_type                = "HTTP"
   disable_execute_api_endpoint = true
-
-  body = templatefile("api.yaml", {})
 }
 
 locals {
