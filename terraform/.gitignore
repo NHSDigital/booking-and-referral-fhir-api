@@ -3,3 +3,4 @@ build
 *.key
 *.pem
 *.csr
+*.crt

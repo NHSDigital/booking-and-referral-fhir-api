@@ -19,6 +19,7 @@ install/
 **/*.key
 **/*.pem
 **/*.csr
+**/*.crt
 
 __pycache__/
 .envrc

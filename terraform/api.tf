@@ -8,8 +8,8 @@ resource "aws_apigatewayv2_api" "service_api" {
 }
 
 locals {
-  # Make sure this file exists. For per-user environment, create your own certs. See key.sh for commands.
-  truststore_file_name = "truststore.pem"
+  # NHSD cert file
+  truststore_file_name = "truststore.crt"
 }
 resource "aws_s3_bucket" "truststore_bucket" {
   bucket = "${local.name_prefix}-trustore"
