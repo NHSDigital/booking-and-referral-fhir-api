@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from typing import Callable
 from urllib import parse
 
+from dateutil.parser import parse as date_parser
+
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -19,7 +21,8 @@ class EventMatch:
     path: str
     method: str
     # Create Response
-    # this lambda receives a dict {id, headers} and produces a response (see make_response). id as in /Appointment/{id}
+    # this lambda receives a dict {queries, id, headers} and produces
+    # a response (see make_response). id as in /Appointment/{id}
     get_example: Callable[[dict], dict] = lambda _: ""
 
     def get_example_response(self, e):
@@ -28,7 +31,7 @@ class EventMatch:
         if is_matched:
             parts = parse.urlparse(path).path.split('/')
             path_id = parts[1] if len(parts) >= 2 else ""
-            arg = {'path': path, 'id': path_id, 'headers': e['headers']}
+            arg = {'queries': e['multiValueQueryStringParameters'], 'id': path_id, 'headers': e['headers']}
 
             return self.get_example(arg)
         else:
@@ -54,36 +57,53 @@ def make_response(body_or_path: str, status_code: int = 200, headers=None):
 
 
 def make_error_response(nhsd_service: str):
-    def _make_response(_status_code: int, example_path: str):
-        return {
-            "statusCode": _status_code,
-            "headers": {"Content-Type": "application/json"},
-            "body": load_example(example_path)
-        }
-
     if str(nhsd_service) == "NHS0001-401":
-        return _make_response(401, "unauthorized.json")
+        return make_response("unauthorized.json", 401)
 
     if str(nhsd_service) == "NHS0001-403":
-        return _make_response(403, "forbidden.json")
+        return make_response("forbidden.json", 403)
 
     if str(nhsd_service) == "NHS0001-406":
-        return _make_response(406, "not-acceptable.json")
+        return make_response("not-acceptable.json", 406)
 
     if str(nhsd_service) == "NHS0001-409":
-        return _make_response(409, "conflict.json")
+        return make_response("conflict.json", 409)
 
     if str(nhsd_service) == "NHS0001-422":
-        return _make_response(422, "unprocessable-entity.json")
+        return make_response("unprocessable-entity.json", 422)
 
     if str(nhsd_service) == "NHS0001-500":
-        return _make_response(500, "server-error.json")
+        return make_response("server-error.json", 500)
 
     if str(nhsd_service) == "NHS0001-501":
-        return _make_response(501, "not-implemented.json")
+        return make_response("not-implemented.json", 501)
 
     if str(nhsd_service) == "NHS0001-503":
-        return _make_response(503, "unavailable.json")
+        return make_response("unavailable.json", 503)
+
+
+def make_slots_response(queries: dict):
+    def is_date(q):
+        try:
+            date_parser(q, fuzzy=False)
+            return True
+        except ValueError:
+            return False
+
+    if ("healthcareService" in queries and
+            "status" in queries and set(queries['status']) <= {'free', 'busy'} and
+            "start" in queries and is_date(queries['start'][0]) and
+            "Schedule.actor:HealthcareService" in queries and
+            "_include" in queries and set(queries["_include"]) <= {"Schedule", "Schedule:actor:Practitioner",
+                                                                   "Schedule:actor:PractitionerRole",
+                                                                   "Schedule:actor:HealthcareService",
+                                                                   "HealthcareService.providedBy",
+                                                                   "HealthcareService.location"}):
+
+        return make_response("slots/GET-success.json", 200)
+
+    else:
+        return make_response("bad-request.json", 400)
 
 
 existing_appointment_id = load_example("appointment/POST-success.txt")
@@ -100,8 +120,6 @@ event_to_response = [
                get_example=lambda r: make_response("appointment/id/GET-success.json")
                if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
 
-    # Fixme: Add a catch route for GET /Appointment/not-uuid
-
     EventMatch(path=rf"^Appointment/{uuid4hex}$", method="PATCH",
                get_example=lambda r: make_response("")
                if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
@@ -110,6 +128,8 @@ event_to_response = [
                get_example=lambda r: make_response("")
                if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
 
+    EventMatch(path=r"^Appointment/.*$", method="GET",
+               get_example=lambda _: make_response("bad-request.json", 400)),
     EventMatch(path=r"^Appointment/.*", method="POST",
                get_example=lambda _: make_response("method-not-allowed.json", 405,
                                                    {"Allow": "GET, PATCH, PUT, DELETE"})),
@@ -185,8 +205,17 @@ event_to_response = [
                get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
 
     # slots
-    EventMatch(path=r"^slots/.*", method="GET",
-               get_example=lambda r: make_error_response(r['headers']['NHSD_Service'])),
+    EventMatch(path=r"^Slot?.*", method="GET",
+               get_example=lambda r: make_slots_response(r['queries'])),
+
+    EventMatch(path=r"^Slot$", method="POST",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
+    EventMatch(path=r"^Slot$", method="PUT",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
+    EventMatch(path=r"^Slot$", method="PATCH",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
+    EventMatch(path=r"^Slot$", method="DELETE",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
 
     # Header: errors
     EventMatch(path=r"^errors/.*", method="GET",
@@ -195,7 +224,6 @@ event_to_response = [
 
 
 def process_event(request_event):
-    # TODO: Validate headers here
     for _event in event_to_response:
         response = _event.get_example_response(request_event)
         if response:
@@ -214,13 +242,15 @@ def handler(_event, context):
     return process_event(_event)
 
 
-# Use this to fake a request for quick testing
+# Use this to fake a request for quick local testing
 if __name__ == '__main__':
     event = {
         "pathParameters": {
-            "proxy": "Appointment/c3f6145e-1a26-4345-b3f2-dccbcba62049"
+            "proxy": "Slots?healthcareService=foo&status=free&"
+                     "_include=Schedule&Schedule.actor:HealthcareService=foo&start=20220301"
         },
         "httpMethod": "GET",
         "headers": {}
     }
-    handler(event, None)
+
+    print(handler(event, None))
