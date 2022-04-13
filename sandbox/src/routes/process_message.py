@@ -6,7 +6,7 @@ route = APIRouter()
 
 
 @route.post("/$process-message")
-def post_process_message(NHSD_Token: str = Header(...)):
+def post_process_message(NHSD_Token: str = Header(...), NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     return load_example("process_message/POST-success.json")
 
 

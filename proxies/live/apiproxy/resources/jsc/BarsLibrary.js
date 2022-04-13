@@ -36,31 +36,13 @@ function set_variables(location, vars) {
 }
 
 
-function get_target_url_from_kvm_nhsd_service(serviceId) {
-    /*
-      Get a url value from the booking-and-referral kvm.
-      the valid endpoints at the moment are:
-      - meta
-      - slots
-      
-      If there is no value in the kvm it returns null
-    */
-      var location = "booking-and-referral-config.NHSD-ServiceIdentifier." + serviceId + ".target";
-      var url = context.getVariable(location);
-      if(url && url.endsWith('/')){
-        url = url.replace(/\/$/,"")
-      }
-      return url
-  }
-
-
 function get_target_url_from_kvm_nhsd_target_identifier(system, value) {
     /*
       Get a url value from the booking-and-referral kvm.
       the valid endpoints at the moment are:
       - meta
       - slots
-      
+
       If there is no value in the kvm it returns null
     */
       var location = "booking-and-referral-config.NHSD-Target-Identifier." + system + "." + value;
@@ -81,7 +63,7 @@ function get_endpoint_from_pathsuffix(pathsuffix) {
     - Appointment
     - ServiceRequest
     - registry
-    
+
     If there is no match in the pathsuffix returns null
 */
     if (pathsuffix.includes('/meta')) {
