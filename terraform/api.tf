@@ -6,7 +6,7 @@ resource "aws_apigatewayv2_api" "service_api" {
 }
 
 locals {
-  # NHSD cert file
+  # NHSD server cert file
   truststore_file_name = "truststore.crt"
 }
 resource "aws_s3_bucket" "truststore_bucket" {
