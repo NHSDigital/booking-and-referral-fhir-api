@@ -1,5 +1,4 @@
 // Get context variables
-var serviceId = context.getVariable("request.header.NHSD-Service");
 var b64decoded = JSON.parse(context.getVariable("b64decoded"));
 var pathSuffix = context.getVariable("proxy.pathsuffix")
 var queryString = context.getVariable("request.querystring")
@@ -16,14 +15,6 @@ if(b64decoded != null){
         isError = true;
     }
 }
-else if(serviceId != null){
- // Get target url from KVM (NHSD-Service header)
-    var targetUrl = get_target_url_from_kvm_nhsd_service(serviceId)
-    if(targetUrl === null | serviceId === null){
-        isError = true;
-    }   
-}
-
 
 context.setVariable("isError", isError)
 
