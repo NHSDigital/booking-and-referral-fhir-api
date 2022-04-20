@@ -15,12 +15,11 @@ properties:
     type: string
     example: "searchset"
   entry:
-  - fullUrl: urn:uuid:1cbdfb97-5859-48a4-8301-d54eab818d68
-    resource:
-      resourceType: "Test"
-
-      
-
-      
-      
+    - fullUrl: "urn:uuid:1cbdfb97-5859-48a4-8301-d54eab818d68"
+      resource: 
+        resourceType: "ServiceRequest"
+    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+      resource:
+        resourceType: "ServiceRequest"
+  
 

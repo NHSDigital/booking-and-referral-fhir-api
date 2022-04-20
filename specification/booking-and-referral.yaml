@@ -363,12 +363,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleAppt.yaml
               example:
                 $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleAppt.yaml
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -414,12 +414,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleAppt.yaml
               example:
                 $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleAppt.yaml
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -517,12 +517,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleRef.yaml
               example:
                 $ref: examples/service_request/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleRef.yaml
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
