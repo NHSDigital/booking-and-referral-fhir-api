@@ -28,7 +28,6 @@ class TestDocumentReference:
             params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -57,7 +56,6 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -84,7 +82,6 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{self.existing_document_reference_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -112,7 +109,6 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -139,7 +135,6 @@ class TestDocumentReference:
             json=load_example("document_reference/POST-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -166,7 +161,6 @@ class TestDocumentReference:
             json=load_example("document_reference/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -193,7 +187,6 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{self.existing_document_reference_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -222,7 +215,6 @@ class TestDocumentReference:
             json=load_example("document_reference/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -250,7 +242,6 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -279,7 +270,6 @@ class TestDocumentReference:
             params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
@@ -306,7 +296,6 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{self.existing_document_reference_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Service": "NHS0001",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"

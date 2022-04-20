@@ -18,17 +18,19 @@ ENTITY_NOT_FOUND = status.HTTP_403_FORBIDDEN  # Spec is probably wrong and statu
 
 
 @route.get("/Appointment")
-def get_appointment(patientIdentifier: str, NHSD_Token: str = Header(...)):
+def get_appointment(patientIdentifier: str, NHSD_Token: str = Header(...), NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     return load_example("appointment/GET-success.json")
 
 
 @route.post("/Appointment", status_code=201)
-def create_appointment(NHSD_Token: str = Header(...)):
+def create_appointment(NHSD_Token: str = Header(...), NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     return load_example("appointment/POST-success.txt")
 
 
 @route.get("/Appointment/{id}")
-def get_appointment_id(response: Response, id: UUID, NHSD_Token: str = Header(...)):
+def get_appointment_id(response: Response,
+                       id: UUID, NHSD_Token: str = Header(...),
+                       NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     if str(id) == existing_appointment_id:
         return load_example("appointment/id/GET-success.json")
     else:
@@ -38,7 +40,10 @@ def get_appointment_id(response: Response, id: UUID, NHSD_Token: str = Header(..
 
 @route.patch("/Appointment/{id}")
 def patch_appointment_id(response: Response,
-                         body: AppointmentBody, id: UUID, NHSD_Token: str = Header(...)
+                         body: AppointmentBody,
+                         id: UUID,
+                         NHSD_Token: str = Header(...),
+                         NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")
                          ):
     if str(id) == existing_appointment_id:
         return ""
@@ -49,7 +54,9 @@ def patch_appointment_id(response: Response,
 
 @route.put("/Appointment/{id}")
 def put_appointment_id(response: Response,
-                       body: AppointmentBody, id: UUID, NHSD_Token: str = Header(...)
+                       body: AppointmentBody,
+                       id: UUID, NHSD_Token: str = Header(...),
+                       NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")
                        ):
     if str(id) == existing_appointment_id:
         return ""
@@ -59,7 +66,9 @@ def put_appointment_id(response: Response,
 
 
 @route.delete("/Appointment/{id}")
-def delete_appointment_id(response: Response, id: UUID, NHSD_Token: str = Header(...)):
+def delete_appointment_id(response: Response,
+                          id: UUID, NHSD_Token: str = Header(...),
+                          NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     if str(id) == existing_appointment_id:
         return ""
     else:
