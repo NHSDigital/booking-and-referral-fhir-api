@@ -170,6 +170,8 @@ paths:
         A receiver dictates what they need from a sender making a request and the MessageDefinition is the mechanism to support this. The Message Definition details what FHIR resources need to be included in the body (payload).
         The receiver may support multiple services e.g. Out-of-Hours, Clinical Assessment Service under one organisation (on the same system) and consideration should be given to maintaining service identifiers and workflow type against Message Definitions.  It's advisable to make this a configurable option which providers can maintain themselves as new services come onboard.
       operationId: getMessageDefinition
+      parameters:
+        - $ref: '#/components/parameters/context_QParam'
       responses:
         '200':
           description: Success
@@ -603,6 +605,15 @@ components:
         example: c3f6145e-1a26-4345-b3f2-dccbcba62049
       required: true
       allowEmptyValue: false
+    context_QParam: 
+      name: context
+      description: |
+       The target service identifier. allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
+      required: false
+      in: query
+      schema:
+        type: string
+        example: 2000099999
     PatientId_QParam: 
       name: patient:identifier
       description: |
