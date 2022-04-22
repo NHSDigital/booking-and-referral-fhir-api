@@ -361,16 +361,16 @@ paths:
                 - 'Slot:*'
       responses:
         '200':
-          description: Success
+          description: Success. A full example of a Slot Searchset response can be found [here](  https://simplifier.net/NHSBookingandReferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2).
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundleAppt.yaml
+                $ref: schemas/SearchBundleSlot.yaml
               example:
                 $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundleAppt.yaml
+                $ref: schemas/SearchBundleSlot.yaml
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -608,7 +608,7 @@ components:
     context_QParam: 
       name: context
       description: |
-       The target service identifier. allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
+       The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
       required: false
       in: query
       schema:

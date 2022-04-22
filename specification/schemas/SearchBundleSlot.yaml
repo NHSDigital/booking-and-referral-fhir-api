@@ -1,0 +1,39 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: "Bundle"
+  meta:
+    type: object
+    properties:
+      profile:
+        type: array
+        items:
+          type: string
+          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
+  type:
+    type: string
+    example: "searchset"
+  entry:
+    - fullUrl: "urn:uuid:1cbdfb97-5859-48a4-8301-d54eab818d68"
+      resource: 
+        resourceType: "Slot"
+    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+      resource:
+        resourceType: "Schedule"
+    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+      resource:
+        resourceType: "HealthcareService"
+    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+      resource:
+        resourceType: "Practitioner"
+    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+      resource:
+        resourceType: "PractitionerRole"
+    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+      resource:
+        resourceType: "Location"
+  
+
+
+
