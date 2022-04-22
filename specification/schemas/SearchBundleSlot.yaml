@@ -21,16 +21,16 @@ properties:
     - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
       resource:
         resourceType: "Schedule"
-    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+    - fullUrl: "urn:uuid:1cbdfb97-5859-48a4-8301-d54eab818d68"
       resource:
         resourceType: "HealthcareService"
-    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+    - fullUrl: "urn:uuid:07939a0c-2854-46ff-9282-ad906bc93679"
       resource:
         resourceType: "Practitioner"
-    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+    - fullUrl: "urn:uuid:9589fb37-87a2-48d8-968f-b371429208a8"
       resource:
         resourceType: "PractitionerRole"
-    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
+    - fullUrl: "urn:uuid:d5ffd0cd-ec7e-48a1-84f1-91f4c0eb8fc5"
       resource:
         resourceType: "Location"
   
