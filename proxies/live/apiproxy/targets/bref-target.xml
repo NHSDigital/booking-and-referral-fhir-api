@@ -82,7 +82,7 @@
     <SSLInfo>
       <Enabled>true</Enabled>
       <ClientAuthEnabled>true</ClientAuthEnabled>
-      <KeyStore>ref://bars-client</KeyStore>
+      <KeyStore>ref://mock-receiver</KeyStore>
       <KeyAlias>cert</KeyAlias>
     </SSLInfo>
   </HTTPTargetConnection>
