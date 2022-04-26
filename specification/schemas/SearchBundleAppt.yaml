@@ -2,26 +2,52 @@ type: object
 properties:
   resourceType:
     type: string
-    example: "Bundle"
+  id:
+    type: string
   meta:
     type: object
     properties:
+      lastUpdated:
+        type: string
       profile:
         type: array
         items:
           type: string
-          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
-  type:
+  status:
     type: string
-    example: "searchset"
-  entry:
-    - fullUrl: "urn:uuid:1cbdfb97-5859-48a4-8301-d54eab818d68"
-      resource: 
-        resourceType: "Appointment"
-    - fullUrl: "urn:uuid:236bb75d-90ef-461f-b71e-fde7f899802c"
-      resource:
-        resourceType: "Appointment"
-  
-
-
-
+  description:
+    type: string
+  start:
+    type: string
+  end:
+    type: string
+  slot:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+  created:
+    type: string
+  basedOn:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+        type:
+          type: string
+  participant:
+    type: array
+    items:
+      type: object
+      properties:
+        actor:
+          type: object
+          properties:
+            reference:
+              type: string
+        status:
+          type: string
