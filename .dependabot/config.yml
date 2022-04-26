@@ -7,7 +7,7 @@ update_configs:
       - match:
           dependency_type: "all"
           update_type: "security:patch"
-  - package_manager: "javascript"
+  - package_manager: "python"
     directory: "/sandbox"
     update_schedule: "live"
     automerged_updates:
