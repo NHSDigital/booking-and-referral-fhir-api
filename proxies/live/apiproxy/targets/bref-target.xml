@@ -83,7 +83,7 @@
       <Enabled>true</Enabled>
       <ClientAuthEnabled>true</ClientAuthEnabled>
       <KeyStore>ref://mock-receiver</KeyStore>
-      <KeyAlias>dev.platform.nhs.uk</KeyAlias>
+      <KeyAlias>cert</KeyAlias>
     </SSLInfo>
   </HTTPTargetConnection>
 </TargetEndpoint>
