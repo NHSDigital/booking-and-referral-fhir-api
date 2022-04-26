@@ -4,6 +4,7 @@ properties:
     type: string
   id:
     type: string
+    example: "777a156c-af3c-4748-a8a3-7e95e4b0df9a"
   meta:
     type: object
     properties:
@@ -13,41 +14,47 @@ properties:
         type: array
         items:
           type: string
-  status:
+          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
+  type:
     type: string
-  description:
+    example: "searchset"
+  total:
+    type: integer
+    example: 2
+  timestamp:
     type: string
-  start:
-    type: string
-  end:
-    type: string
-  slot:
+  link:
     type: array
     items:
       type: object
       properties:
-        reference:
+        relation:
           type: string
-  created:
-    type: string
-  basedOn:
+        url:
+          type: string
+  entry:
     type: array
     items:
       type: object
       properties:
-        reference:
+        fullUrl:
           type: string
-        type:
-          type: string
-  participant:
-    type: array
-    items:
-      type: object
-      properties:
-        actor:
+        resource:
           type: object
           properties:
-            reference:
+            resourceType:
               type: string
-        status:
-          type: string
+              example: "Appointment"
+            id:
+              type: string
+            meta: 
+              type: object
+              properties:
+                lastUpdated:
+                  type: string
+                profile:
+                  type: array
+                  items:
+                    type: string
+                    example: "https://simplifier.net/nhsbookingandreferrals/barsservicerequestrequestcasetransfer"
+
