@@ -613,7 +613,7 @@ components:
       in: query
       schema:
         type: string
-        example: 2000099999
+        example: "2000099999"
     PatientId_QParam: 
       name: patient:identifier
       description: |
