@@ -82,8 +82,8 @@
     <SSLInfo>
       <Enabled>true</Enabled>
       <ClientAuthEnabled>true</ClientAuthEnabled>
-      <KeyStore>ref://mock-receiver</KeyStore>
-      <KeyAlias>dev.platform.nhs.uk</KeyAlias>
+      <KeyStore>ref://bars-client</KeyStore>
+      <KeyAlias>cert</KeyAlias>
     </SSLInfo>
   </HTTPTargetConnection>
 </TargetEndpoint>
