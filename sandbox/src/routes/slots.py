@@ -31,6 +31,7 @@ def slot(
         ..., alias="Schedule.actor:HealthcareService"
     ),
     NHSD_Token: str = Header(...),
+    NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
 ):
     return load_example("slots/GET-success.json")
 

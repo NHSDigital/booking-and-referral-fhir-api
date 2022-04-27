@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Header
 from .example_loader import load_example
 from fastapi.responses import JSONResponse
 
@@ -6,7 +6,7 @@ route = APIRouter()
 
 
 @route.get("/metadata")
-def get_metadata():
+def get_metadata(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     return load_example("metadata/GET-success.json")
 
 

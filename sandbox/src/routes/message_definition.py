@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Header
 from .example_loader import load_example
 from fastapi.responses import JSONResponse
 
@@ -6,7 +6,7 @@ route = APIRouter()
 
 
 @route.get("/MessageDefinition")
-def get_message_definition():
+def get_message_definition(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     return load_example("message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json")
 
 
