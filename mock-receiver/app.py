@@ -118,7 +118,7 @@ event_to_response = [
 
     EventMatch(path=f"^Appointment/{uuid4hex}$", method="GET",
                get_example=lambda r: make_response("appointment/id/GET-success.json")
-               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
+               if r['id'] == existing_appointment_id else make_response("bad-request.json", 400)),
 
     EventMatch(path=rf"^Appointment/{uuid4hex}$", method="PATCH",
                get_example=lambda r: make_response("")
