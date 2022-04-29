@@ -126,8 +126,7 @@ event_to_response = [
 
     EventMatch(path=rf"^Appointment/{uuid4hex}$", method="PUT",
                get_example=lambda r: make_response("")
-               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
-
+               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 400)),
     EventMatch(path=r"^Appointment/.*$", method="GET",
                get_example=lambda _: make_response("bad-request.json", 400)),
     EventMatch(path=r"^Appointment/.*", method="POST",
@@ -138,7 +137,7 @@ event_to_response = [
     EventMatch(path=r"^Appointment$", method="PATCH",
                get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
     EventMatch(path=r"^Appointment$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
+               get_example=lambda _: make_response("method-not-allowed.json", 400, {"Allow": "GET, POST"})),
 
     # metadata
     EventMatch(path=r"^metadata$", method="GET",
