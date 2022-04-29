@@ -9,7 +9,7 @@ docker_service:
       - name: VERSION_INFO
         value: "{{ version_info | to_json }}"
       - name: PORT
-        value: 9000
+        value: "9000"
     health_check:
       matcher: "200"
       path: "/_status"
