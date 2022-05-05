@@ -19,6 +19,7 @@ class TestAppointment:
     @pytest.mark.sandbox
     def test_get_appointments(self, get_token_client_credentials):
         # Given
+
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("appointment/GET-success.json")
