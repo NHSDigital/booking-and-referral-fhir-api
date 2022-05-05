@@ -23,6 +23,7 @@ destroy: workspace
 	AWS_PROFILE=$(aws_profile) terraform destroy
 
 # Docker - lambda
+# url-aws/name:1.1
 docker-build:
 	cp -r ../specification/examples ../mock-receiver
 	docker build --platform linux/amd64 -t mock-receiver-$(environment):latest -f ../mock-receiver/Dockerfile ../mock-receiver
@@ -41,3 +42,13 @@ test:
 
 clean:
 	rm -rf build .terraform upload-key
+
+docker-build-sandbox:
+	cp -r ../specification/examples ../sandbox/src/routes
+	docker build --platform linux/amd64 -t sandbox-$(environment):latest -f ../sandbox/Dockerfile ../sandbox
+
+docker-tag-sandbox: docker-build-sandbox
+	docker tag sandbox-$(environment):latest $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/bars-mock-receiver-$(environment)-ecr-sandbox:latest
+
+docker-push-sandbox: docker-tag-sandbox docker-login
+	docker push $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/bars-mock-receiver-$(environment)-ecr-sandbox:latest
