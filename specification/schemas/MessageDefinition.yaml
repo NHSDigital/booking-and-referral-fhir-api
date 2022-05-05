@@ -10,4 +10,8 @@ properties:
         type: array
         items:
           type: string
-          example: "https://fhir.nhs.uk/StructureDefinition/BARSMessageDefinition"
+        example: [
+          "https://simplifier.net/nhsbookingandreferrals/barsmessagedefinition-servicerequest-request",
+          "https://simplifier.net/nhsbookingandreferrals/barsmessagedefinitionservicerequestresponse",
+          "https://simplifier.net/nhsbookingandreferrals/barsmessagedefinitionbookingrequest"
+          ]

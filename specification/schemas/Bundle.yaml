@@ -10,4 +10,4 @@ properties:
         type: array
         items:
           type: string
-          example: "https://fhir.nhs.uk/StructureDefinition/BARSBundleMessage"
+          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
