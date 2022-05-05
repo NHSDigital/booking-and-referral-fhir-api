@@ -26,10 +26,30 @@ class EventMatch:
     get_example: Callable[[dict], dict] = lambda _: ""
 
     def get_example_response(self, e):
-        path = e["pathParameters"]["proxy"]
-        is_matched = re.match(self.path, path) and self.method == e["httpMethod"]
+        full_path = e["pathParameters"]["proxy"]
+        if e.get("queryStringParameters"):
+            query_params = e.get("queryStringParameters")
+            query_params_name = list(query_params.keys())[0]
+            query_params_value = query_params.get("patientIdentifier")
+            full_path = e["pathParameters"]["proxy"] + "?" + query_params_name + "=" + query_params_value
+
+        print("full_path")
+        print(full_path)
+        print("path")
+        print(self.path)
+        print("method")
+        print(self.method)
+        print(e["httpMethod"])
+        print("match")
+        print(re.match(self.path, full_path))
+        print(self.method == e["httpMethod"])
+        print(self.path == full_path and self.method == e["httpMethod"])
+
+        is_matched = re.match(self.path, full_path) and self.method == e["httpMethod"]
+        # is_matched = self.path == full_path and self.method == e["httpMethod"]
         if is_matched:
-            parts = parse.urlparse(path).path.split('/')
+            print("match")
+            parts = parse.urlparse(full_path).path.split('/')
             path_id = parts[1] if len(parts) >= 2 else ""
             arg = {'queries': e['multiValueQueryStringParameters'], 'id': path_id, 'headers': e['headers']}
 
@@ -108,10 +128,15 @@ def make_slots_response(queries: dict):
 
 existing_appointment_id = load_example("appointment/POST-success.txt")
 uuid4hex = r'[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$'
+nhs_number_regex = r'[0-9]{10}$'
+
 event_to_response = [
     # Appointment
-    EventMatch(path="^Appointment$", method="GET",
+    EventMatch(path=f"^Appointment?patientIdentifier={nhs_number_regex}$", method="GET",
                get_example=lambda _: make_response("appointment/GET-success.json")),
+
+    EventMatch(path=r"^Appointment$", method="GET",
+               get_example=lambda _: make_response("bad-request.json", 400)),
 
     EventMatch(path="^Appointment$", method="POST",
                get_example=lambda _: make_response("appointment/POST-success.txt", 201)),
@@ -121,22 +146,23 @@ event_to_response = [
                if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
 
     EventMatch(path=rf"^Appointment/{uuid4hex}$", method="PATCH",
+               get_example=lambda r: make_response("/""/")
+               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
+
+    EventMatch(path=rf"^Appointment?patientIdentifier={nhs_number_regex}$", method="PUT",
                get_example=lambda r: make_response("")
                if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
 
-    EventMatch(path=rf"^Appointment/{uuid4hex}$", method="PUT",
-               get_example=lambda r: make_response("")
-               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
-    EventMatch(path=r"^Appointment/.*$", method="GET",
-               get_example=lambda _: make_response("bad-request.json", 400)),
     EventMatch(path=r"^Appointment/.*", method="POST",
                get_example=lambda _: make_response("method-not-allowed.json", 405,
                                                    {"Allow": "GET, PATCH, PUT, DELETE"})),
     EventMatch(path=r"^Appointment$", method="PUT",
                get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
+
     EventMatch(path=r"^Appointment$", method="PATCH",
                get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
-    EventMatch(path=r"^Appointment$", method="DELETE",
+
+    EventMatch(path=r"Appointment", method="DELETE",
                get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
 
     # metadata
@@ -238,6 +264,7 @@ def process_event(request_event):
 
 
 def handler(_event, context):
+    print(_event)
     return process_event(_event)
 
 
