@@ -3,7 +3,6 @@ import requests
 from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
-import re
 import uuid
 import base64
 import json
