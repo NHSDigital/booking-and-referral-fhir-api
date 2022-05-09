@@ -22,11 +22,6 @@ def get_appointment(patientIdentifier: str, NHSD_Token: str = Header(...), NHSD_
     return load_example("appointment/GET-success.json")
 
 
-@route.post("/Appointment", status_code=201)
-def create_appointment(NHSD_Token: str = Header(...), NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
-    return load_example("appointment/POST-success.txt")
-
-
 @route.get("/Appointment/{id}")
 def get_appointment_id(response: Response,
                        id: UUID, NHSD_Token: str = Header(...),
@@ -38,44 +33,7 @@ def get_appointment_id(response: Response,
         return load_example("entity-not-found.json")
 
 
-@route.patch("/Appointment/{id}")
-def patch_appointment_id(response: Response,
-                         body: AppointmentBody,
-                         id: UUID,
-                         NHSD_Token: str = Header(...),
-                         NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")
-                         ):
-    if str(id) == existing_appointment_id:
-        return ""
-    else:
-        response.status_code = ENTITY_NOT_FOUND
-        return load_example("entity-not-found.json")
-
-
-@route.put("/Appointment/{id}")
-def put_appointment_id(response: Response,
-                       body: AppointmentBody,
-                       id: UUID, NHSD_Token: str = Header(...),
-                       NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")
-                       ):
-    if str(id) == existing_appointment_id:
-        return ""
-    else:
-        response.status_code = ENTITY_NOT_FOUND
-        return load_example("entity-not-found.json")
-
-
-@route.delete("/Appointment/{id}")
-def delete_appointment_id(response: Response,
-                          id: UUID, NHSD_Token: str = Header(...),
-                          NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
-    if str(id) == existing_appointment_id:
-        return ""
-    else:
-        response.status_code = ENTITY_NOT_FOUND
-        return load_example("entity-not-found.json")
-
-
+@route.post("/Appointment")
 @route.put("/Appointment")
 @route.patch("/Appointment")
 @route.delete("/Appointment")
@@ -84,6 +42,9 @@ def appointment_method_not_allowed():
     return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
 
 
+@route.patch("/Appointment/{id}")
+@route.put("/Appointment/{id}")
+@route.delete("/Appointment/{id}")
 @route.post("/Appointment/{id}")
 def appointment_id_method_not_allowed():
     headers = {"Allow": "GET, PATCH, PUT, DELETE"}
