@@ -1,8 +1,9 @@
 import pytest
 import requests
-from .configuration import config
+#from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
+
 import re
 import uuid
 import base64
@@ -17,7 +18,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_appointments(self, get_token_client_credentials):
+    def test_get_appointments(self, get_token_client_credentials, cmd_options):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -27,8 +28,11 @@ class TestAppointment:
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
+        oauth_base_uri = cmd_options["--oauth-base-uri"]
+        proxy_base_path= cmd_options["--proxy-base-path"]
+
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
+            url=f"{oauth_base_uri}/{proxy_base_path}/Appointment",
             params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
