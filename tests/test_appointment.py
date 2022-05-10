@@ -1,6 +1,6 @@
 import pytest
 import requests
-#from .configuration import config
+from .configuration import config  # TODO To remove
 from assertpy import assert_that
 from .example_loader import load_example
 
@@ -29,7 +29,7 @@ class TestAppointment:
 
         # When
         oauth_base_uri = cmd_options["--oauth-base-uri"]
-        proxy_base_path= cmd_options["--proxy-base-path"]
+        proxy_base_path = cmd_options["--proxy-base-path"]
 
         response = requests.get(
             url=f"{oauth_base_uri}/{proxy_base_path}/Appointment",
