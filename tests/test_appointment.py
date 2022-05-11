@@ -1,6 +1,6 @@
 import pytest
 import requests
-from .configuration import config  # TODO To remove
+# from .configuration import config  # TODO To remove
 from assertpy import assert_that
 from .example_loader import load_example
 
@@ -18,7 +18,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_appointments(self, get_token_client_credentials, cmd_options):
+    def test_get_appointments(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -28,11 +28,8 @@ class TestAppointment:
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
-        oauth_base_uri = cmd_options["--oauth-base-uri"]
-        proxy_base_path = cmd_options["--proxy-base-path"]
-
         response = requests.get(
-            url=f"{oauth_base_uri}/{proxy_base_path}/Appointment",
+            url=f"{base_url_path}/Appointment",
             params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
@@ -51,7 +48,7 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_appointments_missing_param_patient_id(
-            self, get_token_client_credentials
+            self, get_token_client_credentials, base_url_path
     ):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -61,8 +58,9 @@ class TestAppointment:
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
+
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
+            url=f"{base_url_path}/Appointment",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -79,7 +77,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_appointment(self, get_token_client_credentials):
+    def test_get_appointment(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -89,7 +87,7 @@ class TestAppointment:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -106,7 +104,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_appointment_bad_id(self, get_token_client_credentials):
+    def test_get_appointment_bad_id(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -117,7 +115,7 @@ class TestAppointment:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
+            url=f"{base_url_path}/Appointment/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -134,7 +132,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_appointment_entity_not_found(self, get_token_client_credentials):
+    def test_get_appointment_entity_not_found(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
@@ -144,7 +142,7 @@ class TestAppointment:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.non_existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -161,7 +159,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_create_appointment(self, get_token_client_credentials):
+    def test_create_appointment(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 201
@@ -171,7 +169,7 @@ class TestAppointment:
 
         # When
         response = requests.post(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
+            url=f"{base_url_path}/Appointment",
             json=load_example("appointment/POST-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -193,7 +191,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_put_appointment(self, get_token_client_credentials):
+    def test_put_appointment(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -203,7 +201,7 @@ class TestAppointment:
 
         # When
         response = requests.put(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.existing_appointment_id}",
             json=load_example("appointment/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -221,7 +219,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_patch_appointment(self, get_token_client_credentials):
+    def test_patch_appointment(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -231,7 +229,7 @@ class TestAppointment:
 
         # When
         response = requests.patch(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.existing_appointment_id}",
             json=load_example("appointment/id/PATCH-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -249,7 +247,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_delete_appointment(self, get_token_client_credentials):
+    def test_delete_appointment(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -259,7 +257,7 @@ class TestAppointment:
 
         # When
         response = requests.delete(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -276,7 +274,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_put_appointment_bad_id(self, get_token_client_credentials):
+    def test_put_appointment_bad_id(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -287,7 +285,7 @@ class TestAppointment:
 
         # When
         response = requests.put(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
+            url=f"{base_url_path}/Appointment/{bad_id}",
             json=load_example("appointment/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -305,7 +303,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_put_appointment_entity_not_found(self, get_token_client_credentials):
+    def test_put_appointment_entity_not_found(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
@@ -315,7 +313,7 @@ class TestAppointment:
 
         # When
         response = requests.put(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.non_existing_appointment_id}",
             json=load_example("appointment/id/PUT-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -333,7 +331,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_patch_appointment_bad_id(self, get_token_client_credentials):
+    def test_patch_appointment_bad_id(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -344,7 +342,7 @@ class TestAppointment:
 
         # When
         response = requests.patch(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
+            url=f"{base_url_path}/Appointment/{bad_id}",
             json=load_example("appointment/id/PATCH-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -362,7 +360,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_patch_appointment_entity_not_found(self, get_token_client_credentials):
+    def test_patch_appointment_entity_not_found(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
@@ -372,7 +370,7 @@ class TestAppointment:
 
         # When
         response = requests.patch(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.non_existing_appointment_id}",
             json=load_example("appointment/id/PATCH-body.json"),
             headers={
                 "Authorization": f"Bearer {token}",
@@ -390,7 +388,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_delete_appointment_bad_id(self, get_token_client_credentials):
+    def test_delete_appointment_bad_id(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -401,7 +399,7 @@ class TestAppointment:
 
         # When
         response = requests.delete(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
+            url=f"{base_url_path}/Appointment/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -418,7 +416,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_delete_appointment_entity_not_found(self, get_token_client_credentials):
+    def test_delete_appointment_entity_not_found(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
@@ -428,7 +426,7 @@ class TestAppointment:
 
         # When
         response = requests.delete(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.non_existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -445,7 +443,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_appointments_method_not_allowed(self, get_token_client_credentials):
+    def test_appointments_method_not_allowed(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -456,7 +454,7 @@ class TestAppointment:
 
         # When
         response = requests.put(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
+            url=f"{base_url_path}/Appointment",
             params={"patientIdentifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
@@ -474,7 +472,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_appointment_id_method_not_allowed(self, get_token_client_credentials):
+    def test_appointment_id_method_not_allowed(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -484,7 +482,7 @@ class TestAppointment:
 
         # When
         response = requests.post(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
+            url=f"{base_url_path}/Appointment/{self.existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,

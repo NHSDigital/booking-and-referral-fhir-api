@@ -14,12 +14,6 @@ options = [
                 "without appending env name or PR number."
     },
     {
-        "name": "--pr-no",
-        "required": False,
-        "action": "store",
-        "help": "The github pull request number. Example --pr-no=42."
-    },
-    {
         "name": "--proxy-base-path",
         "required": True,
         "action": "store",
@@ -44,30 +38,10 @@ options = [
         "help": "Redirect url for Apigee default app."
     },
     {
-        "name": "--jwt-private-key-file",
-        "required": True,
-        "action": "store",
-        "help": "Absolute path to jwt private key.",
-    },
-    {
         "name": "--apigee-environment",
         "required": True,
         "action": "store",
         "help": "Apigee environment",
-    },
-    {
-        "name": "--apigee-api-token",
-        "required": True,
-        "action": "store",
-        "help": "Apigee api token. It's needed for all Apigee Api services. "
-                "Pass a dummy string if your tests don't need one."
-    },
-    {
-        "name": "--oauth-proxy",
-        "required": True,
-        "action": "store",
-        "help": "Oauth Proxy "
-                "Pass a dummy string if your tests don't need one."
     },
     {
         "name": "--oauth-base-uri",

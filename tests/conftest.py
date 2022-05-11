@@ -23,14 +23,10 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope='session', autouse=True)
 def cmd_options(request) -> dict:
-    options = create_cmd_options(request.config.getoption)
-    print(options)
     return create_cmd_options(request.config.getoption)
 
-
-
 @pytest.fixture(scope="session")
-async def default_oauth_helper(cmd_options: dict): 
+async def default_oauth_helper(cmd_options: dict):
     """This fixture is automatically called once when used inside a class.
     The default app created here should not be modified by your tests.
     The default app has a default product associated.
@@ -41,12 +37,11 @@ async def default_oauth_helper(cmd_options: dict):
     client_secret = cmd_options["--default-client-secret"]
     redirect_url=cmd_options["--default-callback-url"]
     proxy_name = cmd_options["--service-name"]  #Todo
-    oauth_proxy = cmd_options["--oauth-proxy"]
-    oauth_base_uri = cmd_options["--oauth-base-uri"]
+
 
 
     if ENVIRONMENT == "int" or ENVIRONMENT == "sandbox":
-        oauth = OauthHelper(client_id, client_secret, redirect_url, oauth_proxy, oauth_base_uri)
+        oauth = OauthHelper(client_id, client_secret, redirect_url)
         yield oauth
 
     is_internal_env = (
@@ -111,8 +106,6 @@ async def default_oauth_helper(cmd_options: dict):
             client_id=apigee_app.client_id,
             client_secret=apigee_app.client_secret,
             redirect_uri=apigee_app.callback_url,
-            oauth_proxy=oauth_proxy,
-            base_uri=oauth_base_uri
         )
 
         yield oauth
@@ -121,7 +114,7 @@ async def default_oauth_helper(cmd_options: dict):
         print("\nDestroying Default App and Product..")
         await apigee_app.destroy_app()
         await apigee_product.destroy_product()
- 
+
 
 @pytest.fixture(scope="session")
 def event_loop(request):
@@ -153,3 +146,7 @@ async def get_token_client_credentials(default_oauth_helper, cmd_options: dict):
     )
     print(token_resp)
     return token_resp["body"]
+
+@pytest.fixture()
+def base_url_path(cmd_options) -> str:
+    return f"{cmd_options['--oauth-base-uri']}/{cmd_options['--proxy-base-path']}"
