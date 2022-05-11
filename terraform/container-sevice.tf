@@ -6,11 +6,11 @@ resource "aws_ecs_service" "mock-receiver-service" {
   launch_type     = "FARGATE"
   network_configuration {
     security_groups  = [aws_security_group.ecs_tasks.id]
-    subnets          = [data.aws_subnet.bebop_subnet.id]
+    subnets          = [data.aws_subnet.bebop_public_subnet.id]
     assign_public_ip = false
   }
 
-  #  iam_role        = aws_iam_role.ecs-task-role.arn
+  #    iam_role        = aws_iam_role.ecs-task-role.arn # not needed see docs
   #  depends_on = [aws_iam_role.ecs-task-role]
 
   #  ordered_placement_strategy {
@@ -31,7 +31,73 @@ resource "aws_ecs_service" "mock-receiver-service" {
   #
 }
 
+locals {
+  public_subnet_cidr = "10.0.1.0/24"
+}
+resource "aws_security_group" "ecs_tasks" {
+  name   = "${local.name_prefix}-sg-task"
+  vpc_id = data.aws_vpc.fargate-vpc.id
 
+  /*
+    ingress {
+      protocol    = "tcp"
+      from_port   = local.container_port
+      to_port     = local.container_port
+      cidr_blocks = []
+    }
+  */
+
+  ingress {
+    protocol    = "tcp"
+    from_port   = 443
+    to_port     = 443
+    cidr_blocks = [local.public_subnet_cidr]
+  }
+
+  // TODO: is this necessary when subnet is public?
+  /*
+    egress {
+      from_port       = 443
+      to_port         = 443
+      protocol        = "tcp"
+      prefix_list_ids = [
+        aws_vpc_endpoint.s3.prefix_list_id
+      ]
+    }
+  */
+
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [local.public_subnet_cidr]
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  // From below commented sg
+  ingress {
+    protocol         = "tcp"
+    from_port        = local.container_port
+    to_port          = local.container_port
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    protocol         = "-1"
+    from_port        = 0
+    to_port          = 0
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
+
+/*
 resource "aws_security_group" "ecs_tasks" {
   name   = "${local.name_prefix}-sg-task"
   vpc_id = data.aws_vpc.fargate-vpc.id
@@ -52,3 +118,4 @@ resource "aws_security_group" "ecs_tasks" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
+*/

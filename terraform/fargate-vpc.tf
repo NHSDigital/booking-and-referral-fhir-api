@@ -1,11 +1,15 @@
 data "aws_vpc" "fargate-vpc" {
-  id = "vpc-05a0c2d68352a2ef4"
+  id = data.terraform_remote_state.bebop-infra.outputs.bebop-dev-vpc_id
 }
 
 locals {
   container_port = 9000
 }
 
-data "aws_subnet" "bebop_subnet" {
-  id = "subnet-004c03d9e2b09481f"
+data "aws_subnet" "bebop_private_subnet" {
+  id = data.terraform_remote_state.bebop-infra.outputs.bebop-dev-private_subnet
+}
+
+data "aws_subnet" "bebop_public_subnet" {
+  id = data.terraform_remote_state.bebop-infra.outputs.bebop-dev-public_subnet
 }
