@@ -66,7 +66,7 @@ resource "aws_ecs_task_definition" "mock-receiver" {
   ])
 }
 
-resource "aws_ecs_service" "mock-receiver-service" {
+resource "aws_ecs_service" "mock-receiver-service" {-
  
   name            = "${local.name_prefix}-service"
   cluster         = aws_ecs_cluster.ecs-cluster.id
