@@ -5,7 +5,22 @@ resource "aws_ecs_cluster" "ecs-cluster" {
     name  = "containerInsights"
     value = "enabled"
   }
+
+    configuration {
+    execute_command_configuration {
+      logging    = "OVERRIDE"
+      
+      log_configuration {
+        cloud_watch_log_group_name     = aws_cloudwatch_log_group.cluster_container_logs.name
+      }
+    }
+  }
 }
+
+resource "aws_cloudwatch_log_group" "cluster_container_logs" {
+  name = "${local.name_prefix}-cluster"
+}
+
 
 resource "aws_iam_role" "ecs-task-role" {
   name = "${local.name_prefix}-ecs-task"
@@ -29,17 +44,22 @@ EOF
 
 resource "aws_ecs_task_definition" "mock-receiver" {
   family                = "${local.name_prefix}-task"
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = 256
+  memory                   = 512
+  
   container_definitions = jsonencode([
     {
       name         = "rest-api"
       image        = "${data.aws_ecr_image.sandbox_image.repository_name}:latest"
-      cpu          = 10
-      memory       = 512
       essential    = true
+      
       portMappings = [
         {
-          containerPort = 5050
-          hostPort      = 80
+          containerPort = 9000
+          hostPort      = 9000
+          
         }
       ]
     }
@@ -47,10 +67,18 @@ resource "aws_ecs_task_definition" "mock-receiver" {
 }
 
 resource "aws_ecs_service" "mock-receiver-service" {
+ 
   name            = "${local.name_prefix}-service"
   cluster         = aws_ecs_cluster.ecs-cluster.id
   task_definition = aws_ecs_task_definition.mock-receiver.arn
   desired_count   = 1
+  launch_type     = "FARGATE"
+  network_configuration {
+   security_groups  = [aws_security_group.ecs_tasks.id]
+   subnets          = [aws_subnet.main.id]
+   assign_public_ip = false
+ }
+
   #  iam_role        = aws_iam_role.ecs-task-role.arn
   #  depends_on = [aws_iam_role.ecs-task-role]
 
