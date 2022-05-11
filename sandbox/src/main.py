@@ -11,7 +11,6 @@ from routes import (
     metadata,
     service_request,
     process_message,
-    document_reference,
     message_definition,
 )
 from routes.example_loader import load_example
@@ -56,7 +55,6 @@ app.include_router(appointment.route)
 app.include_router(metadata.route)
 app.include_router(service_request.route)
 app.include_router(process_message.route)
-app.include_router(document_reference.route)
 app.include_router(message_definition.route)
 
 
