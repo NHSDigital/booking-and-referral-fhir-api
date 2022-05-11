@@ -1,6 +1,5 @@
 import pytest
 import requests
-# from .configuration import config  # TODO To remove
 from assertpy import assert_that
 from .example_loader import load_example
 import uuid
@@ -157,7 +156,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_appointments_method_not_allowed(self, get_token_client_credentials):
+    def test_appointments_method_not_allowed(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405

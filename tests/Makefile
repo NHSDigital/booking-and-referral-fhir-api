@@ -23,7 +23,7 @@ CUSTOM_CMD_OPT = --service-name="$(FULLY_QUALIFIED_SERVICE_NAME)" \
 reruns = 0
 
 run:
-	../.venv/bin/pytest -s -v test_appointment.py --reruns $(reruns) $(CUSTOM_CMD_OPT) $(f)
+	../.venv/bin/pytest -s -v test_endpoints.py --reruns $(reruns) $(CUSTOM_CMD_OPT) $(f)
 
 run-%:
 	../.venv/bin/pytest -s -v --reruns $(reruns) $(CUSTOM_CMD_OPT) -m $(subst run-,,$@)

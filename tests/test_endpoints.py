@@ -1,6 +1,5 @@
 import requests
 from assertpy import assert_that
-from .configuration import config
 import asyncio
 import pytest
 import base64
@@ -9,14 +8,14 @@ import json
 
 class TestEndpoints:
     @pytest.mark.auth
-    def test_invalid_access_token(self):
+    def test_invalid_access_token(self, base_url_path):
         expected_status_code = 403
         target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
+            url=f"{base_url_path}/metadata",
             headers={
                 "Authorization": "Bearer invalid_token",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -26,14 +25,14 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
     @pytest.mark.auth
-    def test_missing_access_token(self):
+    def test_missing_access_token(self, base_url_path):
         expected_status_code = 401
         target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
+            url=f"{base_url_path}/metadata",
             headers={
                 "Authorization": "",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -53,7 +52,7 @@ class TestEndpoints:
             )
 
     @pytest.mark.broker
-    def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
+    def test_invalid_nhsd_service_identifier(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
@@ -62,7 +61,7 @@ class TestEndpoints:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
+            url=f"{base_url_path}/metadata",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -75,7 +74,7 @@ class TestEndpoints:
 
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_endpoint_not_found(self, get_token_client_credentials):
+    def test_endpoint_not_found(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
@@ -84,7 +83,7 @@ class TestEndpoints:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/invalid",
+            url=f"{base_url_path}/invalid",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -102,11 +101,11 @@ class TestEndpoints:
         ("Appointment", "Appointment/some-id", "Appointment/some-id?param=value"),
     )
     async def test_proxy_routing(
-        self, get_token_client_credentials, debug, path_suffix
+        self, get_token_client_credentials, debug, path_suffix, base_url_path, cmd_options
     ):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_target = f"https://{config.ENVIRONMENT}.api.service.nhs.uk/bars-mock-receiver-proxy/{path_suffix}"
+        expected_target = f"https://{cmd_options['--apigee-environment']}.api.service.nhs.uk/bars-mock-receiver-proxy/{path_suffix}"
         target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -114,7 +113,7 @@ class TestEndpoints:
 
         # When
         requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/{path_suffix}",
+            url=f"{base_url_path}/{path_suffix}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
