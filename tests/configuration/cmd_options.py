@@ -70,6 +70,7 @@ def create_cmd_options(get_cmd_opt_value) -> dict:
 
     return cmd_options
 
+
 def __set_service_name(cmd_options):
     env = cmd_options["--apigee-environment"]
     default_service_name = cmd_options["--service-name"]
@@ -85,6 +86,7 @@ def __set_service_name(cmd_options):
         service_name = f"{default_service_name}-{env}"
 
     cmd_options["--service-name"] = service_name
+
 
 def __set_base_path(cmd_options):
     env = cmd_options["--apigee-environment"]
