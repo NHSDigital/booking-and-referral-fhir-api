@@ -36,7 +36,7 @@ steps:
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
-       make run-sandbox reruns=3 reruns_delay=1 f=--junitxml=tests/api_tests.xml
+       make run-smoketest reruns=3 reruns_delay=1 f=--junitxml=tests/api_tests.xml
       elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
        make run-sandbox reruns=3 reruns_delay=1 f=--junitxml=tests/api_tests.xml
