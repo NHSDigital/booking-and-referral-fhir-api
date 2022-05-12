@@ -78,15 +78,30 @@ Various scripts and commands rely on environment variables being set.
 
 Consider using [direnv](https://direnv.net/) to manage your environment variables during development and maintaining your own `.envrc` file - the values of these variables will be specific to you and/or sensitive.
 
-Or consider filling the script ```/test/configuration/env-variables.sh``` Follow the steps described in the script.
+Once variables have been set in your .env file
+- You can fill the script ```/test/configuration/env-variables.sh``` . Follow the steps described in the script.
+
+- OR Use the make targets to both set env variables and run tests.
+
+Variables you will require
+- `APIGEE_ENVIRONMENT` e.g. internal-dev
+- `APIGEE_USERNAME` - your username
+
+- `FULLY_QUALIFIED_SERVICE_NAME=booking-and-referral-$(APIGEE_ENVIRONMENT)`
+- `SERVICE_BASE_PATH=booking-and-referral/FHIR/R4`
+
+If hitting a pr these values will change.
+
+For internal-dev:
+- `FULLY_QUALIFIED_SERVICE_NAME=booking-and-referral-pr-$(PR_NO)` e.g. booking-and-referral-pr-92
+- `SERVICE_BASE_PATH=booking-and-referral/FHIR/R4-pr-$(PR_NO)` e.g. booking-and-referral/FHIR/R4-pr-92
+
+Or for internal-dev-sandbox
+- `FULLY_QUALIFIED_SERVICE_NAME=booking-and-referral-pr-$(PR_NO)-sandbox` e.g. booking-and-referral-pr-92-sandbox
+- `SERVICE_BASE_PATH=booking-and-referral/FHIR/R4-pr-$(PR_NO)` e.g. booking-and-referral/FHIR/R4-pr-92
 
 
-Various commands rely on environment variables being defined to set them please fill the `{PLACEHOLDER}` fields in the
- [tests/configuration/env-variables.sh](configuration/env-variables.sh) script.
-
-After complete, the script with your information run it to set the values in your environment.
-
-`sh env-variables.sh`
+`CLIENT_ID` and `CLIENT_SECRET`  are only required for int. Otherwise use dummy value
 
 ### Understanding the use of this variables
 
@@ -98,7 +113,7 @@ e.g. to set sandbox as a target environment.
 ```
 export APIGEE_ENVIRONMENT='sandbox'
 export BASE_URL='https://'$APIGEE_ENVIRONMENT'.api.service.nhs.uk'
-export SERVICE_BASE_PATH='booking-and-referral'
+export SERVICE_BASE_PATH='booking-and-referral/FHIR/R4'
 export FULLY_QUALIFIED_SERVICE_NAME='booking-and-referral-'$APIGEE_ENVIRONMENT
 ```
 
@@ -111,17 +126,33 @@ export APIGEE_ENVIRONMENT='internal-dev'
 ## Command line
 
 How to run the tests.
+You can use the make targets
+
+To run all tests
+```
+make run
+```
+
+To run a certain file of tests
+```
+make run f=test_appointment.py
+```
+
+To run one test
+```
+make run f=test_appointment.py::TestAppointment::test_get_appointment
+```
 
 [Pytest](https://docs.pytest.org/en/6.2.x/) allows us to use [markers](https://docs.pytest.org/en/6.2.x/example/markers.html) to decorate a test method. This way we define the scope of our tests.
 
 e.g. to test our sandbox tests
 ```
-poetry run pytest -m sandbox
+make run-sandbox
 ```
 
 e.g. to test our ping test
 ```
-poetry run pytest -m ping
+make run-ping
 ```
 
 you can use the marker listed in the [pytest.ini](../pytest.ini)
@@ -134,4 +165,3 @@ you can use the marker listed in the [pytest.ini](../pytest.ini)
    - Are the environment variables been set?
    - Make sure your detail on the environment variables is the correct ones.
    - Make sure you run the commands to run the test inside the `tests/` folder.
-   - Make sure you run the `sh env-variables.sh` with the same shell you run the tests.
