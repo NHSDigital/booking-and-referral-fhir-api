@@ -6,19 +6,39 @@ from api_test_utils.apigee_api_products import ApigeeApiProducts
 from api_test_utils.apigee_api_apps import ApigeeApiDeveloperApps
 from api_test_utils.oauth_helper import OauthHelper
 from api_test_utils.apigee_api_trace import ApigeeApiTraceDebug
-from .configuration import config
-from .configuration.config import ENVIRONMENT
+from .configuration.cmd_options import options, create_cmd_options
 
+def pytest_addoption(parser):
+    for option in options:
+        parser.addoption(
+            option["name"],
+            required=option.get("required", False),
+            action=option.get("action", "store"),
+            help=option.get("help", ""),
+            default=option.get("default")
+        )
+
+
+@pytest.fixture(scope='session', autouse=True)
+def cmd_options(request) -> dict:
+    return create_cmd_options(request.config.getoption)
 
 @pytest.fixture(scope="session")
-async def default_oauth_helper():
+async def default_oauth_helper(cmd_options: dict):
     """This fixture is automatically called once when used inside a class.
     The default app created here should not be modified by your tests.
     The default app has a default product associated.
     If your test requires specific app config then please create your own"""
 
+    ENVIRONMENT = cmd_options['--apigee-environment']
+    client_id = cmd_options["--default-client-id"]
+    client_secret = cmd_options["--default-client-secret"]
+    redirect_url = cmd_options["--default-callback-url"]
+    proxy_name = cmd_options["--service-name"]
+
+
     if ENVIRONMENT == "int" or ENVIRONMENT == "sandbox":
-        oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
+        oauth = OauthHelper(client_id, client_secret, redirect_url)
         yield oauth
 
     is_internal_env = (
@@ -32,14 +52,14 @@ async def default_oauth_helper():
         apigee_product = ApigeeApiProducts()
         await apigee_product.create_new_product()
         await apigee_product.update_proxies(
-            [config.PROXY_NAME, f"identity-service-{config.ENVIRONMENT}"]
+            [proxy_name, f"identity-service-{ENVIRONMENT}"]
         )
         await apigee_product.update_scopes(
             ["urn:nhsd:apim:app:level3:booking-and-referral"]
         )
         # Product ratelimit
         product_ratelimit = {
-            f"{config.PROXY_NAME}": {
+            f"{proxy_name}": {
                 "quota": {
                     "limit": "300",
                     "enabled": True,
@@ -51,14 +71,14 @@ async def default_oauth_helper():
         }
         await apigee_product.update_attributes({"ratelimiting": json.dumps(product_ratelimit)})
 
-        await apigee_product.update_environments([config.ENVIRONMENT])
+        await apigee_product.update_environments([ENVIRONMENT])
 
         apigee_app = ApigeeApiDeveloperApps()
         await apigee_app.create_new_app()
 
         # Set default JWT Testing resource url and app ratelimit
         app_ratelimit = {
-            f"{config.PROXY_NAME}": {
+            f"{proxy_name}": {
                 "quota": {
                     "limit": "300",
                     "enabled": True,
@@ -101,17 +121,18 @@ def event_loop(request):
 
 
 @pytest.fixture()
-def debug():
+def debug(cmd_options):
     """
     Import the test utils module to be able to:
         - Use the trace tool and get context variables after making a request to Apigee
     """
-    return ApigeeApiTraceDebug(proxy=config.PROXY_NAME)
+    return ApigeeApiTraceDebug(proxy=cmd_options["--service-name"])
 
 
 @pytest.fixture()
-async def get_token_client_credentials(default_oauth_helper):
+async def get_token_client_credentials(default_oauth_helper, cmd_options: dict):
     """Call identity server to get an access token"""
+    ENVIRONMENT = cmd_options['--apigee-environment']
     if "sandbox" in ENVIRONMENT:
         # Sandbox environments don't need access_token. Return fake one
         return {"access_token": "not_needed"}
@@ -120,4 +141,9 @@ async def get_token_client_credentials(default_oauth_helper):
     token_resp = await default_oauth_helper.get_token_response(
         grant_type="client_credentials", _jwt=jwt
     )
+    print(token_resp)
     return token_resp["body"]
+
+@pytest.fixture()
+def base_url_path(cmd_options) -> str:
+    return f"{cmd_options['--oauth-base-uri']}/{cmd_options['--proxy-base-path']}"

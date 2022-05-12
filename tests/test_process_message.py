@@ -1,6 +1,5 @@
 import pytest
 import requests
-from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
 import base64
@@ -13,7 +12,7 @@ class TestProcessMessage:
     @pytest.mark.process_message
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_create_process_message(self, get_token_client_credentials):
+    def test_create_process_message(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -23,7 +22,7 @@ class TestProcessMessage:
 
         # When
         response = requests.post(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/$process-message",
+            url=f"{base_url_path}/$process-message",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -40,7 +39,7 @@ class TestProcessMessage:
     @pytest.mark.process_message
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_process_message_method_not_allowed(self, get_token_client_credentials):
+    def test_process_message_method_not_allowed(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -50,7 +49,7 @@ class TestProcessMessage:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/$process-message",
+            url=f"{base_url_path}/$process-message",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
