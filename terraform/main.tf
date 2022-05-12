@@ -30,10 +30,11 @@ provider "aws" {
   alias  = "acm_provider"
   region = "eu-west-2"
 }
+data "aws_caller_identity" "current" {}
 
 data "terraform_remote_state" "bebop-infra" {
   backend = "s3"
-  config  = {
+  config = {
     bucket = "terraform-nhsd-apim-bebop-infra"
     key    = "infra"
     region = "eu-west-2"

@@ -1,3 +1,9 @@
+locals {
+  public_subnet_cidr  = "10.0.2.0/24"
+  private_subnet_cidr = "10.0.1.0/24"
+  service_cidr        = local.public_subnet_cidr
+  service_subnet_id   = data.aws_subnet.bebop_public_subnet.id
+}
 resource "aws_ecs_service" "mock-receiver-service" {
   name            = "${local.name_prefix}-service"
   cluster         = aws_ecs_cluster.ecs-cluster.id
@@ -6,8 +12,8 @@ resource "aws_ecs_service" "mock-receiver-service" {
   launch_type     = "FARGATE"
   network_configuration {
     security_groups  = [aws_security_group.ecs_tasks.id]
-    subnets          = [data.aws_subnet.bebop_public_subnet.id]
-    assign_public_ip = false
+    subnets          = [local.service_subnet_id]
+    assign_public_ip = true
   }
 
   #    iam_role        = aws_iam_role.ecs-task-role.arn # not needed see docs
@@ -32,7 +38,6 @@ resource "aws_ecs_service" "mock-receiver-service" {
 }
 
 locals {
-  public_subnet_cidr = "10.0.1.0/24"
 }
 resource "aws_security_group" "ecs_tasks" {
   name   = "${local.name_prefix}-sg-task"
@@ -51,7 +56,7 @@ resource "aws_security_group" "ecs_tasks" {
     protocol    = "tcp"
     from_port   = 443
     to_port     = 443
-    cidr_blocks = [local.public_subnet_cidr]
+    cidr_blocks = [local.service_cidr]
   }
 
   // TODO: is this necessary when subnet is public?
@@ -70,7 +75,7 @@ resource "aws_security_group" "ecs_tasks" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = [local.public_subnet_cidr]
+    cidr_blocks = [local.service_cidr]
   }
 
   egress {

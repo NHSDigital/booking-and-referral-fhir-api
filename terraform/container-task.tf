@@ -1,8 +1,8 @@
 resource "aws_ecs_task_definition" "mock-receiver" {
-  family                   = "${local.name_prefix}-task"
-  network_mode             = "awsvpc"
+  family       = "${local.name_prefix}-task"
+  network_mode = "awsvpc"
   // ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
-  task_role_arn            = aws_iam_role.task_role.arn
+  task_role_arn = aws_iam_role.task_role.arn
   //ARN of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
   execution_role_arn       = aws_iam_role.ecs_task_execution.arn
   requires_compatibilities = ["FARGATE"]
@@ -11,11 +11,10 @@ resource "aws_ecs_task_definition" "mock-receiver" {
 
   container_definitions = jsonencode([
     {
-      name      = "rest-api"
-      image     = "${data.aws_ecr_image.sandbox_image.repository_name}:latest"
+      name = "rest-api"
+      #      image     = local.sandbox_image
+      image     = "vad1mo/hello-world-rest"
       essential = true
-      cpu       = 256
-      memory    = 512
 
       portMappings = [
         {
