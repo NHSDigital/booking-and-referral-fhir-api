@@ -1,6 +1,5 @@
 import pytest
 import requests
-from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
 import base64
@@ -15,7 +14,7 @@ class TestServiceRequest:
     @pytest.mark.service_request
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_referrals(self, get_token_client_credentials):
+    def test_get_referrals(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -25,7 +24,7 @@ class TestServiceRequest:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest",
+            url=f"{base_url_path}/ServiceRequest",
             params={"patientIdentifier": self.existing_patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
@@ -43,7 +42,7 @@ class TestServiceRequest:
     @pytest.mark.service_request
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_referral(self, get_token_client_credentials):
+    def test_get_referral(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -53,7 +52,7 @@ class TestServiceRequest:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{self.existing_referral_id}",
+            url=f"{base_url_path}/ServiceRequest/{self.existing_referral_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -70,7 +69,7 @@ class TestServiceRequest:
     @pytest.mark.service_request
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_referral_bad_id(self, get_token_client_credentials):
+    def test_get_referral_bad_id(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -81,7 +80,7 @@ class TestServiceRequest:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{bad_id}",
+            url=f"{base_url_path}/ServiceRequest/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -98,7 +97,7 @@ class TestServiceRequest:
     @pytest.mark.service_request
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_referrals_method_not_allowed(self, get_token_client_credentials):
+    def test_referrals_method_not_allowed(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -108,7 +107,7 @@ class TestServiceRequest:
 
         # When
         response = requests.put(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest",
+            url=f"{base_url_path}/ServiceRequest",
             params={"patientIdentifier": self.existing_patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
@@ -126,7 +125,7 @@ class TestServiceRequest:
     @pytest.mark.service_request
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_referral_id_method_not_allowed(self, get_token_client_credentials):
+    def test_referral_id_method_not_allowed(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -136,7 +135,7 @@ class TestServiceRequest:
 
         # When
         response = requests.post(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest/{self.existing_referral_id}",
+            url=f"{base_url_path}/ServiceRequest/{self.existing_referral_id}",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,

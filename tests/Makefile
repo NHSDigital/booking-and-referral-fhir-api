@@ -1,7 +1,8 @@
 -include .env
 
 # to run against a PR:
-#FULLY_QUALIFIED_SERVICE_NAME='booking-and-referral-$(APIGEE_ENVIRONMENT)-pr-23'
+#FULLY_QUALIFIED_SERVICE_NAME=booking-and-referral-pr-92
+#SERVICE_BASE_PATH =booking-and-referral/FHIR/R4-pr-92
 
 FULLY_QUALIFIED_SERVICE_NAME = booking-and-referral-$(APIGEE_ENVIRONMENT)
 SERVICE_BASE_PATH = 'booking-and-referral/FHIR/R4'
@@ -23,7 +24,7 @@ CUSTOM_CMD_OPT = --service-name="$(FULLY_QUALIFIED_SERVICE_NAME)" \
 reruns = 0
 
 run:
-	../.venv/bin/pytest -s -v test_endpoints.py --reruns $(reruns) $(CUSTOM_CMD_OPT) $(f)
+	../.venv/bin/pytest -s -v --reruns $(reruns) $(CUSTOM_CMD_OPT) $(f)
 
 run-%:
 	../.venv/bin/pytest -s -v --reruns $(reruns) $(CUSTOM_CMD_OPT) -m $(subst run-,,$@)

@@ -1,6 +1,5 @@
 import pytest
 import requests
-from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
 from datetime import datetime
@@ -14,7 +13,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_401_unauthorized_error(self, get_token_client_credentials):
+    def test_401_unauthorized_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 401
@@ -24,7 +23,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -47,7 +46,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_403_forbidden_error(self, get_token_client_credentials):
+    def test_403_forbidden_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
@@ -57,7 +56,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -80,7 +79,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_406_not_acceptable_error(self, get_token_client_credentials):
+    def test_406_not_acceptable_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 406
@@ -90,7 +89,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -113,7 +112,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_409_conflict_error(self, get_token_client_credentials):
+    def test_409_conflict_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 409
@@ -123,7 +122,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -146,7 +145,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_422_unprocessable_entity_error(self, get_token_client_credentials):
+    def test_422_unprocessable_entity_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 422
@@ -156,7 +155,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -179,7 +178,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_500_server_error_error(self, get_token_client_credentials):
+    def test_500_server_error_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
@@ -189,7 +188,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -212,7 +211,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_501_not_implemented_error(self, get_token_client_credentials):
+    def test_501_not_implemented_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 501
@@ -222,7 +221,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -245,7 +244,7 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_503_unavailable_error(self, get_token_client_credentials):
+    def test_503_unavailable_error(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 503
@@ -255,7 +254,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            url=f"{base_url_path}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,

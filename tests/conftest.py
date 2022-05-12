@@ -33,9 +33,8 @@ async def default_oauth_helper(cmd_options: dict):
     ENVIRONMENT = cmd_options['--apigee-environment']
     client_id = cmd_options["--default-client-id"]
     client_secret = cmd_options["--default-client-secret"]
-    redirect_url=cmd_options["--default-callback-url"]
-    proxy_name = cmd_options["--service-name"]  #Todo
-
+    redirect_url = cmd_options["--default-callback-url"]
+    proxy_name = cmd_options["--service-name"]
 
 
     if ENVIRONMENT == "int" or ENVIRONMENT == "sandbox":

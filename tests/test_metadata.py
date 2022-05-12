@@ -1,6 +1,5 @@
 import pytest
 import requests
-from .configuration import config
 from assertpy import assert_that
 from .example_loader import load_example
 import base64
@@ -11,7 +10,7 @@ class TestMetadata:
     @pytest.mark.metadata
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_metadata(self, get_token_client_credentials):
+    def test_get_metadata(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -21,7 +20,7 @@ class TestMetadata:
 
         # When
         response = requests.get(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
+            url=f"{base_url_path}/metadata",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -37,7 +36,7 @@ class TestMetadata:
     @pytest.mark.metadata
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_metadata_method_not_allowed(self, get_token_client_credentials):
+    def test_metadata_method_not_allowed(self, get_token_client_credentials, base_url_path):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -47,7 +46,7 @@ class TestMetadata:
 
         # When
         response = requests.post(
-            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
+            url=f"{base_url_path}/metadata",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
