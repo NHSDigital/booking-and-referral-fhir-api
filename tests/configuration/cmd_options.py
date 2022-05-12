@@ -42,6 +42,12 @@ options = [
         "action": "store",
         "help": "Base Uri "
                 "Pass a dummy string if your tests don't need one."
+    },
+    {
+        "name": "--pr-no",
+        "required": False,
+        "action": "store",
+        "help": "The github pull request number. Example --pr-no=42."
     }
 ]
 
@@ -58,7 +64,36 @@ def create_cmd_options(get_cmd_opt_value) -> dict:
 
     __validate_options(cmd_options)
 
+    __set_service_name(cmd_options)
+
+    __set_base_path(cmd_options)
+
     return cmd_options
+
+def __set_service_name(cmd_options):
+    env = cmd_options["--apigee-environment"]
+    default_service_name = cmd_options["--service-name"]
+    pr_no = cmd_options.get("--pr-no")
+
+    if env == 'internal-dev':
+        service_name = f"{default_service_name}-pr-{pr_no}" if pr_no else f"{default_service_name}-internal-dev"
+
+    elif env == "internal-dev-sandbox":
+        service_name = f"{default_service_name}-pr-{pr_no}-sandbox"
+
+    else:
+        service_name = f"{default_service_name}-{env}"
+
+    cmd_options["--service-name"] = service_name
+
+def __set_base_path(cmd_options):
+    env = cmd_options["--apigee-environment"]
+    pr_no = cmd_options.get("--pr-no")
+    default_base_path = cmd_options["--proxy-base-path"]
+
+    if env in ["internal-dev",  "internal-dev-sandbox"] and pr_no:
+        base_path = f"{default_base_path}-pr-{pr_no}"
+        cmd_options["--proxy-base-path"] = base_path
 
 
 def __validate_options(cmd_options):
@@ -77,5 +112,5 @@ def __validate_options(cmd_options):
                 f"are required for environment: {current_env}")
 
     # internal-dev-sandbox environment is only allowed for pull requests, so --pr-no becomes mandatory
-    if current_env == "internal-dev-sandbox" and not cmd_options["--pr-no"]:
+    if current_env == "internal-dev-sandbox" and not cmd_options.get("--pr-no"):
         raise Exception(f"options --pr-no is mandatory for {current_env}")
