@@ -22,12 +22,13 @@ CUSTOM_CMD_OPT = --service-name="$(FULLY_QUALIFIED_SERVICE_NAME)" \
 				 --proxy-base-path=$(SERVICE_BASE_PATH) --oauth-base-uri=$(OAUTH_BASE_URI)\
 
 reruns = 0
-
+reruns_delay = 0
+f=--junitxml=tests/api_tests.xml
 run:
-	../.venv/bin/pytest -s -v --reruns $(reruns) $(CUSTOM_CMD_OPT) $(f)
+	../.venv/bin/pytest -s -v --reruns $(reruns) --reruns-delay $(reruns_delay) $(CUSTOM_CMD_OPT) $(f)
 
 run-%:
-	../.venv/bin/pytest -s -v --reruns $(reruns) $(CUSTOM_CMD_OPT) -m $(subst run-,,$@)
+	../.venv/bin/pytest -s -v --reruns $(reruns) --reruns-delay $(reruns_delay) $(CUSTOM_CMD_OPT) -m "$*" $(f)
 
 echo-cmd:
-	echo ../.venv/bin/pytest -s -v --reruns $(reruns) $(CUSTOM_CMD_OPT) $(f)
+	echo ../.venv/bin/pytest -s -v --reruns $(reruns) --reruns-delay $(reruns_delay) $(CUSTOM_CMD_OPT) $(f)

@@ -1,12 +1,5 @@
 options = [
     {
-        "name": "--apigee-org",
-        "required": False,
-        "action": "store",
-        "help": "Apigee organisation",
-        "default": "nhsd-nonprod"
-    },
-    {
         "name": "--service-name",
         "required": True,
         "action": "store",
