@@ -19,7 +19,7 @@ Make install will install all the requirements in your local machine that you ca
 ```
 
 ## Test flow to test new develops
-By default this proxy it's pointing to bars mock receiver which is pointing to a docker container as a backend. This backend it's responsible
+By default this proxy it's pointing to bars mock receiver which is pointing to a docker container as a backend. This backend is responsible
 to manage the requests made through this proxy.
 
 In order to run the tests you need to follow this further configurations:
