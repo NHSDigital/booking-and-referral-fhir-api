@@ -11,10 +11,12 @@ resource "aws_ecs_task_definition" "mock-receiver" {
 
   container_definitions = jsonencode([
     {
-      name = "rest-api"
-      #      image     = local.sandbox_image
-      image     = "vad1mo/hello-world-rest"
+      name  = "rest-api"
+      image = local.sandbox_image
+      #      image     = "vad1mo/hello-world-rest"
       essential = true
+      cpu       = 10
+      memory    = 256
 
       portMappings = [
         {

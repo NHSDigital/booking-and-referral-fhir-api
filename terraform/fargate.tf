@@ -1,24 +1,9 @@
-resource "aws_ecs_cluster" "ecs-cluster" {
-  name = "${local.name_prefix}-cluster"
-
-  setting {
-    name  = "containerInsights"
-    value = "enabled"
-  }
-
-  # configuration {
-  # execute_command_configuration {
-  #   logging    = "OVERRIDE"
-
-  #   log_configuration {
-  #     cloud_watch_log_group_name     = aws_cloudwatch_log_group.cluster_container_logs.name
-  #   }
-  # }
-  #}
+data "aws_vpc" "fargate-vpc" {
+  id = data.terraform_remote_state.bebop-infra.outputs.bebop-dev-vpc_id
 }
 
-# resource "aws_cloudwatch_log_group" "cluster_container_logs" {
-#   name = "${local.name_prefix}-cluster"
-# }
-
-
+module "fargate" {
+  source      = "./fargate"
+  name_prefix = local.name_prefix
+  vpc_id      = data.aws_vpc.fargate-vpc.id
+}
