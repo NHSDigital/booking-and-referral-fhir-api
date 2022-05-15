@@ -27,7 +27,7 @@ locals {
 
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file = "project/lambda/${local.lambda_file_name}.js"
+  source_file = "${path.module}/lambda/${local.lambda_file_name}.js"
   output_path = "build/ecs_event_logger_lambda.zip"
 }
 
