@@ -22,14 +22,18 @@ resource "aws_ecs_task_definition" "mock-receiver" {
         }
       ]
 
+      environment : [
+        { "name" : "PORT", "value" : tostring(var.container_port) }
+      ],
+
       logConfiguration : {
         "logDriver" : "awslogs",
         "options" : {
           "awslogs-create-group" : "true",
-          "awslogs-group" : "mockreceivertest"
-          "awslogs-region" : var.region,
-          "awslogs-stream-prefix" : "mockreceiver"
-          //  "stoppedReason": "ResourceInitializationError: failed to validate logger args: : signal: killed"
+          "awslogs-group" : aws_cloudwatch_log_group.container_log_group.name
+          "awslogs-region" : "eu-west-2",
+          // TODO: Fargate creates it's own stream. Do we need to create our own? -> set awslogs-create-group to false and see if we can use our own stream which has retention
+          "awslogs-stream-prefix" : aws_cloudwatch_log_stream.container_log_stream.name
         }
       }
     }

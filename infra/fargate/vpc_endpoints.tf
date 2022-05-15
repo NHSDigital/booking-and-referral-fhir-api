@@ -27,11 +27,12 @@ resource "aws_vpc_endpoint" "ecr_api" {
 
 # CloudWatch
 resource "aws_vpc_endpoint" "cloudwatch" {
-  vpc_id             = var.vpc_id
-  service_name       = "com.amazonaws.${var.region}.logs"
-  vpc_endpoint_type  = "Interface"
-  subnet_ids         = aws_subnet.private_subnets.*.id
-  security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
+  vpc_id              = var.vpc_id
+  service_name        = "com.amazonaws.${var.region}.logs"
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = true
+  subnet_ids          = aws_subnet.private_subnets.*.id
+  security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
 
   tags = {
     Name = "${var.name_prefix}-cloudwatch"
