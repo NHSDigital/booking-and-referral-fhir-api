@@ -21,6 +21,17 @@ resource "aws_ecs_task_definition" "mock-receiver" {
           hostPort      = var.container_port
         }
       ]
+
+      logConfiguration : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-create-group" : "true",
+          "awslogs-group" : "mockreceivertest"
+          "awslogs-region" : var.region,
+          "awslogs-stream-prefix" : "mockreceiver"
+          //  "stoppedReason": "ResourceInitializationError: failed to validate logger args: : signal: killed"
+        }
+      }
     }
   ])
 }

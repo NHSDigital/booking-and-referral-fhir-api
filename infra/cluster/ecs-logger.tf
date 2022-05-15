@@ -3,6 +3,8 @@ Monitoring Cluster: A cluster event will trigger a lambda which log the event to
 log will log that event
 */
 
+// FIXME: log group for this cluster doesn't have retention. We should set it otherwise logs never gets deleted
+
 resource "aws_cloudwatch_event_rule" "ecs_event_stream" {
   name        = "${var.name_prefix}-ecs-event-stream"
   description = "Passes ecs event logs to lambda that writes them to cw logs"

@@ -1,5 +1,6 @@
 module "mock-receiver" {
   source      = "./mock-receiver"
+  region      = var.region
   name_prefix = local.name_prefix
 
   vpc_id     = local.vpc_id
