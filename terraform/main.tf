@@ -8,9 +8,6 @@ terraform {
   backend "s3" {
     bucket = "nhsd-apim-bars-min-terraform"
     region = "eu-west-2"
-    #    profile = "apim-dev"
-    #    shared_credentials_file = "~/.aws/credentials"
-
   }
 }
 
