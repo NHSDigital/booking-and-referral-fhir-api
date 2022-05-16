@@ -7,7 +7,7 @@ resource "aws_ecs_service" "mock-receiver-service" {
   desired_count = 3
   launch_type   = "FARGATE"
   network_configuration {
-    security_groups  = [aws_security_group.ecs_tasks.id]
+    security_groups  = []
     subnets          = var.subnet_ids
     assign_public_ip = true
   }
