@@ -170,6 +170,8 @@ paths:
         A receiver dictates what they need from a sender making a request and the MessageDefinition is the mechanism to support this. The Message Definition details what FHIR resources need to be included in the body (payload).
         The receiver may support multiple services e.g. Out-of-Hours, Clinical Assessment Service under one organisation (on the same system) and consideration should be given to maintaining service identifiers and workflow type against Message Definitions.  It's advisable to make this a configurable option which providers can maintain themselves as new services come onboard.
       operationId: getMessageDefinition
+      parameters:
+        - $ref: '#/components/parameters/context_QParam'
       responses:
         '200':
           description: Success
@@ -215,15 +217,15 @@ paths:
       description: |
         
         ### Using $process-message
-        The inherent flexibility of the various workflows supported by BaRS is facilitated by the $process-message endpoint.
+        The inherent flexibility of the various workflows supported by BaRS is facilitated by the $process-message endpoint. The example in the "Try this API" feature for this endpoint is a referral request.
 
         ### Function
         | Function| API Call|Description
         | ----                              | ----                   | ----                 |
-        | Making a referral request         | POST /$process-message | The sender will POST a FHIR Bundle, including the FHIR resources defined in MessageDefinition requested previously, the 'focus' being a ServiceRequest resource, supported by Encounter, Observation, Flag etc. The MessageHeader resource will indicate the activity required through use of 'event', 'reason' and 'focus' data elements.<cr> The MessageHeader resource will indicate the activity required.|
-        | Respond to a referral             | POST /$process-message | A receiver wanting to respond to a request will direct their response to the Sender's $process-message endpoint, reversing the previous request/response roles. All implementers (senders or receivers) of BaRS must build a $process-message endpoint to be able to support the asynchronous workflows which involve such feedback responses.|
-        | Cancelling a referral             | POST /$process-message | An updated payload request ensuring the status of the service request is set to 'revoked', as a minimum.|
-        | Making a booking                  | POST /$process-message | Once a slot has been identified, the sender makes a request to book through the $process-message endpoint. The receivers MessageDefinition defines the required FHIR resources and must including reference to the service request, if applicable. The MessageHeader resource will indicate the activity required.|
+        | Making a referral request         | POST /$process-message | The sender will POST a FHIR Bundle, including the FHIR resources defined in MessageDefinition requested previously, the 'focus' being a ServiceRequest resource, supported by Encounter, Observation, Flag etc. The MessageHeader resource will indicate the activity required through use of 'event', 'reason' and 'focus' data elements.<cr> The MessageHeader resource will indicate the activity required. An example of this can be found [here.](https://simplifier.net/NHSBookingandReferrals/79120f41-a431-4f08-bcc5-1e67006fcae0/~json)|
+        | Respond to a referral             | POST /$process-message | A receiver wanting to respond to a request will direct their response to the Sender's $process-message endpoint, reversing the previous request/response roles. All implementers (senders or receivers) of BaRS must build a $process-message endpoint to be able to support the asynchronous workflows which involve such feedback responses. An example of this can be found [here.](https://simplifier.net/nhsbookingandreferrals/bc040878-cf51-4acf-9ede-7448fbb5be7c-duplicate-2)|
+        | Cancelling a referral             | POST /$process-message | An updated payload request ensuring the status of the service request is set to 'revoked', as a minimum.An example of this can be found [here.](https://simplifier.net/nhsbookingandreferrals/a961e68a-50e9-4988-9b14-4bfa4629d761)|
+        | Making a booking                  | POST /$process-message | Once a slot has been identified, the sender makes a request to book through the $process-message endpoint. The receivers MessageDefinition defines the required FHIR resources and must including reference to the service request, if applicable. The MessageHeader resource will indicate the activity required.An example of this can be found [here.](https://simplifier.net/nhsbookingandreferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a)|
         | Respond to a booking              | POST /$process-message | A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA.|
         | Cancelling a booking (and rebook) | POST /$process-message | An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
 
@@ -359,16 +361,16 @@ paths:
                 - 'Slot:*'
       responses:
         '200':
-          description: Success
+          description: Success. A full example of a Slot Searchset response can be found [here](  https://simplifier.net/NHSBookingandReferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2).
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleSlot.yaml
               example:
                 $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleSlot.yaml
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -414,12 +416,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleAppt.yaml
               example:
                 $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleAppt.yaml
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -517,12 +519,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleRef.yaml
               example:
                 $ref: examples/service_request/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundle.yaml
+                $ref: schemas/SearchBundleRef.yaml
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -603,6 +605,15 @@ components:
         example: c3f6145e-1a26-4345-b3f2-dccbcba62049
       required: true
       allowEmptyValue: false
+    context_QParam: 
+      name: context
+      description: |
+       The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
+      required: false
+      in: query
+      schema:
+        type: string
+        example: "2000099999"
     PatientId_QParam: 
       name: patient:identifier
       description: |
