@@ -1,8 +1,57 @@
 {
-  "resourceType": "ServiceRequest",
-  "meta": {
-    "profile": [
-      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-ServiceRequest"
-    ]
-  }
+	"resourceType": "ServiceRequest",
+	"id": "71d2b38e-b81c-4894-a522-6a65265b1d58",
+	"meta": {
+		"lastUpdated": "2021-11-26T15:00:00+00:00",
+		"profile": [
+			"https://fhir.nhs.uk/StructureDefinition/BARSServiceRequest-request-validation"
+		]
+	},
+	"basedOn": {
+		"reference": "urn:uuid:9f748662-afde-540e-a6d5-8cd6ae63cd56"
+	},
+	"status": "active",
+	"intent": "plan",
+	"category": [
+		{
+			"coding": [
+				{
+					"system": "https://fhir.nhs.uk/CodeSystem/message-category-servicerequest",
+					"code": "referral",
+					"display": "Transfer of Care"
+				}
+			]
+		}
+	],
+	"subject": {
+		"reference": "urn:uuid:9589fb37-87a2-48d8-968f-b371429208a8"
+	},
+	"encounter": {
+		"reference": "urn:uuid:8c63d621-4d86-4f57-8699-e8e22d49935d"
+	},
+	"occurrencePeriod": {
+		"start": "2021-11-26T15:00:00+00:00",
+		"end": "2021-11-26T15:20:00+00:00"
+	},
+	"authoredOn": "2021-11-26T15:00:00+00:00",
+	"requester": {
+		"reference": "urn:uuid:7d948662-bade-450e-b6c5-9bb6ee39cb56"
+	},
+	"performer": [
+		{
+			"reference": "d5ffd0cd-ec7e-48a1-84f1-91f4c0eb8fc5"
+		}
+	],
+	"locationReference": [
+		{
+			"reference": "urn:uuid:2ec99e82-a0af-4b70-bd53-1869d84b2ad1"
+		}
+	],
+	"supportingInfo": [
+		{
+			"reference": "urn:uuid:d877b820-e72b-44d1-a627-195f54bfc606",
+			"display": "Rejected Services - Patient Choice in Service Selection - Details"
+		}
+	],
+	"PatientInstruction": "ADVICE GIVEN: If there are any new symptoms, or if the condition gets worse, changes or you have any other concerns"
 }
