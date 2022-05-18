@@ -1,11 +1,13 @@
-import pytest
-import requests
-from .configuration import config
-from assertpy import assert_that
-from .example_loader import load_example
-import uuid
 import base64
 import json
+import uuid
+
+import pytest
+import requests
+from assertpy import assert_that
+
+from .configuration import config
+from .example_loader import load_example
 
 
 class TestAppointment:
