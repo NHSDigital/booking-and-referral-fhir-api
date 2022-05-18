@@ -9,6 +9,9 @@ variable "service" {
 variable "domain_name" {
   default = "dev.api.platform.nhs.uk"
 }
+variable "region"{
+default = "eu-west-2"
+}
 
 locals {
   environment         = terraform.workspace
