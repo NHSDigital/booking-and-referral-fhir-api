@@ -5,8 +5,9 @@ terraform {
       version = "~> 4"
     }
   }
+
   backend "s3" {
-    bucket = "nhsd-apim-bars-min-terraform"
+    bucket = "terraform-nhsd-apim-bebop-infra"
     region = "eu-west-2"
   }
 }
@@ -14,11 +15,12 @@ terraform {
 provider "aws" {
   region  = "eu-west-2"
   profile = "apim-dev"
+
   default_tags {
     tags = {
-      Project     = var.project
-      Environment = local.environment
-      Service     = var.service
+      project     = "${var.project}-infra"
+      environment = var.environment
+      tier        = "infrastructure"
     }
   }
 }
@@ -27,5 +29,3 @@ provider "aws" {
   alias  = "acm_provider"
   region = "eu-west-2"
 }
-
-data "aws_caller_identity" "current" {}
