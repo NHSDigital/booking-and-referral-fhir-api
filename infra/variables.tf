@@ -3,28 +3,41 @@ variable "region" {
 }
 
 variable "project" {
-  default = "bars-infra"
+    default = "bars-infra"
 }
 
 variable "domain_name" {
-  default = "dev.api.platform.nhs.uk"
+    default = "dev.api.platform.nhs.uk"
 }
 
 variable "environment" {
-  default = "dev"
+    default = "dev"
 }
 
+
 variable "service" {
-  default = "infra"
+    default = "infra"
 }
 locals {
-  name_prefix = "${var.project}-${var.environment}"
+    name_prefix = "${var.project}-${var.environment}"
 }
 
 variable "registries" {
-  default = ["mock-receiver"]
+    default = ["mock-receiver"]
 }
 
 variable "vpc_id" {
-  default = "vpc-0d79f2b39f53e14f0"
+    default = "vpc-0d79f2b39f53e14f0"
+}
+
+variable "nlb_ports" {
+    type    = map(number)
+    default = {
+        http  = 80
+        https = 443
+    }
+}
+
+variable "autoscaling_group_name" {
+    default = "target-autoscaling-group"
 }
