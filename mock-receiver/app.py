@@ -34,7 +34,11 @@ class EventMatch:
             full_path = e["pathParameters"]["proxy"] + "?" + query_params_name + "=" + query_params_value
 
         is_matched = re.match(self.path, full_path) and self.method == e["httpMethod"]
-        # is_matched = self.path == full_path and self.method == e["httpMethod"]
+        # Flip the bool if we're inverting the check for the method,
+        # this is so we can catch non-allowed methods concisely within one EventMatch object
+        if self.method.startswith("!"):
+            is_matched = not is_matched
+
         if is_matched:
             parts = parse.urlparse(full_path).path.split('/')
             path_id = parts[1] if len(parts) >= 2 else ""
@@ -118,12 +122,27 @@ uuid4hex = r'[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]
 nhs_number_regex = r'[0-9]{10}$'
 
 event_to_response = [
-    # Appointment
+    # All Appointments for a patient
     EventMatch(path=f"^Appointment?patientIdentifier={nhs_number_regex}$", method="GET",
                get_example=lambda _: make_response("appointment/GET-success.json")),
-
+    # A single Appointment by valid uuid4
+    EventMatch(path=f"^Appointment/{existing_appointment_id}$", method="GET",
+               get_example=lambda _: make_response("appointment/id/GET-success.json")),
+    # A single Appointment by non-existent ID
+    EventMatch(path=f"^Appointment/{uuid4hex}$", method="GET",
+               get_example=lambda _: make_response("entity-not-found.json", 403)),
+    # A single Appointment by invalid uuid4
+    EventMatch(path="^Appointment/.*$", method="GET",
+               get_example=lambda _: make_response("bad-request.json", 400)),
+    # All Appointment without a patient id or uuid4
     EventMatch(path=r"^Appointment$", method="GET",
                get_example=lambda _: make_response("bad-request.json", 400)),
+    # Sending a non-GET request for a patient ID
+    EventMatch(path=f"^Appointment?patientIdentifier={nhs_number_regex}$", method="!GET",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    # Sending a non-GET request for an appointment ID
+    EventMatch(path=f"^Appointment/{existing_appointment_id}$", method="!GET",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
 
     # metadata
     EventMatch(path=r"^metadata$", method="GET",
