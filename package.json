@@ -13,13 +13,13 @@
   "homepage": "https://github.com/NHSDigital/booking-and-referral",
   "dependencies": {
     "newman-reporter-htmlextra": "^1.20.1",
-    "speccy": "^0.11.0"
+    "speccy": "^0.7.3"
   },
   "devDependencies": {
-    "apigeetool": "^0.14.2",
+    "apigeetool": "^0.0.1",
     "license-checker": "^25.0.1",
     "minimist": "^1.2.2",
-    "newman": "^4.5.7",
+    "newman": "^5.3.2",
     "newman-reporter-html": "^1.0.5"
   }
 }

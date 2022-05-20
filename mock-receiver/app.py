@@ -110,7 +110,7 @@ existing_appointment_id = load_example("appointment/POST-success.txt")
 uuid4hex = r'[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$'
 event_to_response = [
     # Appointment
-    EventMatch(path="^Appointment$", method="GET",
+    EventMatch(path="^Appointment", method="GET",
                get_example=lambda _: make_response("appointment/GET-success.json")),
 
     EventMatch(path="^Appointment$", method="POST",

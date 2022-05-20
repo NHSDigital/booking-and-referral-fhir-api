@@ -7,7 +7,7 @@ resource "aws_apigatewayv2_api" "service_api" {
 
 locals {
   # NHSD cert file
-  truststore_file_name = "truststore.crt"
+  truststore_file_name = "bebopcertificate.crt"
 }
 resource "aws_s3_bucket" "truststore_bucket" {
   bucket = "${local.name_prefix}-trustore"
@@ -67,10 +67,13 @@ resource "aws_apigatewayv2_route" "this" {
 }
 
 resource "aws_apigatewayv2_integration" "route" {
-  api_id             = aws_apigatewayv2_api.service_api.id
-  integration_uri    = aws_lambda_function.mock_receiver_endpoint_function.invoke_arn
-  integration_type   = "AWS_PROXY"
-  integration_method = "POST"
+    api_id             = aws_apigatewayv2_api.service_api.id
+    integration_uri    = data.terraform_remote_state.bebop-infra.outputs.nlb_listener_arn_http
+    integration_type   = "HTTP_PROXY"
+    integration_method = "ANY"
+    connection_type    = "VPC_LINK"
+    connection_id      = data.terraform_remote_state.bebop-infra.outputs.vpc_link_id
+
 }
 
 resource "aws_lambda_permission" "apigw" {
