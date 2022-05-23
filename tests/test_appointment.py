@@ -16,14 +16,13 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.parametrize("target", ("NHS0001", "NHS0124"))
-    def test_get_appointments(self, get_token_client_credentials, target):
+    def test_get_appointments(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("appointment/GET-success.json")
         patient_id = "4857773456"
-        target_identifier = json.dumps({"value": target, "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -46,16 +45,14 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.parametrize("target", ("NHS0001", "NHS0124"))
     def test_get_appointments_missing_param_patient_id(
-        self, get_token_client_credentials,
-        target
+        self, get_token_client_credentials
     ):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
-        target_identifier = json.dumps({"value": target, "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -77,13 +74,12 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.parametrize("target", ("NHS0001", "NHS0124"))
-    def test_get_appointment(self, get_token_client_credentials, target):
+    def test_get_appointment(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("appointment/id/GET-success.json")
-        target_identifier = json.dumps({"value": target, "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -105,14 +101,13 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.parametrize("target", ("NHS0001", "NHS0124"))
-    def test_get_appointment_bad_id(self, get_token_client_credentials, target):
+    def test_get_appointment_bad_id(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
-        target_identifier = json.dumps({"value": target, "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -134,13 +129,12 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.parametrize("target", ("NHS0001", "NHS0124"))
-    def test_get_appointment_entity_not_found(self, get_token_client_credentials, target):
+    def test_get_appointment_entity_not_found(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
         expected_body = load_example("entity-not-found.json")
-        target_identifier = json.dumps({"value": target, "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -162,14 +156,13 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.parametrize("target", ("NHS0001", "NHS0124"))
-    def test_appointments_method_not_allowed(self, get_token_client_credentials, target):
+    def test_appointments_method_not_allowed(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
         patient_id = "4857773456"
-        target_identifier = json.dumps({"value": target, "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -192,13 +185,12 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.parametrize("target", ("NHS0001", "NHS0124"))
-    def test_appointment_id_method_not_allowed(self, get_token_client_credentials, target):
+    def test_appointment_id_method_not_allowed(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
-        target_identifier = json.dumps({"value": target, "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
