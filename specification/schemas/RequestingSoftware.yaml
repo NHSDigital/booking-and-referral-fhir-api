@@ -1,15 +1,15 @@
-title: requestingSoftware
+title: NHSD-Requesting-software
 type: object
 description: Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
 x-examples:
   example:
-    requestingSoftware:
-      resourceType: Device
-      identifier:
-        - system: 'https://consumersupplier.com/Id/device-identifier'
-          value: SUPP-APP-1
-      model: Supplier product name
-      version: 1.0.0
+    resourceType: Device
+    identifier:
+      - system: 'https://consumersupplier.com/Id/device-identifier'
+        value: SUPP-APP-1
+    model: Supplier product name
+    version:
+        version: 1.0.0
 properties:
   requestingSoftware:
     type: object
@@ -36,11 +36,14 @@ properties:
           required:
             - system
             - value
-      model:
+      deviceName:
         type: string
         example: Supplier product name
       version:
-        type: string
-        example: 1.0.0
+        type: object
+        properties:
+           value:
+             type: string
+             example: "1.0.0"
 required:
   - requestingSoftware
