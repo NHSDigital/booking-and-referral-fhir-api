@@ -8,7 +8,6 @@ required:
 properties:
     resourceType:
       type: string
-      example: 'Practitioner'
     identifier:
       type: array
       uniqueItems: true
@@ -17,10 +16,8 @@ properties:
         properties:
           value:
             type: string
-            example: '100334993514'
           system:
             type: string
-            example: 'https://fhir.nhs.uk/Id/sds-role-profile-id'
         required:
           - value
           - system
