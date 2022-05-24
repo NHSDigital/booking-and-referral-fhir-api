@@ -1,60 +1,58 @@
-title: requestingPractitioner
+title: NHSD-Requesting-Practitioner
 type: object
 description: Requesting Practitioner described in an object based on a FHIR 'Practitioner' resource (Standard Base64 encoded JSON).
 required:
-  - requesting_practitioner
+  - resourceType
+  - identifier
+  - code
 properties:
-  requesting_Practitioner:
-    type: object
-    required:
-      - identifier
-      - name
-      - code
-    properties:
-      resourceType:
-        type: string
-        example: 'Practitioner'
-      identifier:
-        type: array
-        uniqueItems: true
+    resourceType:
+      type: string
+      example: 'Practitioner'
+    identifier:
+      type: array
+      uniqueItems: true
+      items:
+        type: object
+        properties:
+          value:
+            type: string
+            example: '100334993514'
+          system:
+            type: string
+            example: 'https://fhir.nhs.uk/Id/sds-role-profile-id'
+        required:
+          - value
+          - system
+    code:
+      type: array
+      uniqueItems: true
+      items:
+        type: object
         items:
-          type: object
-          properties:
-            value:
-              type: string
-              example: '100334993514'
-            system:
-              type: string
-              example: 'https://fhir.nhs.uk/Id/sds-role-profile-id'
-          required:
-            - value
-            - system
-      code:
-        type: array
-        uniqueItems: true
-        items:
-          type: object
-          properties:
-            code:
-              type: string
-              example: '62247001'
-            system:
-              type: string
-              example: 'http://snomed.info/sct'
-            display:
-              type: string
-              example: 'General Practitioner'
-          required:
-            - code
-            - system
+          coding:
+            type: array
+            uniqueItems: true
+            items:
+              type: object
+              properties:
+                code:
+                  type: string
+                system:
+                  type: string
+                display:
+                  type: string
+              required:
+                - code
+                - system
 x-examples:
   example:
-    requesting_organization:
-      resourceType: PractitionerRole
-      identifier:
-        - system: 'https://fhir.nhs.uk/Id/sds-role-profile-id'
-          value: '100334993514'
-      code:
+    resourceType: PractitionerRole
+    identifier:
+      - system: 'https://fhir.nhs.uk/Id/sds-role-profile-id'
+        value: '100334993514'
+    code:
+      - coding:
         - system: 'http://snomed.info/sct'
           code: '62247001'
           display: 'General Practitioner'
