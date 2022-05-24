@@ -208,7 +208,6 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingPerson_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
     post:
       tags:
@@ -280,7 +279,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingPerson_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
@@ -395,7 +393,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingPerson_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
@@ -447,7 +444,6 @@ paths:
       - $ref: '#/components/parameters/RegistryId_Param'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingPerson_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
@@ -497,7 +493,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingPerson_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
@@ -550,7 +545,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingPerson_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags:
@@ -641,13 +635,6 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/RequestingSoftwareToken'
-    RequestingPerson_HParam:
-      name: NHSD-Requesting-Person
-      description: The identifer of the Sending Person (Standard Base64 encoded JSON).
-      required: false
-      in: header
-      schema:
-        $ref: '#/components/schemas/RequestingPersonToken'
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
       description: The identifer of the Sending Organisation (Standard Base64 encoded JSON).
@@ -777,8 +764,6 @@ components:
       $ref: schemas/RequestingOrganisation.yaml
     RequestingPractitionerToken:
       $ref: schemas/RequestingPractitioner.yaml
-    RequestingPersonToken:
-      $ref: schemas/RequestingPerson.yaml
     RequestingSoftwareToken:
       $ref: schemas/RequestingSoftware.yaml
   securitySchemes:

@@ -23,25 +23,23 @@ properties:
           - system
     code:
       type: array
-      uniqueItems: true
-      items:
+      items: 
         type: object
-        items:
+        properties: 
           coding:
             type: array
-            uniqueItems: true
             items:
               type: object
               properties:
-                code:
-                  type: string
                 system:
                   type: string
-                display:
+                code:
                   type: string
+                display:
+                  type: string 
               required:
-                - code
                 - system
+                - code
 x-examples:
   example:
     resourceType: PractitionerRole
