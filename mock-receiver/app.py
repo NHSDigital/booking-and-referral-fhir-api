@@ -26,10 +26,22 @@ class EventMatch:
     get_example: Callable[[dict], dict] = lambda _: ""
 
     def get_example_response(self, e):
-        path = e["pathParameters"]["proxy"]
-        is_matched = re.match(self.path, path) and self.method == e["httpMethod"]
+        full_path = e["pathParameters"]["proxy"]
+        if e.get("queryStringParameters"):
+            query_params = e.get("queryStringParameters")
+            query_params_name = list(query_params.keys())[0]
+            query_params_value = query_params.get("patientIdentifier")
+            if query_params_value:
+                full_path = e["pathParameters"]["proxy"] + "?" + query_params_name + "=" + query_params_value
+
+        is_matched = re.match(self.path, full_path) and self.method == e["httpMethod"]
+        # Flip the bool if we're inverting the check for the method,
+        # this is so we can catch non-allowed methods concisely within one EventMatch object
+        if self.method.startswith("!") and re.match(self.path, full_path):
+            is_matched = not is_matched
+
         if is_matched:
-            parts = parse.urlparse(path).path.split('/')
+            parts = parse.urlparse(full_path).path.split('/')
             path_id = parts[1] if len(parts) >= 2 else ""
             arg = {'queries': e['multiValueQueryStringParameters'], 'id': path_id, 'headers': e['headers']}
 
@@ -108,114 +120,74 @@ def make_slots_response(queries: dict):
 
 existing_appointment_id = load_example("appointment/POST-success.txt")
 uuid4hex = r'[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$'
+nhs_number_regex = r'[0-9]{10}$'
+
 event_to_response = [
-    # Appointment
-    EventMatch(path="^Appointment$", method="GET",
+    # All Appointments for a patient
+    EventMatch(path=fr"^Appointment\?patientIdentifier={nhs_number_regex}", method="GET",
                get_example=lambda _: make_response("appointment/GET-success.json")),
-
-    EventMatch(path="^Appointment$", method="POST",
-               get_example=lambda _: make_response("appointment/POST-success.txt", 201)),
-
+    # A single Appointment by valid uuid4
+    EventMatch(path=f"^Appointment/{existing_appointment_id}$", method="GET",
+               get_example=lambda _: make_response("appointment/id/GET-success.json")),
+    # A single Appointment by non-existent ID
     EventMatch(path=f"^Appointment/{uuid4hex}$", method="GET",
-               get_example=lambda r: make_response("appointment/id/GET-success.json")
-               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
-
-    EventMatch(path=rf"^Appointment/{uuid4hex}$", method="PATCH",
-               get_example=lambda r: make_response("")
-               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
-
-    EventMatch(path=rf"^Appointment/{uuid4hex}$", method="PUT",
-               get_example=lambda r: make_response("")
-               if r['id'] == existing_appointment_id else make_response("entity-not-found.json", 403)),
-
-    EventMatch(path=r"^Appointment/.*$", method="GET",
+               get_example=lambda _: make_response("entity-not-found.json", 403)),
+    # A single Appointment by invalid uuid4
+    EventMatch(path="^Appointment/.*$", method="GET",
                get_example=lambda _: make_response("bad-request.json", 400)),
-    EventMatch(path=r"^Appointment/.*", method="POST",
-               get_example=lambda _: make_response("method-not-allowed.json", 405,
-                                                   {"Allow": "GET, PATCH, PUT, DELETE"})),
-    EventMatch(path=r"^Appointment$", method="PUT",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
-    EventMatch(path=r"^Appointment$", method="PATCH",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
-    EventMatch(path=r"^Appointment$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
+    # All Appointment without a patient id or uuid4
+    EventMatch(path=r"^Appointment$", method="GET",
+               get_example=lambda _: make_response("bad-request.json", 400)),
+    # Sending a non-GET request for a patient ID
+    EventMatch(path=fr"^Appointment\?patientIdentifier={nhs_number_regex}", method="POST",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    EventMatch(path=fr"^Appointment\?patientIdentifier={nhs_number_regex}", method="PUT",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    EventMatch(path=fr"^Appointment\?patientIdentifier={nhs_number_regex}", method="PATCH",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    EventMatch(path=fr"^Appointment\?patientIdentifier={nhs_number_regex}", method="DELETE",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    # Sending a non-GET request for an appointment ID
+    EventMatch(path=f"^Appointment/{existing_appointment_id}$", method="POST",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    EventMatch(path=f"^Appointment/{existing_appointment_id}$", method="PUT",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    EventMatch(path=f"^Appointment/{existing_appointment_id}$", method="PATCH",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
+    EventMatch(path=f"^Appointment/{existing_appointment_id}$", method="DELETE",
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
 
     # metadata
     EventMatch(path=r"^metadata$", method="GET",
                get_example=lambda _: make_response("metadata/GET-success.json")),
 
-    EventMatch(path=r"^metadata$", method="POST",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
-    EventMatch(path=r"^metadata$", method="PUT",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
-    EventMatch(path=r"^metadata$", method="PATCH",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
-    EventMatch(path=r"^metadata$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
-
     # $process-message
     EventMatch(path=r"^\$process-message$", method="POST",
                get_example=lambda _: make_response("process_message/POST-success.json")),
-
-    EventMatch(path=r"^\$process-message$", method="GET",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "POST"})),
-    EventMatch(path=r"^\$process-message$", method="PUT",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "POST"})),
-    EventMatch(path=r"^\$process-message$", method="PATCH",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "POST"})),
-    EventMatch(path=r"^\$process-message$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "POST"})),
 
     # ServiceRequest
     EventMatch(path=r"^ServiceRequest$", method="GET",
                get_example=lambda _: make_response("service_request/GET-success.json")),
     EventMatch(path=rf"^ServiceRequest/{uuid4hex}$", method="GET",
                get_example=lambda r: make_response("service_request/id/GET-success.json")),
-    EventMatch(path=r"^ServiceRequest$", method="POST",
-               get_example=lambda _: make_response("", 201)),
-    EventMatch(path=rf"^ServiceRequest/{uuid4hex}$", method="PUT",
-               get_example=lambda r: make_response("service_request/id/PUT-success.json")),
-    EventMatch(path=rf"^ServiceRequest/{uuid4hex}$", method="PATH",
-               get_example=lambda r: make_response("service_request/id/PATCH-success.json")),
-    EventMatch(path=r"^ServiceRequest$", method="DELETE",
-               get_example=lambda _: make_response("")),
-
-    EventMatch(path=r"^ServiceRequest$", method="PUT",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
-    EventMatch(path=r"^ServiceRequest$", method="PATCH",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
-    EventMatch(path=r"^ServiceRequest$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET, POST"})),
-    EventMatch(path=rf"^ServiceRequest/{uuid4hex}$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405,
-                                                   {"Allow": "GET, PATCH, PUT, DELETE"})),
 
     # MessageDefinition
     EventMatch(path=r"^MessageDefinition$", method="GET",
                get_example=lambda _:
                make_response("message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json")),
-
+    # Sending a non-GET request for MessageDefinition
     EventMatch(path=r"^MessageDefinition$", method="POST",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
     EventMatch(path=r"^MessageDefinition$", method="PUT",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
     EventMatch(path=r"^MessageDefinition$", method="PATCH",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
     EventMatch(path=r"^MessageDefinition$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
+               get_example=lambda _: make_response("method-not-allowed.json", 405, headers={"allow": "GET"})),
 
     # slots
     EventMatch(path=r"^Slot?.*", method="GET",
                get_example=lambda r: make_slots_response(r['queries'])),
-
-    EventMatch(path=r"^Slot$", method="POST",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
-    EventMatch(path=r"^Slot$", method="PUT",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
-    EventMatch(path=r"^Slot$", method="PATCH",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
-    EventMatch(path=r"^Slot$", method="DELETE",
-               get_example=lambda _: make_response("method-not-allowed.json", 405, {"Allow": "GET"})),
 
     # Header: errors
     EventMatch(path=r"^errors/.*", method="GET",
