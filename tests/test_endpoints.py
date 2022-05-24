@@ -106,7 +106,7 @@ class TestEndpoints:
     ):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_target = f"https://{config.LAMBDA_ENVIRONMENT}.bars.dev.api.platform.nhs.uk/mock-receiver/{path_suffix}"
+        expected_target = f"https://dev.bars.dev.api.platform.nhs.uk/mock-receiver/{path_suffix}"
         target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 

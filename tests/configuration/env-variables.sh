@@ -3,8 +3,6 @@ export SSO_LOGIN_URL='https://login.apigee.com'
 
 ## Target environment name
 export APIGEE_ENVIRONMENT='sandbox'
-## Target lambda environment name
-export LAMBDA_ENVIRONMENT='dev'
 
 export BASE_URL='https://'$APIGEE_ENVIRONMENT'.api.service.nhs.uk'
 export SERVICE_BASE_PATH='booking-and-referral'

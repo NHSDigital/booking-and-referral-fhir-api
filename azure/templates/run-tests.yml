@@ -25,7 +25,6 @@ steps:
       export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
       export APIGEE_API_TOKEN="$(secret.AccessToken)"
-      export LAMBDA_ENVIRONMENT="$(LAMBDA_ENVIRONMENT)"
       export OAUTH_BASE_URI="https://$(ENVIRONMENT).api.service.nhs.uk"
       export OAUTH_PROXY="oauth2"
       export JWT_PRIVATE_KEY_ABSOLUTE_PATH="$(Pipeline.Workspace)/secrets/$(JWT_TESTING_PRIVATE_KEY)"
