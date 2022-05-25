@@ -15,3 +15,7 @@ variable "container_port" {
 variable "subnet_ids" {
   type = list(string)
 }
+
+locals {
+  service_name = "mock-receiver"
+}

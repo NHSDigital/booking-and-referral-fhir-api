@@ -7,7 +7,7 @@ resource "aws_apigatewayv2_api" "service_api" {
 
 locals {
   # NHSD cert file
-  truststore_file_name = "bebopcertificate.crt"
+  truststore_file_name = "truststore.crt"
 }
 resource "aws_s3_bucket" "truststore_bucket" {
   bucket = "${local.name_prefix}-trustore"
@@ -34,16 +34,17 @@ resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
     security_policy = "TLS_1_2"
   }
 
-  mutual_tls_authentication {
-    truststore_uri = "s3://${aws_s3_bucket.truststore_bucket.bucket}/${aws_s3_object.upload_key_to_truststore.key}"
-  }
+  // TODO: enable mtls
+  #  mutual_tls_authentication {
+  #    truststore_uri = "s3://${aws_s3_bucket.truststore_bucket.bucket}/${aws_s3_object.upload_key_to_truststore.key}"
+  #  }
 
   tags = {
     Name = "${local.name_prefix}-api-domain-name"
   }
 }
 
-resource "aws_apigatewayv2_api_mapping" "example" {
+resource "aws_apigatewayv2_api_mapping" "api_mapping" {
   api_id      = aws_apigatewayv2_api.service_api.id
   domain_name = aws_apigatewayv2_domain_name.service_api_domain_name.id
   stage       = aws_apigatewayv2_stage.default.id
@@ -60,20 +61,32 @@ resource "aws_apigatewayv2_stage" "default" {
   }
 }
 
-resource "aws_apigatewayv2_route" "this" {
+resource "aws_apigatewayv2_route" "lambda_route" {
   api_id    = aws_apigatewayv2_api.service_api.id
   route_key = "ANY /${var.service}/{proxy+}"
-  target    = "integrations/${aws_apigatewayv2_integration.route.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
 }
 
-resource "aws_apigatewayv2_integration" "route" {
-    api_id             = aws_apigatewayv2_api.service_api.id
-    integration_uri    = data.terraform_remote_state.bebop-infra.outputs.nlb_listener_arn_http
-    integration_type   = "HTTP_PROXY"
-    integration_method = "ANY"
-    connection_type    = "VPC_LINK"
-    connection_id      = data.terraform_remote_state.bebop-infra.outputs.vpc_link_id
+resource "aws_apigatewayv2_integration" "lambda_integration" {
+  api_id             = aws_apigatewayv2_api.service_api.id
+  integration_uri    = aws_lambda_function.mock_receiver_endpoint_function.invoke_arn
+  integration_type   = "AWS_PROXY"
+  integration_method = "POST"
+}
 
+resource "aws_apigatewayv2_route" "root_route" {
+  api_id    = aws_apigatewayv2_api.service_api.id
+  route_key = "ANY /{proxy+}"
+  target    = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
+}
+
+resource "aws_apigatewayv2_integration" "route_integration" {
+  api_id             = aws_apigatewayv2_api.service_api.id
+  integration_uri    = aws_lb_listener.api_http_80.arn
+  integration_type   = "HTTP_PROXY"
+  integration_method = "ANY"
+  connection_type    = "VPC_LINK"
+  connection_id      = local.vpc_link_id
 }
 
 resource "aws_lambda_permission" "apigw" {
@@ -88,7 +101,7 @@ resource "aws_lambda_permission" "apigw" {
 }
 
 resource "aws_apigatewayv2_deployment" "deployment" {
-  depends_on  = [aws_apigatewayv2_route.this, aws_apigatewayv2_integration.route]
+  depends_on  = [aws_apigatewayv2_route.lambda_route, aws_apigatewayv2_integration.lambda_integration]
   api_id      = aws_apigatewayv2_api.service_api.id
   description = "BaRS api deployment"
 
