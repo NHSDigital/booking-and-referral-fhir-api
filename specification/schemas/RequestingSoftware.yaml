@@ -7,9 +7,9 @@ x-examples:
     identifier:
       - system: 'https://consumersupplier.com/Id/device-identifier'
         value: SUPP-APP-1
-    model: Supplier product name
+    deviceName: Supplier product name
     version:
-        version: 1.0.0
+        value: 1.0.0
 properties:
   requestingSoftware:
     type: object
