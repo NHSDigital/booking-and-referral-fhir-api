@@ -603,7 +603,7 @@ components:
       name: context
       description: |
        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
-      required: false
+      required: true
       in: query
       schema:
         type: string
