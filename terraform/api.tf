@@ -7,11 +7,13 @@ resource "aws_apigatewayv2_api" "service_api" {
 
 locals {
   # NHSD cert file
-  truststore_file_name = "bebopcertificate.crt"
+  truststore_file_name = "truststore_bebop.crt"
 }
+
 resource "aws_s3_bucket" "truststore_bucket" {
   bucket = "${local.name_prefix}-trustore"
 }
+
 resource "aws_s3_bucket_versioning" "truststore_versioning" {
   bucket = aws_s3_bucket.truststore_bucket.id
   versioning_configuration {
@@ -66,26 +68,30 @@ resource "aws_apigatewayv2_route" "this" {
   target    = "integrations/${aws_apigatewayv2_integration.route.id}"
 }
 
+resource "aws_lb_listener" "nlb_listener" {
+    load_balancer_arn = data.terraform_remote_state.bebop-infra.outputs.app_load_balance_id
+    protocol = "HTTP"
+    port     = "80"
+
+    default_action {
+        type             = "forward"
+        target_group_arn = module.mock-receiver.alb_target_group
+    }
+
+    tags = {
+        Name = local.name_prefix
+    }
+}
+
 resource "aws_apigatewayv2_integration" "route" {
     api_id             = aws_apigatewayv2_api.service_api.id
-    integration_uri    = data.terraform_remote_state.bebop-infra.outputs.nlb_listener_arn_http
+    integration_uri    = aws_lb_listener.nlb_listener.arn
     integration_type   = "HTTP_PROXY"
     integration_method = "ANY"
     connection_type    = "VPC_LINK"
     connection_id      = data.terraform_remote_state.bebop-infra.outputs.vpc_link_id
-
 }
 
-resource "aws_lambda_permission" "apigw" {
-  statement_id  = "AllowAPIGatewayInvoke-${local.environment}"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.mock_receiver_endpoint_function.function_name
-  principal     = "apigateway.amazonaws.com"
-
-  # The /*/* portion grants access from any method on any resource
-  # within the API Gateway "REST API".
-  source_arn = "${aws_apigatewayv2_api.service_api.execution_arn}/*/*"
-}
 
 resource "aws_apigatewayv2_deployment" "deployment" {
   depends_on  = [aws_apigatewayv2_route.this, aws_apigatewayv2_integration.route]
@@ -96,3 +102,4 @@ resource "aws_apigatewayv2_deployment" "deployment" {
     create_before_destroy = true
   }
 }
+

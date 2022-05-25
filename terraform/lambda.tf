@@ -1,9 +1,9 @@
-resource "aws_lambda_function" "mock_receiver_endpoint_function" {
-  function_name = local.name_prefix
-  image_uri     = "${aws_ecr_repository.bars-ecr-repository.repository_url}@${data.aws_ecr_image.lambda_image.id}"
-  package_type  = "Image"
-  role          = aws_iam_role.iam_for_lambda.arn
-}
+#resource "aws_lambda_function" "mock_receiver_endpoint_function" {
+#  function_name = local.name_prefix
+#  image_uri     = "${aws_ecr_repository.bars-ecr-repository.repository_url}@${data.aws_ecr_image.lambda_image.id}"
+#  package_type  = "Image"
+#  role          = aws_iam_role.iam_for_lambda.arn
+#}
 
 resource "aws_iam_role" "iam_for_lambda" {
   name = "${local.name_prefix}-lambda"
