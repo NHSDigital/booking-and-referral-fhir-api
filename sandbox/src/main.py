@@ -59,11 +59,6 @@ app.include_router(process_message.route)
 app.include_router(message_definition.route)
 
 
-@app.get("/")
-def health_check():
-    return Response(status_code=HTTP_200_OK)
-
-
 @app.get("/_status")
 def status():
     return Response(status_code=HTTP_200_OK)

@@ -19,7 +19,6 @@ plan: workspace
 apply: workspace
 	$(tr_cmd) apply -auto-approve
 
-
 destroy: workspace
 	AWS_PROFILE=$(aws_profile) terraform destroy
 
@@ -39,7 +38,7 @@ docker-push: docker-tag docker-login
 	docker push $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/bars-mock-receiver-$(environment)-ecr-repo:latest
 
 test:
-	curl -X GET -i https://dev.bars.dev.api.platform.nhs.uk/mock-receiver/Appointment
+	curl -X GET -i https://ansi5.bars.dev.api.platform.nhs.uk/mock-receiver/Appointment
 
 clean:
 	rm -rf build .terraform upload-key
