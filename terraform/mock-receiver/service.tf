@@ -13,8 +13,8 @@ resource "aws_ecs_service" "mock-receiver-service" {
     assign_public_ip = true
   }
   load_balancer {
-    target_group_arn = aws_lb_target_group.http_mock_receiver_tg.arn
-    container_name   = local.service_name
+    target_group_arn = var.alb_tg_arn
+      container_name = local.service_name
     container_port   = var.container_port
   }
 }

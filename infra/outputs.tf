@@ -19,9 +19,17 @@ output "fargate_repository_name" {
 }
 
 output "alb_arn" {
-  value = module.alb.alb_arn
+    value = module.alb.alb_arn
 }
 
 output "vpc_link_id" {
-  value = aws_apigatewayv2_vpc_link.alb_vpc_link.id
+    value = aws_apigatewayv2_vpc_link.alb_vpc_link.id
+}
+
+output "alb_tg_arn" {
+    value = module.alb.alb_target_group_arn
+}
+
+output "alb_listener_arn" {
+    value = module.alb.alb_listener_arn
 }

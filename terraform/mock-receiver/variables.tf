@@ -17,5 +17,8 @@ variable "subnet_ids" {
 }
 
 locals {
-  service_name = "mock-receiver"
+    service_name = "mock-receiver"
+}
+variable "alb_tg_arn" {
+
 }

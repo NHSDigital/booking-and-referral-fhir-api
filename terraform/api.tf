@@ -82,8 +82,8 @@ resource "aws_apigatewayv2_route" "root_route" {
 
 resource "aws_apigatewayv2_integration" "route_integration" {
   api_id             = aws_apigatewayv2_api.service_api.id
-  integration_uri    = aws_lb_listener.api_http_80.arn
-  integration_type   = "HTTP_PROXY"
+    integration_uri  = local.alb_listener_arn
+    integration_type = "HTTP_PROXY"
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
   connection_id      = local.vpc_link_id
