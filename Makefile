@@ -8,6 +8,7 @@ install-node:
 	cd sandbox && npm install
 
 pre-commit-hook:
+	pre-commit install
 	cp scripts/pre-commit .git/hooks/pre-commit
 
 install: install-node install-python pre-commit-hook
