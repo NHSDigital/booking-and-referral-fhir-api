@@ -14,11 +14,12 @@ info:
       * Get referral/s for a patient
       * Get slots
 
-    The following describes the end-to-end process:
-    1. Send a request from your sender application to this API, along with a service identifier header.
-    2. This API redirects the request to the service associated with the service identifier header.
+    Each request contains a header called service identifier. This idetifier
+    is associated with a backend service. The following describes the end-to-end process.
+    1. The client application sends a request, along with a service identifier header.
+    2. It passes through the request to the appropriate backend for the identifier.
     3. The target backend handles the request and sends a response back to this API.
-    4. This API returns the response to your sender application.
+    4. It returns the response to the client application.
 
     ## Who can use this API
     This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
@@ -71,6 +72,10 @@ info:
 
     ## Register on our platform    
     Details on the onboarding process can be found in our [Quick start guide](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide#quick-start-guide).
+    
+    ## Onboarding
+    Details to follow.
+
   version: 1.0.8
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
@@ -112,7 +117,7 @@ paths:
 
         A receiver can only implement a subset of the functionality within the standard and the capability statement will make this clear to a sender. 
 
-        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it. 
+        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it.
       operationId: getMeta
       responses:
         '200':
@@ -179,7 +184,7 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
-              example: 
+              example:
                 $ref: examples/message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json
             application/fhir+xml:
               schema:
@@ -293,7 +298,7 @@ paths:
         
         As documented in the [NHS Booking Standard](https://developer.nhs.uk/apis/uec-appointments/fs_slotmanagement.html), a receiver assigns the service identifier to groups of slots, under a schedule, which ties schedules together for a particular service.
 
-        
+
       operationId: getSlots
       parameters:
         - name: status
@@ -599,23 +604,23 @@ components:
         example: c3f6145e-1a26-4345-b3f2-dccbcba62049
       required: true
       allowEmptyValue: false
-    context_QParam: 
+    context_QParam:
       name: context
       description: |
-       The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
+        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
       required: true
       in: query
       schema:
         type: string
         example: "2000099999"
-    PatientId_QParam: 
+    PatientId_QParam:
       name: patient:identifier
       description: |
-       The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
-
-       |Type           |Expression|
-       |-------             | --------|
-       |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
+        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
+        
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
       required: true
       in: query
       schema:
