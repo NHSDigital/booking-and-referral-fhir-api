@@ -11,39 +11,35 @@ x-examples:
     version:
         value: 1.0.0
 properties:
-  requestingSoftware:
+  resourceType:
+    type: string
+    example: Device
+  identifier:
+    type: array
+    uniqueItems: true
+    items:
+      type: object
+      properties:
+        system:
+          type: string
+          example: 'https://consumersupplier.com/Id/device-identifier'
+        value:
+          type: string
+          example: SUPP-APP-1
+      required:
+        - system
+        - value
+  deviceName:
+    type: string
+    example: Supplier product name
+  version:
     type: object
-    required:
-      - identifier
-      - model
-      - version
     properties:
-      resourceType:
-        type: string
-        example: Device
-      identifier:
-        type: array
-        uniqueItems: true
-        items:
-          type: object
-          properties:
-            system:
-              type: string
-              example: 'https://consumersupplier.com/Id/device-identifier'
-            value:
-              type: string
-              example: SUPP-APP-1
-          required:
-            - system
-            - value
-      deviceName:
-        type: string
-        example: Supplier product name
-      version:
-        type: object
-        properties:
-           value:
-             type: string
-             example: "1.0.0"
+        value:
+          type: string
+          example: "1.0.0"
+        required:
+          - value
 required:
-  - requestingSoftware
+  - resourceType
+  - version
