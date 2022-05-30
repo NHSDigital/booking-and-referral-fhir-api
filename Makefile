@@ -8,8 +8,7 @@ install-node:
 	cd sandbox && npm install
 
 pre-commit-hook:
-	. .venv/bin/activate
-	pre-commit install
+	source .venv/bin/activate && pre-commit install
 
 install: install-node install-python pre-commit-hook
 
