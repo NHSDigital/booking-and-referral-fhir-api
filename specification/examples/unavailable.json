@@ -13,7 +13,7 @@
           "coding": [
             {
               "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
-              "code": "REC_UNAVAILABLE"
+              "code": "REC_SERVICE_UNAVAILABLE"
             }
           ]
         },

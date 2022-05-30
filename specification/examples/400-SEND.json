@@ -8,16 +8,16 @@
   "issue": [
     {
       "severity": "error",
-      "code": "400",
+      "code": "invariant",
       "details": {
         "coding": [
           {
             "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
-            "code": "SEND_BAD_REQUEST"
+            "code": "REC_BAD_REQUEST"
           }
         ]
       },
-      "diagnostics": "The API was unable to process the request: <further diagnostics information, error message/error text>"
+      "diagnostics": "Attempts to Validate the message have failed."
     }
   ]
 }

@@ -8,12 +8,12 @@
     "issue": [
       {
         "severity": "error",
-        "code": "invalid",
+        "code": "not-found",
         "details": {
           "coding": [
             {
               "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
-              "code": "REC_BAD_REQUEST"
+              "code": "REC_NOT_FOUND"
             }
           ]
         },
