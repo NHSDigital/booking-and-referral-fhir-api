@@ -9,7 +9,6 @@ install-node:
 
 pre-commit-hook:
 	pre-commit install
-	cp scripts/pre-commit .git/hooks/pre-commit
 
 install: install-node install-python pre-commit-hook
 
