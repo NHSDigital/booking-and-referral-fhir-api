@@ -1,5 +1,6 @@
 {
     "resourceType": "OperationOutcome",
+    "id": "531e073a-3295-4e67-ae90-e00bd96a9cdd",
     "meta": {
       "profile": [
         "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
