@@ -5,3 +5,7 @@ output "alb_target_group_arn" {
 output "alb_listener_arn" {
     value = aws_lb_listener.api_http_80.arn
 }
+
+output "alb_arn" {
+    value = aws_lb.alb.arn
+}

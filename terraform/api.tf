@@ -7,41 +7,34 @@ resource "aws_apigatewayv2_api" "service_api" {
 
 locals {
   # NHSD cert file
-  truststore_file_name = "truststore.crt"
+  truststore_file_name = "nhs_truststore.crt"
 }
 resource "aws_s3_bucket" "truststore_bucket" {
   bucket = "${local.name_prefix}-trustore"
 }
-resource "aws_s3_bucket_versioning" "truststore_versioning" {
-  bucket = aws_s3_bucket.truststore_bucket.id
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
 
 resource "aws_s3_object" "upload_key_to_truststore" {
-  bucket = aws_s3_bucket_versioning.truststore_versioning.bucket
-  key    = local.truststore_file_name
-  source = local.truststore_file_name
+    bucket = aws_s3_bucket.truststore_bucket.bucket
+    key    = local.truststore_file_name
+    source = local.truststore_file_name
 }
 
 resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
-  domain_name = local.service_domain_name
+    domain_name = local.service_domain_name
 
-  domain_name_configuration {
-    certificate_arn = aws_acm_certificate.service_certificate.arn
-    endpoint_type   = "REGIONAL"
-    security_policy = "TLS_1_2"
-  }
+    domain_name_configuration {
+        certificate_arn = aws_acm_certificate.service_certificate.arn
+        endpoint_type   = "REGIONAL"
+        security_policy = "TLS_1_2"
+    }
 
-  // TODO: enable mtls
-  #  mutual_tls_authentication {
-  #    truststore_uri = "s3://${aws_s3_bucket.truststore_bucket.bucket}/${aws_s3_object.upload_key_to_truststore.key}"
-  #  }
+    mutual_tls_authentication {
+        truststore_uri = "s3://${aws_s3_bucket.truststore_bucket.bucket}/${aws_s3_object.upload_key_to_truststore.key}"
+    }
 
-  tags = {
-    Name = "${local.name_prefix}-api-domain-name"
-  }
+    tags = {
+        Name = "${local.name_prefix}-api-domain-name"
+    }
 }
 
 resource "aws_apigatewayv2_api_mapping" "api_mapping" {

@@ -12,4 +12,5 @@ module "mock-receiver" {
     repository_url  = local.mock_receiver_repository_url
     repository_name = local.mock_receiver_repository_name
     alb_tg_arn      = local.alb_tg_arn
+
 }

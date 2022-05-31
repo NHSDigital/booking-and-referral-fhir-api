@@ -20,5 +20,4 @@ locals {
     service_name = "mock-receiver"
 }
 variable "alb_tg_arn" {
-
 }

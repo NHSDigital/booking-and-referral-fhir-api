@@ -1,6 +1,6 @@
 resource "aws_lb_listener" "api_http_80" {
     load_balancer_arn = aws_lb.alb.arn
-    port              = "80"
+    port              = var.listener_port
     protocol          = "HTTP"
 
     default_action {
