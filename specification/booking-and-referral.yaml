@@ -318,8 +318,12 @@ paths:
             Slot start date/time (yyyy-mm-ddThh:mm:ss).
             To search for time windows within which Slots must start, use “greater than” and “less than” searching.
             
-            For example "GET [base]Slot?start=ge2022-03-01T12:00:00+00&start=le2022-03-01T13:30:00+00". 
+            For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00&start=le2022-03-01T13:30:00+00". 
             The definition of the time window within which Slots are requested is provided by using this parameter twice.
+
+            If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
+            
+            For example "GET [base]/Slot?status=free,busy". 
           schema:
             format: datetime
             type: string
