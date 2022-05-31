@@ -43,3 +43,4 @@ properties:
 required:
   - resourceType
   - version
+  - deviceName
