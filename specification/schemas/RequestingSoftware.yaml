@@ -38,8 +38,8 @@ properties:
         value:
           type: string
           example: "1.0.0"
-        required:
-          - value
+          required:
+            - value
 required:
   - resourceType
   - version
