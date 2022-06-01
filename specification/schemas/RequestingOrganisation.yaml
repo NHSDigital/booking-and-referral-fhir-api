@@ -1,43 +1,36 @@
-title: requestingOrganization
+title: NHSD-End-User-Organisation
 type: object
 description: Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
 required:
-  - requesting_organization
+  - resourceType
 properties:
-  requesting_organization:
-    type: object
-    required:
-      - identifier
-      - name
-    properties:
-      resourceType:
-        type: string
-        example: 'Organization'
-      identifier:
-        type: array
-        uniqueItems: true
-        items:
-          type: object
-          properties:
-            value:
-              type: string
-              example: A1001
-            system:
-              type: string
-              example: 'https://fhir.nhs.uk/Id/ods-organization-code'
-          required:
-            - value
-            - system
-      name:
-        type: string
-        example: My service provider name
+  resourceType:
+    type: string
+    example: 'Organization'
+  identifier:
+    type: array
+    uniqueItems: true
+    items:
+      type: object
+      properties:
+        value:
+          type: string
+          example: A1001
+        system:
+          type: string
+          example: 'https://fhir.nhs.uk/Id/ods-organization-code'
+      required:
+        - value
+        - system
+  name:
+    type: string
+    example: My service provider name
 ## Examples will not show correctly so explicitly defining them for now:
 x-examples:
   example:
-    requesting_organization:
-      resourceType: Organization
-      identifier:
-        - system: 'https://fhir.nhs.uk/Id/ods-organization-code'
-          value: A1001
-      name: 111 North East Service
+    resourceType: Organization
+    identifier:
+      - system: 'https://fhir.nhs.uk/Id/ods-organization-code'
+        value: A1001
+    name: 111 North East Service
 
