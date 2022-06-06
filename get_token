@@ -1,0 +1,665 @@
+#!/bin/bash
+#
+# get_token: gets, caches, and refreshes OAuth2 access tokens
+# See usage_warning() below for details.
+#
+# Environment variables:
+# SSO_LOGIN_URL required, e.g. https://login.apigee.com
+# GET_TOKEN_TEST optional, for testing, one of
+# - BASIC logs parsed username and password from -u
+# - CACHE verifies content of token cache file
+#
+
+NONE='\033[00m'
+RED='\033[01;31m'
+GREEN='\033[01;32m'
+BOLD='\033[1m'
+UNDERLINE='\033[4m'
+LIGHT_BLUE='\033[01;34m'
+
+IS_DEBUG=''
+EXPIRY_LAG_SECONDS=3
+
+CLIENT_CLI_VERSION=2.2.1
+TOKEN_DIR="${HOME}/.sso-cli"
+
+AUTH_TYPE_PASSWORD='password'
+AUTH_TYPE_PASSCODE='passcode'
+
+IS_FORCE_BASIC_AUTH_INPUT=''
+IS_MFA_OPTION_PRESENT=''
+IS_PASSCODE=''
+
+IS_PRINT_CACHE=''
+IS_CLEAR_CACHE=''
+IS_CLEAR_ALL_CACHE=''
+
+BASIC_AUTH_INPUT=""
+MFA_TOKEN=""
+USERNAME=""
+PASSWORD=""
+INSECURE=""
+
+EXIT_OK_WITH_TOKEN=0
+EXIT_HELP=1
+EXIT_CLEAR_CACHE=2
+EXIT_PRINT_CACHE=3
+EXIT_MISSING_SSO_LOGIN_URL=11
+EXIT_MISSING_CREDENTIAL=12
+EXIT_INVALID_CHARACTERS_IN_CREDENTIAL=13
+EXIT_CREDENTIALS_FOR_WRONG_USER=14
+EXIT_ERROR_CALLING_SSO_LOGIN_URL=21
+EXIT_SERVER_REJECTED_TOKEN_REQUEST=22
+EXIT_ERROR_CREATING_CACHE=31
+EXIT_ERROR_WRITING_TOKEN_DAT=32
+
+# Detect whether long values are wrapped by default (yes on Linux, no on Mac) and therefore must be disabled
+encode_lines=$(echo "ABCDEFGHIJKLMNOPQRSTUVWXYZ7890abcdefghijklmnopqrstuvwxyz7890123456" | base64 | wc -l)
+
+base64encode() {
+  if (( encode_lines > 1 )); then
+    # Disable default wrap at 76 chars with GNU base64 on Linux
+    printf '%s' "$1" | base64 --wrap=0
+  else
+    # --wrap is neither required nor supported with BSD base64 on Mac
+    printf '%s' "$1" | base64
+  fi
+}
+
+base64decode() {
+  local bytes="$1"
+  while (( $(printf '%s' "$bytes" | wc -c) % 4 != 0 )); do
+    bytes="${bytes}=" # add padding if necessary to decode final bytes
+  done
+  printf '%s' "$bytes" | base64 --decode
+}
+
+extractClaimsFromJWT() {
+  # BSD base64 decoder accepts URL-encoding and lack of padding; GNU does not
+  base64decode "$(printf '%s' "$1" | cut -f2 -d. | tr -- '-_' '+/')"
+}
+
+jsonString() { # does not work if the string value has escaped double-quotes
+  local pattern="\"$1\":\"([^\"]+)\""
+  if [[ "$*" =~ ${pattern} ]]; then
+    printf '%s' "${BASH_REMATCH[1]}"
+  fi
+}
+
+jsonInteger() {
+  local pattern="\"$1\":([0-9]+)"
+  if [[ "$*" =~ ${pattern} ]]; then
+    printf '%s' "${BASH_REMATCH[1]}"
+  fi
+}
+
+usage_warning() {
+  echo -e "
+ ${BOLD}'get_token'${NONE} generates access and refresh tokens from Apigee SSO using
+  OAuth 2.0 'grant_type=password'. You must provide credentials for a new
+  token pair. Once the token pair is obtained, you may call repeatedly without
+  credentials. The utility will update the access token if necessary, until
+  the refresh token expires.
+
+  Usage: ${GREEN}get_token [options] -u USERNAME:PASSWORD [-m MFACODE]${NONE}
+     or  ${GREEN}get_token [options] -p PASSCODE${NONE}
+         ${GREEN}get_token [options]${NONE}
+
+  Options:
+    -u                  user email alone OR
+                        Basic auth credentials in the form email:password
+    -m                  6-digit Multi-Factor Authentication code or ''
+    -p                  6-character passcode for SAML-enabled users
+    --force-basic-auth  machine users must use Basic auth instead of passcode
+    --insecure          allows the script to perform \"insecure\" SSL
+                        connections and transfers. This option is provided
+                        for testing purposes only in Private Cloud when
+                        apigee-sso has a self-signed certificate.
+    -v                  verbose mode
+    -h                  help
+
+  Environment variable SSO_LOGIN_URL is ${BOLD}${SSO_LOGIN_URL:-"${RED}not set"}${NONE}
+
+  ${BOLD}Notes:${NONE}
+  If any parameters are omitted, you will be prompted to enter them. Please
+  refer to the Apigee documentation for additional details and examples:
+  https://docs.apigee.com/api-services/content/using-oauth2-security-apigee-edge-management-api
+
+  Tokens will be generated and stored locally under \$HOME/.sso-cli
+
+  This is Client CLI version: ${CLIENT_CLI_VERSION}
+"
+}
+
+usage_for_more_details() {
+  echo -e "  For more details: $0 -v -h\n"
+}
+
+usage_details() {
+  echo -e "
+  Detailed steps to generate a token:
+  ===================================
+
+  Follow the method below for your specific environment. Note that the
+  -u option is required, whether using email alone or with a password.
+
+      A. Cloud customers using Apigee as identity provider
+      ----------------------------------------------------
+        1. export SSO_LOGIN_URL=\"https://login.apigee.com\"
+        2. get_token -u {USER_EMAIL}:{PASSWORD} -m {MFA_CODE}
+
+      B. Cloud customers using corporate SAML as identity provider
+      ------------------------------------------------------------
+        1. export SSO_LOGIN_URL=\"https://<zone_name>.login.apigee.com\"
+        2. get_token -u {USER_EMAIL}
+
+        Note:
+        You will be prompted to get one-time code from \"${SSO_LOGIN_URL:-"${RED}\$SSO_LOGIN_URL${NONE}"}/passcode\"
+        instead of using your password. You can also pass the passcode using -p option as shown below:
+
+           get_token -u {USER_EMAIL} -p {PASSCODE}
+
+        If you have machine users configured use --force-basic-auth
+
+      C. Private Cloud customers using local store as identity provider
+      -----------------------------------------------------------------
+        1. export SSO_LOGIN_URL=\"<scheme>://<hostname><port_if_not_443>\"
+        2. get_token -u {USER_EMAIL}:{PASSWORD} -m {MFA_CODE}
+
+      D. Private Cloud customers using corporate SAML as identity provider
+      --------------------------------------------------------------------
+        1. export SSO_LOGIN_URL=\"<scheme>://<hostname><port_if_not_443>\"
+        2. get_token -u {USER_EMAIL}
+
+        Note:
+        You will be prompted to get one-time code from \"<scheme>://<hostname><port_if_not_443>/passcode\"
+        instead of using your password. You can also pass the passcode using -p option as shown below:
+
+           get_token -u {USER_EMAIL} -p {PASSCODE}
+
+      Sample usage
+      ------------
+        1. Users that have not enabled MFA on their accounts:
+           get_token -u me@example.com:Apigee123 -m ''
+
+        2. MFA-enabled users:
+           get_token -u me@example.com:Apigee123 -m 123456
+
+        3. SAML-enabled users:
+           get_token -u me@example.com
+              displays the passcode URL and prompts for value
+              OR you can visit the URL in advance to get passcode
+
+           get_token -u me@example.com -p 123456
+
+        4. Machine users for SAML customers:
+           get_token -u me@example.com:Apigee123 --force-basic-auth
+
+        5. Private Cloud instance of apigee-sso service with self-signed certificate:
+           get_token -u me@example.com:Apigee123 --insecure
+
+        6. Refresh token
+           get_token -u me@example.com
+
+  Token cache options
+  ===================
+
+  These options replace the normal script actions and exit.
+
+  --clear-sso-cache
+      Clears cache directory for \$SSO_LOGIN_URL under \$HOME/.sso-cli
+      discarding any cached access and refresh token for the server.
+
+  --print-sso-cache
+      Prints the cache directory for \$SSO_LOGIN_URL under \$HOME/.sso-cli to stdout
+
+  --clear-all-sso-cache
+      Clears all directories under \$HOME/.sso-cli
+      discarding all cached tokens.
+"
+}
+
+# All messages and prompts go to stderr; stdout reserved for access token
+_println() {
+  >&2 echo -e "$*"
+}
+
+_log() {
+  local level="$1"
+  shift
+  case "$level" in
+    ERROR)
+       _println "${RED}$*${NONE}"
+       ;;
+    DEBUG)
+      if [[ -n "${IS_DEBUG}" ]]; then
+        _println "${LIGHT_BLUE}$*${NONE}"
+      fi
+      ;;
+    *)
+      _println "$level $*"
+      ;;
+  esac
+}
+
+_error_calling_SSO_LOGIN_URL() {
+  _log ERROR "Failure to communicate with SSO server: ${SSO_LOGIN_URL}"
+  exit ${EXIT_ERROR_CALLING_SSO_LOGIN_URL}
+}
+
+_check_client_version_compatibility() {
+  if [[ -f 'server.version' ]]; then
+    _log DEBUG Using cached server.version
+  else
+    if ! curl -o 'server.version' ${INSECURE:-"-G"} -i -H "Accept: application/json" "${SSO_LOGIN_URL}/version" --silent; then
+      _error_calling_SSO_LOGIN_URL
+    fi
+  fi
+  local server_version_api_response=$(<'server.version')
+  if [[ "${server_version_api_response}" == *"HTTP/1.1 200"* ]]; then
+    local server_version=$(jsonString 'cliVersion' "${server_version_api_response}")
+    _log DEBUG "Client CLI version: ${CLIENT_CLI_VERSION}; Server CLI version: ${server_version}"
+
+    if [[ "${server_version}" > "${CLIENT_CLI_VERSION}" ]]; then # lexical, not numeric, comparison; OK for single digits X.Y
+        _log ERROR "###### You have outdated version; please refer the documentation to update to the latest version ######";
+    fi
+  else
+    _error_calling_SSO_LOGIN_URL
+  fi
+}
+
+_get_allowed_authentication_methods() {
+  if [[ -f 'server.login' ]]; then
+    _log DEBUG Using cached server.login
+  else
+    if ! curl -o 'server.login' ${INSECURE:-"-G"} -i -H "Accept: application/json" "${SSO_LOGIN_URL}/login" --silent; then
+      return # This is called from subshell, no point exiting here; but don't try to read server.login
+    fi
+  fi
+  local login_prompts_response=$(<'server.login')
+  if [[ "${login_prompts_response}" == *"HTTP/1.1 200"* ]]; then
+    local login_prompts=$(echo ${login_prompts_response} | sed -E 's/(.*prompts\":\{)(.*)/\2/' | sed -E 's/(.*)(\},\"timestamp\".*)/\1/')
+    if [[ "${login_prompts}" == *"${AUTH_TYPE_PASSCODE}"* ]]; then
+      echo "${AUTH_TYPE_PASSCODE}"
+    else
+      echo "${AUTH_TYPE_PASSWORD}"
+    fi
+  fi
+}
+
+_check_SSO_LOGIN_URL() {
+  if [[ -z "${SSO_LOGIN_URL}" ]]; then
+    _log ERROR "Missing environment variable SSO_LOGIN_URL. Please set SSO_LOGIN_URL using export command.
+    Below are instructions based on the Edge platform you are using:
+    - Cloud customers without zone: export SSO_LOGIN_URL=https://login.apigee.com
+    - Cloud customers with zone: export SSO_LOGIN_URL=https://zone_name.login.apigee.com  (Replace the zone_name with the one provided to you.)
+    - Private Cloud customers: please contact your administrator for the appropriate SSO endpoint."
+
+    exit ${EXIT_MISSING_SSO_LOGIN_URL}
+  fi
+}
+
+_get_sso_server_configuration() {
+  local auth=$(_get_allowed_authentication_methods)
+  if [[ -n "${auth}" ]]; then
+    _log DEBUG "Script uses ${SSO_LOGIN_URL} as the SSO endpoint"
+    SSO_URL="${SSO_LOGIN_URL}/oauth/token"
+    if [[ "${auth}" == "${AUTH_TYPE_PASSCODE}" ]]; then
+      if [[ -n "${IS_FORCE_BASIC_AUTH_INPUT}" ]]; then
+        _log DEBUG "Forcing basic auth instead of passcode"
+      else
+        _log DEBUG "Requires passcode for authentication"
+        IS_PASSCODE='true'
+      fi
+    fi
+  else
+    _error_calling_SSO_LOGIN_URL
+  fi
+}
+
+_setup_get_token_script() {
+  if [[ -z "${CLIENT_AUTH}" ]]; then
+    CLIENT_AUTH=ZWRnZWNsaTplZGdlY2xpc2VjcmV0
+  fi
+
+  if [[ -n "${IS_CLEAR_ALL_CACHE}" ]]; then
+    if [[ -d "${TOKEN_DIR}" ]]; then
+      _log "Clearing all SSO caches in ${TOKEN_DIR}"
+      _clear_directory_content_and_exit "${TOKEN_DIR}"
+    else
+      _log "SSO cache: No such directory: ${TOKEN_DIR}"
+      exit ${EXIT_CLEAR_CACHE}
+    fi
+  fi
+
+  _check_SSO_LOGIN_URL
+
+  local b64_encoded_sso_url="${TOKEN_DIR}/$(base64encode ${SSO_LOGIN_URL})"
+  mkdir -p "${b64_encoded_sso_url}"
+  if cd "${b64_encoded_sso_url}"; then
+    chmod 700 "${TOKEN_DIR}"
+    chmod 700 "${b64_encoded_sso_url}"
+  else
+    exit ${EXIT_ERROR_CREATING_CACHE}
+  fi
+  if [[ -n "${IS_PRINT_CACHE}" ]]; then
+    printf '%s\n' "${b64_encoded_sso_url}"
+    exit ${EXIT_PRINT_CACHE}
+  elif [[ -n "${IS_CLEAR_CACHE}" ]]; then
+    _log "Clearing SSO cache ${b64_encoded_sso_url}"
+    _clear_directory_content_and_exit "${b64_encoded_sso_url}"
+  else
+    _log DEBUG "Current working dir: $(pwd)"
+  fi
+
+  _get_sso_server_configuration
+  _check_client_version_compatibility
+}
+
+_clear_directory_content_and_exit() {
+  find "$1" -mindepth 1 -maxdepth 1 | xargs rm -rfv >&2
+  exit ${EXIT_CLEAR_CACHE}
+}
+
+##################### Pseudocode #####################
+#  1. Validate presence of SSO_LOGIN_URL
+#  2. Check server to see if it supports passcode
+#  3. Check for lone cached token, which indicates username
+#     - This is the default username if none is specified
+#     - If there is more than one, and no username is specified,
+#       prompt for a username, even if using passcode
+#  4. If there is a cached token
+#     - If the access token has not expired, use it
+#     - If not, try to use refresh token
+#  5. If no access token, or refresh failed, get new token pair
+#     - If passcode, prompt for it if necessary
+#     - If not, prompt for username, password, and MFA if necessary
+#  6. With refreshed access token or new pair, update token cache
+#  7. Print JWT to stdout
+#     - All prompts and other messages are to stderr
+#
+
+_parse_basic_auth_credentials() {
+  local pattern='([^:]+)(:(.*))?'
+  if [[ "${BASIC_AUTH_INPUT}" =~ ${pattern} ]]; then
+    USERNAME="${BASH_REMATCH[1]}"
+    PASSWORD="${BASH_REMATCH[3]}"
+  fi
+  if [[ "${GET_TOKEN_TEST}" == 'BASIC' ]]; then
+    _log DEBUG "Username [${USERNAME}] Password [${PASSWORD}]"
+  fi
+}
+
+_user_validation() {
+  if [[ -z "${USERNAME}" ]]; then
+    _println "Enter username:"
+    read -t 30 USERNAME
+  fi
+  USERNAME=$(echo "${USERNAME}" | tr '[:upper:]' '[:lower:]') # to match token "user_name"
+
+  if [[ -n "${USERNAME}" && -z "${PASSWORD}" ]]; then
+    _println "Enter the password for user '${USERNAME}':"
+    read -t 30 -s PASSWORD
+  fi
+
+  if [[ -z "${USERNAME}" || -z "${PASSWORD}" ]]; then
+    _log ERROR "No credentials provided... exiting"
+    exit ${EXIT_MISSING_CREDENTIAL}
+  fi
+
+  qp_username='username='${USERNAME}
+  qp_password='password='${PASSWORD}
+}
+
+_mfa_validation() {
+  if [[ -z "${IS_MFA_OPTION_PRESENT}" ]]; then
+    _println "Enter the six-digit code (no spaces) if '${USERNAME}' is MFA-enabled or press ENTER:"
+    read -t 30 MFA_TOKEN
+  fi
+  if [[ "${MFA_TOKEN}" =~ [^0-9] ]]; then
+    _println "** Invalid MFA code **";
+    exit ${EXIT_INVALID_CHARACTERS_IN_CREDENTIAL}
+  fi
+}
+
+_passcode_validation() {
+  local passcode_regex="[^0-9A-Za-z]+"
+  if [[ -z "${PASSCODE}" ]]; then
+    _println "Starting passcode flow:"
+    _println "-----------------------"
+    _println "Get passcode from ${SSO_LOGIN_URL}/passcode [ Note: Passcode can be used only one time and expires ]"
+    _println "Input passcode (no spaces) and then press ENTER:"
+    read -t 90 PASSCODE
+  fi
+  if [[ "${PASSCODE}" =~ [^0-9A-Za-z] ]]; then
+    _log ERROR "** Invalid passcode **";
+    exit ${EXIT_INVALID_CHARACTERS_IN_CREDENTIAL}
+  elif [[ -z "${PASSCODE}" ]]; then
+    _log ERROR "** Missing passcode **";
+    exit ${EXIT_MISSING_CREDENTIAL}
+  fi
+}
+
+_validate_credentials() {
+  if [[ -n "${IS_PASSCODE}" ]]; then
+    _passcode_validation
+  else
+    _user_validation
+    _mfa_validation
+  fi
+}
+
+_get_new_access_token() {
+  _log DEBUG "OAuth token request: ${SSO_URL}"
+
+  local qp_passcode="passcode=${PASSCODE}"
+  local qp_mfacode="mfa_token=${MFA_TOKEN}"
+  local qparams="grant_type=password"
+  local url="${SSO_URL}?${qp_mfacode}"
+
+  if [[ -n "${IS_PASSCODE}" && -n "${PASSCODE}" ]]; then
+    qparams="--data-urlencode ${qparams} --data-urlencode ${qp_passcode} --data-urlencode response_type=token"
+  else
+    qparams="--data-urlencode ${qparams} --data-urlencode ${qp_username} --data-urlencode ${qp_password}"
+  fi
+
+  local token=$(curl ${INSECURE:-""} -X POST --silent \
+               -H "Content-Type: application/x-www-form-urlencoded;charset=utf-8" \
+               -H "Accept: application/json;charset=utf-8" \
+               -H "Authorization: Basic ${CLIENT_AUTH}" \
+               ${qparams} ${url})
+
+  if [[ "${token}" == *"access_token"* ]]; then
+    local access_token_jwt=$(jsonString 'access_token' "${token}")
+    local token_claims=$(extractClaimsFromJWT "${access_token_jwt}")
+    _log DEBUG "Decoded token claims: ${token_claims}"
+    local user_name=$(jsonString 'user_name' "${token_claims}")
+
+    # USERNAME is from input, from command option or prompted for multiple cached tokens;
+    # or derived from lone cached token. Passcode flow may have no USERNAME if there are
+    # no cached tokens. The user_name from the new token must match the USERNAME if
+    # defined, otherwise you somehow got a token intended for someone else.
+    local token_dat=$(base64encode "${user_name}-token.dat")
+    if [[ ("${user_name}" == "${USERNAME}") || (-n "${IS_PASSCODE}" && -z "${USERNAME}") ]]; then
+      _update_token_dat "${token}" "${token_dat}"
+      _output_token "${access_token_jwt}"
+    else
+      if [[ -n "${IS_PASSCODE}" && -n "${PASSCODE}" ]]; then
+        _println "** Incorrect passcode for the user: '${USERNAME}'";
+      else
+        _println "** Incorrect credentials for the user: '${USERNAME}'";
+      fi
+      exit ${EXIT_CREDENTIALS_FOR_WRONG_USER}
+    fi
+  else
+    _log ERROR "${token}"
+    exit ${EXIT_SERVER_REJECTED_TOKEN_REQUEST}
+  fi
+}
+
+_refresh_access_token() {
+  local cached_token_response="$1"
+  local filename="$2"
+
+  local refresh_token=$(jsonString 'refresh_token' "${cached_token_response}")
+  _log DEBUG "Access token has expired; use the refresh token to get new token"
+
+  local refresh_token_response=$(curl ${INSECURE:-""} --write-out "\nResponse code:%{http_code}\n" --silent \
+    -H "Content-Type: application/x-www-form-urlencoded;charset=utf-8" \
+    -H "Accept: application/json;charset=utf-8" \
+    -H "Authorization: Basic ${CLIENT_AUTH}" \
+    -d "grant_type=refresh_token&refresh_token=${refresh_token}" \
+    ${SSO_URL})
+
+  if [[ "${refresh_token_response}" == *"Response code:200"* ]]; then
+    refresh_token_response=$(echo ${refresh_token_response} | sed -E 's/Response code:200//')
+    _update_token_dat "${refresh_token_response}" "${filename}"
+    local new_access_token=$(jsonString 'access_token' "${refresh_token_response}")
+    _log DEBUG "Got the new access token using refresh token"
+    _output_token "${new_access_token}"
+  else
+    _log DEBUG "Refresh token has expired; discarding cache and generating new access token"
+    _validate_credentials
+    _get_new_access_token
+  fi
+}
+
+_update_token_dat() {
+  local token="$1"
+  local dat_file="$2"
+  _log DEBUG "Caching tokens in ${dat_file}"
+  if printf '%s\n' "${token}" > "${dat_file}" && chmod 600 "${dat_file}"; then
+    if [[ "${GET_TOKEN_TEST}" == 'CACHE' ]]; then
+      >&2 file "${dat_file}"
+    fi
+  else
+    exit ${EXIT_ERROR_WRITING_TOKEN_DAT}
+  fi
+}
+
+_output_token() {
+  if [[ -n "${GET_TOKEN_RESULT}" ]]; then
+    GET_TOKEN_RESULT="$*"
+  else
+    printf '%s\n' "$*"
+  fi
+  # exit $EXIT_OK_WITH_TOKEN would go here, but script may be sourced
+}
+
+main() {
+  _setup_get_token_script
+
+  local access_token_file=""
+  local cached_tokens=($(ls -1 | grep -v 'server\.')) # server.version and server.login -- dot is not base64
+
+  if [[ -n "${BASIC_AUTH_INPUT}" ]]; then
+    _parse_basic_auth_credentials
+  fi
+
+  if (( ${#cached_tokens[@]} > 1 )); then
+    if [[ -z "${USERNAME}" ]]; then
+      _println "sso-cli cache found to contain access tokens pertaining to multiple users;
+      please enter the username (email), to fetch correct one:"
+      read -t 30 USERNAME
+      if [[ -z "${USERNAME}" ]]; then
+        _log ERROR "** Missing username **"
+        exit ${EXIT_MISSING_CREDENTIAL}
+      fi
+      USERNAME=$(echo "${USERNAME}" | tr '[:upper:]' '[:lower:]') # to match token "user_name"
+    fi
+    local token_dat=$(base64encode "${USERNAME}-token.dat")
+    if [[ -f "${token_dat}" ]]; then
+      access_token_file="${token_dat}"
+    fi
+  elif (( ${#cached_tokens[@]} == 1 )); then
+    local access_token_file_decoded=$(base64decode "${cached_tokens[0]}")
+    local user_name="${access_token_file_decoded%-token.dat}"
+    # if token already exists and different user wants to create token now
+    if [[ -n "${USERNAME}" ]]; then
+      if [[ "${USERNAME}" == "${user_name}" ]]; then
+        access_token_file="${cached_tokens[0]}"
+      fi
+    else
+      _log DEBUG "No username specified; found lone cached token for: ${user_name}"
+      USERNAME="${user_name}"
+      access_token_file="${cached_tokens[0]}"
+    fi
+  fi
+
+  if [[ -s "${access_token_file}" ]]; then
+    # if file exists with access_token value
+    local cached_token_response=$(<"${access_token_file}")
+    local cached_access_token=$(jsonString 'access_token' "${cached_token_response}")
+    local token_claims=$(extractClaimsFromJWT "${cached_access_token}")
+    _log DEBUG "Decoded token claims: ${token_claims}"
+    expiry_date=$(jsonInteger 'exp' "${token_claims}")
+    current_date=$(date "+%s")
+    _log DEBUG "Current timestamp: ${current_date}"
+    if (( expiry_date - current_date < EXPIRY_LAG_SECONDS )); then
+      _refresh_access_token "${cached_token_response}" "${access_token_file}"
+    else
+      _log DEBUG "Existing access token is still valid"
+      _output_token "${cached_access_token}"
+    fi
+  else
+    # No access token file present for the desired USERNAME
+    _validate_credentials
+    _get_new_access_token
+  fi
+}
+
+while (( $# > 0 )); do
+  case "$1" in
+    -h)
+      usage_warning
+      if [[ -n "${IS_DEBUG}" ]]; then
+        usage_details
+      else
+        usage_for_more_details
+      fi
+      exit ${EXIT_HELP}
+      ;;
+    -v)
+      IS_DEBUG='true'
+      ;;
+    -u)
+      if [[ "$2" != "-"* ]]; then
+        BASIC_AUTH_INPUT="$2"
+        shift
+      fi
+      ;;
+    -m)
+      IS_MFA_OPTION_PRESENT='true'
+      if [[ "$2" != "-"* ]]; then
+        MFA_TOKEN="$2"
+        shift
+      fi
+      ;;
+    -p)
+      IS_PASSCODE='true'
+      if [[ "$2" != "-"* ]]; then
+        PASSCODE="$2"
+        shift
+      fi
+      ;;
+    --force-basic-auth)
+      IS_FORCE_BASIC_AUTH_INPUT='true'
+      ;;
+    --insecure)
+      INSECURE='-k'
+      ;;
+    --print-sso-cache)
+      IS_PRINT_CACHE='true'
+      ;;
+    --clear-sso-cache)
+      IS_CLEAR_CACHE='true'
+      ;;
+    --clear-all-sso-cache)
+      IS_CLEAR_ALL_CACHE='true'
+      ;;
+  esac
+  shift
+done
+
+_log DEBUG "get_token: verbose mode ON"
+main
