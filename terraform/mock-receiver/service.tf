@@ -19,7 +19,6 @@ resource "aws_ecs_service" "mock-receiver-service" {
   }
 }
 
-// TODO: Narrow down security
 resource "aws_security_group" "service_security_group" {
   name   = var.name_prefix
   vpc_id = var.vpc_id
@@ -32,9 +31,9 @@ resource "aws_security_group" "service_security_group" {
   }
 
   ingress {
-    protocol    = "-1"
-    from_port   = 0
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
+    protocol    = "tcp"
+    from_port   = var.container_port
+    to_port     = var.container_port
+    cidr_blocks = data.aws_subnet.public_subnets.*.cidr_block
   }
 }
