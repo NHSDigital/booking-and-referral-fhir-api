@@ -4,7 +4,7 @@ install-python:
 	poetry install
 
 install-node:
-	npm install
+	npm install --lagacy-peer-deps
 	cd sandbox && npm install
 
 pre-commit-hook:
@@ -13,8 +13,8 @@ pre-commit-hook:
 install: install-node install-python pre-commit-hook
 
 lint:
-	npm run lint
-	#find . -name '*.py' -not -path '**/.venv/*' | xargs poetry run flake8
+	#npm run lint
+	find . -name '*.py' -not -path '**/.venv/*' | xargs poetry run flake8
 
 clean:
 	rm -rf build
