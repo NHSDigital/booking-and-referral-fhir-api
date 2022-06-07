@@ -13,7 +13,7 @@ pre-commit-hook:
 install: install-node install-python pre-commit-hook
 
 lint:
-	#npm run lint
+	npm run lint
 	find . -name '*.py' -not -path '**/.venv/*' | xargs poetry run flake8
 
 clean:
