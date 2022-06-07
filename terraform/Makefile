@@ -52,3 +52,4 @@ docker-tag-sandbox: docker-build-sandbox
 
 docker-push-sandbox: docker-tag-sandbox docker-login
 	docker push $(mock_receiver_repository_url):$(environment)
+
