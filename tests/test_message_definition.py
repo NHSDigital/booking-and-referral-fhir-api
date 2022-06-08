@@ -1,10 +1,12 @@
-import pytest
-import requests
-from .configuration import config
-from assertpy import assert_that
-from .example_loader import load_example
 import base64
 import json
+
+import pytest
+import requests
+from assertpy import assert_that
+
+from .configuration import config
+from .example_loader import load_example
 
 
 class TestMessageDefinition:
@@ -15,7 +17,7 @@ class TestMessageDefinition:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = load_example("message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json")
+        expected_body = load_example("message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json")
         target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 

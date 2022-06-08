@@ -4,7 +4,7 @@ resource "aws_ecs_service" "mock-receiver-service" {
   task_definition  = aws_ecs_task_definition.mock-receiver.arn
   platform_version = "1.4.0"
   # 1.3.0 doesn't need a vpc_endpoint to *.ecr.api see:https://docs.aws.amazon.com/AmazonECR/latest/userguide/vpc-endpoints.html
-  desired_count    = 3
+  desired_count = 0
   // TODO: When tightening security group keep this to 3. It'll deploy each task into a subnet (in each availability zone). When modifying security group make sure all three are still running. This is especially important when changing the cidr blocks
   launch_type      = "FARGATE"
   network_configuration {
