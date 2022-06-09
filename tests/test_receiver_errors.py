@@ -16,12 +16,11 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    # @pytest.mark.debug
     def test_401_unauthorized_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        # expected_status_code = 401
-        # expected_body = load_example("unauthorized.json")
+        expected_status_code = 401
+        expected_body = load_example("unauthorized.json")
         target_identifier = json.dumps({"value": "NHS0001-401", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -44,11 +43,9 @@ class TestReceiverErrors:
             },
         )
 
-        print(response.status_code)
-        print(response.text)
         # Then
-        # assert_that(expected_status_code).is_equal_to(response.status_code)
-        # assert_that(expected_body).is_equal_to(response.json())
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.errors
     @pytest.mark.integration
