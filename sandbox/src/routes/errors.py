@@ -1,5 +1,3 @@
-import base64
-
 from fastapi import APIRouter, Header
 from fastapi.responses import JSONResponse
 
@@ -8,7 +6,7 @@ route = APIRouter()
 
 @route.get("/errors/{path}")
 def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
-    decoded = base64.b64decode(NHSD_Target_Identifier)
+    # decoded = base64.b64decode(NHSD_Target_Identifier)
     # target_id = json.loads(decoded)["value"]
 
     response = {"message": "no match for target id"}
