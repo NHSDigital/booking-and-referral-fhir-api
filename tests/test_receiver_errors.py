@@ -20,8 +20,8 @@ class TestReceiverErrors:
     def test_401_unauthorized_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 401
-        expected_body = load_example("unauthorized.json")
+        # expected_status_code = 401
+        # expected_body = load_example("unauthorized.json")
         target_identifier = json.dumps({"value": "NHS0001-401", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
