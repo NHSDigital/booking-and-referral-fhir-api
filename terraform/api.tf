@@ -72,19 +72,6 @@ resource "aws_cloudwatch_log_group" "api_access_log" {
   retention_in_days = 7
 }
 
-resource "aws_apigatewayv2_route" "lambda_route" {
-  api_id    = aws_apigatewayv2_api.service_api.id
-  route_key = "ANY /${var.service}/{proxy+}"
-  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
-}
-
-resource "aws_apigatewayv2_integration" "lambda_integration" {
-  api_id             = aws_apigatewayv2_api.service_api.id
-  integration_uri    = aws_lambda_function.mock_receiver_endpoint_function.invoke_arn
-  integration_type   = "AWS_PROXY"
-  integration_method = "POST"
-}
-
 resource "aws_apigatewayv2_route" "root_route" {
   api_id    = aws_apigatewayv2_api.service_api.id
   route_key = "ANY /{proxy+}"
@@ -100,19 +87,7 @@ resource "aws_apigatewayv2_integration" "route_integration" {
   connection_id      = local.vpc_link_id
 }
 
-resource "aws_lambda_permission" "apigw" {
-  statement_id  = "AllowAPIGatewayInvoke-${local.environment}"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.mock_receiver_endpoint_function.function_name
-  principal     = "apigateway.amazonaws.com"
-
-  # The /*/* portion grants access from any method on any resource
-  # within the API Gateway "REST API".
-  source_arn = "${aws_apigatewayv2_api.service_api.execution_arn}/*/*"
-}
-
 resource "aws_apigatewayv2_deployment" "deployment" {
-  depends_on  = [aws_apigatewayv2_route.lambda_route, aws_apigatewayv2_integration.lambda_integration]
   api_id      = aws_apigatewayv2_api.service_api.id
   description = "BaRS api deployment"
 
