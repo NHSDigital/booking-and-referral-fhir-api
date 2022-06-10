@@ -53,6 +53,7 @@ resource "aws_apigatewayv2_stage" "default" {
   name        = local.api_stage_name
   auto_deploy = true
 
+  // TODO: api-gateway access logs causes 429
   #  default_route_settings {
   #    logging_level = "OFF"
   #  }
