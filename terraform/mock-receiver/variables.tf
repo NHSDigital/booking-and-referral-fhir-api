@@ -5,8 +5,6 @@ variable "name_prefix" {}
 variable "vpc_id" {}
 variable "cluster_id" {}
 
-variable "repository_url" {}
-variable "repository_name" {}
 variable "image_version" {}
 variable "container_port" {
   default = "9000"
@@ -26,7 +24,8 @@ data "aws_subnet" "public_subnets" {
 }
 
 locals {
-  service_name = "mock-receiver"
+  service_name        = "mock-receiver"
+  container_image_tag = "latest"
 }
 variable "alb_tg_arn" {
 }

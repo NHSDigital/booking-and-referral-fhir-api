@@ -19,6 +19,11 @@ existing_appointment_id = load_example("appointment/POST-success.txt")
 ENTITY_NOT_FOUND = status.HTTP_403_FORBIDDEN  # Spec is probably wrong and status should be 404
 
 
+@route.get("/test")
+def get_test():
+    return "test endpoint new"
+
+
 @route.get("/Appointment")
 def get_appointment(patientIdentifier: str, NHSD_Token: str = Header(...),
                     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):

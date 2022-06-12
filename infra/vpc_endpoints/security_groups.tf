@@ -1,5 +1,6 @@
-locals {
-  subnets_cidr = [for subnet in var.subnets : subnet.cidr]
+data "aws_subnet" "subnets" {
+  count = length(var.subnet_ids)
+  id    = var.subnet_ids[count.index]
 }
 
 resource "aws_security_group" "vpc_endpoint_sg" {
@@ -17,6 +18,6 @@ resource "aws_security_group" "vpc_endpoint_sg" {
     protocol    = "tcp"
     from_port   = 443
     to_port     = 443
-    cidr_blocks = local.subnets_cidr
+    cidr_blocks = data.aws_subnet.subnets.*.cidr_block
   }
 }

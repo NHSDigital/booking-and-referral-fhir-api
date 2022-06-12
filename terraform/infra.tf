@@ -15,25 +15,23 @@ locals {
   vpc_id = data.terraform_remote_state.bebop-infra.outputs.vpc_id
 }
 
-# fargate outputs
-locals {
-  fargate_subnets_ids     = data.terraform_remote_state.bebop-infra.outputs.fargate_subnet_ids
-  fargate_cluster_id      = data.terraform_remote_state.bebop-infra.outputs.fargate_cluster_id
-  public_subnet_ids       = data.terraform_remote_state.bebop-infra.outputs.public_subnet_ids
-  fargate_repository_url  = data.terraform_remote_state.bebop-infra.outputs.fargate_repository_url
-  fargate_repository_name = data.terraform_remote_state.bebop-infra.outputs.fargate_repository_name
+data "aws_subnet" "public_subnets" {
+  count = length(local.public_subnet_ids)
+  id    = local.public_subnet_ids[count.index]
+}
+
+data "aws_subnet" "private_subnets" {
+  count = length(local.private_subnet_ids)
+  id    = local.private_subnet_ids[count.index]
 }
 
 locals {
-  repositories = ["mock-receiver"]
-
-  mock_receiver_repository_url  = local.fargate_repository_url[local.repositories[0]]
-  mock_receiver_repository_name = local.fargate_repository_name[local.repositories[0]]
+  public_subnet_ids   = data.terraform_remote_state.bebop-infra.outputs.public_subnet_ids
+  private_subnet_ids  = data.terraform_remote_state.bebop-infra.outputs.private_subnet_ids
+  public_subnet_cidr  = data.aws_subnet.public_subnets.*.cidr_block
+  private_subnet_cidr = data.aws_subnet.private_subnets.*.cidr_block
 }
 
 locals {
-  alb_arn          = data.terraform_remote_state.bebop-infra.outputs.alb_arn
   vpc_link_id      = data.terraform_remote_state.bebop-infra.outputs.vpc_link_id
-  alb_listener_arn = data.terraform_remote_state.bebop-infra.outputs.alb_listener_arn
-  alb_tg_arn       = data.terraform_remote_state.bebop-infra.outputs.alb_tg_arn
 }
