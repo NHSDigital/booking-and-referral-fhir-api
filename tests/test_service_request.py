@@ -1,16 +1,19 @@
-import pytest
-import requests
-from .configuration import config
-from assertpy import assert_that
-from .example_loader import load_example
 import base64
 import json
+
+import pytest
+import requests
+from assertpy import assert_that
+
+from .configuration import config
+from .example_loader import load_example
 
 
 class TestServiceRequest:
     existing_referral_id = "5dfbbdb8-f94b-4113-b3ff-249cac7f0694"
     existing_patient_id = "4857773456"
     nhsd_token = "nhsd-token"
+    target_id = "NHS0001"
 
     @pytest.mark.service_request
     @pytest.mark.integration
@@ -20,7 +23,7 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("service_request/GET-success.json")
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -48,7 +51,7 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("service_request/id/GET-success.json")
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -76,7 +79,7 @@ class TestServiceRequest:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -103,7 +106,7 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -131,7 +134,7 @@ class TestServiceRequest:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When

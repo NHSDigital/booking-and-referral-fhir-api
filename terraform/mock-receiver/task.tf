@@ -11,8 +11,8 @@ resource "aws_ecs_task_definition" "mock-receiver" {
 
   container_definitions = jsonencode([
     {
-      name      = "mock-receiver"
-      image     = "${var.repository_url}:${var.image_version}"
+      name      = local.service_name
+      image     = "${aws_ecr_repository.mock_receiver_registry.repository_url}:${local.container_image_tag}"
       essential = true
 
       portMappings = [

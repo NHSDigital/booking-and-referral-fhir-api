@@ -1,13 +1,17 @@
-import pytest
-import requests
-from .configuration import config
-from assertpy import assert_that
-from .example_loader import load_example
 import base64
 import json
 
+import pytest
+import requests
+from assertpy import assert_that
+
+from .configuration import config
+from .example_loader import load_example
+
 
 class TestMessageDefinition:
+    target_id = "NHS0001"
+
     @pytest.mark.message_definition
     @pytest.mark.integration
     @pytest.mark.sandbox
@@ -15,8 +19,8 @@ class TestMessageDefinition:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = load_example("message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json")
-        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
+        expected_body = load_example("message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json")
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -43,7 +47,7 @@ class TestMessageDefinition:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
-        target_identifier = json.dumps({"value": "NHS0123", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When

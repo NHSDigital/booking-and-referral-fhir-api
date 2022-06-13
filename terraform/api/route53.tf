@@ -1,10 +1,10 @@
-data "aws_route53_zone" "zone" {
-  name = var.domain_name
+provider "aws" {
+  alias  = "acm_provider"
+  region = "eu-west-2"
 }
-
 resource "aws_acm_certificate" "service_certificate" {
   provider                  = aws.acm_provider
-  domain_name               = local.service_domain_name
+  domain_name               = var.api_domain_name
   subject_alternative_names = []
   validation_method         = "DNS"
 
@@ -14,7 +14,7 @@ resource "aws_acm_certificate" "service_certificate" {
 }
 
 resource "aws_route53_record" "api_domain" {
-  zone_id = data.aws_route53_zone.zone.id
+  zone_id = var.zone_id
   name    = aws_apigatewayv2_domain_name.service_api_domain_name.domain_name
   type    = "A"
   alias {
@@ -39,7 +39,7 @@ resource "aws_route53_record" "dns_validation" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = data.aws_route53_zone.zone.zone_id
+  zone_id         = var.zone_id
 }
 
 resource "aws_acm_certificate_validation" "cert_validation_root" {

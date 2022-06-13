@@ -4,8 +4,8 @@ install-python:
 	poetry install
 
 install-node:
-	npm install
-	cd sandbox && npm install
+	npm install --legacy-peer-deps
+	cd sandbox && npm install --legacy-peer-deps
 
 pre-commit-hook:
 	source .venv/bin/activate && pre-commit install

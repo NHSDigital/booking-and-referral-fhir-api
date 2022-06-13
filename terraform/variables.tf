@@ -9,8 +9,13 @@ variable "service" {
 variable "domain_name" {
   default = "dev.api.platform.nhs.uk"
 }
-variable "region"{
-default = "eu-west-2"
+
+variable "region" {
+  default = "eu-west-2"
+}
+
+variable "container_port" {
+  default = 9000
 }
 
 locals {
