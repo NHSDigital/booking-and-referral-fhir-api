@@ -114,7 +114,7 @@ paths:
 
         A receiver can only implement a subset of the functionality within the standard and the capability statement will make this clear to a sender. 
 
-        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it. 
+        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it.
       operationId: getMeta
       responses:
         '200':
@@ -181,8 +181,8 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
-              example: 
-                $ref: examples/message_definition/MessageDefinition_ ServiceRequest-request_CaseTransfer.json
+              example:
+                $ref: examples/message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
@@ -295,7 +295,7 @@ paths:
         
         As documented in the [NHS Booking Standard](https://developer.nhs.uk/apis/uec-appointments/fs_slotmanagement.html), a receiver assigns the service identifier to groups of slots, under a schedule, which ties schedules together for a particular service.
 
-        
+
       operationId: getSlots
       parameters:
         - name: status
@@ -605,23 +605,23 @@ components:
         example: c3f6145e-1a26-4345-b3f2-dccbcba62049
       required: true
       allowEmptyValue: false
-    context_QParam: 
+    context_QParam:
       name: context
       description: |
-       The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
+        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
       required: true
       in: query
       schema:
         type: string
         example: "2000099999"
-    PatientId_QParam: 
+    PatientId_QParam:
       name: patient:identifier
       description: |
-       The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
-
-       |Type           |Expression|
-       |-------             | --------|
-       |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
+        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
+        
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
       required: true
       in: query
       schema:

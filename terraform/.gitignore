@@ -4,3 +4,4 @@ build
 *.pem
 *.csr
 *.crt
+*.tfstate

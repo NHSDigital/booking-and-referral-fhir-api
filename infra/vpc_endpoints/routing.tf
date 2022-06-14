@@ -12,8 +12,8 @@ resource "aws_vpc_endpoint_route_table_association" "s3_vpc_endpoint_route_table
 }
 
 resource "aws_route_table_association" "private_route_table_assoc" {
-  count = length(var.subnets)
+  count = length(var.subnet_ids)
 
   route_table_id = aws_route_table.private_vpc_endpoint_rt.id
-  subnet_id      = aws_subnet.private_subnets[count.index].id
+  subnet_id      = var.subnet_ids[count.index]
 }

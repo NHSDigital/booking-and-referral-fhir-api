@@ -1,11 +1,13 @@
-import pytest
-import requests
-from .configuration import config
-from assertpy import assert_that
-from .example_loader import load_example
-from datetime import datetime
 import base64
 import json
+from datetime import datetime
+
+import pytest
+import requests
+from assertpy import assert_that
+
+from .configuration import config
+from .example_loader import load_example
 
 
 class TestReceiverErrors:
