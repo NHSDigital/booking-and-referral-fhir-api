@@ -19,6 +19,7 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
+    @pytest.mark.debug
     def test_get_appointments(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]

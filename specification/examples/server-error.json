@@ -1,5 +1,6 @@
 {
     "resourceType": "OperationOutcome",
+    "id": "531e073a-3295-4e67-ae90-e00bd96a9cdd",
     "meta": {
       "profile": [
         "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
@@ -8,7 +9,7 @@
     "issue": [
       {
         "severity": "error",
-        "code": "500",
+        "code": "exception",
         "details": {
           "coding": [
             {
@@ -17,7 +18,7 @@
             }
           ]
         },
-        "diagnostics": "Too many requests have been made by this source in a given amount of time: <further diagnostics information, error message/error text>"
+        "diagnostics": "An problem was encountered processing the request: <further diagnostics information, error message/error text>"
       }
     ]
   }
