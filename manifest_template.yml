@@ -62,7 +62,7 @@ apigee:
       - edgeAPIProductName: {{ NAME }}
         anonAllowed: true
         description: {{ DESCRIPTION }}
-        requireCallbackUrl: {{ ENV.require_callback_url | default(true) }}
+        requireCallbackUrl: false
         title: {{ TITLE }}
         visibility: {{ ENV.make_spec_visible | default(false) }}
         specId: {{ NAME }}
