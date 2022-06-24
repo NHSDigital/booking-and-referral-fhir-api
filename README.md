@@ -1,17 +1,17 @@
 # Booking and Referral FHIR API
 
-![Build](https://github.com/NHSDigital/booking-and-referral/workflows/Build/badge.svg?branch=master)
+![Build](https://github.com/NHSDigital/booking-and-referral-fhir-api/workflows/Build/badge.svg?branch=master)
 
 The bookings and service requests API is defining a standard API for booking of appointments and management of service requests (referrals) between organisations.
 
-This is a RESTful HL7® FHIR® API specification for the *Template API*.
+This is a RESTful HL7® FHIR® API specification for the *Booking and Referral API*.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
 * `sandbox/` This NodeJS application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
 * `scripts/` Utilities helpful to developers of this specification.
 * `proxies/` Live (connecting to another service) and sandbox (using the sandbox container) Apigee API Proxy definitions.
 
-Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://developer.digital.nhs.uk/).
+Consumers of the API will find developer documentation on the [NHS Digital Developer Hub](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-fhir).
 
 ## Table of Contents
 1. [Contributing](#Contributing)
@@ -20,7 +20,7 @@ Consumers of the API will find developer documentation on the [NHS Digital Devel
 
 
 ## Contributing
-Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/booking-and-referral/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/booking-and-referral/blob/master/CODE_OF_CONDUCT.md).
+Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](https://github.com/NHSDigital/booking-and-referral-fhir-api/blob/master/CONTRIBUTING.md) and the [community code of conduct](https://github.com/NHSDigital/booking-and-referral-fhir-api/blob/master/CODE_OF_CONDUCT.md).
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
@@ -47,6 +47,11 @@ in CI, but it's useful to run them locally too.
 ```
 $ make install-hooks
 ```
+
+### Environment Variables
+Various scripts and commands rely on environment variables being set. These are documented with the commands.
+
+:bulb: Consider using [direnv](https://direnv.net/) to manage your environment variables during development and maintaining your own `.envrc` file - the values of these variables will be specific to you and/or sensitive.
 
 ### Make commands
 
@@ -75,7 +80,7 @@ Please, check [readme-to-test](/tests/README.md) file.
 
 ### Speccy
 
-> [Speccy](http://speccy.io/) *A handy toolkit for OpenAPI, with a linter to enforce quality rules, documentation rendering, and resolution.*
+> [Speccy](https://github.com/wework/speccy) *A handy toolkit for OpenAPI, with a linter to enforce quality rules, documentation rendering, and resolution.*
 
 Speccy does the lifting for the following npm scripts:
 

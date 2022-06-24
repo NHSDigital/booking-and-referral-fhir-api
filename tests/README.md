@@ -19,38 +19,24 @@ Make install will install all the requirements in your local machine that you ca
 ```
 
 ## Test flow to test new develops
-When testing we mock the reciever. Our mock reciever is currently a [mock-reciever-proxy](https://github.com/NHSDigital/bars-mock-receiver-proxy)
-with a docker container as the backend.  This backend is responsible for managing the requests made through this proxy.
-The code for mock-reciever docker container can be found in this repo under `/sandbox`.
+When testing we mock the reciever. Our AWS mock reciever is under this folder `/terraform/mock-receiver`
+Our mock-receiver runs a fargate container which is inside the AWS is responsible for managing the requests made through this proxy.
+The code for container can be found in this repo under `/sandbox`.
 
 If you have made code changes to  `/sandbox` in your PR and wish to point your PR tests towards this backend you will need to follow the below steps:
 
-### Part 1 : Open Pull requests
+### Open Pull requests
 1. Create a branch on the [Booking and Referral fhir api](https://github.com/NHSDigital/booking-and-referral-fhir-api) repo.
 
 2. After all your changes, please, commit and push them into the repo.
 
 3. Then open [Booking and Referral fhir api](https://github.com/NHSDigital/booking-and-referral-fhir-api) repo UI on Github and raise a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
-4. Open a branch and create a pull request on [bars-mock-receiver-proxy](https://github.com/NHSDigital/bars-mock-receiver-proxy).
+4. Create a new identifier inside targets.json file in the [booking-and-referral-targets](https://github.com/NHSDigital/booking-and-referral-targets/blob/master/targets/internal-dev/targets.json) (e.g:"NHS0001": "https://{environment}.bars.dev.api.platform.nhs.uk" )
+
+5. Now follow the instructions in the [terraform readme](/terraform/README.md) to deploy your AWS environment and include  your shortname in the .env file.
 
 After both pull request have been deployed in apigee please follow part 2.
-
-### Part 2: Pointing BaRs fhir API to Mock-reciever and Mock-reciever to correct sandbox backend
-
-1. Go to Apigee and find your booking and referral fhir api deployment. It will be named: `booking-and-referral-pr-` your PR number from Github on part 1 step 3.
-
-2. Navigate to developer mode and at the bottom change the file `SetTargetUrl.js`.
-
-3. On this file add the following line:
-      - `targetUrl = "https://internal-dev.api.service.nhs.uk/bars-mock-receiver-proxy-pr` + your PR number on the mock receiver repo. This value comes from part 1 step 4.
-      - Now your booking-and-referral proxy will be pointing to your PR bars-mock-receiver-proxy from part 1 step 4.
-
-Next you need to point your PR mock-reciever (form part 1 step 4) to the backend deployed from your Booking and Referral fhir api PR (from part 1 step 3)
-
-4. On Apigee open the deploy of your mock-reciever PR.
-
-5. Go to develop and click on `bars-mock-receiver-target`. A xml will be presented and you need to edit the element `<Path>/bref-X</Path>` and the X must the number of your PR from part 1 step 3.
 
 ## Set up to run tests
 
