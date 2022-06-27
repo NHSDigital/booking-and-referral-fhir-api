@@ -1,5 +1,5 @@
 steps:
-  - bash: |
+    - bash: |
       make install-python
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Setup pytests
@@ -17,7 +17,7 @@ steps:
       - ptl/app-credentials/booking-and-referral/non-prod/CLIENT_ID_INT
       - ptl/app-credentials/booking-and-referral/non-prod/CLIENT_SECRET_INT
 
-  - bash: |
+  -   bash: |
       export RELEASE_RELEASEID=$(Build.BuildId)
       export SOURCE_COMMIT_ID=$(Build.SourceVersion)
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
@@ -47,12 +47,15 @@ steps:
        poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not status" --junitxml=tests/api_tests.xml
       fi
 
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
-    displayName: Run tests
+      workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
+      displayName: Run tests
 
-  - task: PublishTestResults@2
-    displayName: 'Publish tests results'
-    condition: always()
-    inputs:
-      testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/test-report.xml'
-      failTaskOnFailedTests: true
+    -   task: PublishTestResults@2
+        displayName: 'Publish tests results'
+        condition: always()
+        inputs:
+            testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/test-report.xml'
+            failTaskOnFailedTests: true
+
+    -   bash: |
+            poetry run pytest -v tests/test_appointment.py --junitxml=tests/test-report.xml --reruns 3 --reruns-delay 1
