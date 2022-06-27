@@ -4,7 +4,7 @@
 	"meta": {
 		"lastUpdated": "2021-10-11T15:01:30+00:00",
 		"profile": [
-			"http://hl7.org/fhir/StructureDefinition/Appointment"
+			"https://fhir.hl7.org.uk/StructureDefinition/UKCore-Appointment"
 		]
 	},
 	"status": "booked",

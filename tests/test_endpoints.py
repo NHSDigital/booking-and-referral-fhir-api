@@ -1,13 +1,17 @@
-import requests
-from assertpy import assert_that
-from .configuration import config
 import asyncio
-import pytest
 import base64
 import json
 
+import pytest
+import requests
+from assertpy import assert_that
+
+from .configuration import config
+
 
 class TestEndpoints:
+    target_id = "NHS0001"
+
     @pytest.mark.auth
     def test_invalid_access_token(self):
         """
@@ -15,7 +19,7 @@ class TestEndpoints:
           must return 403 forbiddden
         """
         expected_status_code = 403
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -36,7 +40,7 @@ class TestEndpoints:
           must return 401 unauthorized
         """
         expected_status_code = 401
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -125,8 +129,8 @@ class TestEndpoints:
     ):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_target = f"https://{config.ENVIRONMENT}.api.service.nhs.uk/bars-mock-receiver-proxy/{path_suffix}"
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        expected_target = f"https://dev.bars.dev.api.platform.nhs.uk/{path_suffix}"
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         await debug.start_trace()

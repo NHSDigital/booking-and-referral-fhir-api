@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Header, Response, status
 from uuid import UUID
+
+from fastapi import APIRouter, Header, Response, status
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+
 from .example_loader import load_example
 from .models import Profile
-from fastapi.responses import JSONResponse
 
 
 class AppointmentBody(BaseModel):
@@ -13,12 +15,13 @@ class AppointmentBody(BaseModel):
 
 route = APIRouter()
 
-existing_appointment_id = load_example("appointment/POST-success.txt")
+existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
 ENTITY_NOT_FOUND = status.HTTP_403_FORBIDDEN  # Spec is probably wrong and status should be 404
 
 
 @route.get("/Appointment")
-def get_appointment(patientIdentifier: str, NHSD_Token: str = Header(...), NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
+def get_appointment(patientIdentifier: str, NHSD_Token: str = Header(...),
+                    NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
     return load_example("appointment/GET-success.json")
 
 

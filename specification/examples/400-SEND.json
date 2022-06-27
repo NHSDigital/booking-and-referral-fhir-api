@@ -1,5 +1,6 @@
 {
   "resourceType": "OperationOutcome",
+  "id": "531e073a-3295-4e67-ae90-e00bd96a9cdd",
   "meta": {
     "profile": [
       "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
@@ -8,16 +9,16 @@
   "issue": [
     {
       "severity": "error",
-      "code": "400",
+      "code": "invariant",
       "details": {
         "coding": [
           {
             "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
-            "code": "SEND_BAD_REQUEST"
+            "code": "REC_BAD_REQUEST"
           }
         ]
       },
-      "diagnostics": "The API was unable to process the request: <further diagnostics information, error message/error text>"
+      "diagnostics": "Attempts to Validate the message have failed."
     }
   ]
 }

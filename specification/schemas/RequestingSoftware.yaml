@@ -1,46 +1,46 @@
-title: requestingSoftware
+title: NHSD-Requesting-software
 type: object
 description: Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
 x-examples:
   example:
-    requestingSoftware:
-      resourceType: Device
-      identifier:
-        - system: 'https://consumersupplier.com/Id/device-identifier'
-          value: SUPP-APP-1
-      model: Supplier product name
-      version: 1.0.0
+    resourceType: Device
+    identifier:
+      - system: 'https://consumersupplier.com/Id/device-identifier'
+        value: SUPP-APP-1
+    deviceName: Supplier product name
+    version:
+        value: 1.0.0
 properties:
-  requestingSoftware:
+  resourceType:
+    type: string
+    example: Device
+  identifier:
+    type: array
+    uniqueItems: true
+    items:
+      type: object
+      properties:
+        system:
+          type: string
+          example: 'https://consumersupplier.com/Id/device-identifier'
+        value:
+          type: string
+          example: SUPP-APP-1
+      required:
+        - system
+        - value
+  deviceName:
+    type: string
+    example: Supplier product name
+  version:
     type: object
-    required:
-      - identifier
-      - model
-      - version
     properties:
-      resourceType:
-        type: string
-        example: Device
-      identifier:
-        type: array
-        uniqueItems: true
-        items:
-          type: object
-          properties:
-            system:
-              type: string
-              example: 'https://consumersupplier.com/Id/device-identifier'
-            value:
-              type: string
-              example: SUPP-APP-1
+        value:
+          type: string
+          example: "1.0.0"
           required:
-            - system
             - value
-      model:
-        type: string
-        example: Supplier product name
-      version:
-        type: string
-        example: 1.0.0
 required:
-  - requestingSoftware
+  - resourceType
+  - version
+  - deviceName
