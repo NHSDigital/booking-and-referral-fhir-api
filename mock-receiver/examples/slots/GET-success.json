@@ -1,0 +1,266 @@
+{
+    "resourceType": "Bundle",
+    "id": "777a156c-af3c-4748-a8a3-7e95e4b0df9a",
+    "meta": {
+        "lastUpdated": "2021-10-11T15:01:30+00:00",
+        "profile":  [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Bundle"
+        ]
+    },
+    "type": "searchset",
+    "total": 8,
+    "timestamp": "2021-10-11T12:15:10+00:00",
+    "link":  [
+        {
+            "relation": "self",
+            "url": "https://simplifier.net/nhsbookingandreferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2"
+        }
+    ],
+    "entry":  [
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/Slot/slot001",
+            "resource": {
+                "resourceType": "Slot",
+                "id": "slot001",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Slot"
+                    ]
+                },
+                "serviceCategory":  [
+                    {
+                        "coding":  [
+                            {
+                                "code": "14",
+                                "display": "Emergency Department"
+                            }
+                        ]
+                    }
+                ],
+                "appointmentType": {
+                    "coding":  [
+                        {
+                            "code": "EMERGENCY",
+                            "display": "Emergency appointment"
+                        }
+                    ]
+                },
+                "schedule": {
+                    "reference": "Schedule/sched1111"
+                },
+                "status": "free",
+                "start": "2021-10-06T09:00:00.000+00:00",
+                "end": "2021-10-06T10:00:00.000+00:00"
+            }
+        },
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/Slot/slot002",
+            "resource": {
+                "resourceType": "Slot",
+                "id": "slot002",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Slot"
+                    ]
+                },
+                "serviceCategory":  [
+                    {
+                        "coding":  [
+                            {
+                                "code": "14",
+                                "display": "Emergency Department"
+                            }
+                        ]
+                    }
+                ],
+                "appointmentType": {
+                    "coding":  [
+                        {
+                            "code": "EMERGENCY",
+                            "display": "Emergency appointment"
+                        }
+                    ]
+                },
+                "schedule": {
+                    "reference": "Schedule/sched1111"
+                },
+                "status": "free",
+                "start": "2021-10-06T10:00:00.000+00:00",
+                "end": "2021-10-06T10:30:00.000+00:00"
+            }
+        },
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/Slot/slot003",
+            "resource": {
+                "resourceType": "Slot",
+                "id": "slot003",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Slot"
+                    ]
+                },
+                "serviceCategory":  [
+                    {
+                        "coding":  [
+                            {
+                                "code": "14",
+                                "display": "Emergency Department"
+                            }
+                        ]
+                    }
+                ],
+                "appointmentType": {
+                    "coding":  [
+                        {
+                            "code": "EMERGENCY",
+                            "display": "Emergency appointment"
+                        }
+                    ]
+                },
+                "schedule": {
+                    "reference": "Schedule/sched1111"
+                },
+                "status": "free",
+                "start": "2021-10-06T11:00:00.000+00:00",
+                "end": "2021-10-06T11:30:00.000+00:00"
+            }
+        },
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/Schedule/sched1111",
+            "resource": {
+                "resourceType": "Schedule",
+                "id": "sched1111",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Schedule"
+                    ]
+                },
+                "identifier":  [
+                    {
+                        "system": "https://system.supplier.co.uk/Diary/id",
+                        "value": "8622dfdb-dc6a-47b6-b3a7-2eb2829db287"
+                    }
+                ],
+                "actor":  [
+                    {
+                        "reference": "HealthcareService/918999198999"
+                    },
+                    {
+                        "reference": "PractitionerRole/R0260"
+                    },
+                    {
+                        "reference": "Practitioner/ABCD123456"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/HealthcareService/918999198999",
+            "resource": {
+                "resourceType": "HealthcareService",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService"
+                    ]
+                },
+                "identifier":  [
+                    {
+                        "system": "https://system.supplier.co.uk/My/Healthcare/Services",
+                        "value": "100"
+                    }
+                ],
+                "location":  [
+                    {
+                        "reference": "Location/loc1111"
+                    }
+                ],
+                "name": "Healthcare Service Name"
+            }
+        },
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/Practitioner/ABCD123456",
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "ABCD123456",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Practitioner"
+                    ]
+                },
+                "identifier":  [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "ABCD123456"
+                    },
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
+                        "value": "R0260"
+                    }
+                ],
+                "name":  [
+                    {
+                        "family": "Bloggs",
+                        "given":  [
+                            "Joe"
+                        ],
+                        "prefix":  [
+                            "Dr"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/PractitionerRole/R0260",
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "R0260",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-PractitionerRole"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/ABCD123456"
+                },
+                "code":  [
+                    {
+                        "coding":  [
+                            {
+                                "system": "https://fhir.hl7.org.uk/ValueSet/UKCore-PractitionerRoleCode",
+                                "version": "4.0.1",
+                                "code": "doctor",
+                                "display": "Doctor"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "https://directory.spineservices.nhs.uk/Location/loc1111",
+            "resource": {
+                "resourceType": "Location",
+                "id": "loc1111",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Location"
+                    ]
+                },
+                "name": "Healthcare Service Location",
+                "position": {
+                    "longitude": 143.20196,
+                    "latitude": -37.22866
+                }
+            }
+        }
+    ]
+}

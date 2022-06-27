@@ -182,8 +182,7 @@ class TestAppointment:
     @pytest.mark.sandbox
     def test_appointments_method_not_allowed(self, get_token_client_credentials):
         """
-           test for /appointment..  to put an appointment
-           must return a message of method not allowed
+           test for /appointment..  to test pup method it's not allowed on appointment endpoint
         """
         # Given
         token = get_token_client_credentials["access_token"]

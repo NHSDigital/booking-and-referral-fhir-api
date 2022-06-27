@@ -1,0 +1,23 @@
+{
+    "resourceType": "OperationOutcome",
+    "meta": {
+      "profile": [
+        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+      ]
+    },
+    "issue": [
+      {
+        "severity": "error",
+        "code": "501",
+        "details": {
+          "coding": [
+            {
+              "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+              "code": "REC_NOT_IMPLEMENTED"
+            }
+          ]
+        },
+        "diagnostics": "<Receiver identifier (ODS?)> did not recognize this request: <further diagnostics information, error message/error text>"
+      }
+    ]
+  }

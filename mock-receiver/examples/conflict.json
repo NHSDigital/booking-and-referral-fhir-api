@@ -1,0 +1,23 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "409",
+      "details": {
+        "coding": [
+          {
+            "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+            "code": "REC_CONFLICT"
+          }
+        ]
+      },
+      "diagnostics": "<Receiver Identifier (ODS?)> encountered a conflict: <further diagnostics information, error message/error text>"
+    }
+  ]
+}

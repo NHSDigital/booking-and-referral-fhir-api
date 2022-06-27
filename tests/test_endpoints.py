@@ -58,8 +58,7 @@ class TestEndpoints:
     def test_invalid_access_token_auth_code(self, default_oauth_helper):
         """
           This test checks that when trying to authenticate using auth_code flow
-          an exemption is rised. Sadly the method get_token_response doesn't return
-          the 401 error from apigee and raises and error instead.
+          an exemption is raised.
         """
 
         with pytest.raises(Exception):
@@ -70,8 +69,7 @@ class TestEndpoints:
     @pytest.mark.broker
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
         """
-          test for /metadata..  to check it making a request with a invalide nhs number
-          must return 500 server error.
+          This test checks a request with an invalid service identifier
         """
         # Given
         token = get_token_client_credentials["access_token"]
