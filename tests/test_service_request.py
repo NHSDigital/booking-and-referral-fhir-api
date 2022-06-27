@@ -16,6 +16,9 @@ class TestServiceRequest:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_referrals(self, get_token_client_credentials):
+        """
+           test for /ServiceRequest..to get a list of services related with the nhs_number serviceRequest?patientIdentifier=12312
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -44,6 +47,9 @@ class TestServiceRequest:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_referral(self, get_token_client_credentials):
+        """
+           test for /ServiceRequest..to get a service related with the nhs_number serviceRequest?patientIdentifier=12312
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -71,6 +77,9 @@ class TestServiceRequest:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_referral_bad_id(self, get_token_client_credentials):
+        """
+           test for /ServiceRequest..to check the reponse when the request contains an invalide nhs_number
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -99,6 +108,9 @@ class TestServiceRequest:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_referrals_method_not_allowed(self, get_token_client_credentials):
+        """
+           test for /ServiceRequest..to check the put method is not allowed for serviceRequest
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -127,6 +139,9 @@ class TestServiceRequest:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_referral_id_method_not_allowed(self, get_token_client_credentials):
+        """
+           test for /ServiceRequest..to check the post method is not allowed for serviceRequest
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405

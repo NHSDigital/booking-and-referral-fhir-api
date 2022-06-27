@@ -14,11 +14,15 @@ class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_appointment_id = str(uuid.uuid4())
     nhsd_token = "nhsd-token"
-
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_appointments(self, get_token_client_credentials):
+        """
+           test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
+           must return a list of appointment for the patient
+        """
+
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -48,8 +52,12 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_appointments_missing_param_patient_id(
-            self, get_token_client_credentials
+        self, get_token_client_credentials
     ):
+        """
+           test for /appointment..  to get an appointment for the patient with a patient parameter missing on the request - /Appointment
+           must return a bad request message
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -77,6 +85,10 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_appointment(self, get_token_client_credentials):
+        """
+           test for /appointment..  to get an appointment for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
+           must return an appointment
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -104,6 +116,10 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_appointment_bad_id(self, get_token_client_credentials):
+        """
+         test for /appointment..  to get an appointment for the patient with a invalid patient_id parameter on the request - /Appointment?patientIdentifier=INVALID_ID
+         must return a bad request message
+      """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
@@ -132,6 +148,10 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_appointment_entity_not_found(self, get_token_client_credentials):
+        """
+           test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
+           must return a message of entity not found.
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
@@ -159,6 +179,10 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_appointments_method_not_allowed(self, get_token_client_credentials):
+        """
+           test for /appointment..  to put an appointment
+           must return a message of method not allowed
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
@@ -188,6 +212,10 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_appointment_id_method_not_allowed(self, get_token_client_credentials):
+        """
+          test for /appointment..  to post an appointment
+          must return a message of method not allowed
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405

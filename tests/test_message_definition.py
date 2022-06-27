@@ -12,6 +12,10 @@ class TestMessageDefinition:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_message_definition(self, get_token_client_credentials):
+        """
+           test for /messageDefinition..  to get message definition for the target identifier
+        """
+
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -39,6 +43,10 @@ class TestMessageDefinition:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_message_definition_method_not_allowed(self, get_token_client_credentials):
+        """
+          test for /messageDefinition..  to post message definition for the target identifier
+          must return method not allowed
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405

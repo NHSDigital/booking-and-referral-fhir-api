@@ -16,6 +16,10 @@ class TestSlots:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_slots_happy_path(self, get_token_client_credentials):
+        """
+          test for /Slot..  to get slots for the target identifier
+          must return a slot entity
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -147,6 +151,10 @@ class TestSlots:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_slots_method_not_allowed(self, get_token_client_credentials):
+        """
+          test for /Slot..  to post slot for the target identifier
+          must return method not allowed
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
