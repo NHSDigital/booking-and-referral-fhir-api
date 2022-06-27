@@ -23,7 +23,7 @@ class TestAppointment:
     def test_get_appointments(self, get_token_client_credentials):
         """
            test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
-           must return a list of appointment for the patient
+           must return a list of appointments for the patient
         """
         # Given
         token = get_token_client_credentials["access_token"]
@@ -88,7 +88,7 @@ class TestAppointment:
     @pytest.mark.sandbox
     def test_get_appointment(self, get_token_client_credentials):
         """
-           test for /appointment..  to get an appointment for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
+           test for /appointment..  to get an appointment for the patient passed as a parameter on the request - /Appointment?patientIdentifier=12312
            must return an appointment
         """
         # Given
@@ -118,7 +118,7 @@ class TestAppointment:
     @pytest.mark.sandbox
     def test_get_appointment_bad_id(self, get_token_client_credentials):
         """
-         test for /appointment..  to get an appointment for the patient with a invalid patient_id parameter on the
+         test for /appointment..  to get an appointment for the patient with an invalid patient_id parameter on the
          request - /Appointment?patientIdentifier=INVALID_ID
          must return a bad request message
       """
@@ -151,7 +151,7 @@ class TestAppointment:
     @pytest.mark.sandbox
     def test_get_appointment_entity_not_found(self, get_token_client_credentials):
         """
-           test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
+           test for /appointment..  to get all appointments for the patient passed as a parameter on the request - /Appointment?patientIdentifier=12312
            must return a message of entity not found.
         """
         # Given
@@ -182,7 +182,7 @@ class TestAppointment:
     @pytest.mark.sandbox
     def test_appointments_method_not_allowed(self, get_token_client_credentials):
         """
-           test for /appointment..  to test pup method it's not allowed on appointment endpoint
+           test for /appointment..  to test put method it's not allowed on appointment endpoint
         """
         # Given
         token = get_token_client_credentials["access_token"]
