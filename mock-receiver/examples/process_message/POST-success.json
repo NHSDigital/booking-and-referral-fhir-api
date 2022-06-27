@@ -1,9 +1,0 @@
-{
-  "resourceType": "Bundle",
-  "meta": {
-    "profile": [
-      "https://fhir.nhs.uk/StructureDefinition/BARSUKCoreBundle"
-    ],
-    "type": "message"
-  }
-}

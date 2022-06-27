@@ -1,9 +1,0 @@
-{
-  "resourceType": "Bundle",
-  "meta": {
-    "profile": [
-      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-Bundle"
-    ],
-    "type": "searchset"
-  }
-}
