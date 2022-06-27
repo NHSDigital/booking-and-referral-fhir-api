@@ -15,6 +15,7 @@ class TestAppointment:
     non_existing_appointment_id = str(uuid.uuid4())
     nhsd_token = "nhsd-token"
     target_id = "NHS0001"
+
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
@@ -24,7 +25,6 @@ class TestAppointment:
            test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
            must return a list of appointment for the patient
         """
-
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -109,7 +109,6 @@ class TestAppointment:
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
         )
-
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
