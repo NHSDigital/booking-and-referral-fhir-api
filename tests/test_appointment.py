@@ -118,7 +118,8 @@ class TestAppointment:
     @pytest.mark.sandbox
     def test_get_appointment_bad_id(self, get_token_client_credentials):
         """
-         test for /appointment..  to get an appointment for the patient with a invalid patient_id parameter on the request - /Appointment?patientIdentifier=INVALID_ID
+         test for /appointment..  to get an appointment for the patient with a invalid patient_id parameter on the
+         request - /Appointment?patientIdentifier=INVALID_ID
          must return a bad request message
       """
         # Given
