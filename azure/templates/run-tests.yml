@@ -1,6 +1,5 @@
 steps:
-    - bash: |
-      make install-python
+    -   bash: poetry install
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Setup pytests
 
