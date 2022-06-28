@@ -320,6 +320,8 @@ paths:
             
             For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00&start=le2022-03-01T13:30:00+00". 
             The definition of the time window within which Slots are requested is provided by using this parameter twice.
+            The values must include an offset indicating UTC in the [FHIR dateTime instant format](https://www.hl7.org/fhir/datatypes.html#primitive). 
+
 
             If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
             
@@ -327,12 +329,12 @@ paths:
           schema:
             format: datetime
             type: string
-            example: '2020-03-31T14:00:00'
+            example: '2022-03-01T12:00:00+00'
         - name: Schedule.actor:HealthcareService
           in: query
-          required: true
+          required: false
           description: |
-            Identifier for the intended healthcare service
+            A single service ID can be provided to indicate the service for which appointment slots are returned for.
           schema:
             type: string
             example: '918999198999'
