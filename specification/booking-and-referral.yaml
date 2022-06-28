@@ -363,7 +363,6 @@ paths:
                 - 'HealthcareService:providedBy'
                 - 'HealthcareService:location'
                 - 'Slot:*'
-        - $ref: '#/components/parameters/SlotService_QParam'
       responses:
         '200':
           description: Success. A full example of a Slot Searchset response can be found [here](  https://simplifier.net/NHSBookingandReferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2).
@@ -610,15 +609,6 @@ components:
       name: context
       description: |
         The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
-      required: true
-      in: query
-      schema:
-        type: string
-        example: "2000099999"
-    SlotService_QParam:
-      name: service
-      description: |
-        The appropriate service id of the service for which Slots are being requested. Allows to search by Schedule.actor:HealthcareService. 
       required: true
       in: query
       schema:
