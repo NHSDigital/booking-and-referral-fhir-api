@@ -16,9 +16,13 @@ APIGEE_ENVIRONMENTS:
     display_name: Sandbox
     make_spec_visible: true
     requireCallbackUrl: false
-# Enable int environment when ready by uncommenting:
+  # Enable int environment when ready by uncommenting:
   - name: int
     display_name: Integration Testing
+    make_spec_visible: true
+  - name: prod
+    approval_type: manual
+    display_name: Production
     make_spec_visible: true
 ---
 meta:
