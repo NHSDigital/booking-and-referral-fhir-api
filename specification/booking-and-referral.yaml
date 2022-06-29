@@ -330,7 +330,7 @@ paths:
             format: datetime
             type: string
             example: '2022-03-01T12:00:00+00'
-        - name: Schedule.actor:HealthcareService
+        - name: Schedule:actor:HealthcareService
           in: query
           required: false
           description: |
@@ -358,7 +358,7 @@ paths:
             items:
               type: string
               enum:
-                - 'Slot:Schedule'
+                - 'Slot:schedule'
                 - 'Schedule:actor:Practitioner'
                 - 'Schedule:actor:PractitionerRole'
                 - 'Schedule:actor:HealthcareService'
