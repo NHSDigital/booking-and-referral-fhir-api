@@ -50,11 +50,11 @@ steps:
       workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run tests
 
-    -   task: PublishTestResults@2
-        displayName: 'Publish tests results'
-        condition: always()
-        inputs:
-            testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests/api_tests.xml'
-            testRunTitle: 'Publish test results'
+  - task: PublishTestResults@2
+    displayName: 'Publish tests results'
+    condition: always()
+    inputs:
+      testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests/api_tests.xml'
+      failTaskOnFailedTests: true
 
 
