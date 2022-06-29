@@ -46,22 +46,14 @@ steps:
       poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not status" --junitxml=tests/api_tests.xml
       fi
 
-      workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
+      workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
       displayName: Run tests
-    -   bash: |
-            export APIGEE_API_TOKEN="$(secret.AccessToken)"
-            export OAUTH_BASE_URI="https://$(ENVIRONMENT).api.service.nhs.uk"
-            export OAUTH_PROXY="oauth2"
-
-            poetry run pytest -v tests/test_appointment.py --junitxml=test-report.xml --reruns 3 --reruns-delay 1
-        displayName: Run e2e test
-        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
 
     -   task: PublishTestResults@2
         displayName: 'Publish tests results'
         condition: always()
         inputs:
-            testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests/test-report.xml'
+            testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests/api_tests.xml'
             testRunTitle: 'Publish test results'
 
 
