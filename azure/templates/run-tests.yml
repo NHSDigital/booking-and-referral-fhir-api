@@ -52,7 +52,8 @@ steps:
             export APIGEE_API_TOKEN="$(secret.AccessToken)"
             export OAUTH_BASE_URI="https://$(ENVIRONMENT).api.service.nhs.uk"
             export OAUTH_PROXY="oauth2"
-            poetry run pytest -v tests/test_appointment.py --junitxml=tests/test-report.xml --reruns 3 --reruns-delay 1
+
+            poetry run pytest -v tests/test_appointment.py --junitxml=test-report.xml --reruns 3 --reruns-delay 1
         displayName: Run e2e test
         workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
 
