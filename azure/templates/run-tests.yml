@@ -28,16 +28,16 @@ steps:
             export OAUTH_BASE_URI="https://$(ENVIRONMENT).api.service.nhs.uk"
             export OAUTH_PROXY="oauth2"
             export JWT_PRIVATE_KEY_ABSOLUTE_PATH="$(Pipeline.Workspace)/secrets/$(JWT_TESTING_PRIVATE_KEY)"
-      export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
-      export FULLY_QUALIFIED_SERVICE_NAME="$(FULLY_QUALIFIED_SERVICE_NAME)"
-      export CLIENT_ID="$(CLIENT_ID_INT)"
-      export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
-      export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
+            export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
+            export FULLY_QUALIFIED_SERVICE_NAME="$(FULLY_QUALIFIED_SERVICE_NAME)"
+            export CLIENT_ID="$(CLIENT_ID_INT)"
+            export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
+            export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
 
-      if [[ $APIGEE_ENVIRONMENT == "prod" ]]
-      then
-       poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml
-      elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
+            if [[ $APIGEE_ENVIRONMENT == "prod" ]]
+            then
+            poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest --junitxml=tests/api_tests.xml
+            elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
       poetry run pytest --reruns 3 --reruns-delay 1 -v -m sandbox --junitxml=tests/api_tests.xml
       elif [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "int" ]]
