@@ -47,14 +47,12 @@ steps:
        poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not status" --junitxml=tests/api_tests.xml
       fi
 
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
+    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests
     displayName: Run tests
 
   - task: PublishTestResults@2
     displayName: 'Publish tests results'
     condition: always()
     inputs:
-      testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests/api_tests.xml'
+      testResultsFiles: '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/test-report.xml'
       failTaskOnFailedTests: true
-
-
