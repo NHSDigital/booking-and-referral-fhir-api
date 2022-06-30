@@ -47,7 +47,7 @@ steps:
        poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not status" --junitxml=tests/api_tests.xml
       fi
 
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
     displayName: Run tests
 
   - task: PublishTestResults@2
