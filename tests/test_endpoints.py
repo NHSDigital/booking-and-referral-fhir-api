@@ -14,6 +14,10 @@ class TestEndpoints:
 
     @pytest.mark.auth
     def test_invalid_access_token(self):
+        """
+          test for /metadata..  to check it with an invalid access token
+          must return 403 forbiddden
+        """
         expected_status_code = 403
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
@@ -31,6 +35,10 @@ class TestEndpoints:
 
     @pytest.mark.auth
     def test_missing_access_token(self):
+        """
+          test for /metadata..  to check it making a request without an access token
+          must return 401 unauthorized
+        """
         expected_status_code = 401
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
@@ -48,9 +56,11 @@ class TestEndpoints:
 
     @pytest.mark.auth
     def test_invalid_access_token_auth_code(self, default_oauth_helper):
-        # This test checks that when trying to authenticate using auth_code flow
-        # an exemption is rised. Sadly the method get_token_response doesn't return
-        # the 401 error from apigee and raises and error instead.
+        """
+          This test checks that when trying to authenticate using auth_code flow
+          an exemption is raised.
+        """
+
         with pytest.raises(Exception):
             assert asyncio.run(
                 default_oauth_helper.get_token_response(grant_type="authorization_code")
@@ -58,6 +68,9 @@ class TestEndpoints:
 
     @pytest.mark.broker
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
+        """
+          This test checks a request with an invalid service identifier
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
@@ -80,6 +93,10 @@ class TestEndpoints:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_endpoint_not_found(self, get_token_client_credentials):
+        """
+          test for /invalid..  to check it making a request to an unexisting endpoint
+          must return 500 server error.
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404

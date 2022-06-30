@@ -16,6 +16,9 @@ class TestMetadata:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_metadata(self, get_token_client_credentials):
+        """
+          test for /metadata..  to get metadata for the target identifier
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
@@ -42,6 +45,10 @@ class TestMetadata:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_metadata_method_not_allowed(self, get_token_client_credentials):
+        """
+          test for /metadata..  to post metadata for the target identifier
+          must return method not allowed
+        """
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
