@@ -300,7 +300,12 @@ paths:
       parameters:
         - name: status
           in: query
-          description: Status values that need to be considered for filter
+          description: |
+            Status values that need to be considered for filter. 
+            
+            If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
+            
+            For example "GET [base]/Slot?status=free,busy".  
           required: true
           explode: true
           schema:
@@ -323,9 +328,6 @@ paths:
             The values must include an offset indicating UTC in the [FHIR dateTime instant format](https://www.hl7.org/fhir/datatypes.html#primitive). This is the case for all dateTimes in the BaRS standard.
 
 
-            If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
-            
-            For example "GET [base]/Slot?status=free,busy". 
           schema:
             format: datetime
             type: string
