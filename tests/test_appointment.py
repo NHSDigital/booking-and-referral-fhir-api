@@ -21,6 +21,7 @@ class TestAppointment:
     @pytest.mark.sandbox
     @pytest.mark.debug
     def test_get_appointments(self, get_token_client_credentials):
+        print('Testing...Description test')
         """
            test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
            must return a list of appointments for the patient
@@ -150,7 +151,6 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_appointment_entity_not_found(self, get_token_client_credentials):
-        print('Testing...Description test')
         """
            test for /appointment..  to get all appointments for the patient passed as a parameter on the request - /Appointment?patientIdentifier=12312
            must return a message of entity not found.
