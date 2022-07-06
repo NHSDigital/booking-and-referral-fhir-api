@@ -149,7 +149,6 @@ class TestAppointment:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.short.desc("Just to get all appointments for the patient passed as a parameter on the request")
     def test_get_appointment_entity_not_found(self, get_token_client_credentials):
         """
            test for /appointment..  to get all appointments for the patient passed as a parameter on the request - /Appointment?patientIdentifier=12312
