@@ -20,10 +20,7 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     @pytest.mark.debug
-    @pytest.fixture(name="PATATOES")
-    def test_get_appointments(self, get_token_client_credentials, record_property):
-        record_property("description", "patatoes")
-
+    def test_get_appointments(self, get_token_client_credentials):
         """
            test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
            must return a list of appointments for the patient
