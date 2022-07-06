@@ -20,6 +20,7 @@ class TestAppointment:
     @pytest.mark.integration
     @pytest.mark.sandbox
     @pytest.mark.debug
+    @pytest.fixture(name="PATATOES")
     def test_get_appointments(self, get_token_client_credentials, record_property):
         record_property("description", "patatoes")
 
