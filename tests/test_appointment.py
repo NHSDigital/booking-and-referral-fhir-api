@@ -21,7 +21,6 @@ class TestAppointment:
     @pytest.mark.sandbox
     @pytest.mark.debug
     def test_get_appointments(self, get_token_client_credentials):
-        print("Potatoes")
         """
            test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
            must return a list of appointments for the patient

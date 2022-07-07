@@ -121,3 +121,13 @@ async def get_token_client_credentials(default_oauth_helper):
         grant_type="client_credentials", _jwt=jwt
     )
     return token_resp["body"]
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    test_fn = item.obj
+    docstring = getattr(test_fn, '__doc__')
+    if docstring:
+        report.nodeid = docstring
