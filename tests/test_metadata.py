@@ -17,7 +17,7 @@ class TestMetadata:
     @pytest.mark.sandbox
     def test_get_metadata(self, get_token_client_credentials):
         """
-          test for /metadata..  to get metadata for the target identifier
+          test to get metadata for the target identifier
         """
         # Given
         token = get_token_client_credentials["access_token"]
@@ -46,7 +46,7 @@ class TestMetadata:
     @pytest.mark.sandbox
     def test_metadata_method_not_allowed(self, get_token_client_credentials):
         """
-          test for /metadata..  to post metadata for the target identifier
+          test to posting metadata for the target identifier
           must return method not allowed
         """
         # Given

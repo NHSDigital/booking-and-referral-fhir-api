@@ -17,7 +17,7 @@ class TestMessageDefinition:
     @pytest.mark.sandbox
     def test_get_message_definition(self, get_token_client_credentials):
         """
-           test for /messageDefinition..  to get message definition for the target identifier
+           test to get message definition for the target identifier
         """
 
         # Given
@@ -48,7 +48,7 @@ class TestMessageDefinition:
     @pytest.mark.sandbox
     def test_message_definition_method_not_allowed(self, get_token_client_credentials):
         """
-          test for /messageDefinition..  to post message definition for the target identifier
+          test to posting message definition for the target identifier
           must return method not allowed
         """
         # Given
