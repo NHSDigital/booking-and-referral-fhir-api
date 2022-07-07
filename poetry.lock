@@ -624,16 +624,6 @@ python-versions = ">= 3.6"
 [package.dependencies]
 pytest = ">=5.3"
 
-[[package]]
-name = "pytest-spec"
-version = "3.2.0"
-description = "Library pytest-spec is a pytest plugin to display test execution output like a SPECIFICATION."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-six = "*"
 
 [[package]]
 name = "python-dateutil"
