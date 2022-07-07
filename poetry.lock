@@ -624,7 +624,6 @@ python-versions = ">= 3.6"
 [package.dependencies]
 pytest = ">=5.3"
 
-
 [[package]]
 name = "python-dateutil"
 version = "2.8.2"
