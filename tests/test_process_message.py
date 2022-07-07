@@ -18,7 +18,7 @@ class TestProcessMessage:
     @pytest.mark.sandbox
     def test_create_process_message(self, get_token_client_credentials):
         """
-          test for /$process-message..  to check the message creation flow
+          test to check the message creation flow
         """
         # Given
         token = get_token_client_credentials["access_token"]
@@ -48,7 +48,7 @@ class TestProcessMessage:
     @pytest.mark.sandbox
     def test_process_message_method_not_allowed(self, get_token_client_credentials):
         """
-          test for /process-message.. to check to ensure only the post method is allowed
+          test to check to ensure only the post method is allowed
           must return method not allowed
         """
         # Given

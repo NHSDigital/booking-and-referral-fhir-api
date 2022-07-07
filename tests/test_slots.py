@@ -20,7 +20,7 @@ class TestSlots:
     @pytest.mark.sandbox
     def test_get_slots_happy_path(self, get_token_client_credentials):
         """
-          test for /Slot..  to get slots for the target identifier
+          test to get slots for the target identifier
           must return a slot entity
         """
         # Given
@@ -155,7 +155,7 @@ class TestSlots:
     @pytest.mark.sandbox
     def test_slots_method_not_allowed(self, get_token_client_credentials):
         """
-          test for /Slot..  to post slot for the target identifier
+          test to post slot for the target identifier -
           must return method not allowed
         """
         # Given
