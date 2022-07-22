@@ -299,7 +299,12 @@ paths:
       parameters:
         - name: status
           in: query
-          description: Status values that need to be considered for filter
+          description: |
+            Status values that need to be considered for filter. 
+            
+            If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
+            
+            For example "GET [base]/Slot?status=free,busy".  
           required: true
           explode: true
           schema:
@@ -314,24 +319,23 @@ paths:
           in: query
           required: true
           description: |
-            Slot start date/time (yyyy-mm-ddThh:mm:ss).
+            Slot start date/time (yyyy-mm-ddThh:mm:ss+00:00).
             To search for time windows within which Slots must start, use “greater than” and “less than” searching.
             
-            For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00&start=le2022-03-01T13:30:00+00". 
+            For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00:00&start=le2022-03-01T13:30:00+00:00". 
             The definition of the time window within which Slots are requested is provided by using this parameter twice.
+            The values must include an offset indicating UTC in the [FHIR dateTime instant format](https://www.hl7.org/fhir/datatypes.html#primitive). This is the case for all dateTimes in the BaRS standard.
 
-            If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
-            
-            For example "GET [base]/Slot?status=free,busy". 
+
           schema:
             format: datetime
             type: string
-            example: '2020-03-31T14:00:00'
+            example: '2022-03-01T12:00:00+00:00'
         - name: Schedule.actor:HealthcareService
           in: query
-          required: true
+          required: false
           description: |
-            Identifier for the intended healthcare service
+            A single service ID can be provided to indicate the service for which appointment slots are returned for.
           schema:
             type: string
             example: '918999198999'
@@ -355,7 +359,7 @@ paths:
             items:
               type: string
               enum:
-                - Schedule
+                - 'Slot:schedule'
                 - 'Schedule:actor:Practitioner'
                 - 'Schedule:actor:PractitionerRole'
                 - 'Schedule:actor:HealthcareService'
