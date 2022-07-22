@@ -1,0 +1,23 @@
+{
+    "resourceType": "OperationOutcome",
+    "meta": {
+      "profile": [
+        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+      ]
+    },
+    "issue": [
+      {
+        "severity": "error",
+        "code": "503",
+        "details": {
+          "coding": [
+            {
+              "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+              "code": "REC_UNAVAILABLE"
+            }
+          ]
+        },
+        "diagnostics": "<Receiver identifier (ODS?)> is currently unavailable: <further diagnostics information, error message/error text>"
+      }
+    ]
+  }

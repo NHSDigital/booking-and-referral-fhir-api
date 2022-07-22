@@ -15,6 +15,7 @@ class TestMessageDefinition:
     @pytest.mark.message_definition
     @pytest.mark.integration
     @pytest.mark.sandbox
+    @pytest.mark.debug
     def test_get_message_definition(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -22,6 +23,7 @@ class TestMessageDefinition:
         expected_body = load_example("message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json")
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
+        print(target_identifier_encoded)
 
         # When
         response = requests.get(
