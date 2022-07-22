@@ -28,6 +28,7 @@ class TestMessageDefinition:
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/MessageDefinition",
+            
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -38,6 +39,8 @@ class TestMessageDefinition:
         )
 
         # Then
+        print(token)
+        print(f"{config.BASE_URL}/{config.BASE_PATH}/MessageDefinition")
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
