@@ -320,10 +320,10 @@ paths:
           in: query
           required: true
           description: |
-            Slot start date/time (yyyy-mm-ddThh:mm:ss).
+            Slot start date/time (yyyy-mm-ddThh:mm:ss+00:00).
             To search for time windows within which Slots must start, use “greater than” and “less than” searching.
             
-            For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00&start=le2022-03-01T13:30:00+00". 
+            For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00:00&start=le2022-03-01T13:30:00+00:00". 
             The definition of the time window within which Slots are requested is provided by using this parameter twice.
             The values must include an offset indicating UTC in the [FHIR dateTime instant format](https://www.hl7.org/fhir/datatypes.html#primitive). This is the case for all dateTimes in the BaRS standard.
 
@@ -331,7 +331,7 @@ paths:
           schema:
             format: datetime
             type: string
-            example: '2022-03-01T12:00:00+00'
+            example: '2022-03-01T12:00:00+00:00'
         - name: Schedule.actor:HealthcareService
           in: query
           required: false
