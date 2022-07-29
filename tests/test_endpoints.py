@@ -69,11 +69,11 @@ class TestEndpoints:
     @pytest.mark.broker
     def test_invalid_nhsd_service_identifier(self, get_token_client_credentials):
         """
-          This test checks a request with an invalid service identifier
+          This test checks a request with an invalid service identifier returns a 404 error.
         """
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 500
+        expected_status_code = 404
         target_identifier = json.dumps({"value": "invalid", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 

@@ -54,7 +54,7 @@
           <Name>Javascript.SetTargetUrl</Name>
       </Step>
       <Step>
-          <Name>RaiseFault.500ProxyBadRequest</Name>
+          <Name>RaiseFault.404ProxyNotFound</Name>
           <Condition>isError = true</Condition>
       </Step>
     </Request>
