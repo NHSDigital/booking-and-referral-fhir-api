@@ -73,7 +73,7 @@ class TestEndpoints:
         """
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 500
+        expected_status_code = 404
         target_identifier = json.dumps({"value": "invalid", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
