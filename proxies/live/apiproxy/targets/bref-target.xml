@@ -78,7 +78,8 @@
     </Step>
     <Step>
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
-      <Condition>raisefault.RaiseFault.404ProxyNotFound.bref.error.code = "404"</Condition>
+      <Condition>isError = true</Condition>
+<!--  <Condition>raisefault.RaiseFault.404ProxyNotFound.bref.error.coding.code = "PROXY_NOT_FOUND"</Condition>-->
     </Step>
   </DefaultFaultRule>
   <HTTPTargetConnection>
