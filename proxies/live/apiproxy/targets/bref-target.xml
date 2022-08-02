@@ -76,6 +76,10 @@
       <Name>AssignMessage.401UnauthorizedErrorResponse</Name>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name  = "oauth.v2.InvalidAccessToken"</Condition>
     </Step>
+    <Step>
+      <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
+      <Condition>raisefault.RaiseFault.404ProxyNotFound.bref.error.code = "404"</Condition>
+    </Step>
   </DefaultFaultRule>
   <HTTPTargetConnection>
     <URL>https://mocktarget.apigee.net</URL>
