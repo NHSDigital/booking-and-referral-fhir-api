@@ -7,6 +7,7 @@ import requests
 from assertpy import assert_that
 
 from .configuration import config
+from .example_loader import load_example
 
 
 class TestEndpoints:
@@ -74,6 +75,7 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
+        expected_body = load_example("proxy-not-found.json")
         target_identifier = json.dumps({"value": "invalid", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -89,6 +91,7 @@ class TestEndpoints:
         )
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.integration
     @pytest.mark.sandbox
