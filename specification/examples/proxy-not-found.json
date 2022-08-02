@@ -18,7 +18,7 @@
           }
         ]
       },
-      "diagnostics": "Any further internal debug details i.e. stack trace details etc."
+      "diagnostics": "The target endpoint does not exist in the Endpoint Catalogue."
     }
   ]
 }
