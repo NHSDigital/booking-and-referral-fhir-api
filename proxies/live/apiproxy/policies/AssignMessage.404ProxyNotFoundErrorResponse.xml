@@ -19,10 +19,10 @@
                   {
                     "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
                     "code": "PROXY_NOT_FOUND"
-                  }
+                  }56m
                 ]
               },
-              "diagnostics": "Any further internal debug details i.e. stack trace details etc."
+              "diagnostics": "The target endpoint does not exist in the Endpoint Catalogue."
             }
           ]
         }
