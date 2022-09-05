@@ -12,7 +12,6 @@ from .example_loader import load_example
 class TestServiceRequest:
     existing_referral_id = "5dfbbdb8-f94b-4113-b3ff-249cac7f0694"
     existing_patient_id = "4857773456"
-    nhsd_token = "nhsd-token"
     target_id = "NHS0001"
 
     @pytest.mark.service_request
@@ -36,7 +35,6 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
-                "NHSD-Token": self.nhsd_token,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -66,7 +64,6 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
-                "NHSD-Token": self.nhsd_token,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -97,7 +94,6 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
-                "NHSD-Token": self.nhsd_token,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -128,7 +124,6 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
-                "NHSD-Token": self.nhsd_token,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -158,7 +153,6 @@ class TestServiceRequest:
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
-                "NHSD-Token": self.nhsd_token,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
