@@ -4,6 +4,8 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.responses import Response
 from starlette.status import HTTP_200_OK
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from routes import (
     errors,
@@ -17,6 +19,14 @@ from routes import (
 from routes.example_loader import load_example
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins="https://digital.nhs.uk",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.exception_handler(RequestValidationError)
