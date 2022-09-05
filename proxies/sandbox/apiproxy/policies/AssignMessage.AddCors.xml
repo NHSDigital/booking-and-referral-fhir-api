@@ -4,8 +4,8 @@
     <Set>
         <Headers>
             <Header name="Access-Control-Allow-Origin">{request.header.origin}</Header>
-            <Header name="Access-Control-Allow-Headers">origin, x-requested-with, accept, Content-Type, nhsd-session-urid, NHSD-Token, X-Request-Id, X-Correlation-Id, NHSD-Target-Identifier, NHSD-End-User-Organisation, NHSD-Requesting-Practitioner, NHSD-Requesting-Software</Header>
-            <Header name="Access-Control-Expose-Headers">origin, x-requested-with, accept, Content-Type, nhsd-session-urid, NHSD-Token, X-Request-Id, X-Correlation-Id, NHSD-Target-Identifier, NHSD-End-User-Organisation, NHSD-Requesting-Practitioner, NHSD-Requesting-Software</Header>
+            <Header name="Access-Control-Allow-Headers">origin, x-requested-with, accept, Content-Type, nhsd-session-urid, X-Request-Id, X-Correlation-Id, NHSD-Target-Identifier, NHSD-End-User-Organisation, NHSD-Requesting-Practitioner, NHSD-Requesting-Software</Header>
+            <Header name="Access-Control-Expose-Headers">origin, x-requested-with, accept, Content-Type, nhsd-session-urid, X-Request-Id, X-Correlation-Id, NHSD-Target-Identifier, NHSD-End-User-Organisation, NHSD-Requesting-Practitioner, NHSD-Requesting-Software</Header>
             <Header name="Access-Control-Max-Age">3628800</Header>
             <Header name="Access-Control-Allow-Methods">GET, PUT, POST, DELETE, PATCH</Header>
         </Headers>
