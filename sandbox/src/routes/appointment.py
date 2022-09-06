@@ -16,19 +16,29 @@ class AppointmentBody(BaseModel):
 route = APIRouter()
 
 existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
-ENTITY_NOT_FOUND = status.HTTP_403_FORBIDDEN  # Spec is probably wrong and status should be 404
+ENTITY_NOT_FOUND = (
+    status.HTTP_403_FORBIDDEN
+)  # Spec is probably wrong and status should be 404
 
 
 @route.get("/Appointment")
-def get_appointment(patientIdentifier: str, NHSD_Token: str = Header(...),
-                    NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
+def get_appointment(
+    patientIdentifier: str,
+    NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
+    X_Request_Id: str = Header(..., alias="X-Request-Id"),
+    X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),
+):
     return load_example("appointment/GET-success.json")
 
 
 @route.get("/Appointment/{id}")
-def get_appointment_id(response: Response,
-                       id: UUID, NHSD_Token: str = Header(...),
-                       NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")):
+def get_appointment_id(
+    response: Response,
+    id: UUID,
+    NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
+    X_Request_Id: str = Header(..., alias="X-Request-Id"),
+    X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),
+):
     if str(id) == existing_appointment_id:
         return load_example("appointment/id/GET-success.json")
     else:
@@ -42,7 +52,9 @@ def get_appointment_id(response: Response,
 @route.delete("/Appointment")
 def appointment_method_not_allowed():
     headers = {"Allow": "GET, POST"}
-    return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
+    return JSONResponse(
+        load_example("method-not-allowed.json"), status_code=405, headers=headers
+    )
 
 
 @route.patch("/Appointment/{id}")
@@ -51,4 +63,6 @@ def appointment_method_not_allowed():
 @route.post("/Appointment/{id}")
 def appointment_id_method_not_allowed():
     headers = {"Allow": "GET, PATCH, PUT, DELETE"}
-    return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
+    return JSONResponse(
+        load_example("method-not-allowed.json"), status_code=405, headers=headers
+    )

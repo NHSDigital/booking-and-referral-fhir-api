@@ -9,7 +9,9 @@ route = APIRouter()
 @route.get("/MessageDefinition")
 def get_message_definition(
         context: str,
-        NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier")
+        NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
+        X_Request_Id: str = Header(..., alias="X-Request-Id"),
+        X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),
 ):
     return load_example("message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json")
 
