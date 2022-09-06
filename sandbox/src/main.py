@@ -23,7 +23,6 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins="https://digital.nhs.uk",
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
