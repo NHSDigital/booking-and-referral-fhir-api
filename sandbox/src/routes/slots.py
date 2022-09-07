@@ -23,7 +23,6 @@ class Include(Enum):
 
 @route.get("/Slot")
 def slot(
-    healthcareService: str,
     status: Status,
     start: datetime,
     _include: Include,
