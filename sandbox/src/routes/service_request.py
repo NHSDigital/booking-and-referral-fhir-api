@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Header, Query
 from uuid import UUID
 from pydantic import BaseModel
 from .example_loader import load_example
@@ -15,7 +15,7 @@ class ServiceRequestBody(BaseModel):
 
 @route.get("/ServiceRequest")
 def get_service_request(
-        patientIdentifier: str,
+        patientIdentifier: str = Query(..., alias="patient:identifier"),
         NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
         X_Request_Id: str = Header(..., alias="X-Request-Id"),
         X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header, Query
+from fastapi import APIRouter, Header
 from fastapi.responses import JSONResponse
 from enum import Enum
 from datetime import datetime
@@ -27,9 +27,6 @@ def slot(
     status: Status,
     start: datetime,
     _include: Include,
-    schedule_actor_healthcareService: str = Query(
-        ..., alias="Schedule.actor:HealthcareService"
-    ),
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
     X_Request_Id: str = Header(..., alias="X-Request-Id"),
     X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),

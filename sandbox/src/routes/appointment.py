@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Header, Response, status
+from fastapi import APIRouter, Header, Response, status, Query
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -23,7 +23,7 @@ ENTITY_NOT_FOUND = (
 
 @route.get("/Appointment")
 def get_appointment(
-    patientIdentifier: str,
+    patientIdentifier: str = Query(..., alias="patient:identifier"),
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
     X_Request_Id: str = Header(..., alias="X-Request-Id"),
     X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),

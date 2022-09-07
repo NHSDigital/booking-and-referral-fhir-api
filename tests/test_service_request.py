@@ -19,7 +19,7 @@ class TestServiceRequest:
     @pytest.mark.sandbox
     def test_get_referrals(self, get_token_client_credentials):
         """
-           test to get a list of services for the nhs_number associated /serviceRequest?patientIdentifier=12312
+           test to get a list of services for the nhs_number associated /serviceRequest?patient:identifier=12312
         """
         # Given
         token = get_token_client_credentials["access_token"]
@@ -31,7 +31,7 @@ class TestServiceRequest:
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest",
-            params={"patientIdentifier": self.existing_patient_id},
+            params={"patient:identifier": self.existing_patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -49,7 +49,7 @@ class TestServiceRequest:
     @pytest.mark.sandbox
     def test_get_referral(self, get_token_client_credentials):
         """
-           test to get a service related to the nhs_number serviceRequest?patientIdentifier=12312
+           test to get a service related to the nhs_number serviceRequest?patient:identifier=12312
         """
         # Given
         token = get_token_client_credentials["access_token"]
@@ -120,7 +120,7 @@ class TestServiceRequest:
         # When
         response = requests.put(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/ServiceRequest",
-            params={"patientIdentifier": self.existing_patient_id},
+            params={"patient:identifier": self.existing_patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,

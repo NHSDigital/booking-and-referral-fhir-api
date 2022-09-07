@@ -21,7 +21,7 @@ class TestAppointment:
     @pytest.mark.debug
     def test_get_appointments(self, get_token_client_credentials):
         """
-           test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patientIdentifier=12312
+           test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patient:identifier=12312
            must return a list of appointments for the patient
         """
         # Given
@@ -35,7 +35,7 @@ class TestAppointment:
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
-            params={"patientIdentifier": patient_id},
+            params={"patient:identifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
@@ -113,7 +113,7 @@ class TestAppointment:
     def test_get_appointment_bad_id(self, get_token_client_credentials):
         """
          test to get an appointment for the patient with an invalid patient_id parameter on the
-         request - /Appointment?patientIdentifier=INVALID_ID
+         request - /Appointment?patient:identifier=INVALID_ID
       """
         # Given
         token = get_token_client_credentials["access_token"]
@@ -186,7 +186,7 @@ class TestAppointment:
         # When
         response = requests.put(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
-            params={"patientIdentifier": patient_id},
+            params={"patient:identifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
