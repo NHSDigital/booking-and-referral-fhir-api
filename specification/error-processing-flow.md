@@ -23,7 +23,7 @@ stateDiagram-v2
     A6 --> 406_SEND_NOT_ACCEPTABLE: requested resource not acceptable
     A7 --> 406_REC_NOT_ACCEPTABLE: requested resource not acceptable
     A8 --> 429_SEND_TOO_MANY_REQUESTS: rate limiting applied
-    A9 --> 409_REC_TIMEOUT: receiver timed out (proxy returning 504)
+    A9 --> 409_REC_TIMEOUT: receiver timed out (proxy triggering 504)
     A10 --> 500_REC_SERVER_ERROR: unexpected exception in receiver 
     A11 --> 500_PROXY_SERVER_ERROR/SERVER_ERROR : unexpected exception in proxy
     A12 --> 501_REC_NOT_IMPLEMENTED: receiver not yet implemented endpoint
@@ -43,14 +43,14 @@ stateDiagram-v2
     A7 --> A8
 
 
-    A1 --> 401_REC_UNAUTHORIZED: scenario
-    A2 --> 403_REC_FORBIDDEN: scenario
-    A3 --> 406_SEND_NOT_ACCEPTABLE: scenario
-    A4 --> 409_REC_TIMEOUT: scenario
-    A5 --> 422_REC_UNPROCESSABLE_ENTITY: scenario
-    A6 --> 500_REC_SERVER_ERROR: scenario
-    A7 --> 501_REC_NOT_IMPLEMENTED : scenario
-    A8 --> 503_REC_SERVICE_UNAVAILABLE: scenario
+    A1 --> 401_REC_UNAUTHORIZED: proxy to receiver unauthorized, TLS-MA failure?
+    A2 --> 403_REC_FORBIDDEN: TLS-MA faliure
+    A3 --> 406_SEND_NOT_ACCEPTABLE: requested resource not acceptable
+    A4 --> 409_REC_CONFLICT: no longer valid, should be REC_TIMEOUT receiver timed out (proxy triggering 504)
+    A5 --> 422_REC_UNPROCESSABLE_ENTITY: The start time range requested is too wide (/Slot specific)
+    A6 --> 500_REC_SERVER_ERROR: unexpected exception in receiver 
+    A7 --> 501_REC_NOT_IMPLEMENTED : receiver not yet implemented endpoint
+    A8 --> 503_REC_SERVICE_UNAVAILABLE: The service(s) is unavailable but is able to respond as such (endpoint specific?)
 ```
 
 ## Endpoint specific errors
@@ -63,7 +63,7 @@ graph LR
     B --> |true| D{GET request?}
     D --> |false| E[405 REC_METHOD_NOT_ALLOWED]
     D --> |true| F{Resource exist?}
-    F --> |false| G[404 REC_NOT_FOUND]
+    F --> |false| G[403 REC_NOT_FOUND]
     F --> |true| H[200 OK]
 ```
 ### /Appointment
