@@ -44,7 +44,7 @@ stateDiagram-v2
 
 
     A1 --> 401_REC_UNAUTHORIZED: scenario
-    A1 --> 403_REC_FORBIDDEN: scenario
+    A2 --> 403_REC_FORBIDDEN: scenario
     A3 --> 406_SEND_NOT_ACCEPTABLE: scenario
     A4 --> 409_REC_TIMEOUT: scenario
     A5 --> 422_REC_UNPROCESSABLE_ENTITY: scenario
