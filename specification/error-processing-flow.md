@@ -15,18 +15,42 @@ stateDiagram-v2
     A10 --> A11
     A11 --> A12
 
-    A1 --> SEND_BAD_REQUEST: false
-    A2 --> REC_BAD_REQUEST: false
-    A3 --> REC_BAD_REQUEST2: false
-    A4 --> SEND_UNAUTHORIZED: false
-    A5 --> SEND_METHOD_NOT_ALLOWED: false
-    A6 --> SEND_NOT_ACCEPTABLE: false
-    A7 --> REC_NOT_ACCEPTABLE: false
-    A8 --> SEND_TOO_MANY_REQUESTS: false
-    A9 --> REC_TIMEOUT: false
-    A10 --> REC_SERVER_ERROR: false
-    A11 --> PROXY_SERVER_ERROR/SERVER_ERROR : false
-    A12 --> REC_NOT_IMPLEMENTED: false
+    A1 --> 400 SEND_BAD_REQUEST: missing required param
+    A2 --> 400 REC_BAD_REQUEST: invalid param
+    A3 --> 400 REC_BAD_REQUEST2: feature not yet supported
+    A4 --> 401 SEND_UNAUTHORIZED: token invalid/expired
+    A5 --> 405 SEND_METHOD_NOT_ALLOWED: wrong http verb
+    A6 --> 406 SEND_NOT_ACCEPTABLE: requested resource not acceptable
+    A7 --> 406 REC_NOT_ACCEPTABLE: requested resource not acceptable
+    A8 --> 429 SEND_TOO_MANY_REQUESTS: rate limiting applied
+    A9 --> 409 REC_TIMEOUT: receiver timed out (proxy returning 504)
+    A10 --> 500 REC_SERVER_ERROR: unexpected exception in receiver 
+    A11 --> 500 PROXY_SERVER_ERROR/SERVER_ERROR : unexpected exception in proxy
+    A12 --> 501 REC_NOT_IMPLEMENTED: receiver not yet implemented endpoint
+```
+
+## General errors implemented so far
+
+```mermaid
+stateDiagram-v2
+    [*] --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> A6
+    A6 --> A7
+    A7 --> A8
+
+
+    A1 --> 401 REC_UNAUTHORIZED: scenario
+    A1 --> 403 REC_FORBIDDEN: scenario
+    A3 --> 406 SEND_NOT_ACCEPTABLE: scenario
+    A4 --> 409 REC_TIMEOUT: scenario
+    A5 --> 422 REC_UNPROCESSABLE_ENTITY: scenario
+    A6 --> 500 REC_SERVER_ERROR: scenario
+    A7 --> 501 REC_NOT_IMPLEMENTED : scenario
+    A8 --> 503 REC_SERVICE_UNAVAILABLE: scenario
 ```
 
 ## Endpoint specific errors
