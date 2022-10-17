@@ -26,8 +26,8 @@ info:
     This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
 
     ## API status and roadmap
-    This API is in [alpha](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#api-status), meaning:
-      * it is available for testing in integration environment
+    This API is [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#status), meaning:
+      * it is available for testing in the integration environment
       * we expect to make breaking changes based on developer feedback
 
     ### Roadmap
