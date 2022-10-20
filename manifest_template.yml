@@ -61,8 +61,10 @@ apigee:
         quotaInterval: '1'
         quotaTimeUnit: minute
     specs:
-      - name: {{ NAME }}
-        path: {{ SERVICE_NAME }}.json
+      - name: { { NAME } }
+        path: { { SERVICE_NAME } }.json
+      - name: { { NAME } }2
+        path: { { SERVICE_NAME } }2.json
     api_catalog:
       - edgeAPIProductName: {{ NAME }}
         anonAllowed: true
