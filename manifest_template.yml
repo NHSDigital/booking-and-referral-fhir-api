@@ -63,8 +63,8 @@ apigee:
     specs:
       - name: { { NAME } }
         path: { { SERVICE_NAME } }.json
-      - name: { { NAME } }2
-        path: { { SERVICE_NAME } }2.json
+      - name: bars
+        path: bars.json
     api_catalog:
       - edgeAPIProductName: {{ NAME }}
         anonAllowed: true
