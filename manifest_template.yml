@@ -62,7 +62,7 @@ apigee:
         quotaTimeUnit: minute
     specs:
       - name: { { NAME } }
-        path: { { SERVICE_NAME } }.json
+        path: "{ { SERVICE_NAME } }.json"
       - name: bars
         path: bars.json
     api_catalog:
