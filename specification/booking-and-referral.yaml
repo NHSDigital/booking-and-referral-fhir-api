@@ -7,14 +7,14 @@ info:
     Use this API to send booking and referral information between NHS service providers.
 
     You can:
-      * Get a specific booking
-      * Get bookings for a patient
-      * Process a message
-      * Get message definition
-      * Get capability statement
-      * Get a specific referral
-      * Get referral/s for a patient
-      * Get slots
+      * get a specific booking
+      * get bookings for a patient
+      * process a message
+      * get message definition
+      * get capability statement
+      * get a specific referral
+      * get referral/s for a patient
+      * get slots
 
     The following describes the end-to-end process:
     1. Send a request from your sender application to this API, along with a service identifier header.
@@ -26,7 +26,7 @@ info:
     This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
 
     ## API status and roadmap
-    This API is [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#status), meaning:
+    This API is [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
       * we expect to make breaking changes based on developer feedback
 
