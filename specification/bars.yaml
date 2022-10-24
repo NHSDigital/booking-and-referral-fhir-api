@@ -1,7 +1,22 @@
 openapi: 3.0.0
 info:
   description: |
-    New spec
+    ## Overview
+
+    This API forms part of the [Booking and Referral Standard (BaRS)](https://digital.nhs.uk/services/booking-and-referral-standard). This API specification should be used in conjunction with the [BaRS implementation guide](https://digital.nhs.uk/services/booking-and-referral-standard/booking-and-referral-standard-implementation-guide) for your use case.    
+    Use this API to send booking and referral information between NHS service providers.
+
+    You can:
+      * Get a specific booking
+      * Get bookings for a patient
+      * Process a message
+      * Get message definition
+      * Get capability statement
+      * Get a specific referral
+      * Get referral/s for a patient
+      * Get slots
+
+    The following describes the end-to-end process:
     1. Send a request from your sender application to this API, along with a service identifier header.
     2. This API redirects the request to the service associated with the service identifier header.
     3. The target backend handles the request and sends a response back to this API.
@@ -57,7 +72,7 @@ info:
 
     ## Register on our platform    
     Details on the onboarding process can be found in our [Quick start guide](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide#quick-start-guide).
-  version: 2.0.8
+  version: 1.0.8
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -289,7 +304,7 @@ paths:
             
             If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
             
-            For example "GET [base]/Slot?status=free,busy".
+            For example "GET [base]/Slot?status=free,busy".  
           required: true
           explode: true
           schema:
