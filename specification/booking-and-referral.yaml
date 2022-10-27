@@ -24,7 +24,11 @@ info:
 
     ## Who can use this API
     This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
-
+    
+    ##  Related APIs
+    The following APIs are related to this API:
+      * https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir
+    
     ## API status and roadmap
     This API is [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
@@ -33,7 +37,12 @@ info:
     ### Roadmap
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=booking-and-referral&deleted=0#controls).
     If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
-
+    
+    ## Service level
+    This API is a bronze service, meaning it is operational and supported only during business hours (8am to 6pm), Monday to Friday excluding bank holidays.
+    
+    For more details, see [service levels](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#service-levels).
+    
     ## Technology
     This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#basic-rest) and uses HTTP POST to submit data.
 
@@ -70,7 +79,7 @@ info:
 
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
-    ## Register on our platform    
+    ## Onboarding
     Details on the onboarding process can be found in our [Quick start guide](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide#quick-start-guide).
   version: 1.0.8
   title: Booking and Referral API
