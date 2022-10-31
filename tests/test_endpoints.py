@@ -98,7 +98,7 @@ class TestEndpoints:
     def test_endpoint_not_found(self, get_token_client_credentials):
         """
           test for /invalid..  to check it making a request to an unexisting endpoint
-          must return 500 server error.
+          must return 404 server error.
         """
         # Given
         token = get_token_client_credentials["access_token"]
