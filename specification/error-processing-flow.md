@@ -50,8 +50,8 @@ stateDiagram-v2
     A20 --> 403_REC_FORBIDDEN: TLS-MA failure (code - forbidden)
     A21 --> 403_REC_FORBIDDEN2: TLS-MA failure (code - security)
     A22 --> 500_REC_SERVER_ERROR2: The start params in a slot request were two wide resulting in a large number of results (code - too-costly)
-    A23 --> 500_REC_SERVER_ERROR2: unhandled exception (code - exception)
-    A24 --> 500_REC_SERVER_ERROR3: internal data storage issue (code - no-store)
+    A23 --> 500_REC_SERVER_ERROR3: unhandled exception (code - exception)
+    A24 --> 500_REC_SERVER_ERROR4: internal data storage issue (code - no-store)
     A25 --> 501_REC_NOT_IMPLEMENTED: The receiver has not yet implemented that endpoint or functionality (code - not-supported)
 ```
 
