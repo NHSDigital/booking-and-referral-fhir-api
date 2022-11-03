@@ -21,6 +21,8 @@ APIGEE_ENVIRONMENTS:
     display_name: Integration Testing
     make_spec_visible: true
   - name: prod
+    ratelimit: '100'
+    quota: '1000pm'
     approval_type: manual
     display_name: Production
     make_spec_visible: true
@@ -43,7 +45,16 @@ apigee:
         approvalType: auto
         attributes:
           - name: ratelimiting
-            value: '{"booking-and-referral-{{ENV.name}}":{"quota":{"limit":"300","enabled":true,"interval":1,"timeunit":"minute"}, "spikeArrest":{"ratelimit":"5ps","enabled":true}}}'
+            value:
+              booking-and-referral-{{ENV.name}}:
+                quota:
+                  limit: {{ env.quota | default('300pm') }}
+                  interval: 1
+                  timeunit: minute
+                  enabled: true
+                spikeArrest:
+                    ratelimit: {{ env.ratelimit | default(60) }}
+                    enabled: true
           - name: access
             value: public
           - name: ratelimit
