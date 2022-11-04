@@ -21,6 +21,8 @@ APIGEE_ENVIRONMENTS:
     display_name: Integration Testing
     make_spec_visible: true
   - name: prod
+    ratelimit: '100ps'
+    quota: '1000'
     approval_type: manual
     display_name: Production
     make_spec_visible: true
@@ -43,11 +45,18 @@ apigee:
         approvalType: auto
         attributes:
           - name: ratelimiting
-            value: '{"booking-and-referral-{{ENV.name}}":{"quota":{"limit":"300","enabled":true,"interval":1,"timeunit":"minute"}, "spikeArrest":{"ratelimit":"5ps","enabled":true}}}'
+            value:
+              booking-and-referral-{{ENV.name}}:
+                quota:
+                  limit: {{ env.quota | default('300') }}
+                  interval: 1
+                  timeunit: minute
+                  enabled: true
+                spikeArrest:
+                    ratelimit: {{ env.ratelimit | default('60ps') }}
+                    enabled: true
           - name: access
             value: public
-          - name: ratelimit
-            value: 300pm
         description: {{ DESCRIPTION }}
         displayName: {{ TITLE }}
         environments: [ {{ ENV.name }} ]
@@ -56,9 +65,6 @@ apigee:
           - identity-service-{{ ENV.name }}
         scopes:
           - 'urn:nhsd:apim:app:level3:{{ SERVICE_NAME }}'
-        quota: '300'
-        quotaInterval: '1'
-        quotaTimeUnit: minute
     specs:
       - name: {{ NAME }}
         path: {{ SERVICE_NAME }}.json
