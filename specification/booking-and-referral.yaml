@@ -1,7 +1,6 @@
 openapi: 3.0.0
 info:
   description: |
-  
     ## Overview
 
     This API forms part of the [Booking and Referral Standard (BaRS)](https://digital.nhs.uk/services/booking-and-referral-standard). This API specification should be used in conjunction with the [BaRS implementation guide](https://digital.nhs.uk/services/booking-and-referral-standard/booking-and-referral-standard-implementation-guide) for your use case.    
