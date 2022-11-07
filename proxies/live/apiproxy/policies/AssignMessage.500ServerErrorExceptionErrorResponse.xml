@@ -1,0 +1,33 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.500ServerErrorExceptionErrorResponse">
+  <Set>
+    <StatusCode>500</StatusCode>
+    <Payload contentType="application/json">
+        {
+          "resourceType": "OperationOutcome",
+          "id": "b38b875b-a1cf-4104-a900-3a5d3ce474db",
+          "meta": {
+            "profile": [
+              "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+            ]
+          },
+          "issue": [
+            {
+              "severity": "error",
+              "code": "exception",
+              "details": {
+                "coding": [
+                  {
+                    "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+                    "code": "REC_SERVER_ERROR"
+                  }
+                ]
+              },
+              "diagnostics": "unhandled exception."
+            }
+          ]
+        }
+    </Payload>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="response" />
+</AssignMessage>

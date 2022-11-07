@@ -1,0 +1,33 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.408TimeoutErrorResponse">
+  <Set>
+    <StatusCode>408</StatusCode>
+    <Payload contentType="application/json">
+        {
+          "resourceType": "OperationOutcome",
+          "id": "5abca2a4-eda1-4dae-8cc9-5d48c6b791dc",
+          "meta": {
+            "profile": [
+              "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+            ]
+          },
+          "issue": [
+            {
+              "severity": "error",
+              "code": "timeout",
+              "details": {
+                "coding": [
+                  {
+                    "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+                    "code": "REC_TIMEOUT"
+                  }
+                ]
+              },
+              "diagnostics": "The connection to the Receiver timed out."
+            }
+          ]
+        }
+    </Payload>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="response" />
+</AssignMessage>
