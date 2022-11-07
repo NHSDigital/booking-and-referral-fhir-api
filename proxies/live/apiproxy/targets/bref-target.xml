@@ -80,6 +80,23 @@
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
       <Condition>isError = true</Condition>
     </Step>
+    <Step>
+      <Name>AssignMessage.408TimeoutErrorResponse</Name>
+      <Condition>response.status.code = 408</Condition>
+    </Step>
+    <!-- FIXME: how do we differentiate between these two 500 responses? -->
+    <Step>
+      <Name>AssignMessage.500ServerErrorExceptionErrorResponse</Name>
+      <Condition>response.status.code = 500</Condition>
+    </Step>
+<!--    <Step>-->
+<!--      <Name>AssignMessage.500ServerErrorNoStoreErrorResponse</Name>-->
+<!--      <Condition>response.status.code = 500</Condition>-->
+<!--    </Step>-->
+    <Step>
+      <Name>AssignMessage.503ServiceUnavailableErrorResponse</Name>
+      <Condition>response.status.code = 503</Condition>
+    </Step>
   </DefaultFaultRule>
   <HTTPTargetConnection>
     <URL>https://mocktarget.apigee.net</URL>
