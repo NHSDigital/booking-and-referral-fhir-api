@@ -21,12 +21,11 @@
     </Flow>
     <Flow name="MetadataEndpoint">
       <Description/>
-      <Request/>
-      <Response>
-        <Step>
-          <Name>AssignMessage.AddCapabilityStatement</Name>
-        </Step>
-      </Response>
+      <Request>
+          <Step>
+            <Name>AssignMessage.AddCapabilityStatement</Name>
+          </Step>
+      </Request>
       <Response/>
       <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
     </Flow>
