@@ -249,7 +249,7 @@ class TestReceiverErrors:
 
         # When
         response = requests.get(
-            url=f"http://0.0.0.0:9000/errors/Slot",
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,

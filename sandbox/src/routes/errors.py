@@ -14,8 +14,6 @@ def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifi
     decoded = base64.b64decode(NHSD_Target_Identifier)
     target_id = json.loads(decoded)["value"]
 
-    print(target_id)
-
     response = {"message": "no match for target id"}
     status_code = 400
     if target_id == "NHS0001-401":
