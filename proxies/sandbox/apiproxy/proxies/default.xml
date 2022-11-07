@@ -20,6 +20,16 @@
       <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))
       </Condition>
     </Flow>
+    <Flow name="MetadataEndpoint">
+      <Description/>
+      <Request>
+          <Step>
+            <Name>AssignMessage.AddCapabilityStatement</Name>
+          </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
+    </Flow>
     <Flow name="StatusEndpoint">
       <Request>
         <Step>
@@ -56,6 +66,9 @@
   </RouteRule>
   <RouteRule name="NoRoute">
     <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
+  </RouteRule>
+  <RouteRule name="NoRouteMetadata">
+    <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
   </RouteRule>
   <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
