@@ -1,4 +1,4 @@
-<ExtractVariables name="ExtractVariables.OperationOutcomeCode">
+<ExtractVariables name="ExtractVariables.OperationOutcomeCode" continueOnError="true" enabled="true">
    <Source>response</Source>
    <JSONPayload>
       <Variable name="code">
