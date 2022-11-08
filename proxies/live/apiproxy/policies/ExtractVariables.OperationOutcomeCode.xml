@@ -1,0 +1,9 @@
+<ExtractVariables name="ExtractVariables.OperationOutcomeCode">
+   <Source>response</Source>
+   <JSONPayload>
+      <Variable name="code">
+         <JSONPath>$.root.issue.code</JSONPath>
+      </Variable>
+   </JSONPayload>
+   <VariablePrefix>operation-outcome</VariablePrefix>
+</ExtractVariables>

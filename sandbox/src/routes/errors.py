@@ -26,7 +26,7 @@ def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifi
         response = load_example("not-acceptable.json")
         status_code = 406
     if target_id == "NHS0001-408":
-        response = load_example("OperationOutcome/REC/408-REC_TIMEOUT-timeout.json")
+        response = {}
         status_code = 408
     if target_id == "NHS0001-409":
         response = load_example("conflict.json")
@@ -38,7 +38,7 @@ def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifi
         response = {"message": "empty"}
         status_code = 500
     if target_id == "NHS0001-500-1":
-        response = load_example("OperationOutcome/REC/500-REC_SERVER_ERROR-exception.json")
+        response = {}
         status_code = 500
     if target_id == "NHS0001-500-2":
         response = load_example("OperationOutcome/REC/500-REC_SERVER_ERROR-no-store.json")
@@ -47,7 +47,7 @@ def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifi
         response = load_example("not-implemented.json")
         status_code = 501
     if target_id == "NHS0001-503":
-        response = load_example("OperationOutcome/REC/503-REC_SERVICE_UNAVAILABLE-transient.json")
+        response = {}
         status_code = 503
 
     return JSONResponse(response, status_code=status_code)
