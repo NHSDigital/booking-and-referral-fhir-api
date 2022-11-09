@@ -35,7 +35,7 @@ def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifi
         response = load_example("unprocessable-entity.json")
         status_code = 422
     if target_id == "NHS0001-500":
-        response = {"message": "empty"}
+        response = load_example("server-error.json")
         status_code = 500
     if target_id == "NHS0001-500-1":
         response = {}
