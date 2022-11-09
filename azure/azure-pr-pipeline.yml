@@ -25,10 +25,7 @@ pool:
 
 variables:
   - template: project.yml
-  
-steps:
-  - bash: |
-      cp -r  specification/examples proxies/live/apiproxy/resources/examples
+
 
 extends:
   template: azure/common/apigee-deployment.yml@common
@@ -38,6 +35,8 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     apigee_deployments:
       - environment: internal-dev
+        bash: |
+          cp -r  specification/examples proxies/live/apiproxy/resources/examples
         post_deploy:
             -   template: ./templates/run-tests.yml
       - environment: internal-dev-sandbox
