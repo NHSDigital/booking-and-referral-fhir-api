@@ -93,7 +93,7 @@
     </Step>
     <Step>
       <Name>AssignMessage.500ServerErrorExceptionErrorResponse</Name>
-      <Condition>(response.status.code = 500)</Condition>
+      <Condition>(response.status.code = 500) and (operation-outcome.code != "no-store")</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.503ServiceUnavailableErrorResponse</Name>
