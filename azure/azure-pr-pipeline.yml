@@ -25,7 +25,10 @@ pool:
 
 variables:
   - template: project.yml
-
+  
+steps:
+  - bash: |
+      cp -r  specification/examples proxies/live/apiproxy/resources/examples
 
 extends:
   template: azure/common/apigee-deployment.yml@common
