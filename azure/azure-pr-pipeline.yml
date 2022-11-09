@@ -25,7 +25,13 @@ pool:
 
 variables:
   - template: project.yml
-  
+steps:
+  - bash: |
+    cp -r  specification/examples proxies/live/apiproxy/resources/examples
+    echo "COPY EXAMPLES"
+    ls
+  workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
+  displayName: Copy Spec Examples 
 extends:
   template: azure/common/apigee-deployment.yml@common
   parameters:
