@@ -1,9 +1,10 @@
 <ExtractVariables name="ExtractVariables.OperationOutcomeCode" continueOnError="true" enabled="true">
-   <Source>response</Source>
-   <JSONPayload>
-      <Variable name="code">
-         <JSONPath>$.root.issue.code</JSONPath>
-      </Variable>
-   </JSONPayload>
-   <VariablePrefix>operation-outcome</VariablePrefix>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <VariablePrefix>operation-outcome</VariablePrefix>
+    <Source clearPayload="false">response</Source>
+    <JSONPayload>
+        <Variable name="code">
+            <JSONPath>$.issue[0].code</JSONPath>
+        </Variable>
+    </JSONPayload>
 </ExtractVariables>
