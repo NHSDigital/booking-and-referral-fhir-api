@@ -87,15 +87,13 @@
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>
     </Step>
-    <!-- 500 no-store error will return an OperationOutcome in the server response -->
     <Step>
       <Name>AssignMessage.500ServerErrorNoStoreErrorResponse</Name>
       <Condition>(response.status.code = 500) and (operation-outcome.code = "no-store")</Condition>
     </Step>
-    <!-- A 500 error with an HTML response is a generic IIS error response, for this we return a 500 exception -->
     <Step>
       <Name>AssignMessage.500ServerErrorExceptionErrorResponse</Name>
-      <Condition>(response.status.code = 500) and (response.header.Content-Type = "text/html")</Condition>
+      <Condition>(response.status.code = 500)</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.503ServiceUnavailableErrorResponse</Name>

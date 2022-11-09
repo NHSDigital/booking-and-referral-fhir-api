@@ -212,7 +212,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
         expected_body = load_example("OperationOutcome/REC/500-REC_SERVER_ERROR-exception.json")
-        target_identifier = json.dumps({"value": "NHS0001-500", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-500-1", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
