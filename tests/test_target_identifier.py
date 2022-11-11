@@ -14,6 +14,7 @@ class TestProcessMessage:
 
     @pytest.mark.target_identifier
     @pytest.mark.broker
+    @pytest.mark.sandbox
     def test_invalid_base64_encoded_identifier(self, get_token_client_credentials):
         """
           This test checks a request with an invalid encoded service identifier returns a 400 error.
@@ -67,6 +68,8 @@ class TestProcessMessage:
 
     @pytest.mark.target_identifier
     @pytest.mark.broker
+    @pytest.mark.sandbox
+    @pytest.mark.debug
     def test_malformed_nhsd_service_identifier(self, get_token_client_credentials):
         """
           This test checks a request with an invalid service identifier returns a 404 error.

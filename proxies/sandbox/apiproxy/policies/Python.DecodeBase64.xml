@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Script name="Python.DecodeBase64">
+        <DisplayName>Python.DecodeBase64</DisplayName>
+        <ResourceURL>py://DecodeBase64String.py</ResourceURL>
+</Script>
