@@ -24,6 +24,10 @@
           <Name>LookupCache.Targets</Name>
       </Step>
       <Step>
+        <Name>AssignMessage.AddCapabilityStatement</Name>
+        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
+      </Step>
+      <Step>
           <Name>Python.DecodeBase64</Name>
           <Condition>request.header.NHSD-Target-Identifier != null</Condition>
       </Step>
