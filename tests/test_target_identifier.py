@@ -67,7 +67,6 @@ class TestProcessMessage:
 
     @pytest.mark.target_identifier
     @pytest.mark.broker
-    @pytest.mark.debug
     def test_malformed_nhsd_service_identifier(self, get_token_client_credentials):
         """
           This test checks a request with an invalid service identifier returns a 404 error.
@@ -75,7 +74,7 @@ class TestProcessMessage:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
-        expected_body = load_example("proxy-not-found.json")
+        expected_body = load_example("malformed-target-identifier.json")
         target_identifier = json.dumps({"system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
