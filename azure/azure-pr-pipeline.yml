@@ -25,16 +25,7 @@ pool:
 
 variables:
   - template: project.yml
-jobs:
-- job: copy-examples
-  displayName: Copy Spec Examples
-  continueOnError: true
-  workspace:
-    clean: all
-  steps:
-  - bash: |
-      cp -r  specification/examples proxies/live/apiproxy/resources/examples
-      ls
+
 extends:
   template: azure/common/apigee-deployment.yml@common
   parameters:
