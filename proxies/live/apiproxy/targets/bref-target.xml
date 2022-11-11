@@ -81,6 +81,10 @@
       <Condition>isError = true</Condition>
     </Step>
     <Step>
+      <Name>AssignMessage.400InvalidBase64Encoding</Name>
+      <Condition>b64decodedFailed = true</Condition>
+    </Step>
+    <Step>
       <Name>AssignMessage.408TimeoutErrorResponse</Name>
       <Condition>response.status.code = 408</Condition>
     </Step>
