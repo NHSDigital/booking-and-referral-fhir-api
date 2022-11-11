@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.AddCapabilityStatment">
-    <DisplayName>RaiseFault.AddCapabilityStatment</DisplayName>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.AddCapabilityStatement">
+    <DisplayName>RaiseFault.AddCapabilityStatement</DisplayName>
     <Properties/>
     <FaultResponse/>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
