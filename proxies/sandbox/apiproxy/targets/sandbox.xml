@@ -21,11 +21,14 @@
       </Step>
       <Step>
         <Name>Javascript.CheckTargets</Name>
-        <Condition>targets != null</Condition>
       </Step>
       <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
         <Condition>idMalformed = true</Condition>
+      </Step>
+      <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+        <Condition>isError = true</Condition>
       </Step>
     </Request>
     <Response>
@@ -35,6 +38,10 @@
     </Response>
   </PreFlow>
   <DefaultFaultRule>
+    <Step>
+      <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
+      <Condition>isError = true</Condition>
+    </Step>
     <Step>
       <Name>AssignMessage.400InvalidTargetIdentifierValue</Name>
       <Condition>idMalformed = true</Condition>
