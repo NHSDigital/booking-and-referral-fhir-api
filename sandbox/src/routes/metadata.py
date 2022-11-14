@@ -7,7 +7,6 @@ route = APIRouter()
 
 @route.get("/metadata")
 def get_metadata(
-    NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
     X_Request_Id: str = Header(..., alias="X-Request-Id"),
     X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),
 ):
