@@ -111,6 +111,38 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
+    def test_408_timeout_error(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 408
+        expected_body = load_example("OperationOutcome/REC/408-REC_TIMEOUT-timeout.json")
+        target_identifier = json.dumps({"value": "NHS0001-408", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+            },
+            params={
+                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                "status": ["free"],
+                "start": self.currentTime,
+                "end": self.currentTime,
+                "_include": ["Schedule"],
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.errors
+    @pytest.mark.integration
     def test_409_conflict_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
@@ -175,12 +207,44 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
-    def test_500_server_error_error(self, get_token_client_credentials):
+    def test_500_server_error_exception_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
-        expected_body = load_example("server-error.json")
-        target_identifier = json.dumps({"value": "NHS0001-500", "system": "tests"})
+        expected_body = load_example("OperationOutcome/REC/500-REC_SERVER_ERROR-exception.json")
+        target_identifier = json.dumps({"value": "NHS0001-500-1", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+            },
+            params={
+                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                "status": ["free"],
+                "start": self.currentTime,
+                "end": self.currentTime,
+                "_include": ["Schedule"],
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.errors
+    @pytest.mark.integration
+    def test_500_server_error_no_store_error(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 500
+        expected_body = load_example("OperationOutcome/REC/500-REC_SERVER_ERROR-no-store.json")
+        target_identifier = json.dumps({"value": "NHS0001-500-2", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -243,7 +307,7 @@ class TestReceiverErrors:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 503
-        expected_body = load_example("unavailable.json")
+        expected_body = load_example("OperationOutcome/REC/503-REC_SERVICE_UNAVAILABLE-transient.json")
         target_identifier = json.dumps({"value": "NHS0001-503", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 

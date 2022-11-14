@@ -17,8 +17,6 @@ class ServiceRequestBody(BaseModel):
 def get_service_request(
         patientIdentifier: str = Query(..., alias="patient:identifier"),
         NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
-        X_Request_Id: str = Header(..., alias="X-Request-Id"),
-        X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),
 ):
     return load_example("service_request/GET-success.json")
 
@@ -27,8 +25,6 @@ def get_service_request(
 def get_service_request_id(
     id: UUID,
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
-    X_Request_Id: str = Header(..., alias="X-Request-Id"),
-    X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),
 ):
     return load_example("service_request/id/GET-success.json")
 

@@ -151,3 +151,24 @@ class TestEndpoints:
 
         # Then
         assert_that(target).is_equal_to(expected_target)
+
+    def test_missing_headers_returns_bad_request(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 400
+        expected_body = load_example("OperationOutcome/PROXY-NONE/400-BAD_REQUEST-invalid.json")
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Target-Identifier": target_identifier_encoded,
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())

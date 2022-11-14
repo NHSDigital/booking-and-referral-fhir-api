@@ -54,6 +54,10 @@
           <Name>Javascript.SetTargetUrl</Name>
       </Step>
       <Step>
+          <Name>RaiseFault.400InvalidHeaders</Name>
+          <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>
+      </Step>
+      <Step>
           <Name>RaiseFault.404ProxyNotFound</Name>
           <Condition>isError = true</Condition>
       </Step>
@@ -79,6 +83,25 @@
     <Step>
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
       <Condition>isError = true</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.408TimeoutErrorResponse</Name>
+      <Condition>response.status.code = 408</Condition>
+    </Step>
+    <Step>
+      <Name>ExtractVariables.OperationOutcomeCode</Name>
+    </Step>
+    <Step>
+      <Name>AssignMessage.500ServerErrorNoStoreErrorResponse</Name>
+      <Condition>(response.status.code = 500) and (operation-outcome.code = "no-store")</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.500ServerErrorExceptionErrorResponse</Name>
+      <Condition>(response.status.code = 500) and (operation-outcome.code != "no-store")</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.503ServiceUnavailableErrorResponse</Name>
+      <Condition>response.status.code = 503</Condition>
     </Step>
   </DefaultFaultRule>
   <HTTPTargetConnection>
