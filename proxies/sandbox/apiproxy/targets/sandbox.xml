@@ -21,14 +21,15 @@
       </Step>
       <Step>
         <Name>Javascript.CheckTargets</Name>
+        <Condition>not (proxy.pathsuffix MatchesPath "/_status")</Condition>
       </Step>
       <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
-        <Condition>idMalformed = true</Condition>
+        <Condition>(idMalformed = true) and not (proxy.pathsuffix MatchesPath "/_status")</Condition>
       </Step>
       <Step>
         <Name>RaiseFault.404PageNotFound</Name>
-        <Condition>isError = true</Condition>
+        <Condition>(isError = true) and not (proxy.pathsuffix MatchesPath "/_status")</Condition>
       </Step>
     </Request>
     <Response>
