@@ -7,8 +7,7 @@ route = APIRouter()
 
 @route.get("/metadata")
 def get_metadata(
-    X_Request_Id: str = Header(..., alias="X-Request-Id"),
-    X_Correlation_Id: str = Header(..., alias="X-Correlation-Id"),
+    NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
 ):
     return load_example("metadata/GET-success.json")
 
