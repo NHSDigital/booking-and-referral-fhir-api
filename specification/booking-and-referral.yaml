@@ -46,9 +46,11 @@ info:
     ## Technology
     This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#basic-rest) and uses HTTP POST to submit data.
 
-    It conforms to the [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#fhir) global standard for health care data exchange, specifically to [FHIR R4 (v4.0.1)](https://hl7.org/fhir/r4/), except that it does not support the [capabilities](http://hl7.org/fhir/R4/http.html#capabilities) interaction.
+    It conforms to the [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#fhir) global standard for health care data exchange, specifically to [FHIR R4 (v4.0.1)](https://hl7.org/fhir/r4/).
 
-    It includes some country-specific FHIR extensions, which are built against [FHIR UK Core](https://digital.nhs.uk/services/fhir-uk-core), specifically [fhir.r4.ukcore.stu1 0.5.1](https://simplifier.net/packages/fhir.r4.ukcore.stu1/0.5.1).
+    It includes:
+      * country-specific FHIR extensions, which are built against [FHIR UK Core](https://digital.nhs.uk/services/fhir-uk-core), specifically [fhir.r4.ukcore.stu1 0.5.1](https://simplifier.net/packages/fhir.r4.ukcore.stu1/0.5.1)
+      * BaRS-specific FHIR extensions and ammendments, documented in the [BaRS FHIR project](https://simplifier.net/NHSBookingandReferrals)
  
     ## Network access
     This API is available on the internet.
@@ -80,7 +82,7 @@ info:
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
     ## Onboarding
-    Details on the onboarding process can be found in our [Design (Codre) guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Security-and-authorisation).
+    Details on the onboarding process can be found in our [Core Design Guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Security-and-authorisation).
   version: 1.0.8
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
