@@ -6,6 +6,7 @@ from .models import Profile
 from fastapi.responses import JSONResponse
 
 route = APIRouter()
+existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
 
 
 class ServiceRequestBody(BaseModel):
@@ -26,7 +27,10 @@ def get_service_request_id(
     id: UUID,
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
 ):
-    return load_example("service_request/id/GET-success.json")
+    if str(id) == existing_appointment_id:
+        return load_example("service_request/id/GET-success.json")
+    else:
+        return load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
 
 
 @route.post("/ServiceRequest")
