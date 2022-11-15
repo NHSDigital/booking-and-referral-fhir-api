@@ -24,7 +24,7 @@
           <Name>LookupCache.Targets</Name>
       </Step>
       <Step>
-        <Name>Python.ExampleLoader</Name>
+        <Name>Javascript.ExampleLoader</Name>
         <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
       </Step>
       <Step>
