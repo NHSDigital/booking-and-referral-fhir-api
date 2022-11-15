@@ -240,7 +240,7 @@ paths:
         | Respond to a booking              | POST /$process-message | A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA.|
         | Cancelling a booking (and rebook) | POST /$process-message | An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
 
-        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#end-to-end-workflow) documentation.
+        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#End-to-end-workflow) documentation.
 
       operationId: processMessage
       requestBody:
@@ -691,7 +691,7 @@ components:
     4XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#error-handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Error-handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
@@ -738,7 +738,7 @@ components:
     5XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#error-handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Error-handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
