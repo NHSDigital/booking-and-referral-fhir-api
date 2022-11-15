@@ -3,7 +3,7 @@ info:
   description: |
     ## Overview
 
-    This API forms part of the [Booking and Referral Standard (BaRS)](https://digital.nhs.uk/services/booking-and-referral-standard). This API specification should be used in conjunction with the [BaRS implementation guide](https://digital.nhs.uk/services/booking-and-referral-standard/booking-and-referral-standard-implementation-guide) for your use case.    
+    This API forms part of the [Booking and Referral Standard (BaRS)](https://simplifier.net/guide/nhsbookingandreferralstandard/Home?version=current). This API specification should be used in conjunction with the [BaRS implementation guide](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Applications?version=current) for your use case.    
     Use this API to send booking and referral information between NHS service providers.
 
     You can:
@@ -66,7 +66,7 @@ info:
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
-    For more details, see [BaRS Core - Security and authorisation](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide/bars-core#security-and-authorisation)
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Security-and-authorisation)
 
     ## Environments and testing
     | Environment       | Base URL                                                               |
@@ -80,7 +80,7 @@ info:
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
     ## Onboarding
-    Details on the onboarding process can be found in our [Quick start guide](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-standard-implementation-guide#quick-start-guide).
+    Details on the onboarding process can be found in our [Design (Codre) guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Security-and-authorisation).
   version: 1.0.8
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
