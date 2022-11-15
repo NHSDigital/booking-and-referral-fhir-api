@@ -38,7 +38,7 @@ def get_service_request_id(
 @route.patch("/ServiceRequest")
 @route.delete("/ServiceRequest")
 def service_request_method_not_allowed():
-    headers = {"Allow": "GET, POST"}
+    headers = {"Allow": "GET"}
     return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
 
 
@@ -47,5 +47,5 @@ def service_request_method_not_allowed():
 @route.post("/ServiceRequest/{id}")
 @route.delete("/ServiceRequest/{id}")
 def service_request_id_method_not_allowed():
-    headers = {"Allow": "GET, PATCH, PUT, DELETE"}
+    headers = {"Allow": "GET"}
     return JSONResponse(load_example("method-not-allowed.json"), status_code=405, headers=headers)
