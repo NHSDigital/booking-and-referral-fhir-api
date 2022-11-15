@@ -15,6 +15,22 @@
           AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
         </Condition>
       </Step>
+      <Step>
+        <Name>Python.DecodeBase64</Name>
+        <Condition>request.header.NHSD-Target-Identifier != null</Condition>
+      </Step>
+      <Step>
+        <Name>Javascript.CheckTargets</Name>
+        <Condition>not (proxy.pathsuffix MatchesPath "/_status")</Condition>
+      </Step>
+      <Step>
+        <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+        <Condition>(idMalformed = true) and not (proxy.pathsuffix MatchesPath "/_status")</Condition>
+      </Step>
+      <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+        <Condition>(isError = true) and not (proxy.pathsuffix MatchesPath "/_status")</Condition>
+      </Step>
     </Request>
     <Response>
       <Step>
@@ -22,6 +38,20 @@
       </Step>
     </Response>
   </PreFlow>
+  <DefaultFaultRule>
+    <Step>
+      <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
+      <Condition>isError = true</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.400InvalidTargetIdentifierValue</Name>
+      <Condition>idMalformed = true</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.400InvalidBase64Encoding</Name>
+      <Condition>script.Python.DecodeBase64.failed = true</Condition>
+    </Step>
+  </DefaultFaultRule>
   <HTTPTargetConnection>
     {{ HOSTED_TARGET_CONNECTION }}
   </HTTPTargetConnection>

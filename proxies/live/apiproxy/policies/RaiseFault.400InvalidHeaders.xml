@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.400InvalidHeaders">
+    <DisplayName>RaiseFault.400InvalidHeaders</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Headers/>
+            <Payload contentType="application/json">
+              {
+                "resourceType": "OperationOutcome",
+                "id": "42c78e78-c06a-462a-8194-956e6a8dc4a2",
+                "meta": {
+                  "profile": [
+                    "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+                  ]
+                },
+                "issue": [
+                  {
+                    "severity": "error",
+                    "code": "invalid",
+                    "details": {
+                      "coding": [
+                        {
+                          "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+                          "code": "BAD_REQUEST"
+                        }
+                      ]
+                    },
+                    "diagnostics": "The X-Request-Id or the X-Correlation-Id was not included Or the NHSD-Target-Identifier was not included (depending on the endpoint being called)."
+                  }
+                ]
+              }
+            </Payload>
+            <StatusCode>400</StatusCode>
+            <ReasonPhrase>Invalid</ReasonPhrase>
+        </Set>
+        <AssignVariable>
+            <Name>bref.error.code</Name>
+            <Value>value</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.coding.code</Name>
+            <Value>BAD_REQUEST</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.diagnostics</Name>
+            <Value>The X-Request-Id or the X-Correlation-Id was not included Or the NHSD-Target-Identifier was not included (depending on the endpoint being called)</Value>
+        </AssignVariable>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>

@@ -62,6 +62,14 @@
           <Name>Javascript.SetTargetUrl</Name>
       </Step>
       <Step>
+          <Name>RaiseFault.400InvalidHeaders</Name>
+          <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>
+      </Step>
+      <Step>
+        <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+        <Condition>idMalformed = true</Condition>
+      </Step>
+      <Step>
           <Name>RaiseFault.404ProxyNotFound</Name>
           <Condition>isError = true</Condition>
       </Step>
@@ -95,11 +103,19 @@
       <Condition>isError = true</Condition>
     </Step>
     <Step>
+      <Name>AssignMessage.400InvalidBase64Encoding</Name>
+      <Condition>script.Python.DecodeBase64.failed = true</Condition>
+    </Step>
+    <Step>
       <Name>AssignMessage.408TimeoutErrorResponse</Name>
       <Condition>response.status.code = 408</Condition>
     </Step>
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>
+    </Step>
+    <Step>
+      <Name>AssignMessage.400InvalidTargetIdentifierValue</Name>
+      <Condition>idMalformed = true</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.500ServerErrorNoStoreErrorResponse</Name>
