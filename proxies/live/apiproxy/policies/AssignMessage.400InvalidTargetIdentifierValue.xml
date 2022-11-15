@@ -1,0 +1,32 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.400InvalidTargetIdentifierValue">
+  <Set>
+    <StatusCode>400</StatusCode>
+    <Payload contentType="application/json">
+        {
+            "resourceType": "OperationOutcome",
+            "meta": {
+                "profile": [
+                "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+                ]
+            },
+            "issue": [
+                {
+                "severity": "error",
+                "code": "structure",
+                "details": {
+                    "coding": [
+                    {
+                        "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+                        "code": "PROXY_BAD_REQUEST"
+                    }
+                    ]
+                },
+                "diagnostics": "Invalid schema for NHSD-Target-Identifier header"
+                }
+            ]
+        }
+    </Payload>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="response" />
+</AssignMessage>
