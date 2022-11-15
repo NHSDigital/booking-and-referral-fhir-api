@@ -39,7 +39,7 @@ def get_appointment_id(
         return load_example("appointment/id/GET-success.json")
     else:
         response.status_code = ENTITY_NOT_FOUND
-        return load_example("entity-not-found.json")
+        return load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
 
 
 @route.post("/Appointment")

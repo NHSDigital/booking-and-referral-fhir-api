@@ -148,8 +148,8 @@ class TestAppointment:
         """
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 403
-        expected_body = load_example("entity-not-found.json")
+        expected_status_code = 404
+        expected_body = load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
