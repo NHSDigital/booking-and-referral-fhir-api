@@ -7,6 +7,7 @@ import requests
 from assertpy import assert_that
 
 from .configuration import config
+from .example_loader import load_example
 
 
 class TestEndpoints:
