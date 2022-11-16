@@ -11,7 +11,7 @@ from .example_loader import load_example
 
 
 class TestServiceRequest:
-    existing_referral_id = "5dfbbdb8-f94b-4113-b3ff-249cac7f0694"
+    existing_referral_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_referral_id = str(uuid.uuid4())
     existing_patient_id = "4857773456"
     target_id = "NHS0001"
