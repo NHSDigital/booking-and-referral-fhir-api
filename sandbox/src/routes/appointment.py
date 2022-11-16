@@ -17,8 +17,8 @@ route = APIRouter()
 
 existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
 ENTITY_NOT_FOUND = (
-    status.HTTP_403_FORBIDDEN
-)  # Spec is probably wrong and status should be 404
+    status.HTTP_404_NOT_FOUND
+)
 
 
 @route.get("/Appointment")
