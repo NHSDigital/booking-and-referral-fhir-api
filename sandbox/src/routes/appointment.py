@@ -17,8 +17,8 @@ route = APIRouter()
 
 existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
 ENTITY_NOT_FOUND = (
-    status.HTTP_403_FORBIDDEN
-)  # Spec is probably wrong and status should be 404
+    status.HTTP_404_NOT_FOUND
+)
 
 
 @route.get("/Appointment")
@@ -39,7 +39,7 @@ def get_appointment_id(
         return load_example("appointment/id/GET-success.json")
     else:
         response.status_code = ENTITY_NOT_FOUND
-        return load_example("entity-not-found.json")
+        return load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
 
 
 @route.post("/Appointment")
