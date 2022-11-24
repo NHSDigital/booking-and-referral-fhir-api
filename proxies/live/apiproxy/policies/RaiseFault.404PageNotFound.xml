@@ -26,7 +26,7 @@
                                     }
                                 ]
                             },
-                            "diagnostics": "Endpoint on the API does not exist. This would be a Proxy or unprefixed response. there is no SEND  code for 404 in the value set."
+                            "diagnostics": "Endpoint on the API does not exist. This would be a Proxy or unprefixed response. there is no SEND code for 404 in the value set."
                         }
                     ]
                 }
