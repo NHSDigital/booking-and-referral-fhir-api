@@ -20,7 +20,7 @@ class TestEndpoints:
           must return 403 forbiddden
         """
         expected_status_code = 403
-        # expected_body = load_example("OperationOutcome/REC/403-REC_FORBIDDEN-forbidden.json")
+        expected_body = load_example("OperationOutcome/REC/403-REC_FORBIDDEN-forbidden.json")
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -34,7 +34,7 @@ class TestEndpoints:
         )
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
-        # assert_that(expected_body).is_equal_to(response.json())
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.auth
     def test_missing_access_token(self):
@@ -71,6 +71,8 @@ class TestEndpoints:
                 default_oauth_helper.get_token_response(grant_type="authorization_code")
             )
 
+        # import pdb;pdb.set_trace()
+
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_endpoint_not_found(self, get_token_client_credentials):
@@ -81,6 +83,7 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
+        expected_body = load_example("OperationOutcome/PROXY-NONE/404-NOT_FOUND-not-found.json")
         target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -96,6 +99,7 @@ class TestEndpoints:
         )
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.asyncio
     @pytest.mark.broker
