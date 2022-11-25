@@ -17,10 +17,10 @@ class TestEndpoints:
     def test_invalid_access_token(self):
         """
           test for /metadata..  to check it with an invalid access token
-          must return 403 forbiddden
+          must return 401 forbiddden
         """
-        expected_status_code = 403
-        expected_body = load_example("OperationOutcome/REC/403-REC_FORBIDDEN-forbidden.json")
+        expected_status_code = 401
+        expected_body = load_example("OperationOutcome/SEND/401-SEND_UNAUTHORIZED-security.json")
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
