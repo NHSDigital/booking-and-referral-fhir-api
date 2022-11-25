@@ -1,10 +1,10 @@
-<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.401UnauthorizedErrorResponse">
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.401UnauthorizedUnknownErrorResponse">
   <Set>
     <StatusCode>401</StatusCode>
     <Payload contentType="application/json">
       {
         "resourceType": "OperationOutcome",
-        "id": "d7aaf12e-7b94-4ef6-b047-d2d92981b1cd",
+        "id": "e1112dbd-7aaf-412e-9b94-ef6e047d2d92",
         "meta": {
           "profile": [
             "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
@@ -13,7 +13,7 @@
         "issue": [
           {
             "severity": "error",
-            "code": "security",
+            "code": "unknown",
             "details": {
               "coding": [
                 {
@@ -22,7 +22,7 @@
                 }
               ]
             },
-            "diagnostics": "The user or system was not able to be authenticated, either the access token was invalid, or not provided."
+            "diagnostics": "No Access token was provided."
           }
         ]
       }

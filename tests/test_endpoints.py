@@ -43,7 +43,7 @@ class TestEndpoints:
           must return 401 unauthorized
         """
         expected_status_code = 401
-        expected_body = load_example("OperationOutcome/SEND/401-SEND_UNAUTHORIZED-security.json")
+        expected_body = load_example("OperationOutcome/SEND/401-SEND_UNAUTHORIZED-unknown.json")
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
