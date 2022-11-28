@@ -17,9 +17,10 @@ class TestEndpoints:
     def test_invalid_access_token(self):
         """
           test for /metadata..  to check it with an invalid access token
-          must return 403 forbiddden
+          must return 401 forbiddden
         """
-        expected_status_code = 403
+        expected_status_code = 401
+        expected_body = load_example("OperationOutcome/SEND/401-SEND_UNAUTHORIZED-security.json")
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -33,6 +34,7 @@ class TestEndpoints:
         )
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.auth
     def test_missing_access_token(self):
@@ -41,6 +43,7 @@ class TestEndpoints:
           must return 401 unauthorized
         """
         expected_status_code = 401
+        expected_body = load_example("OperationOutcome/SEND/401-SEND_UNAUTHORIZED-unknown.json")
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -54,6 +57,7 @@ class TestEndpoints:
         )
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.auth
     def test_invalid_access_token_auth_code(self, default_oauth_helper):
@@ -67,6 +71,8 @@ class TestEndpoints:
                 default_oauth_helper.get_token_response(grant_type="authorization_code")
             )
 
+        # import pdb;pdb.set_trace()
+
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_endpoint_not_found(self, get_token_client_credentials):
@@ -77,6 +83,7 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
+        expected_body = load_example("OperationOutcome/PROXY-NONE/404-NOT_FOUND-not-found.json")
         target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -92,6 +99,7 @@ class TestEndpoints:
         )
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.asyncio
     @pytest.mark.broker

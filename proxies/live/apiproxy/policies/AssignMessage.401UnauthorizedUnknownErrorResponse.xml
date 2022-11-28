@@ -1,27 +1,28 @@
-<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.401UnauthorizedErrorResponse">
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.401UnauthorizedUnknownErrorResponse">
   <Set>
     <StatusCode>401</StatusCode>
     <Payload contentType="application/json">
       {
         "resourceType": "OperationOutcome",
+        "id": "e1112dbd-7aaf-412e-9b94-ef6e047d2d92",
         "meta": {
           "profile": [
-            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+            "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
           ]
         },
         "issue": [
           {
             "severity": "error",
-            "code": "401",
+            "code": "unknown",
             "details": {
               "coding": [
                 {
-                  "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
-                  "code": "PROXY_UNAUTHORIZED"
+                  "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+                  "code": "SEND_UNAUTHORIZED"
                 }
               ]
             },
-            "diagnostics": "A BaRS internal component deemed you unauthorized to make this request.: (further diagnostics information, error message/error text)"
+            "diagnostics": "No Access token was provided."
           }
         ]
       }
