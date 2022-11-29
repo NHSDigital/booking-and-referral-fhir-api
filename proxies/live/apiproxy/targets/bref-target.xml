@@ -69,10 +69,6 @@
           <Name>RaiseFault.404ProxyNotFound</Name>
           <Condition>isError = true</Condition>
       </Step>
-      <Step>
-        <Name>RaiseFault.400ReceiverNotFound</Name>
-        <Condition>idNotFound = true</Condition>
-      </Step>
     </Request>
   </PreFlow>
   <FaultRules>
