@@ -18,7 +18,7 @@ class TestReceiverErrors:
     def test_400_invalid_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 401
+        expected_status_code = 400
         expected_body = load_example("OperationOutcome/REC/400-BAD_REQUEST-invalid.json")
         target_identifier = json.dumps({"value": "NHS0001-400", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
@@ -50,7 +50,7 @@ class TestReceiverErrors:
     def test_400_invariant_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 401
+        expected_status_code = 400
         expected_body = load_example("OperationOutcome/REC/400-BAD_REQUEST-invariant.json")
         target_identifier = json.dumps({"value": "NHS0001-400-1", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
@@ -82,7 +82,7 @@ class TestReceiverErrors:
     def test_400_not_supported_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_status_code = 401
+        expected_status_code = 400
         expected_body = load_example("OperationOutcome/REC/400-BAD_REQUEST-not-supported.json")
         target_identifier = json.dumps({"value": "NHS0001-400-2", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
