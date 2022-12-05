@@ -1,6 +1,6 @@
 <AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.403ProxyNotEnabledErrorResponse">
   <Set>
-    <StatusCode>404</StatusCode>
+    <StatusCode>403</StatusCode>
     <Payload contentType="application/json">
         {
             "resourceType": "OperationOutcome",
