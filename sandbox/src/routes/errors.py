@@ -16,6 +16,15 @@ def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifi
 
     response = {"message": "no match for target id"}
     status_code = 400
+    if target_id == "NHS0001-400":
+        response = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invalid.json")
+        status_code = 400
+    if target_id == "NHS0001-400-1":
+        response = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invariant.json")
+        status_code = 400
+    if target_id == "NHS0001-400-2":
+        response = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-not-supported.json")
+        status_code = 400
     if target_id == "NHS0001-401":
         response = load_example("unauthorized.json")
         status_code = 401

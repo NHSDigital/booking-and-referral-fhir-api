@@ -15,6 +15,102 @@ class TestReceiverErrors:
 
     @pytest.mark.errors
     @pytest.mark.integration
+    def test_400_invalid_error(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 400
+        expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invalid.json")
+        target_identifier = json.dumps({"value": "NHS0001-400", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+            },
+            params={
+                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                "status": ["free"],
+                "start": self.currentTime,
+                "end": self.currentTime,
+                "_include": ["Schedule"],
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.errors
+    @pytest.mark.integration
+    def test_400_invariant_error(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 400
+        expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invariant.json")
+        target_identifier = json.dumps({"value": "NHS0001-400-1", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+            },
+            params={
+                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                "status": ["free"],
+                "start": self.currentTime,
+                "end": self.currentTime,
+                "_include": ["Schedule"],
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.errors
+    @pytest.mark.integration
+    def test_400_not_supported_error(self, get_token_client_credentials):
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 400
+        expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-not-supported.json")
+        target_identifier = json.dumps({"value": "NHS0001-400-2", "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Target-Identifier": target_identifier_encoded,
+                "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+            },
+            params={
+                "healthcareService": "09a01679-2564-0fb4-5129-aecc81ea2706",
+                "status": ["free"],
+                "start": self.currentTime,
+                "end": self.currentTime,
+                "_include": ["Schedule"],
+            },
+        )
+
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
+
+    @pytest.mark.errors
+    @pytest.mark.integration
     def test_401_unauthorized_error(self, get_token_client_credentials):
         # Given
         token = get_token_client_credentials["access_token"]
