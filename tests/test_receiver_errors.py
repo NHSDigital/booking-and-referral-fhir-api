@@ -19,7 +19,7 @@ class TestReceiverErrors:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
-        expected_body = load_example("OperationOutcome/REC/400-BAD_REQUEST-invalid.json")
+        expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invalid.json")
         target_identifier = json.dumps({"value": "NHS0001-400", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -51,7 +51,7 @@ class TestReceiverErrors:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
-        expected_body = load_example("OperationOutcome/REC/400-BAD_REQUEST-invariant.json")
+        expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invariant.json")
         target_identifier = json.dumps({"value": "NHS0001-400-1", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
@@ -83,7 +83,7 @@ class TestReceiverErrors:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
-        expected_body = load_example("OperationOutcome/REC/400-BAD_REQUEST-not-supported.json")
+        expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-not-supported.json")
         target_identifier = json.dumps({"value": "NHS0001-400-2", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
