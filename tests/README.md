@@ -36,7 +36,7 @@ Now if you open a new PR your newly added identifier will be found.
 Install get_token
 -----------------------
 You need an Apigee access token to run tests. `APIGEE_TOKEN` environment variable must contain this access token. In order to
-get apigee access token you need `acurl` and a utility script called `get_toke`. To install acurl and get_token:
+get apigee access token you need `acurl` and a utility script called `get_token`. To install acurl and get_token:
 
 1. Create an `install` directory on your machine or use the default usr/local/bin directory.
 2. Download the installation ZIP file from Apigee:
