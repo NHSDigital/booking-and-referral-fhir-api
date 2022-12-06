@@ -653,7 +653,7 @@ components:
         example: https://fhir.nhs.uk/Id/nhs-number:4857773456
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
-      description: The identifier of the Target system (to be Base64 encoded).
+      description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
       required: true
       in: header
       schema:
