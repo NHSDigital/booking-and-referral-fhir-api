@@ -95,10 +95,6 @@ async def default_oauth_helper():
 
 @pytest.fixture(scope="session")
 async def oauth_helper_wrong_app():
-    if ENVIRONMENT == "int" or ENVIRONMENT == "sandbox":
-        oauth = OauthHelper(config.CLIENT_ID, config.CLIENT_SECRET, config.REDIRECT_URL)
-        yield oauth
-
     is_internal_env = (
         ENVIRONMENT == "internal-dev"
         or ENVIRONMENT == "internal-dev-sandbox"
@@ -141,7 +137,6 @@ async def oauth_helper_wrong_app():
         print("\nDestroying Default App and Product..")
         await apigee_app.destroy_app()
         await apigee_product.destroy_product()
-
 
 
 @pytest.fixture(scope="session")
