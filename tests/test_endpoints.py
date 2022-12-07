@@ -1,4 +1,3 @@
-import asyncio
 import base64
 import json
 
@@ -60,18 +59,28 @@ class TestEndpoints:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.auth
-    def test_invalid_access_token_auth_code(self, default_oauth_helper):
+    def test_invalid_product_access_token(self, get_token_client_credentials_wrong_app):
         """
-          This test checks that when trying to authenticate using auth_code flow
-          an exemption is raised.
+          Test that a request made with a valid access token returns a 403 forbidden response when BaRS is not available
         """
+        token = get_token_client_credentials_wrong_app["access_token"]
 
-        with pytest.raises(Exception):
-            assert asyncio.run(
-                default_oauth_helper.get_token_response(grant_type="authorization_code")
-            )
+        expected_status_code = 403
+        expected_body = load_example("OperationOutcome/SEND/403-SEND_FORBIDDEN-forbidden.json")
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
-        # import pdb;pdb.set_trace()
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "NHSD-Target-Identifier": target_identifier_encoded,
+            },
+        )
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.integration
     @pytest.mark.sandbox
