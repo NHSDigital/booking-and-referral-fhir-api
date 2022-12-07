@@ -18,35 +18,27 @@ Make install will install all the requirements in your local machine that you ca
  * `serve` -- Serves a preview of the specification in human-readable format
 ```
 
-## Test flow to test new develops
-When testing we mock the reciever. Our AWS mock reciever is under this folder `/terraform/mock-receiver`
-Our mock-receiver runs a fargate container which is inside the AWS is responsible for managing the requests made through this proxy.
+## Testing new deployments
+When testing we mock the receiver. Our AWS mock receiver is under this folder `/terraform/mock-receiver`
+Our mock-receiver runs on AWS Fargate service. mock-receiver is responsible for managing the requests made via Apigee proxy.
 The code for container can be found in this repo under `/sandbox`.
 
 If you have made code changes to  `/sandbox` in your PR and wish to point your PR tests towards this backend you will need to follow the below steps:
 
 ### Open Pull requests
-1. Create a branch on the [Booking and Referral fhir api](https://github.com/NHSDigital/booking-and-referral-fhir-api) repo.
-
-2. After all your changes, please, commit and push them into the repo.
-
-3. Then open [Booking and Referral fhir api](https://github.com/NHSDigital/booking-and-referral-fhir-api) repo UI on Github and raise a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
-
-4. Create a new identifier inside targets.json file in the [booking-and-referral-targets](https://github.com/NHSDigital/booking-and-referral-targets/blob/master/targets/internal-dev/targets.json) (e.g:"NHS0001": "https://{environment}.bars.dev.api.platform.nhs.uk" )
-
-5. Now follow the instructions in the [terraform readme](/terraform/README.md) to deploy your AWS environment and include  your shortname in the .env file.
-
-After both pull request have been deployed in apigee please follow part 2.
+We use [booking-and-referral-targets repo](https://github.com/NHSDigital/booking-and-referral-targets) to host all the 
+`NHSD-Target-Identifier`s. It serves as a database for all identifier values across all environments. 
+If you want to add a new identifier, then add it to the target repo first and then merge it to the `main` branch.
+Now if you open a new PR your newly added identifier will be found.
 
 ## Set up to run tests
 
 Install get_token
 -----------------------
-The APIGEE_TOKEN env variable has a a dependency of an utility from Apigee that must be installed.
+You need an Apigee access token to run tests. `APIGEE_TOKEN` environment variable must contain this access token. In order to
+get apigee access token you need `acurl` and a utility script called `get_token`. To install acurl and get_token:
 
-To install acurl and get_token:
-
-1. Create an install directory on your machine or use the default usr/local/bin directory.
+1. Create an `install` directory on your machine or use the default usr/local/bin directory.
 2. Download the installation ZIP file from Apigee:
 
 `curl https://login.apigee.com/resources/scripts/sso-cli/ssocli-bundle.zip -O`

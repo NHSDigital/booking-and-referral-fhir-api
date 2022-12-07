@@ -48,6 +48,11 @@ in CI, but it's useful to run them locally too.
 $ make install-hooks
 ```
 
+### Terraform Deployment
+Booking and Referrals Service internal deployment depends on mock services. These mock-services are only used for testing 
+and are not part of the production. Check the readme file in `terraform` directory for more details.
+
+
 ### Environment Variables
 Various scripts and commands rely on environment variables being set. These are documented with the commands.
 
