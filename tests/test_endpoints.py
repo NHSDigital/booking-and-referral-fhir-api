@@ -59,7 +59,7 @@ class TestEndpoints:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.auth
-    def test_invalid_access_token_auth_code(self, get_token_client_credentials_wrong_app):
+    def test_invalid_product_access_token(self, get_token_client_credentials_wrong_app):
         """
           Test that a request made with a valid access token returns a 403 forbidden response when BaRS is not available
         """
