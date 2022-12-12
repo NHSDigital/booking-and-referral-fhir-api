@@ -59,6 +59,7 @@ class TestEndpoints:
         assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.auth
+    @pytest.mark.skipif(config.ENVIRONMENT in ["int", "sandbox"], reason="We don't create an apigee product/app per test in this environment.")
     def test_invalid_product_access_token(self, get_token_client_credentials_wrong_app):
         """
           Test that a request made with a valid access token returns a 403 forbidden response when BaRS is not available
