@@ -92,8 +92,7 @@ info:
 
     To get started, see [digital onboarding](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding).
     
-    Details on the onboarding process can be found in our [Core Design Guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Security-and-authorisation).
-    
+   
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
 
