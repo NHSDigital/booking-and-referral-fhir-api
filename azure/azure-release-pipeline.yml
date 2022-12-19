@@ -62,7 +62,7 @@ extends:
         post_deploy:
           - template: ./templates/run-tests.yml
       - environment: prod
-        enable_status_monitoring: true
+        enable_status_monitoring: false
         depends_on:
           - int
           - sandbox
