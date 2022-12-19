@@ -37,7 +37,6 @@ extends:
           - template: ./templates/run-tests.yml
       -   environment: internal-dev-sandbox
           proxy_path: sandbox
-          enable_status_monitoring: true
           post_deploy:
               -   template: ./templates/run-tests.yml
       - environment: internal-qa
@@ -45,14 +44,12 @@ extends:
           - template: ./templates/run-tests.yml
       - environment: internal-qa-sandbox
         proxy_path: sandbox
-        enable_status_monitoring: true
         post_deploy:
           - template: ./templates/run-tests.yml
     # make_spec_visible is false for sandbox environment
     # (App subscription make sense for most sandbox implementations)
       - environment: sandbox
         proxy_path: sandbox
-        enable_status_monitoring: true
         post_deploy:
           - template: ./templates/run-tests.yml
       - environment: int
