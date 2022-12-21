@@ -3,7 +3,7 @@ info:
   description: |
     ## Overview
 
-    This API forms part of the [Booking and Referral Standard (BaRS)](https://simplifier.net/guide/nhsbookingandreferralstandard/Home?version=current). This API specification should be used in conjunction with the [BaRS implementation guide](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Applications?version=current) for your use case.    
+    This API forms part of the [Booking and Referral Standard (BaRS)](https://simplifier.net/guide/nhsbookingandreferralstandard/Home). This API specification should be used in conjunction with the [BaRS implementation guide](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Applications) for your use case.    
     Use this API to send booking and referral information between NHS service providers.
 
     You can:
@@ -68,7 +68,7 @@ info:
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
-    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Security-and-authorisation)
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#Security-and-authorisation)
 
     ## Environments and testing
     | Environment       | Base URL                                                               |
@@ -259,7 +259,7 @@ paths:
         | Respond to a booking              | POST /$process-message | A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA.|
         | Cancelling a booking (and rebook) | POST /$process-message | An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
 
-        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#End-to-end-workflow) documentation.
+        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#End-to-end-workflow) documentation.
 
       operationId: processMessage
       requestBody:
@@ -710,7 +710,7 @@ components:
     4XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Error-handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#Error-handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
@@ -757,7 +757,7 @@ components:
     5XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core?version=current#Error-handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#Error-handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
