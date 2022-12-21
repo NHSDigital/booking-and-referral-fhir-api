@@ -42,6 +42,7 @@ build-proxy:
 
 copy-examples:
 	cp -r  specification/examples sandbox/src/routes/examples
+	cp -r  specification/examples proxies/live/apiproxy/resources/examples
 
 _dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml Makefile build/. tests specification"
 
