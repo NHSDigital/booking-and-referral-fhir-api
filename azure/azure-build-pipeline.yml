@@ -30,7 +30,6 @@ extends:
     short_service_name: ${{ variables.short_service_name }}
 
 
-extends:
   template: azure/common/apigee-deployment.yml@common
   parameters:
     service_name: ${{ variables.service_name }}
