@@ -1,0 +1,16 @@
+steps:
+    - bash: |
+      export AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
+      Regex='([0-9.]+)'
+      if [[ $AWS_CLI_VERSION == $Regex ]]
+      then
+        echo 'AWS CLI already installed'
+      else
+        echo 'Installing AWS CLI'
+        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+        sudo installer -pkg AWSCLIV2.pkg -target /
+        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+        sudo installer -pkg ./AWSCLIV2.pkg -target /
+      fi
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+    displayName: Run Terraform
