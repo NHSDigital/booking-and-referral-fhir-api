@@ -2,15 +2,16 @@ steps:
   - bash: |  
       export AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
       Regex='([0-9.]+)'
+      echo $AWS_CLI_VERSION
       if [[ $AWS_CLI_VERSION == $Regex ]]
       then
         echo "AWS CLI already installed"
       else
-        echo "Installing AWS CLI"
-        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-        sudo installer -pkg AWSCLIV2.pkg -target /
-        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-        sudo installer -pkg ./AWSCLIV2.pkg -target /
+        wget https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
+        unzip awscli-bundle.zip
+        ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+        ./awscli-bundle/install -b ~/bin/aws
+        ./awscli-bundle/install -h
       fi
       
     displayName: Run Terraform
