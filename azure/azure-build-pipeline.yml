@@ -28,6 +28,6 @@ extends:
   parameters:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
-    post_ecs_push: 
+    test_steps: 
       - template: ./templates/run-terraform.yml
     
