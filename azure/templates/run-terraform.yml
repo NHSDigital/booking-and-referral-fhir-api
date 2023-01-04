@@ -1,6 +1,5 @@
 steps:
-- bash: |
+  - bash: |  
+      echo "AWS CLI already installed"
       
-    echo AWS CLI already installed
-      
-displayName: Run Terraform
+    displayName: Run Terraform
