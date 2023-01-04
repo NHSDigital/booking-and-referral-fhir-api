@@ -23,29 +23,25 @@ resources:
 
 variables:
   - template: project.yml
-jobs:
-- job: Build Pipeline
-  steps:
-    extends:
-      template: azure/common/apigee-build.yml@common
-      parameters:
-        service_name: ${{ variables.service_name }}
-        short_service_name: ${{ variables.short_service_name }}
+extends:
+  template: azure/common/apigee-build.yml@common
+  parameters:
+    service_name: ${{ variables.service_name }}
+    short_service_name: ${{ variables.short_service_name }}
+    test_steps:
+      - bash: |
+        export AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
+        Regex='([0-9.]+)'
+        if [[ $AWS_CLI_VERSION == $Regex ]]
+        then
+          echo 'AWS CLI already installed'
+        else
+          echo 'Installing AWS CLI'
+          curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+          sudo installer -pkg AWSCLIV2.pkg -target /
+          curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+          sudo installer -pkg ./AWSCLIV2.pkg -target /
+        fi
 
-- job: Run Terraform
-  steps:
-    extends:
-      template: azure/common/apigee-deployment.yml@common
-      parameters:
-        service_name: ${{ variables.service_name }}
-        short_service_name: ${{ variables.short_service_name }}
-        service_base_path: ${{ variables.service_base_path }}
-        enable_status_monitoring: false
-        apigee_deployments:
-          - environment: internal-dev
-            post_deploy:
-                -  template: ./templates/run-terraform.yml
-          - environment: internal-dev-sandbox
-            proxy_path: sandbox
-            post_deploy:
-                -   template: ./templates/run-terraform.yml
+      displayName: Run Terraform
+    
