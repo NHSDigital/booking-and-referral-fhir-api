@@ -43,7 +43,7 @@ jobs:
         enable_status_monitoring: false
         apigee_deployments:
           - environment: internal-dev
-          post_deploy:
+            post_deploy:
               -   template: ./templates/run-terraform.yml
         - environment: internal-dev-sandbox
           proxy_path: sandbox
