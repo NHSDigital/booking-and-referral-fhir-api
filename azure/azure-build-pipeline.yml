@@ -29,6 +29,7 @@ extends:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
     test_steps:
-      bash: echo "test"
+      steps:
+        - bash: echo "test"
       displayName: Testing
     
