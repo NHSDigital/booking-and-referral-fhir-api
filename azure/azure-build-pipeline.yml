@@ -29,7 +29,6 @@ extends:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
     test_steps:
-      - bash: |
-        export AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
-      displayName: Run Terraform
+      - bash: echo "test"
+      displayName: Testing
     
