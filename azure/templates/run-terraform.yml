@@ -14,5 +14,7 @@ steps:
         ./awscli-bundle/install -b ~/bin/aws
         ./awscli-bundle/install -h
       fi
+      cd terraform
+      make init
       
     displayName: Run Terraform
