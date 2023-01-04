@@ -24,6 +24,11 @@ steps:
       echo "Build.SourcesDirectory2:"
       echo "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/"
 
+      echo "Build.SourcesDirectory3:"
+      echo "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform"
+
+      cd terraform
+
       
     displayName: Run Terraform
-   # workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
+   # workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)"
