@@ -31,15 +31,5 @@ extends:
     test_steps:
       - bash: |
         export AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
-        echo $AWS_CLI_VERSION
-        Regex='([0-9.]+)'
-
-        if [[ $AWS_CLI_VERSION =~ $Regex ]]
-        then
-                echo 'AWS CLI already installed'
-        else
-                echo 'Installing AWS CLI'
-        fi
-
       displayName: Run Terraform
     
