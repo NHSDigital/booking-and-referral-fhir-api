@@ -24,24 +24,28 @@ resources:
 variables:
   - template: project.yml
 jobs:
-  extends:
-    template: azure/common/apigee-build.yml@common
-    parameters:
-      service_name: ${{ variables.service_name }}
-      short_service_name: ${{ variables.short_service_name }}
+- job: Build Pipeline
+  steps:
+    extends:
+      template: azure/common/apigee-build.yml@common
+      parameters:
+        service_name: ${{ variables.service_name }}
+        short_service_name: ${{ variables.short_service_name }}
 
-  extends:
-    template: azure/common/apigee-deployment.yml@common
-    parameters:
-      service_name: ${{ variables.service_name }}
-      short_service_name: ${{ variables.short_service_name }}
-      service_base_path: ${{ variables.service_base_path }}
-      enable_status_monitoring: false
-      apigee_deployments:
-        - environment: internal-dev
-        post_deploy:
-            -   template: ./templates/run-terraform.yml
-      - environment: internal-dev-sandbox
-        proxy_path: sandbox
-        post_deploy:
-            -   template: ./templates/run-terraform.yml
+- job: Run Terraform
+  steps:
+    extends:
+      template: azure/common/apigee-deployment.yml@common
+      parameters:
+        service_name: ${{ variables.service_name }}
+        short_service_name: ${{ variables.short_service_name }}
+        service_base_path: ${{ variables.service_base_path }}
+        enable_status_monitoring: false
+        apigee_deployments:
+          - environment: internal-dev
+          post_deploy:
+              -   template: ./templates/run-terraform.yml
+        - environment: internal-dev-sandbox
+          proxy_path: sandbox
+          post_deploy:
+              -   template: ./templates/run-terraform.yml
