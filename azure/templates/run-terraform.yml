@@ -27,7 +27,7 @@ steps:
       echo "Build.SourcesDirectory3:"
       echo "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform"
 
-      echo  '$(System.DefaultWorkingDirectory)'
+      echo  '$(System.DefaultWorkingDirectory)/$(SERVICE_NAME)'
       dir
       dir subfoldername
 
