@@ -18,7 +18,14 @@ steps:
       cd $(SERVICE_NAME)/terraform
       echo "changed dir"
       dir 
+      echo "configure list"
+      aws configure list
+      echo "configure list-profiles"
+      aws configure list-profiles
       make init
+
+      
+
 
       
     displayName: Run Terraform
