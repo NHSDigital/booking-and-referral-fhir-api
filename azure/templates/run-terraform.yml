@@ -15,23 +15,10 @@ steps:
         ./awscli-bundle/install -h
       fi
       
-     
-
-      echo "Build.SourcesDirectory:"
-
-      echo "$(Build.SourcesDirectory)"
-
-      echo "Build.SourcesDirectory2:"
-      echo "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/"
-
-      echo "Build.SourcesDirectory3:"
-      echo "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform"
-
-      echo  '$(System.DefaultWorkingDirectory)/$(SERVICE_NAME)'
-      dir
       cd $(SERVICE_NAME)/terraform
       echo "changed dir"
       dir 
+      make init
 
       
     displayName: Run Terraform
