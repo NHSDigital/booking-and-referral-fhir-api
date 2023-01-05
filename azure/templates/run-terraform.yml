@@ -33,4 +33,4 @@ steps:
 
       
     displayName: Run Terraform
-   # workingDirectory: "$(Build.SourcesDirectory)"
+   # workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)"
