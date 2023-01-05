@@ -27,7 +27,9 @@ steps:
       echo "Build.SourcesDirectory3:"
       echo "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform"
 
-      cd terraform
+      echo  '$(System.DefaultWorkingDirectory)'
+      dir
+      dir subfoldername
 
       
     displayName: Run Terraform
