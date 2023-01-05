@@ -4,6 +4,35 @@ steps:
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Setup pytests
 
+  - bash: |  
+      export AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
+      Regex='([0-9.]+)'
+      echo $AWS_CLI_VERSION
+      if [[ $AWS_CLI_VERSION =~ $Regex ]]
+      then
+        echo "AWS CLI already installed"
+      else
+        echo "Installing AWS CLI"
+        wget https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
+        unzip awscli-bundle.zip
+        ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+        ./awscli-bundle/install -b ~/bin/aws
+        ./awscli-bundle/install -h
+      fi
+      
+      echo "list dir"
+      dir 
+      echo "show configured list"
+      aws configure list
+      echo "get caller id"
+      aws sts get-caller-identity
+      echo "get caller id"
+      aws s3 ls
+
+    displayName: Run Terraform
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+
+
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
       role: "auto-ops"

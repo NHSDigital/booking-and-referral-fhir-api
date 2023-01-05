@@ -36,7 +36,6 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         post_deploy:
-            -   template: ./templates/run-terraform.yml
             -   template: ./templates/run-tests.yml           
       - environment: internal-dev-sandbox
         proxy_path: sandbox
