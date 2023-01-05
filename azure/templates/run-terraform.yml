@@ -29,7 +29,7 @@ steps:
 
       echo  '$(System.DefaultWorkingDirectory)/$(SERVICE_NAME)'
       dir
-      cd $(SERVICE_NAME)
+      cd $(SERVICE_NAME)/terraform
       echo "changed dir"
       dir 
 
