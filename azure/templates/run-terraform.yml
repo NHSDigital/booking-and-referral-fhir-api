@@ -20,8 +20,8 @@ steps:
       dir 
       echo "configure list"
       aws configure list
-      echo "configure list-profiles"
-      aws configure list-profiles
+      echo "get caller id"
+      aws sts get-caller-identity
       make init
 
       
