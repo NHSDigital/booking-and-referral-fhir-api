@@ -29,7 +29,9 @@ steps:
 
       echo  '$(System.DefaultWorkingDirectory)/$(SERVICE_NAME)'
       dir
-      dir subfoldername
+      cd $(SERVICE_NAME)
+      echo "changed dir"
+      dir 
 
       
     displayName: Run Terraform
