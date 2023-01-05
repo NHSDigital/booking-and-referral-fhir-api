@@ -15,18 +15,18 @@ steps:
         ./awscli-bundle/install -h
       fi
       
-      cd $(SERVICE_NAME)/terraform
-      echo "changed dir"
+      echo "list dir"
       dir 
-      echo "configure list"
+      echo "show configured list"
       aws configure list
       echo "get caller id"
       aws sts get-caller-identity
-      make init
+      echo "get caller id"
+      aws s3 ls
 
       
 
 
       
     displayName: Run Terraform
-   # workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)"
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
