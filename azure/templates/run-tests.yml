@@ -9,6 +9,7 @@ steps:
     parameters:
         role: "auto-ops"
         profile: "apm_ptl"
+        aws_account: "dev"
 # Assuming AWS Role
 
 
