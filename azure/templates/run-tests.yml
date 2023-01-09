@@ -8,7 +8,7 @@ steps:
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
         role: "auto-ops"
-        profile: "apm_ptl"
+        profile: "apim-dev"
         aws_account: "dev"
 # Assuming AWS Role
 
@@ -20,7 +20,7 @@ steps:
       echo "get caller id"
       aws sts get-caller-identity
       echo "get caller id"
-      aws --profile apm_ptl s3 ls
+      aws --profile apim-dev s3 ls
 
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
