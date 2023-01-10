@@ -1,3 +1,7 @@
+parameters:
+  - name: aws_dev
+    default: aws --profile=apim-dev
+
 steps:
   - bash: |
       make install-python
@@ -14,13 +18,15 @@ steps:
 
 
 # Running Terraform
-  - bash: |  
+  - bash: |
+      echo "content of ~/.aws/config"
+      cat ~/.aws/config
       echo "show configured list"
-      aws configure list
+      ${{ aws_dev }} configure list
       echo "get caller id"
-      aws sts get-caller-identity
+      ${{ aws_dev }} sts get-caller-identity
       echo "get caller id"
-      aws --profile apim-dev s3 ls
+      ${{ aws_dev }} s3 ls
 
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
