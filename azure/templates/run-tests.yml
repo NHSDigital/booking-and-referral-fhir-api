@@ -14,13 +14,15 @@ steps:
 
 
 # Running Terraform
-  - bash: |  
+  - bash: |
+      echo "content of ~/.aws/config"
+      cat ~/.aws/config
       echo "show configured list"
-      aws configure list
+      aws --profile=apim-dev configure list
       echo "get caller id"
-      aws sts get-caller-identity
+      aws --profile=apim-dev sts get-caller-identity
       echo "get caller id"
-      aws --profile apim-dev s3 ls
+      aws --profile=apim-dev s3 ls
 
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
