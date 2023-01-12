@@ -21,7 +21,7 @@ APIGEE_ENVIRONMENTS:
     display_name: Integration Testing
     make_spec_visible: true
   - name: prod
-    ratelimit: '300pm'
+    ratelimit: '1000ps'
     quota: '1000'
     approval_type: manual
     display_name: Production
