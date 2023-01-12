@@ -5,6 +5,6 @@
     <KeyFragment>cached_targets</KeyFragment>
   </CacheKey>
   <ExpirySettings>
-    <TimeoutInSeconds>900</TimeoutInSeconds>
+    <TimeoutInSeconds>43200</TimeoutInSeconds>
   </ExpirySettings>
 </PopulateCache>
