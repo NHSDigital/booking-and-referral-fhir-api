@@ -17,3 +17,7 @@ output "private_subnet_ids" {
 output "fargate_subnet_ids" {
   value = module.private_subnets[*].subnet_id
 }
+
+output "cert_storage_bucket" {
+  value = aws_s3_bucket.cert_storage.bucket
+}
