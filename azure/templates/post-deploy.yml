@@ -8,30 +8,17 @@ steps:
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Setup pytests
 
-# Assuming AWS Role
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
         role: "auto-ops"
         profile: "apim-dev"
         aws_account: "dev"
-# Assuming AWS Role
 
-
-# Running Terraform
   - bash: |
-      echo "content of ~/.aws/config"
-      cat ~/.aws/config
-      echo "show configured list"
-      ${{ aws_dev }} configure list
-      echo "get caller id"
-      ${{ aws_dev }} sts get-caller-identity
-      echo "get caller id"
-      ${{ aws_dev }} s3 ls
-
+        make init
+        make plan
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
-# Running Terraform
-
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:

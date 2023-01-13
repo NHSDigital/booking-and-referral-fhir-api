@@ -8,7 +8,7 @@ resources:
     - repository: common
       type: github
       name: NHSDigital/api-management-utils
-      ref: refs/heads/APM-0000-dev-assume-role
+      ref: refs/heads/edge
       endpoint: NHSDigital
   pipelines:
   - pipeline: build_pipeline
@@ -36,9 +36,9 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         post_deploy:
-            -   template: ./templates/run-tests.yml           
+            -   template: ./templates/post-deploy.yml
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         post_deploy:
-            -   template: ./templates/run-tests.yml
-            
+            -   template: ./templates/post-deploy.yml
+
