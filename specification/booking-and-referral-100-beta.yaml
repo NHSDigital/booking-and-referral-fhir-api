@@ -143,6 +143,7 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Metadata
@@ -191,6 +192,7 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Metadata
@@ -252,6 +254,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     post:
       tags:
         - Message
@@ -323,6 +326,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Slots
@@ -445,6 +449,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Booking
@@ -496,6 +501,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Booking
@@ -545,6 +551,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Referral
@@ -597,6 +604,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Referral
@@ -717,7 +725,15 @@ components:
       schema:
         type: string
         format: uuid
-        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689        
+    Accept_HParam:
+      name: Accept
+      description: 'The Accept Header must also contain the version of the API required. Not specifying a version will imply 1.0.0-alpha'
+      in: header
+      schema:
+        type: string
+        format: uuid
+        example: application/fhir+json; verson=1.0.0-beta    
   responses:
     4XX-BARS:
       description: |
@@ -799,7 +815,7 @@ components:
           schema:
             type: string
             format: uuid
-            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91        
   schemas:
     Capability:
       $ref: schemas/Capability.yaml
