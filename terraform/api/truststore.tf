@@ -4,7 +4,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "truststore_bucket" {
-  bucket = "${var.name_prefix}-trustore"
+  bucket = "${var.name_prefix}-truststore"
 }
 
 resource "aws_s3_object" "upload_key_to_truststore" {
