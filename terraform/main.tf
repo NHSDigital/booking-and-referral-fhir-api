@@ -24,6 +24,7 @@ provider "aws" {
 }
 
 provider "aws" {
+  profile = "apim-dev"
   alias  = "acm_provider"
   region = "eu-west-2"
 }
