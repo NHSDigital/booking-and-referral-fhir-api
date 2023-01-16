@@ -689,21 +689,21 @@ components:
         $ref: '#/components/schemas/TargetIdentifier'
     RequestingDevice_HParam:
       name: NHSD-Requesting-Software
-      description: The identifer of the Sending System (Standard Base64 encoded JSON).
+      description: The identifier of the Sending System (Standard Base64 encoded JSON).
       required: false
       in: header
       schema:
         $ref: '#/components/schemas/RequestingSoftwareToken'
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
-      description: The identifer of the Sending Organisation (Standard Base64 encoded JSON).
+      description: The identifier of the Sending Organisation (Standard Base64 encoded JSON).
       required: false
       in: header
       schema:
         $ref: '#/components/schemas/RequestingOrganisationToken'
     RequestingPractitioner_HParam:
       name: NHSD-Requesting-Practitioner
-      description: The identifer of the Sending System User (Standard Base64 encoded JSON).
+      description: The identifier of the Sending System User (Standard Base64 encoded JSON).
       required: false
       in: header
       schema:
