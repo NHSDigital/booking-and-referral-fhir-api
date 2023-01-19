@@ -114,7 +114,7 @@ info:
     
     Errors specific to each API are shown in the Endpoints section, under Response. See our [reference guide](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#http-status-codes) for more on errors.
     
-  version: 1.0.8
+  version: 1.0.0-beta
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -733,7 +733,7 @@ components:
       required: true
       schema:
         type: string
-        example: application/fhir+json; verson=1.0.0-beta    
+        example: application/fhir+json; version=1.0.0-beta    
   responses:
     4XX-BARS:
       description: |
