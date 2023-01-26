@@ -806,7 +806,7 @@ components:
     TargetIdentifier:
       $ref: schemas/TargetIdentifier.yaml
     Appointment:
-      $ref: schemas/Appointment
+      $ref: schemas/Appointment.yaml
     SearchBundleAppt:
       $ref: schemas/SearchBundleAppt.yaml
     ServiceRequest:
