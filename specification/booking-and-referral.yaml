@@ -414,12 +414,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundleSlot.yaml
+                $ref: '#/components/schemas/SearchBundleSlot'
               example:
                 $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundleSlot.yaml
+                $ref: '#/components/schemas/SearchBundleSlot'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -464,12 +464,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundleAppt.yaml
+                $ref: '#/components/schemas/SearchBundleAppt' 
               example:
                 $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundleAppt.yaml
+                $ref: '#/components/schemas/SearchBundleAppt' 
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -514,12 +514,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/Appointment.yaml
+                $ref: '#/components/schemas/Appointment'
               example:
                 $ref: examples/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/Appointment.yaml
+                $ref: '#/components/schemas/Appointment'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -565,12 +565,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundleRef.yaml
+                $ref: '#/components/schemas/SearchBundleRef'
               example:
                 $ref: examples/service_request/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundleRef.yaml
+                $ref: '#/components/schemas/SearchBundleRef'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -615,12 +615,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/ServiceRequest.yaml
+                $ref: '#/components/schemas/ServiceRequest'
               example:
                 $ref: examples/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/ServiceRequest.yaml
+                $ref: '#/components/schemas/ServiceRequest'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -805,6 +805,16 @@ components:
       $ref: schemas/Capability.yaml
     TargetIdentifier:
       $ref: schemas/TargetIdentifier.yaml
+    Appointment:
+      $ref: schemas/Appointment.yaml
+    SearchBundleAppt:
+      $ref: schemas/SearchBundleAppt.yaml
+    ServiceRequest:
+      $ref: schemas/ServiceRequest.yaml
+    SearchBundleRef:
+      $ref: schemas/SearchBundleRef.yaml
+    SearchBundleSlot:
+      $ref: schemas/SearchBundleSlot.yaml
     MessageBundle:
       $ref: schemas/MessageBundle.yaml
     MessageDefinition:
