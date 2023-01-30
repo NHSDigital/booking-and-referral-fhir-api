@@ -566,6 +566,7 @@ paths:
       operationId: getReferralByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
+        - $ref: '#/components/parameters/ServiceRequestId_QParam'
       responses:
         '200':
           description: Success
@@ -680,6 +681,19 @@ components:
       schema:
         type: string
         example: https://fhir.nhs.uk/Id/nhs-number:4857773456
+    ServiceRequestId_QParam:
+      name: ServiceRequest:identifier
+      description: |
+        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. 
+             
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/fhir/R4/servicerequest.html#search) |ServiceRequest.identifier |
+      required: false
+      in: query
+      schema:
+        type: string
+        example: "10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
