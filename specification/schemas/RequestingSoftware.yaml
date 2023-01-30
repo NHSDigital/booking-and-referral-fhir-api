@@ -30,8 +30,17 @@ properties:
         - system
         - value
   deviceName:
-    type: string
-    example: Supplier product name
+      type: object
+      properties:
+        name:
+          type : string
+          example: Supplier product name
+        type:
+          type: string
+          example: manufacturer-name
+      required:
+        - name
+        - type
   version:
     type: object
     properties:
