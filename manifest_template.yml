@@ -4,6 +4,7 @@ DESCRIPTION: This proxy function as a centralized router for bookings and referr
 APIGEE_ENVIRONMENTS:
   - name: internal-dev
     display_name: Internal Development
+    make_spec_visible: true
   - name: internal-dev-sandbox
     display_name: Internal Development Sandbox
   - name: internal-qa
@@ -67,7 +68,9 @@ apigee:
           - 'urn:nhsd:apim:app:level3:{{ SERVICE_NAME }}'
     specs:
       - name: {{ NAME }}
-        path: {{ SERVICE_NAME }}.json
+        path: "{{ SERVICE_NAME }}.json"
+      - name: {{ NAME }}-new
+        path: "{{ SERVICE_NAME }}-new.json"
     api_catalog:
       - edgeAPIProductName: {{ NAME }}
         anonAllowed: true
