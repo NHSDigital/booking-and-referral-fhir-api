@@ -774,7 +774,8 @@ components:
       required: true
       schema:
         type: string
-        example: application/fhir+json; version=1.0.0-beta    
+        example: |
+          --header 'Accept: application/fhir+json; version=1.0.0-beta'    
   responses:
     4XX-BARS:
       description: |
