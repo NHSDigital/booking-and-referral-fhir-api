@@ -403,7 +403,7 @@ paths:
             * Schedule:actor:Practitioner
             * Schedule:actor:HealthcareService
 
-            The full list of applicable _Includes are shown below, if any are not able to be honored the Receiver will respond, ignoring the unsupported _includes, with the url reflecting this omission in the responses Bundle.link.url. 
+            The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the url reflecting this omission in the responses Bundle.link.url. 
 
             |Inclusion           |Description|
             |-------             | --------|
