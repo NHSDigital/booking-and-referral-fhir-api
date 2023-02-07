@@ -1,6 +1,10 @@
 title: NHSD-Requesting-software
 type: object
-description: Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
+description: |
+  Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
+  Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+  
+  The identifier used here, though arbitrary, should be consistent across instances of a product, the name and version of the product should also be accurate and consistent.
 x-examples:
   example:
     resourceType: Device

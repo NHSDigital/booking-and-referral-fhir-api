@@ -1,6 +1,9 @@
 title: NHSD-Requesting-Practitioner
 type: object
-description: Requesting Practitioner described in an object based on a FHIR 'PractitionerRole' resource (Standard Base64 encoded JSON).
+description: |
+  Requesting Practitioner described in an object based on a FHIR 'PractitionerRole' resource (Standard Base64 encoded JSON).
+
+  The example below shows a General Practitioner and their SDS Role profile Id.
 required:
   - resourceType
   - identifier
