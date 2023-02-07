@@ -405,14 +405,14 @@ paths:
 
             The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the url reflecting this omission in the responses Bundle.link.url. 
 
-            |Inclusion           |Description|
-            |-------             | --------|
-            | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
-            | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
-            | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
-            | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
-            | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
-            | Location           | Include Location Resources referenced within the  HealthcareService Resources|
+            |Expression | Inclusion     |Description|
+            |-------    |--------       |-------- |
+            | Slot:schedule                    | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
+            | Schedule:actor:Practitioner      | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
+            | Schedule:actor:PractitionerRole  | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
+            | Schedule:actor:HealthcareService | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
+            | HealthcareService:providedBy     | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
+            | HealthcareService:location       | Location           | Include Location Resources referenced within the  HealthcareService Resources|
           required: true
           explode: true
           schema:
