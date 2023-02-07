@@ -153,13 +153,17 @@ paths:
       summary: Get capability statement
       description: |
         
-        ### Returns the target endpoints capability statement 
+        ### Returns the target endpoints CapabilityStatement 
 
-        The sender must initially request the receiver's capability statement (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response indicating this and the sender pursues an alternative workflow. 
+        The sender must initially request the receiver's [CapabilityStatement](https://www.hl7.org/fhir/capabilitystatement.html) (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response to indicate this and the sender will pursue an alternative workflow. 
 
-        A receiver can only implement a subset of the functionality within the standard and the capability statement will make this clear to a sender. 
+        A receiver may only implement a subset of the functionality within the standard and the CapabilityStatement will make this clear to a sender. 
 
-        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it.
+        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it. This includes its Version, Security, Endpoints and their associated parameters as well as which MessageDefinitions are supported.
+        
+        Any given endpoint will describe its full capabilities as a client and as a server in response. As the Sender and Receiver roles are interchangeable in certain Application Workflows, all capabilities should be described. 
+        
+        The BaRS proxy will also respond with its own CapabilityStatement, which can be used as an example, by calling this endpoint and omitting the NHSD-Target-Identifier header.
       operationId: getMeta
       responses:
         '200':
@@ -394,7 +398,12 @@ paths:
         - name: _include
           in: query
           description: |
-            Inclusions that drive the rescusive depth of the search
+            Inclusions that drive the rescusive depth of the search. There is a minimum of the following _include parameters required for current Applications.
+            * Slot:schedule
+            * Schedule:actor:Practitioner
+            * Schedule:actor:HealthcareService
+
+            The full list of applicable _Includes are shown below, if any are not able to be honored the Receiver will respond, ignoring the unsupported _includes, with the url reflecting this omission in the responses Bundle.link.url. 
 
             |Inclusion           |Description|
             |-------             | --------|
@@ -732,6 +741,8 @@ components:
       name: NHSD-Requesting-Practitioner
       description: |
         Requesting Practitioner described in an object based on a FHIR 'PractitionerRole' resource (Standard Base64 encoded JSON).
+
+        This item is not mandatory, however if the information is available it must be included in the request. Only in the event that it is not available, should it be omitted.
 
         The example given shows a General Practitioner and their SDS Role profile Id.
       required: false
