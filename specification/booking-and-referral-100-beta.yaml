@@ -699,7 +699,7 @@ components:
     ServiceRequestId_QParam:
       name: ServiceRequest:identifier
       description: |
-        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. 
+        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. This is not the same as ServiceRequest.id. 
              
         |Type           |Expression|
         |-------             | --------|
