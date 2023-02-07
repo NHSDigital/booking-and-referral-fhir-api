@@ -142,7 +142,10 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
@@ -190,7 +193,10 @@ paths:
   /MessageDefinition:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
-      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
