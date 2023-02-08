@@ -85,9 +85,9 @@ info:
     ## Environments and testing
     | Environment       | Base URL                                                               |
     | ----------------- | ---------------------------------------------------------------------- |
-    | Sandbox           | `https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4`        | 
+    | Sandbox           | `https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4`      | 
     | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`          |
-    | Production        | Not yet available                                                      |
+    | Production        | `https://api.service.nhs.uk/booking-and-referral/FHIR/R4`              |
 
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing
 
@@ -112,9 +112,9 @@ info:
     * 400 to 499 if it failed because of a client error by your application
     * 500 to 599 if it failed because of an error on our server
     
-    Errors specific to each API are shown in the Endpoints section, under Response. See our [reference guide](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#http-status-codes) for more on errors.
+    Errors specific to each API are shown in the Endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/design--core?#Error-handling) for more on errors.
     
-  version: 1.0.8
+  version: 1.0.0
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -142,20 +142,28 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Metadata
       summary: Get capability statement
       description: |
         
-        ### Returns the target endpoints capability statement 
+        ### Returns the target endpoints CapabilityStatement 
 
-        The sender must initially request the receiver's capability statement (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response indicating this and the sender pursues an alternative workflow. 
+        The sender must initially request the receiver's [CapabilityStatement](https://www.hl7.org/fhir/capabilitystatement.html) (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response to indicate this and the sender will pursue an alternative workflow. 
 
-        A receiver can only implement a subset of the functionality within the standard and the capability statement will make this clear to a sender. 
+        A receiver may only implement a subset of the functionality within the standard and the CapabilityStatement will make this clear to a sender. 
 
-        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it.
+        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it. This includes its Version, Security, Endpoints and their associated parameters as well as which MessageDefinitions are supported.
+        
+        Any given endpoint will describe its full capabilities as a client and as a server in response. As the Sender and Receiver roles are interchangeable in certain Application Workflows, all capabilities should be described. 
+        
+        The BaRS proxy will also respond with its own CapabilityStatement, which can be used as an example, by calling this endpoint and omitting the NHSD-Target-Identifier header.
       operationId: getMeta
       responses:
         '200':
@@ -189,8 +197,12 @@ paths:
   /MessageDefinition:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
-      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Metadata
@@ -252,6 +264,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     post:
       tags:
         - Message
@@ -323,6 +336,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Slots
@@ -384,16 +398,21 @@ paths:
         - name: _include
           in: query
           description: |
-            Inclusions that drive the rescusive depth of the search
+            Inclusions that drive the rescusive depth of the search. There is a minimum of the following _include parameters required for current Applications.
+            * Slot:schedule
+            * Schedule:actor:Practitioner
+            * Schedule:actor:HealthcareService
 
-            |Inclusion           |Description|
-            |-------             | --------|
-            | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
-            | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
-            | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
-            | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
-            | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
-            | Location           | Include Location Resources referenced within the  HealthcareService Resources|
+            The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the url reflecting this omission in the responses Bundle.link.url. 
+
+            |Expression | Inclusion     |Description|
+            |-------    |--------       |-------- |
+            | Slot:schedule                    | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
+            | Schedule:actor:Practitioner      | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
+            | Schedule:actor:PractitionerRole  | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
+            | Schedule:actor:HealthcareService | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
+            | HealthcareService:providedBy     | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
+            | HealthcareService:location       | Location           | Include Location Resources referenced within the  HealthcareService Resources|
           required: true
           explode: true
           schema:
@@ -445,6 +464,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Booking
@@ -496,6 +516,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Booking
@@ -545,6 +566,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Referral
@@ -559,6 +581,7 @@ paths:
       operationId: getReferralByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
+        - $ref: '#/components/parameters/ServiceRequestId_QParam'
       responses:
         '200':
           description: Success
@@ -597,6 +620,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Referral
@@ -658,7 +682,7 @@ components:
       in: query
       schema:
         type: string
-        example: "2000099999"
+        example: "http://fhir.nhs.uk/Id/dos-service-id|2000099999"
     PatientId_QParam:
       name: patient:identifier
       description: |
@@ -672,6 +696,19 @@ components:
       schema:
         type: string
         example: https://fhir.nhs.uk/Id/nhs-number:4857773456
+    ServiceRequestId_QParam:
+      name: ServiceRequest:identifier
+      description: |
+        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. This is not the same as ServiceRequest.id. 
+             
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/fhir/R4/servicerequest.html#search) |ServiceRequest.identifier |
+      required: false
+      in: query
+      schema:
+        type: string
+        example: "10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
@@ -681,21 +718,33 @@ components:
         $ref: '#/components/schemas/TargetIdentifier'
     RequestingDevice_HParam:
       name: NHSD-Requesting-Software
-      description: The identifer of the Sending System (Standard Base64 encoded JSON).
-      required: false
+      description: |
+        Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
+        Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+        
+        The identifier used, though arbitrary, should be consistent across instances of a product, the name and version of the product should also be accurate and consistent.
+      required: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingSoftwareToken'
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
-      description: The identifer of the Sending Organisation (Standard Base64 encoded JSON).
-      required: false
+      description: |
+        Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
+        Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+        In the example given an ODS code and the Organisation name is provided. Other identifiers are permitted if required. 
+      required: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingOrganisationToken'
     RequestingPractitioner_HParam:
       name: NHSD-Requesting-Practitioner
-      description: The identifer of the Sending System User (Standard Base64 encoded JSON).
+      description: |
+        Requesting Practitioner described in an object based on a FHIR 'PractitionerRole' resource (Standard Base64 encoded JSON).
+
+        This item is not mandatory, however if the information is available it must be included in the request. Only in the event that it is not available, should it be omitted.
+
+        The example given shows a General Practitioner and their SDS Role profile Id.
       required: false
       in: header
       schema:
@@ -717,7 +766,16 @@ components:
       schema:
         type: string
         format: uuid
-        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689        
+    Accept_HParam:
+      name: Accept
+      description: 'The Accept Header must also contain the version of the API required. Not specifying a version will imply the use of version 1.0.0-alpha'
+      in: header
+      required: true
+      schema:
+        type: string
+        example: |
+          --header 'Accept: application/fhir+json; version=1.0.0-beta'    
   responses:
     4XX-BARS:
       description: |
@@ -799,7 +857,7 @@ components:
           schema:
             type: string
             format: uuid
-            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91        
   schemas:
     Capability:
       $ref: schemas/Capability.yaml
