@@ -173,7 +173,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Capability'
               example:
-                $ref: examples/metadata/GET-success.json
+                $ref: examples/metadata/BaRS_API_Capability_Statement .json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Capability'
