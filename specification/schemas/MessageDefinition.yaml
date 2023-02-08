@@ -57,7 +57,7 @@ properties:
                   items:
                     type: string
                   example: [
-                      "https://simplifier.net/nhsbookingandreferrals/barsmessagedefinition-servicerequest-request",
-                      "https://simplifier.net/nhsbookingandreferrals/barsmessagedefinitionservicerequestresponse",
-                      "https://simplifier.net/nhsbookingandreferrals/barsmessagedefinitionbookingrequest"
+                      "https://simplifier.net/NHSBookingandReferrals/BARS-MessageDefinition-ServiceRequest-Request-Referral",
+                      "https://simplifier.net/nhsbookingandreferrals/bars-messagedefinition-servicerequest-response-referral",
+                      "https://simplifier.net/nhsbookingandreferrals/bars-messagedefinition-booking-request"
                       ]
