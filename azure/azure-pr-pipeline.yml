@@ -11,14 +11,14 @@ resources:
       ref: refs/heads/edge
       endpoint: NHSDigital
   pipelines:
-  - pipeline: build_pipeline
-    source: "Booking-Referrals-Build"
-    trigger:
-      branches:
-        exclude:
-          - master
-          - refs/heads/master
-          - refs/tags/v*
+    - pipeline: build_pipeline
+      source: "Booking-Referrals-Build"
+      trigger:
+        branches:
+          exclude:
+            - master
+            - refs/heads/master
+            - refs/tags/v*
 
 pool:
   name: 'AWS-ECS'
@@ -36,9 +36,9 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         post_deploy:
-            -   template: ./templates/post-deploy.yml
+          - template: ./templates/post-deploy.yml
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         post_deploy:
-            -   template: ./templates/post-deploy.yml
+          - template: ./templates/post-deploy.yml
 

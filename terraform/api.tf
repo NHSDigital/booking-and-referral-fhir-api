@@ -15,3 +15,7 @@ module "api" {
     vpc_link_id  = local.vpc_link_id
   }
 }
+
+output "cert" {
+  value = module.api.cert
+}

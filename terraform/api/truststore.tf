@@ -3,17 +3,27 @@ locals {
   truststore_file_name = "nhs_truststore.crt"
 }
 
-data "aws_s3_object" "cert" {
-  bucket = var.cert_storage_bucket 
-  key = local.truststore_file_name
-}
+#data "aws_s3_object" "cert" {
+#  bucket = var.cert_storage_bucket
+#  key = local.truststore_file_name
+#}
 
 resource "aws_s3_bucket" "truststore_bucket" {
   bucket = "${var.name_prefix}-truststore"
 }
 
-resource "aws_s3_object" "upload_key_to_truststore" {
+resource "aws_s3_object_copy" "copy_cert_from_infra" {
   bucket = aws_s3_bucket.truststore_bucket.bucket
   key    = local.truststore_file_name
-  source = data.aws_s3_object.cert.body
+  source = "${var.cert_storage_bucket}/${local.truststore_file_name}"
+}
+
+#resource "aws_s3_object" "upload_key_to_truststore" {
+#  bucket = aws_s3_bucket.truststore_bucket.bucket
+#  key    = local.truststore_file_name
+#  source = data.aws_s3_object.cert.body
+#  content_type = "text/plain"
+#}
+output "cert" {
+  value = "${var.cert_storage_bucket}/${local.truststore_file_name}"
 }

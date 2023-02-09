@@ -1,3 +1,8 @@
+.SILENT:
+
+environment = dev
+aws_profile = apim-dev
+
 -include .env
 
 tf_opt=
