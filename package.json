@@ -3,17 +3,16 @@
   "version": "0.0.1",
   "description": "OAS (Swagger v3) API Definition for Template API",
   "scripts": {
-    "lint": "node_modules/.bin/speccy lint -s openapi-tags -s operation-tags specification/booking-and-referral.yaml --skip default-and-example-are-redundant",
-    "publish": "mkdir -p build && node_modules/.bin/speccy resolve specification/booking-and-referral.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral.json",
-    "serve": "node_modules/.bin/speccy serve build/booking-and-referral.json",
+    "lint": "openapi-generator-cli validate -i specification/booking-and-referral.yaml",
+    "publish": "openapi-generator-cli generate -i specification/booking-and-referral.yaml --generator-key v3.0 -g openapi -o build && rm openapitools.json && mv build/openapi.json build/booking-and-referral.json",
     "check-licenses": "node_modules/.bin/license-checker --failOn GPL --failOn LGPL"
   },
   "author": "NHS Digital",
   "license": "MIT",
   "homepage": "https://github.com/NHSDigital/booking-and-referral",
   "dependencies": {
-    "newman-reporter-htmlextra": "^1.20.1",
-    "speccy": "^0.7.3"
+    "@openapitools/openapi-generator-cli": "^2.5.1",
+    "newman-reporter-htmlextra": "^1.20.1"
   },
   "devDependencies": {
     "apigeetool": "^0.0.1",
