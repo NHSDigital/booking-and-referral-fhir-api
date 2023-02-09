@@ -212,6 +212,7 @@
         {
             "fullUrl": "urn:uuid:7dfe2de5-abbe-4a3c-911f-1482e6fb34c3",
             "resource": {
+                "id": "2000099999",
                 "resourceType": "HealthcareService",
                 "meta": {
                     "lastUpdated": "2021-10-11T15:01:30+00:00",

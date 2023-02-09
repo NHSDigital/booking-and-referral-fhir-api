@@ -384,8 +384,6 @@ paths:
             For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00:00&start=le2022-03-01T13:30:00+00:00". 
             The definition of the time window within which Slots are requested is provided by using this parameter twice.
             The values must include an offset indicating UTC in the [FHIR dateTime instant format](https://www.hl7.org/fhir/datatypes.html#primitive). This is the case for all dateTimes in the BaRS standard.
-
-
           schema:
             format: datetime
             type: string
@@ -397,7 +395,7 @@ paths:
             A single service ID can be provided to indicate the service for which appointment slots are returned for.
           schema:
             type: string
-            example: '918999198999'
+            example: '2000099999'
         - name: _include
           in: query
           description: |
@@ -680,7 +678,7 @@ components:
     context_QParam:
       name: context
       description: |
-        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
+        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id. The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
       required: true
       in: query
       schema:
@@ -698,11 +696,11 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number:4857773456
+        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
     ServiceRequestId_QParam:
-      name: ServiceRequest:identifier
+      name: ServiceRequest.identifier
       description: |
-        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. This is not the same as ServiceRequest.id. 
+        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. This is not the same as ServiceRequest.id. The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
              
         |Type           |Expression|
         |-------             | --------|
@@ -711,7 +709,7 @@ components:
       in: query
       schema:
         type: string
-        example: "10000000000"
+        example: "http://servicerequest.system|10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
