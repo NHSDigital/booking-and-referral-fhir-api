@@ -15,9 +15,9 @@ steps:
         aws_account: "dev"
 
   - bash: |
-        echo if ! [[ $$(FULLY_QUALIFIED_SERVICE_NAME) =~ .*-pr-* ]]; then
+        echo "We run terraform when it's not a PR release. We also don't run it for any sandbox environment"
         if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
-          #if ! [[ $$(FULLY_QUALIFIED_SERVICE_NAME) =~ .*-pr-* ]]; then
+          #if ! [[ $(FULLY_QUALIFIED_SERVICE_NAME) =~ .*-pr-* ]]; then
             make init
             make apply
           #fi
