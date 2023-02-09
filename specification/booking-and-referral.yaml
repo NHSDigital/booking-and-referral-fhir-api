@@ -22,6 +22,18 @@ info:
     3. The target backend handles the request and sends a response back to this API.
     4. This API returns the response to your sender application.
 
+    <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
+        <div class="nhsd-a-box nhsd-a-box--border-yellow">                <div class="nhsd-m-emphasis-box__image-box">
+                    <figure class="nhsd-a-image">
+                        <picture class="nhsd-a-image__picture">
+                                    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIGlkPSJMYXllcl8xIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxNDAgMTQwOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTQwIDE0MCIgeD0iMHB4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB5PSIwcHgiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtkaXNwbGF5Om5vbmU7fQoJLnN0MXtkaXNwbGF5OmlubGluZTtmaWxsOiMyMzFmMjA7fQoJLnN0MntmaWxsOiMyMzFmMjA7fQoJLnN0M3tmaWxsOm5vbmU7c3Ryb2tlOiMyMzFmMjA7c3Ryb2tlLXdpZHRoOjEuOTI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO30KCS5zdDR7ZmlsbDojMjMxZjIwO30KCS5zdDV7ZmlsbDojMjMxZjIwO30KCS5zdDZ7ZmlsbDpub25lO3N0cm9rZTojMjMxZjIwO3N0cm9rZS13aWR0aDo1O3N0cm9rZS1taXRlcmxpbWl0OjEwO30KPC9zdHlsZT4KPGcgY2xhc3M9InN0MCI+Cgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNzAsNi45NWw1NCwzMS41djYzLjExbC01NCwzMS41bC01NC0zMS41VjM4LjQ1TDcwLDYuOTUgTTcwLDBMMTAsMzV2NzBsNjAsMzVsNjAtMzVWMzVMNzAsMEw3MCwweiIvPgo8L2c+CjxnPgoJPHBhdGggY2xhc3M9InN0MiIgZD0iTTEwOS44NiwzOS44NXY1NUg4NS43Yy0zLjA2LDAtNS4xNCwzLjA2LTcuMDgsNWgtMTcuNWMtMS45NC0xLjk0LTQuMDMtNS03LjA4LTVIMjkuODd2LTU1aDI1ICAgYzUuMjgsMCwxMC44MywxLjMyLDE1LDQuNzljNC4xNy0zLjQ3LDkuNzItNC43OSwxNS00Ljc5SDEwOS44NnogTTY0Ljg2LDU0Ljg1YzAtMy44OS03LjIyLTUtMTAtNWgtMTV2MzVoMTMuNzUgICBjNS42MiwwLDcuNTcsMC42OSwxMS4yNSw1VjU0Ljg1eiBNOTkuODYsNDkuODVoLTE1Yy0yLjc4LDAtMTAsMS4xMS0xMCw1djM1YzMuNjgtNC4zMSw1LjYyLTUsMTEuMjUtNWgxMy43NVY0OS44NXoiLz4KPC9nPgo8L3N2Zz4K" alt="" style="object-fit:fill">
+                        </picture>
+                    </figure>
+                </div>            <div class="nhsd-m-emphasis-box__content-box">
+                    <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break"><p class="nhsd-t-body">For a non-technical overview of how to build software that deals with referrals and bookings, see&nbsp;<a onclick="logGoogleAnalyticsEvent('Link click','General','/developer/guides-and-documentation/building-healthcare-software/referrals-and-bookings');" href="/developer/guides-and-documentation/building-healthcare-software/referrals-and-bookings" onkeyup="return vjsu.onKeyUp(event)" class="nhsd-a-link">Building healthcare software - referrals and bookings</a>.</p></div>            </div>
+        </div>
+    </section>
+    
     ## Who can use this API
     This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
     
@@ -402,12 +414,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundleSlot.yaml
+                $ref: '#/components/schemas/SearchBundleSlot'
               example:
                 $ref: examples/slots/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundleSlot.yaml
+                $ref: '#/components/schemas/SearchBundleSlot'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -452,12 +464,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundleAppt.yaml
+                $ref: '#/components/schemas/SearchBundleAppt' 
               example:
                 $ref: examples/appointment/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundleAppt.yaml
+                $ref: '#/components/schemas/SearchBundleAppt' 
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -502,12 +514,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/Appointment.yaml
+                $ref: '#/components/schemas/Appointment'
               example:
                 $ref: examples/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/Appointment.yaml
+                $ref: '#/components/schemas/Appointment'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -553,12 +565,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/SearchBundleRef.yaml
+                $ref: '#/components/schemas/SearchBundleRef'
               example:
                 $ref: examples/service_request/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/SearchBundleRef.yaml
+                $ref: '#/components/schemas/SearchBundleRef'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -603,12 +615,12 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: schemas/ServiceRequest.yaml
+                $ref: '#/components/schemas/ServiceRequest'
               example:
                 $ref: examples/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
-                $ref: schemas/ServiceRequest.yaml
+                $ref: '#/components/schemas/ServiceRequest'
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -793,6 +805,16 @@ components:
       $ref: schemas/Capability.yaml
     TargetIdentifier:
       $ref: schemas/TargetIdentifier.yaml
+    Appointment:
+      $ref: schemas/Appointment.yaml
+    SearchBundleAppt:
+      $ref: schemas/SearchBundleAppt.yaml
+    ServiceRequest:
+      $ref: schemas/ServiceRequest.yaml
+    SearchBundleRef:
+      $ref: schemas/SearchBundleRef.yaml
+    SearchBundleSlot:
+      $ref: schemas/SearchBundleSlot.yaml
     MessageBundle:
       $ref: schemas/MessageBundle.yaml
     MessageDefinition:
