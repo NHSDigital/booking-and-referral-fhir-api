@@ -15,10 +15,12 @@ steps:
         aws_account: "dev"
 
   - bash: |
-        if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
-        then
-          make init
-          make plan
+        echo if ! [[ $$(FULLY_QUALIFIED_SERVICE_NAME) =~ .*-pr-* ]]; then
+        if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
+          #if ! [[ $$(FULLY_QUALIFIED_SERVICE_NAME) =~ .*-pr-* ]]; then
+            make init
+            make apply
+          #fi
         fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
