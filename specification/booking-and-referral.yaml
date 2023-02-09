@@ -9,11 +9,11 @@ info:
     You can:
       * get a specific booking
       * get bookings for a patient
-      * process a message
+      * process a message, either a booking or a referral
       * get message definition
       * get capability statement
       * get a specific referral
-      * get referral/s for a patient
+      * get referrals for a patient
       * get slots
 
     The following describes the end-to-end process:
@@ -21,6 +21,7 @@ info:
     2. This API redirects the request to the service associated with the service identifier header.
     3. The target backend handles the request and sends a response back to this API.
     4. This API returns the response to your sender application.
+    5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications?version=current) the target may send a follow up request to indicate the outcome of a request.
 
     <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
         <div class="nhsd-a-box nhsd-a-box--border-yellow">                <div class="nhsd-m-emphasis-box__image-box">
@@ -42,11 +43,11 @@ info:
       * [https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
     
     ## API status and roadmap
-    This API is [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
+    This API is in [Production Beta](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
-      * we expect to make breaking changes based on developer feedback
+      * it has limited availability in production 
+      * it is subject to breaking changes based on developer feedback
 
-    ### Roadmap
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=booking-and-referral&deleted=0#controls).
     If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
     
@@ -112,7 +113,7 @@ info:
     * 400 to 499 if it failed because of a client error by your application
     * 500 to 599 if it failed because of an error on our server
     
-    Errors specific to each API are shown in the Endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/design--core?#Error-handling) for more on errors.
+    Errors specific to each API are shown in the Endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/design--core?#Error-handling) for further information on error handling within the BaRS Standard.
     
   version: 1.0.0
   title: Booking and Referral API
@@ -128,6 +129,8 @@ servers:
   - url: 'https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4'
     description: Sandbox Server
   - url: 'https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4'
+    description: Production
+  - url: 'https://api.service.nhs.uk/booking-and-referral/FHIR/R4'
     description: Integration Server
 tags:
   - name: Booking
