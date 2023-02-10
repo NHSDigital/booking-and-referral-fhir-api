@@ -671,7 +671,7 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number:4857773456
+        example: https://fhir.nhs.uk/Id/nhs-number%7C4857773456
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
