@@ -23,6 +23,8 @@ info:
     4. This API returns the response to your sender application.
     5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications?version=current) the target may send a follow up request to indicate the outcome of a request.
 
+    ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
+
     <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
         <div class="nhsd-a-box nhsd-a-box--border-yellow">                <div class="nhsd-m-emphasis-box__image-box">
                     <figure class="nhsd-a-image">
