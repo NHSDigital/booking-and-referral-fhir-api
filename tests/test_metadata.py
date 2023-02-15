@@ -81,7 +81,7 @@ class TestMetadata:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = load_example("metadata/BaRS_API_Capability_Statement .json")
+        expected_body = load_example("metadata/BaRS_API_Capability_Statement.json")
 
         # When
         response = requests.get(
