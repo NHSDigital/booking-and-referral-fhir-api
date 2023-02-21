@@ -35,3 +35,7 @@ locals {
 locals {
   vpc_link_id      = data.terraform_remote_state.bebop-infra.outputs.vpc_link_id
 }
+
+locals {
+  cert_storage_bucket = data.terraform_remote_state.bebop-infra.outputs.cert_storage_bucket
+}
