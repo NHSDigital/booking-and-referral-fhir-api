@@ -1,6 +1,6 @@
 .SILENT:
 
-environment = dev
+environment = $(APIGEE_ENVIRONMENT)
 aws_profile = apim-dev
 tr_vars=
 tr_cmd = AWS_PROFILE=$(aws_profile) terraform
