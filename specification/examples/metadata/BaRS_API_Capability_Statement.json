@@ -298,8 +298,7 @@
 							"name": "Schedule.actor:HealthcareService",
 							"type": "token"
 						}
-					],
-					"versioning": "no-version"
+					]
 				}
 			],
 			"operation": [

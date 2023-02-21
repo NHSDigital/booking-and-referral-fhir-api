@@ -1,6 +1,10 @@
 title: NHSD-End-User-Organisation
 type: object
-description: Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
+description: |
+  Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
+  Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+  
+  In this example an ODS code and the Organisation name is provided. Other identifiers are permitted if required. 
 required:
   - resourceType
 properties:

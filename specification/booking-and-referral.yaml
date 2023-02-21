@@ -9,11 +9,11 @@ info:
     You can:
       * get a specific booking
       * get bookings for a patient
-      * process a message
+      * process a message, either a booking or a referral
       * get message definition
       * get capability statement
       * get a specific referral
-      * get referral/s for a patient
+      * get referrals for a patient
       * get slots
 
     The following describes the end-to-end process:
@@ -21,6 +21,9 @@ info:
     2. This API redirects the request to the service associated with the service identifier header.
     3. The target backend handles the request and sends a response back to this API.
     4. This API returns the response to your sender application.
+    5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications?version=current) the target may send a follow up request to indicate the outcome of a request.
+
+    ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
 
     <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
         <div class="nhsd-a-box nhsd-a-box--border-yellow">                <div class="nhsd-m-emphasis-box__image-box">
@@ -42,11 +45,11 @@ info:
       * [https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
     
     ## API status and roadmap
-    This API is [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
+    This API is in [Production Beta](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
-      * we expect to make breaking changes based on developer feedback
+      * it has limited availability in production 
+      * it is subject to breaking changes based on developer feedback
 
-    ### Roadmap
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=booking-and-referral&deleted=0#controls).
     If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
     
@@ -85,9 +88,9 @@ info:
     ## Environments and testing
     | Environment       | Base URL                                                               |
     | ----------------- | ---------------------------------------------------------------------- |
-    | Sandbox           | `https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4`        | 
+    | Sandbox           | `https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4`      | 
     | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`          |
-    | Production        | Not yet available                                                      |
+    | Production        | `https://api.service.nhs.uk/booking-and-referral/FHIR/R4`              |
 
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing
 
@@ -112,9 +115,9 @@ info:
     * 400 to 499 if it failed because of a client error by your application
     * 500 to 599 if it failed because of an error on our server
     
-    Errors specific to each API are shown in the Endpoints section, under Response. See our [reference guide](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#http-status-codes) for more on errors.
+    Errors specific to each API are shown in the Endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/design--core?#Error-handling) for further information on error handling within the BaRS Standard.
     
-  version: 1.0.8
+  version: 1.0.0
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -128,6 +131,8 @@ servers:
   - url: 'https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4'
     description: Sandbox Server
   - url: 'https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4'
+    description: Production
+  - url: 'https://api.service.nhs.uk/booking-and-referral/FHIR/R4'
     description: Integration Server
 tags:
   - name: Booking
@@ -142,20 +147,28 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Metadata
       summary: Get capability statement
       description: |
         
-        ### Returns the target endpoints capability statement 
+        ### Returns the target endpoints CapabilityStatement 
 
-        The sender must initially request the receiver's capability statement (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response indicating this and the sender pursues an alternative workflow. 
+        The sender must initially request the receiver's [CapabilityStatement](https://www.hl7.org/fhir/capabilitystatement.html) (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response to indicate this and the sender will pursue an alternative workflow. 
 
-        A receiver can only implement a subset of the functionality within the standard and the capability statement will make this clear to a sender. 
+        A receiver may only implement a subset of the functionality within the standard and the CapabilityStatement will make this clear to a sender. 
 
-        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it.
+        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it. This includes its Version, Security, Endpoints and their associated parameters as well as which MessageDefinitions are supported.
+        
+        Any given endpoint will describe its full capabilities as a client and as a server in response. As the Sender and Receiver roles are interchangeable in certain Application Workflows, all capabilities should be described. 
+        
+        The BaRS proxy will also respond with its own CapabilityStatement, which can be used as an example, by calling this endpoint and omitting the NHSD-Target-Identifier header.
       operationId: getMeta
       responses:
         '200':
@@ -165,7 +178,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Capability'
               example:
-                $ref: examples/metadata/GET-success.json
+                $ref: examples/metadata/BaRS_API_Capability_Statement.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Capability'
@@ -189,8 +202,12 @@ paths:
   /MessageDefinition:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
-      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Metadata
@@ -252,6 +269,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     post:
       tags:
         - Message
@@ -323,6 +341,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Slots
@@ -367,8 +386,6 @@ paths:
             For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00:00&start=le2022-03-01T13:30:00+00:00". 
             The definition of the time window within which Slots are requested is provided by using this parameter twice.
             The values must include an offset indicating UTC in the [FHIR dateTime instant format](https://www.hl7.org/fhir/datatypes.html#primitive). This is the case for all dateTimes in the BaRS standard.
-
-
           schema:
             format: datetime
             type: string
@@ -380,20 +397,25 @@ paths:
             A single service ID can be provided to indicate the service for which appointment slots are returned for.
           schema:
             type: string
-            example: '918999198999'
+            example: '2000099999'
         - name: _include
           in: query
           description: |
-            Inclusions that drive the rescusive depth of the search
+            Inclusions that drive the rescusive depth of the search. There is a minimum of the following _include parameters required for current Applications.
+            * Slot:schedule
+            * Schedule:actor:Practitioner
+            * Schedule:actor:HealthcareService
 
-            |Inclusion           |Description|
-            |-------             | --------|
-            | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
-            | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
-            | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
-            | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
-            | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
-            | Location           | Include Location Resources referenced within the  HealthcareService Resources|
+            The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the url reflecting this omission in the responses Bundle.link.url. 
+
+            |Expression | Inclusion     |Description|
+            |-------    |--------       |-------- |
+            | Slot:schedule                    | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
+            | Schedule:actor:Practitioner      | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
+            | Schedule:actor:PractitionerRole  | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
+            | Schedule:actor:HealthcareService | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
+            | HealthcareService:providedBy     | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
+            | HealthcareService:location       | Location           | Include Location Resources referenced within the  HealthcareService Resources|
           required: true
           explode: true
           schema:
@@ -445,6 +467,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Booking
@@ -496,6 +519,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Booking
@@ -545,6 +569,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Referral
@@ -559,6 +584,7 @@ paths:
       operationId: getReferralByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
+        - $ref: '#/components/parameters/ServiceRequestId_QParam'
       responses:
         '200':
           description: Success
@@ -597,6 +623,7 @@ paths:
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
         - Referral
@@ -653,12 +680,12 @@ components:
     context_QParam:
       name: context
       description: |
-        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id.
+        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id. The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
       required: true
       in: query
       schema:
         type: string
-        example: "2000099999"
+        example: "http://fhir.nhs.uk/Id/dos-service-id|2000099999"
     PatientId_QParam:
       name: patient:identifier
       description: |
@@ -671,7 +698,20 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number:4857773456
+        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+    ServiceRequestId_QParam:
+      name: ServiceRequest.identifier
+      description: |
+        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. This is not the same as ServiceRequest.id. The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
+             
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/fhir/R4/servicerequest.html#search) |ServiceRequest.identifier |
+      required: false
+      in: query
+      schema:
+        type: string
+        example: "http://servicerequest.system|10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
@@ -681,21 +721,33 @@ components:
         $ref: '#/components/schemas/TargetIdentifier'
     RequestingDevice_HParam:
       name: NHSD-Requesting-Software
-      description: The identifer of the Sending System (Standard Base64 encoded JSON).
-      required: false
+      description: |
+        Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
+        Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+        
+        The identifier used, though arbitrary, should be consistent across instances of a product, the name and version of the product should also be accurate and consistent.
+      required: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingSoftwareToken'
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
-      description: The identifer of the Sending Organisation (Standard Base64 encoded JSON).
-      required: false
+      description: |
+        Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
+        Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+        In the example given an ODS code and the Organisation name is provided. Other identifiers are permitted if required. 
+      required: true
       in: header
       schema:
         $ref: '#/components/schemas/RequestingOrganisationToken'
     RequestingPractitioner_HParam:
       name: NHSD-Requesting-Practitioner
-      description: The identifer of the Sending System User (Standard Base64 encoded JSON).
+      description: |
+        Requesting Practitioner described in an object based on a FHIR 'PractitionerRole' resource (Standard Base64 encoded JSON).
+
+        This item is not mandatory, however if the information is available it must be included in the request. Only in the event that it is not available, should it be omitted.
+
+        The example given shows a General Practitioner and their SDS Role profile Id.
       required: false
       in: header
       schema:
@@ -717,7 +769,16 @@ components:
       schema:
         type: string
         format: uuid
-        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689        
+    Accept_HParam:
+      name: Accept
+      description: 'The Accept Header must also contain the version of the API required. Not specifying a version will imply the use of version 1.0.0-alpha'
+      in: header
+      required: true
+      schema:
+        type: string
+        example: |
+          --header 'Accept: application/fhir+json; version=1.0.0-beta'    
   responses:
     4XX-BARS:
       description: |
@@ -799,7 +860,7 @@ components:
           schema:
             type: string
             format: uuid
-            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91        
   schemas:
     Capability:
       $ref: schemas/Capability.yaml
