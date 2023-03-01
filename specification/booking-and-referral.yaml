@@ -3,7 +3,7 @@ info:
   description: |
     ## Overview
 
-    This API forms part of the [Booking and Referral Standard (BaRS)](https://simplifier.net/guide/nhsbookingandreferralstandard/Home). This API specification should be used in conjunction with the [BaRS implementation guide](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Applications) for your use case.    
+    This API forms part of the [Booking and Referral Standard (BaRS)](https://simplifier.net/guide/nhsbookingandreferralstandard/Home). This API specification should be used in conjunction with the [BaRS implementation guide](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications) for your use case.    
     Use this API to send booking and referral information between NHS service providers.
 
     You can:
