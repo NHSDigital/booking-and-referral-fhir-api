@@ -3,6 +3,8 @@ info:
   description: |
     ## Overview
 
+    ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
+
     This API forms part of the [Booking and Referral Standard (BaRS)](https://simplifier.net/guide/nhsbookingandreferralstandard/Home). This API specification should be used in conjunction with the [BaRS implementation guide](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications) for your use case.    
     Use this API to send booking and referral information between NHS service providers.
 
@@ -23,7 +25,7 @@ info:
     4. This API returns the response to your sender application.
     5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications) the target may send a follow up request to indicate the outcome of a request.
 
-    ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
+    
 
     <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
         <div class="nhsd-a-box nhsd-a-box--border-yellow">                <div class="nhsd-m-emphasis-box__image-box">
