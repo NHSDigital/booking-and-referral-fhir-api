@@ -21,7 +21,7 @@ info:
     2. This API redirects the request to the service associated with the service identifier header.
     3. The target backend handles the request and sends a response back to this API.
     4. This API returns the response to your sender application.
-    5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications?version=current) the target may send a follow up request to indicate the outcome of a request.
+    5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/applications) the target may send a follow up request to indicate the outcome of a request.
 
     ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
 
