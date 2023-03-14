@@ -37,6 +37,9 @@ def errors(NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifi
     if target_id == "NHS0001-408":
         response = {}
         status_code = 408
+    if target_id == "NHS0001-504":
+        response = {}
+        status_code = 504
     if target_id == "NHS0001-409":
         response = load_example("conflict.json")
         status_code = 409

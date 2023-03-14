@@ -108,7 +108,7 @@
     </Step>
     <Step>
       <Name>AssignMessage.408TimeoutErrorResponse</Name>
-      <Condition>response.status.code = 408</Condition>
+      <Condition>response.status.code = 504</Condition>
     </Step>
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>
