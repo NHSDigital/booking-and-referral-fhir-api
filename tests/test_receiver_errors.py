@@ -212,7 +212,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 408
         expected_body = load_example("OperationOutcome/REC/408-REC_TIMEOUT-timeout.json")
-        target_identifier = json.dumps({"value": "NHS0001-408", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-504", "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
