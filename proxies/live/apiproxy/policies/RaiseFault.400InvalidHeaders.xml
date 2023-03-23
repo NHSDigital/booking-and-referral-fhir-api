@@ -26,6 +26,7 @@
                         }
                       ]
                     },
+                    "diagnostics": "The X-Request-Id or the X-Correlation-Id was not included Or the NHSD-Target-Identifier was not included."
                   }
                 ]
               }
