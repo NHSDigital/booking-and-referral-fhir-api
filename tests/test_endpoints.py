@@ -149,8 +149,6 @@ class TestEndpoints:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("OperationOutcome/PROXY-NONE/400-BAD_REQUEST-invalid.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
