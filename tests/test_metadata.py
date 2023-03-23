@@ -46,6 +46,7 @@ class TestMetadata:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_metadata_capability_statement(self, get_token_client_credentials):
+        #LIAMF
         """
           test to get metadata capability statement
         """
@@ -53,6 +54,8 @@ class TestMetadata:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("metadata/BaRS_API_Capability_Statement.json")
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
+        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -60,7 +63,8 @@ class TestMetadata:
             headers={
                 "Authorization": f"Bearer {token}",
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-Target-Identifier": target_identifier_encoded
             },
         )
 
