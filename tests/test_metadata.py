@@ -46,7 +46,6 @@ class TestMetadata:
     @pytest.mark.integration
     @pytest.mark.sandbox
     def test_get_metadata_capability_statement(self, get_token_client_credentials):
-        #LIAMF
         """
           test to get metadata capability statement
         """
