@@ -15,14 +15,6 @@
           AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
         </Condition>
       </Step>
-      <Step>
-        <Name>Python.DecodeBase64</Name>
-        <Condition>request.header.NHSD-Target-Identifier != null</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.CheckTargets</Name>
-        <Condition>not (proxy.pathsuffix MatchesPath "/_status")</Condition>
-      </Step>
       
       <Step>
         <Name>AssignMessage.AddCapabilityStatement</Name>
@@ -32,6 +24,17 @@
         <Name>RaiseFault.AddCapabilityStatement</Name>
         <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
       </Step>
+      <Step>
+        
+        <Name>Python.DecodeBase64</Name>
+        <Condition>request.header.NHSD-Target-Identifier != null</Condition>
+      </Step>
+      <Step>
+        <Name>Javascript.CheckTargets</Name>
+        <Condition>not (proxy.pathsuffix MatchesPath "/_status")</Condition>
+      </Step>
+      
+      
 
       <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
