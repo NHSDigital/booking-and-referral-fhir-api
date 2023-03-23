@@ -156,8 +156,7 @@ class TestEndpoints:
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
             headers={
-                "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "Authorization": f"Bearer {token}"
             },
         )
 
