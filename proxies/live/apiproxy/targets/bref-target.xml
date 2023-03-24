@@ -55,9 +55,6 @@
           <Name>AssignMessage.Targets</Name>
           <Condition>targets = null</Condition>
       </Step>
-
-      
-      
       <Step>
           <Name>Javascript.UnpackVars</Name>
       </Step>
@@ -68,12 +65,10 @@
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
         <Condition>idMalformed = true</Condition>
       </Step>
-      
       <Step>
           <Name>RaiseFault.404ProxyNotFound</Name>
           <Condition>isError = true</Condition>
       </Step>
-      
     </Request>
   </PreFlow>
   <FaultRules>
