@@ -27,7 +27,10 @@
           <Name>RaiseFault.400InvalidHeaders</Name>
           <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null) or (request.header.NHSD-Target-Identifier = null)</Condition>
       </Step>
-
+      <Step>
+        <Name>RaiseFault.AddCapabilityStatement</Name>
+        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier != null))</Condition>
+      </Step>
       <Step>
           <Name>Python.DecodeBase64</Name>
           <Condition>request.header.NHSD-Target-Identifier != null</Condition>
@@ -52,26 +55,24 @@
           <Name>AssignMessage.Targets</Name>
           <Condition>targets = null</Condition>
       </Step>
+
       
-      <Step>
-        <Name>RaiseFault.AddCapabilityStatement</Name>
-        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier != null))</Condition>
-      </Step>
-      <Step>
-        <Name>RaiseFault.400MalformedTargetIdentifier</Name>
-        <Condition>idMalformed = true</Condition>
-      </Step>
-      <Step>
-          <Name>RaiseFault.404ProxyNotFound</Name>
-          <Condition>isError = true</Condition>
-      </Step>
+      
       <Step>
           <Name>Javascript.UnpackVars</Name>
       </Step>
        <Step>
           <Name>Javascript.SetTargetUrl</Name>
       </Step>
+      <Step>
+        <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+        <Condition>idMalformed = true</Condition>
+      </Step>
       
+      <Step>
+          <Name>RaiseFault.404ProxyNotFound</Name>
+          <Condition>isError = true</Condition>
+      </Step>
       
     </Request>
   </PreFlow>
