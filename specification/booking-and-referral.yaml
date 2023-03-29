@@ -159,7 +159,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/TargetIdentifier_HParam'      
+      - $ref: '#/components/parameters/TargetIdentifierMeta_HParam'      
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
@@ -728,6 +728,13 @@ components:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
       required: true
+      in: header
+      schema:
+        $ref: '#/components/schemas/TargetIdentifier'
+    TargetIdentifierMeta_HParam:
+      name: NHSD-Target-Identifier
+      description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
+      required: false
       in: header
       schema:
         $ref: '#/components/schemas/TargetIdentifier'
