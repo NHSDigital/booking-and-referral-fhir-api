@@ -791,7 +791,7 @@ components:
         example: 9562466f-c982-4bd5-bb0e-255e9f5e6689        
     Accept_HParam:
       name: Accept
-      description: 'The Accept Header must also contain the version of the API required. Not specifying a version will imply the use of version 1.0.0-alpha'
+      description: 'The Accept Header must also contain the version of the API required.'
       in: header
       required: true
       schema:
