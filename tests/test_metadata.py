@@ -45,6 +45,7 @@ class TestMetadata:
     @pytest.mark.metadata
     @pytest.mark.integration
     @pytest.mark.sandbox
+    @pytest.mark.debug
     def test_get_metadata_capability_statement(self, get_token_client_credentials):
         """
           test to get metadata capability statement
