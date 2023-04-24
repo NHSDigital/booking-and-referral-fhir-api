@@ -45,7 +45,7 @@ info:
       * [https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
     
     ## API status and roadmap
-    This API is in [Production Beta](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
+    This API Version is in [In Development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
       * it has limited availability in production 
       * it is subject to breaking changes based on developer feedback
@@ -110,7 +110,7 @@ info:
             <div class="nhsd-m-emphasis-box__image-box">
                 <figure class="nhsd-a-image">
                     <picture class="nhsd-a-image__picture">
-                        <img src="http://digital.nhs.uk/binaries/content/gallery/icons/play-circle.svg?colour=231f20" alt="" style="object-fit:fill">
+                        <img src="//nhs-prod.global.ssl.fastly.net/svg-magic/binaries/content/gallery/icons/play-circle.svg?colour=231f20" alt="" style="object-fit:fill">
                     </picture>
                 </figure>
             </div>
@@ -129,7 +129,7 @@ info:
     
     Errors specific to each API are shown in the Endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#core-ErrorHandling) for further information on error handling within the BaRS Standard.
     
-  version: 1.0.0
+  version: 1.1.0-alpha
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -152,6 +152,7 @@ tags:
   - name: Metadata
   - name: Referral
   - name: Slots
+  - name: DocumentReference
 security:
   - OAuth_Token: []
 paths:
@@ -190,7 +191,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Capability'
               example:
-                $ref: examples/metadata/BaRS_API_Capability_Statement.json
+                $ref: examples1.1.0/metadata/BaRS_API_Capability_Statement.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Capability'
@@ -252,7 +253,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
               example:
-                $ref: examples/message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json
+                $ref: examples1.1.0/message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
@@ -312,7 +313,7 @@ paths:
             schema:
               $ref: '#/components/schemas/MessageBundle'
             example:
-              $ref: examples/process_message/POST-body.json
+              $ref: examples1.1.0/process_message/POST-body.json
           application/fhir+xml:
             schema:
               $ref: '#/components/schemas/MessageBundle'
@@ -324,7 +325,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
               example:
-                $ref: examples/process_message/POST-success.json
+                $ref: examples1.1.0/process_message/POST-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
@@ -450,7 +451,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleSlot'
               example:
-                $ref: examples/slots/GET-success.json
+                $ref: examples1.1.0/slots/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleSlot'
@@ -501,7 +502,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
               example:
-                $ref: examples/appointment/GET-success.json
+                $ref: examples1.1.0/appointment/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
@@ -552,7 +553,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples/appointment/id/GET-success.json
+                $ref: examples1.1.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -605,7 +606,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
               example:
-                $ref: examples/service_request/GET-success.json
+                $ref: examples1.1.0/service_request/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
@@ -656,7 +657,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples/service_request/id/GET-success.json
+                $ref: examples1.1.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -677,7 +678,373 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+  /DocumentReference:
+    get:      
+      tags:
+        - DocumentReference
+      summary: Retrieve patient's document pointers (GET)
+      operationId: searchDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: "#/components/parameters/subject_QParam"
+        - $ref: "#/components/parameters/custodian_QParam"
+        - $ref: "#/components/parameters/type_QParam"
+        - $ref: "#/components/parameters/nextPageToken_QParam"
+        - $ref: "#/components/parameters/odsCode_HParam"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json;version=1:
+              schema:
+                $ref: "#/components/schemas/DocumentReferenceBundle"
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+      description: |
+        Retrieve the document pointers for a single patient.  Your request is constrained by the document pointer types
+        agreed during onboarding.  The results can also be filtered to return documents by a given `type` and/or created
+        by a given producer (`custodian`).
+
+        This operation is also available as a http POST, which is the preferred method (see below).
+    post:
+      summary: 'Create new, or Supersede existing, document pointers'
+      operationId: createDocumentReference
+      responses:
+        '201':
+          description: Create / Supersede successful response
+          $ref: '#/components/schemas/OperationalOutcome'
+          content:
+            application/fhir+json;version=1:
+              example:
+                resourceType: OperationOutcome
+                id: 76db24dc-324a-468a-bf02-c06e82279488
+                meta:
+                  profile:
+                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
+                issue:
+                  - severity: information
+                    code: informational
+                    details:
+                      coding:
+                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
+                          code: RESOURCE_CREATED
+                          display: Resource created
+                    diagnostics: Resource created
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
+      parameters:
+        - $ref: '#/components/parameters/odsCode_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      description: |
+        Create new pointers, or Supersede existing ones.
+
+        To create a document pointer you must ensure:
+
+        * The body must be a valid [FHIR R4 DocumentReference](http://hl7.org/fhir/documentreference.html)
+        * `id` is a composite of the ODS Code and an identifier that is locally unique to your system.  NRL does not
+          generate globally unique ids, instead relies on producers to provide a locally unique id prefixed with their
+          ODS code, making it globally unique. e.g.
+          ```
+          XYZ-1234567890
+          ```
+        * `subject` MUST be a `Patient` reference using a valid NHS number. e.g.
+          ```
+          "subject": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/nhs-number",
+              "value": "3495456481"
+            }
+          },
+          ```
+        * `custodian` MUST be an `Organization` reference using a valid ODS code, agreed during [onboarding](#api-description__onboarding). e.g.
+          ```
+          "custodian": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y05868"
+            }
+          }
+          ```
+        * `type` MUST match one of the Document Types agreed during [onboarding](#api-description__onboarding). e.g.
+          ```
+          "type": {
+            "coding\": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "1363501000000100",
+                "display": "Royal College of Physicians NEWS2 (National Early Warning Score 2) chart"
+              }
+            ]
+          }
+          ```
+        * `content` MUST have at least one entry.
+        * `content[].format[]` SHOULD indicate the mechanism for accessing documents, e.g.
+          ```
+          "format": [
+            {
+              "code": "ssp",
+              "display": "Spine Secure Proxy"
+            }
+          ]
+          ```
+
+        To supersede existing pointers you must further specify:
+
+        * at least one existing pointer in the `relatesTo` with a `code` of `replaces`.
+          ```
+          [
+            {
+              "code": "replaces",
+              "target": {
+                "type": "DocumentReference",
+                "identifier": {
+                  "value": "XYZ-1234567890"
+                }
+              }
+            }
+          ]
+          ```
+
+        * The following fields MUST match the pointers being superseded:
+          * `subject`
+          * `type`
+
+        This will cause a new pointer to be created and superseded pointers to be deleted.  Multiple documents can
+        be superseded.
+  '/DocumentReference/{id}':
+    get:
+      summary: Get a single document pointer
+      operationId: readDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/odsCode_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json;version=1:
+              schema:
+                $ref: '#/components/schemas/DocumentReference'
+              example:
+                resourceType: DocumentReference
+                id: Y05868-1234567892
+                status: current
+                docStatus: final
+                type:
+                  coding:
+                    - system: 'http://snomed.info/sct'
+                      code: '887701000000100'
+                      display: Emergency health care plan
+                category:
+                  - coding:
+                      - system: 'http://loinc.org'
+                        code: 68552-9
+                        display: Emergency medicine Emergency department Admission evaluation note
+                subject:
+                  identifier:
+                    system: 'https://fhir.nhs.uk/Id/nhs-number'
+                    value: '4409815415'
+                date: '2022-12-22T11:45:41+11:00'
+                author:
+                  - identifier:
+                      value: Practitioner/A985657ZA
+                authenticator:
+                  identifier:
+                    value: Organization/Y05868
+                custodian:
+                  identifier:
+                    system: 'https://fhir.nhs.uk/Id/ods-organization-code'
+                    value: Y05868
+                securityLabel:
+                  - coding:
+                      - system: 'http://terminology.hl7.org/CodeSystem/v3-Confidentiality'
+                        code: V
+                        display: very restricted
+                content:
+                  - attachment:
+                      contentType: application/pdf
+                      language: en-US
+                      url: 'https://spine-proxy.national.ncrs.nhs.uk/p1.nhs.uk/EPAACS/EmergencyCarPlan.pdf'
+                      creation: '2022-12-22T09:45:41+11:00'
+                    format:
+                      system: 'urn:oid:1.3.6.1.4.1.19376.1.2.3'
+                      code: 'urn:ihe:pcc:handp:2008'
+                      display: History and Physical Specification
+                context:
+                  encounter:
+                    - identifier:
+                        value: Encounter/4409815415
+                  event:
+                    - coding:
+                        - system: 'http://snomed.info/sct'
+                          code: '702779007'
+                          display: Emergency health care plan agreed
+                  period:
+                    start: '2022-12-20T09:00:41+11:00'
+                    end: '2022-12-20T09:45:41+11:00'
+                  facilityType:
+                    coding:
+                      - system: 'http://snomed.info/sct'
+                        code: '453121000124107'
+                        display: Emergency department healthcare professional
+                  related:
+                    - identifier:
+                        system: 'https://fhir.nhs.uk/Id/ods-organization-code'
+                        value: EMERGENCY DEPT PRIMARY CARE STREAMING
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+      description: |
+        Read a single document pointer by specifying the `DocumentReference.id`.  Note that you will only be able to
+        retrieve document pointers that have been created by the organisation specified in the `ODS-End-User-Organisation-ODS`
+        header, and agreed during [onboarding](#onbaroding).
+    put:
+      summary: Update a single document pointer
+      operationId: updateDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/odsCode_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        '200':
+          description: Successful response
+          $ref: '#/components/schemas/OperationalOutcome'
+          content:
+            application/fhir+json;version=1:
+              example:
+                resourceType: OperationOutcome
+                id: fc39effb-144c-4342-bdf2-4214f0cb728b
+                meta:
+                  profile:
+                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
+                issue:
+                  - severity: information
+                    code: informational
+                    details:
+                      coding:
+                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
+                          code: RESOURCE_UPDATED
+                          display: Resource updated
+                    diagnostics: Resource updated
+        '201':
+          description: Successful response
+          $ref: '#/components/schemas/OperationalOutcome'
+          content:
+            application/fhir+json;version=1:
+              example:
+                resourceType: OperationOutcome
+                id: fc39effb-144c-4342-bdf2-4214f0cb728b
+                meta:
+                  profile:
+                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
+                issue:
+                  - severity: information
+                    code: informational
+                    details:
+                      coding:
+                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
+                          code: RESOURCE_UPDATED
+                          display: Resource updated
+                    diagnostics: Resource updated
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
+      description: |
+        Update a single pointer you created.
+
+        Note that the following fields are immutable:
+        * `id`
+        * `subject`
+        * `custodian`
+        * `type`
+
+        Note that unlike NRL STU3 changing the `status` field does NOT delete document pointers.  To delete document
+        pointers please use the `DELETE` endpoint.
+    delete:
+      summary: Delete a single document pointer
+      operationId: deleteDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/odsCode_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        '200':
+          $ref: '#/components/schemas/OperationalOutcome'
+          description: Successful response
+          content:
+            application/fhir+json;version=1:
+              example:
+                resourceType: OperationOutcome
+                id: c6113a50-70bf-436e-b417-7c8024d2e8bf
+                meta:
+                  profile:
+                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
+                issue:
+                  - severity: information
+                    code: informational
+                    details:
+                      coding:
+                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
+                          code: RESOURCE_REMOVED
+                          display: Resource removed
+                    diagnostics: Resource removed
+        '204':
+          description: Successful response
+          $ref: '#/components/schemas/OperationalOutcome'
+          content:
+            application/fhir+json;version=1:
+              example:
+                resourceType: OperationOutcome
+                id: c6113a50-70bf-436e-b417-7c8024d2e8bf
+                meta:
+                  profile:
+                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
+                issue:
+                  - severity: information
+                    code: informational
+                    details:
+                      coding:
+                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
+                          code: RESOURCE_REMOVED
+                          display: Resource removed
+                    diagnostics: Resource removed
+      description: |
+        Delete a single document pointer that your created. 
+
 components:
+  requestBodies:
+    DocumentReference:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/DocumentReference'
+      required: true
   parameters:
     RegistryId_Param:
       name: id
@@ -797,7 +1164,88 @@ components:
       schema:
         type: string
         example: |
-          --header 'Accept: application/fhir+json; version=1.0.0-beta'    
+          --header 'Accept: application/fhir+json; version=1.0.0-beta'
+    subject_QParam:
+      name: subject:identifier
+      in: query
+      schema:
+        $ref: "#/components/schemas/RequestQuerySubject"
+      required: true
+      examples:
+        none:
+          summary: None
+          value: ""
+        valid_1:
+          summary: "Valid #1"
+          value: https://fhir.nhs.uk/Id/nhs-number|4409815415
+        valid_2:
+          summary: "Valid #2"
+          value: https://fhir.nhs.uk/Id/nhs-number|3495456481
+        invalid:
+          summary: Unknown
+          value: https://fhir.nhs.uk/Id/nhs-number|3495456001
+    custodian_QParam:
+      name: custodian:identifier
+      in: query
+      schema:
+        $ref: "#/components/schemas/RequestQueryCustodian"
+      examples:
+        none:
+          summary: None
+          value: ""
+        valid:
+          summary: Valid
+          value: https://fhir.nhs.uk/Id/ods-organization-code|Y05868
+        invalid:
+          summary: Unknown
+          value: https://fhir.nhs.uk/Id/ods-organization-code|XYZ
+    type_QParam:
+      name: type
+      in: query
+      schema:
+        $ref: "#/components/schemas/RequestQueryType"
+      examples:
+        none:
+          summary: None
+          value: ""
+        SNOMED_CODES_MENTAL_HEALTH_CRISIS_PLAN:
+          summary: Mental Health Crisis Plan
+          value: http://snomed.info/sct|736253002
+        SNOMED_CODES_EMERGENCY_HEALTH_CARE_PLAN:
+          summary: Emergency Healthcare Plan
+          value: http://snomed.info/sct|887701000000100
+        SNOMED_CODES_END_OF_LIFE_CARE_COORDINATION_SUMMARY:
+          summary: End of Life Care Coordination Summary
+          value: http://snomed.info/sct|861421000000109
+        SNOMED_CODES_NATIONAL_EARLY_WARNING_SCORE_2:
+          summary: National Early Warning Code 2
+          value: http://snomed.info/sct|1363501000000100
+        invalid:
+          summary: Unknown
+          value: http://snomed.info/sct|410970009
+    nextPageToken_QParam:
+      name: next-page-token
+      description: |
+        A token that can be sent as either a query parameter or in the post body parameter to retrieve the next set of 20 records.
+
+        This token is returned in the meta.tag field.
+      in: query
+      schema:
+        $ref: "#/components/schemas/NextPageToken"
+    odsCode_HParam:
+      name: NHSD-End-User-Organisation-ODS
+      description: ODS Code for Organisation
+      in: header
+      schema:
+        $ref: "#/components/schemas/RequestHeaderOdsCode"
+      required: true
+      examples:
+        valid:
+          summary: Valid
+          value: Y05868
+        invalid:
+          summary: Unknown
+          value: XYZ    
   responses:
     4XX-BARS:
       description: |
@@ -832,7 +1280,7 @@ components:
           schema:
             $ref: '#/components/schemas/OperationalOutcome'
           example:
-            $ref: examples/400-SEND.json
+            $ref: examples1.1.0/400-SEND.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -866,7 +1314,7 @@ components:
           schema:
             $ref: '#/components/schemas/OperationalOutcome'
           example:
-            $ref: examples/500-REC.json
+            $ref: examples1.1.0/500-REC.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -882,31 +1330,50 @@ components:
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91        
   schemas:
     Capability:
-      $ref: schemas/Capability.yaml
+      $ref: schemas1.1.0/Capability.yaml
     TargetIdentifier:
-      $ref: schemas/TargetIdentifier.yaml
+      $ref: schemas1.1.0/TargetIdentifier.yaml
     Appointment:
-      $ref: schemas/Appointment.yaml
+      $ref: schemas1.1.0/Appointment.yaml
     SearchBundleAppt:
-      $ref: schemas/SearchBundleAppt.yaml
+      $ref: schemas1.1.0/SearchBundleAppt.yaml
     ServiceRequest:
-      $ref: schemas/ServiceRequest.yaml
+      $ref: schemas1.1.0/ServiceRequest.yaml
     SearchBundleRef:
-      $ref: schemas/SearchBundleRef.yaml
+      $ref: schemas1.1.0/SearchBundleRef.yaml
     SearchBundleSlot:
-      $ref: schemas/SearchBundleSlot.yaml
+      $ref: schemas1.1.0/SearchBundleSlot.yaml
     MessageBundle:
-      $ref: schemas/MessageBundle.yaml
+      $ref: schemas1.1.0/MessageBundle.yaml
     MessageDefinition:
-      $ref: schemas/MessageDefinition.yaml
+      $ref: schemas1.1.0/MessageDefinition.yaml
     OperationalOutcome:
-      $ref: schemas/OperationalOutcome.yaml
+      $ref: schemas1.1.0/OperationalOutcome.yaml
     RequestingOrganisationToken:
-      $ref: schemas/RequestingOrganisation.yaml
+      $ref: schemas1.1.0/RequestingOrganisation.yaml
     RequestingPractitionerToken:
-      $ref: schemas/RequestingPractitioner.yaml
+      $ref: schemas1.1.0/RequestingPractitioner.yaml
     RequestingSoftwareToken:
-      $ref: schemas/RequestingSoftware.yaml
+      $ref: schemas1.1.0/RequestingSoftware.yaml
+    DocumentReferenceBundle:
+      $ref: schemas1.1.0/DocumentReferenceBundle.yaml
+    DocumentReference:
+      $ref: schemas1.1.0/DocumentReferenceBundle.yaml
+    RequestQuerySubject:
+      type: string
+      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)$
+      example: "https://fhir.nhs.uk/Id/nhs-number|4409815415"
+    RequestQueryCustodian:
+      type: string
+      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)$
+      example: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
+    RequestQueryType:
+      type: string
+      example: "http://snomed.info/sct|736253002"
+    NextPageToken:
+      type: string
+    RequestHeaderOdsCode:
+      type: string
   securitySchemes:
     OAuth_Token:
       type: http

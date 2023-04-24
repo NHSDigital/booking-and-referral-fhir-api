@@ -1,0 +1,27 @@
+type: object
+properties:
+  id:
+    type: string
+    pattern: "[A-Za-z0-9\\-\\.]{1,64}"
+    description: Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
+  use:
+    type: string
+    pattern: "[^\\s]+(\\s[^\\s]+)*"
+    description: The purpose of this identifier.
+  type:
+    $ref: "DocumentReferenceCodeableConcept.yaml"
+    description: A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.
+  system:
+    type: string
+    pattern: \S*
+    description: Establishes the namespace for the value &ndash; that is, a URL that describes a set values that are unique.
+  value:
+    type: string
+    pattern: "[ \\r\\n\\t\\S]+"
+    description: The portion of the identifier typically relevant to the user and which is unique within the context of the system.
+  period:
+    $ref: "DocumentReferencePeriod.yaml"
+    description: Time period during which identifier is/was valid for use.
+  assigner:
+    $ref: "DocumentReferenceReference.yaml"
+    description: Organization that issued/manages the identifier.
