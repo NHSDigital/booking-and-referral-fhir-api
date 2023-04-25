@@ -1,0 +1,15 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.SetNRLfHeaders">
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    <Add>
+        <Headers>
+          <Header name="Accept">application/fhir+json;version=1</Header>
+          <Header name="NHSD-End-User-Organisation-ODS">Y05868</Header>
+          <Header name="X-Request-ID">60E0B220-8136-4CA5-AE46-1D97EF59D068</Header>
+          <Header name="X-Correlation-ID">11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA</Header>
+        </Headers>
+        <QueryParams>
+            <QueryParam name="subject:identifier">https://fhir.nhs.uk/Id/nhs-number|4409815415</QueryParam>
+        </QueryParams>
+    </Add>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>
