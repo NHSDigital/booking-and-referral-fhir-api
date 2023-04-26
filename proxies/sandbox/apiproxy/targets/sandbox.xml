@@ -24,6 +24,14 @@
         <Condition>not (proxy.pathsuffix MatchesPath "/_status")</Condition>
       </Step>
       <Step>
+          <Name>ExtractVariables.SubjectIdentifier</Name>
+          <Condition>(proxy.pathsuffix Matches "/DocumentReference")</Condition>
+      </Step>
+      <Step>
+        <Name>Javascript.SetNRLfTarget</Name>
+        <Condition>(proxy.pathsuffix Matches "/DocumentReference")</Condition>
+      </Step>
+      <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
         <Condition>(idMalformed = true) and not (proxy.pathsuffix MatchesPath "/_status")</Condition>
       </Step>
