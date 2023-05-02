@@ -38,6 +38,10 @@
   <RouteRule name="NoRoutePing">
     <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
   </RouteRule>
+  <RouteRule name="nrlf-consumer-route">
+    <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*"</Condition>
+  </RouteRule>
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>
   </RouteRule>

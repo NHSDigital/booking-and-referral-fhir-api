@@ -1,0 +1,21 @@
+<TargetEndpoint name="nrlf-consumer-target">
+  <PreFlow>
+    <Request>
+      <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+        <Condition>proxy.pathsuffix Not Matches "/DocumentReference*"</Condition>
+      </Step>
+      <Step>
+        <Name>OauthV2.VerifyAccessToken</Name>
+      </Step>
+      <Step>
+        <Name>FlowCallout.ApplyRateLimiting</Name>
+      </Step>
+    </Request>
+    <LocalTargetConnection>
+      <APIProxy>nrl-consumer-api-{{ APIGEE_ENVIRONMENT }}</APIProxy>
+      <ProxyEndpoint>default</ProxyEndpoint>
+      <Path>/nrl-consumer-api</Path>
+    </LocalTargetConnection>
+  </PreFlow>
+</TargetEndpoint>
