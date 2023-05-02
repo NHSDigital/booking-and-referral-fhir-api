@@ -13,9 +13,9 @@
       </Step>
     </Request>
     <LocalTargetConnection>
-      <APIProxy>nrl-consumer-api-{{ APIGEE_ENVIRONMENT }}</APIProxy>
+      <APIProxy>nrl-consumer-api-internal-dev</APIProxy>
       <ProxyEndpoint>default</ProxyEndpoint>
-      <Path>/nrl-consumer-api</Path>
+<!--      <Path>/nrl-consumer-api</Path>-->
     </LocalTargetConnection>
   </PreFlow>
 </TargetEndpoint>
