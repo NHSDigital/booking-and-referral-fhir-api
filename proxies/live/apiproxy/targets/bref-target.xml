@@ -58,14 +58,6 @@
           <Name>Javascript.SetTargetUrl</Name>
       </Step>
       <Step>
-          <Name>ExtractVariables.SubjectIdentifier</Name>
-          <Condition>(proxy.pathsuffix Matches "/DocumentReference")</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.SetNRLfTarget</Name>
-        <Condition>(proxy.pathsuffix Matches "/DocumentReference")</Condition>
-      </Step>
-      <Step>
           <Name>RaiseFault.400InvalidHeaders</Name>
           <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>
       </Step>

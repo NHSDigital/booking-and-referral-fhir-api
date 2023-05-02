@@ -6,5 +6,5 @@
         <Pattern ignoreCase="true">{subjectIdentifier}</Pattern>
     </QueryParam>
     <VariablePrefix>query_params</VariablePrefix>
-    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
 </ExtractVariables>

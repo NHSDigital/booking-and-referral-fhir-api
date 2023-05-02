@@ -3,14 +3,28 @@
   <Description/>
   <FaultRules/>
   <PreFlow name="PreFlow">
-    <Request/>
+    <Request>
+      <Step>
+        <Name>OauthV2.VerifyAccessToken</Name>
+      </Step>
+      <Step>
+        <Name>FlowCallout.ApplyRateLimiting</Name>
+      </Step>
+    </Request>
     <Response/>
   </PreFlow>
   <PostFlow name="PostFlow">
-    <Request/>
+    <Request>
+
+    </Request>
     <Response/>
   </PostFlow>
-  <Flows/>
+  <Flows>
+    <Step>
+      <Name>ExtractVariables.SubjectIdentifier</Name>
+      <Name>AssignMessage.NrlfRequest</Name>
+    </Step>
+  </Flows>
   <LocalTargetConnection>
     <APIProxy>nrl-consumer-api-internal-dev</APIProxy>
     <ProxyEndpoint>default</ProxyEndpoint>
