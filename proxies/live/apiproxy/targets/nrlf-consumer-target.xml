@@ -5,12 +5,6 @@
   <PreFlow name="PreFlow">
     <Request>
       <Step>
-        <Name>OauthV2.VerifyAccessToken</Name>
-      </Step>
-      <Step>
-        <Name>FlowCallout.ApplyRateLimiting</Name>
-      </Step>
-      <Step>
         <Name>AssignMessage.NrlfRequest</Name>
       </Step>
     </Request>
