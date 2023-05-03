@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GenerateJWT async="false" continueOnError="false" enabled="true" name="GenerateJWT.NrlfClientAssertion">
+  <DisplayName>GenerateJWT.NrlfClientAssertion</DisplayName>
+  <Algorithm>RS512</Algorithm>
+  <PrivateKey>
+    <Id>test-1</Id>
+    <Value ref="private.private_key"/>
+  </PrivateKey>
+  <Subject ref="private.api_key"/>
+  <Issuer ref="private.api_key"/>
+  <Audience>https://int.api.service.nhs.uk/oauth2/token</Audience>
+  <ExpiresIn>5m</ExpiresIn>
+  <OutputVariable>client_assertion</OutputVariable>
+</GenerateJWT>

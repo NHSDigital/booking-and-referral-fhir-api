@@ -5,6 +5,15 @@
   <PreFlow name="PreFlow">
     <Request>
       <Step>
+        <Name>KVM.GetNrlfPrivateKey</Name>
+      </Step>
+      <Step>
+        <Name>GenerateJWT.NrlfClientAssertion</Name>
+      </Step>
+      <Step>
+        <Name>ServiceCallout.NrlfAuth</Name>
+      </Step>
+      <Step>
         <Name>AssignMessage.NrlfRequest</Name>
       </Step>
     </Request>

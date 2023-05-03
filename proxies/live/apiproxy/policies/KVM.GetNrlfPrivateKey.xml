@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM.GetNrlfPrivateKey" mapIdentifier="bars-nrlf-credentials">
+  <DisplayName>KeyValueMapOperations.GetClientCredentials</DisplayName>
+  <ExclusiveCache>false</ExclusiveCache>
+  <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+  <Get assignTo="private.api_key">
+    <Key>
+      <Parameter>api_key</Parameter>
+    </Key>
+  </Get>
+  <Get assignTo="private.private_key">
+    <Key>
+      <Parameter>private_key</Parameter>
+    </Key>
+  </Get>
+</KeyValueMapOperations>
