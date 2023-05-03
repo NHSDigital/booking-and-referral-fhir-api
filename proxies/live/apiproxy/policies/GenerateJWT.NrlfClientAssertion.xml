@@ -6,8 +6,8 @@
     <Id>test-1</Id>
     <Value ref="private.private_key"/>
   </PrivateKey>
-  <Subject ref="private.api_key"/>
-  <Issuer ref="private.api_key"/>
+  <Subject ref="private.client_id"/>
+  <Issuer ref="private.client_id"/>
   <Audience>https://int.api.service.nhs.uk/oauth2/token</Audience>
   <ExpiresIn>5m</ExpiresIn>
   <OutputVariable>client_assertion</OutputVariable>

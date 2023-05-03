@@ -14,6 +14,9 @@
         <Name>ServiceCallout.NrlfAuth</Name>
       </Step>
       <Step>
+        <Name>Javascript.NrlfAddAuthorization</Name>
+      </Step>
+      <Step>
         <Name>AssignMessage.NrlfRequest</Name>
       </Step>
     </Request>

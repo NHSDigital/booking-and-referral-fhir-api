@@ -6,7 +6,6 @@
       <Header name="Accept">application/fhir+json;version=1</Header>
       <Header name="NHSD-End-User-Organisation-ODS">Y05868</Header>
       <Header name="X-Request-ID">{createUuid()}</Header>
-      <Header name="Authorization">Bearer {nrlfTokenResponse}</Header>
     </Headers>
     <Version>1.1</Version>
   </Set>

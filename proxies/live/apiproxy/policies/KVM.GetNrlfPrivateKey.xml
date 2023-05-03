@@ -3,9 +3,9 @@
   <DisplayName>KeyValueMapOperations.GetClientCredentials</DisplayName>
   <ExclusiveCache>false</ExclusiveCache>
   <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
-  <Get assignTo="private.api_key">
+  <Get assignTo="private.client_id">
     <Key>
-      <Parameter>api_key</Parameter>
+      <Parameter>client_id</Parameter>
     </Key>
   </Get>
   <Get assignTo="private.private_key">
