@@ -4,10 +4,10 @@
   <Algorithm>RS512</Algorithm>
   <PrivateKey>
     <Id>test-1</Id>
-    <Value ref="private.private_key"/>
+    <Value ref="private.nrlfPrivateKey"/>
   </PrivateKey>
-  <Subject ref="private.client_id"/>
-  <Issuer ref="private.client_id"/>
+  <Subject ref="nrlfClientId"/>
+  <Issuer ref="nrlfClientId"/>
   <Audience>https://int.api.service.nhs.uk/oauth2/token</Audience>
   <ExpiresIn>5m</ExpiresIn>
   <OutputVariable>client_assertion</OutputVariable>

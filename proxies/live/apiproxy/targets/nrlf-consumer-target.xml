@@ -8,6 +8,9 @@
         <Name>KVM.GetNrlfPrivateKey</Name>
       </Step>
       <Step>
+        <Name>KVM.GetNrlfClientId</Name>
+      </Step>
+      <Step>
         <Name>GenerateJWT.NrlfClientAssertion</Name>
       </Step>
       <Step>
@@ -22,8 +25,10 @@
     </Request>
     <Response/>
   </PreFlow>
-  <LocalTargetConnection>
-    <APIProxy>nrl-consumer-api-{{ APIGEE_ENVIRONMENT }}</APIProxy>
-    <ProxyEndpoint>default</ProxyEndpoint>
-  </LocalTargetConnection>
+  <HTTPTargetConnection>
+    <URL>https://int.api.service.nhs.uk/record-locator/consumer</URL>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+    </SSLInfo>
+  </HTTPTargetConnection>
 </TargetEndpoint>
