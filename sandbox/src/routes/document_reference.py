@@ -18,4 +18,3 @@ def get_document_reference(request: Request):
         return load_example("document_reference/GET-success-empty.json")
     else:
         return load_example("document_reference/GET-success.json")
-
