@@ -3,7 +3,7 @@
   <DisplayName>KVM.GetNrlfPrivateKey</DisplayName>
   <ExclusiveCache>false</ExclusiveCache>
   <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
-  <Get assignTo="nrlfPrivateKey">
+  <Get assignTo="private.nrlfPrivateKey">
     <Key>
       <Parameter>private_key</Parameter>
     </Key>

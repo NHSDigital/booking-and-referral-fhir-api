@@ -26,7 +26,7 @@
     <Response/>
   </PreFlow>
   <HTTPTargetConnection>
-    <URL>https://int.api.service.nhs.uk/record-locator/consumer</URL>
+    <URL>https://int.api.service.nhs.uk/record-locator/consumer/FHIR/R4</URL>
     <SSLInfo>
       <Enabled>true</Enabled>
     </SSLInfo>
