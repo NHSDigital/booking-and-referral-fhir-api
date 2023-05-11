@@ -70,10 +70,6 @@
   <RouteRule name="NoRouteMetadata">
     <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
   </RouteRule>
-  <RouteRule name="nrlf-consumer-route">
-    <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference*"</Condition>
-  </RouteRule>
   <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
   </RouteRule>
