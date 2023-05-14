@@ -1,13 +1,13 @@
-var access_token;
-// var cached_access_token = context.getVariable("cached_access_token");
+var accessToken;
+var cachedAccessToken = context.getVariable("nrflCachedAccessToken");
 
-// if (cached_access_token) {
-//     access_token = cached_access_token;
-// } else {
+if (cachedAccessToken) {
+    access_token = cachedAccessToken;
+} else {
     var respContent=context.getVariable('nrlfTokenResponse.content');
     var respObject=JSON.parse(respContent)
-    access_token = respObject["access_token"]
-// }
+    accessToken = respObject["accessToken"]
+}
 
-context.setVariable("access_token", access_token)
-context.setVariable("request.header.Authorization", "Bearer " + access_token);
+context.setVariable("nrlfAccessToken", accessToken)
+context.setVariable("request.header.Authorization", "Bearer " + accessToken);

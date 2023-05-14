@@ -7,7 +7,6 @@
     <Add>
       <FormParams>
         <FormParam name="grant_type">client_credentials</FormParam>
-        <FormParam name="redirect_uri">https://oauth.pstmn.io/v1/callback</FormParam>
         <FormParam name="client_assertion_type">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</FormParam>
         <FormParam name="client_assertion">{client_assertion}</FormParam>
       </FormParams>
@@ -16,6 +15,6 @@
   <Response>nrlfTokenResponse</Response>
   <HTTPTargetConnection>
     <Properties/>
-    <URL>https://int.api.service.nhs.uk/oauth2/token</URL>
+    <URL>https://{nrlfAuthDomain}/oauth2/token</URL>
   </HTTPTargetConnection>
 </ServiceCallout>

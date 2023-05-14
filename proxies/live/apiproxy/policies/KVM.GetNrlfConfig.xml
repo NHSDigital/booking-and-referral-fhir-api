@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM.GetNrlfConfig" mapIdentifier="booking-and-referrals-config">
+  <DisplayName>KVM.GetNrlfConfig</DisplayName>
+  <ExclusiveCache>false</ExclusiveCache>
+  <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+  <Get assignTo="nrlfClientId">
+    <Key>
+      <Parameter>nrlf_client_id</Parameter>
+    </Key>
+  </Get>
+  <Get assignTo="nrlfAuthDomain">
+    <Key>
+      <Parameter>nrlf_auth_domain</Parameter>
+    </Key>
+  </Get>
+</KeyValueMapOperations>

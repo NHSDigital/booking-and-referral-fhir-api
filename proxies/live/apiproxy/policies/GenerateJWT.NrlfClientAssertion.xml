@@ -8,7 +8,7 @@
   </PrivateKey>
   <Subject ref="nrlfClientId"/>
   <Issuer ref="nrlfClientId"/>
-  <Audience>https://int.api.service.nhs.uk/oauth2/token</Audience>
+  <Audience ref="nrlfAuthUrl"/>
   <ExpiresIn>5m</ExpiresIn>
   <OutputVariable>client_assertion</OutputVariable>
 </GenerateJWT>

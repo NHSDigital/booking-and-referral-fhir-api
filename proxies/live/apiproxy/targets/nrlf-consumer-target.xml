@@ -5,22 +5,33 @@
   <PreFlow name="PreFlow">
     <Request>
       <Step>
-        <Name>KVM.GetNrlfPrivateKey</Name>
+        <Name>LookupCache.NrlfAccessToken</Name>
       </Step>
       <Step>
-        <Name>KVM.GetNrlfClientId</Name>
+        <Name>KVM.GetNrlfPrivateKey</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+      <Step>
+        <Name>KVM.GetNrlfConfig</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>
       <Step>
         <Name>GenerateJWT.NrlfClientAssertion</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>
       <Step>
         <Name>ServiceCallout.NrlfAuth</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>
       <Step>
         <Name>Javascript.NrlfAddAuthorization</Name>
       </Step>
       <Step>
         <Name>AssignMessage.NrlfRequest</Name>
+      </Step>
+      <Step>
+        <Name>PopulateCache.NrlfAccessToken</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>
     </Request>
     <Response/>
