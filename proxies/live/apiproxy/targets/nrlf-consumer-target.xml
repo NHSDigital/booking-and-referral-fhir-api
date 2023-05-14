@@ -16,6 +16,10 @@
         <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>
       <Step>
+        <Name>AssignMessage.SetNrlfAuthUrl</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+      <Step>
         <Name>GenerateJWT.NrlfClientAssertion</Name>
         <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>

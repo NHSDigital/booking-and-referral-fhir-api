@@ -6,7 +6,7 @@ if (cachedAccessToken) {
 } else {
     var respContent=context.getVariable('nrlfTokenResponse.content');
     var respObject=JSON.parse(respContent)
-    accessToken = respObject["accessToken"]
+    accessToken = respObject["access_token"]
 }
 
 context.setVariable("nrlfAccessToken", accessToken)
