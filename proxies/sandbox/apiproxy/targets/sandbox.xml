@@ -21,11 +21,7 @@
       </Step>
       <Step>
         <Name>Javascript.CheckTargets</Name>
-        <Condition>not (proxy.pathsuffix MatchesPath "/_status")</Condition>
-      </Step>
-      <Step>
-          <Name>ExtractVariables.SubjectIdentifier</Name>
-          <Condition>(proxy.pathsuffix Matches "/DocumentReference")</Condition>
+        <Condition>not ((proxy.pathsuffix MatchesPath "/_status") or (proxy.pathsuffix MatchesPath "/DocumentReference/*"))</Condition>
       </Step>
       <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
