@@ -13,4 +13,9 @@
       <Parameter>nrlf_auth_domain</Parameter>
     </Key>
   </Get>
+  <Get assignTo="nrlfBarsOds">
+    <Key>
+      <Parameter>nrlf_bars_ods</Parameter>
+    </Key>
+  </Get>
 </KeyValueMapOperations>
