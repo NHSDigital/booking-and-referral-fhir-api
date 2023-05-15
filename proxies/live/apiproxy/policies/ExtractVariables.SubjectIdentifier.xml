@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="ExtractVariables.SubjectIdentifier">
+    <DisplayName>ExtractVariables.SubjectIdentifier</DisplayName>
+    <Source>request</Source>
+    <QueryParam name="subject:identifier">
+        <Pattern ignoreCase="true">{subjectIdentifier}</Pattern>
+    </QueryParam>
+    <VariablePrefix>query_params</VariablePrefix>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+</ExtractVariables>

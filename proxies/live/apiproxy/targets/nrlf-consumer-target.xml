@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="nrlf-consumer-target">
+  <Description/>
+  <FaultRules/>
+  <PreFlow name="PreFlow">
+    <Request>
+      <Step>
+        <Name>LookupCache.NrlfAccessToken</Name>
+      </Step>
+      <Step>
+        <Name>KVM.GetNrlfPrivateKey</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+      <Step>
+        <Name>KVM.GetNrlfConfig</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+      <Step>
+        <Name>AssignMessage.SetNrlfAuthUrl</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+      <Step>
+        <Name>GenerateJWT.NrlfClientAssertion</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+      <Step>
+        <Name>ServiceCallout.NrlfAuth</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+      <Step>
+        <Name>Javascript.NrlfAddAuthorization</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.NrlfRequest</Name>
+      </Step>
+      <Step>
+        <Name>PopulateCache.NrlfAccessToken</Name>
+        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
+      </Step>
+    </Request>
+    <Response/>
+  </PreFlow>
+  <HTTPTargetConnection>
+    <URL>https://int.api.service.nhs.uk/record-locator/consumer/FHIR/R4</URL>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+    </SSLInfo>
+  </HTTPTargetConnection>
+</TargetEndpoint>

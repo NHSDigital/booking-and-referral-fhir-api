@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AssignMessage.NrlfRequest" async="false">
+  <Set>
+    <Verb>GET</Verb>
+    <Headers>
+      <Header name="Accept">application/fhir+json;version=1</Header>
+      <Header name="NHSD-End-User-Organisation-ODS">V4T0L</Header>
+      <Header name="X-Request-ID">{createUuid()}</Header>
+    </Headers>
+    <Version>1.1</Version>
+  </Set>
+  <AssignTo createNew="false" transport="http" type="request"/>
+  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+</AssignMessage>

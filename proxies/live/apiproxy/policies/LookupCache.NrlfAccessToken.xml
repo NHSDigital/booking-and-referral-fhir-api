@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LookupCache async="false" continueOnError="false" enabled="true" name="LookupCache.NrlfAccessToken">
+  <DisplayName>LookupCache.NrlfAccessToken</DisplayName>
+  <Properties/>
+  <Scope>Exclusive</Scope>
+  <CacheKey>
+    <KeyFragment>nrlfAccessToken</KeyFragment>
+  </CacheKey>
+  <AssignTo>cachedNrlfAccessToken</AssignTo>
+</LookupCache>
