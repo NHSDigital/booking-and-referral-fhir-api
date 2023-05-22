@@ -75,4 +75,10 @@
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>
   </RouteRule>
+  <DefaultFaultRule>
+    <Step>
+      <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed == true</Condition>
+    </Step>
+  </DefaultFaultRule>
 </ProxyEndpoint>
