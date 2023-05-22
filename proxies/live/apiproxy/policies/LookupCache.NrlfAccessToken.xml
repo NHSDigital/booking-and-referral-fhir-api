@@ -6,5 +6,5 @@
   <CacheKey>
     <KeyFragment>nrlfAccessToken</KeyFragment>
   </CacheKey>
-  <AssignTo>nrflCachedAccessToken</AssignTo>
+  <AssignTo>nrlfCachedAccessToken</AssignTo>
 </LookupCache>
