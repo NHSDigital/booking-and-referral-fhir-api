@@ -15,8 +15,7 @@
           <Name>AssignMessage.AddCors</Name>
         </Step>
       </Response>
-      <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)
-      </Condition>
+      <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
     </Flow>
     <Flow name="AddPayloadToPing">
       <Description/>
@@ -26,8 +25,7 @@
           <Name>AssignMessage.AddPayloadToPing</Name>
         </Step>
       </Response>
-      <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))
-      </Condition>
+      <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
     </Flow>
     <Flow name="Checks">
       <Request>
@@ -63,9 +61,7 @@
     <VirtualHost>secure</VirtualHost>
   </HTTPProxyConnection>
   <RouteRule name="NoRoute">
-    <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and
-      (request.header.Access-Control-Request-Method != null)
-    </Condition>
+    <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
   </RouteRule>
   <RouteRule name="NoRoutePing">
     <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb

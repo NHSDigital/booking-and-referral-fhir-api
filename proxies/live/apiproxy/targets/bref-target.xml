@@ -6,8 +6,7 @@
       </Step>
       <Step>
         <Name>RaiseFault.AddCapabilityStatement</Name>
-        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))
-        </Condition>
+        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
       </Step>
       <Step>
         <Name>Python.DecodeBase64</Name>
