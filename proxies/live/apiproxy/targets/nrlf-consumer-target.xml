@@ -13,7 +13,6 @@
       </Step>
       <Step>
         <Name>KVM.GetNrlfConfig</Name>
-        <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>
       <Step>
         <Name>AssignMessage.SetNrlfAuthUrl</Name>
