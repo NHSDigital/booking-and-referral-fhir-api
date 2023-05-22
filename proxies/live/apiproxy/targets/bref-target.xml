@@ -2,53 +2,54 @@
   <PreFlow>
     <Request>
       <Step>
-          <Name>LookupCache.Targets</Name>
+        <Name>LookupCache.Targets</Name>
       </Step>
-     <Step>
+      <Step>
         <Name>RaiseFault.AddCapabilityStatement</Name>
-        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
+        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))
+        </Condition>
       </Step>
       <Step>
-          <Name>Python.DecodeBase64</Name>
-          <Condition>request.header.NHSD-Target-Identifier != null</Condition>
+        <Name>Python.DecodeBase64</Name>
+        <Condition>request.header.NHSD-Target-Identifier != null</Condition>
       </Step>
       <Step>
-          <Name>Javascript.UnpackVars</Name>
-          <Condition>targets != null</Condition>
+        <Name>Javascript.UnpackVars</Name>
+        <Condition>targets != null</Condition>
       </Step>
       <Step>
-          <Name>Javascript.CheckTargets</Name>
-          <Condition>targets != null</Condition>
+        <Name>Javascript.CheckTargets</Name>
+        <Condition>targets != null</Condition>
       </Step>
       <Step>
-          <Name>ServiceCallout.GetTargetsKvm</Name>
-          <Condition>targets = null</Condition>
+        <Name>ServiceCallout.GetTargetsKvm</Name>
+        <Condition>targets = null</Condition>
       </Step>
       <Step>
-          <Name>PopulateCache.Targets</Name>
-          <Condition>targets = null</Condition>
+        <Name>PopulateCache.Targets</Name>
+        <Condition>targets = null</Condition>
       </Step>
       <Step>
-          <Name>AssignMessage.Targets</Name>
-          <Condition>targets = null</Condition>
+        <Name>AssignMessage.Targets</Name>
+        <Condition>targets = null</Condition>
       </Step>
       <Step>
-          <Name>Javascript.UnpackVars</Name>
-      </Step>
-       <Step>
-          <Name>Javascript.SetTargetUrl</Name>
+        <Name>Javascript.UnpackVars</Name>
       </Step>
       <Step>
-          <Name>RaiseFault.400InvalidHeaders</Name>
-          <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>
+        <Name>Javascript.SetTargetUrl</Name>
+      </Step>
+      <Step>
+        <Name>RaiseFault.400InvalidHeaders</Name>
+        <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>
       </Step>
       <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
         <Condition>idMalformed = true</Condition>
       </Step>
       <Step>
-          <Name>RaiseFault.404ProxyNotFound</Name>
-          <Condition>isError = true</Condition>
+        <Name>RaiseFault.404ProxyNotFound</Name>
+        <Condition>isError = true</Condition>
       </Step>
     </Request>
   </PreFlow>
@@ -68,16 +69,18 @@
   </FaultRules>
   <DefaultFaultRule>
     <Step>
-        <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
-        <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name  = "keymanagement.service.invalid_access_token"</Condition>
+      <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.invalid_access_token"</Condition>
     </Step>
     <Step>
-        <Name>AssignMessage.401UnauthorizedUnknownErrorResponse</Name>
-        <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name  = "oauth.v2.InvalidAccessToken"</Condition>
+      <Name>AssignMessage.401UnauthorizedUnknownErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "oauth.v2.InvalidAccessToken"</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.403ProxyNotEnabledErrorResponse</Name>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.InvalidAPICallAsNoApiProductMatchFound"</Condition>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name =
+        "keymanagement.service.InvalidAPICallAsNoApiProductMatchFound"
+      </Condition>
     </Step>
     <Step>
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>

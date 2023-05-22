@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TargetEndpoint name="nrlf-consumer-target">
-  <Description />
-  <FaultRules />
+  <Description/>
+  <FaultRules/>
   <PreFlow name="PreFlow">
     <Request>
       <Step>
@@ -37,7 +37,7 @@
         <Condition>lookupcache.LookupCache.NrlfAccessToken.cachehit = false</Condition>
       </Step>
     </Request>
-    <Response />
+    <Response/>
   </PreFlow>
   <HTTPTargetConnection>
     <URL>https://int.api.service.nhs.uk/record-locator/consumer/FHIR/R4</URL>
