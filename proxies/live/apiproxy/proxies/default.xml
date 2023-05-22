@@ -75,9 +75,4 @@
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>
   </RouteRule>
-  <DefaultFaultRule>
-    <Step>
-      <Name>AssignMessage.Errors.CatchAllMessage</Name>
-    </Step>
-  </DefaultFaultRule>
 </ProxyEndpoint>
