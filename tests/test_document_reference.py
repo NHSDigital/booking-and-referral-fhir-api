@@ -12,7 +12,6 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.debug
     def test_get_document_reference(self, get_token_client_credentials):
         """
            Test for the /DocumentReference endpoint. This operation will call the Consumer NRL API.

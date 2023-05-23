@@ -1,8 +1,8 @@
 var accessToken;
-var cachedAccessToken = context.getVariable("nrflCachedAccessToken");
+var cachedAccessToken = context.getVariable("nrlfCachedAccessToken");
 
 if (cachedAccessToken) {
-    access_token = cachedAccessToken;
+    accessToken = cachedAccessToken;
 } else {
     var respContent=context.getVariable('nrlfTokenResponse.content');
     var respObject=JSON.parse(respContent)
