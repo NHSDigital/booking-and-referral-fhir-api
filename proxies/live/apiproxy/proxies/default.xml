@@ -68,6 +68,10 @@
       = "HEAD"))
     </Condition>
   </RouteRule>
+  <RouteRule name="nrlf-producer-route">
+    <TargetEndpoint>nrlf-producer-target</TargetEndpoint>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference/*"</Condition>
+  </RouteRule>
   <RouteRule name="nrlf-consumer-route">
     <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
     <Condition>proxy.pathsuffix Matches "/DocumentReference*"</Condition>
