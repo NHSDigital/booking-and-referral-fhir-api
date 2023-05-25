@@ -70,8 +70,8 @@
   </RouteRule>
   <RouteRule name="nrlf-producer-route">
     <TargetEndpoint>nrlf-producer-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference/*"</Condition>
-  </RouteRule>
+    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and ((request.verb != "GET")))</Condition>
+   </RouteRule>
   <RouteRule name="nrlf-consumer-route">
     <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
     <Condition>proxy.pathsuffix Matches "/DocumentReference*"</Condition>
@@ -83,6 +83,18 @@
     <Step>
       <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed == true</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.invalid_access_token"</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.401UnauthorizedUnknownErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "oauth.v2.InvalidAccessToken"</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.403ProxyNotEnabledErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.InvalidAPICallAsNoApiProductMatchFound"</Condition>
     </Step>
   </DefaultFaultRule>
 </ProxyEndpoint>
