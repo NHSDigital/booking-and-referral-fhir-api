@@ -29,10 +29,12 @@ def post_document_reference(request: Request):
 def get_document_reference_by_id(request: Request):
     return load_example("document_reference/id/Not-Found.json")
 
+
 @route.put("/DocumentReference/*")
 def put_document_reference_by_id(request: Request):
     return load_example("document_reference/id/Not-Found.json")
 
+
 @route.delete("/DocumentReference/*")
-def put_document_reference_by_id(request: Request):
+def delete_document_reference_by_id(request: Request):
     return load_example("document_reference/id/DELETE-success.json")
