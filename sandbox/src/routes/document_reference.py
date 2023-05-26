@@ -18,3 +18,21 @@ def get_document_reference(request: Request):
         return load_example("document_reference/GET-success-empty.json")
     else:
         return load_example("document_reference/GET-success.json")
+
+
+@route.post("/DocumentReference")
+def post_document_reference(request: Request):
+    return load_example("document_reference/POST-success.json")
+
+
+@route.get("/DocumentReference/*")
+def get_document_reference_by_id(request: Request):
+    return load_example("document_reference/id/Not-Found.json")
+
+@route.put("/DocumentReference/*")
+def put_document_reference_by_id(request: Request):
+    return load_example("document_reference/id/Not-Found.json")
+
+@route.delete("/DocumentReference/*")
+def put_document_reference_by_id(request: Request):
+    return load_example("document_reference/id/DELETE-success.json")

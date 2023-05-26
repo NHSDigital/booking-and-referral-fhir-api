@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage continueOnError="false" enabled="true" name="AssignMessage.NrlfRequest" async="false">
   <Set>
-    <Verb>GET</Verb>
+    <Verb>{request.verb}</Verb>
     <Headers>
       <Header name="Accept">application/fhir+json;version=1</Header>
       <Header name="NHSD-End-User-Organisation-ODS">V4T0L</Header>
