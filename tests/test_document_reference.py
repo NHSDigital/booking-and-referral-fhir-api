@@ -17,7 +17,7 @@ class TestDocumentReference:
     @pytest.mark.debug
     def test_get_document_reference(self, get_token_client_credentials):
         """
-           Test for the /DocumentReference endpoint. This operation will call the Consumer NRL API.
+           Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API.
         """
         subject_identifier = "https://fhir.nhs.uk/Id/nhs-number|"+TestDocumentReference.end_user_nhs_number
         # Given
@@ -36,7 +36,6 @@ class TestDocumentReference:
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
             },
         )
-
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
@@ -46,7 +45,7 @@ class TestDocumentReference:
     @pytest.mark.debug
     def test_get_document_reference_by_id(self, get_token_client_credentials):
         """
-           Test for the /DocumentReference/{id} endpoint. This operation will call the Producer NRL API.
+           Test for the GET /DocumentReference/{id} endpoint. This operation will call the Producer NRL API.
         """
         document_id = "V4T0L-"
         timestamp = int(time.time())
@@ -78,7 +77,7 @@ class TestDocumentReference:
     @pytest.mark.debug
     def test_post_delete_put_document_reference(self, get_token_client_credentials):
         """
-           Test for the POST and Delete /DocumentReference endpoint. This operation will call the Producer NRL API.
+           Test for the POST, Delete and PUT /DocumentReference endpoint. This operation will call the Producer NRL API.
         """
         document_id = "V4T0L-"
         timestamp = int(time.time())
