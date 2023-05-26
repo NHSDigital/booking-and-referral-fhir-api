@@ -4,14 +4,12 @@ from assertpy import assert_that
 import time
 import random
 import json
-
 from .configuration import config
-from .example_loader import load_example
 
 
 class TestDocumentReference:
     end_user_ods = "V4T0L"
-    end_user_nhs_number="4409815415"
+    end_user_nhs_number = "4409815415"
 
     @pytest.mark.appointment
     @pytest.mark.integration
@@ -25,7 +23,6 @@ class TestDocumentReference:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
-        expected_body = load_example("document_reference/GET-success-empty.json")
 
         # When
         response = requests.get(
@@ -55,7 +52,7 @@ class TestDocumentReference:
         timestamp = int(time.time())
         random.seed(timestamp)
         random_integer = random.randint(0, 1000)
-        document_id+=str(random_integer)
+        document_id += str(random_integer)
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
@@ -75,7 +72,6 @@ class TestDocumentReference:
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
 
-
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
@@ -88,50 +84,52 @@ class TestDocumentReference:
         timestamp = int(time.time())
         random.seed(timestamp)
         random_integer = random.randint(0, 1000)
-        document_id+=str(random_integer)
+        document_id += str(random_integer)
         # Given
         token = get_token_client_credentials["access_token"]
         expected_post_status_code = 201
         expected_delete_status_code = 200
         expected_put_status_code = 404
-        
-        request_payload={
-  "resourceType": "DocumentReference",
-  "id": document_id,
-  "type": {
-    "coding": [
-      {"system": "https://snomed.info/ict",
-      "code": "3457005",
-      "display": "Royal College of Physicians NEWS2 (National Early Warning Score 2) chart"
-      }
-    ]
-  },
-  "subject": {
-     "identifier": {
-    "system": "https://fhir.nhs.uk/Id/nhs-number",
-    "value": TestDocumentReference.end_user_nhs_number
-  }
-  },
-  "status": "active",
-  "content": [
-    {
-      "attachment": {
-        "language": "en-UK",
-        "url": "http://fhir.nhs.uk/Id/dos-service-id%7C111111111",
-        "size": 0,
-        "title": "Physical",
-        "creation": "2005-12-24T09:35:00+11:00"
-      }
-    }
-  ],
-  "custodian": {
-    "identifier": {
-    "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-    "value": TestDocumentReference.end_user_ods
-  }
-  }
-}       
-        json_payload = json.dumps(request_payload)  
+        request_payload = {
+                        "resourceType": "DocumentReference",
+                        "id": document_id,
+                        "type": {
+                                "coding": [
+                                  {
+                                   "system": "https://snomed.info/ict",
+                                   "code": "3457005",
+                                   "display": "Royal College of Physicians NEWS2 (National Early Warning Score 2) chart"
+                                  }
+                                ]
+                                },
+                        "subject": {
+                                   "identifier":
+                                   {
+                                     "system": "https://fhir.nhs.uk/Id/nhs-number",
+                                     "value": TestDocumentReference.end_user_nhs_number
+                                   }
+                                   },
+                        "status": "active",
+                        "content": [
+                         {
+                          "attachment":
+                          {
+                            "language": "en-UK",
+                            "url": "http://fhir.nhs.uk/Id/dos-service-id%7C111111111",
+                            "size": 0,
+                            "title": "Physical",
+                            "creation": "2005-12-24T09:35:00+11:00"
+                          }
+                         }
+                        ],
+                        "custodian": {
+                          "identifier": {
+                                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                                        "value": TestDocumentReference.end_user_ods
+                                        }
+                                     }
+                          }
+        json_payload = json.dumps(request_payload)
         # When
         post_response = requests.post(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference",
