@@ -1,6 +1,5 @@
 from urllib.parse import parse_qs
-from fastapi import APIRouter, Request
-from starlette.responses import Response
+from fastapi import APIRouter, Request, Response
 from .example_loader import load_example
 
 route = APIRouter()

@@ -5,15 +5,11 @@ import time
 import random
 import json
 from .configuration import config
-import base64
 
 
 class TestDocumentReference:
     end_user_ods = "V4T0L"
     end_user_nhs_number = "4409815415"
-    target_id = "NHS0001"
-    target_identifier = json.dumps({"value": target_id, "system": "tests"})
-    target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
     @pytest.mark.appointment
     @pytest.mark.integration
@@ -35,7 +31,6 @@ class TestDocumentReference:
             headers={
                 "Accept": "application/fhir+json;version=1",
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_identifier_encoded,
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
@@ -66,7 +61,6 @@ class TestDocumentReference:
             headers={
                 "Accept": "application/fhir+json;version=1",
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_identifier_encoded,
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
@@ -141,7 +135,6 @@ class TestDocumentReference:
                 "Accept": "application/fhir+json;version=1",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_identifier_encoded,
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
@@ -155,7 +148,6 @@ class TestDocumentReference:
                 "Accept": "application/fhir+json;version=1",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_identifier_encoded,
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
@@ -168,7 +160,6 @@ class TestDocumentReference:
                 "Accept": "application/fhir+json;version=1",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_identifier_encoded,
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
