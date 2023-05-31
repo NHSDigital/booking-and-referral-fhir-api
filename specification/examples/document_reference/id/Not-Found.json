@@ -1,0 +1,25 @@
+{
+    "resourceType": "OperationOutcome",
+    "id": "e0f4f71f-6165-4485-a77a-5189138661d6",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome"
+        ]
+    },
+    "issue": [
+        {
+            "severity": "error",
+            "code": "processing",
+            "details": {
+                "coding": [
+                    {
+                        "system": "https://fhir.nhs.uk/CodeSystem/Spine-ErrorOrWarningCode",
+                        "code": "RESOURCE_NOT_FOUND",
+                        "display": "Resource not found"
+                    }
+                ]
+            },
+            "diagnostics": "Item could not be found"
+        }
+    ]
+}

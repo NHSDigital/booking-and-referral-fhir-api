@@ -1,8 +1,25 @@
 {
-    "resourceType": "DocumentReference",
-    "meta": {
+  "resourceType": "OperationOutcome",
+  "id": "968922ad-b1a2-4afa-b766-0482e4edec72",
+  "meta": {
       "profile": [
-        "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-DocumentReference"
+          "https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome"
       ]
-    }
-  }
+  },
+  "issue": [
+      {
+          "severity": "information",
+          "code": "informational",
+          "details": {
+              "coding": [
+                  {
+                      "system": "https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode",
+                      "code": "RESOURCE_CREATED",
+                      "display": "Resource created"
+                  }
+              ]
+          },
+          "diagnostics": "Resource created"
+      }
+  ]
+}
