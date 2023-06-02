@@ -15,15 +15,22 @@ steps:
         aws_account: "dev"
 
   - bash: |
-        echo "We run terraform when it's not a PR release. We also don't run it for any sandbox environment"
+        echo "We run terraform when it's not any sandbox environment"
         if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
-          if ! [[ $(FULLY_QUALIFIED_SERVICE_NAME) =~ .*-pr-* ]]; then
+
+          pr_no=$(echo $(FULLY_QUALIFIED_SERVICE_NAME) | { grep -oE '[0-9]+$' || true; })
+          if [ -z $pr_no ]; then
+          workspace=$APIGEE_ENVIRONMENT
+          else
+          workspace=$APIGEE_ENVIRONMENT-PR
+          echo workspace: $workspace
+          fi
             export AWS_PROFILE=apim-dev
             aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
       
             make init
-            make apply aws_account_no=${aws_account_no}
-          fi
+            make apply aws_account_no=${aws_account_no} environment=$workspace
+          
         fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"

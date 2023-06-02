@@ -1,6 +1,5 @@
 .SILENT:
 
-environment = dev
 aws_profile = apim-dev
 tr_vars=
 tr_cmd = AWS_PROFILE=$(aws_profile) terraform
