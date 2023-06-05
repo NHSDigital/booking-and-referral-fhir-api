@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_log_group" "api_access_log" {
-  name              = "API-Gateway-Execution-Logs_${aws_apigatewayv2_api.service_api.id}/${local.api_stage_name}"
+  name              = "/aws/vendedlogs/${aws_apigatewayv2_api.service_api.id}/${local.api_stage_name}"
   retention_in_days = 7
 }
 
@@ -8,7 +8,7 @@ resource "aws_api_gateway_account" "api_account" {
 }
 
 resource "aws_iam_role" "api_cloudwatch" {
-  name = "${var.name_prefix}-api-logs"
+  name = "${var.short_prefix}-api-logs"
 
   assume_role_policy = <<EOF
 {

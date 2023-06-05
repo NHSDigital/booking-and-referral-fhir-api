@@ -18,6 +18,9 @@ plan: workspace
 apply: workspace
 	$(tr_cmd) apply -auto-approve
 
+destroy:
+	$(tr_cmd) destroy $(tr_vars)
+
 test:
 	curl -X GET --key client.key --cert client.crt -i https://$(environment).bars.dev.api.platform.nhs.uk/Appointment
 
