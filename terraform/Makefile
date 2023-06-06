@@ -1,6 +1,5 @@
 .SILENT:
 
-environment = dev
 aws_profile = apim-dev
 tr_vars=
 tr_cmd = AWS_PROFILE=$(aws_profile) terraform
@@ -18,6 +17,9 @@ plan: workspace
 
 apply: workspace
 	$(tr_cmd) apply -auto-approve
+
+destroy:
+	$(tr_cmd) destroy $(tr_vars)
 
 test:
 	curl -X GET --key client.key --cert client.crt -i https://$(environment).bars.dev.api.platform.nhs.uk/Appointment
