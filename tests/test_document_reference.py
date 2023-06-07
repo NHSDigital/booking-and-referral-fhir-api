@@ -1,9 +1,11 @@
+import json
+import random
+import time
+
 import pytest
 import requests
 from assertpy import assert_that
-import time
-import random
-import json
+
 from .configuration import config
 
 
@@ -14,7 +16,6 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.debug
     def test_get_document_reference(self, get_token_client_credentials):
         """
            Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API.
@@ -42,7 +43,6 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.debug
     def test_get_document_reference_by_id(self, get_token_client_credentials):
         """
            Test for the GET /DocumentReference/{id} endpoint. This operation will call the Producer NRL API.

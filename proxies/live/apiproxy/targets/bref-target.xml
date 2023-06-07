@@ -52,14 +52,6 @@
       </Step>
     </Request>
   </PreFlow>
-  <PostFlow>
-    <Response>
-      <Step>
-        <Name>AssignMessage.403ReceiverMtlsResponse</Name>
-        <Condition>response.status.code = 403</Condition>
-      </Step>
-    </Response>
-  </PostFlow>
   <FaultRules>
     <FaultRule name="rate_limiting_error">
       <Step>
@@ -75,6 +67,10 @@
     </FaultRule>
   </FaultRules>
   <DefaultFaultRule>
+    <Step>
+      <Name>AssignMessage.403ReceiverMtlsResponse</Name>
+      <Condition>response.status.code = 403</Condition>
+    </Step>
     <Step>
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
       <Condition>isError = true</Condition>
