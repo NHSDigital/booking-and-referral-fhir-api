@@ -108,4 +108,5 @@
       <KeyAlias>cert</KeyAlias>
     </SSLInfo>
   </HTTPTargetConnection>
+  <Timeout>200</Timeout>
 </TargetEndpoint>
