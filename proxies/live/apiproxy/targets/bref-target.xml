@@ -77,7 +77,7 @@
     </Step>
     <Step>
       <Name>AssignMessage.408TimeoutErrorResponse</Name>
-      <Condition>response.status.code = 504</Condition>
+      <Condition>error.status.code = 504</Condition>
     </Step>
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>
@@ -88,18 +88,21 @@
     </Step>
     <Step>
       <Name>AssignMessage.500ServerErrorNoStoreErrorResponse</Name>
-      <Condition>(response.status.code = 500) and (operation-outcome.code = "no-store")</Condition>
+      <Condition>(error.status.code = 500) and (operation-outcome.code = "no-store")</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.500ServerErrorExceptionErrorResponse</Name>
-      <Condition>(response.status.code = 500) and (operation-outcome.code != "no-store")</Condition>
+      <Condition>(error.status.code = 500) and (operation-outcome.code != "no-store")</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.503ServiceUnavailableErrorResponse</Name>
-      <Condition>response.status.code = 503</Condition>
+      <Condition>error.status.code = 503</Condition>
     </Step>
   </DefaultFaultRule>
   <HTTPTargetConnection>
+        <Properties>
+            <Property name="io.timeout.millis">32000</Property>
+        </Properties>
     <URL>https://mocktarget.apigee.net</URL>
     <SSLInfo>
       <Enabled>true</Enabled>
