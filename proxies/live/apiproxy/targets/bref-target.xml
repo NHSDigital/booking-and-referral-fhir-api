@@ -68,6 +68,10 @@
   </FaultRules>
   <DefaultFaultRule>
     <Step>
+      <Name>AssignMessage.403ReceiverMtlsResponse</Name>
+      <Condition>response.status.code = 403</Condition>
+    </Step>
+    <Step>
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
       <Condition>isError = true</Condition>
     </Step>

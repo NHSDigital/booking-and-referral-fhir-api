@@ -1,9 +1,9 @@
 {
   "resourceType": "OperationOutcome",
-  "id": "531e073a-3295-4e67-ae90-e00bd96a9cdd",
+  "id": "c936667e-13b0-4f56-94b1-e944a459837e",
   "meta": {
     "profile": [
-      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+      "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
     ]
   },
   "issue": [
@@ -18,7 +18,7 @@
           }
         ]
       },
-      "diagnostics": "Failed to Authenticate with <Receiver Identifier (ODS?)>: <further diagnostics information, error message/error text>"
+      "diagnostics": "TLS-MA failure."
     }
   ]
 }
