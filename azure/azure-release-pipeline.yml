@@ -39,23 +39,15 @@ extends:
           proxy_path: sandbox
           post_deploy:
               -   template: ./templates/post-deploy.yml
-      - environment: internal-qa
-        post_deploy:
-          - template: ./templates/post-deploy.yml
-      - environment: internal-qa-sandbox
-        proxy_path: sandbox
-        post_deploy:
-          - template: ./templates/post-deploy.yml
-    # make_spec_visible is false for sandbox environment
-    # (App subscription make sense for most sandbox implementations)
       - environment: sandbox
+        depends_on:
+          - internal_dev_sandbox
         proxy_path: sandbox
         post_deploy:
           - template: ./templates/post-deploy.yml
       - environment: int
         depends_on:
-          - internal_qa
-          - internal_qa_sandbox
+          - internal_dev
         post_deploy:
           - template: ./templates/post-deploy.yml
       - environment: prod

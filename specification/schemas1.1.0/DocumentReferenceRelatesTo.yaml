@@ -1,0 +1,16 @@
+type: object
+properties:
+  id:
+    type: string
+    pattern: "[A-Za-z0-9\\-\\.]{1,64}"
+    description: Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
+  code:
+    type: string
+    pattern: "[^\\s]+(\\s[^\\s]+)*"
+    description: The type of relationship that this document has with anther document.
+  target:
+    $ref: "DocumentReferenceReference.yaml"
+    description: The target document of this relationship.
+required:
+  - code
+  - target

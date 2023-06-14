@@ -1,0 +1,23 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "structure",
+      "details": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+            "code": "PROXY_BAD_REQUEST"
+          }
+        ]
+      },
+      "diagnostics": "Invalid schema for NHSD-Target-Identifier header"
+    }
+  ]
+}

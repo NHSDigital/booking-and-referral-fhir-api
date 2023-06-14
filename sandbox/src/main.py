@@ -1,11 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.responses import Response
 from starlette.status import HTTP_200_OK
-from fastapi.middleware.cors import CORSMiddleware
-
 
 from routes import (
     errors,
@@ -15,6 +14,7 @@ from routes import (
     service_request,
     process_message,
     message_definition,
+    document_reference,
 )
 from routes.example_loader import load_example
 
@@ -66,6 +66,7 @@ app.include_router(metadata.route)
 app.include_router(service_request.route)
 app.include_router(process_message.route)
 app.include_router(message_definition.route)
+app.include_router(document_reference.route)
 
 
 @app.get("/_status")

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.SetNrlfAuthUrl">
+  <DisplayName>AssignMessage.SetNrlfAuthUrl</DisplayName>
+  <Properties/>
+  <AssignVariable>
+    <Name>nrlfAuthUrl</Name>
+    <Template>https://{nrlfAuthDomain}/oauth2/token</Template>
+  </AssignVariable>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

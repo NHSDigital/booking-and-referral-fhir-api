@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GenerateJWT async="false" continueOnError="false" enabled="true" name="GenerateJWT.NrlfClientAssertion">
+  <DisplayName>GenerateJWT.NrlfClientAssertion</DisplayName>
+  <Algorithm>RS512</Algorithm>
+  <PrivateKey>
+    <Id>test-1</Id>
+    <Value ref="private.nrlfPrivateKey"/>
+  </PrivateKey>
+  <Subject ref="nrlfClientId"/>
+  <Issuer ref="nrlfClientId"/>
+  <Audience ref="nrlfAuthUrl"/>
+  <ExpiresIn>5m</ExpiresIn>
+  <OutputVariable>client_assertion</OutputVariable>
+</GenerateJWT>

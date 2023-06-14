@@ -5,10 +5,6 @@
 {
 	"resourceType": "CapabilityStatement",
 	"id": "BaRS-FHIR-Server",
-	"meta": {
-		"versionId": "1.0.0-alpha",
-		"lastUpdated": "2022-09-16T15:00:00+01:00"
-	},
 	"url": "https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4",
 	"name": "BaRS FHIR Server CapabilityStatement",
 	"status": "active",

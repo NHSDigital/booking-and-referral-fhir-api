@@ -1,70 +1,58 @@
 <TargetEndpoint name="booking-and-referral-target">
   <PreFlow>
     <Request>
-     <Step>
-        <Name>RaiseFault.404PageNotFound</Name>
-        <Condition>
-                  (proxy.pathsuffix Not Matches "/metadata")
-                  AND (proxy.pathsuffix Not Matches "/$process-message")
-                  AND (proxy.pathsuffix Not Matches "/Slot*")
-                  AND (proxy.pathsuffix Not Matches "/Appointment*")
-                  AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
-                  AND (proxy.pathsuffix Not Matches "/registry*")
-                  AND (proxy.pathsuffix Not Matches "/DocumentReference*")
-                  AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
-        </Condition>
-      </Step>
-      <Step>
-        <Name>OauthV2.VerifyAccessToken</Name>
-      </Step>
-      <Step>
-        <Name>FlowCallout.ApplyRateLimiting</Name>
-      </Step>
       <Step>
           <Name>RaiseFault.400InvalidHeaders</Name>
           <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null) or (request.header.NHSD-Target-Identifier = null)</Condition>
       </Step>
       <Step>
           <Name>LookupCache.Targets</Name>
+       </Step>
+      <Step>
+        <Name>RaiseFault.AddCapabilityStatement</Name>
+        <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
       </Step>
       <Step>
-          <Name>Python.DecodeBase64</Name>
-          <Condition>request.header.NHSD-Target-Identifier != null</Condition>
+        <Name>Python.DecodeBase64</Name>
+        <Condition>request.header.NHSD-Target-Identifier != null</Condition>
       </Step>
       <Step>
-          <Name>Javascript.UnpackVars</Name>
-          <Condition>targets != null</Condition>
+        <Name>Javascript.UnpackVars</Name>
+        <Condition>targets != null</Condition>
       </Step>
       <Step>
-          <Name>Javascript.CheckTargets</Name>
-          <Condition>targets != null</Condition>
+        <Name>Javascript.CheckTargets</Name>
+        <Condition>targets != null</Condition>
       </Step>
       <Step>
-          <Name>ServiceCallout.GetTargetsKvm</Name>
-          <Condition>targets = null</Condition>
+        <Name>ServiceCallout.GetTargetsKvm</Name>
+        <Condition>targets = null</Condition>
       </Step>
       <Step>
-          <Name>PopulateCache.Targets</Name>
-          <Condition>targets = null</Condition>
+        <Name>PopulateCache.Targets</Name>
+        <Condition>targets = null</Condition>
       </Step>
       <Step>
-          <Name>AssignMessage.Targets</Name>
-          <Condition>targets = null</Condition>
+        <Name>AssignMessage.Targets</Name>
+        <Condition>targets = null</Condition>
       </Step>
       <Step>
-          <Name>Javascript.UnpackVars</Name>
+        <Name>Javascript.UnpackVars</Name>
       </Step>
-       <Step>
-          <Name>Javascript.SetTargetUrl</Name>
+      <Step>
+        <Name>Javascript.SetTargetUrl</Name>
       </Step>
-      
+      <Step>
+        <Name>RaiseFault.400InvalidHeaders</Name>
+        <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>
+      </Step>
       <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
         <Condition>idMalformed = true</Condition>
       </Step>
       <Step>
-          <Name>RaiseFault.404ProxyNotFound</Name>
-          <Condition>isError = true</Condition>
+        <Name>RaiseFault.404ProxyNotFound</Name>
+        <Condition>isError = true</Condition>
       </Step>
     </Request>
   </PreFlow>
@@ -78,16 +66,8 @@
   </FaultRules>
   <DefaultFaultRule>
     <Step>
-        <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
-        <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name  = "keymanagement.service.invalid_access_token"</Condition>
-    </Step>
-    <Step>
-        <Name>AssignMessage.401UnauthorizedUnknownErrorResponse</Name>
-        <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name  = "oauth.v2.InvalidAccessToken"</Condition>
-    </Step>
-    <Step>
-      <Name>AssignMessage.403ProxyNotEnabledErrorResponse</Name>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.InvalidAPICallAsNoApiProductMatchFound"</Condition>
+      <Name>AssignMessage.403ReceiverMtlsResponse</Name>
+      <Condition>response.status.code = 403</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
@@ -99,7 +79,7 @@
     </Step>
     <Step>
       <Name>AssignMessage.408TimeoutErrorResponse</Name>
-      <Condition>response.status.code = 504</Condition>
+      <Condition>error.status.code = 504</Condition>
     </Step>
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>
@@ -110,18 +90,21 @@
     </Step>
     <Step>
       <Name>AssignMessage.500ServerErrorNoStoreErrorResponse</Name>
-      <Condition>(response.status.code = 500) and (operation-outcome.code = "no-store")</Condition>
+      <Condition>(error.status.code = 500) and (operation-outcome.code = "no-store")</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.500ServerErrorExceptionErrorResponse</Name>
-      <Condition>(response.status.code = 500) and (operation-outcome.code != "no-store")</Condition>
+      <Condition>(error.status.code = 500) and (operation-outcome.code != "no-store")</Condition>
     </Step>
     <Step>
       <Name>AssignMessage.503ServiceUnavailableErrorResponse</Name>
-      <Condition>response.status.code = 503</Condition>
+      <Condition>error.status.code = 503</Condition>
     </Step>
   </DefaultFaultRule>
   <HTTPTargetConnection>
+        <Properties>
+            <Property name="io.timeout.millis">32000</Property>
+        </Properties>
     <URL>https://mocktarget.apigee.net</URL>
     <SSLInfo>
       <Enabled>true</Enabled>

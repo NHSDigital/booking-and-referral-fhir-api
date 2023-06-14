@@ -1,5 +1,5 @@
 resource "aws_lb" "alb" {
-  name               = var.name_prefix
+  name               = var.short_prefix
   internal           = true
   load_balancer_type = "application"
 

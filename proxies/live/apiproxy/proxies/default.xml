@@ -1,4 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ProxyEndpoint name="default">
+  <PreFlow>
+    <Request>
+      <Step>
+        <Name>FlowCallout.ApplyRateLimiting</Name>
+      </Step>
+    </Request>
+  </PreFlow>
   <Flows>
     <Flow name="OptionsPreFlight">
       <Request/>
@@ -19,8 +27,28 @@
       </Response>
       <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
     </Flow>
+    <Flow name="Checks">
+      <Request>
+        <Step>
+          <Name>RaiseFault.404PageNotFound</Name>
+          <Condition>
+            (proxy.pathsuffix Not Matches "/metadata")
+            AND (proxy.pathsuffix Not Matches "/$process-message")
+            AND (proxy.pathsuffix Not Matches "/Slot*")
+            AND (proxy.pathsuffix Not Matches "/Appointment*")
+            AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
+            AND (proxy.pathsuffix Not Matches "/registry*")
+            AND (proxy.pathsuffix Not Matches "/DocumentReference*")
+            AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
+          </Condition>
+        </Step>
+        <Step>
+          <Name>OauthV2.VerifyAccessToken</Name>
+        </Step>
+      </Request>
+      <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
+    </Flow>
   </Flows>
-  <PreFlow/>
   <PostClientFlow name="PostClientFlow">
     <Response>
       <Step>
@@ -36,14 +64,37 @@
     <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
   </RouteRule>
   <RouteRule name="NoRoutePing">
-    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
+    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb
+      = "HEAD"))
+    </Condition>
+  </RouteRule>
+  <RouteRule name="nrlf-producer-route">
+    <TargetEndpoint>nrlf-producer-target</TargetEndpoint>
+    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and ((request.verb != "GET")))</Condition>
+   </RouteRule>
+  <RouteRule name="nrlf-consumer-route">
+    <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*"</Condition>
   </RouteRule>
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>
   </RouteRule>
   <DefaultFaultRule>
     <Step>
-      <Name>AssignMessage.Errors.CatchAllMessage</Name>
+      <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed == true</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.invalid_access_token"</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.401UnauthorizedUnknownErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "oauth.v2.InvalidAccessToken"</Condition>
+    </Step>
+    <Step>
+      <Name>AssignMessage.403ProxyNotEnabledErrorResponse</Name>
+      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.InvalidAPICallAsNoApiProductMatchFound"</Condition>
     </Step>
   </DefaultFaultRule>
 </ProxyEndpoint>

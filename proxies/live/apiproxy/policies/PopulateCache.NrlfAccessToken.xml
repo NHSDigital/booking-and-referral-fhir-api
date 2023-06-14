@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PopulateCache async="false" continueOnError="false" enabled="true" name="PopulateCache.NrlfAccessToken">
+  <DisplayName>PopulateCache.NrlfAccessToken</DisplayName>
+  <Properties/>
+  <Scope>Exclusive</Scope>
+  <CacheKey>
+    <KeyFragment>nrlfAccessToken</KeyFragment>
+  </CacheKey>
+  <ExpirySettings>
+    <TimeoutInSec>300</TimeoutInSec>
+  </ExpirySettings>
+  <Source>nrlfAccessToken</Source>
+</PopulateCache>
