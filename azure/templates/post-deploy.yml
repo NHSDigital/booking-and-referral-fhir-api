@@ -22,7 +22,7 @@ steps:
           if [ -z $pr_no ]; then
           workspace=$APIGEE_ENVIRONMENT
           else
-          workspace=$APIGEE_ENVIRONMENT-pr
+          workspace=$APIGEE_ENVIRONMENT-v1
           echo workspace: $workspace
           fi
             export AWS_PROFILE=apim-dev
