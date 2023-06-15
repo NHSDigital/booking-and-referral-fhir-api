@@ -22,7 +22,7 @@ steps:
           if [ -z $pr_no ]; then
           workspace=$APIGEE_ENVIRONMENT
           else
-          workspace=$APIGEE_ENVIRONMENT-v1
+          workspace=$APIGEE_ENVIRONMENT-pr
           echo workspace: $workspace
           fi
             export AWS_PROFILE=apim-dev
@@ -34,6 +34,7 @@ steps:
         fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+    retryCountOnTaskFailure: 2
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
