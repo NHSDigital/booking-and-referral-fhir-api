@@ -29,7 +29,6 @@ steps:
             aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
       
             make init
-            make destroy -auto-approve
             make apply aws_account_no=${aws_account_no} environment=$workspace
           
         fi
