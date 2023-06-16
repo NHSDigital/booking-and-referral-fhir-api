@@ -10,7 +10,7 @@ from .example_loader import load_example
 
 
 class TestMetadata:
-    target_id = "NHS0001"
+    target_id = config.TARGET_ID
 
     @pytest.mark.metadata
     @pytest.mark.integration
@@ -45,6 +45,7 @@ class TestMetadata:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
+    @pytest.mark.debug
     @pytest.mark.metadata
     @pytest.mark.integration
     @pytest.mark.sandbox

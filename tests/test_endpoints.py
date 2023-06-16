@@ -10,7 +10,7 @@ from .example_loader import load_example
 
 
 class TestEndpoints:
-    target_id = "NHS0001"
+    target_id = config.TARGET_ID
 
     @pytest.mark.auth
     def test_invalid_access_token(self):
@@ -94,7 +94,7 @@ class TestEndpoints:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
         expected_body = load_example("OperationOutcome/PROXY-NONE/404-NOT_FOUND-not-found.json")
-        target_identifier = json.dumps({"value": "NHS0001", "system": "tests"})
+        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -122,7 +122,7 @@ class TestEndpoints:
     ):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_target = f"https://dev.bars.dev.api.platform.nhs.uk/{path_suffix}"
+        expected_target = f"https://internal-dev.bars.dev.api.platform.nhs.uk/{path_suffix}"
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 

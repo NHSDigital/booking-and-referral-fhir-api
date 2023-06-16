@@ -67,6 +67,13 @@ steps:
       export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
       export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
 
+      pr_no=$(echo $(FULLY_QUALIFIED_SERVICE_NAME) | { grep -oE '[0-9]+$' || true; })
+      if [ -z $pr_no ]; then
+          export TARGET_ID= NHS0001
+      else
+          export TARGET_ID= NHS0001-pr
+      fi
+
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
        poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest -o junit_logging=all --junitxml=api_tests.xml

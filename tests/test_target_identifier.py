@@ -10,7 +10,7 @@ from .example_loader import load_example
 
 
 class TestProcessMessage:
-    target_id = "NHS0001"
+    target_id = config.TARGET_ID
 
     @pytest.mark.target_identifier
     @pytest.mark.broker
