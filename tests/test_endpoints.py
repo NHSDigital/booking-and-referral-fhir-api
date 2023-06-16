@@ -124,7 +124,7 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         if "pr" in self.target_id:
-            expected_target=f"https://internal-dev-pr.bars.dev.api.platform.nhs.uk/{path_suffix}"
+            expected_target = f"https://internal-dev-pr.bars.dev.api.platform.nhs.uk/{path_suffix}"
         else:
             expected_target = f"https://internal-dev.bars.dev.api.platform.nhs.uk/{path_suffix}"
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
