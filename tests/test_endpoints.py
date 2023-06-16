@@ -111,6 +111,7 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
+    @pytest.mark.debug
     @pytest.mark.asyncio
     @pytest.mark.broker
     @pytest.mark.parametrize(
@@ -122,7 +123,10 @@ class TestEndpoints:
     ):
         # Given
         token = get_token_client_credentials["access_token"]
-        expected_target = f"https://internal-dev.bars.dev.api.platform.nhs.uk/{path_suffix}"
+        if "pr" in self.target_id:
+            expected_target=f"https://internal-dev-pr.bars.dev.api.platform.nhs.uk/{path_suffix}"
+        else:
+            expected_target = f"https://internal-dev.bars.dev.api.platform.nhs.uk/{path_suffix}"
         target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
