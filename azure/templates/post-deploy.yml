@@ -67,10 +67,13 @@ steps:
       export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
 
       pr_no=$(echo $(FULLY_QUALIFIED_SERVICE_NAME) | { grep -oE '[0-9]+$' || true; })
+      echo $pr_no
       if [ -z $pr_no ]; then
-          export TARGET_ID= NHS0001
+          export TARGET_ID= "NHS0001"
+          echo "exporting NHS0001"
       else
-          export TARGET_ID= NHS0001-pr
+          export TARGET_ID= "NHS0001-pr"
+          echo "exporting NHS0001-pr"
       fi
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
