@@ -13,7 +13,7 @@ from .example_loader import load_example
 class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_appointment_id = str(uuid.uuid4())
-    target_id = "NHS0001"
+    target_id = config.TARGET_ID
 
     @pytest.mark.appointment
     @pytest.mark.integration

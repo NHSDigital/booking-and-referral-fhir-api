@@ -12,7 +12,7 @@ from .example_loader import load_example
 
 class TestSlots:
     currentTime = datetime.now()
-    target_id = "NHS0001"
+    target_id = config.TARGET_ID
 
     @pytest.mark.slots
     @pytest.mark.integration
