@@ -10,7 +10,8 @@ from .example_loader import load_example
 
 
 class TestMessageDefinition:
-    target_id = config.TARGET_SYSTEM
+    target_id = json.dumps({"value": "NHS0001", "system": config.TARGET_SYSTEM})
+    target_id_encoded = base64.b64encode(bytes(target_id, "utf-8"))
 
     @pytest.mark.message_definition
     @pytest.mark.integration
@@ -24,15 +25,13 @@ class TestMessageDefinition:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/MessageDefinition",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -55,15 +54,13 @@ class TestMessageDefinition:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/MessageDefinition",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
