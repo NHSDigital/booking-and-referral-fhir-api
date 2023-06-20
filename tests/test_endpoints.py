@@ -27,7 +27,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": "Bearer invalid_token",
-                "NHSD-Target-Identifier": self.target_id,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
         # Then
@@ -48,7 +48,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": "",
-                "NHSD-Target-Identifier": self.target_id,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
         # Then
@@ -71,7 +71,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_id,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
         # Then
@@ -95,7 +95,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/invalid",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_id,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
@@ -127,7 +127,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/{path_suffix}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_id,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
@@ -149,7 +149,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": self.target_id,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
 
