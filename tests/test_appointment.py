@@ -13,12 +13,11 @@ from .example_loader import load_example
 class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_appointment_id = str(uuid.uuid4())
-    target_id = config.TARGET_ID
+    target_id = config.TARGET_SYSTEM
 
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.debug
     def test_get_appointments(self, get_token_client_credentials):
         """
            test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patient:identifier=12312

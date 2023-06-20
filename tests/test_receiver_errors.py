@@ -14,6 +14,7 @@ class TestReceiverErrors:
     currentTime = datetime.now()
 
     @pytest.mark.errors
+    @pytest.mark.debug
     @pytest.mark.integration
     def test_400_invalid_error(self, get_token_client_credentials):
         # Given

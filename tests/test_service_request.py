@@ -14,7 +14,7 @@ class TestServiceRequest:
     existing_referral_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_referral_id = str(uuid.uuid4())
     existing_patient_id = "4857773456"
-    target_id = config.TARGET_ID
+    target_id = config.TARGET_SYSTEM
 
     @pytest.mark.service_request
     @pytest.mark.integration

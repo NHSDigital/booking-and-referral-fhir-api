@@ -10,7 +10,7 @@ from .example_loader import load_example
 
 
 class TestEndpoints:
-    target_id = config.TARGET_ID
+    target_id = config.TARGET_SYSTEM
 
     @pytest.mark.auth
     def test_invalid_access_token(self):

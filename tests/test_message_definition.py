@@ -10,7 +10,7 @@ from .example_loader import load_example
 
 
 class TestMessageDefinition:
-    target_id = config.TARGET_ID
+    target_id = config.TARGET_SYSTEM
 
     @pytest.mark.message_definition
     @pytest.mark.integration

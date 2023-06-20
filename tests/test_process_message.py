@@ -10,7 +10,7 @@ from .example_loader import load_example
 
 
 class TestProcessMessage:
-    target_id = config.TARGET_ID
+    target_id = config.TARGET_SYSTEM
 
     @pytest.mark.process_message
     @pytest.mark.integration
