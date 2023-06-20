@@ -1,9 +1,9 @@
 <TargetEndpoint name="booking-and-referral-target">
   <PreFlow>
     <Request>
-      <Step>
-        <Name>LookupCache.Targets</Name>
-      </Step>
+<!--      <Step>-->
+<!--        <Name>LookupCache.Targets</Name>-->
+<!--      </Step>-->
       <Step>
         <Name>RaiseFault.AddCapabilityStatement</Name>
         <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
