@@ -14,7 +14,7 @@ class TestServiceRequest:
     existing_referral_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_referral_id = str(uuid.uuid4())
     existing_patient_id = "4857773456"
-    target_id = "NHS0001"
+    target_id = config.TARGET_ID
 
     @pytest.mark.service_request
     @pytest.mark.integration
@@ -38,7 +38,10 @@ class TestServiceRequest:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -67,7 +70,10 @@ class TestServiceRequest:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -97,7 +103,10 @@ class TestServiceRequest:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -126,7 +135,10 @@ class TestServiceRequest:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -156,7 +168,10 @@ class TestServiceRequest:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -185,7 +200,10 @@ class TestServiceRequest:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 

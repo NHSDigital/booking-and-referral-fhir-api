@@ -13,12 +13,11 @@ from .example_loader import load_example
 class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_appointment_id = str(uuid.uuid4())
-    target_id = "NHS0001"
+    target_id = config.TARGET_ID
 
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.debug
     def test_get_appointments(self, get_token_client_credentials):
         """
            test for /appointment..  to get all appointments for the patient passed as parameter on the request - /Appointment?patient:identifier=12312
@@ -40,7 +39,10 @@ class TestAppointment:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -71,7 +73,10 @@ class TestAppointment:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -100,7 +105,10 @@ class TestAppointment:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
         # Then
@@ -130,7 +138,10 @@ class TestAppointment:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -160,7 +171,10 @@ class TestAppointment:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -191,7 +205,10 @@ class TestAppointment:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
@@ -221,7 +238,10 @@ class TestAppointment:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": target_identifier_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 

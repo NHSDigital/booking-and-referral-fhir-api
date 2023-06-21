@@ -34,6 +34,7 @@ steps:
         fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+    retryCountOnTaskFailure: 2
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
@@ -64,6 +65,13 @@ steps:
       export CLIENT_ID="$(CLIENT_ID_INT)"
       export CLIENT_SECRET="$(CLIENT_SECRET_INT)"
       export REDIRECT_URL="https://nhsd-apim-testing-$(ENVIRONMENT).herokuapp.com/callback"
+
+      pr_no=$(echo $(FULLY_QUALIFIED_SERVICE_NAME) | { grep -oE '[0-9]+$' || true; })
+      if [ -z $pr_no ]; then
+          export TARGET_ID="NHS0001"
+      else
+          export TARGET_ID="NHS0001-pr"
+      fi
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
