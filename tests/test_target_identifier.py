@@ -10,7 +10,7 @@ from .example_loader import load_example
 
 
 class TestProcessMessage:
-    target_id = config.TARGET_ID
+    target_id = config.TARGET_SYSTEM
 
     @pytest.mark.target_identifier
     @pytest.mark.broker
@@ -50,7 +50,7 @@ class TestProcessMessage:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
         expected_body = load_example("proxy-not-found.json")
-        target_identifier = json.dumps({"value": "invalid", "system": "tests"})
+        target_identifier = json.dumps({"value": "invalid", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -78,7 +78,7 @@ class TestProcessMessage:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("malformed-target-identifier.json")
-        target_identifier = json.dumps({"system": "tests"})
+        target_identifier = json.dumps({"system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When

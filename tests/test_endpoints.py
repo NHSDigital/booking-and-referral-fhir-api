@@ -10,7 +10,8 @@ from .example_loader import load_example
 
 
 class TestEndpoints:
-    target_id = config.TARGET_ID
+    target_id = json.dumps({"value": "NHS0001", "system": config.TARGET_SYSTEM})
+    target_id_encoded = base64.b64encode(bytes(target_id, "utf-8"))
 
     @pytest.mark.auth
     def test_invalid_access_token(self):
@@ -20,15 +21,13 @@ class TestEndpoints:
         """
         expected_status_code = 401
         expected_body = load_example("OperationOutcome/SEND/401-SEND_UNAUTHORIZED-security.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": "Bearer invalid_token",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
         # Then
@@ -43,15 +42,13 @@ class TestEndpoints:
         """
         expected_status_code = 401
         expected_body = load_example("OperationOutcome/SEND/401-SEND_UNAUTHORIZED-unknown.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": "",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
         # Then
@@ -68,15 +65,13 @@ class TestEndpoints:
 
         expected_status_code = 403
         expected_body = load_example("OperationOutcome/SEND/403-SEND_FORBIDDEN-forbidden.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/metadata",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
         # Then
@@ -94,15 +89,13 @@ class TestEndpoints:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
         expected_body = load_example("OperationOutcome/PROXY-NONE/404-NOT_FOUND-not-found.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/invalid",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
@@ -111,7 +104,6 @@ class TestEndpoints:
         assert_that(expected_status_code).is_equal_to(response.status_code)
         assert_that(expected_body).is_equal_to(response.json())
 
-    @pytest.mark.debug
     @pytest.mark.asyncio
     @pytest.mark.broker
     @pytest.mark.parametrize(
@@ -123,12 +115,10 @@ class TestEndpoints:
     ):
         # Given
         token = get_token_client_credentials["access_token"]
-        if "pr" in self.target_id:
+        if "pr" in config.TARGET_SYSTEM:
             expected_target = f"https://internal-dev-pr.bars.dev.api.platform.nhs.uk/{path_suffix}"
         else:
             expected_target = f"https://internal-dev.bars.dev.api.platform.nhs.uk/{path_suffix}"
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         await debug.start_trace()
 
@@ -137,7 +127,7 @@ class TestEndpoints:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/{path_suffix}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
@@ -153,15 +143,13 @@ class TestEndpoints:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("OperationOutcome/PROXY-NONE/400-BAD_REQUEST-invalid.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Slot",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
             },
         )
 

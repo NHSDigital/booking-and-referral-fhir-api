@@ -27,10 +27,10 @@ steps:
           fi
             export AWS_PROFILE=apim-dev
             aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
-      
+
             make init
             make apply aws_account_no=${aws_account_no} environment=$workspace
-          
+
         fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
@@ -68,9 +68,9 @@ steps:
 
       pr_no=$(echo $(FULLY_QUALIFIED_SERVICE_NAME) | { grep -oE '[0-9]+$' || true; })
       if [ -z $pr_no ]; then
-          export TARGET_ID="NHS0001"
+          export TARGET_SYSTEM="tests"
       else
-          export TARGET_ID="NHS0001-pr"
+          export TARGET_SYSTEM="tests-pr"
       fi
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
