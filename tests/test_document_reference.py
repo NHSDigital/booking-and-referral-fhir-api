@@ -73,7 +73,6 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.debug
     def test_post_delete_put_document_reference(self, get_token_client_credentials):
         """
            Test for the POST, Delete and PUT /DocumentReference endpoint. This operation will call the Producer NRL API.

@@ -20,7 +20,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invalid.json")
-        target_identifier = json.dumps({"value": "NHS0001-400", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-400", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -52,7 +52,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-invariant.json")
-        target_identifier = json.dumps({"value": "NHS0001-400-1", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-400-1", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -84,7 +84,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("OperationOutcome/REC/400-REC_BAD_REQUEST-not-supported.json")
-        target_identifier = json.dumps({"value": "NHS0001-400-2", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-400-2", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -116,7 +116,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 401
         expected_body = load_example("unauthorized.json")
-        target_identifier = json.dumps({"value": "NHS0001-401", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-401", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -148,7 +148,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 403
         expected_body = load_example("forbidden.json")
-        target_identifier = json.dumps({"value": "NHS0001-403", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-403", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -180,7 +180,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 406
         expected_body = load_example("not-acceptable.json")
-        target_identifier = json.dumps({"value": "NHS0001-406", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-406", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -212,7 +212,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 408
         expected_body = load_example("OperationOutcome/REC/408-REC_TIMEOUT-timeout.json")
-        target_identifier = json.dumps({"value": "NHS0001-504", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-504", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -244,7 +244,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 409
         expected_body = load_example("conflict.json")
-        target_identifier = json.dumps({"value": "NHS0001-409", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-409", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -276,7 +276,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 422
         expected_body = load_example("unprocessable-entity.json")
-        target_identifier = json.dumps({"value": "NHS0001-422", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-422", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -308,7 +308,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
         expected_body = load_example("OperationOutcome/REC/500-REC_SERVER_ERROR-exception.json")
-        target_identifier = json.dumps({"value": "NHS0001-500-1", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-500-1", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -340,7 +340,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 500
         expected_body = load_example("OperationOutcome/REC/500-REC_SERVER_ERROR-no-store.json")
-        target_identifier = json.dumps({"value": "NHS0001-500-2", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-500-2", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -372,7 +372,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 501
         expected_body = load_example("not-implemented.json")
-        target_identifier = json.dumps({"value": "NHS0001-501", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-501", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
@@ -404,7 +404,7 @@ class TestReceiverErrors:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 503
         expected_body = load_example("OperationOutcome/REC/503-REC_SERVICE_UNAVAILABLE-transient.json")
-        target_identifier = json.dumps({"value": "NHS0001-503", "system": "tests"})
+        target_identifier = json.dumps({"value": "NHS0001-503", "system": config.TARGET_SYSTEM})
         target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
