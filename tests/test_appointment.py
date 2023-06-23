@@ -13,7 +13,9 @@ from .example_loader import load_example
 class TestAppointment:
     existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
     non_existing_appointment_id = str(uuid.uuid4())
-    target_id = "NHS0001"
+
+    target_id = json.dumps({"value": "NHS0001", "system": config.TARGET_SYSTEM})
+    target_id_encoded = base64.b64encode(bytes(target_id, "utf-8"))
 
     @pytest.mark.appointment
     @pytest.mark.integration
@@ -29,8 +31,6 @@ class TestAppointment:
         expected_status_code = 200
         expected_body = load_example("appointment/GET-success.json")
         patient_id = "4857773456"
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
@@ -38,7 +38,7 @@ class TestAppointment:
             params={"patient:identifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -61,15 +61,13 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -90,15 +88,13 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 200
         expected_body = load_example("appointment/id/GET-success.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -120,15 +116,13 @@ class TestAppointment:
         expected_status_code = 400
         expected_body = load_example("bad-request.json")
         bad_id = "non-uuid"
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{bad_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -150,15 +144,13 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
         expected_body = load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.non_existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -180,8 +172,6 @@ class TestAppointment:
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
         patient_id = "4857773456"
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.put(
@@ -189,7 +179,7 @@ class TestAppointment:
             params={"patient:identifier": patient_id},
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
@@ -211,15 +201,13 @@ class TestAppointment:
         token = get_token_client_credentials["access_token"]
         expected_status_code = 405
         expected_body = load_example("method-not-allowed.json")
-        target_identifier = json.dumps({"value": self.target_id, "system": "tests"})
-        target_identifier_encoded = base64.b64encode(bytes(target_identifier, "utf-8"))
 
         # When
         response = requests.post(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/Appointment/{self.existing_appointment_id}",
             headers={
                 "Authorization": f"Bearer {token}",
-                "NHSD-Target-Identifier": target_identifier_encoded,
+                "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
             },
