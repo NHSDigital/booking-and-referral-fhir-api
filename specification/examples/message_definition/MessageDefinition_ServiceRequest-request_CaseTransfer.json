@@ -37,10 +37,16 @@
 				},
 				"useContext": [
 					{
-						"code": {
-							"system": "https://fhir.nhs.uk/CodeSystem/dos-id",
-							"code": "2000099999"
-						},
+						"code": [
+                {
+                "system": "https://fhir.nhs.uk/CodeSystem/dos-id",
+                "code": "2000099999"
+              },
+              {
+                "system": "https://fhir.nhs.uk/CodeSystem/usecases-categories-bars",
+                "code": "REFERRALTOPHARMACY"
+              }
+            ],
 						"valueCodeableConcept": {
 							"coding": [
 								{
