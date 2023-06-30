@@ -416,8 +416,10 @@ paths:
             Inclusions that drive the rescusive depth of the search. There is a minimum of the following _include parameters required for current Applications.
             * Slot:schedule
             * Schedule:actor:Practitioner
-            * Schedule:actor:HealthcareService
-
+            * Schedule:actor:HealthcareService            
+            
+            **Note**: Both _include and _revinclude share the same syntax - up to three components, separated by colon characters (:). 
+            Unlike search queries, this is not a FHIRPath expression
             The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the url reflecting this omission in the responses Bundle.link.url. 
 
             |Expression | Inclusion     |Description|
