@@ -148,11 +148,11 @@ servers:
     description: Integration Server
 tags:
   - name: Booking
+  - name: DocumentReference
   - name: Message
   - name: Metadata
   - name: Referral
   - name: Slots
-  - name: DocumentReference
 security:
   - OAuth_Token: []
 paths:
@@ -719,36 +719,26 @@ paths:
         Retrieve the document pointers for a single patient.  Your request is constrained by the document pointer types
         agreed during onboarding.  The results can also be filtered to return documents by a given `type` and/or created
         by a given producer (`custodian`).
-    post:
+    post:      
+      tags:
+        - DocumentReference
       summary: 'Create new, or Supersede existing, document pointers'
       operationId: createDocumentReference
-      responses:
-        "201":
-          description: Create / Supersede successful response
-          $ref: '#/components/schemas/OperationalOutcome'
-          content:
-            application/fhir+json;version=1:
-              example:
-                resourceType: OperationOutcome
-                id: 76db24dc-324a-468a-bf02-c06e82279488
-                meta:
-                  profile:
-                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
-                issue:
-                  - severity: information
-                    code: informational
-                    details:
-                      coding:
-                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
-                          code: RESOURCE_CREATED
-                          display: Resource created
-                    diagnostics: Resource created
-      requestBody:
-        $ref: '#/components/requestBodies/DocumentReference'
       parameters:
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        "201":
+          description: Create / Supersede successful response
+          content:
+            application/fhir+json:
+              schema: 
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/201_POST.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
       description: |
         Create new pointers.
 
@@ -810,7 +800,9 @@ paths:
             }
           ```
   '/DocumentReference/{id}':
-    get:
+    get:      
+      tags:
+        - DocumentReference
       summary: Get a single document pointer
       operationId: readDocumentReference
       parameters:
@@ -843,57 +835,10 @@ paths:
         Read a single document pointer by specifying a `DocumentReference.id`.  Note that you will only be able to
         retrieve document pointers that have been created by the organisation specified in the `ODS-End-User-Organisation`
         header, and agreed during [onboarding](#onbaroding).
-    put:
+    put:      
+      tags:
+        - DocumentReference
       summary: Update a single document pointer
-      operationId: updateDocumentReference
-      parameters:
-        - $ref: '#/components/parameters/RegistryId_Param'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-      responses:
-        '200':
-          description: Successful response
-          $ref: '#/components/schemas/OperationalOutcome'
-          content:
-            application/fhir+json;version=1:
-              example:
-                resourceType: OperationOutcome
-                id: fc39effb-144c-4342-bdf2-4214f0cb728b
-                meta:
-                  profile:
-                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
-                issue:
-                  - severity: information
-                    code: informational
-                    details:
-                      coding:
-                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
-                          code: RESOURCE_UPDATED
-                          display: Resource updated
-                    diagnostics: Resource updated
-        '201':
-          description: Successful response
-          $ref: '#/components/schemas/OperationalOutcome'
-          content:
-            application/fhir+json;version=1:
-              example:
-                resourceType: OperationOutcome
-                id: fc39effb-144c-4342-bdf2-4214f0cb728b
-                meta:
-                  profile:
-                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
-                issue:
-                  - severity: information
-                    code: informational
-                    details:
-                      coding:
-                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
-                          code: RESOURCE_UPDATED
-                          display: Resource updated
-                    diagnostics: Resource updated
-      requestBody:
-        $ref: '#/components/requestBodies/DocumentReference'
       description: |
         Update a single pointer you created.
 
@@ -904,8 +849,27 @@ paths:
         * `type`
 
         Note that unlike NRL STU3 changing the `status` field does NOT delete document pointers.  To delete document
-        pointers please use the `DELETE` endpoint.
-    delete:
+        pointers please use the `DELETE` endpoint.      
+      operationId: updateDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/200_PUT.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
+    delete:      
+      tags:
+        - DocumentReference
       summary: Delete a single document pointer
       operationId: deleteDocumentReference
       parameters:
@@ -915,25 +879,13 @@ paths:
         - $ref: '#/components/parameters/CorrelationId_HParam'
       responses:
         '200':
-          $ref: '#/components/schemas/OperationalOutcome'
           description: Successful response
           content:
-            application/fhir+json;version=1:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
               example:
-                resourceType: OperationOutcome
-                id: c6113a50-70bf-436e-b417-7c8024d2e8bf
-                meta:
-                  profile:
-                    - 'https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome'
-                issue:
-                  - severity: information
-                    code: informational
-                    details:
-                      coding:
-                        - system: 'https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode'
-                          code: RESOURCE_REMOVED
-                          display: Resource removed
-                    diagnostics: Resource removed
+                $ref: examples1.1.0/200_DELETE.json
       description: |
         Delete a single document pointer that you created. 
 components:
@@ -1078,6 +1030,7 @@ components:
         type: string
         example: https://fhir.nhs.uk/Id/nhs-number|4857773456
     custodian_QParam:
+      description: The custodian of the pointer
       name: custodian:identifier
       in: query
       schema:
@@ -1091,6 +1044,7 @@ components:
           value: https://fhir.nhs.uk/Id/ods-organization-code|Y05868
     type_QParam:
       name: type
+      description: The specified type of pointers to be returned.
       in: query
       schema:
         $ref: "#/components/schemas/RequestQueryType"
