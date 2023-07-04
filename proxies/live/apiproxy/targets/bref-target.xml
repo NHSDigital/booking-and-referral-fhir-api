@@ -2,6 +2,19 @@
   <PreFlow>
     <Request>
       <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+        <Condition>
+          (proxy.pathsuffix Not Matches "/metadata")
+          AND (proxy.pathsuffix Not Matches "/$process-message")
+          AND (proxy.pathsuffix Not Matches "/Slot*")
+          AND (proxy.pathsuffix Not Matches "/Appointment*")
+          AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
+          AND (proxy.pathsuffix Not Matches "/registry*")
+          AND (proxy.pathsuffix Not Matches "/DocumentReference*")
+          AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
+        </Condition>
+      </Step>
+      <Step>
         <Name>LookupCache.Targets</Name>
       </Step>
       <Step>
