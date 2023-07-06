@@ -33,7 +33,6 @@ The contents of this repository are protected by Crown Copyright (C).
 * make
 * nodejs + npm/yarn
 * [poetry](https://github.com/python-poetry/poetry)
-* Java 8+
 
 ### Install
 ```
@@ -45,11 +44,11 @@ You can install some pre-commit hooks to ensure you can't commit invalid spec ch
 in CI, but it's useful to run them locally too.
 
 ```
-$ make install-hooks
+$ make pre-commit-hook
 ```
 
 ### Terraform Deployment
-Booking and Referrals Service internal deployment depends on mock services. These mock-services are only used for testing 
+Booking and Referrals Service internal deployment depends on mock services. These mock-services are only used for testing
 and are not part of the production. Check the readme file in `terraform` directory for more details.
 
 
