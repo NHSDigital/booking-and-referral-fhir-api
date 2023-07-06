@@ -3,10 +3,10 @@ module "mock-receiver" {
   region      = var.region
   name_prefix = local.name_prefix
 
-  vpc_id        = local.vpc_id
+  vpc_id        = local.private_subnet_ids
   cluster_id    = module.cluster.cluster_id
   subnet_ids    = local.private_subnet_ids
-  lb_subnet_ids = local.public_subnet_ids
+  lb_subnet_ids = local.private_subnet_ids
 
   container_port = 9000
   image_version  = local.environment
