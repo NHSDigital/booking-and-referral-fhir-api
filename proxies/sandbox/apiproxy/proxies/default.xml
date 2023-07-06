@@ -30,11 +30,15 @@
       <Response/>
       <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
     </Flow>
-    <Flow name="StatusEndpoint">
+    <Flow name="CheckEndpoint">
       <Request>
         <Step>
           <Condition>request.header.apikey = null or private.common.status-endpoint-api-key != request.header.apikey</Condition>
           <Name>RaiseFault.401Unauthorized</Name>
+        </Step>
+        <Step>
+          <Name>RaiseFault.406PageNotAcceptable</Name>
+          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
         </Step>
         <Step>
           <Name>ServiceCallout.CallHealthcheckEndpoint</Name>
@@ -70,9 +74,20 @@
   <RouteRule name="NoRouteMetadata">
     <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
   </RouteRule>
-  <RouteRule name="sandbox">
+  <RouteRule name="nrlf-producer-sandbox-route">
+    <TargetEndpoint>nrlf-producer-sandbox-target</TargetEndpoint>
+    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and (request.verb != "GET")) and versionNumber = "1.1.0"</Condition>
+   </RouteRule>
+  <RouteRule name="nrlf-consumer-sandbox-route">
+    <TargetEndpoint>nrlf-consumer-sandbox-target</TargetEndpoint>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber = "1.1.0"</Condition>
+  </RouteRule>
+    <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
   </RouteRule>
+
+
+
   <DefaultFaultRule>
     <Step>
       <Name>AssignMessage.Errors.CatchAllMessage</Name>

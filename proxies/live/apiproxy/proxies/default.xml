@@ -5,6 +5,10 @@
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
+       <Step>
+        <Condition>(request.header.Accept != null)</Condition>
+        <Name>Javascript.setVersion</Name>
+      </Step>
     </Request>
   </PreFlow>
   <Flows>
@@ -29,6 +33,10 @@
     </Flow>
     <Flow name="Checks">
       <Request>
+        <Step>
+          <Name>RaiseFault.406PageNotAcceptable</Name>
+          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
+        </Step>
         <Step>
           <Name>OauthV2.VerifyAccessToken</Name>
         </Step>
@@ -57,11 +65,11 @@
   </RouteRule>
   <RouteRule name="nrlf-producer-route">
     <TargetEndpoint>nrlf-producer-target</TargetEndpoint>
-    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and ((request.verb != "GET")))</Condition>
+    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and (request.verb != "GET")) and versionNumber = "1.1.0"</Condition>
    </RouteRule>
   <RouteRule name="nrlf-consumer-route">
     <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference*"</Condition>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber = "1.1.0"</Condition>
   </RouteRule>
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>

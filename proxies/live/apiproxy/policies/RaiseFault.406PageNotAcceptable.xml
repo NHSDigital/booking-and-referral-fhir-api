@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.406PageNotAcceptable">
+    <DisplayName>RaiseFault.406PageNotAcceptable</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Headers/>
+            <Payload contentType="text/plain">
+                {
+                    "resourceType": "OperationOutcome",
+                    "id": "531e073a-3295-4e67-ae90-e00bd96a9cdd",
+                    "meta": {
+                        "profile": [
+                            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+                        ]
+                    },
+                    "issue": [
+                        {
+                            "severity": "error",
+                            "code": "processing",
+                            "details": {
+                                "coding": [
+                                    {
+                                        "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+                                        "code": "SEND_NOT_ACCEPTABLE"
+                                    }
+                                ]
+                            },
+                            "diagnostics": "Senders message had an incorrect content type defined for a response: &lt;further diagnostics information, error message/error text&gt;"
+                        }
+                    ]
+                }
+            </Payload>
+            <StatusCode>406</StatusCode>
+            <ReasonPhrase>Not Acceptable</ReasonPhrase>
+        </Set>
+        <AssignVariable>
+            <Name>bref.error.code</Name>
+            <Value>value</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.coding.code</Name>
+            <Value>SEND_NOT_ACCEPTABLE</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.diagnostics</Name>
+            <Value>The Accept Header has misisng Version number or incorrect content type (further diagnostics information, error message/error text)</Value>
+        </AssignVariable>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>

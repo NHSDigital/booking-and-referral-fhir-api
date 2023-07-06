@@ -30,7 +30,34 @@ class TestDocumentReference:
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference",
             params={"subject:identifier": subject_identifier},
             headers={
-                "Accept": "application/fhir+json;version=1",
+                "Accept": "application/fhir+json;version=1.1.0",
+                "Authorization": f"Bearer {token}",
+                "NHSD-End-User-Organisation-ODS": self.end_user_ods,
+                "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
+                "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
+            },
+        )
+        # Then
+        assert_that(expected_status_code).is_equal_to(response.status_code)
+
+    @pytest.mark.appointment
+    @pytest.mark.integration
+    @pytest.mark.sandbox
+    def test_get_document_reference_without_version(self, get_token_client_credentials):
+        """
+           Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API without Accept header
+        """
+        subject_identifier = "https://fhir.nhs.uk/Id/nhs-number|"+self.end_user_nhs_number
+        # Given
+        token = get_token_client_credentials["access_token"]
+        expected_status_code = 406
+
+        # When
+        response = requests.get(
+            url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference",
+            params={"subject:identifier": subject_identifier},
+            headers={
+                "Accept": "application/fhir+json",
                 "Authorization": f"Bearer {token}",
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
@@ -59,7 +86,7 @@ class TestDocumentReference:
         response = requests.get(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{document_id}",
             headers={
-                "Accept": "application/fhir+json;version=1",
+                "Accept": "application/fhir+json;version=1.1.0",
                 "Authorization": f"Bearer {token}",
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
@@ -131,7 +158,7 @@ class TestDocumentReference:
         post_response = requests.post(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference",
             headers={
-                "Accept": "application/fhir+json;version=1",
+                "Accept": "application/fhir+json;version=1.1.0",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
@@ -144,7 +171,7 @@ class TestDocumentReference:
         delete_response = requests.delete(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{document_id}",
             headers={
-                "Accept": "application/fhir+json;version=1",
+                "Accept": "application/fhir+json;version=1.1.0",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,
@@ -156,7 +183,7 @@ class TestDocumentReference:
         put_response = requests.put(
             url=f"{config.BASE_URL}/{config.BASE_PATH}/DocumentReference/{document_id}",
             headers={
-                "Accept": "application/fhir+json;version=1",
+                "Accept": "application/fhir+json;version=1.1.0",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
                 "NHSD-End-User-Organisation-ODS": self.end_user_ods,

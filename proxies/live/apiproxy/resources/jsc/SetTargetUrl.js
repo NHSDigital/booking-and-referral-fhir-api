@@ -16,6 +16,7 @@ if(b64decoded != null){
     }
 }
 
+
 context.setVariable("isError", isError)
 
 // Override target url
