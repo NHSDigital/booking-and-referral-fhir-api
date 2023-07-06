@@ -1,4 +1,4 @@
-<TargetEndpoint name="sandbox">
+<TargetEndpoint name="nrlf-consumer-sandbox-target">
   <PreFlow>
     <Request>
       <Step>
