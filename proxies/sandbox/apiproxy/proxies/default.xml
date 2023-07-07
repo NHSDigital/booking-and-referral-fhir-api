@@ -33,7 +33,7 @@
     <Flow name="CheckVersion">
             <Request>
                 <Step>
-                    <Name>Javascript.setVersion</Name>
+                    <Name>Javascript.SetnRemoveVersion</Name>
                     <Condition>(request.header.Accept != null)</Condition>
                 </Step>
             </Request>

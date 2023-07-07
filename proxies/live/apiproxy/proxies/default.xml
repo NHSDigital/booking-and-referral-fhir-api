@@ -7,7 +7,7 @@
       </Step>
        <Step>
         <Condition>(request.header.Accept != null)</Condition>
-        <Name>Javascript.setVersion</Name>
+        <Name>Javascript.SetnRemoveVersion</Name>
       </Step>
     </Request>
   </PreFlow>
