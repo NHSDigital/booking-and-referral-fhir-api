@@ -30,6 +30,14 @@
       <Response/>
       <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
     </Flow>
+    <Flow name="CheckVersion">
+            <Request>
+                <Step>
+                    <Name>Javascript.setVersion</Name>
+                    <Condition>(request.header.Accept != null)</Condition>
+                </Step>
+            </Request>
+    </Flow>
     <Flow name="CheckEndpoint">
       <Request>
         <Step>
