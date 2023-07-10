@@ -3,7 +3,7 @@ module "mock-receiver" {
   region      = var.region
   name_prefix = local.name_prefix
 
-  vpc_id        = local.private_subnet_ids
+  vpc_id        = local.vpc_id
   cluster_id    = module.cluster.cluster_id
   subnet_ids    = local.private_subnet_ids
   lb_subnet_ids = local.private_subnet_ids
