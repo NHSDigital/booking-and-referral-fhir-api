@@ -30,24 +30,12 @@
       <Response/>
       <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
     </Flow>
-    <Flow name="CheckVersion">
-            <Request>
-                <Step>
-                    <Name>Javascript.SetnRemoveVersion</Name>
-                    <Condition>(request.header.Accept != null)</Condition>
-                </Step>
-                <Step>
-                   <Name>RaiseFault.406PageNotAcceptable</Name>
-                   <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
-                 </Step>
-            </Request>
-    </Flow>
-    <Flow name="CheckEndpoint">
+    <Flow name="StatusEndpoint">
       <Request>
         <Step>
+        <Condition>request.header.apikey = null or private.common.status-endpoint-api-key != request.header.apikey</Condition>
           <Name>RaiseFault.401Unauthorized</Name>
-          <Condition>request.header.apikey = null or private.common.status-endpoint-api-key != request.header.apikey</Condition>
-        </Step>
+          </Step>
         <Step>
           <Name>ServiceCallout.CallHealthcheckEndpoint</Name>
         </Step>
@@ -60,6 +48,19 @@
       <Condition>(proxy.pathsuffix MatchesPath "/_status") and ((request.verb = "GET") or (request.verb = "HEAD"))
       </Condition>
     </Flow>
+    <Flow name="CheckVersion">
+            <Request>
+                <Step>
+                    <Name>Javascript.SetnRemoveVersion</Name>
+                    <Condition>(request.header.Accept != null)</Condition>
+                </Step>
+                <Step>
+                   <Name>RaiseFault.406PageNotAcceptable</Name>
+                   <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
+                 </Step>
+            </Request>
+    </Flow>
+    
   </Flows>
   <PreFlow/>
   <PostClientFlow name="PostClientFlow">
