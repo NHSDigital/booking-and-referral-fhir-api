@@ -68,6 +68,8 @@ apigee:
     specs:
       - name: {{ NAME }}
         path: {{ SERVICE_NAME }}.json
+      - name: {{ NAME }}
+        path: {{ SERVICE_NAME }}-1.1.0.json
     api_catalog:
       - edgeAPIProductName: {{ NAME }}
         anonAllowed: true
