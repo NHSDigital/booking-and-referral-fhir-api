@@ -36,17 +36,17 @@
                     <Name>Javascript.SetnRemoveVersion</Name>
                     <Condition>(request.header.Accept != null)</Condition>
                 </Step>
+                <Step>
+                   <Name>RaiseFault.406PageNotAcceptable</Name>
+                   <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
+                 </Step>
             </Request>
     </Flow>
     <Flow name="CheckEndpoint">
       <Request>
         <Step>
-          <Condition>request.header.apikey = null or private.common.status-endpoint-api-key != request.header.apikey</Condition>
           <Name>RaiseFault.401Unauthorized</Name>
-        </Step>
-        <Step>
-          <Name>RaiseFault.406PageNotAcceptable</Name>
-          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
+          <Condition>request.header.apikey = null or private.common.status-endpoint-api-key != request.header.apikey</Condition>
         </Step>
         <Step>
           <Name>ServiceCallout.CallHealthcheckEndpoint</Name>
