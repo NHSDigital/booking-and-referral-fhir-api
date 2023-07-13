@@ -66,9 +66,9 @@ apigee:
         scopes:
           - 'urn:nhsd:apim:app:level3:{{ SERVICE_NAME }}'
     specs:
-      - name: {{ NAME }}
+      - name: {{ SERVICE_NAME }}-{{ ENV.name }}
         path: {{ SERVICE_NAME }}.json
-      - name: {{ NAME }}
+      - name: {{ SERVICE_NAME }}-1.1.0-{{ ENV.name }}
         path: {{ SERVICE_NAME }}-1.1.0.json
     api_catalog:
       - edgeAPIProductName: {{ NAME }}
