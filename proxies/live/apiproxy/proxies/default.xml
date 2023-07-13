@@ -5,6 +5,10 @@
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
+       <Step>
+        <Condition>(request.header.Accept != null)</Condition>
+        <Name>Javascript.SetnRemoveVersion</Name>
+      </Step>
     </Request>
   </PreFlow>
   <Flows>
@@ -30,17 +34,8 @@
     <Flow name="Checks">
       <Request>
         <Step>
-          <Name>RaiseFault.404PageNotFound</Name>
-          <Condition>
-            (proxy.pathsuffix Not Matches "/metadata")
-            AND (proxy.pathsuffix Not Matches "/$process-message")
-            AND (proxy.pathsuffix Not Matches "/Slot*")
-            AND (proxy.pathsuffix Not Matches "/Appointment*")
-            AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
-            AND (proxy.pathsuffix Not Matches "/registry*")
-            AND (proxy.pathsuffix Not Matches "/DocumentReference*")
-            AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
-          </Condition>
+          <Name>RaiseFault.406PageNotAcceptable</Name>
+          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
         </Step>
         <Step>
           <Name>OauthV2.VerifyAccessToken</Name>
@@ -70,11 +65,11 @@
   </RouteRule>
   <RouteRule name="nrlf-producer-route">
     <TargetEndpoint>nrlf-producer-target</TargetEndpoint>
-    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and ((request.verb != "GET")))</Condition>
+    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and (request.verb != "GET")) and versionNumber = "1.1.0"</Condition>
    </RouteRule>
   <RouteRule name="nrlf-consumer-route">
     <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference*"</Condition>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber = "1.1.0"</Condition>
   </RouteRule>
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>

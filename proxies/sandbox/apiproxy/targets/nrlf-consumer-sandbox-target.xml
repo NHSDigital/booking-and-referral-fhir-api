@@ -1,0 +1,23 @@
+<TargetEndpoint name="nrlf-consumer-sandbox-target">
+  <PreFlow>
+    <Request>
+      <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+        <Condition>
+          proxy.pathsuffix Not Matches "/DocumentReference*"
+        </Condition>
+      </Step>
+      <Step>
+        <Name>AssignMessage.NrlfRequest</Name>
+      </Step>
+    </Request>
+    <Response>
+      <Step>
+        <Name>AssignMessage.AddCors</Name>
+      </Step>
+    </Response>
+  </PreFlow>
+  <HTTPTargetConnection>
+    {{ HOSTED_TARGET_CONNECTION }}
+  </HTTPTargetConnection>
+</TargetEndpoint>

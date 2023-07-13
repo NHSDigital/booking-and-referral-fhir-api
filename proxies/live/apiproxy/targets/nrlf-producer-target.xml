@@ -5,6 +5,10 @@
   <PreFlow name="PreFlow">
     <Request>
       <Step>
+        <Name>RaiseFault.404PageNotFound</Name>
+        <Condition>proxy.pathsuffix Not Matches "/DocumentReference*"</Condition>
+      </Step>
+      <Step>
         <Name>LookupCache.NrlfAccessToken</Name>
       </Step>
       <Step>
