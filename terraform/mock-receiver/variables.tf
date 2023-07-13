@@ -18,6 +18,11 @@ variable "lb_subnet_ids" {
   type = list(string)
 }
 
+data "aws_subnet" "public_subnets" {
+  count = length(var.lb_subnet_ids)
+  id    = var.lb_subnet_ids[count.index]
+}
+
 locals {
   service_name        = "mock-receiver"
   container_image_tag = "latest"
