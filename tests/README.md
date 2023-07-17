@@ -26,8 +26,8 @@ The code for container can be found in this repo under `/sandbox`.
 If you have made code changes to  `/sandbox` in your PR and wish to point your PR tests towards this backend you will need to follow the below steps:
 
 ### Open Pull requests
-We use [booking-and-referral-targets repo](https://github.com/NHSDigital/booking-and-referral-targets) to host all the 
-`NHSD-Target-Identifier`s. It serves as a database for all identifier values across all environments. 
+We use [booking-and-referral-targets repo](https://github.com/NHSDigital/booking-and-referral-targets) to host all the
+`NHSD-Target-Identifier`s. It serves as a database for all identifier values across all environments.
 If you want to add a new identifier, then add it to the target repo first and then merge it to the `main` branch.
 Now if you open a new PR your newly added identifier will be found.
 
@@ -74,6 +74,7 @@ Variables you will require
 - `FULLY_QUALIFIED_SERVICE_NAME=booking-and-referral-$(APIGEE_ENVIRONMENT)`
 - `SERVICE_BASE_PATH=booking-and-referral/FHIR/R4`
 - `CLIENT_ID` and `CLIENT_SECRET`  are only required for int. Otherwise use dummy value
+- `TARGET_SYSTEM=tests` use `tests-pr` if you are testing a PR deployment
 - you will also require the correct jwt private key file.
 
 If running tests against a deployed PR on internal-dev or internal-dev-sandbox environments `FULLY_QUALIFIED_SERVICE_NAME` and `SERVICE_BASE_PATH` will be as follows:
