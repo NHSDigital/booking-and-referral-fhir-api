@@ -36,6 +36,6 @@ resource "aws_security_group" "service_security_group" {
     protocol    = "tcp"
     from_port   = var.container_port
     to_port     = var.container_port
-    cidr_blocks = data.aws_subnet.public_subnets.*.cidr_block
+    cidr_blocks = data.aws_subnet.private_subnets.*.cidr_block
   }
 }
