@@ -12,7 +12,7 @@ resource "aws_security_group" "vpc_link_security_group" {
         protocol    = "tcp"
         from_port   = var.listener_port
         to_port     = var.listener_port
-        cidr_blocks = local.private_subnet_cidr
+        cidr_blocks = local.public_subnet_cidr
     }
 
     ingress {
