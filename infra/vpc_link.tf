@@ -1,7 +1,7 @@
 resource "aws_apigatewayv2_vpc_link" "alb_vpc_link" {
     name               = local.name_prefix
     security_group_ids = [aws_security_group.vpc_link_security_group.id]
-    subnet_ids         = module.subnets[*].subnet_id
+    subnet_ids         = module.private_subnets[*].subnet_id
 }
 
 resource "aws_security_group" "vpc_link_security_group" {
