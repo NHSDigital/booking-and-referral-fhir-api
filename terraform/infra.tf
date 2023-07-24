@@ -26,10 +26,10 @@ data "aws_subnet" "private_subnets" {
 }
 
 locals {
-  public_subnet_ids   = data.terraform_remote_state.bebop-infra.outputs.public_subnet_ids
-  private_subnet_ids  = data.terraform_remote_state.bebop-infra.outputs.private_subnet_ids
-  public_subnet_cidr  = data.aws_subnet.public_subnets.*.cidr_block
-  private_subnet_cidr = data.aws_subnet.private_subnets.*.cidr_block
+    public_subnet_ids   = data.terraform_remote_state.bebop-infra.outputs.public_subnet_ids
+    public_subnet_cidr  = data.aws_subnet.public_subnets.*.cidr_block
+    private_subnet_ids  = data.terraform_remote_state.bebop-infra.outputs.private_subnet_ids
+    private_subnet_cidr = data.aws_subnet.private_subnets.*.cidr_block
 }
 
 locals {

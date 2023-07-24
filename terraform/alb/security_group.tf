@@ -13,6 +13,6 @@ resource "aws_security_group" "alb_security_group" {
         protocol    = "tcp"
         from_port   = var.listener_port
         to_port     = var.listener_port
-        cidr_blocks = var.infra_public_subnet
+        cidr_blocks = var.infra_private_subnet
     }
 }

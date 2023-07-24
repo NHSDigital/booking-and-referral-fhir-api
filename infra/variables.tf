@@ -8,7 +8,7 @@ locals {
 
 locals {
     private_subnet_cidr = [for subnet in local.private_subnet : subnet.cidr]
-    public_subnet_cidr  = [for subnet in local.public_subnet : subnet.cidr]
+    public_subnet_cidr = [for subnet in local.public_subnet : subnet.cidr]
 }
 
 locals {
@@ -27,6 +27,7 @@ locals {
             is_public         = true
         }
     ]
+
     private_subnet = [
         {
             cidr              = cidrsubnet(local.vpc_cidr, 8, 101)
