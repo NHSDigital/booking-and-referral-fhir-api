@@ -22,8 +22,8 @@ clean:
 
 publish: clean
 	mkdir -p build
-	node_modules/.bin/speccy resolve specification/booking-and-referral.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral.json
-	node_modules/.bin/speccy resolve specification/booking-and-referral-1.1.0.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral-1.1.0.json
+	node_modules/.bin/openapi-generator-cli resolve specification/booking-and-referral.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral.json
+	node_modules/.bin/openapi-generator-cli resolve specification/booking-and-referral-1.1.0.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral-1.1.0.json
 
 serve:
 	npm run serve
