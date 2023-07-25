@@ -21,9 +21,11 @@ clean:
 	rm -rf dist
 
 publish: clean
+	rm -rf build
 	mkdir -p build
-	node_modules/.bin/openapi-generator-cli resolve specification/booking-and-referral.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral.json
-	node_modules/.bin/openapi-generator-cli resolve specification/booking-and-referral-1.1.0.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral-1.1.0.json
+	npm run publish 2> /dev/null
+	cp build/booking-and-referral.json mock_provider/
+	cp -r specification mock_provider/specification
 
 serve:
 	npm run serve
