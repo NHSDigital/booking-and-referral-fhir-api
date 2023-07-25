@@ -23,11 +23,8 @@ clean:
 publish: clean
 	rm -rf build
 	mkdir -p build
-	npm run publish 2> /dev/null
-	cp build/gp-connect-access-record-fhir.json mock_provider/
-	cp -r specification mock_provider/specification
-	node_modules/.bin/openapi-generator-cli generate -i specification/booking-and-referral.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral.json
-	node_modules/.bin/openapi-generator-cli generate -i specification/booking-and-referral-1.1.0.yaml | poetry run python scripts/yaml2json.py | poetry run python scripts/set_version.py > build/booking-and-referral-1.1.0.json
+	node_modules/.bin/openapi-generator-cli generate -i specification/booking-and-referral-1.1.0.yaml --generator-key v3.0  -g openapi -o build && rm openapitools.json && mv build/openapi.json build/booking-and-referral-1.1.0.json
+	node_modules/.bin/openapi-generator-cli generate -i specification/booking-and-referral.yaml --generator-key v3.0  -g openapi -o build && rm openapitools.json && mv build/openapi.json build/booking-and-referral.json
 
 serve:
 	npm run serve
