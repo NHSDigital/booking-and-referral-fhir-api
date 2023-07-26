@@ -14,6 +14,7 @@ class TestEndpoints:
     target_id_encoded = base64.b64encode(bytes(target_id, "utf-8"))
 
     @pytest.mark.auth
+    @pytest.mark.debug
     def test_invalid_access_token(self):
         """
           test for /metadata..  to check it with an invalid access token

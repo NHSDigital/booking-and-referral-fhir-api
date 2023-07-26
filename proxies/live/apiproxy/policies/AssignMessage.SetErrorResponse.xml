@@ -1,0 +1,12 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.SetErrorResponse">
+  <Set>
+    <StatusCode>{errorStatusCode}</StatusCode>
+    <Payload contentType="application/json">
+      {
+        errorContent
+      }
+    </Payload>
+  </Set>
+  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>
