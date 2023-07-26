@@ -76,6 +76,9 @@
   </RouteRule>
   <DefaultFaultRule>
     <Step>
+      <Name>Javascript.HandleErrors</Name>
+    </Step>
+    <Step>
       <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed == true</Condition>
     </Step>
