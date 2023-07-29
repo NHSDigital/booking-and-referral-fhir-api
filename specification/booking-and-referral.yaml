@@ -820,7 +820,7 @@ components:
       schema:
         type: string
         example: |
-          --header 'Accept: application/fhir+json; version=1.0.0-beta'    
+          --header 'Accept: application/fhir+json; version=1.0.0'    
   responses:
     4XX-BARS:
       description: |
