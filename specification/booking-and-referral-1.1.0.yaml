@@ -100,9 +100,8 @@ info:
     This API is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
     meaning we authenticate the calling application but not the end user.
 
-    You can use this access mode as follows:
-    * unattended (end user not present)
-
+    You must use the unattended (end user not present) access mode for this API.
+   
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
