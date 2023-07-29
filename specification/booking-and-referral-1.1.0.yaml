@@ -114,6 +114,8 @@ info:
     | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`          |
     | Production        | `https://api.service.nhs.uk/booking-and-referral/FHIR/R4`              |
 
+    Our [Sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing) is for early developer testing and covers a limited number of scenarios with predefined responses. Please not this environment is stateless.
+
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing
 
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
@@ -513,7 +515,7 @@ paths:
       description: |
         
         ### Returns bookings for a specified patient.
-        Use this endpoint to get all bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned. 
+        Use this endpoint to get all bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned in a FHIR searchset Bundle containing Appointment resources. 
         
         If a sender wants to cancel a particular booking, they must perform a read first, comparing and amending the details prior to performing the update.
       operationId: getBookingByPatient
@@ -565,7 +567,7 @@ paths:
       description: | 
         
         ### Returns specific booking by id
-        Use this endpoint to get a specific booking by its unique id. A booking with the specified identifier at the specified target endpoint will be returned, should it exist. 
+        Use this endpoint to get a specific booking by its unique id. A booking with the specified identifier at the specified target endpoint will be returned in the format of a FHIR Appointment resource, should it exist. 
         
         If a sender wants to cancel a booking, they must perform a read first, comparing and amending the details prior to performing the update.
 
