@@ -65,16 +65,7 @@
     </Request>
   </PreFlow>
   <FaultRules>
-    <FaultRule name="rate_limiting_error">
-      <Step>
-        <Name>AssignMessage.429RateLimitingErrorResponse</Name>
-      </Step>
-      <Condition>raisefault.RaiseFault.QuotaPerApp.failed</Condition>
-    </FaultRule>
     <FaultRule name="metadata_capability_statement">
-      <Step>
-        <Name>AssignMessage.AddCapabilityStatement</Name>
-      </Step>
       <Condition>raisefault.RaiseFault.AddCapabilityStatement.failed</Condition>
     </FaultRule>
   </FaultRules>

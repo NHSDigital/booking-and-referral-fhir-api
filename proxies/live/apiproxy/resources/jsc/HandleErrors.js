@@ -7,6 +7,10 @@ function makeResponse(errorObject, statusCode) {
 
 function handleError(context) {
     // PROXY flow
+
+    if (context.getVariable("raisefault.RaiseFault.QuotaPerApp.failed")) {
+        return makeResponse(errorRepository["429RateLimiting"], 429)
+    }
     // Authorization
     const tokenFaultName = context.getVariable("oauthV2.OauthV2.VerifyAccessToken.fault.name")
 
@@ -22,7 +26,6 @@ function handleError(context) {
     if (context.getVariable("oauthV2.OauthV2.VerifyAccessToken.failed")) {
         return makeResponse(errorRepository["401UnauthorizedSecurity"], 401)
     }
-
 
     // Target flow
     // Request Validation
@@ -62,7 +65,7 @@ function handleError(context) {
     // FIXME: return a default error message
 }
 
-let errorResponse;
+let errorResponse = null;
 
 const validationError = context.getVariable("validation.error")
 if (validationError) {

@@ -74,6 +74,15 @@ const errorRepository = {
         systemCode = "PROXY_BAD_REQUEST",
         diagnostics = "Invalid schema for NHSD-Target-Identifier header"
     ),
+    "400InvalidHeaders": makeError(
+        id = "42c78e78-c06a-462a-8194-956e6a8dc4a2",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "invalid",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "BAD_REQUEST",
+        diagnostics = "The X-Request-Id or the X-Correlation-Id was not included Or the NHSD-Target-Identifier was not included (depending on the endpoint being called)."
+    ),
     "404ProxyNotFound": makeError(
         id = "531e073a-3295-4e67-ae90-e00bd96a9cdd",
         profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
@@ -109,6 +118,16 @@ const errorRepository = {
         system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
         systemCode = "REC_TIMEOUT",
         diagnostics = "The connection to the Receiver timed out."
+    ),
+    // FIXME: id is not provided.
+    "429RateLimiting": makeError(
+        id = "",
+        profile = "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome",
+        severity = "error",
+        code = "429",
+        system = "http://hl7.org/fhir/ValueSet/operation-outcome",
+        systemCode = "PROXY_TOO_MANY_REQUESTS",
+        diagnostics = "Too many requests have been made by this source in a given amount of time: (further diagnostics information, error message/error text)"
     ),
     "503ServiceUnavailable": makeError(
         id = "4b87b05b-7a20-4994-abea-57778024d216",
