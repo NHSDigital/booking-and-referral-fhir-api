@@ -9,6 +9,13 @@
         <Condition>(request.header.Accept != null)</Condition>
         <Name>Javascript.SetnRemoveVersion</Name>
       </Step>
+      <Step>
+        <Name>Javascript.ValidateRequest</Name>
+      </Step>
+      <Step>
+        <Name>RaiseFault.RequestInvalid</Name>
+        <Condition>validationError != null</Condition>
+      </Step>
     </Request>
   </PreFlow>
   <Flows>

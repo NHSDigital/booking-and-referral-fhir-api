@@ -92,6 +92,15 @@ const errorRepository = {
         systemCode = "REC_FORBIDDEN",
         diagnostics = "TLS-MA failure."
     ),
+    "406PageNotAcceptable": makeError(
+        id = "531e073a-3295-4e67-ae90-e00bd96a9cdd",
+        profile = "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome",
+        severity = "error",
+        code = "processing",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "SEND_NOT_ACCEPTABLE",
+        diagnostics = "Senders message had an incorrect content type defined for a response: &lt;further diagnostics information, error message/error text&gt;"
+    ),
     "408TimeoutError": makeError(
         id = "5abca2a4-eda1-4dae-8cc9-5d48c6b791dc",
         profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",

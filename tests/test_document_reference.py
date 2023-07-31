@@ -43,6 +43,7 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
+    @pytest.mark.debug
     def test_get_document_reference_without_version(self, get_token_client_credentials):
         """
            Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API without Accept header

@@ -23,6 +23,7 @@ function handleError(context) {
         return makeResponse(errorRepository["401UnauthorizedSecurity"], 401)
     }
 
+
     // Target flow
     // Request Validation
     if (context.getVariable("script.Python.DecodeBase64.failed")) {
