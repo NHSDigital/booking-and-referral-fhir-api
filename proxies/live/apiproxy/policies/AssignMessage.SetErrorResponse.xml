@@ -2,9 +2,7 @@
   <Set>
     <StatusCode>{errorStatusCode}</StatusCode>
     <Payload contentType="application/json">
-      {
-        errorContent
-      }
+      {errorContent}
     </Payload>
   </Set>
   <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
