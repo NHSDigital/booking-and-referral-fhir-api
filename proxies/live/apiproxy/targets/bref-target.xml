@@ -80,6 +80,12 @@
   </FaultRules>
   <DefaultFaultRule>
     <Step>
+      <Name>Javascript.HandleErrors</Name>
+    </Step>
+    <Step>
+      <Name>AssignMessage.SetErrorResponse</Name>
+    </Step>
+    <Step>
       <Name>AssignMessage.403ReceiverMtlsResponse</Name>
       <Condition>response.status.code = 403</Condition>
     </Step>

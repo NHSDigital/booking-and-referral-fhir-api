@@ -3,5 +3,5 @@
     <DisplayName>Javascript.HandleErrors</DisplayName>
     <Properties/>
     <ResourceURL>jsc://HandleErrors.js</ResourceURL>
-    <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
+    <IncludeURL>jsc://ErrorRepository.js</IncludeURL>
 </Javascript>
