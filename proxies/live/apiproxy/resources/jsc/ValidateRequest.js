@@ -8,8 +8,13 @@ function apiVersion(context) {
 
 function validate(context) {
     if (apiVersion(context)) {
-        return "406PageNotAcceptable"
+        return {
+            name: "406PageNotAcceptable",
+            statusCode: 406
+        }
     }
+
+    return null
 }
 
-context.setVariable("validationError", validate(context))
+context.setVariable("validation.error", validate(context))

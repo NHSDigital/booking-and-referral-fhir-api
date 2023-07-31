@@ -62,7 +62,15 @@ function handleError(context) {
     // FIXME: return a default error message
 }
 
-const errorResponse = handleError(context)
+let errorResponse
+
+const validationError = context.getVariable("validation.error")
+if (validationError) {
+    errorResponse  = makeResponse(errorRepository[validationError.name], validationError.statusCode)
+} else {
+    errorResponse = handleError(context)
+}
+
 context.setVariable("errorContent", errorResponse.content)
 context.setVariable("errorStatusCode", errorResponse.statusCode)
 

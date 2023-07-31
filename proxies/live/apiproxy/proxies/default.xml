@@ -13,8 +13,8 @@
         <Name>Javascript.ValidateRequest</Name>
       </Step>
       <Step>
-        <Name>RaiseFault.RequestInvalid</Name>
-        <Condition>validationError != null</Condition>
+        <Name>RaiseFault.InvalidRequest</Name>
+        <Condition>validation.error != null</Condition>
       </Step>
     </Request>
   </PreFlow>
@@ -40,10 +40,10 @@
     </Flow>
     <Flow name="Checks">
       <Request>
-        <Step>
-          <Name>RaiseFault.406PageNotAcceptable</Name>
-          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
-        </Step>
+<!--        <Step>-->
+<!--          <Name>RaiseFault.406PageNotAcceptable</Name>-->
+<!--          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>-->
+<!--        </Step>-->
         <Step>
           <Name>OauthV2.VerifyAccessToken</Name>
         </Step>
