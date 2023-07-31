@@ -93,10 +93,10 @@
       <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>
       <Condition>isError = true</Condition>
     </Step>
-    <Step>
-      <Name>AssignMessage.400InvalidBase64Encoding</Name>
-      <Condition>script.Python.DecodeBase64.failed = true</Condition>
-    </Step>
+<!--    <Step>-->
+<!--      <Name>AssignMessage.400InvalidBase64Encoding</Name>-->
+<!--      <Condition>script.Python.DecodeBase64.failed = true</Condition>-->
+<!--    </Step>-->
     <Step>
       <Name>AssignMessage.408TimeoutErrorResponse</Name>
       <Condition>error.status.code = 504</Condition>

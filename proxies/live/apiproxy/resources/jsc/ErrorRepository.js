@@ -63,6 +63,16 @@ const errorRepository = {
         system = "http://hl7.org/fhir/ValueSet/operation-outcome",
         systemCode = "PROXY_BAD_REQUEST",
         diagnostics = "The base64 decoding of the NHSD-Target-Identifier header failed."
+    ),
+    // FIXME: id is not provided.
+    "400InvalidTargetIdentifierValue": makeError(
+        id = "",
+        profile = "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome",
+        severity = "error",
+        code = "structure",
+        system = "http://hl7.org/fhir/ValueSet/operation-outcome",
+        systemCode = "PROXY_BAD_REQUEST",
+        diagnostics = "Invalid schema for NHSD-Target-Identifier header"
     )
 }
 

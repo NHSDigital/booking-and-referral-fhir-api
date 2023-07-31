@@ -6,9 +6,8 @@ function makeResponse(errorObject, statusCode) {
 }
 
 function handleError(context) {
+    // Authorization
     const tokenFaultName = context.getVariable("oauthV2.OauthV2.VerifyAccessToken.fault.name")
-    print("here")
-    print(tokenFaultName)
 
     if (tokenFaultName === "keymanagement.service.invalid_access_token") {
         return makeResponse(errorRepository["401UnauthorizedSecurity"], 401)
@@ -22,6 +21,15 @@ function handleError(context) {
     if (context.getVariable("oauthV2.OauthV2.VerifyAccessToken.failed")) {
         return makeResponse(errorRepository["401UnauthorizedSecurity"], 401)
     }
+
+    // Request Validation
+    if (context.getVariable("script.Python.DecodeBase64.failed")) {
+        return makeResponse(errorRepository["400InvalidBase64Encoding"], 400)
+    }
+    if (context.getVariable("idMalformed")) {
+        return makeResponse(errorRepository["400InvalidTargetIdentifierValue"], 400)
+    }
+
 }
 
 const errorResponse = handleError(context)
