@@ -73,6 +73,60 @@ const errorRepository = {
         system = "http://hl7.org/fhir/ValueSet/operation-outcome",
         systemCode = "PROXY_BAD_REQUEST",
         diagnostics = "Invalid schema for NHSD-Target-Identifier header"
-    )
+    ),
+    "404ProxyNotFound": makeError(
+        id = "531e073a-3295-4e67-ae90-e00bd96a9cdd",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "not-found",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "PROXY_NOT_FOUND",
+        diagnostics = "The target endpoint does not exist in the Endpoint Catalogue."
+    ),
+    "403ReceiverMtls": makeError(
+        id = "c936667e-13b0-4f56-94b1-e944a459837e",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "forbidden",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "REC_FORBIDDEN",
+        diagnostics = "TLS-MA failure."
+    ),
+    "408TimeoutError": makeError(
+        id = "5abca2a4-eda1-4dae-8cc9-5d48c6b791dc",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "timeout",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "REC_TIMEOUT",
+        diagnostics = "The connection to the Receiver timed out."
+    ),
+    "503ServiceUnavailable": makeError(
+        id = "4b87b05b-7a20-4994-abea-57778024d216",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "transient",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "REC_SERVICE_UNAVAILABLE",
+        diagnostics = "The response from the receiver was a 503, with no detail. Also useful if there is a connection failure such as the endpoint not being found, or failing to resolve."
+    ),
+    "500ServerErrorException": makeError(
+        id = "b38b875b-a1cf-4104-a900-3a5d3ce474db",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "exception",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "REC_SERVER_ERROR",
+        diagnostics = "unhandled exception."
+    ),
+    "500ServerErrorNoStore": makeError(
+        id = "ca0f6c46-589e-4558-a937-d4974e1112db",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "no-store",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "REC_SERVER_ERROR",
+        diagnostics = "internal data storage issue."
+    ),
 }
 

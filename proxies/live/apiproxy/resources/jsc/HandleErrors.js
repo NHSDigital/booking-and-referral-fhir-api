@@ -6,6 +6,7 @@ function makeResponse(errorObject, statusCode) {
 }
 
 function handleError(context) {
+    // PROXY flow
     // Authorization
     const tokenFaultName = context.getVariable("oauthV2.OauthV2.VerifyAccessToken.fault.name")
 
@@ -22,6 +23,33 @@ function handleError(context) {
         return makeResponse(errorRepository["401UnauthorizedSecurity"], 401)
     }
 
+    // Target flow
+    const errorStatusCode = context.getVariable("error.status.code")
+
+    if (errorStatusCode === "503") {
+        return makeResponse(errorRepository["503ServiceUnavailable"], 503)
+    }
+    if (errorStatusCode === "500" ) {
+        if (context.getVariable("operation-outcome.code") === "no-store") {
+            return makeResponse(errorRepository["500ServerErrorNoStore"], 500)
+        } else {
+            return makeResponse(errorRepository["500ServerErrorException"], 500)
+        }
+    }
+    if (errorStatusCode === "504") {
+        return makeResponse(errorRepository["408TimeoutError"], 408)
+    }
+
+    if (context.getVariable("isError")) {
+        return makeResponse(errorRepository["404ProxyNotFound"], 404)
+    }
+
+    const responseStatusCode = context.getVariable("response.status.code")
+    if (responseStatusCode === "403") {
+        return makeResponse(errorRepository["403ReceiverMtls"], 403)
+    }
+
+
     // Request Validation
     if (context.getVariable("script.Python.DecodeBase64.failed")) {
         return makeResponse(errorRepository["400InvalidBase64Encoding"], 400)
@@ -29,6 +57,7 @@ function handleError(context) {
     if (context.getVariable("idMalformed")) {
         return makeResponse(errorRepository["400InvalidTargetIdentifierValue"], 400)
     }
+
 
 }
 
