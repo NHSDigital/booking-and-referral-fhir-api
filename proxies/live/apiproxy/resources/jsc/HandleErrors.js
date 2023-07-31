@@ -65,7 +65,7 @@ function handleError(context) {
     // FIXME: return a default error message
 }
 
-let errorResponse = null;
+var errorResponse = null;
 
 const validationError = context.getVariable("validation.error")
 if (validationError) {
