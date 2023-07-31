@@ -82,45 +82,12 @@
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>
     </Step>
-
     <Step>
       <Name>Javascript.HandleErrors</Name>
     </Step>
     <Step>
       <Name>AssignMessage.SetErrorResponse</Name>
     </Step>
-<!--    <Step>-->
-<!--      <Name>AssignMessage.403ReceiverMtlsResponse</Name>-->
-<!--      <Condition>response.status.code = 403</Condition>-->
-<!--    </Step>-->
-<!--    <Step>-->
-<!--      <Name>AssignMessage.404ProxyNotFoundErrorResponse</Name>-->
-<!--      <Condition>isError = true</Condition>-->
-<!--    </Step>-->
-<!--    <Step>-->
-<!--      <Name>AssignMessage.400InvalidBase64Encoding</Name>-->
-<!--      <Condition>script.Python.DecodeBase64.failed = true</Condition>-->
-<!--    </Step>-->
-<!--    <Step>-->
-<!--      <Name>AssignMessage.408TimeoutErrorResponse</Name>-->
-<!--      <Condition>error.status.code = 504</Condition>-->
-<!--    </Step>-->
-<!--    <Step>-->
-<!--      <Name>AssignMessage.400InvalidTargetIdentifierValue</Name>-->
-<!--      <Condition>idMalformed = true</Condition>-->
-<!--    </Step>-->
-<!--    <Step>-->
-<!--      <Name>AssignMessage.500ServerErrorNoStoreErrorResponse</Name>-->
-<!--      <Condition>(error.status.code = 500) and (operation-outcome.code = "no-store")</Condition>-->
-<!--    </Step>-->
-<!--    <Step>-->
-<!--      <Name>AssignMessage.500ServerErrorExceptionErrorResponse</Name>-->
-<!--      <Condition>(error.status.code = 500) and (operation-outcome.code != "no-store")</Condition>-->
-<!--    </Step>-->
-<!--    <Step>-->
-<!--      <Name>AssignMessage.503ServiceUnavailableErrorResponse</Name>-->
-<!--      <Condition>error.status.code = 503</Condition>-->
-<!--    </Step>-->
   </DefaultFaultRule>
   <HTTPTargetConnection>
         <Properties>
