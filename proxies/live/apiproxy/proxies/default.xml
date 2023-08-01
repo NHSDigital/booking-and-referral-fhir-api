@@ -9,13 +9,6 @@
         <Condition>(request.header.Accept != null)</Condition>
         <Name>Javascript.SetnRemoveVersion</Name>
       </Step>
-      <Step>
-        <Name>Javascript.ValidateRequest</Name>
-      </Step>
-      <Step>
-        <Name>RaiseFault.InvalidRequest</Name>
-        <Condition>validation.error != null</Condition>
-      </Step>
     </Request>
   </PreFlow>
   <Flows>
@@ -53,9 +46,16 @@
 <!--          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>-->
 <!--        </Step>-->
         <Step>
-          <Name>OauthV2.VerifyAccessToken</Name>
-          <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
+          <Name>Javascript.ValidateRequest</Name>
         </Step>
+        <Step>
+          <Name>RaiseFault.InvalidRequest</Name>
+          <Condition>validation.error != null</Condition>
+        </Step>
+        <Step>
+          <Name>OauthV2.VerifyAccessToken</Name>
+        </Step>
+        <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
       </Request>
     </Flow>
   </Flows>
