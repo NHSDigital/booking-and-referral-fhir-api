@@ -2,6 +2,7 @@ function validEndpoint(context) {
     const path = context.getVariable("proxy.pathsuffix")
     return path.startsWith("/$process-message") ||
         path.startsWith("/Slot") ||
+        path.startsWith("/metadata") ||
         path.startsWith("/Appointment") ||
         path.startsWith("/ServiceRequest") ||
         path.startsWith("/registry") ||

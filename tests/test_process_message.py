@@ -43,7 +43,6 @@ class TestProcessMessage:
     @pytest.mark.process_message
     @pytest.mark.integration
     @pytest.mark.sandbox
-    @pytest.mark.debug
     def test_process_message_method_not_allowed(self, get_token_client_credentials):
         """
           test to check to ensure only the post method is allowed
