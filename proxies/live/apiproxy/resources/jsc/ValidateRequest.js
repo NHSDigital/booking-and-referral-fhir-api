@@ -1,3 +1,14 @@
+function validEndpoint(context) {
+    const path = context.getVariable("proxy.pathsuffix")
+    return path.startsWith("/$process-message") ||
+        path.startsWith("/Slot") ||
+        path.startsWith("/Appointment") ||
+        path.startsWith("/ServiceRequest") ||
+        path.startsWith("/registry") ||
+        path.startsWith("/DocumentReference") ||
+        path.startsWith("/MessageDefinition")
+}
+
 function hasRequiredHeaders(context) {
     const headers = context.getVariable("request.headers.names").toArray()
 
@@ -20,6 +31,13 @@ function isVersionValid(context) {
 }
 
 function validate(context) {
+    if (!validEndpoint(context)) {
+        return {
+            name: "404PageNotFound",
+            statusCode: 404
+
+        }
+    }
     if (!hasRequiredHeaders(context)) {
         return {
             name: "400InvalidHeaders",

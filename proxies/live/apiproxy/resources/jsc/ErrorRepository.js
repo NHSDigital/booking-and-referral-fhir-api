@@ -92,6 +92,15 @@ const errorRepository = {
         systemCode = "PROXY_NOT_FOUND",
         diagnostics = "The target endpoint does not exist in the Endpoint Catalogue."
     ),
+    "404PageNotFound": makeError(
+        id = "91e8828a-c936-4667-b13b-0f5664b1e944",
+        profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+        severity = "error",
+        code = "not-found",
+        system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+        systemCode = "NOT_FOUND",
+        diagnostics = "Endpoint on the API does not exist. This would be a Proxy or unprefixed response. there is no SEND code for 404 in the value set."
+    ),
     "403ReceiverMtls": makeError(
         id = "c936667e-13b0-4f56-94b1-e944a459837e",
         profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",

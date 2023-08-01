@@ -80,6 +80,7 @@ class TestEndpoints:
 
     @pytest.mark.integration
     @pytest.mark.sandbox
+    @pytest.mark.debug
     def test_endpoint_not_found(self, get_token_client_credentials):
         """
           test for /invalid..  to check it making a request to an unexisting endpoint
