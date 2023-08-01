@@ -54,9 +54,9 @@
 <!--        </Step>-->
         <Step>
           <Name>OauthV2.VerifyAccessToken</Name>
+          <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
         </Step>
       </Request>
-      <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
     </Flow>
   </Flows>
   <PostClientFlow name="PostClientFlow">
@@ -74,9 +74,7 @@
     <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
   </RouteRule>
   <RouteRule name="NoRoutePing">
-    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb
-      = "HEAD"))
-    </Condition>
+    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD")) </Condition>
   </RouteRule>
 <!--  <RouteRule name="CapabilityStatement">-->
 <!--    <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>-->

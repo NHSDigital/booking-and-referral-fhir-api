@@ -50,10 +50,10 @@
       <Step>
         <Name>Javascript.SetTargetUrl</Name>
       </Step>
-      <Step>
-        <Name>RaiseFault.400InvalidHeaders</Name>
-        <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>
-      </Step>
+<!--      <Step>-->
+<!--        <Name>RaiseFault.400InvalidHeaders</Name>-->
+<!--        <Condition>(request.header.X-Request-Id is null) or (request.header.X-Correlation-Id is null)</Condition>-->
+<!--      </Step>-->
       <Step>
         <Name>RaiseFault.400MalformedTargetIdentifier</Name>
         <Condition>idMalformed = true</Condition>
