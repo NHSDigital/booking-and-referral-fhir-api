@@ -1,9 +1,6 @@
 openapi: 3.0.0
 info:
   description: |
-    ## Overview
-
-    ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
 
     <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
     <div class="nhsd-a-box nhsd-a-box--border-yellow">
@@ -21,7 +18,11 @@ info:
       </div>
       </div>
     </section>
-    
+
+    ## Overview
+
+    ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
+
     Use this API to send booking and referral information between NHS service providers.
 
     You can:
