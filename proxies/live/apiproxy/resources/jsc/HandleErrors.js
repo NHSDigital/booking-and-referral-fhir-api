@@ -62,7 +62,7 @@ function handleError(context) {
         return makeResponse(errorRepository["403ReceiverMtls"], 403)
     }
 
-    // FIXME: return a default error message
+    return makeResponse(errorRepository["500UnhandledException"], 500)
 }
 
 var errorResponse = null;
