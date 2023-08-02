@@ -55,7 +55,7 @@ const errorRepository = {
   ),
 
   "400InvalidBase64Encoding": makeError(
-    id = "",
+    id = "76825bab-2cab-432a-b881-66ec070981d8",
     profile = "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome",
     severity = "error",
     code = "400",
@@ -64,7 +64,7 @@ const errorRepository = {
     diagnostics = "The base64 decoding of the NHSD-Target-Identifier header failed."
   ),
   "400InvalidTargetIdentifierValue": makeError(
-    id = "",
+    id = "da38f50a-160a-4e5d-8e77-117b0759053a",
     profile = "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome",
     severity = "error",
     code = "structure",
