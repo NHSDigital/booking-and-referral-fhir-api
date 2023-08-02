@@ -4,6 +4,7 @@
     <Payload contentType="application/json">
         {
             "resourceType": "OperationOutcome",
+            "id": "da38f50a-160a-4e5d-8e77-117b0759053a",
             "meta": {
                 "profile": [
                 "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
