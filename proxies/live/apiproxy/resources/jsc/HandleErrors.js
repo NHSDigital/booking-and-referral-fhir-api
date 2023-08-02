@@ -61,8 +61,6 @@ function handleError(context) {
     if (responseStatusCode === 403) {
         return makeResponse(errorRepository["403ReceiverMtls"], 403)
     }
-
-    return makeResponse(errorRepository["500UnhandledException"], 500)
 }
 
 var errorResponse = null;
