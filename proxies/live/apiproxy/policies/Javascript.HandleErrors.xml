@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="Javascript.HandleErrors">
+    <DisplayName>Javascript.HandleErrors</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://HandleErrors.js</ResourceURL>
+    <IncludeURL>jsc://ErrorRepository.js</IncludeURL>
+</Javascript>

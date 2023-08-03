@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="Javascript.ValidateRequest">
+    <DisplayName>Javascript.ValidateRequest</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://ValidateRequest.js</ResourceURL>
+</Javascript>

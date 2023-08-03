@@ -5,10 +5,6 @@
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
-       <Step>
-        <Condition>(request.header.Accept != null)</Condition>
-        <Name>Javascript.SetnRemoveVersion</Name>
-      </Step>
     </Request>
   </PreFlow>
   <Flows>
@@ -31,17 +27,32 @@
       </Response>
       <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
     </Flow>
+    <Flow name="CapabilityStatement">
+      <Response>
+        <Step>
+          <Name>AssignMessage.AddCapabilityStatement</Name>
+        </Step>
+      </Response>
+      <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
+    </Flow>
     <Flow name="Checks">
       <Request>
         <Step>
-          <Name>RaiseFault.406PageNotAcceptable</Name>
-          <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber != "1.1.0"</Condition>
-        </Step>
-        <Step>
           <Name>OauthV2.VerifyAccessToken</Name>
         </Step>
+        <Step>
+          <Condition>(request.header.Accept != null)</Condition>
+          <Name>Javascript.SetnRemoveVersion</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.ValidateRequest</Name>
+        </Step>
+        <Step>
+          <Name>RaiseFault.InvalidRequest</Name>
+          <Condition>validation.error != null</Condition>
+        </Step>
+        <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
       </Request>
-      <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
     </Flow>
   </Flows>
   <PostClientFlow name="PostClientFlow">
@@ -59,9 +70,10 @@
     <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
   </RouteRule>
   <RouteRule name="NoRoutePing">
-    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb
-      = "HEAD"))
-    </Condition>
+    <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD")) </Condition>
+  </RouteRule>
+  <RouteRule name="CapabilityStatement">
+    <Condition>(proxy.pathsuffix MatchesPath "/metadata") and ((request.verb = "GET") and (request.header.NHSD-Target-Identifier = null))</Condition>
   </RouteRule>
   <RouteRule name="nrlf-producer-route">
     <TargetEndpoint>nrlf-producer-target</TargetEndpoint>
@@ -76,20 +88,10 @@
   </RouteRule>
   <DefaultFaultRule>
     <Step>
-      <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed == true</Condition>
+      <Name>Javascript.HandleErrors</Name>
     </Step>
     <Step>
-      <Name>AssignMessage.401UnauthorizedSecurityErrorResponse</Name>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.invalid_access_token"</Condition>
-    </Step>
-    <Step>
-      <Name>AssignMessage.401UnauthorizedUnknownErrorResponse</Name>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "oauth.v2.InvalidAccessToken"</Condition>
-    </Step>
-    <Step>
-      <Name>AssignMessage.403ProxyNotEnabledErrorResponse</Name>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.fault.name = "keymanagement.service.InvalidAPICallAsNoApiProductMatchFound"</Condition>
+      <Name>AssignMessage.SetErrorResponse</Name>
     </Step>
   </DefaultFaultRule>
 </ProxyEndpoint>
