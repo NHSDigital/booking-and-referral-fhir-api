@@ -25,3 +25,5 @@ locals {
 }
 variable "alb_tg_arn" {
 }
+
+variable "service_domain_name"{}
