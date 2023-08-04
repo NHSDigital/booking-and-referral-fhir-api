@@ -41,10 +41,9 @@ resource "null_resource" "mock-receiver_image_push" {
     while [ $counter -lt 8 ]
     do
       echo "Waiting for Service to be up and running..."
-        ((counter=counter+1))
-        echo $counter
-        sleep 80
-      fi
+      ((counter=counter+1))
+      echo $counter
+      sleep 80
     done  
     
     EOF
