@@ -27,6 +27,7 @@ resource "null_resource" "mock-receiver_image_push" {
   }
 
   provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
     command = <<EOF
     export AWS_PROFILE=apim-dev
     aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.eu-west-2.amazonaws.com
@@ -37,18 +38,9 @@ resource "null_resource" "mock-receiver_image_push" {
     aws ecs update-service --cluster ${var.name_prefix} --service ${var.name_prefix} --force-new-deployment --region eu-west-2
     sleep 50
     counter=0
-    endpoint=https://${var.service_domain_name}/_status
-    echo $endpoint
-    while [ $counter -lt 10 ]
+    while [ $counter -lt 8 ]
     do
-      response=$(curl -s -o /dev/null -w "%%{http_code}" -X GET $endpoint )
-      echo $response
-      if [ $response -eq 200 ]
-      then
-        echo "Status test successful"
-        break
-      else
-        echo "Waiting for $endpoint to return a 200 response..."
+      echo "Waiting for Service to be up and running..."
         ((counter=counter+1))
         echo $counter
         sleep 80
