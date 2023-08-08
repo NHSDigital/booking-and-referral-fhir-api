@@ -7,7 +7,7 @@
     "checks": {
       "spine:status": [
         {
-          "status": "passed",
+          "status": "pass",
           "timeout": "false",
           "responseCode": 200,
           "outcome": "",
