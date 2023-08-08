@@ -36,11 +36,12 @@ resource "null_resource" "mock-receiver_image_push" {
     docker build --platform linux/amd64 -t $image_tag -f ${local.mock_receiver_path}/Dockerfile ${local.mock_receiver_path}
     docker push -a $ecr_url
     aws ecs update-service --cluster ${var.name_prefix} --service ${var.name_prefix} --force-new-deployment --region eu-west-2
-
+    counter=0
     while [ $counter -lt 8 ]
     do
         echo "Waiting for ECS Service to be up and running..."
         echo "This may take while so kindly be patient..."
+        ((counter=counter+1))
         sleep 80
     done
     EOF
