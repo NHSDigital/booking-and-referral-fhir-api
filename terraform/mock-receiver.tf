@@ -10,4 +10,5 @@ module "mock-receiver" {
   container_port = 9000
   image_version  = local.environment
   alb_tg_arn     = module.alb.alb_target_group_arn
+  service_domain_name = local.service_domain_name
 }
