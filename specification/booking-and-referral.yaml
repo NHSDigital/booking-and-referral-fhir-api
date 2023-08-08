@@ -438,7 +438,6 @@ paths:
           description: |
             Inclusions that drive the rescusive depth of the search. There is a minimum of the following _include parameters required for current Applications.
             * Slot:schedule
-            * Schedule:actor:Practitioner
             * Schedule:actor:HealthcareService            
             
             **Note**: Both _include and _revinclude share the same syntax - up to three components, separated by colon characters (:). 
