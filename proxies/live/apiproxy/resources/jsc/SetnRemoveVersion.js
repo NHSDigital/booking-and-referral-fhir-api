@@ -16,5 +16,3 @@ for (var i = 0; i < acceptArray.length; i++) {
 }
 
 context.setVariable('versionNumber', versionNumber);
-
-context.setVariable('request.header.Accept', modifiedAcceptHeader);
