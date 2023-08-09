@@ -5,7 +5,6 @@ var versionNumber = '1.0.0';
 for (var i = 0; i < acceptArray.length; i++) {
     var acceptValue = acceptArray[i].trim();
     versionNumber = acceptValue.split('=')[1];  //Getting versionNumber after '=' sign
-    versionNumber = versionNumber.split('-')[0];  //Removing beta/aplha from end
 }
 
 context.setVariable('versionNumber', versionNumber);
