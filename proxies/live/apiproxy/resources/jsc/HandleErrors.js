@@ -45,7 +45,8 @@ function handleError(context) {
     if (errorStatusCode === 500 ) {
         if (context.getVariable("operation-outcome.code") === "no-store") {
             return makeResponse(errorRepository["500ServerErrorNoStore"], 500)
-        } else {
+        } 
+        else if (context.getVariable("operation-outcome.code") === null) {
             return makeResponse(errorRepository["500ServerErrorException"], 500)
         }
     }

@@ -44,11 +44,6 @@
       </Step>
     </Request>
   </PreFlow>
-  <FaultRules>
-    <FaultRule name="metadata_capability_statement">
-      <Condition>raisefault.RaiseFault.AddCapabilityStatement.failed</Condition>
-    </FaultRule>
-  </FaultRules>
   <DefaultFaultRule>
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>
