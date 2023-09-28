@@ -17,7 +17,7 @@
         <Condition>targets != null</Condition>
       </Step>
       <Step>
-        <Name>ServiceCallout.GetTargetsKvm</Name>
+        <Name>KVM.GetBarsTargets</Name>
         <Condition>targets = null</Condition>
       </Step>
       <Step>
