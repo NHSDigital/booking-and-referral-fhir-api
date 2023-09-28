@@ -4,7 +4,7 @@
   <Request>
     <Set>
       <Verb>GET</Verb>
-      <Path>NHSDigital/booking-and-referral-targets/master/targets/{{ APIGEE_ENVIRONMENT }}/targets.json</Path>
+      <Path>{bars_targets_path}</Path>
     </Set>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   </Request>
