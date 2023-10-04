@@ -3,7 +3,7 @@
   <DisplayName>KVM.GetBarsTargets</DisplayName>
   <ExclusiveCache>false</ExclusiveCache>
   <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
-  <Get assignTo="bars_targets_path">
+  <Get assignTo="bars_targets_url">
     <Key>
       <Parameter>targets</Parameter>
     </Key>
