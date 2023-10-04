@@ -12,6 +12,6 @@
     <SSLInfo>
       <Enabled>true</Enabled>
     </SSLInfo>
-    <URL>{bars_targets_url}</URL>
+    <URL>https://{bars_targets_url}</URL>
   </HTTPTargetConnection>
 </ServiceCallout>
