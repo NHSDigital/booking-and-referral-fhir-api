@@ -4,7 +4,6 @@
   <Request>
     <Set>
       <Verb>GET</Verb>
-      <Path>{bars_targets_path}</Path>
     </Set>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   </Request>
@@ -13,6 +12,6 @@
     <SSLInfo>
       <Enabled>true</Enabled>
     </SSLInfo>
-    <URL>https://raw.githubusercontent.com</URL>
+    <URL>{bars_targets_url}</URL>
   </HTTPTargetConnection>
 </ServiceCallout>
