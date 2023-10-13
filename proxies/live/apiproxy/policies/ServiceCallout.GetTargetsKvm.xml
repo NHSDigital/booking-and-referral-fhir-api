@@ -4,15 +4,16 @@
   <Request>
     <Set>
       <Verb>GET</Verb>
-      <Path>NHSDigital/booking-and-referral-targets/master/targets/{{ APIGEE_ENVIRONMENT }}/targets.json</Path>
+      <Path></Path>
     </Set>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   </Request>
   <Response>private.config_raw</Response>
   <HTTPTargetConnection>
-    <SSLInfo>
-      <Enabled>true</Enabled>
-    </SSLInfo>
-    <URL>https://raw.githubusercontent.com</URL>
-  </HTTPTargetConnection>
+  <SSLInfo>
+    <Enabled>true</Enabled>
+  </SSLInfo>
+  <URL>https://api.enterprise.apigee.com/v1/organizations/{{APIGEE_ORG_NAME}}/environments/{{APIGEE_ENVIRONMENT}}/key-value-maps/booking-and-referrals-targets/entries/Targets</URL>
+</HTTPTargetConnection>
+
 </ServiceCallout>
