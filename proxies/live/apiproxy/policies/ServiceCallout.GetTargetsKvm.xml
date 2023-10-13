@@ -1,19 +1,27 @@
 <ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.GetTargetsKvm">
-  <!-- This is the default (55 seconds). Including it to make explicit. -->
-  <Timeout>55000</Timeout>
-  <Request>
-    <Set>
-      <Verb>GET</Verb>
-      <Path></Path>
-    </Set>
-    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
-  </Request>
-  <Response>private.config_raw</Response>
-  <HTTPTargetConnection>
-  <SSLInfo>
-    <Enabled>true</Enabled>
-  </SSLInfo>
-  <URL>https://api.enterprise.apigee.com/v1/organizations/{{APIGEE_ORG_NAME}}/environments/{{APIGEE_ENVIRONMENT}}/key-value-maps/booking-and-referrals-targets/entries/Targets</URL>
-</HTTPTargetConnection>
-
+    <!-- This is the default (55 seconds). Including it to make explicit. -->
+    <Timeout>55000</Timeout>
+    <Request>
+        <Set>
+            <Verb>GET</Verb>
+            <Path>https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/{{APIGEE_ENVIRONMENT}}/key-value-maps/booking-and-referrals-targets/entries/Targets</Path>
+        </Set>
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>
+        <Step>
+            <Name>TargetsKVMResponseHandling.js</Name>
+        </Step>
+    </Response>
+    <AssignMessage name="Assign-URL">
+        <AssignTo createNew="false" transport="http" type="request">url</AssignTo>
+        <Set>myExtractedURL</Set>
+    </AssignMessage>
+    <Response>private.config_raw</Response>
+    <HTTPTargetConnection>
+        <SSLInfo>
+            <Enabled>true</Enabled>
+        </SSLInfo>
+        <URL></URL>
+    </HTTPTargetConnection>
 </ServiceCallout>
