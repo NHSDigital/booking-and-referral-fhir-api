@@ -4,7 +4,7 @@
     <Request>
         <Set>
             <Verb>GET</Verb>
-            <Path>https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/{{APIGEE_ENVIRONMENT}}/key-value-maps/booking-and-referrals-targets/entries/Targets</Path>
+            <Path>https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/key-value-maps/booking-and-referrals-targets/entries/Targets</Path>
         </Set>
         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
     </Request>
