@@ -18,7 +18,6 @@
       </Step>
       <Step>
         <Name>KVM.GetTargets</Name>
-        <Condition>targets = null</Condition>
       </Step>
       <Step>
         <Name>ServiceCallout.GetTargetsKvm</Name>

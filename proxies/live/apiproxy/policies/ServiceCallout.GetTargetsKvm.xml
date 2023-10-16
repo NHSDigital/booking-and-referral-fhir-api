@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.GetTargetsKvm">
-    <!-- This is the default (55 seconds). Including it to make explicit. -->
     <Timeout>55000</Timeout>
     <Request>
         <Set>
             <Verb>GET</Verb>
-            <QueryParams>
-                <QueryParam name="url"><Ref>request.queryparam.targets</Ref></QueryParam>
-            </QueryParams>
+            <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
         </Set>
-        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
     </Request>
     <HTTPTargetConnection>
         <SSLInfo>
             <Enabled>true</Enabled>
         </SSLInfo>
-        <URL><Ref>request.queryparam.url</Ref></URL>
+        <URL>https://<Ref>target-url</Ref></URL>
     </HTTPTargetConnection>
 </ServiceCallout>
 

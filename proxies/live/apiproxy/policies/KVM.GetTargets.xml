@@ -3,7 +3,7 @@
   <DisplayName>KVM.GetTaregts</DisplayName>
   <ExclusiveCache>false</ExclusiveCache>
   <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
-  <Get assignTo="request.queryparam.targets">
+  <Get assignTo="target-url">
     <Key>
       <Parameter>targets</Parameter>
     </Key>
