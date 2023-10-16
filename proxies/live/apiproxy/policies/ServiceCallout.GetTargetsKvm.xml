@@ -8,10 +8,7 @@
         </Set>
     </Request>
     <HTTPTargetConnection>
-        <SSLInfo>
-            <Enabled>true</Enabled>
-        </SSLInfo>
-        <URL>https://<Ref>target-url</Ref></URL>
+        <URL>https://{target-url}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>
 

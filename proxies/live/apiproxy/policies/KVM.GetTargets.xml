@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM.GetTargets" mapIdentifier="booking-and-referrals-targets">
-  <DisplayName>KVM.GetTaregts</DisplayName>
+  <DisplayName>KVM.GetTargets</DisplayName>
   <ExclusiveCache>false</ExclusiveCache>
   <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
   <Get assignTo="target-url">
