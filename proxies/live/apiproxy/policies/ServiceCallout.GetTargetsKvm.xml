@@ -4,7 +4,7 @@
     <Request>
         <Set>
             <Verb>GET</Verb>
-            <Path>https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/key-value-maps/booking-and-referrals-targets/entries/Targets</Path>
+            <Path>https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/booking-and-referrals-targets</Path>
         </Set>
         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
     </Request>
@@ -15,13 +15,12 @@
     </Response>
     <AssignMessage name="Assign-URL">
         <AssignTo createNew="false" transport="http" type="request">url</AssignTo>
-        <Set>myExtractedURL</Set>
+        <Set><Ref>myExtractedURL</Ref></Set>
     </AssignMessage>
-    <Response>private.config_raw</Response>
     <HTTPTargetConnection>
         <SSLInfo>
             <Enabled>true</Enabled>
         </SSLInfo>
-        <URL></URL>
+        <URL><Ref>myExtractedURL</Ref></URL>
     </HTTPTargetConnection>
 </ServiceCallout>
