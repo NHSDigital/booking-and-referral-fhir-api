@@ -1,10 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.GetTargetsKvm">
     <!-- This is the default (55 seconds). Including it to make explicit. -->
     <Timeout>55000</Timeout>
     <Request>
         <Set>
             <Verb>GET</Verb>
-            <Path><Ref>booking-and-referrals-target-url</Ref></Path>
+            <QueryParams>
+                <QueryParam name="url"><Ref>request.queryparam.targets</Ref></QueryParam>
+            </QueryParams>
         </Set>
         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
     </Request>
@@ -12,6 +15,7 @@
         <SSLInfo>
             <Enabled>true</Enabled>
         </SSLInfo>
-        <URL><Ref>booking-and-referrals-target-url</Ref></URL>
+        <URL><Ref>request.queryparam.url</Ref></URL>
     </HTTPTargetConnection>
 </ServiceCallout>
+

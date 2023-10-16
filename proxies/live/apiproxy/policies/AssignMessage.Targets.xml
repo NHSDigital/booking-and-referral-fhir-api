@@ -2,7 +2,15 @@
     <AssignTo createNew="true" type="response">booking-and-referrals-target-url</AssignTo>
     <Set>
         <Payload contentType="text/plain">
-            <Ref>booking-and-referrals-targets.targets</Ref>
+            <Conditional>
+                <Condition>request.queryparam.targets != null</Condition>
+                <Set>
+                    <Ref>request.queryparam.targets</Ref>
+                </Set>
+                <Else>
+                    <Ref>booking-and-referrals-targets.targets</Ref>
+                </Else>
+            </Conditional>
         </Payload>
     </Set>
 </AssignMessage>

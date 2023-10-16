@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM.GetTargets" mapIdentifier="booking-and-referrals-targets">
+  <DisplayName>KVM.GetNrlfConfig</DisplayName>
+  <ExclusiveCache>false</ExclusiveCache>
+  <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+  <Get assignTo="request.queryparam.targets">
+    <Key>
+      <Parameter>targets</Parameter>
+    </Key>
+  </Get>
+</KeyValueMapOperations>
