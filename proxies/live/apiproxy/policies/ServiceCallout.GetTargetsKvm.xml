@@ -4,23 +4,14 @@
     <Request>
         <Set>
             <Verb>GET</Verb>
-            <Path>https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/booking-and-referrals-targets</Path>
+            <Path><Ref>booking-and-referrals-target-url</Ref></Path>
         </Set>
         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
     </Request>
-    <Response>
-        <Step>
-            <Name>TargetsKVMResponseHandling.js</Name>
-        </Step>
-    </Response>
-    <AssignMessage name="Assign-URL">
-        <AssignTo createNew="false" transport="http" type="request">url</AssignTo>
-        <Set><Ref>myExtractedURL</Ref></Set>
-    </AssignMessage>
     <HTTPTargetConnection>
         <SSLInfo>
             <Enabled>true</Enabled>
         </SSLInfo>
-        <URL><Ref>myExtractedURL</Ref></URL>
+        <URL><Ref>booking-and-referrals-target-url</Ref></URL>
     </HTTPTargetConnection>
 </ServiceCallout>

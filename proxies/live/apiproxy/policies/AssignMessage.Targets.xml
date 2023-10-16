@@ -1,7 +1,9 @@
-<AssignMessage name='AssignMessage.Targets'>
-  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
-  <AssignVariable>
-    <Name>targets</Name>
-    <Ref>private.config_raw.content</Ref>
-  </AssignVariable>
+<AssignMessage name="AssignMessage.Targets">
+    <AssignTo createNew="true" type="response">booking-and-referrals-target-url</AssignTo>
+    <Set>
+        <Payload contentType="text/plain">
+            <Ref>booking-and-referrals-targets.targets</Ref>
+        </Payload>
+    </Set>
 </AssignMessage>
+
