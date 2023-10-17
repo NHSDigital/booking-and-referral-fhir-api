@@ -7,8 +7,9 @@
             <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
         </Set>
     </Request>
+    <Response>private.config_raw</Response>
     <HTTPTargetConnection>
-        <URL>https://{target-url}</URL>
+        <URL>https://{targets}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>
 
