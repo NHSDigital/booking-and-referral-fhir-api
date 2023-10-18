@@ -4,11 +4,15 @@
     <Request>
         <Set>
             <Verb>GET</Verb>
+            <Path>{target_path}</Path>
             <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
         </Set>
     </Request>
-    <Response>calloutResponse</Response> 
+    <Response>private.config_raw</Response>
     <HTTPTargetConnection>
-        <URL>https://{github_target_url}</URL>
+        <SSLInfo>
+            <Enabled>true</Enabled>
+        </SSLInfo>
+        <URL>https://{target_domain}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

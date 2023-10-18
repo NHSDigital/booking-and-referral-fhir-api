@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM.GetTargets" mapIdentifier="booking-and-referrals-targets">
-  <DisplayName>KVM.GetTargets</DisplayName>
-  <ExclusiveCache>false</ExclusiveCache>
-  <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
-  <Get assignTo="github_target_url">
-    <Key>
-      <Parameter>targets</Parameter>
-    </Key>
-  </Get>
+    <DisplayName>KVM.GetTargets</DisplayName>
+    <ExclusiveCache>false</ExclusiveCache>
+    <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+    <Get assignTo="target_domain">
+        <Key>
+            <Parameter>target-domain</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="target_path">
+        <Key>
+            <Parameter>target-path</Parameter>
+        </Key>
+    </Get>
 </KeyValueMapOperations>
