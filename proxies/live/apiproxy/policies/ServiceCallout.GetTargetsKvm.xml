@@ -7,9 +7,8 @@
             <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
         </Set>
     </Request>
-    <Response>private.config_raw</Response>
+    <Response>calloutResponse</Response> 
     <HTTPTargetConnection>
-        <URL>https://{targets}</URL>
+        <URL>https://{github_target_url}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>
-
