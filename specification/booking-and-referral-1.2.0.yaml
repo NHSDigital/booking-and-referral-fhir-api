@@ -981,6 +981,73 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+  /HealthcareService:
+    get:
+      tags:
+        - HealthcareService
+      summary: Get the HealthcareService for an identifier.
+      description: Get the HealthcareService for an identifier.
+      operationId: findHealthcareServiceByOrg
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/HCProvidedBy_QParam'
+        - $ref: '#/components/parameters/HealthcareServiceIdentifier_QParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/200-OrganizationBundle'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/HealthcareService/{id}':
+    parameters:
+      - $ref: '#/components/parameters/HealthcareServiceIdentifier_PParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags: 
+        - HealthcareService
+      summary: Get a Specific HealthcareService
+      description: read operation for a Specific HealthcareService
+      operationId: getHealthcareService
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:
+      tags: 
+        - HealthcareService
+      summary: Update a Specific Organization
+      description: Creates a new current version for an existing resource [(update)](https://www.hl7.org/fhir/http.html#update) or creates an initial version if no resource already exists for the given id [(new)](https://www.hl7.org/fhir/http.html#upsert).
+      operationId: replaceHealthcareService
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        '201':
+          $ref: '#/components/responses/201-Created'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
+    delete:
+      tags: 
+        - Organization
+      summary: Delete a Specific HealthcareService
+      description: Delete a Specific HealthcareService
+      operationId: deleteHealthcareService
+      responses:
+        '200':
+           $ref: '#/components/responses/200-Delete'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
 components:
   requestBodies:
     DocumentReference:
@@ -1177,7 +1244,31 @@ components:
       required: false
       allowEmptyValue: false
       schema:
+        $ref: '#/components/schemas/ODS'  
+    HealthcareServiceIdentifier_QParam:
+      name: HealthcareService.identifier
+      description: The identifier of the HealthcareService.
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/Service'
+    HCProvidedBy_QParam:
+      name: HealthcareService.providedBy
+      description: The identifier of the organization that is managing the endpoint(s).
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
         $ref: '#/components/schemas/ODS'
+    HealthcareServiceIdentifier_PParam:
+      name: id
+      description: The identifier of the HealthcareService.
+      in: path
+      required: true
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/GUID'
   responses:
     4XX-BARS:
       description: |
@@ -1428,6 +1519,13 @@ components:
       $ref: schemas1.2.0/EndpointBundle.yaml
     OrganizationBundle:
       $ref: schemas1.2.0/OrganizationBundle.yaml
+    Service:
+      type: string
+      example: https://fhir.nhs.uk/Id/dos-service-id|1000099999
+    GUID:
+        type: string
+        format: uuid
+        example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
   securitySchemes:
     OAuth_Token:
       type: http
