@@ -1048,6 +1048,79 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+  /Endpoint:
+    get:
+      tags:
+        - Endpoint
+      summary: Get the Endpoints based on an Organization identifier.
+      description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
+      operationId: findEndpointByOrg
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/EndpointHas_Qparam'
+        - $ref: '#/components/parameters/EndpointIdentifier_QParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/200-EndpointBundle'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/Endpoint/{id}':
+    parameters:
+      - $ref: '#/components/parameters/EndpointIdentifier_PParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags: 
+        - Endpoint
+      summary: Get a Specific Endpoint
+      description: read operation for a Specific Endpoint
+      operationId: getEndpoint
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicEndpoint'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:
+      tags: 
+        - Endpoint
+      summary: Update a Specific Endpoint.
+      description: | 
+        Creates a new current version for an existing resource ([update](https://www.hl7.org/fhir/http.html#update)) or creates an initial version if no resource already exists for the given id ([new](https://www.hl7.org/fhir/http.html#upsert)).
+
+        Only the owner of an Endpoint can modify it. 
+      operationId: replaceEndpoint
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicEndpoint'
+        '201':
+          $ref: '#/components/responses/201-Created'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
+    delete:
+      tags: 
+        - Endpoint
+      summary: Delete a Specific Endpoint
+      description: | 
+        Delete a Specific Endpoint.
+        
+        Only the owner of an Endpoint can delete it. 
+      operationId: deleteEndpoint
+      responses:
+        '200':
+           $ref: '#/components/responses/200-Delete'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
 components:
   requestBodies:
     DocumentReference:
@@ -1264,6 +1337,36 @@ components:
     HealthcareServiceIdentifier_PParam:
       name: id
       description: The identifier of the HealthcareService.
+      in: path
+      required: true
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/GUID'
+    EndpointIdentifier_QParam:
+      name: Endpoint.identifier
+      description: The identifier of the type of Endpoint.
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/EndpointIdentifier' 
+    EndpointHas_Qparam:
+      name: _has
+      description: | 
+        The healthcareService you want the Endpoints returned for.
+
+        |HealthcareService Property| Example|
+        |-------             | --------|
+        |HealthcareService.Identifier| `_has:HealthcareService.Identifier=https://fhir.nhs.uk/Id/dos-service-id\|1000099999`|
+        |HealthcareService.Id| `_has:HealthcareService.Id=95852b93-d1ab-4c51-8e7d-c24cf9b257a9`|
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/Has'
+    EndpointIdentifier_PParam:
+      name: id
+      description: The identifier of the endpoint.
       in: path
       required: true
       allowEmptyValue: false
@@ -1526,6 +1629,14 @@ components:
         type: string
         format: uuid
         example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    EndpointIdentifier:
+      type: string
+      example: https://fhir.nhs.uk/Id/EndpointSystem|EndpointValue
+    Has:
+      type: string
+      enum:
+        - HealthcareService.Identifier
+        - HealthcareService.Id
   securitySchemes:
     OAuth_Token:
       type: http
