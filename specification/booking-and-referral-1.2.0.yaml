@@ -934,6 +934,53 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+  '/Organization/{id}':
+    parameters:
+      - $ref: '#/components/parameters/ResourceId_Param'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags: 
+        - Organization
+      summary: Get a Specific Organization
+      description: read operation for a Specific Organization
+      operationId: getOrganization
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:
+      tags: 
+        - Organization
+      summary: Update a Specific Organization
+      description: Creates a new current version for an existing resource [(update)](https://www.hl7.org/fhir/http.html#update) or creates an initial version if no resource already exists for the given id [(new)](https://www.hl7.org/fhir/http.html#upsert).
+      operationId: replaceOrganization
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        '201':
+          $ref: '#/components/responses/201-Created'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
+    delete:
+      tags: 
+        - Organization
+      summary: Delete a Specific Organization
+      description: Delete a Specific Organization
+      operationId: deleteOrganization
+      responses:
+        '200':
+           $ref: '#/components/responses/200-Delete'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
 components:
   requestBodies:
     DocumentReference:
@@ -946,6 +993,16 @@ components:
     RegistryId_Param:
       name: id
       description: The identifier of the registry object.
+      in: path
+      schema:
+        type: string
+        format: uuid
+        example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+      required: true
+      allowEmptyValue: false
+    ResourceId_Param:
+      name: id
+      description: The identifier of the resource.
       in: path
       schema:
         type: string
@@ -1280,6 +1337,27 @@ components:
         application/fhir+json:
           schema:
             $ref: '#/components/schemas/OrganizationBundle'
+          example:
+            $ref: examples1.2.0/Endpoint/success_bundle.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    201-Created:         
+      description: Resource Created Successfully
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
           example:
             $ref: examples1.2.0/Endpoint/success_bundle.json
       headers:
