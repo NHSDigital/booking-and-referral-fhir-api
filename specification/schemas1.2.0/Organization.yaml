@@ -1,0 +1,18 @@
+type: object
+properties:
+  Endpoint:
+    description: NOTE - This **MUST** to point at a **UK Core Organization** (when it exists) definition not the HL7 R4
+    type: object
+    properties:
+      resourceType:
+        type: string
+      meta:
+        type: object
+        properties:
+          profile:
+            type: string
+x-examples:
+  example:
+    resourceType: Endpoint
+    meta:
+      profile: 'https://www.hl7.org/fhir/organization.html'

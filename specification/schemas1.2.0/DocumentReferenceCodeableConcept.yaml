@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    type: string
+    pattern: "[A-Za-z0-9\\-\\.]{1,64}"
+    description: Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
+  coding:
+    type: array
+    items:
+      $ref: "DocumentReferenceCoding.yaml"
+      description: A reference to a code defined by a terminology system.
+  text:
+    type: string
+    pattern: "[ \\r\\n\\t\\S]+"
+    description: A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.

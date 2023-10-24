@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "d7aaf12e-7b94-4ef6-b047-d2d92981b1cd",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "security",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "SEND_UNAUTHORIZED"
+					}
+				]
+			},
+			"diagnostics": "The user or system was not able to be authenticated, either the access token was invalid, or not provided."
+		}
+	]
+}
