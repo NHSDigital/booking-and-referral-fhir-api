@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "7b94ef6e-047d-42d9-8981-b1cd6d2f54b2",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "duplicate",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "BAD_REQUEST"
+					}
+				]
+			},
+			"diagnostics": "The addition or update to an endpoint has resulted in a duplicate record."
+		}
+	]
+}

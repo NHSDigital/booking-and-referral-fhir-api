@@ -178,6 +178,9 @@ tags:
   - name: Metadata
   - name: Referral
   - name: Slots
+  - name: Organization
+  - name: HealthcareService
+  - name: Endpoint
 security:
   - OAuth_Token: []
 paths:
@@ -912,6 +915,25 @@ paths:
                 $ref: examples1.1.0/200_DELETE.json
       description: |
         Delete a single document pointer that you created. 
+  /Organization:
+    get:
+      tags:
+        - Organization
+      summary: Get the Organization for an identifier.
+      description: Get the Organization for an identifier.
+      operationId: findOrganizationByOrg
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/Organization_QParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/200-OrganizationBundle'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
 components:
   requestBodies:
     DocumentReference:
@@ -1090,7 +1112,15 @@ components:
         This token is returned in the meta.tag field.
       in: query
       schema:
-        $ref: "#/components/schemas/NextPageToken"  
+        $ref: "#/components/schemas/NextPageToken"
+    Organization_QParam:
+      name: Organization.identifier
+      description: The identifier of the organization that is managing the endpoint(s).
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/ODS'
   responses:
     4XX-BARS:
       description: |
@@ -1172,7 +1202,99 @@ components:
           schema:
             type: string
             format: uuid
-            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91        
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-Delete:         
+      description: The resource was successfully delete. 
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationalOutcome'
+          example:
+            $ref: examples1.2.0/OperationOutcome/200-Delete.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-AtomicEndpoint:         
+      description: The Operation was Successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: examples1.2.0/Endpoint/success_Endpoint_Atomic.json
+    200-AtomicOrganization:         
+      description: The Operation was Successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: examples1.2.0/Endpoint/success_Organization_Atomic.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-EndpointBundle:         
+      description: The operation was successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/EndpointBundle'
+          example:
+            $ref: examples1.2.0/Endpoint/success_bundle.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-OrganizationBundle:         
+      description: The operation was successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OrganizationBundle'
+          example:
+            $ref: examples1.2.0/Endpoint/success_bundle.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
   schemas:
     Capability:
       $ref: schemas1.1.0/Capability.yaml
@@ -1219,6 +1341,15 @@ components:
       type: string
     RequestHeaderOdsCode:
       type: string
+    ODS:
+      type: string
+      example: https://fhir.nhs.uk/Id/ods-organization-code|A001
+    Endpoint:
+      $ref: schemas1.2.0/Endpoint.yaml
+    EndpointBundle:
+      $ref: schemas1.2.0/EndpointBundle.yaml
+    OrganizationBundle:
+      $ref: schemas1.2.0/OrganizationBundle.yaml
   securitySchemes:
     OAuth_Token:
       type: http

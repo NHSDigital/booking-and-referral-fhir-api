@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "86abf679-cb49-4e5a-a6f2-324ece8cc123",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "not-supported",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_NOT_IMPLEMENTED"
+					}
+				]
+			},
+			"diagnostics": "The receiver has not yet implemented that endpoint or functionality."
+		}
+	]
+}

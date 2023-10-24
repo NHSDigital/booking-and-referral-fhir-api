@@ -1,0 +1,59 @@
+type: object
+properties:
+  resourceType:
+    type: string
+  id:
+    type: string
+    example: "777a156c-af3c-4748-a8a3-7e95e4b0df9a"
+  meta:
+    type: object
+    properties:
+      lastUpdated:
+        type: string
+      profile:
+        type: array
+        items:
+          type: string
+          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
+  type:
+    type: string
+    example: "searchset"
+  total:
+    type: integer
+    example: 2
+  timestamp:
+    type: string
+  link:
+    type: array
+    items:
+      type: object
+      properties:
+        relation:
+          type: string
+        url:
+          type: string
+  entry:
+    type: array
+    items:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+        resource:
+          type: object
+          properties:
+            resourceType:
+              type: string
+              example: "Slot"
+            id:
+              type: string
+            meta: 
+              type: object
+              properties:
+                lastUpdated:
+                  type: string
+                profile:
+                  type: array
+                  items:
+                    type: string
+
