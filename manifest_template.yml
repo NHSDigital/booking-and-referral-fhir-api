@@ -70,6 +70,8 @@ apigee:
         path: {{ SERVICE_NAME }}.json
       - name: {{ SERVICE_NAME }}-new-{{ ENV.name }}
         path: {{ SERVICE_NAME }}-1.1.0.json
+      - name: {{ SERVICE_NAME }}-endpoint-catalogue-{{ ENV.name }}
+        path: {{ SERVICE_NAME }}-1.2.0.json
     api_catalog:
       - edgeAPIProductName: {{ NAME }}
         anonAllowed: true
