@@ -8,6 +8,38 @@ from api_test_utils.oauth_helper import OauthHelper
 from api_test_utils.apigee_api_trace import ApigeeApiTraceDebug
 from .configuration import config
 from .configuration.config import ENVIRONMENT
+from pytest_nhsd_apim.apigee_apis import ApigeeNonProdCredentials, ApigeeClient, DeveloperAppsAPI
+
+
+PRODUCT_ID_ATTR = {
+    "attribute": [
+        {"name": "product-id", "value": "P.GH7-4TY"}
+    ]
+}
+
+def update_test_app(test_app, attr: dict = PRODUCT_ID_ATTR):
+    _test_app = test_app()
+    app_name = _test_app['name']
+
+    _config = ApigeeNonProdCredentials()
+    _client = ApigeeClient(config=_config)
+    _app = DeveloperAppsAPI(client=_client)
+
+    existing_attr = _app.get_app_attributes(email="apm-testing-internal-dev@nhs.net", app_name=app_name)
+    # TODO - can we avoid this check by making the app fixture use the pytest function scope in place of the
+    #  session scope used by the pytest-nhsd-apim default app?
+    # If the existing app attributes does not contain the new app attributes, add the new attributes and update the app
+    if not all(x in existing_attr['attribute'] for x in attr['attribute']):
+        body = {'attribute': attr['attribute']}
+        _app.post_app_attributes(email="apm-testing-internal-dev@nhs.net", app_name=app_name, body=body)
+
+    # Force a refresh of the app to update the attributes in the session
+    test_app(True)
+
+
+@pytest.fixture(scope="class")
+def test_app_with_attributes(nhsd_apim_test_app):
+    update_test_app(nhsd_apim_test_app)
 
 
 @pytest.fixture(scope="session")

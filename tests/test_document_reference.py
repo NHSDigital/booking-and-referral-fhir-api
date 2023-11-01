@@ -16,7 +16,7 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_document_reference(self, get_token_client_credentials):
+    def test_get_document_reference(self, get_token_client_credentials, test_app_with_attributes):
         """
            Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API.
         """
@@ -32,7 +32,6 @@ class TestDocumentReference:
             headers={
                 "Accept": "application/fhir+json;version=1.1.0",
                 "Authorization": f"Bearer {token}",
-                "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
             },
@@ -43,7 +42,7 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_document_reference_without_version(self, get_token_client_credentials):
+    def test_get_document_reference_without_version(self, get_token_client_credentials, test_app_with_attributes):
         """
            Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API without Accept header
         """
@@ -59,7 +58,6 @@ class TestDocumentReference:
             headers={
                 "Accept": "application/fhir+json",
                 "Authorization": f"Bearer {token}",
-                "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
             },
@@ -70,7 +68,7 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_document_reference_by_id(self, get_token_client_credentials):
+    def test_get_document_reference_by_id(self, get_token_client_credentials, test_app_with_attributes):
         """
            Test for the GET /DocumentReference/{id} endpoint. This operation will call the Producer NRL API.
         """
@@ -88,7 +86,6 @@ class TestDocumentReference:
             headers={
                 "Accept": "application/fhir+json;version=1.1.0",
                 "Authorization": f"Bearer {token}",
-                "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
             },
@@ -100,7 +97,7 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_post_delete_put_document_reference(self, get_token_client_credentials):
+    def test_post_delete_put_document_reference(self, get_token_client_credentials, test_app_with_attributes):
         """
            Test for the POST, Delete and PUT /DocumentReference endpoint. This operation will call the Producer NRL API.
         """
@@ -161,7 +158,6 @@ class TestDocumentReference:
                 "Accept": "application/fhir+json;version=1.1.0",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
-                "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
             },
@@ -174,7 +170,6 @@ class TestDocumentReference:
                 "Accept": "application/fhir+json;version=1.1.0",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
-                "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
             }
@@ -186,7 +181,6 @@ class TestDocumentReference:
                 "Accept": "application/fhir+json;version=1.1.0",
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}",
-                "NHSD-End-User-Organisation-ODS": self.end_user_ods,
                 "X-Request-Id": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
                 "X-Correlation-Id": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
             },
