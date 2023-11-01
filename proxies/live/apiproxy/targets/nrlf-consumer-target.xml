@@ -5,6 +5,9 @@
   <PreFlow name="PreFlow">
     <Request>
       <Step>
+        <Name>AssignMessage.AddProductIDHeader</Name>
+      </Step>
+      <Step>
         <Name>LookupCache.NrlfAccessToken</Name>
       </Step>
       <Step>

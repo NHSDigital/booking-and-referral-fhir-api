@@ -1,0 +1,9 @@
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.AddProductIDHeader">
+  <Set>
+    <Headers>
+        <Header name="NHSD-End-User-Organisation">{oauth2.OauthV2.VerifyAccessToken.product-id}</Header>
+    </Headers>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="response" />
+</AssignMessage>
