@@ -16,13 +16,13 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_document_reference(self, get_token_client_credentials, test_app_with_attributes):
+    def test_get_document_reference(self, get_token_client_credentials_document_reference):
         """
            Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API.
         """
         subject_identifier = "https://fhir.nhs.uk/Id/nhs-number|"+self.end_user_nhs_number
         # Given
-        token = get_token_client_credentials["access_token"]
+        token = get_token_client_credentials_document_reference["access_token"]
         expected_status_code = 200
 
         # When
@@ -42,13 +42,13 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_document_reference_without_version(self, get_token_client_credentials, test_app_with_attributes):
+    def test_get_document_reference_without_version(self, get_token_client_credentials_document_reference):
         """
            Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API without Accept header
         """
         subject_identifier = "https://fhir.nhs.uk/Id/nhs-number|"+self.end_user_nhs_number
         # Given
-        token = get_token_client_credentials["access_token"]
+        token = get_token_client_credentials_document_reference["access_token"]
         expected_status_code = 406
 
         # When
@@ -68,7 +68,7 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_document_reference_by_id(self, get_token_client_credentials, test_app_with_attributes):
+    def test_get_document_reference_by_id(self, get_token_client_credentials_document_reference):
         """
            Test for the GET /DocumentReference/{id} endpoint. This operation will call the Producer NRL API.
         """
@@ -78,7 +78,7 @@ class TestDocumentReference:
         random_integer = random.randint(0, 1000)
         document_id += str(random_integer)
         # Given
-        token = get_token_client_credentials["access_token"]
+        token = get_token_client_credentials_document_reference["access_token"]
         expected_status_code = 404
         # When
         response = requests.get(
@@ -97,7 +97,7 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_post_delete_put_document_reference(self, get_token_client_credentials, test_app_with_attributes):
+    def test_post_delete_put_document_reference(self, get_token_client_credentials_document_reference):
         """
            Test for the POST, Delete and PUT /DocumentReference endpoint. This operation will call the Producer NRL API.
         """
@@ -107,7 +107,7 @@ class TestDocumentReference:
         random_integer = random.randint(0, 1000)
         document_id += str(random_integer)
         # Given
-        token = get_token_client_credentials["access_token"]
+        token = get_token_client_credentials_document_reference["access_token"]
         expected_post_status_code = 201
         expected_delete_status_code = 200
         expected_put_status_code = 404
