@@ -1,7 +1,7 @@
 <AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.AddProductIDHeader">
   <Set>
     <Headers>
-        <Header name="NHSD-End-User-Organisation">{oauth2.OauthV2.VerifyAccessToken.product-id}</Header>
+        <Header name="NHSD-End-User-Organisation">{verifyapikey.VerifyAPIKey.CustomAttributes.product-id}</Header>
     </Headers>
   </Set>
   <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>

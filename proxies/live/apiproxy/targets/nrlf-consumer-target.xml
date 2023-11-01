@@ -5,6 +5,9 @@
   <PreFlow name="PreFlow">
     <Request>
       <Step>
+        <Name>VerifyAPIKey.CustomAttributes</Name>
+      </Step>
+      <Step>
         <Name>AssignMessage.AddProductIDHeader</Name>
       </Step>
       <Step>
