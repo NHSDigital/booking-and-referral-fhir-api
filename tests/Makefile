@@ -10,8 +10,8 @@ REDIRECT_URL=https://nhsd-apim-testing-internal-dev.herokuapp.com/callback
 .EXPORT_ALL_VARIABLES:
 
 run:
-	poetry run pytest --apigee-access-token=$(APIGEE_ACCESS_TOKEN) -s -v $(f);
+	poetry run pytest --apigee-access-token=$(APIGEE_API_TOKEN) -s -v $(f);
 
 #  run tests with certain marker e.g. make run-sandbox runs tests marked with sandbox
 run-%:
-	poetry run pytest --apigee-access-token=$(APIGEE_ACCESS_TOKEN) -s -v -m "$*" $(f)
+	poetry run pytest --apigee-access-token=$(APIGEE_API_TOKEN) -s -v -m "$*" $(f)

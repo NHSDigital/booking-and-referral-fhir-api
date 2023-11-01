@@ -75,15 +75,15 @@ steps:
 
       if [[ $APIGEE_ENVIRONMENT == "prod" ]]
       then
-       poetry run pytest --reruns 3 --reruns-delay 1 -v -m smoketest -o junit_logging=all --junitxml=api_tests.xml
+       poetry run pytest --apigee-access-token=$(APIGEE_API_TOKEN) --reruns 3 --reruns-delay 1 -v -m smoketest -o junit_logging=all --junitxml=api_tests.xml
       elif [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
        poetry run pytest --reruns 3 --reruns-delay 1 -v -m sandbox -o junit_logging=all --junitxml=api_tests.xml
       elif [[ $APIGEE_ENVIRONMENT == "internal-qa" || $APIGEE_ENVIRONMENT == "int" ]]
       then
-       poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not broker and not status" -o junit_logging=all --junitxml=api_tests.xml
+       poetry run pytest --apigee-access-token=$(APIGEE_API_TOKEN) --reruns 3 --reruns-delay 1 -v -m "not broker and not status" -o junit_logging=all --junitxml=api_tests.xml
       else
-       poetry run pytest --reruns 3 --reruns-delay 1 -v -m "not status" -o junit_logging=all --junitxml=api_tests.xml
+       poetry run pytest --apigee-access-token=$(APIGEE_API_TOKEN) --reruns 3 --reruns-delay 1 -v -m "not status" -o junit_logging=all --junitxml=api_tests.xml
       fi
 
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests"
