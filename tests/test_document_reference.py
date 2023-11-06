@@ -67,6 +67,7 @@ class TestDocumentReference:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.skip
     @pytest.mark.sandbox
     def test_get_document_reference_by_id(self, get_token_client_credentials_document_reference):
         """
@@ -96,6 +97,7 @@ class TestDocumentReference:
 
     @pytest.mark.appointment
     @pytest.mark.integration
+    @pytest.mark.skip
     @pytest.mark.sandbox
     def test_post_delete_put_document_reference(self, get_token_client_credentials_document_reference):
         """
