@@ -23,9 +23,9 @@ clean:
 publish: clean
 	rm -rf build
 	mkdir -p build
-	redocly bundle specification/booking-and-referral-1.2.0.yaml --dereferenced --remove-unused-components --ext json -o build/booking-and-referral-1.2.0.json
-	redocly bundle specification/booking-and-referral-1.1.0.yaml --dereferenced --remove-unused-components --ext json -o build/booking-and-referral-1.1.0.json
-	redocly bundle specification/booking-and-referral.yaml --dereferenced --remove-unused-components --ext json -o build/booking-and-referral.json
+	node_modules/.bin/redocly bundle specification/booking-and-referral-1.2.0.yaml --dereferenced --remove-unused-components --ext json -o build/booking-and-referral-1.2.0.json
+	node_modules/.bin/redocly bundle specification/booking-and-referral-1.1.0.yaml --dereferenced --remove-unused-components --ext json -o build/booking-and-referral-1.1.0.json
+	node_modules/.bin/redocly bundle specification/booking-and-referral.yaml --dereferenced --remove-unused-components --ext json -o build/booking-and-referral.json
 
 serve:
 	npm run serve
