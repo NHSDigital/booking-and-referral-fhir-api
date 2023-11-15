@@ -174,13 +174,13 @@ servers:
 tags:
   - name: Booking
   - name: DocumentReference
+  - name: Endpoint
+  - name: HealthcareService
   - name: Message
   - name: Metadata
+  - name: Organization
   - name: Referral
   - name: Slots
-  - name: Organization
-  - name: HealthcareService
-  - name: Endpoint
 security:
   - OAuth_Token: []
 paths:
