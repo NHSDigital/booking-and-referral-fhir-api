@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- This is not for Authentication. We use this policy to get access to Custom Attributes associated with the App -->
+<VerifyAPIKey async="false" continueOnError="false" enabled="true" name="VerifyAPIKey.CustomAttributes">
+  <DisplayName>VerifyAPIKey.CustomAttributes</DisplayName>
+  <Properties/>
+  <APIKey ref="apigee.client_id"/>
+</VerifyAPIKey>
