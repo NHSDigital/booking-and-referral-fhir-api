@@ -67,10 +67,10 @@ info:
       * [https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
     
     ## API status and roadmap
-    This API is in [Production Beta](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
+    This API is in [Production](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
-      * it has limited availability in production 
-      * it is subject to breaking changes based on developer feedback
+      * it has availability in production 
+      * it is NOT subject to breaking changes
 
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=booking-and-referral&deleted=0#controls).
     If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
