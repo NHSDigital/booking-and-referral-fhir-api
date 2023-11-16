@@ -66,10 +66,10 @@ info:
     
     ##  Related APIs
     The following APIs are related to this API:
-      * succeeds [NHS Booking - FHIR API](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
+      * This API replaces the [NHS Booking - FHIR API](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
     
     ## API status and roadmap
-    This API Version is in [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
+    This version of the API version is [development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
       * it has limited availability in production 
       * it is subject to breaking changes based on developer feedback
@@ -101,8 +101,6 @@ info:
     This API is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
     meaning we authenticate the calling application but not the end user.
 
-    You must use the unattended (end user not present) access mode for this API.
-   
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
@@ -129,7 +127,7 @@ info:
     | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`          |
     | Production        | `https://api.service.nhs.uk/booking-and-referral/FHIR/R4`              |
 
-    Our [Sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing) is for early developer testing and covers a limited number of scenarios with predefined responses. Please not this environment is stateless.
+    Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing) is for early developer testing and covers a limited number of scenarios with predefined responses. Please not this environment is stateless.
 
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing.
 
@@ -974,7 +972,7 @@ components:
         example: "http://servicerequest.system|10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
-      description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
+      description: The identifier of the Target system. A Base64 encoded object containing value and system properties. please see
       required: true
       in: header
       schema:
@@ -1021,7 +1019,7 @@ components:
         $ref: '#/components/schemas/RequestingPractitionerToken'
     RequestId_HParam:
       name: X-Request-Id
-      description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+      description: 'The X-Correlation-Id for the request header, when supplied, mirrored back by the receiver.'
       required: true
       in: header
       schema:
@@ -1030,7 +1028,7 @@ components:
         example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     CorrelationId_HParam:
       name: X-Correlation-Id
-      description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+      description: 'The X-Correlation-Id for the request header, when supplied, mirrored back by the receiver.'
       required: true
       in: header
       schema:
