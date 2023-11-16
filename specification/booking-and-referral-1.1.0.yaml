@@ -34,7 +34,7 @@ info:
       * get a specific referral
       * get referrals for a patient
       * get slots
-      * manage DocumentReferences to either a booking or a referral.
+      * manage DocumentReferences to either a booking or a referral
       
 
     The following describes the end-to-end process:
@@ -62,11 +62,11 @@ info:
     </section>
     
     ## Who can use this API
-    This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
+    This API can only be used for the Booking and Referral Standard where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. We'll ask you to demonstrate this as part of the digital onboarding
     
     ##  Related APIs
     The following APIs are related to this API:
-      * Succeeds [NHS Booking - FHIR API](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
+      * succeeds [NHS Booking - FHIR API](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
     
     ## API status and roadmap
     This API Version is in [in development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
@@ -103,6 +103,11 @@ info:
 
     You must use the unattended (end user not present) access mode for this API.
    
+    To use this access mode, use the following security pattern:
+    * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
+
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#Security-and-authorisation).
+
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
 
@@ -126,7 +131,7 @@ info:
 
     Our [Sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing) is for early developer testing and covers a limited number of scenarios with predefined responses. Please not this environment is stateless.
 
-    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing
+    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing.
 
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
@@ -253,7 +258,7 @@ paths:
       summary: Get Message Definition
       description: |
         
-        ### Returns MessageDefinitions supported by the target endpoint.
+        ### Returns MessageDefinitions supported by the target endpoint
 
         The Message Definition retrieval is required to inform a Sender on building the payload. A request is made using the Service Identifier and workflow type values, linking to the useContext and event elements, respectively, in the Message Definition resource, returning a list of FHIR resources. 
         
@@ -328,7 +333,7 @@ paths:
         | Respond to a booking              | POST /$process-message | A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA.|
         | Cancelling a booking (and rebook) | POST /$process-message | An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
 
-        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#End-to-end-workflow) documentation.
+        For more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#End-to-end-workflow) documentation.
 
       operationId: processMessage
       requestBody:
@@ -387,7 +392,7 @@ paths:
       summary: Get slots
       description: |
 
-        ### Get available slots.
+        ### Get available slots
 
         A call to Slots is for querying a target endpoint for suitable slots to book a new Appointment into for a patient. 
         A request for slots support various filter parameters but requires the service identifier, slot status(es) and a timeframe to limit the search. 
@@ -515,7 +520,7 @@ paths:
       summary: Get bookings for a patient
       description: |
         
-        ### Returns bookings for a specified patient.
+        ### Returns bookings for a specified patient
         Use this endpoint to get all bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned in a FHIR searchset Bundle containing Appointment resources. 
         
         If a sender wants to cancel a particular booking, they must perform a read first, comparing and amending the details prior to performing the update.
@@ -617,7 +622,7 @@ paths:
       summary: Get referral/s for a patient
       description: |
         
-        ### Returns service requests for a specified patient.
+        ### Returns service requests for a specified patient
         
         Use this endpoint to get all service requests for a given patient. All service requests for the specified patient at the specified target endpoint will be returned. 
         
@@ -747,7 +752,7 @@ paths:
     post:      
       tags:
         - DocumentReference
-      summary: 'Create new, or Supersede existing, document pointers'
+      summary: 'Create new or update existing document pointer'
       operationId: createDocumentReference
       parameters:
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
@@ -769,7 +774,7 @@ paths:
 
         To create a document pointer you must ensure:
 
-        * The body must be a valid [FHIR R4 DocumentReference](http://hl7.org/fhir/documentreference.html)
+        * the body must be a valid [FHIR R4 DocumentReference](http://hl7.org/fhir/documentreference.html)
         * `id` is a composite of the ODS Code and an identifier that is locally unique to your system.  NRL does not
           generate globally unique ids, instead relies on producers to provide a locally unique id prefixed with their
           ODS code, making it globally unique. e.g.
