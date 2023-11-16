@@ -10,8 +10,8 @@ authors = [
 ]
 readme = 'README.md'
 license = "MIT"
-repository = "https://github.com/NHSDigital/booking-and-referral"
-homepage = "https://github.com/NHSDigital/booking-and-referral"
+repository = "https://github.com/NHSDigital/booking-and-referral-fhir-api"
+homepage = "https://github.com/NHSDigital/booking-and-referral-fhir-api"
 keywords = ["healthcare", "uk", "nhs"] #TODO add additional keywords
 
 
