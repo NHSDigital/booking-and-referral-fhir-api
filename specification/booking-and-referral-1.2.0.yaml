@@ -174,13 +174,13 @@ servers:
 tags:
   - name: Booking
   - name: DocumentReference
+  - name: Endpoint
+  - name: HealthcareService
   - name: Message
   - name: Metadata
+  - name: Organization
   - name: Referral
   - name: Slots
-  - name: Organization
-  - name: HealthcareService
-  - name: Endpoint
 security:
   - OAuth_Token: []
 paths:
@@ -927,6 +927,8 @@ paths:
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/Organization_QParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-OrganizationBundle'
@@ -940,6 +942,8 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags: 
         - Organization
@@ -994,6 +998,8 @@ paths:
         - $ref: '#/components/parameters/HCProvidedBy_QParam'
         - $ref: '#/components/parameters/HealthcareServiceIdentifier_QParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-OrganizationBundle'
@@ -1007,6 +1013,8 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags: 
         - HealthcareService
@@ -1061,6 +1069,8 @@ paths:
         - $ref: '#/components/parameters/EndpointHas_Qparam'
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointBundle'
@@ -1074,6 +1084,8 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags: 
         - Endpoint
