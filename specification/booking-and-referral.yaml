@@ -13,7 +13,7 @@ info:
       </div>
       <div class="nhsd-m-emphasis-box__content-box">
         <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
-        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home" class="nhsd-a-link">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the  <a href="https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-applications" class="nhsd-a-link">BaRS implementation guide</a> for your use case</p>
+        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home" class="nhsd-a-link">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the  <a href="https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-applications" class="nhsd-a-link">BaRS implementation guide</a> for your use case.</p>
         </div>
       </div>
       </div>
@@ -105,6 +105,16 @@ info:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
     For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#Security-and-authorisation)
+    
+    ## Errors
+    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
+
+    * 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
+    * 400 to 499 if it failed because of a client error by your application
+    * 500 to 599 if it failed because of an error on our server
+    
+    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#core-ErrorHandling) for further information on error handling within the BaRS Standard.
+    
 
     ## Environments and testing
     | Environment       | Base URL                                                               |
@@ -143,15 +153,6 @@ info:
         </div>
     </div> 
    
-    ## Errors
-    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
-
-    * 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
-    * 400 to 499 if it failed because of a client error by your application
-    * 500 to 599 if it failed because of an error on our server
-    
-    Errors specific to each API are shown in the Endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#core-ErrorHandling) for further information on error handling within the BaRS Standard.
-    
   version: 1.0.0
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
