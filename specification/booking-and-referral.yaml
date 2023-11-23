@@ -13,7 +13,7 @@ info:
       </div>
       <div class="nhsd-m-emphasis-box__content-box">
         <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
-        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home" class="nhsd-a-link">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the  <a href="https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-applications" class="nhsd-a-link">BaRS implementation guide</a> for your use case</p>
+        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home" class="nhsd-a-link">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the  <a href="https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-applications" class="nhsd-a-link">BaRS implementation guide</a> for your use case.</p>
         </div>
       </div>
       </div>
@@ -60,17 +60,17 @@ info:
     </section>
     
     ## Who can use this API
-    This API can only be used where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. You must do this before you can go live.
+    This API can only be used for the Booking and Referral Standard where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. We'll ask you to demonstrate this as part of the digital onboarding process before your software goes live.
     
     ##  Related APIs
     The following APIs are related to this API:
-      * [https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
+      * This API replaces the [NHS Booking - FHIR API](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
     
     ## API status and roadmap
-    This API is in [Production Beta](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
+    This version of the API is in [Production](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
       * it is available for testing in the integration environment
-      * it has limited availability in production 
-      * it is subject to breaking changes based on developer feedback
+      * it has availability in production 
+      * it is NOT subject to breaking changes
 
     To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=booking-and-referral&deleted=0#controls).
     If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
@@ -99,12 +99,20 @@ info:
     This API is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
     meaning we authenticate the calling application but not the end user.
 
-    You must use the unattended (end user not present) access mode for this API.
-
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
-    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#Security-and-authorisation)
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#Security-and-authorisation).
+    
+    ## Errors
+    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
+
+    * 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
+    * 400 to 499 if it failed because of a client error by your application
+    * 500 to 599 if it failed because of an error on our server
+    
+    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#core-ErrorHandling) for further information on error handling within the BaRS Standard.
+    
 
     ## Environments and testing
     | Environment       | Base URL                                                               |
@@ -113,9 +121,9 @@ info:
     | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`          |
     | Production        | `https://api.service.nhs.uk/booking-and-referral/FHIR/R4`              |
 
-    Our [Sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing) is for early developer testing and covers a limited number of scenarios with predefined responses. Please not this environment is stateless.
+    Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing) is for early developer testing and covers a limited number of scenarios with predefined responses. Please not this environment is stateless.
 
-    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing
+    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing.
 
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
@@ -143,15 +151,6 @@ info:
         </div>
     </div> 
    
-    ## Errors
-    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
-
-    * 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
-    * 400 to 499 if it failed because of a client error by your application
-    * 500 to 599 if it failed because of an error on our server
-    
-    Errors specific to each API are shown in the Endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#core-ErrorHandling) for further information on error handling within the BaRS Standard.
-    
   version: 1.0.0
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
@@ -249,7 +248,7 @@ paths:
       summary: Get Message Definition
       description: |
         
-        ### Returns MessageDefinitions supported by the target endpoint.
+        ### Returns MessageDefinitions supported by the target endpoint
 
         The Message Definition retrieval is required to inform a Sender on building the payload. A request is made using the Service Identifier and workflow type values, linking to the useContext and event elements, respectively, in the Message Definition resource, returning a list of FHIR resources. 
         
@@ -383,7 +382,7 @@ paths:
       summary: Get slots
       description: |
 
-        ### Get available slots.
+        ### Get available slots
 
         A call to Slots is for querying a target endpoint for suitable slots to book a new Appointment into for a patient. 
         A request for slots support various filter parameters but requires the service identifier, slot status(es) and a timeframe to limit the search. 
@@ -510,7 +509,7 @@ paths:
       summary: Get bookings for a patient
       description: |
         
-        ### Returns bookings for a specified patient.
+        ### Returns bookings for a specified patient
         Use this endpoint to get all bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned. 
         
         If a sender wants to cancel a particular booking, they must perform a read first, comparing and amending the details prior to performing the update.
@@ -612,7 +611,7 @@ paths:
       summary: Get referral/s for a patient
       description: |
         
-        ### Returns service requests for a specified patient.
+        ### Returns service requests for a specified patient
         
         Use this endpoint to get all service requests for a given patient. All service requests for the specified patient at the specified target endpoint will be returned. 
         
@@ -797,7 +796,7 @@ components:
         $ref: '#/components/schemas/RequestingPractitionerToken'
     RequestId_HParam:
       name: X-Request-Id
-      description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+      description: 'The X-Request-Id for the request header, when supplied, mirrored back by the receiver.'
       required: true
       in: header
       schema:
@@ -806,7 +805,7 @@ components:
         example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     CorrelationId_HParam:
       name: X-Correlation-Id
-      description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+      description: 'The X-Correlation-Id for the request header, when supplied, mirrored back by the receiver.'
       required: true
       in: header
       schema:
