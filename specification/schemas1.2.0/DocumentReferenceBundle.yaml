@@ -37,23 +37,4 @@ properties:
     items:
       type: object
       properties:
-        fullUrl:
-          type: string
-        resource:
-          type: object
-          properties:
-            resourceType:
-              type: string
-              example: "DocumentReference"
-            id:
-              type: string
-            meta: 
-              type: object
-              properties:
-                lastUpdated:
-                  type: string
-                profile:
-                  type: array
-                  items:
-                    type: string
-                    example: "https://simplifier.net/nhsbookingandreferrals/barsservicerequestrequestcasetransfer"
+        $ref: "DocumentReference.yaml"

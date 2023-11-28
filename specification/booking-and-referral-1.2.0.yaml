@@ -1245,7 +1245,7 @@ components:
       content:
         application/fhir+json;version=1:
           schema:
-            $ref: '#/components/schemas/DocumentReference'
+            $ref: '#/components/schemas/DocumentReferenceBundle'
     Appointment:
       content:
         application/fhir+json;version=1:
@@ -1723,7 +1723,7 @@ components:
     DocumentReferenceBundle:
       $ref: schemas1.2.0/DocumentReferenceBundle.yaml
     DocumentReference:
-      $ref: schemas1.2.0/DocumentReferenceBundle.yaml
+      $ref: schemas1.2.0/DocumentReference.yaml
     RequestQuerySubject:
       type: string
       pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)$

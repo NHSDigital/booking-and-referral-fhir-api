@@ -1,6 +1,13 @@
 {
 	"resourceType": "Bundle",
 	"type": "searchset",
+	"id": "27e2b1c8-ecd8-48f8-9958-8e614cc7ad58",
+	"meta": {
+		"lastUpdated": "2021-10-11T15:01:30+00:00",
+		"profile": [
+			"https://fhir.nhs.uk/R4/StructureDefinition/UKCore-DocumentReference"
+		]
+	},
 	"total": 1,
 	"entry": [
 		{
