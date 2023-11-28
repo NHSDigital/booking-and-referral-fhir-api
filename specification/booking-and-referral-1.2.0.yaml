@@ -628,7 +628,7 @@ paths:
               example:
                 $ref: examples1.1.0/200_PUT.json
       requestBody:
-        $ref: '#/components/requestBodies/DocumentReference'
+        $ref: '#/components/requestBodies/Appointment'
     delete:      
       tags:
         - Appointment
@@ -655,7 +655,7 @@ paths:
               example:
                 $ref: examples1.1.0/200_PUT.json
       requestBody:
-        $ref: '#/components/requestBodies/DocumentReference'
+        $ref: '#/components/requestBodies/Appointment'
   /ServiceRequest:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -786,7 +786,7 @@ paths:
               example:
                 $ref: examples1.1.0/200_PUT.json
       requestBody:
-        $ref: '#/components/requestBodies/DocumentReference'
+        $ref: '#/components/requestBodies/ServiceRequest'
     delete:      
       tags:
         - Referral
@@ -813,7 +813,7 @@ paths:
               example:
                 $ref: examples1.1.0/200_PUT.json
       requestBody:
-        $ref: '#/components/requestBodies/DocumentReference'
+        $ref: '#/components/requestBodies/ServiceRequest'
   /DocumentReference:
     get:      
       tags:
