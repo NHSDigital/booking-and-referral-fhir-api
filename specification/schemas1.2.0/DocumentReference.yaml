@@ -4,6 +4,17 @@ properties:
     type: string
     enum:
       - DocumentReference
+  meta:
+    type: object
+    properties:
+      lastUpdated:
+        type: string
+        example: "2021-10-11T15:01:30+00:00"
+      profile:
+        type: array
+        items:
+          type: string
+          example: "https://fhir.nhs.uk/R4/StructureDefinition/UKCore-DocumentReference" 
   id:
     type: string
     example: "$OrganisationNamePrefix|696cfcd2-6425-459d-b2ad-91e34a6a1b9c"
@@ -18,17 +29,7 @@ properties:
                 example: "urn:ietf:rfc:3986"
             value: 
                 type: string
-                example: "urn:uuid:27e2b1c8-ecd8-48f8-9958-8e614cc7ad73"
-  meta:
-    type: object
-    properties:
-      lastUpdated:
-        type: string
-      profile:
-        type: array
-        items:
-          type: string
-          example: "https://fhir.nhs.uk/R4/StructureDefinition/UKCore-DocumentReference"        
+                example: "urn:uuid:27e2b1c8-ecd8-48f8-9958-8e614cc7ad73"       
   status:
     type: string
     example: "current"
@@ -52,22 +53,25 @@ properties:
                     example: "Appointment (booking)"
     description: Specifies the particular kind of document referenced  (e.g. History and Physical, Discharge Summary, Progress Note). This usually equates to the purpose of making the document referenced.
   category:
-    type: object
+    type: array
     properties:
-        coding:
-        type: array
-        items:
-            type: object
+        type: object
+        properties:
+            coding:
+            type: array
+            items:
             properties:
-                system:
-                    type: string
-                    example: "http://ihe.net/xds/connectathon/classCodes"
-                code:
-                    type: string
-                    example: "History and Physical"
-                display:
-                    type: string
-                    example: "History and Physical"
+                type: object                
+                properties:
+                    system:
+                        type: string
+                        example: "http://ihe.net/xds/connectathon/classCodes"
+                    code:
+                        type: string
+                        example: "History and Physical"
+                    display:
+                        type: string
+                        example: "History and Physical"
     description: A categorization for the type of document referenced &ndash; helps for indexing and searching. This may be implied by or derived from the code specified in the DocumentReference.type.
   subject:
     type: object

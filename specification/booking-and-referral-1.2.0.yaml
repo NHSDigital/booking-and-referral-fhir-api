@@ -604,7 +604,7 @@ paths:
           $ref: '#/components/responses/5XX-BARS'
     put:      
       tags:
-        - Appointment
+        - Booking
       summary: Update an Appointment resource by id
       description: |
         Update a single Appointment resource.     
@@ -631,7 +631,7 @@ paths:
         $ref: '#/components/requestBodies/Appointment'
     delete:      
       tags:
-        - Appointment
+        - Booking
       summary: Delete or Cancel a Appointment resource by id
       description: |
         Delete or Cancel a single Appointment resource.     
@@ -950,7 +950,7 @@ paths:
             application/fhir+json;version=1:
               schema:
                 $ref: '#/components/schemas/DocumentReference'
-              example: examples1.1.0/document_reference/id/GET-success.json
+              example: examples1.2.0/document_reference/id/GET-success.json
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1408,9 +1408,6 @@ components:
       schema:
         $ref: "#/components/schemas/RequestQueryCustodian"
       examples:
-        none:
-          summary: None
-          value: ""
         valid:
           summary: Valid
           value: https://fhir.nhs.uk/Id/ods-organization-code|Y05868
@@ -1698,35 +1695,35 @@ components:
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
   schemas:
     Capability:
-      $ref: schemas1.1.0/Capability.yaml
+      $ref: schemas1.2.0/Capability.yaml
     TargetIdentifier:
-      $ref: schemas1.1.0/TargetIdentifier.yaml
+      $ref: schemas1.2.0/TargetIdentifier.yaml
     Appointment:
-      $ref: schemas1.1.0/Appointment.yaml
+      $ref: schemas1.2.0/Appointment.yaml
     SearchBundleAppt:
-      $ref: schemas1.1.0/SearchBundleAppt.yaml
+      $ref: schemas1.2.0/SearchBundleAppt.yaml
     ServiceRequest:
-      $ref: schemas1.1.0/ServiceRequest.yaml
+      $ref: schemas1.2.0/ServiceRequest.yaml
     SearchBundleRef:
-      $ref: schemas1.1.0/SearchBundleRef.yaml
+      $ref: schemas1.2.0/SearchBundleRef.yaml
     SearchBundleSlot:
-      $ref: schemas1.1.0/SearchBundleSlot.yaml
+      $ref: schemas1.2.0/SearchBundleSlot.yaml
     MessageBundle:
-      $ref: schemas1.1.0/MessageBundle.yaml
+      $ref: schemas1.2.0/MessageBundle.yaml
     MessageDefinition:
-      $ref: schemas1.1.0/MessageDefinition.yaml
+      $ref: schemas1.2.0/MessageDefinition.yaml
     OperationalOutcome:
-      $ref: schemas1.1.0/OperationalOutcome.yaml
+      $ref: schemas1.2.0/OperationalOutcome.yaml
     RequestingOrganisationToken:
-      $ref: schemas1.1.0/RequestingOrganisation.yaml
+      $ref: schemas1.2.0/RequestingOrganisation.yaml
     RequestingPractitionerToken:
-      $ref: schemas1.1.0/RequestingPractitioner.yaml
+      $ref: schemas1.2.0/RequestingPractitioner.yaml
     RequestingSoftwareToken:
-      $ref: schemas1.1.0/RequestingSoftware.yaml
+      $ref: schemas1.2.0/RequestingSoftware.yaml
     DocumentReferenceBundle:
-      $ref: schemas1.1.0/DocumentReferenceBundle.yaml
+      $ref: schemas1.2.0/DocumentReferenceBundle.yaml
     DocumentReference:
-      $ref: schemas1.1.0/DocumentReferenceBundle.yaml
+      $ref: schemas1.2.0/DocumentReferenceBundle.yaml
     RequestQuerySubject:
       type: string
       pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)$
