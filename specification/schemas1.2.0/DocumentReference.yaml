@@ -16,7 +16,7 @@ properties:
           example: 'https://fhir.nhs.uk/R4/StructureDefinition/UKCore-DocumentReference'
   identifier:
     type: array
-    properties:
+    items:
       type: object
       properties:
         system:
@@ -69,12 +69,12 @@ properties:
       purpose of making the document referenced.
   category:
     type: array
-    properties:
+    items:
       type: object
       properties:
         coding: 
             type: array
-            properties:
+            items:
               type: object
               properties:
                 system:
@@ -147,7 +147,7 @@ properties:
       already exist.
   securityLabel:
     type: array
-    properties:
+    items:
       type: object
       properties:
         coding: 
@@ -172,7 +172,7 @@ properties:
       on the document the reference refers to.
   content:
     type: array
-    properties:
+    items:
       type: object
       properties:
         attachment:
@@ -189,12 +189,12 @@ properties:
               example: '2005-12-24T09:35:00+11:00'
         format:
           type: array
-          properties:
+          items:
             type: object
             properties: 
                 coding:
                   type: array
-                  properties:
+                  items:
                     type: object
                     properties:
                       system:
@@ -220,7 +220,4 @@ properties:
             type: string
             example: '2005-12-24T09:35:00+11:00'
     description: The clinical context in which the document was prepared.
-required:
-  - resourceType
-  - status
-  - content
+

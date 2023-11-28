@@ -950,7 +950,8 @@ paths:
             application/fhir+json;version=1:
               schema:
                 $ref: '#/components/schemas/DocumentReference'
-              example: examples1.2.0/document_reference/id/GET-success.json
+              example: 
+                $ref: examples1.2.0/document_reference/id/GET-success.json
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'

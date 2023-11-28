@@ -2,6 +2,7 @@ type: object
 properties:
   resourceType:
     type: string
+    example: "Bundle"
   id:
     type: string
     example: "777a156c-af3c-4748-a8a3-7e95e4b0df9a"
@@ -10,31 +11,24 @@ properties:
     properties:
       lastUpdated:
         type: string
+        example: '2021-10-11T15:01:30+00:00'
       profile:
-        type: array
-        items:
+        type: array 
+        items:          
           type: string
           example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
-  type:
-    type: string
-    example: "searchset"
   total:
     type: integer
     example: 2
-  timestamp:
+  "type":
     type: string
-  link:
-    type: array
-    items:
-      type: object
-      properties:
-        relation:
-          type: string
-        url:
-          type: string
+    example: "searchset"
   entry:
     type: array
     items:
       type: object
       properties:
-        $ref: "DocumentReference.yaml"
+          resource:
+            type: object
+            $ref: "DocumentReference.yaml"
+        
