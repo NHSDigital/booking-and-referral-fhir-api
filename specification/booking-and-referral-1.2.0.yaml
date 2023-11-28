@@ -602,6 +602,60 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+    put:      
+      tags:
+        - Appointment
+      summary: Update an Appointment resource by id
+      description: |
+        Update a single Appointment resource.     
+      operationId: updateAppointment
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/TargetIdentifier_HParam'
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/200_PUT.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
+    delete:      
+      tags:
+        - Appointment
+      summary: Delete or Cancel a Appointment resource by id
+      description: |
+        Delete or Cancel a single Appointment resource.     
+      operationId: deleteAppointment
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/TargetIdentifier_HParam'
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/200_PUT.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
   /ServiceRequest:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -706,6 +760,60 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+    put:      
+      tags:
+        - Referral
+      summary: Update an ServiceRequest resource by id
+      description: |
+        Update a single ServiceRequest resource.     
+      operationId: updateServiceRequest
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/TargetIdentifier_HParam'
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/200_PUT.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
+    delete:      
+      tags:
+        - Referral
+      summary: Delete or Cancel a ServiceRequest resource by id
+      description: |
+        Delete or Cancel a single ServiceRequest resource.     
+      operationId: deleteServiceRequest
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/TargetIdentifier_HParam'
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/200_PUT.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
   /DocumentReference:
     get:      
       tags:
@@ -1138,6 +1246,17 @@ components:
         application/fhir+json;version=1:
           schema:
             $ref: '#/components/schemas/DocumentReference'
+    Appointment:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/Appointment'
+      required: true
+    ServiceRequest:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/ServiceRequest'
       required: true
   parameters:
     RegistryId_Param:
