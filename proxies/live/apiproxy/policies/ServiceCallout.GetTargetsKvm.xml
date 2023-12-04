@@ -4,7 +4,6 @@
   <Request>
     <Set>
       <Verb>GET</Verb>
-      <Path>NHSDigital/booking-and-referral-targets/master/targets/{{ APIGEE_ENVIRONMENT }}/targets.json</Path>
     </Set>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   </Request>
@@ -13,6 +12,6 @@
     <SSLInfo>
       <Enabled>true</Enabled>
     </SSLInfo>
-    <URL>https://raw.githubusercontent.com</URL>
+    <URL>https://{bars_targets_url}</URL>
   </HTTPTargetConnection>
 </ServiceCallout>
