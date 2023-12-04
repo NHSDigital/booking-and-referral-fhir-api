@@ -1,18 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.GetTargetsKvm">
-  <!-- This is the default (55 seconds). Including it to make explicit. -->
-  <Timeout>55000</Timeout>
-  <Request>
-    <Set>
-      <Verb>GET</Verb>
-      <Path>NHSDigital/booking-and-referral-targets/master/targets/{{ APIGEE_ENVIRONMENT }}/targets.json</Path>
-    </Set>
-    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
-  </Request>
-  <Response>private.config_raw</Response>
-  <HTTPTargetConnection>
-    <SSLInfo>
-      <Enabled>true</Enabled>
-    </SSLInfo>
-    <URL>https://raw.githubusercontent.com</URL>
-  </HTTPTargetConnection>
+    <Timeout>55000</Timeout>
+    <Request>
+        <Set>
+            <Verb>GET</Verb>
+            <Path>{target_path}</Path>
+            <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+        </Set>
+    </Request>
+    <Response>private.config_raw</Response>
+    <HTTPTargetConnection>
+        <SSLInfo>
+            <Enabled>true</Enabled>
+        </SSLInfo>
+        <URL>https://{target_domain}</URL>
+    </HTTPTargetConnection>
 </ServiceCallout>

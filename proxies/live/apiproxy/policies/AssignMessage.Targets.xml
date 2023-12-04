@@ -1,7 +1,8 @@
-<AssignMessage name='AssignMessage.Targets'>
-  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
-  <AssignVariable>
-    <Name>targets</Name>
-    <Ref>private.config_raw.content</Ref>
-  </AssignVariable>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="AssignMessage.Targets">
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    <AssignVariable>
+        <Name>targets</Name>
+        <Ref>private.config_raw.content</Ref>
+    </AssignVariable>
 </AssignMessage>
