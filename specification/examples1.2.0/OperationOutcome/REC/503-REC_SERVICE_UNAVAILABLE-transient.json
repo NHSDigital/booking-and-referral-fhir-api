@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "4b87b05b-7a20-4994-abea-57778024d216",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "transient",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_SERVICE_UNAVAILABLE"
+					}
+				]
+			},
+			"diagnostics": "The response from the receiver was a 503, with no detail. Also useful if there is a connection failure such as the endpoint not being found, or failing to resolve."
+		}
+	]
+}

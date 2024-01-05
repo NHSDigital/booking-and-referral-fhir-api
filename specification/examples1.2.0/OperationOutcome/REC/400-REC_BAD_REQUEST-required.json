@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "a0f6c465-89e5-458b-a37d-4974e1112dbd",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "required",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_BAD_REQUEST"
+					}
+				]
+			},
+			"diagnostics": "The parameter value was not included in the request."
+		}
+	]
+}

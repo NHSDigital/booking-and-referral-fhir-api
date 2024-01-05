@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "ca0f6c46-589e-4558-a937-d4974e1112db",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "no-store",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_SERVER_ERROR"
+					}
+				]
+			},
+			"diagnostics": "internal data storage issue."
+		}
+	]
+}

@@ -1,0 +1,24 @@
+{
+  "resourceType": "OperationOutcome",
+  "id": "76825bab-2cab-432a-b881-66ec070981d8",
+  "meta": {
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "400",
+      "details": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/ValueSet/operation-outcome",
+            "code": "PROXY_BAD_REQUEST"
+          }
+        ]
+      },
+      "diagnostics": "The base64 decoding of the NHSD-Target-Identifier header failed."
+    }
+  ]
+}

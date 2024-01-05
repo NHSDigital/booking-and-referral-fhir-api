@@ -1,0 +1,1653 @@
+openapi: 3.0.0
+info:
+  description: |
+
+    <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
+    <div class="nhsd-a-box nhsd-a-box--border-yellow">
+      <div class="nhsd-m-emphasis-box__image-box">
+      <figure class="nhsd-a-image">
+        <picture class="nhsd-a-image__picture">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIGlkPSJMYXllcl8xIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxNDAgMTQwOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTQwIDE0MCIgeD0iMHB4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB5PSIwcHgiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtkaXNwbGF5Om5vbmU7fQoJLnN0MXtkaXNwbGF5OmlubGluZTtmaWxsOiMyMzFmMjA7fQoJLnN0MntmaWxsOiMyMzFmMjA7fQoJLnN0M3tmaWxsOm5vbmU7c3Ryb2tlOiMyMzFmMjA7c3Ryb2tlLXdpZHRoOjEuOTI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO30KCS5zdDR7ZmlsbDojMjMxZjIwO30KCS5zdDV7ZmlsbDojMjMxZjIwO30KCS5zdDZ7ZmlsbDpub25lO3N0cm9rZTojMjMxZjIwO3N0cm9rZS13aWR0aDo1O3N0cm9rZS1taXRlcmxpbWl0OjEwO30KPC9zdHlsZT4KPGcgY2xhc3M9InN0MCI+Cgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNzAsNi45NWw1NCwzMS41djYzLjExbC01NCwzMS41bC01NC0zMS41VjM4LjQ1TDcwLDYuOTUgTTcwLDBMMTAsMzV2NzBsNjAsMzVsNjAtMzVWMzVMNzAsMEw3MCwweiIvPgo8L2c+CjxnPgoJPHBhdGggY2xhc3M9InN0MiIgZD0iTTEwOS44NiwzOS44NXY1NUg4NS43Yy0zLjA2LDAtNS4xNCwzLjA2LTcuMDgsNWgtMTcuNWMtMS45NC0xLjk0LTQuMDMtNS03LjA4LTVIMjkuODd2LTU1aDI1ICAgYzUuMjgsMCwxMC44MywxLjMyLDE1LDQuNzljNC4xNy0zLjQ3LDkuNzItNC43OSwxNS00Ljc5SDEwOS44NnogTTY0Ljg2LDU0Ljg1YzAtMy44OS03LjIyLTUtMTAtNWgtMTV2MzVoMTMuNzUgICBjNS42MiwwLDcuNTcsMC42OSwxMS4yNSw1VjU0Ljg1eiBNOTkuODYsNDkuODVoLTE1Yy0yLjc4LDAtMTAsMS4xMS0xMCw1djM1YzMuNjgtNC4zMSw1LjYyLTUsMTEuMjUtNWgxMy43NVY0OS44NXoiLz4KPC9nPgo8L3N2Zz4K" alt="" style="object-fit:fill">
+          </picture>
+        </figure>
+      </div>
+      <div class="nhsd-m-emphasis-box__content-box">
+        <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
+        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home" class="nhsd-a-link">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the  <a href="https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-applications" class="nhsd-a-link">BaRS implementation guide</a> for your use case.</p>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    ## Overview
+    
+    ![BaRS FHIR API end-to-end process](https://raw.githubusercontent.com/NHSDigital/booking-and-referral-fhir-api/master/specification/images/BaRS-FHIR-API.svg)
+    
+    Use this API to send booking and referral information between NHS service providers.
+
+    You can:
+      * get a specific booking
+      * get bookings for a patient
+      * process a message, either a booking or a referral
+      * get message definition
+      * get capability statement
+      * get a specific referral
+      * get referrals for a patient
+      * get slots
+      * manage reference pointers to either a booking or a referral
+      
+
+    The following describes the end-to-end process:
+    1. Send a request from your sender application to this API, along with a service identifier header.
+    2. This API redirects the request to the service associated with the service identifier header.
+    3. The target backend handles the request and sends a response back to this API.
+    4. This API returns the response to your sender application.
+    5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-applications) the target may send a follow up request to indicate the outcome of a request.
+
+    <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
+    <div class="nhsd-a-box nhsd-a-box--border-yellow">
+      <div class="nhsd-m-emphasis-box__image-box">
+        <figure class="nhsd-a-image">
+          <picture class="nhsd-a-image__picture">
+            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIGlkPSJMYXllcl8xIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxNDAgMTQwOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTQwIDE0MCIgeD0iMHB4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB5PSIwcHgiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtkaXNwbGF5Om5vbmU7fQoJLnN0MXtkaXNwbGF5OmlubGluZTtmaWxsOiMyMzFmMjA7fQoJLnN0MntmaWxsOiMyMzFmMjA7fQoJLnN0M3tmaWxsOm5vbmU7c3Ryb2tlOiMyMzFmMjA7c3Ryb2tlLXdpZHRoOjEuOTI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO30KCS5zdDR7ZmlsbDojMjMxZjIwO30KCS5zdDV7ZmlsbDojMjMxZjIwO30KCS5zdDZ7ZmlsbDpub25lO3N0cm9rZTojMjMxZjIwO3N0cm9rZS13aWR0aDo1O3N0cm9rZS1taXRlcmxpbWl0OjEwO30KPC9zdHlsZT4KPGcgY2xhc3M9InN0MCI+Cgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNzAsNi45NWw1NCwzMS41djYzLjExbC01NCwzMS41bC01NC0zMS41VjM4LjQ1TDcwLDYuOTUgTTcwLDBMMTAsMzV2NzBsNjAsMzVsNjAtMzVWMzVMNzAsMEw3MCwweiIvPgo8L2c+CjxnPgoJPHBhdGggY2xhc3M9InN0MiIgZD0iTTEwOS44NiwzOS44NXY1NUg4NS43Yy0zLjA2LDAtNS4xNCwzLjA2LTcuMDgsNWgtMTcuNWMtMS45NC0xLjk0LTQuMDMtNS03LjA4LTVIMjkuODd2LTU1aDI1ICAgYzUuMjgsMCwxMC44MywxLjMyLDE1LDQuNzljNC4xNy0zLjQ3LDkuNzItNC43OSwxNS00Ljc5SDEwOS44NnogTTY0Ljg2LDU0Ljg1YzAtMy44OS03LjIyLTUtMTAtNWgtMTV2MzVoMTMuNzUgICBjNS42MiwwLDcuNTcsMC42OSwxMS4yNSw1VjU0Ljg1eiBNOTkuODYsNDkuODVoLTE1Yy0yLjc4LDAtMTAsMS4xMS0xMCw1djM1YzMuNjgtNC4zMSw1LjYyLTUsMTEuMjUtNWgxMy43NVY0OS44NXoiLz4KPC9nPgo8L3N2Zz4K" alt="" style="object-fit:fill">
+              </picture>
+          </figure>
+        </div>
+        <div class="nhsd-m-emphasis-box__content-box">
+          <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
+            <p class="nhsd-t-body">For a non-technical overview of how to build software that deals with referrals and bookings, see&nbsp;<a onclick="logGoogleAnalyticsEvent('Link click','General','/developer/guides-and-documentation/building-healthcare-software/referrals-and-bookings');" href="/developer/guides-and-documentation/building-healthcare-software/referrals-and-bookings" onkeyup="return vjsu.onKeyUp(event)" class="nhsd-a-link">Building healthcare software - referrals and bookings</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    ## Who can use this API
+    This API can only be used for the Booking and Referral Standard where there is a legal basis to do so. Make sure you have a valid use case before you go too far with your development. We'll ask you to demonstrate this as part of the digital onboarding
+
+    ##  Related APIs
+    The following APIs are related to this API:
+      * This API replaces the [NHS Booking - FHIR API](https://digital.nhs.uk/developer/api-catalogue/nhs-booking-fhir)
+    
+    ## API status and roadmap
+    This version of the API version is in [development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses), meaning:
+      * it is available for testing in the integration environment
+      * it has no availability in production 
+      * it is subject to breaking changes based on developer feedback
+
+    To see our roadmap, or to suggest, comment or vote on features for this API, see our [interactive product backlog](https://nhs-digital-api-management.featureupvote.com/?order=popular&filter=allexceptdone&tag=booking-and-referral&deleted=0#controls).
+    If you have any other queries, please [contact us](https://digital.nhs.uk/developer/help-and-support).
+    
+    ## Service level
+    This API is a platinum service, meaning it is operational and supported 24 hours a day, 365 days a year.
+    
+    For more details, see [service levels](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#service-levels).
+    
+    ## Technology
+    This API is [RESTful](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#basic-rest) and uses HTTP POST to submit data.
+
+    It conforms to the [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#fhir) global standard for health care data exchange, specifically to [FHIR R4 (v4.0.1)](https://hl7.org/fhir/r4/).
+
+    It includes:
+      * country-specific FHIR extensions, which are built against [FHIR UK Core](https://digital.nhs.uk/services/fhir-uk-core), specifically [fhir.r4.ukcore.stu1 0.5.1](https://simplifier.net/packages/fhir.r4.ukcore.stu1/0.5.1)
+      * BaRS-specific FHIR extensions and ammendments, documented in the [BaRS FHIR project](https://simplifier.net/NHSBookingandReferrals)
+ 
+    ## Network access
+    This API is available on the internet and also indirectly via HSCN.
+
+    For more details, see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
+
+    ## Security and authorisation
+
+    This API is [application-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#application-restricted-apis),
+    meaning we authenticate the calling application but not the end user.
+    
+    To use this access mode, use the following security pattern:
+    * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
+
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#Security-and-authorisation).
+    
+    ## Errors
+    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
+
+    * 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
+    * 400 to 499 if it failed because of a client error by your application
+    * 500 to 599 if it failed because of an error on our server
+    
+    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#core-ErrorHandling) for further information on error handling within the BaRS Standard.
+    
+    ## Environments and testing
+    | Environment       | Base URL                                                               |
+    | ----------------- | ---------------------------------------------------------------------- |
+    | Sandbox           | `https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4`      | 
+    | Integration test  | `https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4`          |
+
+    Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing) is for early developer testing and covers a limited number of scenarios with predefined responses. Please not this environment is stateless.
+
+    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing) is for formal integration testing.
+
+    For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
+
+    ## Onboarding
+    You need to get your software approved by us before it can go live with this API. We call this onboarding. The onboarding process can sometimes be quite long, so it’s worth planning well ahead.
+
+    As part of this process, you need to demonstrate that you can manage risks and that your software conforms technically with the requirements for this API.
+
+    Information on this page might impact the design of your software. For details, see [Onboarding support information](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-fhir/onboarding-support-information).
+
+    To understand how our online digital onboarding process works, see [digital onboarding](https://digital.nhs.uk/developer/guides-and-documentation/digital-onboarding).
+    
+    <div class="nhsd-m-emphasis-box nhsd-m-emphasis-box--emphasis nhsd-!t-margin-bottom-6" aria-label="Highlighted Information">
+        <div class="nhsd-a-box nhsd-a-box--border-blue">
+            <div class="nhsd-m-emphasis-box__image-box">
+                <figure class="nhsd-a-image">
+                    <picture class="nhsd-a-image__picture">
+                        <img src="http://digital.nhs.uk/binaries/content/gallery/icons/play-circle.svg?colour=231f20" alt="" style="object-fit:fill">
+                    </picture>
+                </figure>
+            </div>
+            <div class="nhsd-m-emphasis-box__content-box">
+                <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break"><p class="nhsd-t-body">To get started, sign in or create a <a href="https://onboarding.prod.api.platform.nhs.uk/">developer account</a>, then select 'product onboarding'.</p></div>            
+            </div>
+        </div>
+    </div> 
+   
+       
+  version: 1.1.0-alpha
+  title: Booking and Referral API
+  termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
+  contact:
+    email: uec.appointmentbooking@nhs.net
+    url: 'https://developer.nhs.uk/apis/uec-appointments'
+    name: NHS Digital
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4'
+    description: Sandbox Server
+  - url: 'https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4'
+    description: Production
+  - url: 'https://api.service.nhs.uk/booking-and-referral/FHIR/R4'
+    description: Integration Server
+tags:
+  - name: Booking
+  - name: DocumentReference
+  - name: Endpoint
+  - name: HealthcareService
+  - name: Message
+  - name: Metadata
+  - name: Organization
+  - name: Referral
+  - name: Slots
+security:
+  - OAuth_Token: []
+paths:
+  /metadata:
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifierMeta_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags:
+        - Metadata
+      summary: Get capability statement
+      description: |
+        
+        ### Returns the target endpoints CapabilityStatement 
+
+        The sender must initially request the receiver's [CapabilityStatement](https://www.hl7.org/fhir/capabilitystatement.html) (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response to indicate this and the sender will pursue an alternative workflow. 
+
+        A receiver may only implement a subset of the functionality within the standard and the CapabilityStatement will make this clear to a sender. 
+
+        What is returned is a server level response to indicate what functionality the target API supports and how to interact with it. This includes its Version, Security, Endpoints and their associated parameters as well as which MessageDefinitions are supported.
+        
+        Any given endpoint will describe its full capabilities as a client and as a server in response. As the Sender and Receiver roles are interchangeable in certain Application Workflows, all capabilities should be described. 
+        
+        The BaRS proxy will also respond with its own CapabilityStatement, which can be used as an example, by calling this endpoint and omitting the NHSD-Target-Identifier header.
+      operationId: getMeta
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Capability'
+              example:
+                $ref: examples1.1.0/metadata/BaRS_API_Capability_Statement.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Capability'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /MessageDefinition:
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'      
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags:
+        - Metadata
+      summary: Get Message Definition
+      description: |
+        
+        ### Returns MessageDefinitions supported by the target endpoint
+
+        The Message Definition retrieval is required to inform a Sender on building the payload. A request is made using the Service Identifier and workflow type values, linking to the useContext and event elements, respectively, in the Message Definition resource, returning a list of FHIR resources. 
+        
+        The order of workflow beyond this point is relatively flexible, the only stipulation being responses occurring after requests.
+
+        ### Sender
+        
+        The request for Message Definition is the next step for a Sender following the metadata acquisition. 
+        The sender must request the Message Definition for the Service Identifier obtained previously, along with the type of workflow type e.g. booking-request, servicerequest-request. The Message Definition will contain a list of FHIR resources which the sender must include when making a booking or referral. 
+        
+        ### Receiver
+
+        A receiver dictates what they need from a sender making a request and the MessageDefinition is the mechanism to support this. The Message Definition details what FHIR resources need to be included in the body (payload).
+        The receiver may support multiple services e.g. Out-of-Hours, Clinical Assessment Service under one organisation (on the same system) and consideration should be given to maintaining service identifiers and workflow type against Message Definitions.  It's advisable to make this a configurable option which providers can maintain themselves as new services come onboard.
+      operationId: getMessageDefinition
+      parameters:
+        - $ref: '#/components/parameters/context_QParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/MessageDefinition'
+              example:
+                $ref: examples1.1.0/message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/MessageDefinition'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /$process-message:
+    parameters:
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    post:
+      tags:
+        - Message
+      summary: Process a message
+      description: |
+        
+        ### Using $process-message
+        The inherent flexibility of the various workflows supported by BaRS is facilitated by the $process-message endpoint. The example in the "Try this API" feature for this endpoint is a referral request.
+
+        ### Function
+        | Function| API Call|Description
+        | ----                              | ----                   | ----                 |
+        | Making a referral request         | POST /$process-message | The sender will POST a FHIR Bundle, including the FHIR resources defined in MessageDefinition requested previously, the 'focus' being a ServiceRequest resource, supported by Encounter, Observation, Flag etc. The MessageHeader resource will indicate the activity required through use of 'event', 'reason' and 'focus' data elements.<cr> The MessageHeader resource will indicate the activity required. An example of this can be found [here.](https://simplifier.net/NHSBookingandReferrals/79120f41-a431-4f08-bcc5-1e67006fcae0/~json)|
+        | Respond to a referral             | POST /$process-message | A receiver wanting to respond to a request will direct their response to the Sender's $process-message endpoint, reversing the previous request/response roles. All implementers (senders or receivers) of BaRS must build a $process-message endpoint to be able to support the asynchronous workflows which involve such feedback responses. An example of this can be found [here.](https://simplifier.net/nhsbookingandreferrals/bc040878-cf51-4acf-9ede-7448fbb5be7c-duplicate-2)|
+        | Cancelling a referral             | POST /$process-message | An updated payload request ensuring the status of the service request is set to 'revoked', as a minimum.An example of this can be found [here.](https://simplifier.net/nhsbookingandreferrals/a961e68a-50e9-4988-9b14-4bfa4629d761)|
+        | Making a booking                  | POST /$process-message | Once a slot has been identified, the sender makes a request to book through the $process-message endpoint. The receivers MessageDefinition defines the required FHIR resources and must including reference to the service request, if applicable. The MessageHeader resource will indicate the activity required.An example of this can be found [here.](https://simplifier.net/nhsbookingandreferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a)|
+        | Respond to a booking              | POST /$process-message | A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA.|
+        | Cancelling a booking (and rebook) | POST /$process-message | An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
+
+        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#End-to-end-workflow) documentation.
+
+      operationId: processMessage
+      requestBody:
+        description: Message Details
+        required: true
+        content:
+          application/fhir+json:
+            schema:
+              $ref: '#/components/schemas/MessageBundle'
+            example:
+              $ref: examples1.1.0/process_message/POST-body.json
+          application/fhir+xml:
+            schema:
+              $ref: '#/components/schemas/MessageBundle'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/MessageBundle'
+              example:
+                $ref: examples1.1.0/process_message/POST-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/MessageBundle'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /Slot:
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags:
+        - Slots
+      summary: Get slots
+      description: |
+
+        ### Get available slots
+
+        A call to Slots is for querying a target endpoint for suitable slots to book a new Appointment into for a patient. 
+        A request for slots support various filter parameters but requires the service identifier, slot status(es) and a timeframe to limit the search. 
+        
+        As documented in the [NHS Booking Standard](https://developer.nhs.uk/apis/uec-appointments/fs_slotmanagement.html), a receiver assigns the service identifier to groups of slots, under a schedule, which ties schedules together for a particular service.
+
+
+      operationId: getSlots
+      parameters:
+        - name: status
+          in: query
+          description: |
+            Status values that need to be considered for filter. 
+            
+            If attempting to filter by multiple status' they must be separated with commas as opposed to defining the query parameter twice as defined in [FHIR Guidance](https://hl7.org/fhir/search.html#combining)
+            
+            For example "GET [base]/Slot?status=free,busy".  
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - free
+                - busy
+              default: free
+        - name: start
+          in: query
+          required: true
+          description: |
+            Slot start date/time (yyyy-mm-ddThh:mm:ss+00:00).
+            To search for time windows within which Slots must start, use “greater than” and “less than” searching.
+            
+            For example "GET [base]/Slot?start=ge2022-03-01T12:00:00+00:00&start=le2022-03-01T13:30:00+00:00". 
+            The definition of the time window within which Slots are requested is provided by using this parameter twice.
+            The values must include an offset indicating UTC in the [FHIR dateTime instant format](https://www.hl7.org/fhir/datatypes.html#primitive). This is the case for all dateTimes in the BaRS standard.
+          schema:
+            format: datetime
+            type: string
+            example: '2022-03-01T12:00:00+00:00'
+        - name: Schedule.actor:HealthcareService
+          in: query
+          required: false
+          description: |
+            A single service ID can be provided to indicate the service for which appointment slots are returned for.
+          schema:
+            type: string
+            example: '2000099999'
+        - name: _include
+          in: query
+          description: |
+            Inclusions that drive the rescusive depth of the search. There is a minimum of the following _include parameters required for current Applications.
+            * Slot:schedule
+            * Schedule:actor:HealthcareService
+
+            **Note**: Both _include and _revinclude share the same syntax - up to three components, separated by colon characters (:). 
+            Unlike search queries, this is not a FHIRPath expression
+
+            The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the url reflecting this omission in the responses Bundle.link.url. 
+
+            |Expression | Inclusion     |Description|
+            |-------    |--------       |-------- |
+            | Slot:schedule                    | Schedule           | Include Schedule Resources referenced within the  Slot Resources|
+            | Schedule:actor:Practitioner      | Practitioner       | Include Practitioner Resources referenced within the  Schedule Resources|
+            | Schedule:actor:PractitionerRole  | PractitionerRole   | Include Practitioner Role Resources referenced within the  Schedule Resources |
+            | Schedule:actor:HealthcareService | HealthcareService  | Include HealthcareService Resources referenced within the  Schedule Resources|
+            | HealthcareService:providedBy     | ProvidedBy         | Include Organization Resources referenced within the  HealthcareService Resources|
+            | HealthcareService:location       | Location           | Include Location Resources referenced within the  HealthcareService Resources|
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - 'Slot:schedule'
+                - 'Schedule:actor:Practitioner'
+                - 'Schedule:actor:PractitionerRole'
+                - 'Schedule:actor:HealthcareService'
+                - 'HealthcareService:providedBy'
+                - 'HealthcareService:location'
+                - 'Slot:*'
+      responses:
+        '200':
+          description: Success. A full example of a Slot Searchset response can be found [here](  https://simplifier.net/NHSBookingandReferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2).
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/SearchBundleSlot'
+              example:
+                $ref: examples1.1.0/slots/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/SearchBundleSlot'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /Appointment:
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags:
+        - Booking
+      summary: Get bookings for a patient
+      description: |
+        
+        ### Returns bookings for a specified patient
+        Use this endpoint to get all bookings for a given patient. All bookings for the specified patient at the specified target endpoint will be returned in a FHIR searchset Bundle containing Appointment resources. 
+        
+        If a sender wants to cancel a particular booking, they must perform a read first, comparing and amending the details prior to performing the update.
+      operationId: getBookingByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId_QParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/SearchBundleAppt' 
+              example:
+                $ref: examples1.1.0/appointment/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/SearchBundleAppt' 
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/Appointment/{id}':
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags:
+        - Booking
+      summary: Get a specific booking
+      description: | 
+        
+        ### Returns specific booking by id
+        Use this endpoint to get a specific booking by its unique id. A booking with the specified identifier at the specified target endpoint will be returned in the format of a FHIR Appointment resource, should it exist. 
+        
+        If a sender wants to cancel a booking, they must perform a read first, comparing and amending the details prior to performing the update.
+
+      operationId: getBooking
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+              example:
+                $ref: examples1.1.0/appointment/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /ServiceRequest:
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags:
+        - Referral
+      summary: Get referral/s for a patient
+      description: |
+        
+        ### Returns service requests for a specified patient
+        
+        Use this endpoint to get all service requests for a given patient. All service requests for the specified patient at the specified target endpoint will be returned. 
+        
+        If a sender wants to cancel a service request, they must perform a read first and amend the response version when updating.
+      operationId: getReferralByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId_QParam'
+        - $ref: '#/components/parameters/ServiceRequestId_QParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/SearchBundleRef'
+              example:
+                $ref: examples1.1.0/service_request/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/SearchBundleRef'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/ServiceRequest/{id}':
+    parameters:
+      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/TargetIdentifier_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+    get:
+      tags:
+        - Referral
+      summary: Get a specific referral
+      description: | 
+        
+        ### Returns specific service request by id
+        Use this endpoint to get a specific service request by its unique id. A service request with the specified identifier at the specified target endpoint will be returned, should it exist. 
+        
+        If a sender wants to cancel a service request, they must perform a read first, comparing and amending the details prior to performing the update.
+
+      operationId: getReferral
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+              example:
+                $ref: examples1.1.0/service_request/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /DocumentReference:
+    get:      
+      tags:
+        - DocumentReference
+      summary: Retrieve patient's document pointers (GET)
+      operationId: searchDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: "#/components/parameters/subject_QParam"
+        - $ref: "#/components/parameters/custodian_QParam"
+        - $ref: "#/components/parameters/type_QParam"
+        - $ref: "#/components/parameters/nextPageToken_QParam"
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json;version=1:
+              schema:
+                $ref: "#/components/schemas/DocumentReferenceBundle"
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+      description: |
+        Retrieve the document pointers for a single patient.  Your request is constrained by the document pointer types
+        agreed during onboarding.  The results can also be filtered to return documents by a given `type` and/or created
+        by a given producer (`custodian`).
+    post:      
+      tags:
+        - DocumentReference
+      summary: 'Create new or update existing document pointer'
+      operationId: createDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        "201":
+          description: Create / Supersede successful response
+          content:
+            application/fhir+json:
+              schema: 
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/201_POST.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
+      description: |
+        Create new pointers.
+
+        To create a document pointer you must ensure:
+
+        * the body must be a valid [FHIR R4 DocumentReference](http://hl7.org/fhir/documentreference.html)
+        * `id` is a composite of the ODS Code and an identifier that is locally unique to your system.  NRL does not
+          generate globally unique ids, instead relies on producers to provide a locally unique id prefixed with their
+          ODS code, making it globally unique. e.g.
+          ```
+          XYZ-1234567890
+          ```
+        * `subject` MUST be a `Patient` reference using a valid NHS number. e.g.
+          ```
+          "subject": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/nhs-number",
+              "value": "3495456481"
+            }
+          },
+          ```
+        * `custodian` MUST contain an `Organization` reference using a valid ODS code, agreed during [onboarding](#api-description__onboarding). e.g.
+          ```
+          "custodian": {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "Y05868"
+            }
+          }
+          ```
+        * `type` MUST match one of the Document Types defined for BaRS, this is either a Appointment (booking) or a Patient referral.
+          ```
+          "type": {
+            "coding\": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "3457005",
+                "display": "Patient referral"
+              }
+            ]
+          }
+          ```
+        * `content` MUST have at least one entry.
+        * `content[].format[]` SHOULD indicate the BaRS message, e.g
+          ```
+          "format": [
+            {
+              "code": "referral",
+              "display": "Transfer of Care"
+            }
+          ]
+          ```
+        * `content[].attachment[]`  SHOULD indicate the mechanism for accessing documents, this could be the BaRS Target-Identifier, or the direct URL, e.g.
+          ```
+          "attachment": 
+            {
+              "url": "http://fhir.nhs.uk/Id/dos-service-id|111111111",
+              "language": "en-UK"
+            }
+          ```
+  '/DocumentReference/{id}':
+    get:      
+      tags:
+        - DocumentReference
+      summary: Get a single document pointer
+      operationId: readDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json;version=1:
+              schema:
+                $ref: '#/components/schemas/DocumentReference'
+              example: examples1.1.0/document_reference/id/GET-success.json
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+      description: |
+        Read a single document pointer by specifying a `DocumentReference.id`.  Note that you will only be able to
+        retrieve document pointers that have been created by the organisation specified in the `ODS-End-User-Organisation`
+        header, and agreed during [onboarding](#onbaroding).
+    put:      
+      tags:
+        - DocumentReference
+      summary: Update a single document pointer
+      description: |
+        Update a single pointer you created.
+
+        Note that the following fields are immutable:
+        * `id`
+        * `subject`
+        * `custodian`
+        * `type`
+
+        Note that unlike NRL STU3 changing the `status` field does NOT delete document pointers.  To delete document
+        pointers please use the `DELETE` endpoint.      
+      operationId: updateDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/200_PUT.json
+      requestBody:
+        $ref: '#/components/requestBodies/DocumentReference'
+    delete:      
+      tags:
+        - DocumentReference
+      summary: Delete a single document pointer
+      operationId: deleteDocumentReference
+      parameters:
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.1.0/200_DELETE.json
+      description: |
+        Delete a single document pointer that you created. 
+  /Organization:
+    get:
+      tags:
+        - Organization
+      summary: Get the Organization for an identifier
+      description: Get the Organization for an identifier
+      operationId: findOrganizationByOrg
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/Organization_QParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/200-OrganizationBundle'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/Organization/{id}':
+    parameters:
+      - $ref: '#/components/parameters/ResourceId_Param'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+    get:
+      tags: 
+        - Organization
+      summary: Get a Specific Organization
+      description: read operation for a Specific Organization
+      operationId: getOrganization
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:
+      tags: 
+        - Organization
+      summary: Update a Specific Organization
+      description: Creates a new current version for an existing resource [(update)](https://www.hl7.org/fhir/http.html#update) or creates an initial version if no resource already exists for the given id [(new)](https://www.hl7.org/fhir/http.html#upsert).
+      operationId: replaceOrganization
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        '201':
+          $ref: '#/components/responses/201-Created'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
+    delete:
+      tags: 
+        - Organization
+      summary: Delete a Specific Organization
+      description: Delete a Specific Organization
+      operationId: deleteOrganization
+      responses:
+        '200':
+           $ref: '#/components/responses/200-Delete'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /HealthcareService:
+    get:
+      tags:
+        - HealthcareService
+      summary: Get the HealthcareService for an identifier
+      description: Get the HealthcareService for an identifier
+      operationId: findHealthcareServiceByOrg
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/HCProvidedBy_QParam'
+        - $ref: '#/components/parameters/HealthcareServiceIdentifier_QParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/200-OrganizationBundle'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/HealthcareService/{id}':
+    parameters:
+      - $ref: '#/components/parameters/HealthcareServiceIdentifier_PParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+    get:
+      tags: 
+        - HealthcareService
+      summary: Get a specific HealthcareService
+      description: Read operation for a Specific HealthcareService
+      operationId: getHealthcareService
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:
+      tags: 
+        - HealthcareService
+      summary: Update a Specific Organization
+      description: Creates a new current version for an existing resource [(update)](https://www.hl7.org/fhir/http.html#update) or creates an initial version if no resource already exists for the given id [(new)](https://www.hl7.org/fhir/http.html#upsert).
+      operationId: replaceHealthcareService
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        '201':
+          $ref: '#/components/responses/201-Created'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
+    delete:
+      tags: 
+        - Organization
+      summary: Delete a Specific HealthcareService
+      description: Delete a Specific HealthcareService
+      operationId: deleteHealthcareService
+      responses:
+        '200':
+           $ref: '#/components/responses/200-Delete'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  /Endpoint:
+    get:
+      tags:
+        - Endpoint
+      summary: Get the Endpoints based on an Organization identifier
+      description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
+      operationId: findEndpointByOrg
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/EndpointHas_Qparam'
+        - $ref: '#/components/parameters/EndpointIdentifier_QParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/200-EndpointBundle'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+  '/Endpoint/{id}':
+    parameters:
+      - $ref: '#/components/parameters/EndpointIdentifier_PParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/RequestingDevice_HParam'
+    get:
+      tags: 
+        - Endpoint
+      summary: Get a Specific Endpoint
+      description: Read operation for a specific Endpoint
+      operationId: getEndpoint
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicEndpoint'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:
+      tags: 
+        - Endpoint
+      summary: Update a Specific Endpoint
+      description: | 
+        Creates a new current version for an existing resource ([update](https://www.hl7.org/fhir/http.html#update)) or creates an initial version if no resource already exists for the given id ([new](https://www.hl7.org/fhir/http.html#upsert)).
+
+        Only the owner of an Endpoint can modify it. 
+      operationId: replaceEndpoint
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicEndpoint'
+        '201':
+          $ref: '#/components/responses/201-Created'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
+    delete:
+      tags: 
+        - Endpoint
+      summary: Delete a Specific Endpoint
+      description: | 
+        Delete a Specific Endpoint.
+        
+        Only the owner of an Endpoint can delete it. 
+      operationId: deleteEndpoint
+      responses:
+        '200':
+           $ref: '#/components/responses/200-Delete'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+components:
+  requestBodies:
+    DocumentReference:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/DocumentReference'
+      required: true
+  parameters:
+    RegistryId_Param:
+      name: id
+      description: The identifier of the registry object.
+      in: path
+      schema:
+        type: string
+        format: uuid
+        example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+      required: true
+      allowEmptyValue: false
+    ResourceId_Param:
+      name: id
+      description: The identifier of the resource.
+      in: path
+      schema:
+        type: string
+        format: uuid
+        example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+      required: true
+      allowEmptyValue: false
+    context_QParam:
+      name: context
+      description: |
+        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id. This is must be coupled with the [BaRS use case category](https://simplifier.net/nhsbookingandreferrals/usecases-categories-bars). The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
+      required: true
+      in: query
+      schema:
+        type: string
+        example: "context=http://fhir.nhs.uk/Id/dos-service-id|2000099999&context=https://fhir.nhs.uk/CodeSystem/usecases-categories-bars|REFERRALTOPHARMACY"
+    PatientId_QParam:
+      name: patient:identifier
+      description: |
+        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
+        
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
+      required: true
+      in: query
+      schema:
+        type: string
+        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+    ServiceRequestId_QParam:
+      name: ServiceRequest.identifier
+      description: |
+        The unique booking reference number of the refferal, or the Unique GUID/UUID of the referral request. This is not the same as ServiceRequest.id. The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
+             
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/fhir/R4/servicerequest.html#search) |ServiceRequest.identifier |
+      required: false
+      in: query
+      schema:
+        type: string
+        example: "http://servicerequest.system|10000000000"
+    TargetIdentifier_HParam:
+      name: NHSD-Target-Identifier
+      description: The identifier of the Target system. A Base64 encoded object containing value and system properties. More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
+      required: true
+      in: header
+      schema:
+        $ref: '#/components/schemas/TargetIdentifier'
+    TargetIdentifierMeta_HParam:
+      name: NHSD-Target-Identifier
+      description: The identifier of the Target system. A Base64 encoded object containing value and system properties.More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
+      required: false
+      in: header
+      schema:
+        $ref: '#/components/schemas/TargetIdentifier'
+    RequestingDevice_HParam:
+      name: NHSD-Requesting-Software
+      description: |
+        Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
+        Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+        
+        The identifier used, though arbitrary, should be consistent across instances of a product, the name and version of the product should also be accurate and consistent.
+      required: true
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingSoftwareToken'
+    RequestingOrganisation_HParam:
+      name: NHSD-End-User-Organisation
+      description: |
+        Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
+        Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
+        In the example given an ODS code and the Organisation name is provided. Other identifiers are permitted if required. 
+      required: true
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingOrganisationToken'
+    RequestingPractitioner_HParam:
+      name: NHSD-Requesting-Practitioner
+      description: |
+        Requesting Practitioner described in an object based on a FHIR 'PractitionerRole' resource (Standard Base64 encoded JSON).
+
+        This item is not mandatory, however if the information is available it must be included in the request. Only in the event that it is not available, should it be omitted.
+
+        The example given shows a General Practitioner and their SDS Role profile Id.
+      required: false
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestingPractitionerToken'
+    RequestId_HParam:
+      name: X-Request-Id
+      description: 'The X-Correlation-Id for the request header, when supplied, mirrored back by the receiver.'
+      required: true
+      in: header
+      schema:
+        type: string
+        format: uuid
+        example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    CorrelationId_HParam:
+      name: X-Correlation-Id
+      description: 'The X-Correlation-Id for the request header, when supplied, mirrored back by the receiver.'
+      required: true
+      in: header
+      schema:
+        type: string
+        format: uuid
+        example: 9562466f-c982-4bd5-bb0e-255e9f5e6689        
+    Accept_HParam:
+      name: Accept
+      description: 'The Accept Header must also contain the version of the API required.'
+      in: header
+      required: true
+      schema:
+        type: string
+        example: |
+          --header 'Accept: application/fhir+json; version=1.2.0'
+    subject_QParam:
+      name: subject:identifier
+      description: |
+        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
+        
+        |Type           |Expression|
+        |-------             | --------|
+        |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
+      required: true
+      in: query
+      schema:
+        type: string
+        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+    custodian_QParam:
+      description: The custodian of the pointer
+      name: custodian:identifier
+      in: query
+      schema:
+        $ref: "#/components/schemas/RequestQueryCustodian"
+      examples:
+        none:
+          summary: None
+          value: ""
+        valid:
+          summary: Valid
+          value: https://fhir.nhs.uk/Id/ods-organization-code|Y05868
+    type_QParam:
+      name: type
+      description: The specified type of pointers to be returned.
+      in: query
+      schema:
+        $ref: "#/components/schemas/RequestQueryType"
+      examples:
+        none:
+          summary: None
+          value: ""
+        BOOKING:
+          summary: Appointment (booking)
+          value: http://snomed.info/sct|749001000000101
+        REFERRAL:
+          summary: Patient referral
+          value: http://snomed.info/sct|3457005
+    nextPageToken_QParam:
+      name: next-page-token
+      description: |
+        A token that can be sent as either a query parameter or in the post body parameter to retrieve the next set of 20 records.
+
+        This token is returned in the meta.tag field.
+      in: query
+      schema:
+        $ref: "#/components/schemas/NextPageToken"
+    Organization_QParam:
+      name: Organization.identifier
+      description: The identifier of the organization that is managing the endpoint(s).
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/ODS'  
+    HealthcareServiceIdentifier_QParam:
+      name: HealthcareService.identifier
+      description: The identifier of the HealthcareService.
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/Service'
+    HCProvidedBy_QParam:
+      name: HealthcareService.providedBy
+      description: The identifier of the organization that is managing the endpoint(s).
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/ODS'
+    HealthcareServiceIdentifier_PParam:
+      name: id
+      description: The identifier of the HealthcareService.
+      in: path
+      required: true
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/GUID'
+    EndpointIdentifier_QParam:
+      name: Endpoint.identifier
+      description: The identifier of the type of Endpoint.
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/EndpointIdentifier' 
+    EndpointHas_Qparam:
+      name: _has
+      description: | 
+        The healthcareService you want the Endpoints returned for.
+
+        |HealthcareService Property| Example|
+        |-------             | --------|
+        |HealthcareService.Identifier| `_has:HealthcareService.Identifier=https://fhir.nhs.uk/Id/dos-service-id\|1000099999`|
+        |HealthcareService.Id| `_has:HealthcareService.Id=95852b93-d1ab-4c51-8e7d-c24cf9b257a9`|
+      in: query
+      required: false
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/Has'
+    EndpointIdentifier_PParam:
+      name: id
+      description: The identifier of the endpoint.
+      in: path
+      required: true
+      allowEmptyValue: false
+      schema:
+        $ref: '#/components/schemas/GUID'
+  responses:
+    4XX-BARS:
+      description: |
+        Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#Error-handling).
+
+        | HTTP status | Error code                 | Description |
+        | ----------- | -------------------------- | --------------------------------------------- |
+        | 400         | SEND_BAD_REQUEST           | The API was unable to process the request. |
+        | 400         | REC_BAD_REQUEST            | The Receiver has responded stating the message was malformed. |
+        | 401         | SEND_UNAUTHORIZED          | The API deemed you unauthorized to make this request. |
+        | 401         | REC_UNAUTHORIZED           | The receiver deemed you unauthorized to make request. |
+        | 403         | SEND_FORBIDDEN             | Missing or Expired Token. |
+        | 404         | PROXY_NOT_FOUND            | No related people exist for given NHS number. |
+        | 404         | REC_NOT_FOUND              | Patient record for given NHS number has been invalidated and not superseded by another NHS number. |
+        | 405         | SEND_METHOD_NOT_ALLOWED    | HTTP Verb is not correct for this scenario.|
+        | 405         | REC_METHOD_NOT_ALLOWED     | Receiver does not allow this.|
+        | 405         | PROXY_METHOD_NOT_ALLOWED   | Proxy does not allow this.|
+        | 406         | SEND_NOT_ACCEPTABLE        | Senders message had an incorrect content type defined for a response.|
+        | 408         | REC_TIMEOUT                | The downstream domain processing has not completed within the configured timeout period. |
+        | 409         | SEND_CONFLICT              |  |
+        | 409         | REC_CONFLICT               |  |
+        | 409         | PROXY_CONFLICT             |  |
+        | 422         | SEND_UNPROCESSABLE_ENTITY  | Message was not malformed but deemed unprocessable. |
+        | 422         | REC_UNPROCESSABLE_ENTITY   | Message was not malformed but deemed unprocessable. |         
+        | 422         | PROXY_UNPROCESSABLE_ENTITY | Message was not malformed but deemed unprocessable. |         
+        | 429         | SEND_TOO_MANY_REQUESTS     | The user has sent too many requests in a given amount of time|
+        | 429         | REC_TOO_MANY_REQUESTS      | The user has sent too many requests in a given amount of time|
+
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationalOutcome'
+          example:
+            $ref: examples1.1.0/400-SEND.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    5XX-BARS:
+      description: |
+        Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/Design--Core#Error-handling).
+
+        | HTTP status | Error code                 | Description |
+        | ----------- | -------------------------- | --------------------------------------------- |
+        | 500         | REC_SERVER_ERROR           | The receiver server has encountered an Error processing the request. |
+        | 500         | PROXY_SERVER_ERROR         | Proxy Error. |
+        | 501         | SEND_NOT_IMPLEMENTED       | The Request was not recognized. |
+        | 501         | REC_NOT_IMPLEMENTED        | The Receiver did not recognize the request. |
+        | 501         | PROXY_NOT_IMPLEMENTED      | The Proxy did not recognize the request. |
+        | 503         | REC_UNAVAILABLE            | The Receiver was unavailable to service the request.|
+        | 503         | PROXY_UNAVAILABLE          | The Proxy was unavailable to service the request. |
+
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationalOutcome'
+          example:
+            $ref: examples1.1.0/500-REC.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-Delete:         
+      description: The resource was successfully delete. 
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationalOutcome'
+          example:
+            $ref: examples1.2.0/OperationOutcome/200-Delete.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-AtomicEndpoint:         
+      description: The Operation was Successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: examples1.2.0/Endpoint/success_Endpoint_Atomic.json
+    200-AtomicOrganization:         
+      description: The Operation was Successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: examples1.2.0/Endpoint/success_Organization_Atomic.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-EndpointBundle:         
+      description: The operation was successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/EndpointBundle'
+          example:
+            $ref: examples1.2.0/Endpoint/success_bundle.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-OrganizationBundle:         
+      description: The operation was successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OrganizationBundle'
+          example:
+            $ref: examples1.2.0/Endpoint/success_bundle.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    201-Created:         
+      description: Resource Created Successfully
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: examples1.2.0/Endpoint/success_bundle.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+  schemas:
+    Capability:
+      $ref: schemas1.1.0/Capability.yaml
+    TargetIdentifier:
+      $ref: schemas1.1.0/TargetIdentifier.yaml
+    Appointment:
+      $ref: schemas1.1.0/Appointment.yaml
+    SearchBundleAppt:
+      $ref: schemas1.1.0/SearchBundleAppt.yaml
+    ServiceRequest:
+      $ref: schemas1.1.0/ServiceRequest.yaml
+    SearchBundleRef:
+      $ref: schemas1.1.0/SearchBundleRef.yaml
+    SearchBundleSlot:
+      $ref: schemas1.1.0/SearchBundleSlot.yaml
+    MessageBundle:
+      $ref: schemas1.1.0/MessageBundle.yaml
+    MessageDefinition:
+      $ref: schemas1.1.0/MessageDefinition.yaml
+    OperationalOutcome:
+      $ref: schemas1.1.0/OperationalOutcome.yaml
+    RequestingOrganisationToken:
+      $ref: schemas1.1.0/RequestingOrganisation.yaml
+    RequestingPractitionerToken:
+      $ref: schemas1.1.0/RequestingPractitioner.yaml
+    RequestingSoftwareToken:
+      $ref: schemas1.1.0/RequestingSoftware.yaml
+    DocumentReferenceBundle:
+      $ref: schemas1.1.0/DocumentReferenceBundle.yaml
+    DocumentReference:
+      $ref: schemas1.1.0/DocumentReferenceBundle.yaml
+    RequestQuerySubject:
+      type: string
+      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)$
+      example: "https://fhir.nhs.uk/Id/nhs-number|4409815415"
+    RequestQueryCustodian:
+      type: string
+      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)$
+      example: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
+    RequestQueryType:
+      type: string
+      example: "http://snomed.info/sct|749001000000101"
+    NextPageToken:
+      type: string
+    RequestHeaderOdsCode:
+      type: string
+    ODS:
+      type: string
+      example: https://fhir.nhs.uk/Id/ods-organization-code|A001
+    Endpoint:
+      $ref: schemas1.2.0/Endpoint.yaml
+    EndpointBundle:
+      $ref: schemas1.2.0/EndpointBundle.yaml
+    OrganizationBundle:
+      $ref: schemas1.2.0/OrganizationBundle.yaml
+    Service:
+      type: string
+      example: https://fhir.nhs.uk/Id/dos-service-id|1000099999
+    GUID:
+        type: string
+        format: uuid
+        example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    EndpointIdentifier:
+      type: string
+      example: https://fhir.nhs.uk/Id/EndpointSystem|EndpointValue
+    Has:
+      type: string
+      enum:
+        - HealthcareService.Identifier
+        - HealthcareService.Id
+  securitySchemes:
+    OAuth_Token:
+      type: http
+      scheme: bearer

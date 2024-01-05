@@ -1,0 +1,4 @@
+title: Identifier
+type: string
+example: 'eyJ2YWx1ZSI6ICJOSFMwMDAxIiwgInN5c3RlbSI6ICJ0ZXN0cyJ9'
+description: Identifier
