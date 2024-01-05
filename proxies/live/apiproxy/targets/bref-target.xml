@@ -1,70 +1,73 @@
 <TargetEndpoint name="booking-and-referral-target">
-  <PreFlow>
-    <Request>
-      <Step>
-        <Name>LookupCache.Targets</Name>
-      </Step>
-      <Step>
-        <Name>Python.DecodeBase64</Name>
-        <Condition>request.header.NHSD-Target-Identifier != null</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.UnpackVars</Name>
-        <Condition>targets != null</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.CheckTargets</Name>
-        <Condition>targets != null</Condition>
-      </Step>
-      <Step>
-        <Name>ServiceCallout.GetTargetsKvm</Name>
-        <Condition>targets = null</Condition>
-      </Step>
-      <Step>
-        <Name>PopulateCache.Targets</Name>
-        <Condition>targets = null</Condition>
-      </Step>
-      <Step>
-        <Name>AssignMessage.Targets</Name>
-        <Condition>targets = null</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.UnpackVars</Name>
-      </Step>
-      <Step>
-        <Name>Javascript.SetTargetUrl</Name>
-      </Step>
-      <Step>
-        <Name>RaiseFault.400MalformedTargetIdentifier</Name>
-        <Condition>idMalformed = true</Condition>
-      </Step>
-      <Step>
-        <Name>RaiseFault.404ProxyNotFound</Name>
-        <Condition>isError = true</Condition>
-      </Step>
-    </Request>
-  </PreFlow>
-  <DefaultFaultRule>
-    <Step>
-      <Name>ExtractVariables.OperationOutcomeCode</Name>
-    </Step>
-    <Step>
-      <Name>Javascript.HandleErrors</Name>
-    </Step>
-    <Step>
-      <Name>AssignMessage.SetErrorResponse</Name>
-    </Step>
-  </DefaultFaultRule>
-  <HTTPTargetConnection>
+    <PreFlow>
+        <Request>
+            <Step>
+                <Name>LookupCache.Targets</Name>
+            </Step>
+            <Step>
+                <Name>Javascript.UnpackVars</Name>
+                <Condition>targets != null</Condition>
+            </Step>
+            <Step>
+                <Name>Python.DecodeBase64</Name>
+                <Condition>request.header.NHSD-Target-Identifier != null And targets != null</Condition>
+            </Step>
+            <Step>
+                <Name>Javascript.CheckTargets</Name>
+                <Condition>targets != null</Condition>
+            </Step>
+            <Step>
+                <Name>ServiceCallout.GetTargetsKvm</Name>
+                <Condition>targets = null</Condition>
+            </Step>
+            <Step>
+                <Name>PopulateCache.Targets</Name>
+                <Condition>targets = null</Condition>
+            </Step>
+            <Step>
+                <Name>AssignMessage.Targets</Name>
+                <Condition>targets = null</Condition>
+            </Step>
+            <Step>
+                <Name>Javascript.UnpackVars</Name>
+            </Step>
+            <Step>
+                <Name>Python.DecodeBase64</Name>
+            </Step>
+            <Step>
+                <Name>Javascript.SetTargetUrl</Name>
+            </Step>
+            <Step>
+                <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+                <Condition>idMalformed = true</Condition>
+            </Step>
+            <Step>
+                <Name>RaiseFault.404ProxyNotFound</Name>
+                <Condition>isError = true</Condition>
+            </Step>
+        </Request>
+    </PreFlow>
+    <DefaultFaultRule>
+        <Step>
+            <Name>ExtractVariables.OperationOutcomeCode</Name>
+        </Step>
+        <Step>
+            <Name>Javascript.HandleErrors</Name>
+        </Step>
+        <Step>
+            <Name>AssignMessage.SetErrorResponse</Name>
+        </Step>
+    </DefaultFaultRule>
+    <HTTPTargetConnection>
         <Properties>
             <Property name="io.timeout.millis">32000</Property>
         </Properties>
-    <URL>https://mocktarget.apigee.net</URL>
-    <SSLInfo>
-      <Enabled>true</Enabled>
-      <ClientAuthEnabled>true</ClientAuthEnabled>
-      <KeyStore>ref://bars-client</KeyStore>
-      <KeyAlias>cert</KeyAlias>
-    </SSLInfo>
-  </HTTPTargetConnection>
+        <URL>https://mocktarget.apigee.net</URL>
+        <SSLInfo>
+            <Enabled>true</Enabled>
+            <ClientAuthEnabled>true</ClientAuthEnabled>
+            <KeyStore>ref://bars-client</KeyStore>
+            <KeyAlias>cert</KeyAlias>
+        </SSLInfo>
+    </HTTPTargetConnection>
 </TargetEndpoint>
