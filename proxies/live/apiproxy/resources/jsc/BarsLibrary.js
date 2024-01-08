@@ -45,7 +45,7 @@ function get_target_url_from_kvm_nhsd_target_identifier(system, value) {
 
       If there is no value in the kvm it returns null
     */
-      var location = "booking-and-referral-config.NHSD-Target-Identifier." + system + "." + value;
+      var location = "b64decodedTarget.NHSD-Target-Identifier." + system + "." + value;
       var url = context.getVariable(location);
       if(url && url.endsWith('/')){
         url = url.replace(/\/$/,"")
