@@ -21,10 +21,6 @@
         <Condition>targets = null</Condition>
       </Step>
       <Step>
-        <Name>PopulateCache.Targets</Name>
-        <Condition>targets = null</Condition>
-      </Step>
-      <Step>
         <Name>AssignMessage.Targets</Name>
         <Condition>targets = null</Condition>
       </Step>
@@ -41,6 +37,10 @@
       <Step>
         <Name>RaiseFault.404ProxyNotFound</Name>
         <Condition>isError = true</Condition>
+      <Step>
+        <Name>PopulateCache.Targets</Name>
+        <Condition>isError = false</Condition>
+      </Step>
       </Step>
     </Request>
   </PreFlow>
