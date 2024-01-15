@@ -37,10 +37,10 @@
       <Step>
         <Name>RaiseFault.404ProxyNotFound</Name>
         <Condition>isError = true</Condition>
+      </Step>
       <Step>
         <Name>PopulateCache.Targets</Name>
         <Condition>isError = false</Condition>
-      </Step>
       </Step>
     </Request>
   </PreFlow>
