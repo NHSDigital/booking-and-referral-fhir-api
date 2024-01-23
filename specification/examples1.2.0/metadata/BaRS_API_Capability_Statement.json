@@ -4,7 +4,7 @@
 	"url": "https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4",
 	"name": "BaRS FHIR Server CapabilityStatement",
 	"status": "active",
-	"version": "1.2.0",
+	"version": "1.1.0",
 	"experimental": false,
 	"date": "2022-09-16T15:00:00+01:00",
 	"publisher": "NHS Digital",
@@ -22,7 +22,7 @@
 	"kind": "instance",
 	"software": {
 		"name": "BaRS API",
-		"version": "1.2.0"
+		"version": "1.1.0"
 	},
 	"implementation": {
 		"description": "BaRS FHIR Server",
@@ -69,7 +69,8 @@
 						}
 					],
 					"versioning": "no-version"
-				},				{
+				},
+				{
 					"type": "MessageDefinition",
 					"interaction": [
 						{
@@ -84,7 +85,8 @@
 						}
 					],
 					"versioning": "no-version"
-				},				{
+				},
+				{
 					"type": "Appointment",
 					"interaction": [
 						{
@@ -112,6 +114,54 @@
 							"name": "patient:identifier",
 							"type": "token",
 							"documentation": "NHS Number (system must be https://fhir.nhs.uk/Id/nhs-number)"
+						}
+					],
+					"versioning": "no-version"
+				},
+				{
+					"type": "DocumentReference",
+					"interaction": [
+						{
+							"code": "read"
+						},
+						{
+							"code": "search-type"
+						},
+						{
+							"code": "create"
+						},
+						{
+							"code": "update"
+						},
+						{
+							"code": "delete"
+						}
+					],
+					"searchParam": [
+						{
+							"name": "_id",
+							"type": "token",
+							"documentation": "Unique identifier for a DocumentReference"
+						},
+						{
+							"name": "type",
+							"type": "token",
+							"documentation": "The specified type of pointers to be returned."
+						},
+						{
+							"name": "custodian:identifier",
+							"type": "token",
+							"documentation": "The custodian of the DocumentReference"
+						},
+						{
+							"name": "patient:identifier",
+							"type": "token",
+							"documentation": "NHS Number (system must be https://fhir.nhs.uk/Id/nhs-number)"
+						},
+						{
+							"name": "next-page-token",
+							"type": "token",
+							"documentation": "A token that can be sent as either a query parameter or in the post body parameter to retrieve the next set of 20 records"
 						}
 					],
 					"versioning": "no-version"
@@ -234,6 +284,54 @@
 							"name": "patient:identifier",
 							"type": "token",
 							"documentation": "NHS Number (system must be https://fhir.nhs.uk/Id/nhs-number)"
+						}
+					],
+					"versioning": "no-version"
+				},
+				{
+					"type": "DocumentReference",
+					"interaction": [
+						{
+							"code": "read"
+						},
+						{
+							"code": "search-type"
+						},
+						{
+							"code": "create"
+						},
+						{
+							"code": "update"
+						},
+						{
+							"code": "delete"
+						}
+					],
+					"searchParam": [
+						{
+							"name": "_id",
+							"type": "token",
+							"documentation": "Unique identifier for a DocumentReference"
+						},
+						{
+							"name": "type",
+							"type": "token",
+							"documentation": "The specified type of pointers to be returned."
+						},
+						{
+							"name": "custodian:identifier",
+							"type": "token",
+							"documentation": "The custodian of the DocumentReference"
+						},
+						{
+							"name": "patient:identifier",
+							"type": "token",
+							"documentation": "NHS Number (system must be https://fhir.nhs.uk/Id/nhs-number)"
+						},
+						{
+							"name": "next-page-token",
+							"type": "token",
+							"documentation": "A token that can be sent as either a query parameter or in the post body parameter to retrieve the next set of 20 records"
 						}
 					],
 					"versioning": "no-version"
