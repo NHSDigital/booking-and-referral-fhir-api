@@ -4,7 +4,7 @@
 	"url": "https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4",
 	"name": "BaRS FHIR Server CapabilityStatement",
 	"status": "active",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"experimental": false,
 	"date": "2022-09-16T15:00:00+01:00",
 	"publisher": "NHS Digital",
