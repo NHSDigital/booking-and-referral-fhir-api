@@ -1,49 +1,65 @@
 <TargetEndpoint name="booking-and-referral-target">
-  <PreFlow>
-    <Request>
-      <Step>
-        <Name>LookupCache.Targets</Name>
-      </Step>
-      <Step>
-        <Name>Python.DecodeBase64</Name>
-        <Condition>request.header.NHSD-Target-Identifier != null</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.UnpackVars</Name>
-        <Condition>targets != null</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.CheckTargets</Name>
-        <Condition>targets != null</Condition>
-      </Step>
-      <Step>
-        <Name>ServiceCallout.GetTargetsKvm</Name>
-        <Condition>targets = null</Condition>
-      </Step>
-      <Step>
-        <Name>AssignMessage.Targets</Name>
-        <Condition>targets = null</Condition>
-      </Step>
-      <Step>
-        <Name>Javascript.UnpackVars</Name>
-      </Step>
-      <Step>
-        <Name>Javascript.SetTargetUrl</Name>
-      </Step>
-      <Step>
-        <Name>RaiseFault.400MalformedTargetIdentifier</Name>
-        <Condition>idMalformed = true</Condition>
-      </Step>
-      <Step>
-        <Name>RaiseFault.404ProxyNotFound</Name>
-        <Condition>isError = true</Condition>
-      </Step>
-      <Step>
-        <Name>PopulateCache.Targets</Name>
-        <Condition>isError = false</Condition>
-      </Step>
-    </Request>
-  </PreFlow>
+  <Flows>
+    <Flow name="Main">
+      <Request>
+        <Step>
+          <Name>LookupCache.Targets</Name>
+        </Step>
+        <Step>
+          <Name>Python.DecodeBase64</Name>
+          <Condition>request.header.NHSD-Target-Identifier != null</Condition>
+        </Step>
+        <Step>
+          <Name>Javascript.UnpackVars</Name>
+          <Condition>targets != null</Condition>
+        </Step>
+        <Step>
+          <Name>Javascript.CheckTargets</Name>
+          <Condition>targets != null</Condition>
+        </Step>
+        <Step>
+          <Name>ServiceCallout.GetTargetsKvm</Name>
+          <Condition>targets = null</Condition>
+        </Step>
+        <Step>
+          <Name>AssignMessage.Targets</Name>
+          <Condition>targets = null</Condition>
+        </Step>
+        <Step>
+          <Name>Javascript.UnpackVars</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.SetTargetUrl</Name>
+        </Step>
+        <Step>
+          <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+          <Condition>idMalformed = true</Condition>
+        </Step>
+        <Step>
+          <Name>RaiseFault.404ProxyNotFound</Name>
+          <Condition>isError = true</Condition>
+        </Step>
+        <Step>
+          <Name>PopulateCache.Targets</Name>
+          <Condition>isError = false</Condition>
+        </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix != "/_cache")</Condition>
+    </Flow>
+    <Flow name="CacheRefresh">
+      <Request>
+        <Step>
+          <Name>ServiceCallout.GetTargetsKvm</Name>
+        </Step>
+        <Step>
+          <Name>PopulateCache.Targets</Name>
+        </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/_cache") and ((request.verb = "GET"))</Condition>
+    </Flow>
+  </Flows>
   <DefaultFaultRule>
     <Step>
       <Name>ExtractVariables.OperationOutcomeCode</Name>

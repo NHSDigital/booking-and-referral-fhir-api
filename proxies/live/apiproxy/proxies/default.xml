@@ -8,18 +8,6 @@
     </Request>
   </PreFlow>
   <Flows>
-    <Flow name="CacheRefresh">
-      <Request/>
-      <Response>
-        <Step>
-          <Name>ServiceCallout.GetTargetsKvm</Name>
-        </Step>
-        <Step>
-          <Name>PopulateCache.Targets</Name>
-        </Step>
-      </Response>
-      <Condition>(proxy.pathsuffix MatchesPath "/_cache") and ((request.verb = "GET"))</Condition>
-    </Flow>
     <Flow name="OptionsPreFlight">
       <Request/>
       <Response>
@@ -78,9 +66,6 @@
     <BasePath>{{ SERVICE_BASE_PATH }}</BasePath>
     <VirtualHost>secure</VirtualHost>
   </HTTPProxyConnection>
-  <RouteRule name="CacheRefresh">
-    <Condition>(proxy.pathsuffix MatchesPath "/_cache") and ((request.verb = "GET"))</Condition>
-  </RouteRule>
   <RouteRule name="NoRoute">
     <Condition>(request.verb = "OPTIONS") and (request.header.origin != null) and (request.header.Access-Control-Request-Method != null)</Condition>
   </RouteRule>
