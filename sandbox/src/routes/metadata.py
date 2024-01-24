@@ -9,7 +9,7 @@ route = APIRouter()
 def get_metadata(
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
 ):
-    return load_example("metadata/GET-success.json")
+    return load_example("metadata/BaRS_API_Capability_Statement.json")
 
 
 @route.post("/metadata")
