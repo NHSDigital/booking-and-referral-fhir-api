@@ -51,7 +51,7 @@
           <Name>RaiseFault.InvalidRequest</Name>
           <Condition>validation.error != null</Condition>
         </Step>
-        <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status")</Condition>
+        <Condition>(proxy.pathsuffix Not Matches "/_ping") AND (proxy.pathsuffix Not Matches "/_status") AND (proxy.pathsuffix Not Matches "/_cache")</Condition>
       </Request>
     </Flow>
   </Flows>
