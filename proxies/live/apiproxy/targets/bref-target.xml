@@ -50,6 +50,9 @@
     <Flow name="CacheRefresh">
       <Request>
         <Step>
+          <Name>VerifyAPIKey.CacheRefresh</Name>
+        </Step>
+        <Step>
           <Name>ServiceCallout.GetTargetsKvm</Name>
         </Step>
         <Step>

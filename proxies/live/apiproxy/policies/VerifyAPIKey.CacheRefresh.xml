@@ -1,0 +1,3 @@
+<VerifyAPIKey name="VerifyAPIKey.CacheRefresh">
+    <APIKey ref="request.header.apikey"/>
+</VerifyAPIKey>
