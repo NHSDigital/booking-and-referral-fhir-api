@@ -575,7 +575,7 @@ paths:
       operationId: getBooking
       responses:
         '200':
-          description: Success
+          description: Successful response
           content:
             application/fhir+json:
               schema:
@@ -602,6 +602,8 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Appointment'
     put:      
       tags:
         - Booking
@@ -624,9 +626,55 @@ paths:
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/OperationalOutcome'
+                $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.1.0/200_PUT.json
+                $ref: examples1.1.0/appointment/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Appointment'
+    patch:
+      tags:
+        - Booking
+      summary: Partially update a specific Appointment
+      description: | 
+        Partially update a single Appointment resource.
+
+      operationId: patchAppointment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+              example:
+                $ref: examples1.1.0/appointment/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
       requestBody:
         $ref: '#/components/requestBodies/Appointment'
     delete:      
@@ -654,8 +702,10 @@ paths:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
                 $ref: examples1.1.0/200_PUT.json
-      requestBody:
-        $ref: '#/components/requestBodies/Appointment'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /ServiceRequest:
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -733,7 +783,7 @@ paths:
       operationId: getReferral
       responses:
         '200':
-          description: Success
+          description: Successful
           content:
             application/fhir+json:
               schema:
@@ -760,16 +810,18 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/ServiceRequest'
     put:
       tags:
         - Referral
       summary: Update a specific referral
       description: | 
-
+        Update a single ServiceRequest resource.  
       operationId: putReferral
       responses:
         '200':
-          description: Success
+          description: Successful response
           content:
             application/fhir+json:
               schema:
@@ -796,16 +848,18 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/ServiceRequest'
     patch:
       tags:
         - Referral
       summary: Partially update a specific referral
       description: | 
-
+        Update a single ServiceRequest resource.  
       operationId: patchReferral
       responses:
         '200':
-          description: Success
+          description: Successful response
           content:
             application/fhir+json:
               schema:
@@ -832,12 +886,14 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/ServiceRequest'
     delete:
       tags:
         - Referral
       summary: Cancel a specific referral
-      description: | 
-
+      description: |
+         Cancel a specific referral
       operationId: deleteReferral
       responses:
         '200':
