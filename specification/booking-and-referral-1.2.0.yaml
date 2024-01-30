@@ -760,60 +760,98 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
-    put:      
+    put:
       tags:
         - Referral
-      summary: Update an ServiceRequest resource by id
-      description: |
-        Update a single ServiceRequest resource.     
-      operationId: updateServiceRequest
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/TargetIdentifier_HParam'
-        - $ref: '#/components/parameters/RegistryId_Param'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
-        - $ref: '#/components/parameters/Accept_HParam'
+      summary: Update a specific referral
+      description: | 
+
+      operationId: putReferral
       responses:
-        "200":
-          description: Successful response
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+              example:
+                $ref: examples1.1.0/service_request/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    patch:
+      tags:
+        - Referral
+      summary: Partially update a specific referral
+      description: | 
+
+      operationId: patchReferral
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+              example:
+                $ref: examples1.1.0/service_request/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    delete:
+      tags:
+        - Referral
+      summary: Cancel a specific referral
+      description: | 
+
+      operationId: deleteReferral
+      responses:
+        '200':
+          description: Successful deletion response
           content:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.1.0/200_PUT.json
-      requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
-    delete:      
-      tags:
-        - Referral
-      summary: Delete or Cancel a ServiceRequest resource by id
-      description: |
-        Delete or Cancel a single ServiceRequest resource.     
-      operationId: deleteServiceRequest
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/TargetIdentifier_HParam'
-        - $ref: '#/components/parameters/RegistryId_Param'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
-        - $ref: '#/components/parameters/Accept_HParam'
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/fhir+json:
-              schema:
-                $ref: '#/components/schemas/OperationalOutcome'
-              example:
-                $ref: examples1.1.0/200_PUT.json
-      requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
+                $ref: examples1.1.0/200_DELETE.json
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
   /DocumentReference:
     get:      
       tags:
