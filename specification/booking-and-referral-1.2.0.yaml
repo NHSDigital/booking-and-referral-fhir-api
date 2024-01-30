@@ -530,7 +530,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
               example:
-                $ref: examples1.1.0/appointment/GET-success.json
+                $ref: examples1.2.0/appointment/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
@@ -581,7 +581,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.1.0/appointment/id/GET-success.json
+                $ref: examples1.2.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -628,7 +628,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.1.0/appointment/id/GET-success.json
+                $ref: examples1.2.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -654,7 +654,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.1.0/appointment/id/GET-success.json
+                $ref: examples1.2.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -701,7 +701,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.1.0/200_PUT.json
+                $ref: examples1.2.0/200_PUT.json
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -738,7 +738,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
               example:
-                $ref: examples1.1.0/service_request/GET-success.json
+                $ref: examples1.2.0/service_request/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
@@ -789,7 +789,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.1.0/service_request/id/GET-success.json
+                $ref: examples1.2.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -827,7 +827,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.1.0/service_request/id/GET-success.json
+                $ref: examples1.2.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -865,7 +865,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.1.0/service_request/id/GET-success.json
+                $ref: examples1.2.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -903,7 +903,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.1.0/200_DELETE.json
+                $ref: examples1.2.0/200_DELETE.json
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
