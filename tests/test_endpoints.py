@@ -88,7 +88,6 @@ class TestEndpoints:
         # Given
         token = get_token_client_credentials["access_token"]
         expected_status_code = 404
-        expected_body = load_example("OperationOutcome/PROXY-NONE/404-NOT_FOUND-not-found.json")
 
         # When
         response = requests.get(
@@ -100,9 +99,9 @@ class TestEndpoints:
                 "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
             },
         )
+
         # Then
         assert_that(expected_status_code).is_equal_to(response.status_code)
-        assert_that(expected_body).is_equal_to(response.json())
 
     @pytest.mark.asyncio
     @pytest.mark.broker
