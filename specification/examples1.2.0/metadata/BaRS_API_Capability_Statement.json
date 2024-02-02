@@ -97,6 +97,15 @@
 						},
 						{
 							"code": "search-type"
+						},
+						{
+							"code": "create"
+						},
+						{
+							"code": "update"
+						},
+						{
+							"code": "delete"
 						}
 					],
 					"searchParam": [
@@ -267,6 +276,15 @@
 						},
 						{
 							"code": "search-type"
+						},
+						{
+							"code": "create"
+						},
+						{
+							"code": "update"
+						},
+						{
+							"code": "delete"
 						}
 					],
 					"searchParam": [
