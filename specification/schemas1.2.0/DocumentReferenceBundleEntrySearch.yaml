@@ -1,7 +1,0 @@
-title: DocumentReferenceBundleEntrySearch
-x-stoplight:
-  id: cjq9eqza61nx9
-type: object
-properties:
-  id:
-    type: string
