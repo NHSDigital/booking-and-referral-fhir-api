@@ -1,3 +1,4 @@
+var bookingReferralConfigRaw =  JSON.parse(context.getVariable("targets"));
+var bookingReferralConfig = bookingReferralConfigRaw.content
 
-var bookingReferralConfig =  JSON.parse(context.getVariable("targets"));
-set_variables("booking-and-referral-config", bookingReferralConfig)
+context.setVariable("booking-and-referral-config", bookingReferralConfig)
