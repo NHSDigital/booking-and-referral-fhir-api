@@ -45,8 +45,9 @@ function get_target_url_from_kvm_nhsd_target_identifier(system, value) {
 
       If there is no value in the kvm it returns null
     */
-      var location = "b64decodedTarget.NHSD-Target-Identifier." + system + "." + value;
-      var url = context.getVariable(location);
+      var NHSDTargetIdentifier = "NHSD-Target-Identifier"
+      var b64decodedTarget = JSON.parse(context.getVariable("b64decodedTarget"));
+      var url = b64decodedTarget[NHSDTargetIdentifier][system][value];
       if(url && url.endsWith('/')){
         url = url.replace(/\/$/,"")
       }
