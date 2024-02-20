@@ -5,6 +5,9 @@
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
+      <Step>
+        <Name>FlowCallout.GetEnvironmentKeyValueMapData</Name>
+      </Step>
     </Request>
   </PreFlow>
   <Flows>

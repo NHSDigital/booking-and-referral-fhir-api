@@ -1,0 +1,9 @@
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FlowCallout async="false" continueOnError="false" enabled="true" name="FlowCallout.GetEnvironmentKeyValueMapData">
+  <DisplayName>FlowCallout.GetEnvironmentKeyValueMapData</DisplayName>
+  <Parameters>
+    <Parameter name="GITHUB_TOKEN">{{ booking-and-referral-github-token }}</Parameter>
+  </Parameters>
+  <SharedFlowBundle>GetEnvironmentKeyValueMapData</SharedFlowBundle>
+</FlowCallout>
