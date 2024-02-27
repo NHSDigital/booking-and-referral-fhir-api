@@ -10,7 +10,7 @@
                 <Header name="X-GitHub-Api-Version">2022-11-28</Header>
                 <Header name="User-Agent">RyanThomas1214</Header>
                 <Header name="Accept">application/vnd.github+json</Header>
-                <Header name="Authorization">Bearer {private.environment_kvm_data}</Header>
+                <Header name="Authorization">Bearer {private.GITHUB_TOKEN}</Header>
             </Headers>
         </Set>
         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>

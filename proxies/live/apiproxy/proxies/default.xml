@@ -6,7 +6,7 @@
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
-        <Name>FlowCallout.GetEnvironmentKeyValueMapData</Name>
+        <Name>KVM.GetGitHubToken</Name>
       </Step>
     </Request>
   </PreFlow>
