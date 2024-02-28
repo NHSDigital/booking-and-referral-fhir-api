@@ -5,6 +5,9 @@
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
+      <Step>
+        <Name>KVM.GetGitHubToken</Name>
+      </Step>
     </Request>
   </PreFlow>
   <Flows>
