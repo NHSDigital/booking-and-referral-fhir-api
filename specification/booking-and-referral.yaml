@@ -250,6 +250,8 @@ paths:
         
         ### Returns MessageDefinitions supported by the target endpoint
 
+
+
         The Message Definition retrieval is required to inform a Sender on building the payload. A request is made using the Service Identifier and workflow type values, linking to the useContext and event elements, respectively, in the Message Definition resource, returning a list of FHIR resources. 
         
         The order of workflow beyond this point is relatively flexible, the only stipulation being responses occurring after requests.
