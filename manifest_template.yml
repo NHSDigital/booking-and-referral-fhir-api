@@ -1,6 +1,6 @@
 SERVICE_NAME: booking-and-referral
 PRODUCT_DISPLAY_NAME: Booking and Referral FHIR API
-DESCRIPTION: This proxy function as a centralized router for bookings and referrals services
+DESCRIPTION: This proxy function as a centralized router for bookings and referrals services (TESTING CHANGE)
 APIGEE_ENVIRONMENTS:
   - name: internal-dev
     display_name: Internal Development
