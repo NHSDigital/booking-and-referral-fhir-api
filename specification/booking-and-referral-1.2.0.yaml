@@ -1223,7 +1223,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
+        $ref: '#/components/requestBodies/Organization'
   '/Organization/{id}':
     parameters:
       - $ref: '#/components/parameters/ResourceId_Param'
@@ -1298,7 +1298,7 @@ paths:
     post:
       tags:
         - HealthcareService
-      summary: Create an HealthcareService
+      summary: Create a HealthcareService
       description: | 
         Create a single HealthcareService resource.  
       operationId: createHealthcareService
@@ -1310,7 +1310,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
+        $ref: '#/components/requestBodies/HealthcareService'
   '/HealthcareService/{id}':
     parameters:
       - $ref: '#/components/parameters/HealthcareServiceIdentifier_PParam'
@@ -1397,7 +1397,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
+        $ref: '#/components/requestBodies/Endpoint'
   '/Endpoint/{id}':
     parameters:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
@@ -1465,6 +1465,21 @@ components:
         application/fhir+json;version=1:
           schema:
             $ref: '#/components/schemas/Appointment'
+    Endpoint:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+    Organization:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/Organization'
+    HealthcareService:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/HealthcareService'
       required: true
     ServiceRequest:
       content:
@@ -1823,6 +1838,19 @@ components:
             $ref: '#/components/schemas/Endpoint'
           example:
             $ref: examples1.2.0/Endpoint/success_Endpoint_Atomic.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     200-AtomicHealthcareService:         
       description: The Operation was Successful
       content:
@@ -1830,7 +1858,7 @@ components:
           schema:
             $ref: '#/components/schemas/Endpoint'
           example:
-            $ref: examples1.2.0/Endpoint/success_Organization_Atomic.json
+            $ref: examples1.2.0/HealthcareService/success_HealthcareService_Atomic.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1851,7 +1879,7 @@ components:
           schema:
             $ref: '#/components/schemas/Endpoint'
           example:
-            $ref: examples1.2.0/Endpoint/success_Organization_Atomic.json
+            $ref: examples1.2.0/Organization/success_Organization_Atomic.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1965,10 +1993,6 @@ components:
       $ref: schemas1.2.0/DocumentReferenceBundle.yaml
     DocumentReference:
       $ref: schemas1.2.0/DocumentReference.yaml
-    RequestQuerySubject:
-      type: string
-      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)$
-      example: "https://fhir.nhs.uk/Id/nhs-number|4409815415"
     RequestQueryCustodian:
       type: string
       pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)$
@@ -1977,8 +2001,6 @@ components:
       type: string
       example: "http://snomed.info/sct|749001000000101"
     NextPageToken:
-      type: string
-    RequestHeaderOdsCode:
       type: string
     ODS:
       type: string
