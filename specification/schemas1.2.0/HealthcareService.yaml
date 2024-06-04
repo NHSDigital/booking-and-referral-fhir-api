@@ -1,7 +1,7 @@
 type: object
 properties:
   Endpoint:
-    description: This **MUST** be an **Endpoint** resource
+    description: This **MUST** be an **HealthcareService** resource
     type: object
     properties:
       resourceType:
