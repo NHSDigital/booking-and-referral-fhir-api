@@ -15,4 +15,4 @@ x-examples:
   example:
     resourceType: Endpoint
     meta: 
-      profile: http://hl7.org/fhir/StructureDefinition/Endpoint
+      profile: https://fhir.hl7.org.uk/StructureDefinition/UKCore-HealthcareService
