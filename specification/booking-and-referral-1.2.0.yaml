@@ -1217,29 +1217,7 @@ paths:
       operationId: createOrganization
       responses:
         '200':
-          description: Successful response
-          content:
-            application/fhir+json:
-              schema:
-                $ref: '#/components/responses/200-AtomicOrganization'
-              example:
-                $ref: examples1.2.0/service_request/id/GET-success.json
-            application/fhir+xml:
-              schema:
-                $ref: '#/components/schemas/Organization'
-          headers:
-            X-Correlation-Id:
-              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-            X-Request-Id:
-              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+          $ref: '#/components/responses/200-AtomicOrganization'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1326,29 +1304,7 @@ paths:
       operationId: createHealthcareService
       responses:
         '200':
-          description: Successful response
-          content:
-            application/fhir+json:
-              schema:
-                $ref: '#/components/responses/200-AtomicHealthcareService'
-              example:
-                $ref: examples1.2.0/service_request/id/GET-success.json
-            application/fhir+xml:
-              schema:
-                $ref: '#/components/schemas/HealthcareService'
-          headers:
-            X-Correlation-Id:
-              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-            X-Request-Id:
-              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+          $ref: '#/components/responses/200-AtomicHealthcareService'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1435,29 +1391,7 @@ paths:
       operationId: createEndpoint
       responses:
         '200':
-          description: Successful response
-          content:
-            application/fhir+json:
-              schema:
-                $ref: '#/components/responses/200-AtomicEndpoint'
-              example:
-                $ref: examples1.2.0/service_request/id/GET-success.json
-            application/fhir+xml:
-              schema:
-                $ref: '#/components/schemas/Endpoint'
-          headers:
-            X-Correlation-Id:
-              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-            X-Request-Id:
-              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+          $ref: '#/components/responses/200-AtomicEndpoint'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
