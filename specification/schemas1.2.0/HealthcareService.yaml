@@ -1,7 +1,7 @@
 type: object
 properties:
   Endpoint:
-    description: This **MUST** be an **Organization** resource
+    description: This **MUST** be an **HealthcareService** resource
     type: object
     properties:
       resourceType:
@@ -14,5 +14,5 @@ properties:
 x-examples:
   example:
     resourceType: Endpoint
-    meta:
-      profile: 'https://fhir.hl7.org.uk/StructureDefinition/UKCore-Organization'
+    meta: 
+      profile: https://fhir.hl7.org.uk/StructureDefinition/UKCore-HealthcareService

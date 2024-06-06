@@ -1207,7 +1207,23 @@ paths:
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
+          $ref: '#/components/responses/5XX-BARS' 
+    post:
+      tags:
+        - Organization
+      summary: Create an Organization
+      description: | 
+        Create a single Organization resource.  
+      operationId: createOrganization
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicOrganization'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
           $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Organization'
   '/Organization/{id}':
     parameters:
       - $ref: '#/components/parameters/ResourceId_Param'
@@ -1278,7 +1294,23 @@ paths:
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
+          $ref: '#/components/responses/5XX-BARS' 
+    post:
+      tags:
+        - HealthcareService
+      summary: Create a HealthcareService
+      description: | 
+        Create a single HealthcareService resource.  
+      operationId: createHealthcareService
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicHealthcareService'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
           $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/HealthcareService'
   '/HealthcareService/{id}':
     parameters:
       - $ref: '#/components/parameters/HealthcareServiceIdentifier_PParam'
@@ -1349,7 +1381,23 @@ paths:
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
+          $ref: '#/components/responses/5XX-BARS' 
+    post:
+      tags:
+        - Endpoint
+      summary: Create an Endpoint
+      description: | 
+        Create a single Endpoint resource.  
+      operationId: createEndpoint
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicEndpoint'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
           $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Endpoint'
   '/Endpoint/{id}':
     parameters:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
@@ -1417,6 +1465,21 @@ components:
         application/fhir+json;version=1:
           schema:
             $ref: '#/components/schemas/Appointment'
+    Endpoint:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+    Organization:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/Organization'
+    HealthcareService:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/HealthcareService'
       required: true
     ServiceRequest:
       content:
@@ -1775,6 +1838,40 @@ components:
             $ref: '#/components/schemas/Endpoint'
           example:
             $ref: examples1.2.0/Endpoint/success_Endpoint_Atomic.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-AtomicHealthcareService:         
+      description: The Operation was Successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: examples1.2.0/HealthcareService/success_HealthcareService_Atomic.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     200-AtomicOrganization:         
       description: The Operation was Successful
       content:
@@ -1782,7 +1879,7 @@ components:
           schema:
             $ref: '#/components/schemas/Endpoint'
           example:
-            $ref: examples1.2.0/Endpoint/success_Organization_Atomic.json
+            $ref: examples1.2.0/Organization/success_Organization_Atomic.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1866,6 +1963,12 @@ components:
       $ref: schemas1.2.0/TargetIdentifier.yaml
     Appointment:
       $ref: schemas1.2.0/Appointment.yaml
+    Endpoint:
+      $ref: schemas1.2.0/Endpoint.yaml
+    HealthcareService:
+      $ref: schemas1.2.0/HealthcareService.yaml
+    Organization:
+      $ref: schemas1.2.0/Organization.yaml
     SearchBundleAppt:
       $ref: schemas1.2.0/SearchBundleAppt.yaml
     ServiceRequest:
@@ -1890,10 +1993,6 @@ components:
       $ref: schemas1.2.0/DocumentReferenceBundle.yaml
     DocumentReference:
       $ref: schemas1.2.0/DocumentReference.yaml
-    RequestQuerySubject:
-      type: string
-      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)$
-      example: "https://fhir.nhs.uk/Id/nhs-number|4409815415"
     RequestQueryCustodian:
       type: string
       pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)$
@@ -1903,13 +2002,9 @@ components:
       example: "http://snomed.info/sct|749001000000101"
     NextPageToken:
       type: string
-    RequestHeaderOdsCode:
-      type: string
     ODS:
       type: string
       example: https://fhir.nhs.uk/Id/ods-organization-code|A001
-    Endpoint:
-      $ref: schemas1.2.0/Endpoint.yaml
     EndpointBundle:
       $ref: schemas1.2.0/EndpointBundle.yaml
     OrganizationBundle:
