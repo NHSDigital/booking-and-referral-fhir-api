@@ -25,6 +25,9 @@ ENTITY_NOT_FOUND = (
 def get_appointment(
     patientIdentifier: str = Query(..., alias="patient:identifier"),
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
+    NHSD_End_User_Organisation: str = Header(..., alias="NHSD-End-User-Organisation"),
+    NHSD_Requesting_Software: str = Header(..., alias="NHSD-Requesting-Software"),
+    Accept: str = Header(None)
 ):
     return load_example("appointment/GET-success.json")
 
@@ -34,6 +37,9 @@ def get_appointment_id(
     response: Response,
     id: UUID,
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
+    NHSD_End_User_Organisation: str = Header(..., alias="NHSD-End-User-Organisation"),
+    NHSD_Requesting_Software: str = Header(..., alias="NHSD-Requesting-Software"),
+    Accept: str = Header(None)
 ):
     if str(id) == existing_appointment_id:
         return load_example("appointment/id/GET-success.json")

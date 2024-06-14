@@ -22,6 +22,9 @@ class ServiceRequestBody(BaseModel):
 def get_service_request(
         patientIdentifier: str = Query(..., alias="patient:identifier"),
         NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
+        NHSD_End_User_Organisation: str = Header(..., alias="NHSD-End-User-Organisation"),
+        NHSD_Requesting_Software: str = Header(..., alias="NHSD-Requesting-Software"),
+        Accept: str = Header(None)
 ):
     return load_example("service_request/GET-success.json")
 
@@ -31,6 +34,9 @@ def get_service_request_id(
     response: Response,
     id: UUID,
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
+    NHSD_End_User_Organisation: str = Header(..., alias="NHSD-End-User-Organisation"),
+    NHSD_Requesting_Software: str = Header(..., alias="NHSD-Requesting-Software"),
+    Accept: str = Header(None)
 ):
     if str(id) == existing_appointment_id:
         return load_example("service_request/id/GET-success.json")
