@@ -1349,7 +1349,7 @@ paths:
           $ref: '#/components/responses/5XX-BARS'          
     delete:
       tags: 
-        - Organization
+        - HealthcareService
       summary: Delete a Specific HealthcareService
       description: Delete a Specific HealthcareService
       operationId: deleteHealthcareService
