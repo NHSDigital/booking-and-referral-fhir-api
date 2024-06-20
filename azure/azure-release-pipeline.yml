@@ -33,23 +33,29 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     apigee_deployments:
       - environment: internal-dev
+        jinja_templates:
+          DOMAIN_ENDPOINT: https://internal-dev.bars.dev.api.platform.nhs.uk
         post_deploy:
           - template: ./templates/post-deploy.yml
-      -   environment: internal-dev-sandbox
-          proxy_path: sandbox
-          post_deploy:
-              -   template: ./templates/post-deploy.yml
+      - environment: internal-dev-sandbox
+        proxy_path: sandbox
+        jinja_templates:
+          DOMAIN_ENDPOINT: just-dummy-value-for-successful-build
+        post_deploy:
+          - template: ./templates/post-deploy.yml
       - environment: sandbox
+        proxy_path: sandbox
+        jinja_templates:
+          DOMAIN_ENDPOINT: just-dummy-value-for-successful-build
         depends_on:
           - internal_dev_sandbox
-        proxy_path: sandbox
-        post_deploy:
-          - template: ./templates/post-deploy.yml
       - environment: int
         depends_on:
           - internal_dev
+        jinja_templates:
+          DOMAIN_ENDPOINT: https://int.bars.dev.api.platform.nhs.uk
         post_deploy:
-          - template: ./templates/post-deploy.yml
+           - template: ./templates/post-deploy.yml
       - environment: prod
         enable_status_monitoring: false
         depends_on:
