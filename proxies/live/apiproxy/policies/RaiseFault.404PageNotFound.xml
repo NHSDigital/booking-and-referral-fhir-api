@@ -5,32 +5,7 @@
     <FaultResponse>
         <Set>
             <Headers/>
-            <Payload contentType="text/plain">
-                {
-                    "resourceType": "OperationOutcome",
-                    "id": "91e8828a-c936-4667-b13b-0f5664b1e944",
-                    "meta": {
-                        "profile": [
-                            "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
-                        ]
-                    },
-                    "issue": [
-                        {
-                            "severity": "error",
-                            "code": "not-found",
-                            "details": {
-                                "coding": [
-                                    {
-                                        "system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
-                                        "code": "NOT_FOUND"
-                                    }
-                                ]
-                            },
-                            "diagnostics": "Endpoint on the API does not exist. This would be a Proxy or unprefixed response. there is no SEND code for 404 in the value set."
-                        }
-                    ]
-                }
-            </Payload>
+            <Payload contentType="text/plain"/>
             <StatusCode>404</StatusCode>
             <ReasonPhrase>Not Found</ReasonPhrase>
         </Set>

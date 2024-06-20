@@ -57,6 +57,10 @@ function handleError(context) {
     if (context.getVariable("isError")) {
         return makeResponse(errorRepository["404ProxyNotFound"], 404)
     }
+    
+    if (errorStatusCode === 404) {
+        return makeResponse(errorRepository["404VersionMismatch"], 404)
+    }
 
     const responseStatusCode = context.getVariable("response.status.code")
     if (responseStatusCode === 403) {
