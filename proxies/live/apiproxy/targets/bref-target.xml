@@ -3,6 +3,18 @@
     <Flow name="Main">
       <Request>
         <Step>
+          <Name>RaiseFault.404PageNotFound</Name>
+          <Condition>
+            (proxy.pathsuffix Matches "/Endpoint*")
+            OR (proxy.pathsuffix Matches "/HealthcareService*")
+            OR (proxy.pathsuffix Matches "/Organization*")
+          </Condition>
+        </Step>
+        <Step>
+          <Name>RaiseFault.404PageNotFound</Name>
+          <Condition>isError = true</Condition>
+        </Step>
+        <Step>
           <Name>LookupCache.Targets</Name>
         </Step>
         <Step>
