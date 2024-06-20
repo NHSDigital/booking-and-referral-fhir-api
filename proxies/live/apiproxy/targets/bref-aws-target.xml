@@ -3,7 +3,10 @@
   <PreFlow>
     <Request>
       <Step>
-        <Name>FlowCallout.ApplyRateLimiting</Name>
+        <Name>VerifyAPIKey.CustomAttributes</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.AddAuthorizationHeaders</Name>
       </Step>
     </Request>
   </PreFlow>
