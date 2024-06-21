@@ -58,7 +58,7 @@ function handleError(context) {
         return makeResponse(errorRepository["404ProxyNotFound"], 404)
     }
     
-    if (errorStatusCode === 404) {
+    else if (errorStatusCode === 404) {
         return makeResponse(errorRepository["404VersionMismatch"], 404)
     }
 
