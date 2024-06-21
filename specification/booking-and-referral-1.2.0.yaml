@@ -602,8 +602,6 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
-      requestBody:
-        $ref: '#/components/requestBodies/Appointment'
     put:      
       tags:
         - Booking
@@ -843,8 +841,6 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
-      requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
     put:
       tags:
         - Referral
