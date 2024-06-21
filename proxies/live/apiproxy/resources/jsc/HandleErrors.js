@@ -58,7 +58,7 @@ function handleError(context) {
         return makeResponse(errorRepository["404ProxyNotFound"], 404)
     }
     
-    if (errorStatusCode === 406) {
+    if (errorStatusCode === 410) {
         return makeResponse(errorRepository["406SendNotAcceptable"], 406)
     }
 

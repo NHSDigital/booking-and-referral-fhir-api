@@ -6,7 +6,7 @@
         <Set>
             <Headers/>
             <Payload contentType="text/plain"/>
-            <StatusCode>406</StatusCode>
+            <StatusCode>410</StatusCode>
             <ReasonPhrase>Not Acceptable</ReasonPhrase>
         </Set>
         <AssignVariable>
