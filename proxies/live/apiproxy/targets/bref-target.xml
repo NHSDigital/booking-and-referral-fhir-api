@@ -4,7 +4,7 @@
         <Flow name="Main">
             <Request>
                 <Step>
-                    <Name>RaiseFault.404PageNotFound</Name>
+                    <Name>RaiseFault.406SendNotAcceptable</Name>
                     <Condition>(proxy.pathsuffix Matches "/Endpoint*") OR (proxy.pathsuffix Matches "/HealthcareService*") OR (proxy.pathsuffix Matches "/Organization*")</Condition>
                 </Step>
                 <Step>

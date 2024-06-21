@@ -56,8 +56,11 @@ extends:
           DOMAIN_ENDPOINT: https://int.bars.dev.api.platform.nhs.uk
         post_deploy:
            - template: ./templates/post-deploy.yml
+      - environment: manual-approval
+        manual_approval_prod: true
       - environment: prod
         enable_status_monitoring: false
         depends_on:
           - int
           - sandbox
+          - manual_approval
