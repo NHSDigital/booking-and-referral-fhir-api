@@ -2,8 +2,8 @@
     <DisplayName>ExtractVariables.GetProductId</DisplayName>
     <Source clearPayload="true|false">request</Source>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>    
-    <Source clearPayload="false">request</Source>
     <Header name="ProductId">
-      <Pattern ignoreCase="false">ProductId</Pattern>
+      <Pattern>{headerValue}</Pattern>
     </Header>
+    <VariablePrefix>extracted</VariablePrefix>
 </ExtractVariables>
