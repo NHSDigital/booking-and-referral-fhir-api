@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFault.406SendNotAcceptable">
+    <DisplayName>RaiseFault.406SendNotAcceptable</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Headers/>
+            <Payload contentType="text/plain"/>
+            <StatusCode>410</StatusCode>
+            <ReasonPhrase>Not Acceptable</ReasonPhrase>
+        </Set>
+        <AssignVariable>
+            <Name>bref.error.code</Name>
+            <Value>value</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.coding.code</Name>
+            <Value>SEND_NOT_ACCEPTABLE</Value>
+        </AssignVariable>
+        <AssignVariable>
+            <Name>bref.error.diagnostics</Name>
+            <Value>Senders message has incorrect accept header</Value>
+        </AssignVariable>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>

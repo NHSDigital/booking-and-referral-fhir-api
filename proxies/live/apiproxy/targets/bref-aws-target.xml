@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="booking-and-referral-aws-target">
+  <PreFlow>
+    <Request>
+      <Step>
+        <Name>VerifyAPIKey.CustomAttributes</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.AddAuthorizationHeaders</Name>
+      </Step>
+    </Request>
+  </PreFlow>
+  <HTTPTargetConnection>
+    <URL>{{ DOMAIN_ENDPOINT }}</URL>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+      <ClientAuthEnabled>true</ClientAuthEnabled>
+      <KeyStore>ref://bars-client</KeyStore>
+      <KeyAlias>cert</KeyAlias>
+    </SSLInfo>
+    <Properties>
+      <Property name="supports.http10">true</Property>
+      <Property name="request.retain.headers">User-Agent,Referer,Accept-Language</Property>
+      <Property name="retain.queryparams">apikey</Property>
+    </Properties>
+  </HTTPTargetConnection>
+</TargetEndpoint>

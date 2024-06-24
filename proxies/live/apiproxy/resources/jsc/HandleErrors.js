@@ -57,6 +57,10 @@ function handleError(context) {
     if (context.getVariable("isError")) {
         return makeResponse(errorRepository["404ProxyNotFound"], 404)
     }
+    
+    if (errorStatusCode === 410) {
+        return makeResponse(errorRepository["406SendNotAcceptable"], 406)
+    }
 
     const responseStatusCode = context.getVariable("response.status.code")
     if (responseStatusCode === 403) {
