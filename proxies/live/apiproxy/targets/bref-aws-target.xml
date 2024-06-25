@@ -6,10 +6,28 @@
         <Name>VerifyAPIKey.CustomAttributes</Name>
       </Step>
       <Step>
-        <Name>AssignMessage.AddAuthorizationHeaders</Name>
+        <Name>ExtractVariables.GetProductId</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.GetProductIdAttribute</Name>
+      </Step>
+      <Step>
+        <Name>RaiseFault.403InvalidProduct</Name>
+        <Condition>!(extracted.headerValue == AppProductId)</Condition>
       </Step>
     </Request>
   </PreFlow>
+  <DefaultFaultRule>
+      <Step>
+        <Name>ExtractVariables.OperationOutcomeCode</Name>
+      </Step>
+      <Step>
+        <Name>Javascript.HandleErrors</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.SetErrorResponse</Name>
+      </Step>
+  </DefaultFaultRule>
   <HTTPTargetConnection>
     <URL>{{ DOMAIN_ENDPOINT }}</URL>
     <SSLInfo>
