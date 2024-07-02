@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "675c5ee8-5b86-4ad8-a44c-e3b2b38b875b",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "processing",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_NOT_ACCEPTABLE"
+					}
+				]
+			},
+			"diagnostics": "Version isnt in FOT and should be ignored in FOT if presented. but post FOT it will be evaluated."
+		}
+	]
+}
