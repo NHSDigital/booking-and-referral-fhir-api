@@ -6,14 +6,7 @@
         <Name>VerifyAPIKey.CustomAttributes</Name>
       </Step>
       <Step>
-        <Name>ExtractVariables.GetProductId</Name>
-      </Step>
-      <Step>
-        <Name>AssignMessage.GetProductIdAttribute</Name>
-      </Step>
-      <Step>
-        <Name>RaiseFault.403InvalidProduct</Name>
-        <Condition>!(extracted.headerValue == AppProductId)</Condition>
+        <Name>AssignMessage.AddAuthorizationHeaders</Name>
       </Step>
     </Request>
   </PreFlow>

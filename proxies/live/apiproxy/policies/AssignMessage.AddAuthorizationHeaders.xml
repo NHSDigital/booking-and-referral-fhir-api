@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.AddAuthorizationHeaders">
+  <DisplayName>AssignMessage.AddAuthorizationHeaders</DisplayName>
+  <Set>
+    <Headers>
+      <Header name="AuthenticationType">{verifyapikey.VerifyAPIKey.CustomAttributes.AuthenticationType}</Header>
+      <Header name="ApplicationId">{verifyapikey.VerifyAPIKey.CustomAttributes.ApplicationId}</Header>
+    </Headers>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+  <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>
