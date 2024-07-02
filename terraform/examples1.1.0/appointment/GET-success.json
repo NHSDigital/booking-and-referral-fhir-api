@@ -1,8 +1,0 @@
-{
-  "resourceType": "Appointment",
-  "meta": {
-    "profile": [
-      "https://simplifier.net/nhsbookingandreferrals/barsbundlemessage"
-    ]
-  }
-}
