@@ -10,6 +10,17 @@
       </Step>
     </Request>
   </PreFlow>
+  <DefaultFaultRule>
+      <Step>
+        <Name>ExtractVariables.OperationOutcomeCode</Name>
+      </Step>
+      <Step>
+        <Name>Javascript.HandleErrors</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.SetErrorResponse</Name>
+      </Step>
+  </DefaultFaultRule>
   <HTTPTargetConnection>
     <URL>{{ DOMAIN_ENDPOINT }}</URL>
     <SSLInfo>

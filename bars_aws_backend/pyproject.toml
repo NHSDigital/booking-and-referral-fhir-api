@@ -1,0 +1,28 @@
+[tool.poetry]
+name        = "bars_aws_backend"
+version     = "0.1.0"
+description = ""
+authors     = ["Your Name <you@example.com>"]
+readme      = "README.md"
+packages    = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python                  = "~3.10"
+"fhir.resources"        = "~7.0.2"
+boto3                   = "~1.26.90"
+boto3-stubs-lite        = {extras = ["dynamodb"], version = "~1.26.90"}
+aws-lambda-typing       = "~2.18.0"
+moto                    = "~4.2.11"
+requests                = "~2.31.0"
+responses               = "~0.24.1"
+pydantic                = "~1.10.13"
+pyjwt                   = "~2.8.0"
+cryptography            = "~42.0.4"
+cffi                    = "~1.16.0"
+jsonpath-ng             = "^1.6.0"
+simplejson              = "^3.19.2"
+structlog               = "^24.1.0"
+
+[build-system]
+requires      = ["poetry-core ~= 1.5.0"]
+build-backend = "poetry.core.masonry.api"
