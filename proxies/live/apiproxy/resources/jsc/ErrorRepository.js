@@ -103,10 +103,10 @@ const errorRepository = {
     id = "91e8828a-c936-4667-b13b-0f5664b1e944",
     profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
     severity = "error",
-    code = "send-not-acceptable",
+    code = "not-supported",
     system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
     systemCode = "SEND_NOT_ACCEPTABLE",
-    diagnostics = "Senders message has incorrect accept header"
+    diagnostics = "Senders message has incorrect version details"
   ),
   "403ReceiverMtls": makeError(
     id = "c936667e-13b0-4f56-94b1-e944a459837e",
