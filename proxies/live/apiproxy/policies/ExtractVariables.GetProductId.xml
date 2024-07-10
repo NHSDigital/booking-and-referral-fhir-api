@@ -1,0 +1,9 @@
+<ExtractVariables name="ExtractVariables.GetProductId" continueOnError="false" enabled="true">
+    <DisplayName>ExtractVariables.GetProductId</DisplayName>
+    <Source clearPayload="true|false">request</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>    
+    <Header name="ProductId">
+      <Pattern>{headerValue}</Pattern>
+    </Header>
+    <VariablePrefix>extracted</VariablePrefix>
+</ExtractVariables>
