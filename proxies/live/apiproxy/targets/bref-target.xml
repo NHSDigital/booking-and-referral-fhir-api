@@ -1,97 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TargetEndpoint name="booking-and-referral-target">
-    <Flows>
-        <Flow name="Main">
-            <Request>
-                <Step>
-                    <Name>RaiseFault.406SendNotAcceptable</Name>
-                    <Condition>(proxy.pathsuffix Matches "/Endpoint*") OR (proxy.pathsuffix Matches "/HealthcareService*") OR (proxy.pathsuffix Matches "/Organization*")</Condition>
-                </Step>
-                <Step>
-                    <Name>LookupCache.Targets</Name>
-                </Step>
-                <Step>
-                    <Name>Javascript.UnpackVars</Name>
-                    <Condition>targets != null</Condition>
-                </Step>
-                <Step>
-                    <Name>Python.DecodeBase64</Name>
-                    <Condition>request.header.NHSD-Target-Identifier != null And targets != null</Condition>
-                </Step>
-                <Step>
-                    <Name>Javascript.CheckTargets</Name>
-                    <Condition>targets != null</Condition>
-                </Step>
-                <Step>
-                    <Name>ServiceCallout.GetTargetsKvm</Name>
-                    <Condition>targets = null</Condition>
-                </Step>
-                <Step>
-                    <Name>PopulateCache.Targets</Name>
-                    <Condition>targets = null</Condition>
-                </Step>
-                <Step>
-                    <Name>AssignMessage.Targets</Name>
-                    <Condition>targets = null</Condition>
-                </Step>
-                <Step>
-                    <Name>Javascript.UnpackVars</Name>
-                </Step>
-                <Step>
-                    <Name>Python.DecodeBase64</Name>
-                </Step>
-                <Step>
-                    <Name>Javascript.SetTargetUrl</Name>
-                </Step>
-                <Step>
-                    <Name>RaiseFault.400MalformedTargetIdentifier</Name>
-                    <Condition>idMalformed = true</Condition>
-                </Step>
-                <Step>
-                    <Name>RaiseFault.404ProxyNotFound</Name>
-                    <Condition>isError = true</Condition>
-                </Step>                
-            </Request>
-            <Response/>
-            <Condition>(proxy.pathsuffix != "/_cache")</Condition>
-        </Flow>
-        <Flow name="CacheRefresh">
-            <Request>
-                <Step>
-                    <Name>VerifyAPIKey.CacheRefresh</Name>
-                </Step>
-                <Step>
-                    <Name>ServiceCallout.GetTargetsKvm</Name>
-                </Step>
-                <Step>
-                    <Name>PopulateCache.Targets</Name>
-                </Step>
-            </Request>
-            <Response/>
-            <Condition>(proxy.pathsuffix MatchesPath "/_cache") and ((request.verb = "GET"))</Condition>
-        </Flow>
-    </Flows>
-    <DefaultFaultRule>
+  <Flows>
+    <Flow name="Main">
+      <Request>
         <Step>
-            <Name>ExtractVariables.OperationOutcomeCode</Name>
+          <Name>LookupCache.Targets</Name>
         </Step>
         <Step>
-            <Name>Javascript.HandleErrors</Name>
+          <Name>Javascript.UnpackVars</Name>
+          <Condition>targets != null</Condition>
         </Step>
         <Step>
-            <Name>AssignMessage.SetErrorResponse</Name>
+          <Name>Python.DecodeBase64</Name>
+          <Condition>request.header.NHSD-Target-Identifier != null And targets != null</Condition>
         </Step>
-    </DefaultFaultRule>
-    <HTTPTargetConnection>
+        <Step>
+          <Name>Javascript.CheckTargets</Name>
+          <Condition>targets != null</Condition>
+        </Step>
+        <Step>
+          <Name>ServiceCallout.GetTargetsKvm</Name>
+          <Condition>targets = null</Condition>
+        </Step>
+        <Step>
+          <Name>PopulateCache.Targets</Name>
+          <Condition>targets = null</Condition>
+        </Step>
+        <Step>
+          <Name>AssignMessage.Targets</Name>
+          <Condition>targets = null</Condition>
+        </Step>
+        <Step>
+          <Name>Javascript.UnpackVars</Name>
+        </Step>
+        <Step>
+          <Name>Python.DecodeBase64</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.SetTargetUrl</Name>
+        </Step>
+        <Step>
+          <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+          <Condition>idMalformed = true</Condition>
+        </Step>
+        <Step>
+          <Name>RaiseFault.404ProxyNotFound</Name>
+          <Condition>isError = true</Condition>
+        </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix != "/_cache")</Condition>
+    </Flow>
+    <Flow name="CacheRefresh">
+      <Request>
+        <Step>
+          <Name>VerifyAPIKey.CacheRefresh</Name>
+        </Step>
+        <Step>
+          <Name>ServiceCallout.GetTargetsKvm</Name>
+        </Step>
+        <Step>
+          <Name>PopulateCache.Targets</Name>
+        </Step>
+      </Request>
+      <Response/>
+      <Condition>(proxy.pathsuffix MatchesPath "/_cache") and ((request.verb = "GET"))</Condition>
+    </Flow>
+  </Flows>
+  <DefaultFaultRule>
+    <Step>
+      <Name>ExtractVariables.OperationOutcomeCode</Name>
+    </Step>
+    <Step>
+      <Name>Javascript.HandleErrors</Name>
+    </Step>
+    <Step>
+      <Name>AssignMessage.SetErrorResponse</Name>
+    </Step>
+  </DefaultFaultRule>
+  <HTTPTargetConnection>
         <Properties>
             <Property name="io.timeout.millis">32000</Property>
         </Properties>
-        <URL>https://mocktarget.apigee.net</URL>
-        <SSLInfo>
-            <Enabled>true</Enabled>
-            <ClientAuthEnabled>true</ClientAuthEnabled>
-            <KeyStore>ref://bars-client</KeyStore>
-            <KeyAlias>cert</KeyAlias>
-        </SSLInfo>
-    </HTTPTargetConnection>
+    <URL>https://mocktarget.apigee.net</URL>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+      <ClientAuthEnabled>true</ClientAuthEnabled>
+      <KeyStore>ref://bars-client</KeyStore>
+      <KeyAlias>cert</KeyAlias>
+    </SSLInfo>
+  </HTTPTargetConnection>
 </TargetEndpoint>
