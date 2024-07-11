@@ -16,13 +16,13 @@ class TestDocumentReference:
     @pytest.mark.appointment
     @pytest.mark.integration
     @pytest.mark.sandbox
-    def test_get_document_reference(self, get_token_client_credentials_document_reference):
+    def test_get_document_reference(self, get_token_client_credentials):
         """
            Test for the GET /DocumentReference endpoint. This operation will call the Consumer NRL API.
         """
         subject_identifier = "https://fhir.nhs.uk/Id/nhs-number|"+self.end_user_nhs_number
         # Given
-        token = get_token_client_credentials_document_reference["access_token"]
+        token = get_token_client_credentials["access_token"]
         expected_status_code = 200
 
         # When
