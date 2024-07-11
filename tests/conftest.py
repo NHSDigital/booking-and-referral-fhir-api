@@ -152,7 +152,6 @@ async def oauth_helper_document_reference():
                 "identity-service-jwks/main/jwks/internal-dev/"
                 "9baed6f4-1361-4a8e-8531-1f8426e3aba8.json",
                 "ratelimiting": json.dumps(app_ratelimit),
-                "product-id": "P.GH7-4TY"
             }
         )
 
