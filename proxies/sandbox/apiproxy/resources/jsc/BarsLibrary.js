@@ -3,7 +3,7 @@
     This way we can share functions between javascript policies.
     In order to load this library in your javascript policy
     use the tag <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
-    for reference see:
+    for reference se:
     https://www.googlecloudcommunity.com/gc/Apigee/Can-you-include-a-Javascript-in-another-Javascript/m-p/59862#M51664
 
 */
