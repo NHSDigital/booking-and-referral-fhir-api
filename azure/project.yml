@@ -5,4 +5,3 @@ variables:
   product_display_name: Booking and Referral FHIR API
   product_description: This proxy function as a centralized router for bookings and referrals services
   spec_file: booking-and-referral.json
-  pr_number: ${{ split(variables['Build.SourceBranch'], '/')[2] }}

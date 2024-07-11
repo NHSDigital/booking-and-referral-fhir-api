@@ -91,20 +91,15 @@
     <TargetEndpoint>nrlf-consumer-sandbox-target</TargetEndpoint>
     <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber = "1.1.0"</Condition>
   </RouteRule>
-  <RouteRule name="booking-and-referral-aws-target">
-      <TargetEndpoint>sandbox</TargetEndpoint>
-      <Condition>((proxy.pathsuffix Matches "/Endpoint*") or (proxy.pathsuffix Matches "/HealthcareService*") or (proxy.pathsuffix Matches "/Organization*")) and versionNumber = "1.2.0"</Condition>
-  </RouteRule>
-  <RouteRule name="sandbox">
+    <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
   </RouteRule>
+
+
+
   <DefaultFaultRule>
     <Step>
       <Name>AssignMessage.Errors.CatchAllMessage</Name>
     </Step>
   </DefaultFaultRule>
 </ProxyEndpoint>
-
-
-
-  
