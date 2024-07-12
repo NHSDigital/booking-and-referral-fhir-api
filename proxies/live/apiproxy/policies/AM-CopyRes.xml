@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-CopyRes">
+    <DisplayName>AM-CopyRes</DisplayName>
+    <Properties/>
+    <Copy source="s3CalloutResponse">
+        <Headers>true</Headers>
+        <QueryParams>true</QueryParams>
+        <FormParams>true</FormParams>
+        <Payload>true</Payload>
+        <StatusCode>true</StatusCode>
+        <ReasonPhrase>true</ReasonPhrase>
+    </Copy>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>
