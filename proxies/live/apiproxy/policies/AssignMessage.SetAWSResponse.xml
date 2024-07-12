@@ -1,0 +1,7 @@
+<AssignMessage name="AssignMessage">
+    <AssignVariable>
+        <Name>response.content</Name>
+        <Ref>s3_object_content</Ref>
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>
