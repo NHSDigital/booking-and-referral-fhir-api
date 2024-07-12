@@ -1,4 +1,4 @@
-<AssignMessage name="AssignMessage">
+<AssignMessage name="AssignMessage.SetAWSResponse">
     <AssignVariable>
         <Name>response.content</Name>
         <Ref>s3_object_content</Ref>
