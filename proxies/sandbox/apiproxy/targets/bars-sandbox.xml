@@ -12,9 +12,6 @@
           AND (proxy.pathsuffix Not Matches "/ServiceRequest*")
           AND (proxy.pathsuffix Not Matches "/registry*")
           AND (proxy.pathsuffix Not Matches "/MessageDefinition*")
-          AND (proxy.pathsuffix Not Matches "/Endpoint*")
-          AND (proxy.pathsuffix Not Matches "/HealthcareService*")
-          AND (proxy.pathsuffix Not Matches "/Organization*")
         </Condition>
       </Step>
       <Step>
