@@ -47,9 +47,6 @@
         <Step>
           <Name>ServiceCallout.GetTargetsKvm</Name>
         </Step>
-        <Step>
-          <Name>PopulateCache.Targets</Name>
-        </Step>
       </Request>
       <Response/>
       <Condition>(proxy.pathsuffix MatchesPath "/_cache") and ((request.verb = "GET"))</Condition>
