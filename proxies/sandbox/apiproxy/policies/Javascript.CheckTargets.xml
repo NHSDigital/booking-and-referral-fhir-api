@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="Javascript.CheckTargets">
-    <DisplayName>Javascript.CheckTargets</DisplayName>
-    <Properties/>
-    <ResourceURL>jsc://CheckTargets.js</ResourceURL>
-    <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
-</Javascript>

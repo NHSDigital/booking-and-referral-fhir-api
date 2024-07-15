@@ -39,18 +39,6 @@
       <Response/>
       <Condition>(proxy.pathsuffix != "/_cache")</Condition>
     </Flow>
-    <Flow name="CacheRefresh">
-      <Request>
-        <Step>
-          <Name>VerifyAPIKey.CacheRefresh</Name>
-        </Step>
-        <Step>
-          <Name>ServiceCallout.GetTargetsKvm</Name>
-        </Step>
-      </Request>
-      <Response/>
-      <Condition>(proxy.pathsuffix MatchesPath "/_cache") and ((request.verb = "GET"))</Condition>
-    </Flow>
   </Flows>
   <DefaultFaultRule>
     <Step>
