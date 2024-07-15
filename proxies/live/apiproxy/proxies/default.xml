@@ -8,6 +8,9 @@
       <Step>
         <Name>KVM.GetGitHubToken</Name>
       </Step>
+      <Step>
+        <Name>KVM.GetS3Credentials</Name>
+      </Step>
     </Request>
   </PreFlow>
   <Flows>

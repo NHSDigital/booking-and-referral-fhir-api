@@ -5,8 +5,8 @@
         <Property name="service">{aws-service-name}</Property>
         <Property name="endpoint">https://{aws-service-endpoint}</Property>
         <Property name="region">{aws-region}</Property>
-        <Property name="key">{private.aws-key}</Property>
-        <Property name="secret">{private.aws-secret-key}</Property>
+        <Property name="key">s3Key</Property>
+        <Property name="secret">s3Secret</Property>
         <Property name="message-variable-ref">s3Callout</Property>
     </Properties>
     <ClassName>com.google.apigee.edgecallouts.AWSSignatureV4Callout</ClassName>
