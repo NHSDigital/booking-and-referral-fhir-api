@@ -1,0 +1,13 @@
+<JavaCallout async="false" continueOnError="false" enabled="true" name="JC-AWSSign-V4">
+  <Properties>
+    <Property name="service">{aws-service-name}</Property>
+    <Property name="endpoint">{aws-service-name}</Property>
+    <Property name="region">{aws-region}</Property>
+    <Property name="key">{private.aws-key}</Property>
+    <Property name="secret">{private.aws-secret-key}</Property>
+    <Property name="source">s3Callout</Property>
+    <Property name="sign-content-sha256">true</Property> <!-- optional -->
+  </Properties>
+  <ClassName>com.google.apigee.callouts.AWSV4Signature</ClassName>
+  <ResourceURL>java://apigee-callout-awsv4sig-20240614.jar</ResourceURL>
+</JavaCallout>
