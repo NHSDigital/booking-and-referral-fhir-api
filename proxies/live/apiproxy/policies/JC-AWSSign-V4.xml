@@ -1,7 +1,7 @@
 <JavaCallout async="false" continueOnError="false" enabled="true" name="JC-AWSSign-V4">
   <Properties>
     <Property name="service">{aws-service-name}</Property>
-    <Property name="endpoint">{aws-service-name}</Property>
+    <Property name="endpoint">https://{aws-service-endpoint}</Property>
     <Property name="region">{aws-region}</Property>
     <Property name="key">{private.aws-key}</Property>
     <Property name="secret">{private.aws-secret-key}</Property>
