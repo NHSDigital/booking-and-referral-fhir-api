@@ -6,10 +6,7 @@
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
-        <Name>KVM.GetGitHubToken</Name>
-      </Step>
-      <Step>
-        <Name>KVM.GetS3Credentials</Name>
+        <Name>AssignMessage.SetApimGuids</Name>
       </Step>
     </Request>
   </PreFlow>

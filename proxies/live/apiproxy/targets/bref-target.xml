@@ -3,6 +3,9 @@
     <Flow name="Main">
       <Request>
         <Step>
+          <Name>KVM.GetS3Credentials</Name>
+        </Step>
+        <Step>
           <Name>AM-S3Request</Name>
         </Step>
         <Step>
@@ -10,9 +13,6 @@
         </Step>
         <Step>
           <Name>SC-CallS3</Name>
-        </Step>
-        <Step>
-          <Name>AM-CopyRes</Name>
         </Step>
         <Step>
           <Name>AssignMessage.Targets</Name>

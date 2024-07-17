@@ -15,12 +15,11 @@
         <Value>eu-west-2</Value>
     </AssignVariable>
     <Set>
-        <Verb>PUT</Verb>
-        <Path>newS3ObjectKey</Path>
+        <Verb>GET</Verb>
+        <Path>targets.json</Path>
         <Headers>
             <Header name="content-type">application/octet-stream</Header>
-        </Headers>
-        <Payload>New S3 Value</Payload>
+        </Headers>        
     </Set>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
     <AssignTo createNew="new" transport="http" type="request">s3Callout</AssignTo>
