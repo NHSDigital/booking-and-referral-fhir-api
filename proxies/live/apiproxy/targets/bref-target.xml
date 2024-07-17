@@ -25,6 +25,9 @@
           <Name>Python.DecodeBase64</Name>
         </Step>
         <Step>
+          <Name>Javascript.CheckTarget</Name>
+        </Step>
+        <Step>
           <Name>Javascript.SetTargetUrl</Name>
         </Step>
         <Step>
