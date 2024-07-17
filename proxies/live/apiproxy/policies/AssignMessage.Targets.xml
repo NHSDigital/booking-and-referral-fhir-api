@@ -2,6 +2,6 @@
   <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   <AssignVariable>
     <Name>targets</Name>
-    <Ref>private.s3CalloutResponse.content</Ref>
+    <Ref>s3CalloutResponse.content</Ref>
   </AssignVariable>
 </AssignMessage>
