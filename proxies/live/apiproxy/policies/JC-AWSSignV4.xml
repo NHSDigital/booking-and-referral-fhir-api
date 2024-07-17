@@ -10,5 +10,5 @@
         <Property name="message-variable-ref">s3Callout</Property>
     </Properties>
     <ClassName>com.google.apigee.edgecallouts.AWSSignatureV4Callout</ClassName>
-    <ResourceURL>java://edge-callout-aws-signature-v4.jar</ResourceURL>
+    <ResourceURL>java://edge-callout-aws-signature-v4.1.jar</ResourceURL>
 </JavaCallout>
