@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="true" enabled="true" name="SC-CallS3">
+    <DisplayName>SC-CallS3</DisplayName>
+    <Properties/>
+    <Request clearPayload="false" variable="s3Callout">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>s3CalloutResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://{aws-service-endpoint}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

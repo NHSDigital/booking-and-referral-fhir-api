@@ -18,4 +18,3 @@ if (b64decoded != null && b64decoded['system'] && b64decoded['value']) {
 } else {
   context.setVariable('idMalformed', true)
 }
-

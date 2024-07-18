@@ -1,7 +1,0 @@
-<LookupCache name='LookupCache.Targets'>
-  <AssignTo>targets</AssignTo>
-  <Scope>Application</Scope>
-  <CacheKey>
-    <KeyFragment>cached_targets</KeyFragment>
-  </CacheKey>
-</LookupCache>

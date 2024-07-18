@@ -1,0 +1,14 @@
+<JavaCallout async="false" continueOnError="false" enabled="true" name="JC-AWSSignV4">
+    <DisplayName>JC-AWSSignV4</DisplayName>
+    <Properties>
+        <Property name="debug">true</Property>
+        <Property name="service">{aws-service-name}</Property>
+        <Property name="endpoint">https://{aws-service-endpoint}</Property>
+        <Property name="region">{aws-region}</Property>
+        <Property name="key">{private.s3Key}</Property>
+        <Property name="secret">{private.s3Secret}</Property>
+        <Property name="message-variable-ref">s3Callout</Property>
+    </Properties>
+    <ClassName>com.google.apigee.edgecallouts.AWSSignatureV4Callout</ClassName>
+    <ResourceURL>java://edge-callout-aws-signature-v4.1.jar</ResourceURL>
+</JavaCallout>
