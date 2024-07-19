@@ -8,6 +8,6 @@
     <Response>s3CalloutResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>https://{aws-service-endpoint}</URL>
+        <URL>https://{private.target}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>
