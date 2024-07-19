@@ -3,7 +3,7 @@
     <Properties>
         <Property name="debug">true</Property>
         <Property name="service">{aws-service-name}</Property>
-        <Property name="endpoint">https://{aws-service-endpoint}</Property>
+        <Property name="endpoint">https://{private.target}</Property>
         <Property name="region">{aws-region}</Property>
         <Property name="key">{private.s3Key}</Property>
         <Property name="secret">{private.s3Secret}</Property>

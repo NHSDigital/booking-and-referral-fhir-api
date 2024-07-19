@@ -7,10 +7,6 @@
         <Value>s3</Value>
     </AssignVariable>
     <AssignVariable>
-        <Name>aws-service-endpoint</Name>
-        <Value>booking-and-referral-targets-int.s3.amazonaws.com</Value>
-    </AssignVariable>
-    <AssignVariable>
         <Name>aws-region</Name>
         <Value>eu-west-2</Value>
     </AssignVariable>
