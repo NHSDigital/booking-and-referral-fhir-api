@@ -12,7 +12,7 @@
     </AssignVariable>
     <Set>
         <Verb>GET</Verb>
-        <Path>targets.json</Path>
+        <Path>{private.endpoint}</Path>
         <Headers>
             <Header name="content-type">application/octet-stream</Header>
         </Headers>        
