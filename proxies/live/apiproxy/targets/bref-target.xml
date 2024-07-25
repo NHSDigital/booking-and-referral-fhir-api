@@ -39,8 +39,7 @@
           <Condition>isError = true</Condition>
         </Step>
       </Request>
-      <Response/>
-      <Condition>(proxy.pathsuffix != "/_cache")</Condition>
+      <Response/>      
     </Flow>
   </Flows>
   <DefaultFaultRule>
