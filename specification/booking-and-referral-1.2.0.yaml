@@ -1089,7 +1089,7 @@ paths:
           ```
           "attachment": 
             {
-              "url": "http://fhir.nhs.uk/Id/dos-service-id|111111111",
+              "url": "https://fhir.nhs.uk/Id/dos-service-id|111111111",
               "language": "en-UK"
             }
           ```
