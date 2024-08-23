@@ -533,7 +533,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
               example:
-                $ref: examples1.1.0/appointment/GET-success.json
+                $ref: examples1.2.0/appointment/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
@@ -554,6 +554,31 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+    post:      
+      tags:
+        - Booking
+      summary: Create an Appointment resource
+      description: |
+        Update a single Appointment resource.     
+      operationId: createAppointment
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+              example:
+                $ref: examples1.2.0/appointment/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Appointment'
   '/Appointment/{id}':
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -578,13 +603,13 @@ paths:
       operationId: getBooking
       responses:
         '200':
-          description: Success
+          description: Successful response
           content:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.1.0/appointment/id/GET-success.json
+                $ref: examples1.2.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -601,6 +626,107 @@ paths:
                 type: string
                 format: uuid
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:      
+      tags:
+        - Booking
+      summary: Update an Appointment resource by id
+      description: |
+        Update a single Appointment resource.     
+      operationId: updateAppointment
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/TargetIdentifier_HParam'
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+              example:
+                $ref: examples1.2.0/appointment/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Appointment'
+    patch:
+      tags:
+        - Booking
+      summary: Partially update a specific Appointment
+      description: | 
+        Partially update a single Appointment resource.
+      operationId: patchAppointment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+              example:
+                $ref: examples1.2.0/appointment/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Appointment'
+    delete:      
+      tags:
+        - Booking
+      summary: Delete or Cancel a Appointment resource by id
+      description: |
+        Delete or Cancel a single Appointment resource.     
+      operationId: deleteAppointment
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/TargetIdentifier_HParam'
+        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
+        - $ref: '#/components/parameters/RequestingDevice_HParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.2.0/200_PUT.json
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -637,7 +763,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
               example:
-                $ref: examples1.1.0/service_request/GET-success.json
+                $ref: examples1.2.0/service_request/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
@@ -658,6 +784,44 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+    post:
+      tags:
+        - Referral
+      summary: Create a Referral
+      description: | 
+        Update a single ServiceRequest resource.  
+      operationId: createReferral
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+              example:
+                $ref: examples1.2.0/service_request/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/ServiceRequest'
   '/ServiceRequest/{id}':
     parameters:
       - $ref: '#/components/parameters/RegistryId_Param'
@@ -682,13 +846,13 @@ paths:
       operationId: getReferral
       responses:
         '200':
-          description: Success
+          description: Successful
           content:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.1.0/service_request/id/GET-success.json
+                $ref: examples1.2.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -705,6 +869,102 @@ paths:
                 type: string
                 format: uuid
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+    put:
+      tags:
+        - Referral
+      summary: Update a specific referral
+      description: | 
+        Update a single ServiceRequest resource.  
+      operationId: putReferral
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+              example:
+                $ref: examples1.2.0/service_request/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/ServiceRequest'
+    patch:
+      tags:
+        - Referral
+      summary: Partially update a specific referral
+      description: | 
+        Update a single ServiceRequest resource.  
+      operationId: patchReferral
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+              example:
+                $ref: examples1.2.0/service_request/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/ServiceRequest'
+    delete:
+      tags:
+        - Referral
+      summary: Cancel a specific referral
+      description: |
+         Cancel a specific referral
+      operationId: deleteReferral
+      responses:
+        '200':
+          description: Successful deletion response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/OperationalOutcome'
+              example:
+                $ref: examples1.2.0/200_DELETE.json
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -918,6 +1178,17 @@ paths:
         Delete a single document pointer that you created. 
 components:
   requestBodies:
+    Appointment:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/Appointment'
+    ServiceRequest:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/ServiceRequest'
+      required: true
     DocumentReference:
       content:
         application/fhir+json;version=1:
@@ -1066,7 +1337,7 @@ components:
       examples:
         none:
           summary: None
-          value: ""
+          value: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
         valid:
           summary: Valid
           value: https://fhir.nhs.uk/Id/ods-organization-code|Y05868
