@@ -11,7 +11,9 @@ x-examples:
     identifier:
       - system: 'https://consumersupplier.com/Id/device-identifier'
         value: SUPP-APP-1
-    deviceName: Supplier product name
+    deviceName:
+      name: Supplier product name
+      type: Manufacturer name
     version:
         value: 1.0.0
 properties:
@@ -33,18 +35,18 @@ properties:
       required:
         - system
         - value
-  deviceName:
-      type: object
-      properties:
-        name:
-          type : string
-          example: Supplier product name
-        type:
-          type: string
-          example: manufacturer-name
-      required:
-        - name
-        - type
+    deviceName:
+        type: object
+        properties:
+          name:
+            type : string
+            example: Supplier product name
+          type:
+            type: string
+            example: manufacturer name
+          required:
+            - name
+            - type
   version:
     type: object
     properties:
