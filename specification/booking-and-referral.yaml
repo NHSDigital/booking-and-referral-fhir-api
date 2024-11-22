@@ -304,6 +304,7 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/use-context_HParam'
     post:
       tags:
         - Message
@@ -376,6 +377,7 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Slots
@@ -503,6 +505,7 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Booking
@@ -555,6 +558,7 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Booking
@@ -605,6 +609,7 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Referral
@@ -659,6 +664,7 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Referral
@@ -820,7 +826,16 @@ components:
       schema:
         type: string
         example: |
-          --header 'Accept: application/fhir+json; version=1.0.07'    
+          --header 'Accept: application/fhir+json; version=1.0.07'        
+    use-context_HParam:
+      name: use-context
+      description: 'This header is for usage statistics for the BaRS Proxy for NHS England.'
+      in: header
+      required: true
+      schema:
+        type: string
+        example: |
+          --header 'use-context: a4t2|validation|servicerequest-response|new'    
   responses:
     4XX-BARS:
       description: |
