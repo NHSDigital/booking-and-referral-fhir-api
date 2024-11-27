@@ -951,7 +951,7 @@ components:
       in: query
       schema:
         type: string
-        example: "context=https://fhir.nhs.uk/Id/dos-service-id|2000099999&context=https://fhir.nhs.uk/CodeSystem/usecases-categories-bars|referraltopharmacy"
+        example: "context=https://fhir.nhs.uk/Id/dos-service-id|2000099999&context=https://fhir.nhs.uk/CodeSystem/usecases-categories-bars|a1t1"
     PatientId_QParam:
       name: patient:identifier
       description: |
