@@ -33,7 +33,10 @@ class TestMessageDefinition:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
             params={"context": "2000099999"}
         )
@@ -62,7 +65,10 @@ class TestMessageDefinition:
                 "Authorization": f"Bearer {token}",
                 "NHSD-Target-Identifier": self.target_id_encoded,
                 "X-Request-Id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
-                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+                "X-Correlation-Id": "9562466f-c982-4bd5-bb0e-255e9f5e6689",
+                "NHSD-End-User-Organisation": "test",
+                "NHSD-Requesting-Software": "test",
+                "Accept": "application/fhir+json"
             },
         )
 
