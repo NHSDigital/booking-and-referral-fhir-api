@@ -1571,7 +1571,7 @@ components:
       required: true
       in: header
       schema:
-        $ref: '#/components/schemas/RequestingSoftwareToken'
+        $ref: '#/components/schemas/RequestingSoftware'
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
       description: |
@@ -1619,8 +1619,7 @@ components:
       required: true
       schema:
         type: string
-        example: |
-          --header 'Accept: application/fhir+json; version=1.2.0'        
+        example: application/fhir+json; version=1.2.0       
     use-context_HParam:
       name: use-context
       description: 'This header is for usage statistics for the BaRS Proxy for NHS England.'
