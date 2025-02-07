@@ -556,6 +556,31 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+    post:      
+      tags:
+        - Booking
+      summary: Create an Appointment resource
+      description: |
+        Update a single Appointment resource.     
+      operationId: createAppointment
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+              example:
+                $ref: examples1.2.0/appointment/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Appointment'
   '/Appointment/{id}':
     parameters:
       - $ref: '#/components/parameters/RequestId_HParam'
@@ -615,40 +640,6 @@ paths:
       description: |
         Update a single Appointment resource.     
       operationId: updateAppointment
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/TargetIdentifier_HParam'
-        - $ref: '#/components/parameters/RegistryId_Param'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
-        - $ref: '#/components/parameters/Accept_HParam'
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/fhir+json:
-              schema:
-                $ref: '#/components/schemas/Appointment'
-              example:
-                $ref: examples1.2.0/appointment/id/GET-success.json
-            application/fhir+xml:
-              schema:
-                $ref: '#/components/schemas/Appointment'
-        4XX:
-          $ref: '#/components/responses/4XX-BARS'
-        5XX:
-          $ref: '#/components/responses/5XX-BARS'
-      requestBody:
-        $ref: '#/components/requestBodies/Appointment'
-    post:      
-      tags:
-        - Booking
-      summary: Create an Appointment resource by id
-      description: |
-        Update a single Appointment resource.     
-      operationId: createAppointment
       parameters:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
@@ -797,6 +788,44 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+    post:
+      tags:
+        - Referral
+      summary: Create a Referral
+      description: | 
+        Update a single ServiceRequest resource.  
+      operationId: createReferral
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+              example:
+                $ref: examples1.2.0/service_request/id/GET-success.json
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceRequest'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/ServiceRequest'
   '/ServiceRequest/{id}':
     parameters:
       - $ref: '#/components/parameters/RegistryId_Param'
@@ -856,44 +885,6 @@ paths:
       description: | 
         Update a single ServiceRequest resource.  
       operationId: putReferral
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/fhir+json:
-              schema:
-                $ref: '#/components/schemas/ServiceRequest'
-              example:
-                $ref: examples1.2.0/service_request/id/GET-success.json
-            application/fhir+xml:
-              schema:
-                $ref: '#/components/schemas/ServiceRequest'
-          headers:
-            X-Correlation-Id:
-              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-            X-Request-Id:
-              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
-              schema:
-                type: string
-                format: uuid
-                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-        4XX:
-          $ref: '#/components/responses/4XX-BARS'
-        5XX:
-          $ref: '#/components/responses/5XX-BARS'
-      requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
-    post:
-      tags:
-        - Referral
-      summary: Create a referral
-      description: | 
-        Update a single ServiceRequest resource.  
-      operationId: createReferral
       responses:
         '200':
           description: Successful response
@@ -1097,7 +1088,7 @@ paths:
           ```
           "attachment": 
             {
-              "url": "http://fhir.nhs.uk/Id/dos-service-id|111111111",
+              "url": "https://fhir.nhs.uk/Id/dos-service-id|111111111",
               "language": "en-UK"
             }
           ```
@@ -1546,7 +1537,7 @@ components:
       in: query
       schema:
         type: string
-        example: "http://servicerequest.system|10000000000"
+        example: "https://servicerequest.system|10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties. More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
@@ -1571,7 +1562,7 @@ components:
       required: true
       in: header
       schema:
-        $ref: '#/components/schemas/RequestingSoftware'
+        $ref: '#/components/schemas/RequestingSoftwareToken'
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
       description: |
