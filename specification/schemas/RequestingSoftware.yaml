@@ -1,61 +1,11 @@
 title: NHSD-Requesting-software
-type: object
+x-stoplight:
+  id: aa57p3lehepwg
+type: string
+format: byte
 description: |
   Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
   Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
-  
+
   The identifier used here, though arbitrary, should be consistent across instances of a product, the name and version of the product should also be accurate and consistent.
-x-examples:
-  example:
-    resourceType: Device
-    identifier:
-      - system: 'https://consumersupplier.com/Id/device-identifier'
-        value: SUPP-APP-1
-    deviceName:
-      name: Supplier product name
-      type: Manufacturer name
-    version:
-        value: 1.0.0
-properties:
-  resourceType:
-    type: string
-    example: Device
-  identifier:
-    type: array
-    uniqueItems: true
-    items:
-      type: object
-      properties:
-        system:
-          type: string
-          example: 'https://consumersupplier.com/Id/device-identifier'
-        value:
-          type: string
-          example: SUPP-APP-1
-      required:
-        - system
-        - value
-    deviceName:
-        type: object
-        properties:
-          name:
-            type : string
-            example: Supplier product name
-          type:
-            type: string
-            example: manufacturer name
-          required:
-            - name
-            - type
-  version:
-    type: object
-    properties:
-        value:
-          type: string
-          example: "1.0.0"
-          required:
-            - value
-required:
-  - resourceType
-  - version
-  - deviceName
+example: eyJyZXNvdXJjZVR5cGUiOiJEZXZpY2UiLCJpZGVudGlmaWVyIjpbeyJzeXN0ZW0iOiJodHRwczovL2NvbnN1bWVyc3VwcGxpZXIuY29tL0lkL2RldmljZS1pZGVudGlmaWVyIiwidmFsdWUiOiJTVVBQLUFQUC0xIn1dLCJkZXZpY2VOYW1lIjp7Im5hbWUiOiJTdXBwbGllciBwcm9kdWN0IG5hbWUiLCJ0eXBlIjoibWFudWZhY3R1cmVyLW5hbWUifSwidmVyc2lvbiI6eyJ2YWx1ZSI6IjEuMC4wIn19Cg==
