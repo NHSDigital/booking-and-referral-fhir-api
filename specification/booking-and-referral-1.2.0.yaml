@@ -152,7 +152,7 @@ info:
     </div> 
    
        
-  version: 1.1.0-alpha
+  version: 1.2.0-alpha
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -1511,7 +1511,7 @@ components:
       in: query
       schema:
         type: string
-        example: "context=https://fhir.nhs.uk/Id/dos-service-id|2000099999&context=https://fhir.nhs.uk/CodeSystem/usecases-categories-bars|a1t1"
+        example: "https%3A%2F%2Ffhir.nhs.uk%2FId%2Fdos-service-id%7C2000099999%26context%3Dhttps%3A%2F%2Ffhir.nhs.uk%2FCodeSystem%2Fusecases-categories-bars%7Ca1t1"
     PatientId_QParam:
       name: patient:identifier
       description: |
@@ -1610,8 +1610,7 @@ components:
       required: true
       schema:
         type: string
-        example: |
-          --header 'Accept: application/fhir+json; version=1.2.0'        
+        example: application/fhir+json; version=1.2.0       
     use-context_HParam:
       name: use-context
       description: 'This header is for usage statistics for the BaRS Proxy for NHS England.'
@@ -1620,7 +1619,7 @@ components:
       schema:
         type: string
         example: |
-          --header 'use-context: a4t2|validation|servicerequest-response|new'
+          a4t2|validation|servicerequest-response|new
     subject_QParam:
       name: subject:identifier
       description: |

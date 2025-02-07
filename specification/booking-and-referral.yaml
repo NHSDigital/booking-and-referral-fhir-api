@@ -726,7 +726,7 @@ components:
       in: query
       schema:
         type: string
-        example: "https://fhir.nhs.uk/Id/dos-service-id|2000099999"
+        example: "https%3A%2F%2Ffhir.nhs.uk%2FId%2Fdos-service-id%7C2000099999"
     PatientId_QParam:
       name: patient:identifier
       description: |
@@ -826,7 +826,7 @@ components:
       schema:
         type: string
         example: |
-          --header 'Accept: application/fhir+json; version=1.0.07'        
+          'application/fhir+json; version=1.0.07'        
     use-context_HParam:
       name: use-context
       description: 'This header is for usage statistics for the BaRS Proxy for NHS England.'
@@ -835,7 +835,7 @@ components:
       schema:
         type: string
         example: |
-          --header 'use-context: a4t2|validation|servicerequest-response|new'    
+          a4t2|validation|servicerequest-response|new  
   responses:
     4XX-BARS:
       description: |
