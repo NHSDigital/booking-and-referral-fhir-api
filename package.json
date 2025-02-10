@@ -17,7 +17,6 @@
     "minimist": "^1.2.8"
   },
   "dependencies": {
-    "@redocly/ajv": "^8.17.1",
     "@redocly/cli": "^1.28.5"
   }
 }
