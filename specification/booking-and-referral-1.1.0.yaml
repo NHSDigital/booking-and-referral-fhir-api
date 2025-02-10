@@ -1298,7 +1298,7 @@ components:
         $ref: '#/components/schemas/RequestingPractitionerToken'
     RequestId_HParam:
       name: X-Request-Id
-      description: 'The X-Correlation-Id for the request header, when supplied, mirrored back by the receiver.'
+      description: 'The X-Request-Id for the request header, when supplied, mirrored back by the receiver.'
       required: true
       in: header
       schema:

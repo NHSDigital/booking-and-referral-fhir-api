@@ -1,4 +1,5 @@
 title: Identifier
 type: string
+format: byte  # This signals base64 encoding
 example: 'eyJ2YWx1ZSI6ICJOSFMwMDAxIiwgInN5c3RlbSI6ICJ0ZXN0cyJ9'
 description: Identifier
