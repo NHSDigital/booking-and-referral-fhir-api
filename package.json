@@ -12,11 +12,11 @@
   "license": "MIT",
   "homepage": "https://github.com/NHSDigital/booking-and-referral",
   "devDependencies": {
-    "apigeetool": "^0.0.1",
+    "apigeetool": "^0.16.5",
     "license-checker": "^25.0.1",
-    "minimist": "^1.2.2"
+    "minimist": "^1.2.8"
   },
   "dependencies": {
-    "@redocly/cli": "^1.4.0"
+    "@redocly/cli": "^1.28.5"
   }
 }
