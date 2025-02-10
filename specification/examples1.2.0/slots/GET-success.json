@@ -111,10 +111,10 @@
             }
         },
         {
-            "fullUrl": "urn:uuid:bb094130-c64f-43a8-b22b-d5b30e1b782f",
+            "fullUrl": "urn:uuid:deb4c4b3-870b-4599-84df-5e54cef7afda",
             "resource": {
                 "resourceType": "Slot",
-                "id": "slot003",
+                "id": "deb4c4b3-870b-4599-84df-5e54cef7afda",
                 "meta": {
                     "lastUpdated": "2021-10-11T15:01:30+00:00",
                     "profile":  [

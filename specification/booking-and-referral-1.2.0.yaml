@@ -586,7 +586,7 @@ paths:
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
-      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/ResourceId_Param'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
@@ -644,7 +644,7 @@ paths:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/TargetIdentifier_HParam'
-        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/ResourceId_Param'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
         - $ref: '#/components/parameters/RequestingDevice_HParam'
@@ -704,7 +704,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/Appointment'
+        $ref: '#/components/requestBodies/AppointmentPatch'
     delete:      
       tags:
         - Booking
@@ -716,7 +716,7 @@ paths:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/TargetIdentifier_HParam'
-        - $ref: '#/components/parameters/RegistryId_Param'
+        - $ref: '#/components/parameters/ResourceId_Param'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
         - $ref: '#/components/parameters/RequestingDevice_HParam'
@@ -828,7 +828,7 @@ paths:
         $ref: '#/components/requestBodies/ServiceRequest'
   '/ServiceRequest/{id}':
     parameters:
-      - $ref: '#/components/parameters/RegistryId_Param'
+      - $ref: '#/components/parameters/ResourceId_Param'
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
@@ -953,7 +953,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/ServiceRequest'
+        $ref: '#/components/requestBodies/ServiceRequestPatch'
     delete:
       tags:
         - Referral
@@ -1460,6 +1460,17 @@ components:
         application/fhir+json;version=1:
           schema:
             $ref: '#/components/schemas/Appointment'
+          examples:
+            successExample:
+              externalValue: examples1.2.0/appointment/PUT-body.json
+    AppointmentPatch:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/Appointment'
+          examples:
+            successExample:
+              externalValue: examples1.2.0/appointment/PATCH-body.json
     Endpoint:
       content:
         application/fhir+json;version=1:
@@ -1481,6 +1492,17 @@ components:
         application/fhir+json;version=1:
           schema:
             $ref: '#/components/schemas/ServiceRequest'
+          examples:
+            successExample:
+              externalValue: examples1.2.0/service_request/PUT-body.json
+    ServiceRequestPatch:
+      content:
+        application/fhir+json;version=1:
+          schema:
+            $ref: '#/components/schemas/ServiceRequest'
+          examples:
+            successExample:
+              externalValue: examples1.2.0/service_request/PATCH-body.json
       required: true
   parameters:
     RegistryId_Param:
@@ -1500,7 +1522,7 @@ components:
       schema:
         type: string
         format: uuid
-        example: c3f6145e-1a26-4345-b3f2-dccbcba62049
+        example: 91607239-b002-470a-8709-6b25bd50fdd1
       required: true
       allowEmptyValue: false
     context_QParam:
@@ -1587,7 +1609,7 @@ components:
         $ref: '#/components/schemas/RequestingPractitionerToken'
     RequestId_HParam:
       name: X-Request-Id
-      description: 'The X-Correlation-Id for the request header, when supplied, mirrored back by the receiver.'
+      description: 'The X-Request-Id for the request header, when supplied, mirrored back by the receiver.'
       required: true
       in: header
       schema:
