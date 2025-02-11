@@ -29,9 +29,11 @@ def get_appointment(
 ):
     return load_example("appointment/GET-success.json")
 
+
 @route.post("/Appointment")
 def post_appointment(appointment: AppointmentBody):
     return load_example("appointment/POST-success.json")
+
 
 @route.put("/Appointment")
 @route.patch("/Appointment")
@@ -55,6 +57,7 @@ def get_appointment_id(
         response.status_code = ENTITY_NOT_FOUND
         return load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
 
+
 @route.patch("/Appointment/{id}")
 def patch_appointment(appointment: AppointmentBody):
     return load_example("appointment/POST-success.json")
@@ -63,6 +66,7 @@ def patch_appointment(appointment: AppointmentBody):
 @route.put("/Appointment/{id}")
 def put_appointment(appointment: AppointmentBody):
     return load_example("appointment/POST-success.json")
+
 
 @route.delete("/Appointment/{id}")
 def delete_appointment(id: UUID):
@@ -73,6 +77,7 @@ def delete_appointment(id: UUID):
         return JSONResponse(
             load_example("entity-not-found.json"), status_code=404
         )
+
 
 @route.post("/Appointment/{id}")
 def appointment_id_method_not_allowed():
