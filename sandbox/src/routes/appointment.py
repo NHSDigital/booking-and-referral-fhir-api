@@ -16,6 +16,7 @@ class AppointmentBody(BaseModel):
 route = APIRouter()
 
 existing_appointment_id = "c3f6145e-1a26-4345-b3f2-dccbcba62049"
+existing_appointment2_id = "91607239-b002-470a-8709-6b25bd50fdd1"
 ENTITY_NOT_FOUND = (
     status.HTTP_404_NOT_FOUND
 )
@@ -34,8 +35,7 @@ def get_appointment_id(
     response: Response,
     id: UUID,
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
-):
-    if str(id) == existing_appointment_id:
+id or str(id) == existing_appointment2_id:
         return load_example("appointment/id/GET-success.json")
     else:
         response.status_code = ENTITY_NOT_FOUND
@@ -61,4 +61,3 @@ def appointment_id_method_not_allowed():
     headers = {"Allow": "GET, PATCH, PUT, DELETE"}
     return JSONResponse(
         load_example("method-not-allowed.json"), status_code=405, headers=headers
-    )
