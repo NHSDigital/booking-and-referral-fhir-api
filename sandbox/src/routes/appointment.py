@@ -35,11 +35,13 @@ def get_appointment_id(
     response: Response,
     id: UUID,
     NHSD_Target_Identifier: str = Header(..., alias="NHSD-Target-Identifier"),
-id or str(id) == existing_appointment2_id:
+):
+    if str(id) == existing_appointment_id or str(id) == existing_appointment2_id:
         return load_example("appointment/id/GET-success.json")
     else:
         response.status_code = ENTITY_NOT_FOUND
         return load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
+
 
 
 @route.post("/Appointment")
@@ -61,3 +63,4 @@ def appointment_id_method_not_allowed():
     headers = {"Allow": "GET, PATCH, PUT, DELETE"}
     return JSONResponse(
         load_example("method-not-allowed.json"), status_code=405, headers=headers
+    )
