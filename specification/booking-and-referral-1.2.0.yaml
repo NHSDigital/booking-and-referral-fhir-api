@@ -1562,7 +1562,11 @@ components:
         example: "https://servicerequest.system|10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
-      description: The identifier of the Target system. A Base64 encoded object containing value and system properties. More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
+      description: >
+          The identifier of the Target system. A Base64 encoded object containing value and system properties. 
+          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow) 
+          
+          Example object before encoding `{"value": "NHS0001", "system": "tests"}`.
       required: true
       in: header
       schema:

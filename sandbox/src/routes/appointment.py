@@ -30,6 +30,21 @@ def get_appointment(
     return load_example("appointment/GET-success.json")
 
 
+@route.post("/Appointment")
+def post_appointment(appointment: AppointmentBody):
+    return load_example("appointment/POST-success.json")
+
+
+@route.put("/Appointment")
+@route.patch("/Appointment")
+@route.delete("/Appointment")
+def appointment_method_not_allowed():
+    headers = {"Allow": "GET, POST"}
+    return JSONResponse(
+        load_example("method-not-allowed.json"), status_code=405, headers=headers
+    )
+
+
 @route.get("/Appointment/{id}")
 def get_appointment_id(
     response: Response,
@@ -43,20 +58,27 @@ def get_appointment_id(
         return load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
 
 
-@route.post("/Appointment")
-@route.put("/Appointment")
-@route.patch("/Appointment")
-@route.delete("/Appointment")
-def appointment_method_not_allowed():
-    headers = {"Allow": "GET, POST"}
-    return JSONResponse(
-        load_example("method-not-allowed.json"), status_code=405, headers=headers
-    )
-
-
 @route.patch("/Appointment/{id}")
+def patch_appointment(appointment: AppointmentBody):
+    return load_example("appointment/POST-success.json")
+
+
 @route.put("/Appointment/{id}")
+def put_appointment(appointment: AppointmentBody):
+    return load_example("appointment/POST-success.json")
+
+
 @route.delete("/Appointment/{id}")
+def delete_appointment(id: UUID):
+    if str(id) == existing_appointment_id or str(id) == existing_appointment2_id:
+        load_example("200_PUT.json")
+        return
+    else:
+        return JSONResponse(
+            load_example("entity-not-found.json"), status_code=404
+        )
+
+
 @route.post("/Appointment/{id}")
 def appointment_id_method_not_allowed():
     headers = {"Allow": "GET, PATCH, PUT, DELETE"}
