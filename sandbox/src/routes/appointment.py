@@ -43,7 +43,6 @@ def get_appointment_id(
         return load_example("OperationOutcome/REC/404-REC_NOT_FOUND-not-found.json")
 
 
-
 @route.post("/Appointment")
 @route.put("/Appointment")
 @route.patch("/Appointment")
