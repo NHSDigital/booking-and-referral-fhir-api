@@ -1235,7 +1235,7 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+        example: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C4857773456
     ServiceRequestId_QParam:
       name: ServiceRequest.identifier
       description: |
@@ -1248,7 +1248,7 @@ components:
       in: query
       schema:
         type: string
-        example: "http://servicerequest.system|10000000000"
+        example: "http%3A%2F%2Fservicerequest.system%7C10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties. please see
@@ -1344,7 +1344,7 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+        example: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C4857773456
     custodian_QParam:
       description: The custodian of the pointer
       name: custodian:identifier
@@ -1354,10 +1354,10 @@ components:
       examples:
         none:
           summary: None
-          value: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
+          value: "https%3A%2F%2Ffhir.nhs.uk%2FId%2Fods-organization-code%7CY05868"
         valid:
           summary: Valid
-          value: https://fhir.nhs.uk/Id/ods-organization-code|Y05868
+          value: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fods-organization-code%7CY05868
     type_QParam:
       name: type
       description: The specified type of pointers to be returned.
@@ -1370,10 +1370,10 @@ components:
           value: ""
         BOOKING:
           summary: Appointment (booking)
-          value: http://snomed.info/sct|749001000000101
+          value: http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101
         REFERRAL:
           summary: Patient referral
-          value: http://snomed.info/sct|3457005
+          value: http%3A%2F%2Fsnomed.info%2Fsct%7C3457005
     nextPageToken_QParam:
       name: next-page-token
       description: |
@@ -1506,7 +1506,7 @@ components:
       example: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
     RequestQueryType:
       type: string
-      example: "http://snomed.info/sct|749001000000101"
+      example: "http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101"
     NextPageToken:
       type: string
     RequestHeaderOdsCode:

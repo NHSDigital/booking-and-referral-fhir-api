@@ -1546,7 +1546,7 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+        example: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C4857773456
     ServiceRequestId_QParam:
       name: ServiceRequest.identifier
       description: |
@@ -1562,11 +1562,17 @@ components:
         example: "https://servicerequest.system|10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
-      description: >
+      description: |
           The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow) 
+          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
           
-          Example object before encoding `{"value": "NHS0001", "system": "tests"}`.
+          **Example object before encoding** 
+          ```json
+          {
+            "value": "NHS0001",
+            "system": "tests"
+          }
+       
       required: true
       in: header
       schema:
@@ -1585,6 +1591,27 @@ components:
         Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
         
         The identifier used, though arbitrary, should be consistent across instances of a product, the name and version of the product should also be accurate and consistent.
+        
+        **Example object before encoding**
+        ```json
+        {
+          "resourceType": "Device",
+          "identifier": [
+            {
+              "system": "https://consumersupplier.com/Id/device-identifier",
+              "value": "SUPP-APP-1"
+            }
+          ],
+          "deviceName": {
+            "name": "Supplier product name",
+            "type": "manufacturer-name"
+          },
+          "version": {
+            "value": "1.0.0"
+          }
+        }
+
+
       required: true
       in: header
       schema:
@@ -1595,6 +1622,19 @@ components:
         Requesting Organization described in an object based on a FHIR 'Organization' resource (Standard Base64 encoded JSON).
         Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
         In the example given an ODS code and the Organisation name is provided. Other identifiers are permitted if required. 
+
+        **Example object before encoding** 
+          ```json
+          {
+            "resourceType": "Organization",
+            "identifier": [
+              {
+                "value": "A1001",
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code"
+              }
+            ],
+            "name": "My service provider name"
+          }
       required: true
       in: header
       schema:
@@ -1607,6 +1647,30 @@ components:
         This item is not mandatory, however if the information is available it must be included in the request. Only in the event that it is not available, should it be omitted.
 
         The example given shows a General Practitioner and their SDS Role profile Id.
+
+
+        **Example object before encoding** 
+        ```json
+        {
+          "resourceType": "PractitionerRole",
+          "identifier": [
+            {
+              "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
+              "value": "100334993514"
+            }
+          ],
+          "code": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "62247001",
+                  "display": "General practitioner"
+                }
+              ]
+            }
+          ]
+        }
       required: false
       in: header
       schema:
@@ -1658,7 +1722,7 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+        example: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C4857773456
     custodian_QParam:
       description: The custodian of the pointer
       name: custodian:identifier
@@ -1668,7 +1732,7 @@ components:
       examples:
         valid:
           summary: Valid
-          value: https://fhir.nhs.uk/Id/ods-organization-code|Y05868
+          value: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fods-organization-code%7CY05868
     type_QParam:
       name: type
       description: The specified type of pointers to be returned.
@@ -1681,10 +1745,10 @@ components:
           value: ""
         BOOKING:
           summary: Appointment (booking)
-          value: http://snomed.info/sct|749001000000101
+          value: http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101
         REFERRAL:
           summary: Patient referral
-          value: http://snomed.info/sct|3457005
+          value: http%3A%2F%2Fsnomed.info%2Fsct%7C3457005
     nextPageToken_QParam:
       name: next-page-token
       description: |
@@ -2028,7 +2092,7 @@ components:
       example: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
     RequestQueryType:
       type: string
-      example: "http://snomed.info/sct|749001000000101"
+      example: "http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101"
     NextPageToken:
       type: string
     ODS:
