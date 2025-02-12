@@ -1,9 +1,7 @@
 from urllib.parse import urlencode
 from fastapi import APIRouter, Request, Response
-from .example_loader import load_example
 import httpx
 import logging
-import ssl
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -13,11 +11,13 @@ route = APIRouter()
 
 NRLSandboxUrl = "https://sandbox.api.service.nhs.uk/record-locator/consumer/FHIR/R4/DocumentReference"
 
+
 def filter_headers(headers):
     EXCLUDED_HEADERS = {"host", "connection", "expect", "authorization"}  # Add more if needed
     headers = {k: v for k, v in headers.items() if k.lower() not in EXCLUDED_HEADERS}
     logger.info(f"Filtered request headers: {headers}")
     return headers
+
 
 @route.get("/DocumentReference/{id}")
 async def get_document_reference_by_id(request: Request):
