@@ -2,12 +2,12 @@ FROM python:3.7
 
 WORKDIR /opt/app
 
-COPY requirements.txt .
+COPY sandbox/requirements.txt .
 
 RUN pip3 install -r requirements.txt
 
-
-COPY src .
+COPY sandbox/src .
+COPY specification/examples examples
 
 EXPOSE 9000
 CMD ["python", "main.py"]
