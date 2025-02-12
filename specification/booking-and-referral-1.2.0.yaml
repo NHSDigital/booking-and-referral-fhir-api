@@ -1528,7 +1528,13 @@ components:
     context_QParam:
       name: context
       description: |
-        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id. This is must be coupled with the [BaRS use case category](https://simplifier.net/nhsbookingandreferrals/usecases-categories-bars). The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
+        The target service identifier. Allowing the ability to filter returned message definitions by the specified service id. In this example a DoS id. 
+        This is must be coupled with the [BaRS use case category](https://simplifier.net/nhsbookingandreferrals/usecases-categories-bars). 
+        The preferred format is system|value however a value should be accepted and honoured as per [FHIR guidance](https://www.hl7.org/fhir/search.html#token).
+        
+        **Example query without encoding** 
+    
+          *https://fhir.nhs.uk/Id/dos-service-id|2000099999&context=https://fhir.nhs.uk/CodeSystem/usecases-categories-bars|a1t1*
       required: true
       in: query
       schema:
@@ -1542,6 +1548,9 @@ components:
         |Type           |Expression|
         |-------             | --------|
         |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
+        
+        **Example query without encoding** 
+        *https://fhir.nhs.uk/Id/nhs-number|4857773456*
       required: true
       in: query
       schema:
@@ -1555,11 +1564,13 @@ components:
         |Type           |Expression|
         |-------             | --------|
         |[token](https://hl7.org/fhir/R4/servicerequest.html#search) |ServiceRequest.identifier |
+        **Example query without encoding** 
+        *https://servicerequest.system|10000000000*
       required: false
       in: query
       schema:
         type: string
-        example: "https://servicerequest.system|10000000000"
+        example: "https%3A%2F%2Fservicerequest.system%7C10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: |
@@ -1579,7 +1590,16 @@ components:
         $ref: '#/components/schemas/TargetIdentifier'
     TargetIdentifierMeta_HParam:
       name: NHSD-Target-Identifier
-      description: The identifier of the Target system. A Base64 encoded object containing value and system properties.More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
+      description: |
+        The identifier of the Target system. A Base64 encoded object containing value and system properties. 
+         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
+          
+        **Example object before encoding** 
+        ```json
+        {
+          "value": "NHS0001",
+          "system": "tests"
+        }
       required: false
       in: header
       schema:
@@ -1718,24 +1738,35 @@ components:
         |Type           |Expression|
         |-------             | --------|
         |[token](https://hl7.org/implement/standards/FHIR/search.html#token) |Appointment.participant.actor:identifier |
+        
+        **Example before encoding**
+        *https://fhir.nhs.uk/Id/nhs-number|4857773456*
       required: true
       in: query
       schema:
         type: string
         example: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C4857773456
     custodian_QParam:
-      description: The custodian of the pointer
+      description: | 
+        The custodian of the pointer
+
+        **Endpoint without encoding**
+        *https://fhir.nhs.uk/Id/ods-organization-code|Y05868*
       name: custodian:identifier
       in: query
       schema:
         $ref: "#/components/schemas/RequestQueryCustodian"
-      examples:
-        valid:
-          summary: Valid
-          value: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fods-organization-code%7CY05868
+      # examples:
+      #   valid:
+      #     summary: Valid
+      #     value: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fods-organization-code%7CY05868
     type_QParam:
       name: type
-      description: The specified type of pointers to be returned.
+      description: |
+        The specified type of pointers to be returned.
+
+        **Example query without encoding**
+        *http://snomed.info/sct|749001000000101*
       in: query
       schema:
         $ref: "#/components/schemas/RequestQueryType"
@@ -2089,7 +2120,7 @@ components:
     RequestQueryCustodian:
       type: string
       pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)$
-      example: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
+      example: "https%3A%2F%2Ffhir.nhs.uk%2FId%2Fods-organization-code%7CY05868"
     RequestQueryType:
       type: string
       example: "http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101"

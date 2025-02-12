@@ -69,13 +69,12 @@ def put_appointment(appointment: AppointmentBody):
 
 
 @route.delete("/Appointment/{id}")
-def delete_appointment(id: UUID):
+def delete_appointment(response: Response, id: UUID):
     if str(id) == existing_appointment_id or str(id) == existing_appointment2_id:
         return load_example("200_PUT.json")
     else:
-        return JSONResponse(
-            load_example("entity-not-found.json"), status_code=404
-        )
+        response.status_code = ENTITY_NOT_FOUND
+        load_example("entity-not-found.json")
 
 
 @route.post("/Appointment/{id}")
