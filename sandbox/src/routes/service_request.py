@@ -64,7 +64,7 @@ def put_appointment(servicerequest: ServiceRequestBody):
 
 @route.delete("/ServiceRequest/{id}")
 def delete_appointment(response: Response, id: UUID):
-    if str(id) == existing_appointment_id :
+    if str(id) == existing_appointment_id:
         return load_example("200_PUT.json")
     else:
         response.status_code = ENTITY_NOT_FOUND
@@ -77,5 +77,3 @@ def appointment_id_method_not_allowed():
     return JSONResponse(
         load_example("method-not-allowed.json"), status_code=405, headers=headers
     )
-
-
