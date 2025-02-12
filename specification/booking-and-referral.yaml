@@ -739,7 +739,7 @@ components:
       in: query
       schema:
         type: string
-        example: https://fhir.nhs.uk/Id/nhs-number|4857773456
+        example: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C4857773456
     ServiceRequestId_QParam:
       name: ServiceRequest.identifier
       description: |
@@ -752,7 +752,7 @@ components:
       in: query
       schema:
         type: string
-        example: "http://servicerequest.system|10000000000"
+        example: "http%3A%2F%2Fservicerequest.system%7C10000000000"
     TargetIdentifier_HParam:
       name: NHSD-Target-Identifier
       description: The identifier of the Target system. A Base64 encoded object containing value and system properties.
