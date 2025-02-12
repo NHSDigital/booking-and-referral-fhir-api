@@ -31,17 +31,6 @@ async def get_document_reference_by_id(request: Request):
 
     return Response(content=response.content, status_code=response.status_code, headers=dict(response.headers))
 
-@route.get("/test")
-async def get_test(request: Request):
-    query_string = urlencode(request.query_params)  # Preserve query params
-    target = f"{NRLSandboxUrl}?{query_string}" if query_string else NRLSandboxUrl
-    logger.info(f"GET request target: {target}")
-
-    async with httpx.AsyncClient() as client:
-        response = await client.get(target, headers=filter_headers(dict(request.headers)))
-
-    return Response(content=response.content, status_code=response.status_code, headers=dict(response.headers))
-
 
 @route.get("/DocumentReference")
 async def get_document_reference(request: Request):
