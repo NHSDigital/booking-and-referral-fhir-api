@@ -20,6 +20,7 @@ def filter_headers(headers):
     logger.info(f"Filtered request headers: {headers}")
     return headers
 
+
 @route.get("/test")
 async def test_document_reference(request: Request):
     query_string = urlencode(request.query_params)  # Preserve query params
@@ -43,7 +44,6 @@ async def test_document_reference(request: Request):
 
     # Convert result to JSON and calculate content length
     result_json = json.dumps(result)
-    content_length = str(len(result_json))
 
     # Remove Content-Length from received headers to avoid duplication
     if "content-length" in received_headers:
@@ -51,8 +51,8 @@ async def test_document_reference(request: Request):
     if "access-control-allow-origin" in received_headers:
         received_headers["access-control-allow-origin"] = "*"
 
-     # Update the response headers with the received headers and content length
-    response_headers = {**received_headers }
+    # Update the response headers with the received headers and content length
+    response_headers = {**received_headers}
 
     return JSONResponse(content=result_json, status_code=response.status_code, headers=response_headers)
 
