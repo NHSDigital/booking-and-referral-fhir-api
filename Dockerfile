@@ -7,7 +7,7 @@ COPY sandbox/requirements.txt .
 RUN pip3 install -r requirements.txt
 
 COPY sandbox/src .
-COPY specification/examples examples
+COPY specification/examples /opt/app/examples
 
 EXPOSE 9000
 CMD ["python", "main.py"]
