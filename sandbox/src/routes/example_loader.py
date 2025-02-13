@@ -1,7 +1,7 @@
 import os
 import json
 
-current_directory = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+current_directory = os.path.dirname(os.path.realpath(__file__))
 
 
 def load_example(path: str):
