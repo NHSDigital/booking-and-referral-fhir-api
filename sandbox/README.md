@@ -25,6 +25,8 @@ This is a docker container that contains a Flask API with a single endpoint to s
 * docker
 
 
+**Note** use the Dockerfile in the root to run this locally
+
 ### Install
 Open the terminal in the project directory and run
 ```
