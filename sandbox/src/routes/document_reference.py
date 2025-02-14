@@ -15,7 +15,7 @@ NRLSandboxUrl = "https://sandbox.api.service.nhs.uk/record-locator/consumer/FHIR
 
 
 def filter_headers(headers):
-    EXCLUDED_HEADERS = {"host", "connection", "expect", "authorization"}  # Add more if needed
+    EXCLUDED_HEADERS = {"host", "connection", "expect"}  # Add more if needed
     headers = {k: v for k, v in headers.items() if k.lower() not in EXCLUDED_HEADERS}
     logger.info(f"Filtered request headers: {headers}")
     return headers
@@ -49,7 +49,9 @@ async def test_document_reference(request: Request):
     if "content-length" in received_headers:
         del received_headers["content-length"]
     if "access-control-allow-origin" in received_headers:
-        received_headers["access-control-allow-origin"] = "*"
+        del received_headers["access-control-allow-origin"]
+
+    received_headers["access-control-allow-origin"] = "*"
 
     # Update the response headers with the received headers and content length
     response_headers = {**received_headers}
