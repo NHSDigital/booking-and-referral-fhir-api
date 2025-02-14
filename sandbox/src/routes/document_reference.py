@@ -69,8 +69,8 @@ async def get_document_reference_by_id(request: Request):
     async with httpx.AsyncClient() as client:
         response = await client.get(target, headers=filter_headers(dict(request.headers)))
 
-    if "access-control-allow-origin" in request.headers:
-        request.headers["access-control-allow-origin"] = "*"
+    if "access-control-allow-origin" in response.headers:
+        response.headers["access-control-allow-origin"] = "*"
 
     return Response(content=response.content, status_code=response.status_code, headers=dict(response.headers))
 
@@ -87,7 +87,9 @@ async def get_document_reference(request: Request):
     received_headers = dict(response.headers)
 
     if "access-control-allow-origin" in received_headers:
-        received_headers["access-control-allow-origin"] = "*"
+        del received_headers["access-control-allow-origin"]
+
+    received_headers["access-control-allow-origin"] = "*"
 
     return Response(content=response.content, status_code=response.status_code, headers=received_headers)
 
