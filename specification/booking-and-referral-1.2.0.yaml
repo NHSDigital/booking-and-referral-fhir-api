@@ -987,6 +987,7 @@ paths:
         - $ref: "#/components/parameters/custodian_QParam"
         - $ref: "#/components/parameters/type_QParam"
         - $ref: "#/components/parameters/nextPageToken_QParam"
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         "200":
           description: Successful response
@@ -1019,6 +1020,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         "201":
           description: Create / Supersede successful response
@@ -1100,6 +1102,7 @@ paths:
         - $ref: '#/components/parameters/RegistryId_Param'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           description: Successful response
@@ -1146,6 +1149,7 @@ paths:
         - $ref: '#/components/parameters/RegistryId_Param'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         "200":
           description: Successful response
@@ -1166,6 +1170,7 @@ paths:
         - $ref: '#/components/parameters/RegistryId_Param'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           description: Successful response
