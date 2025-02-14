@@ -987,7 +987,6 @@ paths:
         - $ref: "#/components/parameters/custodian_QParam"
         - $ref: "#/components/parameters/type_QParam"
         - $ref: "#/components/parameters/nextPageToken_QParam"
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         "200":
           description: Successful response
@@ -1018,7 +1017,6 @@ paths:
       summary: 'Create new or update existing document pointer'
       operationId: createDocumentReference
       parameters:
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
       responses:
@@ -1100,7 +1098,6 @@ paths:
       operationId: readDocumentReference
       parameters:
         - $ref: '#/components/parameters/RegistryId_Param'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
       responses:
@@ -1147,7 +1144,6 @@ paths:
       operationId: updateDocumentReference
       parameters:
         - $ref: '#/components/parameters/RegistryId_Param'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
       responses:
@@ -1168,7 +1164,6 @@ paths:
       operationId: deleteDocumentReference
       parameters:
         - $ref: '#/components/parameters/RegistryId_Param'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
       responses:
