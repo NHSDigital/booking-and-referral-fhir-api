@@ -200,7 +200,7 @@ paths:
         
         ### Returns the target endpoints CapabilityStatement 
 
-        The sender must initially request the receiver's [CapabilityStatement](https://www.hl7.org/fhir/capabilitystatement.html) (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response to indicate this and the sender will pursue an alternative workflow. 
+        The sender must initially request the Receiver's [CapabilityStatement](https://www.hl7.org/fhir/capabilitystatement.html) (GET /metadata) to establish how to interact with the receivers API (its capabilities). If the receiver does not support BaRS functionality the BaRS API will provide an error response to indicate this and the sender will pursue an alternative workflow. 
 
         A receiver may only implement a subset of the functionality within the standard and the CapabilityStatement will make this clear to a sender. 
 
@@ -1575,13 +1575,13 @@ components:
       name: NHSD-Target-Identifier
       description: |
           The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
+          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core).
           
           **Example object before encoding** 
           ```json
           {
-            "value": "NHS0001",
-            "system": "tests"
+            "value": "2000011147",
+            "system": "https://fhir.nhs.uk/Id/dos-service-id"
           }
        
       required: true
@@ -1592,7 +1592,7 @@ components:
       name: NHSD-Target-Identifier
       description: |
         The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core?version=1.2.0#core-EndToEndWorkflow).
+         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Design/BaRS-Core).
           
         **Example object before encoding** 
         ```json
@@ -1715,7 +1715,7 @@ components:
         example: 9562466f-c982-4bd5-bb0e-255e9f5e6689        
     Accept_HParam:
       name: Accept
-      description: 'The Accept Header must also contain the version of the API required.'
+      description: 'The Accept header must also contain version of BaRS Core the Sender is expecting to interoperate on.'
       in: header
       required: true
       schema:
