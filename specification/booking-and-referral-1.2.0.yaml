@@ -575,6 +575,19 @@ paths:
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -661,6 +674,19 @@ paths:
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -730,6 +756,19 @@ paths:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
                 $ref: examples1.2.0/200_PUT.json
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -970,6 +1009,19 @@ paths:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
                 $ref: examples1.2.0/200_DELETE.json
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1030,6 +1082,19 @@ paths:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
                 $ref: examples1.1.0/201_POST.json
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
       requestBody:
         $ref: '#/components/requestBodies/DocumentReference'
       description: |
@@ -1159,6 +1224,19 @@ paths:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
                 $ref: examples1.1.0/200_PUT.json
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
       requestBody:
         $ref: '#/components/requestBodies/DocumentReference'
     delete:      
@@ -1180,6 +1258,19 @@ paths:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
                 $ref: examples1.1.0/200_DELETE.json
+          headers:
+            X-Correlation-Id:
+              description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+            X-Request-Id:
+              description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+              schema:
+                type: string
+                format: uuid
+                example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
       description: |
         Delete a single document pointer that you created. 
   /Organization:
