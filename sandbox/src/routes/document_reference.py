@@ -80,9 +80,9 @@ async def get_document_reference(request: Request):
     query_string = urlencode(request.query_params)  # Preserve query params
     target = f"{NRLSandboxUrl}?{query_string}" if query_string else NRLSandboxUrl
     logger.info(f"GET request target: {target}")
-    filteredHeaders=filter_headers(dict(request.headers))
+    filteredHeaders = filter_headers(dict(request.headers))
     logger.info(f"request headers: {filteredHeaders}")
-    logger.info(f"Sending Request")
+    logger.info("Sending Request")
 
     async with httpx.AsyncClient() as client:
         response = await client.get(target, headers=filteredHeaders)
