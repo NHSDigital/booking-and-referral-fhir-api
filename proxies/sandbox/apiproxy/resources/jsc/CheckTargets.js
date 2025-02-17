@@ -6,5 +6,6 @@ var isSchemaValid = (b64decoded != null && b64decoded['system'] && b64decoded['v
 context.setVariable('idMalformed', !isSchemaValid)
 
 // Check the value
-var isValueValid = b64decoded.system === "tests" && b64decoded.value.startsWith("NHS")
+var isValueValid = (b64decoded.system.toLowerCase() === "https://fhir.nhs.uk/id/dos-service-id" && b64decoded.value.startsWith("2000")) ||
+                   (b64decoded.system === "tests" && b64decoded.value.startsWith("NHS"))
 context.setVariable('isError', !isValueValid)

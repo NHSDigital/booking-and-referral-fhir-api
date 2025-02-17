@@ -80,11 +80,16 @@ async def get_document_reference(request: Request):
     query_string = urlencode(request.query_params)  # Preserve query params
     target = f"{NRLSandboxUrl}?{query_string}" if query_string else NRLSandboxUrl
     logger.info(f"GET request target: {target}")
+    filteredHeaders = filter_headers(dict(request.headers))
+    logger.info(f"request headers: {filteredHeaders}")
+    logger.info("Sending Request")
 
     async with httpx.AsyncClient() as client:
-        response = await client.get(target, headers=filter_headers(dict(request.headers)))
+        response = await client.get(target, headers=filteredHeaders)
 
     received_headers = dict(response.headers)
+
+    logger.info(f"Got result back from target: {response.content}")
 
     # if "access-control-allow-origin" in received_headers:
     #     del received_headers["access-control-allow-origin"]
