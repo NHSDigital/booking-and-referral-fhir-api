@@ -15,7 +15,7 @@ NRLSandboxUrl = "https://sandbox.api.service.nhs.uk/record-locator/consumer/FHIR
 
 
 def filter_headers(headers):
-    EXCLUDED_HEADERS = {"host", "connection", "expect"}  # Add more if needed
+    EXCLUDED_HEADERS = {"host", "connection", "expect", "x-forwarded-for", "x-forwarded-proto", "x-forwarded-port"}  # Add more if needed
     headers = {k: v for k, v in headers.items() if k.lower() not in EXCLUDED_HEADERS}
     logger.info(f"Filtered request headers: {headers}")
     return headers
@@ -81,11 +81,18 @@ async def get_document_reference(request: Request):
     target = f"{NRLSandboxUrl}?{query_string}" if query_string else NRLSandboxUrl
     logger.info(f"GET request target: {target}")
     filteredHeaders = filter_headers(dict(request.headers))
-    logger.info(f"request headers: {filteredHeaders}")
+    logger.error(f"request headers: {filteredHeaders}")
     logger.info("Sending Request")
 
-    async with httpx.AsyncClient() as client:
-        response = await client.get(target, headers=filteredHeaders)
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(target, headers=filteredHeaders)
+    except httpx.TimeoutException:
+        logger.exception("Request timed out")
+        return JSONResponse(content={"error": "Request timed out"}, status_code=504)
+    except Exception:
+        logger.exception("An error occurred")
+        return JSONResponse(content={"error": "An error occurred"}, status_code=500)
 
     received_headers = dict(response.headers)
 
@@ -117,11 +124,44 @@ async def put_document_reference_by_id(request: Request):
     nrLSandboxUrl = NRLSandboxUrl+"/{id}"
     target = f"{nrLSandboxUrl}?{query_string}" if query_string else nrLSandboxUrl
 
-    async with httpx.AsyncClient() as client:
-        response = await client.put(target, headers=filter_headers(dict(request.headers)), data=await request.body())
-    logger.info(f"PUT request target: {target}")
+    target = (
+        "https://sandbox.api.service.nhs.uk/record-locator/consumer/FHIR/R4/DocumentReference"
+        "?subject%3Aidentifier=https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C9876543210"
+        "&type=http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101"
+        "&category=http%3A%2F%2Fsnomed.info%2Fsct%7C419891008"
+    )
+
+    headers = {
+        "accept": "application/fhir+json;version=1.1.0",
+        "content-type": "application/fhir+json;version=1.1.0",
+        "nhsd-end-user-organisation-ods": "V4T0L",
+        "x-request-id": "c1ab3fba-6bae-4ba4-b257-5a87c44d4a91",
+        "x-correlation-id": "9562466f-c982-4bd5-bb0e-255e9f5e6689"
+     }
+
+    logger.info(f"PUT request target: {target} headers: {headers}")
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(target, headers=headers)
+    except httpx.TimeoutException:
+        logger.exception("Request timed out")
+        return JSONResponse(content={"error": "Request timed out"}, status_code=504)
+    except Exception:
+        logger.exception("An error occurred")
+        return JSONResponse(content={"error": "An error occurred"}, status_code=500)
+
+    logger.info(f"GET response from NRL: {response.content}")
+    for handler in logger.handlers:
+        handler.flush()
 
     return Response(content=response.content, status_code=response.status_code, headers=dict(response.headers))
+
+    # async with httpx.AsyncClient() as client:
+    #     response = await client.put(target, headers=filter_headers(dict(request.headers)), data=await request.body())
+    # logger.info(f"PUT request target: {target}")
+
+    # return Response(content=response.content, status_code=response.status_code, headers=dict(response.headers))
 
 
 @route.delete("/DocumentReference/{id}")
