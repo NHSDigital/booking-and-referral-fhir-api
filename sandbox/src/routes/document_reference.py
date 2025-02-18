@@ -94,7 +94,6 @@ async def get_document_reference(request: Request):
         logger.exception("An error occurred")
         return JSONResponse(content={"error": "An error occurred"}, status_code=500)
 
-
     received_headers = dict(response.headers)
 
     logger.info(f"Got result back from target: {response.content}")
