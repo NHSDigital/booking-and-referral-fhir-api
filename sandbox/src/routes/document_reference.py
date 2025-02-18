@@ -87,10 +87,10 @@ async def get_document_reference(request: Request):
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(target, headers=filteredHeaders)
-    except httpx.TimeoutException as e:
+    except httpx.TimeoutException:
         logger.exception("Request timed out")
         return JSONResponse(content={"error": "Request timed out"}, status_code=504)
-    except Exception as e:
+    except Exception:
         logger.exception("An error occurred")
         return JSONResponse(content={"error": "An error occurred"}, status_code=500)
 
@@ -125,7 +125,12 @@ async def put_document_reference_by_id(request: Request):
     nrLSandboxUrl = NRLSandboxUrl+"/{id}"
     target = f"{nrLSandboxUrl}?{query_string}" if query_string else nrLSandboxUrl
 
-    target = "https://sandbox.api.service.nhs.uk/record-locator/consumer/FHIR/R4/DocumentReference?subject%3Aidentifier=https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C9876543210&type=http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101&category=http%3A%2F%2Fsnomed.info%2Fsct%7C419891008"
+    target = (
+        "https://sandbox.api.service.nhs.uk/record-locator/consumer/FHIR/R4/DocumentReference"
+        "?subject%3Aidentifier=https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C9876543210"
+        "&type=http%3A%2F%2Fsnomed.info%2Fsct%7C749001000000101"
+        "&category=http%3A%2F%2Fsnomed.info%2Fsct%7C419891008"
+    )
 
     headers = {
         "accept": "application/fhir+json;version=1.1.0",
@@ -140,13 +145,12 @@ async def put_document_reference_by_id(request: Request):
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(target, headers=headers)
-    except httpx.TimeoutException as e:
+    except httpx.TimeoutException:
         logger.exception("Request timed out")
         return JSONResponse(content={"error": "Request timed out"}, status_code=504)
-    except Exception as e:
+    except Exception:
         logger.exception("An error occurred")
         return JSONResponse(content={"error": "An error occurred"}, status_code=500)
-
 
     logger.info(f"GET response from NRL: {response.content}")
     for handler in logger.handlers:
