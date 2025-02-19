@@ -8,12 +8,12 @@
               "coding": [
                   {
                       "system": "https://fhir.nhs.uk/ValueSet/NRL-ResponseCode",
-                      "code": "RESOURCE_CREATED",
-                      "display": "Resource created"
+                      "code": "RESOURCE_DELETED",
+                      "display": "Resource deleted"
                   }
               ]
           },
-          "diagnostics": "The document has been created"
+          "diagnostics": "The requested DocumentReference has been deleted"
       }
   ]
- }
+}

@@ -17,31 +17,36 @@ properties:
   identifier:
     type: array
     items:
-      type: object
-      properties:
-        system:
-          type: string
-          example: 'https://fhir.nhs.uk/Id/BaRS-Identifier'
-        value:
-          type: string
-          example: 8c63d621-4d86-4f57-8699-e8e22d49935d
+      - type: object
+        properties:
+          system:
+            type: string
+            example: 'https://fhir.nhs.uk/Id/BaRS-Identifier'
+          value:
+            type: string
+            example: 8c63d621-4d86-4f57-8699-e8e22d49935d
+      - type: object
+        properties:
+          system:
+            type: string
+            example: 'https://fhir.nhs.uk/Id/dos-service-id'
+          value:
+            type: string
+            example: 2000072491
+      - type: object
+        properties:
+          system:
+            type: string
+            example: 'https://fhir.nhs.uk/id/product-id'
+          value:
+            type: string
+            example: P.GH7-4TY
   id:
     type: string
     example: $OrganisationNamePrefix|696cfcd2-6425-459d-b2ad-91e34a6a1b9c
     description: >-
       The logical id of the resource, as used in the URL for the resource. Once
       assigned, this value never changes.
-  masterIdentifier:
-    type: array
-    items:
-      type: object
-      properties:
-        system:
-          type: string
-          example: 'urn:ietf:rfc:3986'
-        value:
-          type: string
-          example: 'urn:uuid:27e2b1c8-ecd8-48f8-9958-8e614cc7ad73'
   status:
     type: string
     example: current
@@ -56,13 +61,13 @@ properties:
             properties:
               system:
                 type: string
-                example: 'https://snomed.info/ict'
+                example: 'https://snomed.info/sct'
               code:
                 type: string
                 example: '749001000000101'
               display:
                 type: string
-                example: Appointment (booking)
+                example: Appointment (record artifact)
     description: >-
       Specifies the particular kind of document referenced  (e.g. History and
       Physical, Discharge Summary, Progress Note). This usually equates to the
@@ -79,17 +84,15 @@ properties:
               properties:
                 system:
                   type: string
-                  example: 'http://ihe.net/xds/connectathon/classCodes'
+                  example: 'http://snomed.info/sct'
                 code:
                   type: string
-                  example: History and Physical
+                  example: 419891008
                 display:
                   type: string
-                  example: History and Physical
+                  example: Record artifact (record artifact)
     description: >-
-      A categorization for the type of document referenced &ndash; helps for
-      indexing and searching. This may be implied by or derived from the code
-      specified in the DocumentReference.type.
+      A categorization for the type of document referenced.
   subject:
     type: object
     properties:
@@ -122,71 +125,17 @@ properties:
     description: >-
       Identifies the organization or group who is responsible for ongoing
       maintenance of and access to the document.
-  relatesTo:
-    type: array
-    items:
-      type: object
-      properties:
-        code:
-          type: string
-          example: replaces
-        target:
-          type: object
-          properties:
-            type:
-              type: string
-              example: DocumentReference
-            identifier:
-              type: object
-              properties:
-                value:
-                  type: string
-                  example: $DocumentReference.id
-    description: >-
-      Relationships that this document has with other document references that
-      already exist.
-  securityLabel:
-    type: array
-    items:
-      type: object
-      properties:
-        coding: 
-            type: array
-            items:
-              type: object
-              properties:
-                system:
-                  type: string
-                  example: 'http://terminology.hl7.org/CodeSystem/v3-Confidentiality'
-                code:
-                  type: string
-                  example: M
-                display:
-                  type: string
-                  example: moderate
-    description: >-
-      A set of Security&ndash;Tag codes specifying the level of privacy/security
-      of the Document. Note that DocumentReference.meta.security contains the
-      security labels of the "reference" to the document, while
-      DocumentReference.securityLabel contains a snapshot of the security labels
-      on the document the reference refers to.
   content:
     type: array
     items:
       type: object
       properties:
-        attachment:
+        extension:
           type: object
           properties:
-            language:
-              type: string
-              example: en-UK
             url:
               type: string
               example: 'http://fhir.nhs.uk/Id/dos-service-id|111111111'
-            creation:
-              type: string
-              example: '2005-12-24T09:35:00+11:00'
         format:
           type: array
           items:
@@ -199,10 +148,13 @@ properties:
                     properties:
                       system:
                         type: string
-                        example: 'https://fhir.nhs.uk/CodeSystem/message-events-bars'
+                        example: 'https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode'
                       code:
                         type: string
-                        example: booking-request
+                        example: urn:nhs-ic:structured
+                      display:
+                        type: string
+                        example: Structured Document
     description: >-
       The document and format referenced. There may be multiple content element
       repetitions, each with a different format.
