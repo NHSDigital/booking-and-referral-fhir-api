@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 import logging
-from tests.example_loader import load_example
+from .example_loader import load_example
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
