@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 route = APIRouter()
 
+
 @route.get("/DocumentReference/{id}")
 async def get_document_reference_by_id():
     return load_example("document_reference/id/GET-success.json")
