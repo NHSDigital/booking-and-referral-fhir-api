@@ -60,7 +60,7 @@
                  </Step>
             </Request>
     </Flow>
-    
+
   </Flows>
   <PreFlow/>
   <PostClientFlow name="PostClientFlow">
@@ -89,7 +89,7 @@
    </RouteRule>
   <RouteRule name="nrlf-consumer-sandbox-route">
     <TargetEndpoint>nrlf-consumer-sandbox-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber = "1.1.0"</Condition>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*"and versionNumber Matches "([1-9]\.\d+\.\d+)"</Condition>
   </RouteRule>
     <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
