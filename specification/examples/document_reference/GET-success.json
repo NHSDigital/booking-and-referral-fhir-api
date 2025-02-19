@@ -1,559 +1,334 @@
 {
-    "resourceType": "Bundle",
-    "type": "searchset",
-    "total": 4,
-    "entry": [
-        {
-            "resource": {
-                "resourceType": "DocumentReference",
-                "id": "Y05868-1634567890",
-                "meta": {
-                    "profile": [
-                        "http://fhir.nhs.net/StructureDefinition/nrls-documentreference-1-0"
-                    ]
-                },
-                "masterIdentifier": {
-                    "system": "urn:ietf:rfc:3986",
-                    "value": "urn:oid:1.3.6.1.4.1.21367.2005.9.0"
-                },
-                "identifier": [
-                    {
-                        "system": "urn:ietf:rfc:3986",
-                        "value": "urn:oid:1.3.6.1.4.1.21367.2005.3.7.1330"
-                    }
-                ],
-                "status": "current",
-                "docStatus": "final",
-                "type": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "736253002",
-                            "display": "Mental Health Crisis Plan"
-                        }
-                    ]
-                },
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://loinc.org",
-                                "code": "55112-7",
-                                "display": "Document summary"
-                            }
-                        ]
-                    }
-                ],
-                "subject": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "4409815415"
-                    }
-                },
-                "date": "2022-12-21T10:45:41+11:00",
-                "author": [
-                    {
-                        "identifier": {
-                            "value": "Practitioner/A985657ZA"
-                        }
-                    }
-                ],
-                "authenticator": {
-                    "identifier": {
-                        "value": "Organization/Y05868"
-                    }
-                },
-                "custodian": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                        "value": "Y05868"
-                    }
-                },
-                "description": "Physical",
-                "securityLabel": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
-                                "code": "V",
-                                "display": "very restricted"
-                            }
-                        ]
-                    }
-                ],
-                "content": [
-                    {
-                        "attachment": {
-                            "contentType": "application/pdf",
-                            "language": "en-US",
-                            "url": "https://spine-proxy.national.ncrs.nhs.uk/p1.nhs.uk/EPAACS/MHCPummaryReport.pdf",
-                            "size": 3654,
-                            "hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-                            "title": "Physical",
-                            "creation": "2022-12-21T10:45:41+11:00"
-                        },
-                        "format": {
-                            "system": "urn:oid:1.3.6.1.4.1.19376.1.2.3",
-                            "code": "urn:ihe:pcc:cm:2008",
-                            "display": "History and Physical Specification"
-                        }
-                    }
-                ],
-                "context": {
-                    "encounter": [
-                        {
-                            "identifier": {
-                                "value": "Encounter/4409815415"
-                            }
-                        }
-                    ],
-                    "event": [
-                        {
-                            "coding": [
-                                {
-                                    "system": "http://snomed.info/sct",
-                                    "code": "736253002",
-                                    "display": "Mental Health Crisis Plan"
-                                }
-                            ]
-                        }
-                    ],
-                    "period": {
-                        "start": "2022-12-21T09:00:41+11:00",
-                        "end": "2022-12-21T10:45:41+11:00"
-                    },
-                    "facilityType": {
-                        "coding": [
-                            {
-                                "system": "http://snomed.info/sct",
-                                "code": "73770003",
-                                "display": "Mental health caregiver support"
-                            }
-                        ]
-                    },
-                    "practiceSetting": {
-                        "coding": [
-                            {
-                                "system": "http://snomed.info/sct",
-                                "code": "390826005",
-                                "display": "Mental health caregiver support"
-                            }
-                        ]
-                    },
-                    "sourcePatientInfo": {
-                        "identifier": {
-                            "value": "Patient/4409815415"
-                        }
-                    },
-                    "related": [
-                        {
-                            "identifier": {
-                                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                                "value": "MENTAL HEALTH OUTREACH"
-                            }
-                        }
-                    ]
-                }
-            }
+  "resourceType": "Bundle",
+  "type": "searchset",
+  "total": 3,
+  "link": [
+    {
+      "relation": "self",
+      "url": "https://int.api.service.nhs.uk/record-locator/consumer/FHIR/R4/DocumentReference?subject:identifier=https://fhir.nhs.uk/Id/nhs-number|9693893123&type=http://snomed.info/sct|749001000000101&category=http://snomed.info/sct|419891008"
+    }
+  ],
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "V4T0L-3aeb90b0-7ffa-408a-babf-f20b80ce2c27",
+        "meta": {
+          "lastUpdated": "2025-02-18T17:04:53.948Z"
         },
-        {
-            "resource": {
-                "resourceType": "DocumentReference",
-                "id": "Y05868-1634567891",
-                "meta": {
-                    "profile": [
-                        "http://fhir.nhs.net/StructureDefinition/nrls-documentreference-1-0"
-                    ]
-                },
-                "masterIdentifier": {
-                    "system": "urn:ietf:rfc:3986",
-                    "value": "urn:oid:1.3.6.1.4.1.21367.2005.8.7"
-                },
-                "identifier": [
-                    {
-                        "system": "urn:ietf:rfc:3986",
-                        "value": "urn:oid:1.3.6.1.4.1.21367.2005.3.7.1214"
-                    }
-                ],
-                "status": "current",
-                "docStatus": "final",
-                "type": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "861421000000109",
-                            "display": "End of life care coordination summary"
-                        }
-                    ]
-                },
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://loinc.org",
-                                "code": "55112-7",
-                                "display": "Document summary"
-                            }
-                        ]
-                    }
-                ],
-                "subject": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "4409815415"
-                    }
-                },
-                "date": "2022-12-26T10:45:41+11:00",
-                "author": [
-                    {
-                        "identifier": {
-                            "value": "Practitioner/A985657ZA"
-                        }
-                    }
-                ],
-                "authenticator": {
-                    "identifier": {
-                        "value": "Organization/Y05868"
-                    }
-                },
-                "custodian": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                        "value": "Y05868"
-                    }
-                },
-                "description": "Physical",
-                "securityLabel": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
-                                "code": "V",
-                                "display": "very restricted"
-                            }
-                        ]
-                    }
-                ],
-                "content": [
-                    {
-                        "attachment": {
-                            "contentType": "application/pdf",
-                            "language": "en-US",
-                            "url": "https://spine-proxy.national.ncrs.nhs.uk/p1.nhs.uk/EPAACS/EOLSummaryReport.pdf",
-                            "size": 3654,
-                            "hash": "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
-                            "title": "Physical",
-                            "creation": "2022-12-26T10:45:41+11:00"
-                        },
-                        "format": {
-                            "system": "urn:oid:1.3.6.1.4.1.19376.1.2.3",
-                            "code": "urn:ihe:pcc:cm:2008",
-                            "display": "Care Management"
-                        }
-                    }
-                ],
-                "context": {
-                    "encounter": [
-                        {
-                            "identifier": {
-                                "value": "Encounter/4409815415"
-                            }
-                        }
-                    ],
-                    "event": [
-                        {
-                            "coding": [
-                                {
-                                    "system": "http://snomed.info/sct",
-                                    "code": "713058002",
-                                    "display": "End of life care planning"
-                                }
-                            ]
-                        }
-                    ],
-                    "period": {
-                        "start": "2022-12-26T09:00:41+11:00",
-                        "end": "2022-12-26T10:45:41+11:00"
-                    },
-                    "facilityType": {
-                        "coding": [
-                            {
-                                "system": "http://snomed.info/sct",
-                                "code": "73770003",
-                                "display": "Hospital-based outpatient emergency care center"
-                            }
-                        ]
-                    },
-                    "sourcePatientInfo": {
-                        "identifier": {
-                            "value": "Patient/4409815415"
-                        }
-                    },
-                    "related": [
-                        {
-                            "identifier": {
-                                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                                "value": "TRAFFORD GENERAL HOSPITAL"
-                            }
-                        }
-                    ]
-                }
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/BaRS-Identifier",
+            "value": "GL0-DZOqD39"
+          },
+          {
+            "system": "https://fhir.nhs.uk/Id/dos-service-id",
+            "value": "2000072491"
+          },
+          {
+            "system": "https://fhir.nhs.uk/id/product-id",
+            "value": "P.GH7-4TY"
+          }
+        ],
+        "status": "current",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "749001000000101",
+              "display": "Appointment (record artifact)"
             }
+          ]
         },
-        {
-            "resource": {
-                "resourceType": "DocumentReference",
-                "id": "Y05868-1634567892",
-                "meta": {
-                    "profile": [
-                        "http://fhir.nhs.net/StructureDefinition/nrls-documentreference-1-0"
-                    ]
-                },
-                "masterIdentifier": {
-                    "system": "urn:ietf:rfc:3986",
-                    "value": "urn:oid:1.3.6.1.4.1.21367.2015.3.7"
-                },
-                "identifier": [
-                    {
-                        "system": "urn:ietf:rfc:3986",
-                        "value": "urn:oid:1.3.6.1.4.1.21367.2005.3.7.1534"
-                    }
-                ],
-                "status": "current",
-                "docStatus": "preliminary ",
-                "type": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "1363501000000100",
-                            "display": "Royal College of Physicians NEWS2 (National Early Warning Score 2) chart"
-                        }
-                    ]
-                },
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://loinc.org",
-                                "code": "34769-0",
-                                "display": "General medicine Physician attending Note"
-                            }
-                        ]
-                    }
-                ],
-                "subject": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "4409815415"
-                    }
-                },
-                "date": "2022-12-22T11:45:41+11:00",
-                "author": [
-                    {
-                        "identifier": {
-                            "value": "Practitioner/A782161SZ"
-                        }
-                    }
-                ],
-                "authenticator": {
-                    "identifier": {
-                        "value": "Organization/Y05868"
-                    }
-                },
-                "custodian": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                        "value": "Y05868"
-                    }
-                },
-                "securityLabel": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
-                                "code": "V",
-                                "display": "very restricted"
-                            }
-                        ]
-                    }
-                ],
-                "content": [
-                    {
-                        "attachment": {
-                            "contentType": "application/pdf",
-                            "language": "en-US",
-                            "url": "https://spine-proxy.national.ncrs.nhs.uk/p1.nhs.uk/EPAACS/PhysicianNote.pdf",
-                            "creation": "2022-12-22T09:45:41+11:00"
-                        },
-                        "format": {
-                            "system": "urn:oid:1.3.6.1.4.1.19376.1.2.3",
-                            "code": "urn:ihe:pcc:handp:2008",
-                            "display": "History and Physical Specification"
-                        }
-                    }
-                ],
-                "context": {
-                    "encounter": [
-                        {
-                            "identifier": {
-                                "value": "Encounter/4409815415"
-                            }
-                        }
-                    ],
-                    "event": [
-                        {
-                            "coding": [
-                                {
-                                    "system": "http://snomed.info/sct",
-                                    "code": "445627002",
-                                    "display": "Assessment using adult early warning scoring system"
-                                }
-                            ]
-                        }
-                    ],
-                    "period": {
-                        "start": "2022-12-20T09:00:41+11:00",
-                        "end": "2022-12-20T09:45:41+11:00"
-                    },
-                    "facilityType": {
-                        "coding": [
-                            {
-                                "system": "http://snomed.info/sct",
-                                "code": "273580000",
-                                "display": "London hospital pain chart assessment"
-                            }
-                        ]
-                    },
-                    "related": [
-                        {
-                            "identifier": {
-                                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                                "value": "ROYAL COLLEGE OF PHYSICIANS OF LONDON"
-                            }
-                        }
-                    ]
-                }
-            }
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "419891008",
+                "display": "Record artifact (record artifact)"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9693893123"
+          }
         },
-        {
-            "resource": {
-                "resourceType": "DocumentReference",
-                "id": "Y05868-1234567892",
-                "status": "current",
-                "docStatus": "final",
-                "type": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "887701000000100",
-                            "display": "Emergency health care plan"
-                        }
-                    ]
-                },
-                "category": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://loinc.org",
-                                "code": "68552-9",
-                                "display": "Emergency medicine Emergency department Admission evaluation note"
-                            }
-                        ]
-                    }
-                ],
-                "subject": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/nhs-number",
-                        "value": "4409815415"
-                    }
-                },
-                "date": "2022-12-22T11:45:41+11:00",
-                "author": [
-                    {
-                        "identifier": {
-                            "value": "Practitioner/A985657ZA"
-                        }
-                    }
-                ],
-                "authenticator": {
-                    "identifier": {
-                        "value": "Organization/Y05868"
-                    }
-                },
-                "custodian": {
-                    "identifier": {
-                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                        "value": "Y05868"
-                    }
-                },
-                "securityLabel": [
-                    {
-                        "coding": [
-                            {
-                                "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
-                                "code": "V",
-                                "display": "very restricted"
-                            }
-                        ]
-                    }
-                ],
-                "content": [
-                    {
-                        "attachment": {
-                            "contentType": "application/pdf",
-                            "language": "en-US",
-                            "url": "https://spine-proxy.national.ncrs.nhs.uk/p1.nhs.uk/EPAACS/EmergencyCarPlan.pdf",
-                            "creation": "2022-12-22T09:45:41+11:00"
-                        },
-                        "format": {
-                            "system": "urn:oid:1.3.6.1.4.1.19376.1.2.3",
-                            "code": "urn:ihe:pcc:handp:2008",
-                            "display": "History and Physical Specification"
-                        }
-                    }
-                ],
-                "context": {
-                    "encounter": [
-                        {
-                            "identifier": {
-                                "value": "Encounter/4409815415"
-                            }
-                        }
-                    ],
-                    "event": [
-                        {
-                            "coding": [
-                                {
-                                    "system": "http://snomed.info/sct",
-                                    "code": "702779007",
-                                    "display": "Emergency health care plan agreed"
-                                }
-                            ]
-                        }
-                    ],
-                    "period": {
-                        "start": "2022-12-20T09:00:41+11:00",
-                        "end": "2022-12-20T09:45:41+11:00"
-                    },
-                    "facilityType": {
-                        "coding": [
-                            {
-                                "system": "http://snomed.info/sct",
-                                "code": "453121000124107",
-                                "display": "Emergency department healthcare professional"
-                            }
-                        ]
-                    },
-                    "related": [
-                        {
-                            "identifier": {
-                                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                                "value": "EMERGENCY DEPT PRIMARY CARE STREAMING"
-                            }
-                        }
-                    ]
-                }
+        "date": "2025-02-18T17:04:53.948Z",
+        "author": [
+          {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "RGT"
             }
+          }
+        ],
+        "custodian": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "RGT"
+          }
+        },
+        "content": [
+          {
+            "extension": [
+              {
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLContentStability",
+                      "code": "static",
+                      "display": "Static"
+                    }
+                  ]
+                },
+                "url": "https://fhir.nhs.uk/England/StructureDefinition/Extension-England-ContentStability"
+              }
+            ],
+            "attachment": {
+              "contentType": "application/fhir+json",
+              "url": "https://server.fire.ly/r4/Appointment/GL0-DZOqD39"
+            },
+            "format": {
+              "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode",
+              "code": "urn:nhs-ic:structured",
+              "display": "Structured Document"
+            }
+          }
+        ],
+        "context": {
+          "period": {
+            "start": "2025-02-01T06:45:00+00:00",
+            "end": "2025-02-01T07:00:00+00:00"
+          },
+          "practiceSetting": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394802001",
+                "display": "General medicine (qualifier value)"
+              }
+            ]
+          }
         }
-    ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "V4T0L-9195efef-89f2-4311-95eb-f548b8721f87",
+        "meta": {
+          "lastUpdated": "2025-02-19T10:47:36.281Z"
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/BaRS-Identifier",
+            "value": "GL0-DZOqD39"
+          },
+          {
+            "system": "https://fhir.nhs.uk/Id/dos-service-id",
+            "value": "2000072491"
+          },
+          {
+            "system": "https://fhir.nhs.uk/id/product-id",
+            "value": "P.GH7-4TY"
+          }
+        ],
+        "status": "current",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "749001000000101",
+              "display": "Appointment (record artifact)"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "419891008",
+                "display": "Record artifact (record artifact)"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9693893123"
+          }
+        },
+        "date": "2025-02-19T10:47:36.281Z",
+        "author": [
+          {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "RGT"
+            }
+          }
+        ],
+        "custodian": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "RGT"
+          }
+        },
+        "content": [
+          {
+            "extension": [
+              {
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLContentStability",
+                      "code": "static",
+                      "display": "Static"
+                    }
+                  ]
+                },
+                "url": "https://fhir.nhs.uk/England/StructureDefinition/Extension-England-ContentStability"
+              }
+            ],
+            "attachment": {
+              "contentType": "application/fhir+json",
+              "url": "https://server.fire.ly/r4/Appointment/GL0-DZOqD39"
+            },
+            "format": {
+              "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode",
+              "code": "urn:nhs-ic:structured",
+              "display": "Structured Document"
+            }
+          }
+        ],
+        "context": {
+          "period": {
+            "start": "2025-02-01T06:45:00+00:00",
+            "end": "2025-02-01T07:00:00+00:00"
+          },
+          "practiceSetting": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394802001",
+                "display": "General medicine (qualifier value)"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "V4T0L-6c36ad92-afda-45a7-9ad2-e49dce496123",
+        "meta": {
+          "lastUpdated": "2025-02-19T10:49:03.585Z"
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/BaRS-Identifier",
+            "value": "GL0-DZOqD39"
+          },
+          {
+            "system": "https://fhir.nhs.uk/Id/dos-service-id",
+            "value": "2000072491"
+          },
+          {
+            "system": "https://fhir.nhs.uk/id/product-id",
+            "value": "P.GH7-4TY"
+          }
+        ],
+        "status": "current",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "749001000000101",
+              "display": "Appointment (record artifact)"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "419891008",
+                "display": "Record artifact (record artifact)"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9693893123"
+          }
+        },
+        "date": "2025-02-19T10:49:03.585Z",
+        "author": [
+          {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "RGT"
+            }
+          }
+        ],
+        "custodian": {
+          "identifier": {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "RGT"
+          }
+        },
+        "content": [
+          {
+            "extension": [
+              {
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLContentStability",
+                      "code": "static",
+                      "display": "Static"
+                    }
+                  ]
+                },
+                "url": "https://fhir.nhs.uk/England/StructureDefinition/Extension-England-ContentStability"
+              }
+            ],
+            "attachment": {
+              "contentType": "application/fhir+json",
+              "url": "https://server.fire.ly/r4/Appointment/GL0-DZOqD39"
+            },
+            "format": {
+              "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode",
+              "code": "urn:nhs-ic:structured",
+              "display": "Structured Document"
+            }
+          }
+        ],
+        "context": {
+          "period": {
+            "start": "2025-02-01T06:55:00+00:00",
+            "end": "2025-02-01T09:00:00+00:00"
+          },
+          "practiceSetting": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "394802001",
+                "display": "General medicine (qualifier value)"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
 }

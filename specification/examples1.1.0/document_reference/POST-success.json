@@ -1,8 +1,19 @@
 {
-    "resourceType": "DocumentReference",
-    "meta": {
-      "profile": [
-        "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-DocumentReference"
-      ]
-    }
-  }
+  "resourceType": "OperationOutcome",
+  "issue": [
+      {
+          "severity": "information",
+          "code": "informational",
+          "details": {
+              "coding": [
+                  {
+                      "system": "https://fhir.nhs.uk/ValueSet/NRL-ResponseCode",
+                      "code": "RESOURCE_CREATED",
+                      "display": "Resource created"
+                  }
+              ]
+          },
+          "diagnostics": "The document has been created"
+      }
+  ]
+ }

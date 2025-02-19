@@ -1,8 +1,104 @@
 {
   "resourceType": "DocumentReference",
   "meta": {
-    "profile": [
-      "https://simplifier.net/guide/NHSBookingandReferrals/UKCore-DocumentReference"
-    ]
+      "lastUpdated": "2025-02-18T14:15:25.704Z"
+  },
+  "identifier": [
+      {
+          "system": "https://fhir.nhs.uk/Id/BaRS-Identifier",
+          "value": "GL0-DZOqD39"
+      },
+      {
+          "system": "https://fhir.nhs.uk/Id/dos-service-id",
+          "value": "2000072491"
+      },
+      {
+          "system": "https://fhir.nhs.uk/id/product-id",
+          "value": "P.GH7-4TY"
+      }
+  ],
+  "status": "current",
+  "type": {
+      "coding": [
+          {
+              "system": "http://snomed.info/sct",
+              "code": "749001000000101",
+              "display": "Appointment (record artifact)"
+          }
+      ]
+  },
+  "category": [
+      {
+          "coding": [
+              {
+                  "system": "http://snomed.info/sct",
+                  "code": "419891008",
+                  "display": "Record artifact (record artifact)"
+              }
+          ]
+      }
+  ],
+  "subject": {
+      "identifier": {
+          "system": "https://fhir.nhs.uk/Id/nhs-number",
+          "value": "9693893123"
+      }
+  },
+  "date": "2025-02-18T14:15:25.704Z",
+  "author": [
+      {
+          "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "RGT"
+          }
+      }
+  ],
+  "custodian": {
+      "identifier": {
+          "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+          "value": "RGT"
+      }
+  },
+  "content": [
+      {
+          "extension": [
+              {
+                  "valueCodeableConcept": {
+                      "coding": [
+                          {
+                              "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLContentStability",
+                              "code": "static",
+                              "display": "Static"
+                          }
+                      ]
+                  },
+                  "url": "https://fhir.nhs.uk/England/StructureDefinition/Extension-England-ContentStability"
+              }
+          ],
+          "attachment": {
+              "contentType": "application/fhir+json",
+              "url": "https://server.fire.ly/r4/Appointment/GL0-DZOqD39"
+          },
+          "format": {
+              "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode",
+              "code": "urn:nhs-ic:structured",
+              "display": "Structured Document"
+          }
+      }
+  ],
+  "context": {
+      "period": {
+          "start": "2025-02-01T06:45:00+00:00",
+          "end": "2025-02-01T07:00:00+00:00"
+      },
+      "practiceSetting": {
+          "coding": [
+              {
+                  "system": "http://snomed.info/sct",
+                  "code": "394802001",
+                  "display": "General medicine (qualifier value)"
+              }
+          ]
+      }
   }
 }

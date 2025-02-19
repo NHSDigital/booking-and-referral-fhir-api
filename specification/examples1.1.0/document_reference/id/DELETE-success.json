@@ -1,11 +1,5 @@
 {
     "resourceType": "OperationOutcome",
-    "id": "df70fe32-2d7d-4942-9e76-c1435ad1b04c",
-    "meta": {
-        "profile": [
-            "https://fhir.nhs.uk/StructureDefinition/NHSDigital-OperationOutcome"
-        ]
-    },
     "issue": [
         {
             "severity": "information",
@@ -14,12 +8,12 @@
                 "coding": [
                     {
                         "system": "https://fhir.nhs.uk/CodeSystem/NRLF-SuccessCode",
-                        "code": "RESOURCE_REMOVED",
-                        "display": "Resource removed"
+                        "code": "RESOURCE_DELETED",
+                        "display": "Resource deleted"
                     }
                 ]
             },
-            "diagnostics": "Resource removed"
+            "diagnostics": "The requested DocumentReference has been deleted"
         }
     ]
 }
