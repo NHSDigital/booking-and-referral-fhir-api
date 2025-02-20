@@ -2,33 +2,122 @@ type: object
 properties:
   resourceType:
     type: string
-    example: "Bundle"
-  id:
+    example: Bundle
+  type:
     type: string
-    example: "777a156c-af3c-4748-a8a3-7e95e4b0df9a"
-  meta:
-    type: object
-    properties:
-      lastUpdated:
-        type: string
-        example: '2021-10-11T15:01:30+00:00'
-      profile:
-        type: array 
-        items:          
-          type: string
-          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
+    example: searchset
   total:
     type: integer
-    example: 2
-  "type":
-    type: string
-    example: "searchset"
+    example: 3
+  link:
+    type: array
+    items:
+      type: object
+      properties:
+        relation:
+          type: string
+          example: self
+        url:
+          type: string
+          format: url
+          example: >-
+            https://int.api.service.nhs.uk/record-locator/consumer/FHIR/R4/DocumentReference?subject:identifier=https://fhir.nhs.uk/Id/nhs-number|9693893123&type=http://snomed.info/sct|749001000000101&category=http://snomed.info/sct|419891008
+      additionalProperties: false
   entry:
     type: array
     items:
       type: object
       properties:
-          resource:
-            type: object
-            $ref: "DocumentReference.yaml"
-        
+        resource:
+          type: object
+          properties:
+            resourceType:
+              type: string
+              example: DocumentReference
+            id:
+              type: string
+              example: V4T0L-3aeb90b0-7ffa-408a-babf-f20b80ce2c27
+            meta:
+              type: object
+              properties:
+                lastUpdated:
+                  type: string
+                  format: date-time
+                  example: '2025-02-18T17:04:53.948Z'
+              additionalProperties: false
+            identifier:
+              type: array
+            status:
+              type: string
+              example: current
+            type:
+              type: object
+              properties:
+                coding:
+                  type: array
+              additionalProperties: false
+            category:
+              type: array
+            subject:
+              type: object
+              properties:
+                identifier:
+                  type: object
+                  properties:
+                    system:
+                      type: string
+                      format: url
+                      example: https://fhir.nhs.uk/Id/nhs-number
+                    value:
+                      type: string
+                      example: '9693893123'
+                  additionalProperties: false
+              additionalProperties: false
+            date:
+              type: string
+              format: date-time
+              example: '2025-02-18T17:04:53.948Z'
+            author:
+              type: array
+            custodian:
+              type: object
+              properties:
+                identifier:
+                  type: object
+                  properties:
+                    system:
+                      type: string
+                      format: url
+                      example: https://fhir.nhs.uk/Id/ods-organization-code
+                    value:
+                      type: string
+                      example: RGT
+                  additionalProperties: false
+              additionalProperties: false
+            content:
+              type: array
+            context:
+              type: object
+              properties:
+                period:
+                  type: object
+                  properties:
+                    start:
+                      type: string
+                      format: date-time
+                      example: '2025-02-01T06:45:00+00:00'
+                    end:
+                      type: string
+                      format: date-time
+                      example: '2025-02-01T07:00:00+00:00'
+                  additionalProperties: false
+                practiceSetting:
+                  type: object
+                  properties:
+                    coding:
+                      type: array
+                  additionalProperties: false
+              additionalProperties: false
+          additionalProperties: false
+      additionalProperties: false
+additionalProperties: false
