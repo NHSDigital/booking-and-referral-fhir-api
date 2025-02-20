@@ -47,6 +47,13 @@ properties:
               additionalProperties: false
             identifier:
               type: array
+              items:
+              - type: object
+                properties:
+                  system:
+                    type: string
+                  value:
+                    type: string
             status:
               type: string
               example: current
@@ -55,9 +62,40 @@ properties:
               properties:
                 coding:
                   type: array
+                  items:
+                    type: object
+                    properties:
+                      system:
+                        type: string
+                        format: url
+                        example: http://snomed.info/sct
+                      code:
+                        type: string
+                        example: '749001000000101'
+                      display:
+                        type: string
+                        example: Appointment (record artifact)
               additionalProperties: false
             category:
               type: array
+              items:
+                type: object
+                properties:
+                  coding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        system:
+                          type: string
+                          format: url
+                          example: http://snomed.info/sct
+                        code:
+                          type: string
+                          example: '419891008'
+                        display:
+                          type: string
+                          example: Clinical notes
             subject:
               type: object
               properties:
@@ -79,6 +117,19 @@ properties:
               example: '2025-02-18T17:04:53.948Z'
             author:
               type: array
+              items:
+                type: object
+                properties:
+                  identifier:
+                    type: object
+                    properties:
+                      system:
+                        type: string
+                      value:
+                        type: string
+                    required:
+                    - system
+                    - value
             custodian:
               type: object
               properties:
@@ -96,6 +147,55 @@ properties:
               additionalProperties: false
             content:
               type: array
+              items:
+                type: object
+                properties:
+                  extension:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        valueCodeableConcept:
+                          type: object
+                          properties:
+                            coding:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  system:
+                                    type: string
+                                  code:
+                                    type: string
+                                  display:
+                                    type: string
+                                required:
+                                - system
+                                - code
+                                - display
+                          required:
+                          - coding
+                        url:
+                          type: string
+                  attachment:
+                    type: object
+                    properties:
+                      contentType:
+                        type: string
+                      url:
+                        type: string
+                    required:
+                    - contentType
+                    - url
+                  format:
+                    type: object
+                    properties:
+                      system:
+                        type: string
+                      code:
+                        type: string
+                      display:
+                        type: string
             context:
               type: object
               properties:
@@ -116,6 +216,15 @@ properties:
                   properties:
                     coding:
                       type: array
+                      items:
+                        type: object
+                        properties:
+                          system:
+                            type: string
+                          code:
+                            type: string
+                          display:
+                            type: string                 
                   additionalProperties: false
               additionalProperties: false
           additionalProperties: false

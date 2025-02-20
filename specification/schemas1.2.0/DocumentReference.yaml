@@ -46,6 +46,19 @@ properties:
       properties:
         coding:
           type: array
+          items:
+            type: object
+            properties:
+              system:
+                type: string
+                format: url
+                example: http://snomed.info/sct
+              code:
+                type: string
+                example: '419891008'
+              display:
+                type: string
+                example: Clinical notes
       additionalProperties: false
   subject:
     type: object
@@ -105,6 +118,31 @@ properties:
       properties:
         extension:
           type: array
+          items:
+            type: object
+            properties:
+              valueCodeableConcept:
+                type: object
+                properties:
+                  coding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        system:
+                          type: string
+                        code:
+                          type: string
+                        display:
+                          type: string
+                      required:
+                      - system
+                      - code
+                      - display
+                required:
+                - coding
+              url:
+                type: string
         attachment:
           type: object
           properties:
