@@ -3,162 +3,134 @@ properties:
   resourceType:
     type: string
     example: DocumentReference
-  meta:
-    type: object
-    properties:
-      lastUpdated:
-        type: string
-        example: '2021-10-11T15:01:30+00:00'
-      profile:
-        type: array
-        items:
-          type: string
-          example: 'https://fhir.nhs.uk/R4/StructureDefinition/UKCore-DocumentReference'
   identifier:
     type: array
     items:
-      - type: object
-        properties:
-          system:
-            type: string
-            example: 'https://fhir.nhs.uk/Id/BaRS-Identifier'
-          value:
-            type: string
-            example: 8c63d621-4d86-4f57-8699-e8e22d49935d
-      - type: object
-        properties:
-          system:
-            type: string
-            example: 'https://fhir.nhs.uk/Id/dos-service-id'
-          value:
-            type: string
-            example: 2000072491
-      - type: object
-        properties:
-          system:
-            type: string
-            example: 'https://fhir.nhs.uk/id/product-id'
-          value:
-            type: string
-            example: P.GH7-4TY
-  id:
-    type: string
-    example: $OrganisationNamePrefix|696cfcd2-6425-459d-b2ad-91e34a6a1b9c
-    description: >-
-      The logical id of the resource, as used in the URL for the resource. Once
-      assigned, this value never changes.
+      type: object
+      properties:
+        system:
+          type: string
+          format: url
+          example: https://fhir.nhs.uk/Id/BaRS-Identifier
+        value:
+          type: string
+          example: GL0-DZOqD39
+      additionalProperties: false
   status:
     type: string
     example: current
-    description: The status of this document reference.
   type:
     type: object
     properties:
       coding:
-          type: array
-          items:
-            type: object
-            properties:
-              system:
-                type: string
-                example: 'https://snomed.info/sct'
-              code:
-                type: string
-                example: '749001000000101'
-              display:
-                type: string
-                example: Appointment (record artifact)
-    description: >-
-      Specifies the particular kind of document referenced  (e.g. History and
-      Physical, Discharge Summary, Progress Note). This usually equates to the
-      purpose of making the document referenced.
+        type: array
+        items:
+          type: object
+          properties:
+            system:
+              type: string
+              format: url
+              example: http://snomed.info/sct
+            code:
+              type: string
+              example: '749001000000101'
+            display:
+              type: string
+              example: Appointment (record artifact)
+          additionalProperties: false
+    additionalProperties: false
   category:
     type: array
     items:
       type: object
       properties:
-        coding: 
-            type: array
-            items:
-              type: object
-              properties:
-                system:
-                  type: string
-                  example: 'http://snomed.info/sct'
-                code:
-                  type: string
-                  example: 419891008
-                display:
-                  type: string
-                  example: Record artifact (record artifact)
-    description: >-
-      A categorization for the type of document referenced.
+        coding:
+          type: array
+      additionalProperties: false
   subject:
     type: object
     properties:
-      identifier: 
+      identifier:
+        type: object
+        properties:
+          system:
+            type: string
+            example: https://fhir.nhs.uk/Id/nhs-number
+            format: url
+          value:
+            type: string
+            example: '9693893123'
+        additionalProperties: false
+    additionalProperties: false
+  date:
+    type: string
+    example: '2025-02-05T08:25:13.136693+00:00'
+    format: date-time
+  author:
+    type: array
+    items:
+      type: object
+      properties:
+        identifier:
           type: object
           properties:
             system:
               type: string
-              example: 'https://fhir.nhs.uk/Id/nhs-number'
-            Value:
+              format: url
+              example: https://fhir.nhs.uk/Id/ods-organization-code
+            value:
               type: string
-              example: $nhs-number
-    description: >-
-      Who or what the document is about. The document can be about a person,
-      (patient or healthcare practitioner), a device (e.g. a machine) or even a
-      group of subjects (such as a document about a herd of farm animals, or a
-      set of patients that share a common exposure).
+              example: RGT
+          additionalProperties: false
+      additionalProperties: false
   custodian:
     type: object
     properties:
       identifier:
-          type: object
-          properties:
-            system:
-              type: string
-              example: 'https://fhir.nhs.uk/Id/ods-organization-code'
-            Value:
-              type: string
-              example: $ods-code
-    description: >-
-      Identifies the organization or group who is responsible for ongoing
-      maintenance of and access to the document.
+        type: object
+        properties:
+          system:
+            type: string
+            example: https://fhir.nhs.uk/Id/ods-organization-code
+            format: url
+          value:
+            type: string
+            example: RGT
+        additionalProperties: false
+    additionalProperties: false
   content:
     type: array
     items:
       type: object
       properties:
         extension:
+          type: array
+        attachment:
           type: object
           properties:
+            contentType:
+              type: string
+              example: application/fhir+json
             url:
               type: string
-              example: 'http://fhir.nhs.uk/Id/dos-service-id|111111111'
+              format: url
+              example: https://server.fire.ly/r4/Appointment/GL0-DZOqD39
+          additionalProperties: false
         format:
-          type: array
-          items:
-            type: object
-            properties: 
-                coding:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      system:
-                        type: string
-                        example: 'https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode'
-                      code:
-                        type: string
-                        example: urn:nhs-ic:structured
-                      display:
-                        type: string
-                        example: Structured Document
-    description: >-
-      The document and format referenced. There may be multiple content element
-      repetitions, each with a different format.
-    minItems: 1
+          type: object
+          properties:
+            system:
+              type: string
+              format: url
+              example: https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode
+            code:
+              type: string
+              example: urn:nhs-ic:structured
+            display:
+              type: string
+              example: Structured Document
+          additionalProperties: false
+      additionalProperties: false
   context:
     type: object
     properties:
@@ -167,9 +139,32 @@ properties:
         properties:
           start:
             type: string
-            example: '2005-12-24T09:35:00+11:00'
+            example: '2025-02-01T06:45:00+00:00'
+            format: date-time
           end:
             type: string
-            example: '2005-12-24T09:35:00+11:00'
-    description: The clinical context in which the document was prepared.
-
+            example: '2025-02-01T07:00:00+00:00'
+            format: date-time
+        additionalProperties: false
+      practiceSetting:
+        type: object
+        properties:
+          coding:
+            type: array
+            items:
+              type: object
+              properties:
+                system:
+                  type: string
+                  format: url
+                  example: http://snomed.info/sct
+                code:
+                  type: string
+                  example: '394802001'
+                display:
+                  type: string
+                  example: General medicine (qualifier value)
+              additionalProperties: false
+        additionalProperties: false
+    additionalProperties: false
+additionalProperties: false
