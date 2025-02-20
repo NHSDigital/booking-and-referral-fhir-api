@@ -16,13 +16,13 @@ for (var i = 0; i < acceptArray.length; i++) {
     }
 }
 
-// Function to convert version "X.Y.Z" to a comparable number (e.g., "1.2.0" → 1020)
+// Function to convert version "X.Y.Z" to a comparable number (e.g., "1.2.0" → 10200)
 function versionToNumber(version) {
     var parts = version.split('.').map(Number);
     if (parts.length !== 3 || parts.some(isNaN)) {
         return 0;  // Invalid version, ignore it
     }
-    return parts[0] * 1000 + parts[1] * 10 + parts[2];
+    return parts[0] * 10000 + parts[1] * 100 + parts[2];
 }
 
 // Find the highest version

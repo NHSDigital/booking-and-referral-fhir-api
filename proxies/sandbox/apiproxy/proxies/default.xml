@@ -56,7 +56,7 @@
                 </Step>
                 <Step>
                    <Name>RaiseFault.406PageNotAcceptable</Name>
-                   <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumberNumeric &lt; 1100</Condition>
+                   <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumberNumeric &lt; 10100</Condition>
                  </Step>
             </Request>
     </Flow>
@@ -85,11 +85,11 @@
   </RouteRule>
   <RouteRule name="nrlf-producer-sandbox-route">
     <TargetEndpoint>nrlf-producer-sandbox-target</TargetEndpoint>
-    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and (request.verb != "GET")) and versionNumberNumeric  >= 1100</Condition>
+    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and (request.verb != "GET")) and versionNumberNumeric  >= 10100</Condition>
    </RouteRule>
   <RouteRule name="nrlf-consumer-sandbox-route">
     <TargetEndpoint>nrlf-consumer-sandbox-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference*"and versionNumberNumeric >= 1100</Condition>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*"and versionNumberNumeric >= 10100</Condition>
   </RouteRule>
     <RouteRule name="sandbox">
     <TargetEndpoint>sandbox</TargetEndpoint>
