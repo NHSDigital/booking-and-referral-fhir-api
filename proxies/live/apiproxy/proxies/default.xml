@@ -84,7 +84,7 @@
    </RouteRule>
   <RouteRule name="nrlf-consumer-route">
     <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumberNumeric >= 1100</Condition>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber = "1.1.0"</Condition>
   </RouteRule>
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>
