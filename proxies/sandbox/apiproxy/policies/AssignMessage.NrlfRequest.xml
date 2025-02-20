@@ -3,10 +3,9 @@
   <Set>
     <Verb>{request.verb}</Verb>
     <Headers>
-      <Header name="Accept">application/fhir+json;version=1.1.0</Header>
+      <Header name="Accept">application/fhir+json;version=1</Header>
       <Header name="NHSD-End-User-Organisation-ODS">V4T0L</Header>
       <Header name="X-Request-ID">{createUuid()}</Header>
-      <Header name="content-type">application/fhir+json;version=1.1.0</Header>
     </Headers>
     <Version>1.1</Version>
   </Set>

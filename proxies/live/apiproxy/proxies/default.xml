@@ -80,11 +80,11 @@
   </RouteRule>
   <RouteRule name="nrlf-producer-route">
     <TargetEndpoint>nrlf-producer-target</TargetEndpoint>
-    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and (request.verb != "GET")) and versionNumber Matches "([1-9]\.\d+\.\d+)"</Condition>
+    <Condition>(proxy.pathsuffix Matches "/DocumentReference/*") or ((proxy.pathsuffix Matches "/DocumentReference*") and (request.verb != "GET")) and versionNumber = "1.1.0"</Condition>
    </RouteRule>
   <RouteRule name="nrlf-consumer-route">
     <TargetEndpoint>nrlf-consumer-target</TargetEndpoint>
-    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumber Matches "([1-9]\.\d+\.\d+)"</Condition>
+    <Condition>proxy.pathsuffix Matches "/DocumentReference*" and versionNumberNumeric >= 1100</Condition>
   </RouteRule>
   <RouteRule name="booking-and-referral-target">
     <TargetEndpoint>booking-and-referral-target</TargetEndpoint>
