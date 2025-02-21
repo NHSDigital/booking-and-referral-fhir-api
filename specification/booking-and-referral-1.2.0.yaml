@@ -1045,7 +1045,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/fhir+json;version=1:
+            application/fhir+json;version=1.2.0:
               schema:
                 $ref: "#/components/schemas/DocumentReferenceBundle"
           headers:
@@ -1197,7 +1197,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json;version=1:
+            application/fhir+json;version=1.2.0:
               schema:
                 $ref: '#/components/schemas/DocumentReference'
               example: 
@@ -1568,12 +1568,12 @@ components:
   requestBodies:
     DocumentReference:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/DocumentReferenceBundle'
     Appointment:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/Appointment'
           examples:
@@ -1581,7 +1581,7 @@ components:
               externalValue: examples1.2.0/appointment/PUT-body.json
     AppointmentPatch:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/Appointment'
           examples:
@@ -1589,23 +1589,23 @@ components:
               externalValue: examples1.2.0/appointment/PATCH-body.json
     Endpoint:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/Endpoint'
     Organization:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/Organization'
     HealthcareService:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/HealthcareService'
       required: true
     ServiceRequest:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/ServiceRequest'
           examples:
@@ -1613,7 +1613,7 @@ components:
               externalValue: examples1.2.0/service_request/PUT-body.json
     ServiceRequestPatch:
       content:
-        application/fhir+json;version=1:
+        application/fhir+json;version=1.2.0:
           schema:
             $ref: '#/components/schemas/ServiceRequest'
           examples:
