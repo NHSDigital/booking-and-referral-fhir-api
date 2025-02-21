@@ -13,8 +13,8 @@ function hasRequiredHeaders(context) {
 function isVersionValid(context) {
     const path = context.getVariable("proxy.pathsuffix")
     if (path.startsWith("/DocumentReference")) {
-        const version = context.getVariable("versionNumber")
-        return version === "1.1.0"
+        const version = context.getVariable("versionNumberNumeric")
+        return version >= 10100
     }
     return true
 }
