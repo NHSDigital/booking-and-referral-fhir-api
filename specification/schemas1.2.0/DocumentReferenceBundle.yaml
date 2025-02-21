@@ -48,7 +48,7 @@ properties:
             identifier:
               type: array
               items:
-              - type: object
+                type: object
                 properties:
                   system:
                     type: string
