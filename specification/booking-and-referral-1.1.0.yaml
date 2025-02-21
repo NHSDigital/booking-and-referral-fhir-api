@@ -1498,11 +1498,11 @@ components:
       $ref: schemas1.1.0/DocumentReferenceBundle.yaml
     RequestQuerySubject:
       type: string
-      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)$
+      pattern: ^(?:https:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)|https%3A%2F%2Ffhir\.nhs\.uk%2FId%2Fnhs-number%7C(\d+))$
       example: "https://fhir.nhs.uk/Id/nhs-number|4409815415"
     RequestQueryCustodian:
       type: string
-      pattern: ^https\:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)$
+      pattern: ^(?:https:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)|https%3A%2F%2Ffhir\.nhs\.uk%2FId%2Fods-organization-code%7C(\w+))$
       example: "https://fhir.nhs.uk/Id/ods-organization-code|Y05868"
     RequestQueryType:
       type: string
