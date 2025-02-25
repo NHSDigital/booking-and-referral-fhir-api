@@ -7,7 +7,7 @@ The bookings and service requests API is defining a standard API for booking of 
 This is a RESTful HL7® FHIR® API specification for the *Booking and Referral API*.
 
 * `specification/` This [Open API Specification](https://swagger.io/docs/specification/about/) describes the endpoints, methods and messages exchanged by the API. Use it to generate interactive documentation; the contract between the API and its consumers.
-* `sandbox/` This NodeJS application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
+* `sandbox/` This Python application implements a mock implementation of the service. Use it as a back-end service to the interactive documentation to illustrate interactions and concepts. It is not intended to provide an exhaustive/faithful environment suitable for full development and testing.
 * `scripts/` Utilities helpful to developers of this specification.
 * `proxies/` Live (connecting to another service) and sandbox (using the sandbox container) Apigee API Proxy definitions.
 
@@ -115,3 +115,26 @@ Successful deployment of the API Proxy requires:
 The Key-Value maps need to be specifed within the [api-management-infrasture](https://github.com/NHSDigital/api-management-infrastructure) repository to be able to be used with the API proxy.
 
 :bulb: For Sandbox-running environments (`test`) these need to be present for successful deployment but can be set to empty/dummy values.
+
+## Aditional notes
+The build pipeline uses Redoc so to find any errors you can use the command below, there are currently loads of warnings which isnt ideal but can be ignored.
+
+```
+npx redocly lint --max-problems 300 --skip-rule=security-defined specification/booking-and-referral-1.2.0.yaml
+```
+
+To get a single spec file you can use `speccy publish` as above or redoc thus
+
+```
+npx redocly  bundle specification/booking-and-referral-1.2.0.yaml --remove-unused-components --ext json -o build/booking-and-referral-1.2.2.json
+```
+
+you can then use that file here [swagger.io](https://editor.swagger.io/) to view and see any errors, alternatively you can get access to the Apigee non-prod account, use the form here [SNOW form](https://www.support.internalservices.england.nhs.uk/nhs_digital?id=sc_cat_item&sys_id=440a1c211be0561078ac4337b04bcb5d&sysparm_category=7496f0c81b1c9610772fa756b04bcbf7) to get access, then the portal for [Apigee](https://login.apigee.com/login) Once youve signed in you can click on the `specs` button and upload the specification file, any errors will show at the top.
+
+### Sandbox
+see the readme in the sanbox folder.
+
+### Path to live
+After you've done any update and got the merged in Master (afer a PR) the build process will kick off in the background and deploy the Sandbox ineternal-dev internal-qa and the INT versions of the changes to Apigee, this can take upto 15 mins. to change the spec file and update the [BloomRech spec page](https://digital.nhs.uk/developer/api-catalogue/booking-and-referral-fhir) you need to post a request the the Slack channel `platforms-apim-producer-support` with a link to the approved PR, a copy of all three Api Spec files (Do not use the partial ones from the repo, use the ones created by the Azure pipline or the ones from redoc)
+After this someone will pick up the request and (assuming no errors) make the update for you, once applied this can take upto an hour to show.
+

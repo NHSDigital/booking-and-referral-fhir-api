@@ -2,12 +2,127 @@ type: object
 properties:
   resourceType:
     type: string
-    example: "ServiceRequest"
+    example: ServiceRequest
+  id:
+    type: string
+    example: 71d2b38e-b81c-4894-a522-6a65265b1d58
+    format: uuid
   meta:
     type: object
     properties:
+      lastUpdated:
+        type: string
+        example: '2021-11-26T15:00:00+00:00'
+        format: date-time
       profile:
         type: array
         items:
           type: string
-          example: "https://simplifier.net/NHSBookingandReferrals/BARSServiceRequestRequestCaseTransfer"
+          format: url
+          example: >-
+            https://fhir.nhs.uk/StructureDefinition/BARSServiceRequest-request-validation
+    additionalProperties: false
+  basedOn:
+    type: object
+    properties:
+      reference:
+        type: string
+        example: urn:uuid:9f748662-afde-540e-a6d5-8cd6ae63cd56
+    additionalProperties: false
+  status:
+    type: string
+    example: active
+  intent:
+    type: string
+    example: plan
+  category:
+    type: array
+    items:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            type: object
+            properties:
+              system:
+                type: string
+                format: url
+              code:
+                type: string
+              display:
+                type: string
+      additionalProperties: false
+  subject:
+    type: object
+    properties:
+      reference:
+        type: string
+        example: urn:uuid:9589fb37-87a2-48d8-968f-b371429208a8
+    additionalProperties: false
+  encounter:
+    type: object
+    properties:
+      reference:
+        type: string
+        example: urn:uuid:8c63d621-4d86-4f57-8699-e8e22d49935d
+    additionalProperties: false
+  occurrencePeriod:
+    type: object
+    properties:
+      start:
+        type: string
+        example: '2021-11-26T15:00:00+00:00'
+        format: date-time
+      end:
+        type: string
+        example: '2021-11-26T15:20:00+00:00'
+        format: date-time
+    additionalProperties: false
+  authoredOn:
+    type: string
+    example: '2021-11-26T15:00:00+00:00'
+    format: date-time
+  requester:
+    type: object
+    properties:
+      reference:
+        type: string
+        example: urn:uuid:7d948662-bade-450e-b6c5-9bb6ee39cb56
+    additionalProperties: false
+  performer:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+          format: uuid
+          example: d5ffd0cd-ec7e-48a1-84f1-91f4c0eb8fc5
+      additionalProperties: false
+  locationReference:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+          example: urn:uuid:2ec99e82-a0af-4b70-bd53-1869d84b2ad1
+      additionalProperties: false
+  supportingInfo:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+          example: urn:uuid:d877b820-e72b-44d1-a627-195f54bfc606
+        display:
+          type: string
+          example: Rejected Services - Patient Choice in Service Selection - Details
+      additionalProperties: false
+  PatientInstruction:
+    type: string
+    example: >-
+      ADVICE GIVEN: If there are any new symptoms, or if the condition gets
+      worse, changes or you have any other concerns

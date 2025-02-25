@@ -4,25 +4,25 @@ properties:
     type: string
   id:
     type: string
-    example: "696cfcd2-6425-459d-b2ad-91e34a6a1b9c"
+    format: uuid
   meta:
     type: object
     properties:
       lastUpdated:
         type: string
+        format: date-time
       profile:
         type: array
         items:
           type: string
-          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
+          format: url
   type:
     type: string
-    example: "searchset"
   total:
     type: integer
-    example: 2
   timestamp:
     type: string
+    format: date-time
   link:
     type: array
     items:
@@ -32,32 +32,100 @@ properties:
           type: string
         url:
           type: string
+          format: url
   entry:
     type: array
     items:
       type: object
       properties:
-        fullUrl:
-          type: string
         resource:
           type: object
           properties:
             resourceType:
               type: string
-              example: "MessageDefinition"
             id:
               type: string
-            meta: 
+              format: uuid
+            meta:
               type: object
               properties:
-                lastUpdated:
-                  type: string
                 profile:
                   type: array
                   items:
                     type: string
-                  example: [
-                      "https://simplifier.net/NHSBookingandReferrals/BARS-MessageDefinition-ServiceRequest-Request-Referral",
-                      "https://simplifier.net/nhsbookingandreferrals/bars-messagedefinition-servicerequest-response-referral",
-                      "https://simplifier.net/nhsbookingandreferrals/bars-messagedefinition-booking-request"
-                      ]
+                    format: url
+            url:
+              type: string
+              format: url
+            name:
+              type: string
+            title:
+              type: string
+            status:
+              type: string
+            date:
+              type: string
+              format: date
+            eventCoding:
+              type: object
+              properties:
+                system:
+                  type: string
+                  format: url
+                code:
+                  type: string
+            useContext:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        system:
+                          type: string
+                          format: url
+                        code:
+                          type: string
+                  valueCodeableConcept:
+                    type: object
+                    properties:
+                      coding:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            system:
+                              type: string
+                              format: url
+                            code:
+                              type: string
+                      valueCodeableConcept:
+                        type: object
+                        properties:
+                          coding:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                system:
+                                  type: string
+                                  format: url
+                                code:
+                                  type: string
+            focus:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  profile:
+                    type: string
+                    format: url
+                  min:
+                    type: integer
+                  max:
+                    type: string

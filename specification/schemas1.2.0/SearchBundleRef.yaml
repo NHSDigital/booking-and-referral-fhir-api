@@ -2,27 +2,13 @@ type: object
 properties:
   resourceType:
     type: string
-  id:
-    type: string
-    example: "777a156c-af3c-4748-a8a3-7e95e4b0df9a"
-  meta:
-    type: object
-    properties:
-      lastUpdated:
-        type: string
-      profile:
-        type: array
-        items:
-          type: string
-          example: "https://simplifier.net/NHSBookingandReferrals/BaRSBundleMessage"
+    example: Bundle
   type:
     type: string
-    example: "searchset"
+    example: searchset
   total:
     type: integer
-    example: 2
-  timestamp:
-    type: string
+    example: 1
   link:
     type: array
     items:
@@ -30,31 +16,137 @@ properties:
       properties:
         relation:
           type: string
+          example: self
         url:
           type: string
+          format: url
+          example: >-
+            https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/ServiceRequest
+      additionalProperties: false
   entry:
     type: array
     items:
       type: object
       properties:
-        fullUrl:
+        resourceType:
           type: string
-        resource:
+          example: ServiceRequest
+        id:
+          type: string
+          format: uuid
+          example: 71d2b38e-b81c-4894-a522-6a65265b1d58
+        meta:
           type: object
           properties:
-            resourceType:
+            lastUpdated:
               type: string
-              example: "ServiceRequest"
-            id:
+              format: date-time
+              example: '2021-11-26T15:00:00+00:00'
+            profile:
+              type: array
+              items:
+                type: string
+                format: url
+          additionalProperties: false
+        basedOn:
+          type: object
+          properties:
+            reference:
               type: string
-            meta: 
-              type: object
-              properties:
-                lastUpdated:
-                  type: string
-                profile:
-                  type: array
-                  items:
-                    type: string
-                    example: "https://simplifier.net/nhsbookingandreferrals/barsservicerequestrequestcasetransfer"
-
+              example: urn:uuid:9f748662-afde-540e-a6d5-8cd6ae63cd56
+          additionalProperties: false
+        status:
+          type: string
+          example: active
+        intent:
+          type: string
+          example: plan
+        category:
+          type: array
+          items:
+            type: object
+            properties:
+              coding:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    system:
+                      type: string
+                      format: url
+                    code:
+                      type: string
+                    display:
+                      type: string
+        subject:
+          type: object
+          properties:
+            reference:
+              type: string
+              example: urn:uuid:9589fb37-87a2-48d8-968f-b371429208a8
+          additionalProperties: false
+        encounter:
+          type: object
+          properties:
+            reference:
+              type: string
+              example: urn:uuid:8c63d621-4d86-4f57-8699-e8e22d49935d
+          additionalProperties: false
+        occurrencePeriod:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date-time
+              example: '2021-11-26T15:00:00+00:00'
+            end:
+              type: string
+              format: date-time
+              example: '2021-11-26T15:20:00+00:00'
+          additionalProperties: false
+        authoredOn:
+          type: string
+          format: date-time
+          example: '2021-11-26T15:00:00+00:00'
+        requester:
+          type: object
+          properties:
+            reference:
+              type: string
+              example: urn:uuid:7d948662-bade-450e-b6c5-9bb6ee39cb56
+          additionalProperties: false
+        performer:
+          type: array
+          items:
+            type: object
+            properties:
+              reference:
+                type: string
+                format: uuid
+        locationReference:
+          type: array
+          items:
+            type: object
+            properties:
+              reference:
+                type: string
+        supportingInfo:
+          type: array
+          items:
+            type: object
+            properties:
+              reference:
+                type: string
+              display:
+                type: string
+        PatientInstruction:
+          type: string
+          example: >-
+            ADVICE GIVEN: If there are any new symptoms, or if the condition
+            gets worse, changes or you have any other concerns
+        search:
+          type: object
+          properties:
+            mode:
+              type: string
+              example: match
