@@ -1,6 +1,6 @@
 // Get Accept header
 var acceptHeader = context.getVariable('request.header.Accept') || "";
-var acceptArray = acceptHeader.split(';');
+var acceptArray = acceptHeader.split(',');
 
 // Default version if not found
 var highestVersion = "1.0.0";
@@ -10,9 +10,13 @@ var versions = [];
 
 for (var i = 0; i < acceptArray.length; i++) {
     var acceptValue = acceptArray[i].trim();
-    if (acceptValue.startsWith("version")) {
-        var version = acceptValue.split('=')[1].trim();  // Trim spaces
-        versions.push(version);
+    var params = acceptValue.split(';');
+    for (var j = 0; j < params.length; j++) {
+        var param = params[j].trim().toLowerCase();  // Convert to lowercase
+        if (param.startsWith("version")) {
+            var version = param.split('=')[1].trim();  // Trim spaces
+            versions.push(version);
+        }
     }
 }
 
