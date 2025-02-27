@@ -1131,7 +1131,7 @@ paths:
         * `type` MUST match one of the Document Types defined for BaRS, this is either a Appointment (booking) or a Patient referral.
           ```json
           "type": {
-            "coding\": [
+            "coding": [
               {
                 "system": "http://snomed.info/sct",
                 "code": "749001000000101",
@@ -1873,7 +1873,8 @@ components:
     subject_QParam:
       name: subject:identifier
       description: |
-        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
+        The Url encoded patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales. 
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
         
         |Type           |Expression|
         |-------             | --------|
@@ -1889,6 +1890,7 @@ components:
     custodian_QParam:
       description: | 
         The custodian of the pointer
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
 
         **Endpoint without encoding**
         *https://fhir.nhs.uk/Id/ods-organization-code|Y05868*
@@ -1896,14 +1898,11 @@ components:
       in: query
       schema:
         $ref: "#/components/schemas/RequestQueryCustodian"
-      # examples:
-      #   valid:
-      #     summary: Valid
-      #     value: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fods-organization-code%7CY05868
     type_QParam:
       name: type
       description: |
         The specified type of pointers to be returned.
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
 
         **Example query without encoding**
         *http://snomed.info/sct|749001000000101*
@@ -1931,7 +1930,9 @@ components:
         $ref: "#/components/schemas/NextPageToken"
     Organization_QParam:
       name: Organization.identifier
-      description: The identifier of the organization that is managing the endpoint(s).
+      description: |
+        The identifier of the organization that is managing the endpoint(s).
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
       in: query
       required: false
       allowEmptyValue: false
@@ -1939,7 +1940,9 @@ components:
         $ref: '#/components/schemas/ODS'  
     HealthcareServiceIdentifier_QParam:
       name: HealthcareService.identifier
-      description: The identifier of the HealthcareService.
+      description: |
+        The identifier of the HealthcareService.
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
       in: query
       required: false
       allowEmptyValue: false
@@ -1947,7 +1950,9 @@ components:
         $ref: '#/components/schemas/Service'
     HCProvidedBy_QParam:
       name: HealthcareService.providedBy
-      description: The identifier of the organization that is managing the endpoint(s).
+      description: |
+        The identifier of the organization that is managing the endpoint(s).
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
       in: query
       required: false
       allowEmptyValue: false
@@ -1963,7 +1968,9 @@ components:
         $ref: '#/components/schemas/GUID'
     EndpointIdentifier_QParam:
       name: Endpoint.identifier
-      description: The identifier of the type of Endpoint.
+      description: |
+        The identifier of the type of Endpoint.
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
       in: query
       required: false
       allowEmptyValue: false
@@ -1973,6 +1980,7 @@ components:
       name: _has
       description: | 
         The healthcareService you want the Endpoints returned for.
+        This needs to be Url Encoded as its passed as a query parameter and part of the url.
 
         |HealthcareService Property| Example|
         |-------             | --------|
