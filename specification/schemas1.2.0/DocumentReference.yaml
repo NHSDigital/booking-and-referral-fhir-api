@@ -89,9 +89,9 @@ properties:
             example: '3495456481'
             pattern: ^\d{10}$  # NHS number must be 10 digits
         additionalProperties: false
-      required:
-        - system
-        - value
+        required:
+          - system
+          - value
     additionalProperties: false
   date:
     type: string
@@ -113,9 +113,9 @@ properties:
               type: string
               example: RGT
           additionalProperties: false
-        required:
-          - system
-          - value
+          required:
+            - system
+            - value
       additionalProperties: false
   custodian:
     type: object
@@ -132,9 +132,9 @@ properties:
             type: string
             example: RGT
         additionalProperties: false
-      required:
-        - system
-        - value
+        required:
+          - system
+          - value
     additionalProperties: false
   content:
     type: array
