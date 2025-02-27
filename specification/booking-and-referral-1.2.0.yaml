@@ -277,7 +277,7 @@ paths:
         '200':
           description: Success
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
               example:
@@ -338,7 +338,7 @@ paths:
         description: Message Details
         required: true
         content:
-          application/fhir+json:
+          application/fhir+json;version=1.0.0:
             schema:
               $ref: '#/components/schemas/MessageBundle'
             example:
@@ -479,7 +479,7 @@ paths:
         '200':
           description: Success. A full example of a Slot Searchset response can be found [here](  https://simplifier.net/NHSBookingandReferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2).
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/SearchBundleSlot'
               example:
@@ -531,7 +531,7 @@ paths:
         '200':
           description: Success
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
               example:
@@ -567,7 +567,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
@@ -621,7 +621,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
@@ -666,7 +666,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
@@ -704,7 +704,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
@@ -751,7 +751,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
@@ -802,7 +802,7 @@ paths:
         '200':
           description: Success
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
               example:
@@ -838,7 +838,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
@@ -892,7 +892,7 @@ paths:
         '200':
           description: Successful
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
@@ -928,7 +928,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
@@ -966,7 +966,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
@@ -1004,7 +1004,7 @@ paths:
         '200':
           description: Successful deletion response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.0.0:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
@@ -1078,7 +1078,7 @@ paths:
         "201":
           description: Create / Supersede successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.2.0:
               schema: 
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
@@ -1111,7 +1111,7 @@ paths:
 
         * the body must be a valid [FHIR R4 DocumentReference](http://hl7.org/fhir/documentreference.html)
         * `subject` MUST be a `Patient` reference using a valid NHS number. e.g.
-          ```
+          ```json
           "subject": {
             "identifier": {
               "system": "https://fhir.nhs.uk/Id/nhs-number",
@@ -1119,8 +1119,8 @@ paths:
             }
           },
           ```
-        * `custodian` MUST contain an `Organization` reference using a valid ODS code, agreed during [onboarding](#api-description__onboarding). e.g.
-          ```
+        * `custodian` MUST contain an `Organization` reference using a valid ODS code, agreed during onboarding. e.g.
+          ```json
           "custodian": {
             "identifier": {
               "system": "https://fhir.nhs.uk/Id/ods-organization-code",
@@ -1129,7 +1129,7 @@ paths:
           }
           ```
         * `type` MUST match one of the Document Types defined for BaRS, this is either a Appointment (booking) or a Patient referral.
-          ```
+          ```json
           "type": {
             "coding\": [
               {
@@ -1140,9 +1140,23 @@ paths:
             ]
           }
           ```
-        * `content` MUST have at least one entry.
-        * `content[].format[]` SHOULD indicate the document type eg
+        * `category` MUST indicate the broader class of the Document Type as agreed during onboarding, e.g.
+          ```json
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/document-reference-category",
+                  "code": "clinical",
+                  "display": "Clinical"
+                }
+              ]
+            }
+          ]
           ```
+        * `content` MUST have at least one entry.
+        * `content[].format[]` SHOULD indicate the document is structured or not, e.g.
+          ```json
           "format": [
             {
               "system": "https://fhir.nhs.uk/England/CodeSystem/England-NRLFormatCode",
@@ -1151,24 +1165,34 @@ paths:
             }
           ]
           ```
-        * `content[].attachment[]`  SHOULD indicate the direct URL, e.g.
-          ```
+        * `content[].attachment.url`  MUST contain the direct URL, e.g.
+          ```json
           "attachment": 
             {
-              "contentType": "application/fhir+json",
               "url": "https://server.fire.ly/r4/Appointment/GL0-DZOqD39"
             }
           ```
-        * `context.period`  SHOULD indicate Appointment date and time, e.g.
+        * `author` SHOULD contain an `Organization` reference using a valid ODS code, agreed during onboarding. e.g.
+          ```json
+          "author": [
+            {
+              "identifier": {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "Y05868"
+              }
+            }
+          ]
           ```
-            "context": {
-              "period": {
-                "start": "2025-02-01T06:45:00+00:00",
-                "end": "2025-02-01T07:00:00+00:00"
-              },
+        * `context.period`  SHOULD indicate Appointment date and time, e.g.
+          ```json
+          "context": {
+            "period": {
+              "start": "2025-02-01T06:45:00+00:00",
+              "end": "2025-02-01T07:00:00+00:00"
+            },
           ```
         * `identifier.[]`  MUST contain the correct identifiers for BaRS including service-id AND product-id, e.g.
-          ```
+          ```json
           {
             "system": "https://fhir.nhs.uk/Id/BaRS-Identifier",
             "value": "GL0-DZOqD39"
@@ -1244,7 +1268,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.2.0:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
@@ -1278,7 +1302,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json:
+            application/fhir+json;version=1.2.0:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:

@@ -5,6 +5,7 @@ properties:
     example: DocumentReference
   identifier:
     type: array
+    minItems: 3  # Ensure at least three items DosId, ProductId and BaRS Identifier
     items:
       type: object
       properties:
@@ -16,6 +17,9 @@ properties:
           type: string
           example: GL0-DZOqD39
       additionalProperties: false
+    required:
+      - system
+      - value
   status:
     type: string
     example: current
@@ -38,7 +42,12 @@ properties:
               type: string
               example: Appointment (record artifact)
           additionalProperties: false
+          required:
+            - system
+            - code
     additionalProperties: false
+    required:
+      - coding
   category:
     type: array
     items:
@@ -59,6 +68,10 @@ properties:
               display:
                 type: string
                 example: Clinical notes
+          additionalProperties: false
+          required:
+            - system
+            - code
       additionalProperties: false
   subject:
     type: object
@@ -70,10 +83,15 @@ properties:
             type: string
             example: https://fhir.nhs.uk/Id/nhs-number
             format: url
+            pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/nhs-number$
           value:
             type: string
-            example: '9693893123'
+            example: '3495456481'
+            pattern: ^\d{10}$  # NHS number must be 10 digits
         additionalProperties: false
+      required:
+        - system
+        - value
     additionalProperties: false
   date:
     type: string
@@ -95,6 +113,9 @@ properties:
               type: string
               example: RGT
           additionalProperties: false
+        required:
+          - system
+          - value
       additionalProperties: false
   custodian:
     type: object
@@ -106,13 +127,18 @@ properties:
             type: string
             example: https://fhir.nhs.uk/Id/ods-organization-code
             format: url
+            pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code$
           value:
             type: string
             example: RGT
         additionalProperties: false
+      required:
+        - system
+        - value
     additionalProperties: false
   content:
     type: array
+    minItems: 1  # Ensure at least one entry
     items:
       type: object
       properties:
@@ -135,12 +161,8 @@ properties:
                           type: string
                         display:
                           type: string
-                      required:
-                      - system
-                      - code
-                      - display
                 required:
-                - coding
+                  - coding
               url:
                 type: string
         attachment:
@@ -153,6 +175,9 @@ properties:
               type: string
               format: url
               example: https://server.fire.ly/r4/Appointment/GL0-DZOqD39
+          required:
+            - contentType
+            - url
           additionalProperties: false
         format:
           type: object
@@ -167,6 +192,9 @@ properties:
             display:
               type: string
               example: Structured Document
+          required:
+            - system
+            - code
           additionalProperties: false
       additionalProperties: false
   context:
@@ -183,6 +211,9 @@ properties:
             type: string
             example: '2025-02-01T07:00:00+00:00'
             format: date-time
+        required:
+          - start
+          - end
         additionalProperties: false
       practiceSetting:
         type: object
@@ -205,4 +236,13 @@ properties:
               additionalProperties: false
         additionalProperties: false
     additionalProperties: false
+required:
+  - subject
+  - type
+  - custodian
+  - content
+  - identifier
+  - category
+  - author
 additionalProperties: false
+
