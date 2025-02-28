@@ -1,5 +1,11 @@
 {
 	"resourceType": "Appointment",
+  "meta": {
+    "lastUpdated": "2021-11-11T12:11:30+00:00",
+    "profile": [
+      "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Appointment"
+    ]
+  },
 	"id": "91607239-b002-470a-8709-6b25bd50fdd1",
 	"status": "booked"
 }
