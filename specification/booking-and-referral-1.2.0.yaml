@@ -191,7 +191,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Metadata
@@ -248,7 +247,6 @@ paths:
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Metadata
@@ -384,7 +382,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Slots
@@ -513,7 +510,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Booking
@@ -563,6 +559,8 @@ paths:
       description: |
         Update a single Appointment resource.     
       operationId: createAppointment
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         "200":
           description: Successful response
@@ -604,7 +602,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Booking
@@ -662,6 +659,7 @@ paths:
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
         - $ref: '#/components/parameters/RequestingDevice_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         "200":
           description: Successful response
@@ -700,6 +698,8 @@ paths:
       description: | 
         Partially update a single Appointment resource.
       operationId: patchAppointment
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         '200':
           description: Successful response
@@ -747,6 +747,7 @@ paths:
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
         - $ref: '#/components/parameters/RequestingDevice_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         "200":
           description: Successful response
@@ -782,7 +783,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Referral
@@ -834,6 +834,8 @@ paths:
       description: | 
         Update a single ServiceRequest resource.  
       operationId: createReferral
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         '200':
           description: Successful response
@@ -875,7 +877,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Referral
@@ -924,6 +925,8 @@ paths:
       description: | 
         Update a single ServiceRequest resource.  
       operationId: putReferral
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         '200':
           description: Successful response
@@ -961,6 +964,8 @@ paths:
       summary: Partially update a specific referral
       description: | 
         Update a single ServiceRequest resource.  
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       operationId: patchReferral
       responses:
         '200':
@@ -999,6 +1004,8 @@ paths:
       summary: Cancel a specific referral
       description: |
          Cancel a specific referral
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       operationId: deleteReferral
       responses:
         '200':
@@ -1074,6 +1081,7 @@ paths:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         "201":
           description: Create / Supersede successful response
@@ -1257,13 +1265,14 @@ paths:
         * `type`
 
         Note that unlike NRL STU3 changing the `status` field does NOT delete document pointers.  To delete document
-        pointers please use the `DELETE` endpoint.      
+        pointers please use the `DELETE` endpoint.   
       operationId: updateDocumentReference
       parameters:
         - $ref: '#/components/parameters/RegistryId_Param'
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         "200":
           description: Successful response
@@ -1298,6 +1307,7 @@ paths:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         '200':
           description: Successful response
