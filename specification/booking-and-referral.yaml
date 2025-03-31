@@ -377,7 +377,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Slots
@@ -505,7 +504,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Booking
@@ -558,7 +556,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Booking
@@ -609,7 +606,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Referral
@@ -664,7 +660,6 @@ paths:
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
       - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/use-context_HParam'
     get:
       tags:
         - Referral
