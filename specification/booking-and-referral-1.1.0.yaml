@@ -556,6 +556,8 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
     post:      
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       tags:
         - Booking
       summary: Create an Appointment resource
@@ -647,6 +649,7 @@ paths:
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
         - $ref: '#/components/parameters/RequestingDevice_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         "200":
           description: Successful response
@@ -666,6 +669,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Appointment'
     patch:
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       tags:
         - Booking
       summary: Partially update a specific Appointment
@@ -719,6 +724,7 @@ paths:
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
         - $ref: '#/components/parameters/RequestingDevice_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/use-context_HParam'
       responses:
         "200":
           description: Successful response
@@ -786,6 +792,8 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
     post:
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       tags:
         - Referral
       summary: Create a Referral
@@ -875,6 +883,8 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
     put:
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       tags:
         - Referral
       summary: Update a specific referral
@@ -913,6 +923,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ServiceRequest'
     patch:
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       tags:
         - Referral
       summary: Partially update a specific referral
@@ -951,6 +963,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ServiceRequest'
     delete:
+      parameters:
+        - $ref: '#/components/parameters/use-context_HParam'
       tags:
         - Referral
       summary: Cancel a specific referral
@@ -1488,7 +1502,7 @@ components:
     DocumentReferenceBundle:
       $ref: schemas1.1.0/DocumentReferenceBundle.yaml
     DocumentReference:
-      $ref: schemas1.1.0/DocumentReferenceBundle.yaml
+      $ref: schemas1.1.0/DocumentReference.yaml
     RequestQuerySubject:
       type: string
       pattern: ^(?:https:\/\/fhir\.nhs\.uk\/Id\/nhs-number\|(\d+)|https%3A%2F%2Ffhir\.nhs\.uk%2FId%2Fnhs-number%7C(\d+))$
