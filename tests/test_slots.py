@@ -18,6 +18,7 @@ class TestSlots:
     @pytest.mark.slots
     @pytest.mark.integration
     @pytest.mark.sandbox
+    @pytest.mark.debug
     def test_get_slots_happy_path(self, get_token_client_credentials):
         """
           test to get slots for the target identifier
