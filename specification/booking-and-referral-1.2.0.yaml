@@ -523,6 +523,9 @@ paths:
       operationId: getBookingByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
+        - $ref: '#/components/parameters/PatientName_QParam'
+        - $ref: '#/components/parameters/PatientDoB_QParam'
+        - $ref: '#/components/parameters/PatientPostcode_QParam'
       responses:
         '200':
           description: Success
@@ -797,6 +800,9 @@ paths:
       operationId: getReferralByPatient
       parameters:
         - $ref: '#/components/parameters/PatientId_QParam'
+        - $ref: '#/components/parameters/PatientName_QParam'
+        - $ref: '#/components/parameters/PatientDoB_QParam'
+        - $ref: '#/components/parameters/PatientPostcode_QParam'
         - $ref: '#/components/parameters/ServiceRequestId_QParam'
       responses:
         '200':
@@ -1693,7 +1699,7 @@ components:
     PatientId_QParam:
       name: patient:identifier
       description: |
-        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales.
+        The patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales. It can be used without reference to Name, Date of Birth or Postcode parameters.
         
         |Type           |Expression|
         |-------             | --------|
@@ -1701,11 +1707,38 @@ components:
         
         **Example query without encoding** 
         *https://fhir.nhs.uk/Id/nhs-number|4857773456*
-      required: true
+      required: false
       in: query
       schema:
         type: string
         example: https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C4857773456
+    PatientName_QParam:
+      name: patient:name
+      description: |
+        The patient's name, including family, given, prefix, suffix and/or text. The Receiving system will check against any patient demographic fields they hold to establish a match. It is expected this parameter is used in conjunction with Date of Birth and Postcode to ensure a unique match.
+      required: false
+      in: query
+      schema:
+        type: string
+        example: John%20Smith%0A
+    PatientDoB_QParam:
+      name: patient:birthdate
+      description: |
+        The patient's Date of Birth. The Receiving system will check against this patient demographic field to establish a match. It is expected this parameter is used in conjunction with Name and Postcode to ensure a unique match.
+      required: false
+      in: query
+      schema:
+        type: string
+        example: eq20%2F01%2F1995%0A
+    PatientPostcode_QParam:
+      name: patient:address-postalcode
+      description: |
+        The patient's Home address Postcode. The Receiving system will check against this patient demographic field to establish a match. It is expected this parameter is used in conjunction with Name and Date of Birth to ensure a unique match.
+      required: false
+      in: query
+      schema:
+        type: string
+        example: LS1%204AP%0A
     ServiceRequestId_QParam:
       name: ServiceRequest.identifier
       description: |
