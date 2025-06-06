@@ -1,0 +1,11 @@
+title: NHSD-Requesting-Practitioner
+description: |
+  Requesting Practitioner described in an object based on a FHIR 'PractitionerRole' resource (Standard Base64 encoded JSON).
+  
+  This item is not mandatory, however if the information is available it must be included in the request. Only in the event that it is not available, should it be omitted.
+  
+  The example below shows a General Practitioner and their SDS Role profile Id.
+  The Base64 encoded example below shows a General Practitioner and their SDS Role profile Id.
+type: string
+format: byte
+example: 'eyJyZXNvdXJjZVR5cGUiOiJzdHJpbmciLCJpZGVudGlmaWVyIjpbeyJ2YWx1ZSI6InN0cmluZyIsInN5c3RlbSI6InN0cmluZyJ9XSwiY29kZSI6W3siY29kaW5nIjpbeyJzeXN0ZW0iOiJzdHJpbmciLCJjb2RlIjoic3RyaW5nIiwiZGlzcGxheSI6InN0cmluZyJ9XX1dfQo='
