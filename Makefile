@@ -24,6 +24,7 @@ publish: clean
 	rm -rf build
 	mkdir -p build
 	node_modules/.bin/redocly bundle specification/booking-and-referral-1.2.0.yaml --remove-unused-components --ext json -o build/booking-and-referral-1.2.0.json
+	node_modules/.bin/redocly bundle specification/booking-and-referral-1.2.0.yaml --remove-unused-components --ext json -o build/booking-and-referral-1.2.0.json
 	node_modules/.bin/redocly bundle specification/booking-and-referral-1.1.0.yaml --remove-unused-components --ext json -o build/booking-and-referral-1.1.0.json
 	node_modules/.bin/redocly bundle specification/booking-and-referral.yaml --remove-unused-components --ext json -o build/booking-and-referral.json
 
