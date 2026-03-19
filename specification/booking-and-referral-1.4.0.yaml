@@ -1337,92 +1337,6 @@ paths:
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
       description: |
         Delete a single document pointer that you created. 
-  /Organization:
-    get:
-      tags:
-        - Organization
-      summary: Get the Organization for an identifier
-      description: Get the Organization for an identifier
-      operationId: findOrganizationByOrg
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/Organization_QParam'
-        - $ref: '#/components/parameters/Accept_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
-      responses:
-        '200':
-          $ref: '#/components/responses/200-OrganizationBundle'
-        4XX:
-          $ref: '#/components/responses/4XX-BARS'
-        5XX:
-          $ref: '#/components/responses/5XX-BARS' 
-    post:
-      tags:
-        - Organization
-      summary: Create an Organization
-      description: | 
-        Create a single Organization resource.  
-      operationId: createOrganization
-      responses:
-        '200':
-          $ref: '#/components/responses/200-AtomicOrganization'
-        4XX:
-          $ref: '#/components/responses/4XX-BARS'
-        5XX:
-          $ref: '#/components/responses/5XX-BARS'
-      requestBody:
-        $ref: '#/components/requestBodies/Organization'
-  '/Organization/{id}':
-    parameters:
-      - $ref: '#/components/parameters/ResourceId_Param'
-      - $ref: '#/components/parameters/RequestId_HParam'
-      - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/Accept_HParam'
-      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
-    get:
-      tags: 
-        - Organization
-      summary: Get a Specific Organization
-      description: read operation for a Specific Organization
-      operationId: getOrganization
-      responses:
-        '200':
-          $ref: '#/components/responses/200-AtomicOrganization'
-        4XX:
-          $ref: '#/components/responses/4XX-BARS'
-        5XX:
-          $ref: '#/components/responses/5XX-BARS'
-    put:
-      tags: 
-        - Organization
-      summary: Update a Specific Organization
-      description: Creates a new current version for an existing resource [(update)](https://www.hl7.org/fhir/http.html#update) or creates an initial version if no resource already exists for the given id [(new)](https://www.hl7.org/fhir/http.html#upsert).
-      operationId: replaceOrganization
-      responses:
-        '200':
-          $ref: '#/components/responses/200-AtomicOrganization'
-        '201':
-          $ref: '#/components/responses/201-Created'
-        4XX:
-          $ref: '#/components/responses/4XX-BARS'
-        5XX:
-          $ref: '#/components/responses/5XX-BARS'          
-    delete:
-      tags: 
-        - Organization
-      summary: Delete a Specific Organization
-      description: Delete a Specific Organization
-      operationId: deleteOrganization
-      responses:
-        '200':
-           $ref: '#/components/responses/200-Delete'
-        4XX:
-          $ref: '#/components/responses/4XX-BARS'
-        5XX:
-          $ref: '#/components/responses/5XX-BARS'
   /HealthcareService:
     get:
       tags:
@@ -1485,7 +1399,7 @@ paths:
     put:
       tags: 
         - HealthcareService
-      summary: Update a Specific Organization
+      summary: Update a Specific HealthcareService
       description: Creates a new current version for an existing resource [(update)](https://www.hl7.org/fhir/http.html#update) or creates an initial version if no resource already exists for the given id [(new)](https://www.hl7.org/fhir/http.html#upsert).
       operationId: replaceHealthcareService
       responses:
