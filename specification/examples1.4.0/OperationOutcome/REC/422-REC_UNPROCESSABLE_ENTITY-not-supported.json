@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "13b0f566-4b1e-4944-a459-837ee79d6c6d",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "not-supported",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_UNPROCESSABLE_ENTITY"
+					}
+				]
+			},
+			"diagnostics": "the versioning specified is not supported."
+		}
+	]
+}

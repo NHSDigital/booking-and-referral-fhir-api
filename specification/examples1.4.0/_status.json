@@ -1,0 +1,20 @@
+{
+    "status": "pass",
+    "version": "v1.2.445-beta",
+    "revision": "229",
+    "releaseId": "14646",
+    "commitId": "44ffee6003831d3a76cf7787633159b18e0ed660",
+    "checks": {
+      "spine:status": [
+        {
+          "status": "pass",
+          "timeout": "false",
+          "responseCode": 200,
+          "outcome": "",
+          "links": {
+            "self": "https://veit07.devspineservices.nhs.uk/healthcheck"
+          }
+        }
+      ]
+    }
+  }

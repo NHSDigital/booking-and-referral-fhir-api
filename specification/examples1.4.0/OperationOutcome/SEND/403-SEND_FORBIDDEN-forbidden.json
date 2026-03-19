@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "3ce474db-cbc8-4682-a5ab-ca2a4eda1dae",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "forbidden",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "SEND_FORBIDDEN"
+					}
+				]
+			},
+			"diagnostics": "The access token was provided, but BaRS is not enabled."
+		}
+	]
+}

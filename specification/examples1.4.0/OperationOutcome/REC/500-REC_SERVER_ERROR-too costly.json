@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "c6b791dc-a0f6-4c46-989e-558b937d4974",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "too costly",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_SERVER_ERROR"
+					}
+				]
+			},
+			"diagnostics": "The start params in a slot request were two wide resulting in a large number of results. ."
+		}
+	]
+}

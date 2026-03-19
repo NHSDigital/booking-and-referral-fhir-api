@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "a1cf1049-9003-4a5d-9ce4-74dbcbc8682a",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "processing",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "SEND_NOT_ACCEPTABLE"
+					}
+				]
+			},
+			"diagnostics": "The requested resource is capable of generating only content not acceptable according to the Accept headers sent in the request. Versions in Accept or content."
+		}
+	]
+}

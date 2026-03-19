@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "85b86ad8-844c-4e3b-8b38-b875ba1cf104",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "not-supported",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "SEND_METHOD_NOT_ALLOWED"
+					}
+				]
+			},
+			"diagnostics": "using the wrong http verb. ie GET instead of POST"
+		}
+	]
+}
