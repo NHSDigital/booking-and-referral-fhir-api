@@ -188,7 +188,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifierMeta_HParam'      
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
@@ -243,7 +242,6 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'      
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
@@ -306,7 +304,6 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
       - $ref: '#/components/parameters/use-context_HParam'
     post:
@@ -379,7 +376,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
@@ -507,7 +503,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
@@ -602,7 +597,6 @@ paths:
       - $ref: '#/components/parameters/ResourceId_Param'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
@@ -659,7 +653,6 @@ paths:
         - $ref: '#/components/parameters/ResourceId_Param'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
         - $ref: '#/components/parameters/use-context_HParam'
       responses:
@@ -747,7 +740,6 @@ paths:
         - $ref: '#/components/parameters/ResourceId_Param'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
         - $ref: '#/components/parameters/Accept_HParam'
         - $ref: '#/components/parameters/use-context_HParam'
       responses:
@@ -783,7 +775,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
@@ -880,7 +871,6 @@ paths:
       - $ref: '#/components/parameters/TargetIdentifier_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/RequestingPractitioner_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
     get:
       tags:
@@ -1351,7 +1341,6 @@ paths:
         - $ref: '#/components/parameters/HealthcareServiceIdentifier_QParam'
         - $ref: '#/components/parameters/Accept_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-OrganizationBundle'
@@ -1382,7 +1371,6 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags: 
         - HealthcareService
@@ -1438,7 +1426,6 @@ paths:
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
         - $ref: '#/components/parameters/Accept_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/RequestingDevice_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointBundle'
@@ -1469,7 +1456,6 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/Accept_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-      - $ref: '#/components/parameters/RequestingDevice_HParam'
     get:
       tags: 
         - Endpoint
@@ -1700,38 +1686,6 @@ components:
       in: header
       schema:
         $ref: '#/components/schemas/TargetIdentifier'
-    RequestingDevice_HParam:
-      name: NHSD-Requesting-Software
-      description: |
-        Requesting Software described in an object based on a FHIR 'Device' resource (Standard Base64 encoded JSON).
-        Different BaRS Applications may have different standards and requirements for the Access Control which these headers are used for. 
-        
-        The identifier used, though arbitrary, should be consistent across instances of a product, the name and version of the product should also be accurate and consistent.
-        
-        **Example object before encoding**
-        ```json
-        {
-          "resourceType": "Device",
-          "identifier": [
-            {
-              "system": "https://consumersupplier.com/Id/device-identifier",
-              "value": "SUPP-APP-1"
-            }
-          ],
-          "deviceName": {
-            "name": "Supplier product name",
-            "type": "manufacturer-name"
-          },
-          "version": {
-            "value": "1.0.0"
-          }
-        }
-
-
-      required: true
-      in: header
-      schema:
-        $ref: '#/components/schemas/RequestingSoftwareToken'
     RequestingOrganisation_HParam:
       name: NHSD-End-User-Organisation
       description: |
@@ -2215,8 +2169,6 @@ components:
       $ref: schemas1.4.0/RequestingOrganisation.yaml
     RequestingPractitionerToken:
       $ref: schemas1.4.0/RequestingPractitioner.yaml
-    RequestingSoftwareToken:
-      $ref: schemas1.4.0/RequestingSoftware.yaml
     DocumentReferenceBundle:
       $ref: schemas1.4.0/DocumentReferenceBundle.yaml
     DocumentReference:
