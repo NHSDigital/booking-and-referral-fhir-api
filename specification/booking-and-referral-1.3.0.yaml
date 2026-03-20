@@ -1757,7 +1757,7 @@ components:
       name: NHSD-Target-Identifier
       description: |
           The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/home/core/1.3.1/endpointcatalogue-standardpattern).
+          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.3.1/End-to-end-workflow).
           
           **Example object before encoding** 
           ```json
@@ -1774,7 +1774,7 @@ components:
       name: NHSD-Target-Identifier
       description: |
         The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/home/core/1.3.1/endpointcatalogue-standardpattern).
+         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/home/core/1.3.1/End-to-end-workflow).
           
         **Example object before encoding** 
         ```json
