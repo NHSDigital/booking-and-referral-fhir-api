@@ -1449,6 +1449,29 @@ paths:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
         $ref: '#/components/requestBodies/Endpoint'
+  '/Endpoint/$template':
+    get:
+      tags:
+        - Endpoint
+      summary: Get the Endpoint template based on an Organization identifier
+      description: Get the Endpoint template for an identifier. Its address will be omitted if the Endpoint.header is set to private, unless the requestor is the owner.
+      operationId: getEndpointTemplate
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/EndpointHas_Qparam'
+        - $ref: '#/components/parameters/EndpointIdentifier_QParam'
+        - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+        - $ref: '#/components/parameters/ConnectionType_HParam'
+        - $ref: '#/components/parameters/PayloadType_HParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/200-EndpointBundle'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS' 
   '/Endpoint/{id}':
     parameters:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
@@ -1770,7 +1793,21 @@ components:
       required: true
       schema:
         type: string
-        example: application/fhir+json; version=1.4.0       
+        example: application/fhir+json; version=1.4.0    
+    ConnectionType_HParam:
+      name: ConnectionType
+      description: 'The technical protocol (e.g., hl7-fhir-rest).'
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/ConnectionType' 
+    PayloadType_HParam:
+      name: PayloadType
+      description: 'Defines the specific message standard used (e.g., BaRS).'
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/PayloadType' 
     use-context_HParam:
       name: use-context
       description: 'This header is for usage statistics for the BaRS Proxy for NHS England.'
@@ -2169,6 +2206,10 @@ components:
       $ref: schemas1.4.0/RequestingOrganisation.yaml
     RequestingPractitionerToken:
       $ref: schemas1.4.0/RequestingPractitioner.yaml
+    ConnectionType:
+      $ref: schemas1.4.0/ConnectionType.yaml
+    PayloadType:
+      $ref: schemas1.4.0/PayloadType.yaml
     DocumentReferenceBundle:
       $ref: schemas1.4.0/DocumentReferenceBundle.yaml
     DocumentReference:
