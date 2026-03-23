@@ -2015,7 +2015,8 @@ components:
     EndpointIdentifier_QParam:
       name: Endpoint.identifier
       description: |
-        The identifier of the type of Endpoint.
+        The identifier of the *type* of Endpoint, usually the identifier set by the organisation/supplier that created the Endpoint. 
+        It is important to note that this is **not** the same as **Endpoint.id**, which is the unique identifier for the Endpoint resource. The Endpoint.identifier can be shared across multiple Endpoint resources.
         This needs to be Url Encoded as its passed as a query parameter and part of the url.
       in: query
       required: false
@@ -2039,7 +2040,7 @@ components:
         $ref: '#/components/schemas/Has'
     EndpointIdentifier_PParam:
       name: id
-      description: The identifier of the endpoint.
+      description: The unique identifier of the endpoint.
       in: path
       required: true
       allowEmptyValue: false
