@@ -1349,7 +1349,7 @@ paths:
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/HCProvidedBy_QParam'
         - $ref: '#/components/parameters/HealthcareServiceIdentifier_QParam'
-        - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/AcceptEPC_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
@@ -1379,7 +1379,7 @@ paths:
       - $ref: '#/components/parameters/HealthcareServiceIdentifier_PParam'
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/AcceptEPC_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
     get:
       tags: 
@@ -1434,7 +1434,7 @@ paths:
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/EndpointHas_Qparam'
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
-        - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/AcceptEPC_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
@@ -1471,7 +1471,7 @@ paths:
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/EndpointHas_Qparam'
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
-        - $ref: '#/components/parameters/Accept_HParam'
+        - $ref: '#/components/parameters/AcceptEPC_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/ConnectionType_QParam'
         - $ref: '#/components/parameters/PayloadType_QParam'
@@ -1503,7 +1503,7 @@ paths:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/AcceptEPC_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
     get:
       tags: 
@@ -1557,7 +1557,7 @@ paths:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
       - $ref: '#/components/parameters/RequestId_HParam'
       - $ref: '#/components/parameters/CorrelationId_HParam'
-      - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/AcceptEPC_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       - $ref: '#/components/parameters/ConnectionType_QParam'
       - $ref: '#/components/parameters/PayloadType_QParam'
@@ -1590,7 +1590,7 @@ paths:
       operationId: deleteEndpointTemplate
       responses:
         '200':
-           $ref: '#/components/responses/200-Delete'
+          $ref: '#/components/responses/200-Delete'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1894,7 +1894,15 @@ components:
       required: true
       schema:
         type: string
-        example: application/fhir+json; version=1.4.0    
+        example: application/fhir+json; version=1.4.0 
+    AcceptEPC_HParam:
+      name: Accept
+      description: 'The Accept header must specify the type of content the requester can process.'
+      in: header
+      required: true
+      schema:
+        type: string
+        example: application/fhir+json;  
     ConnectionType_QParam:
       name: ConnectionType
       description: 'The technical protocol (e.g., hl7-fhir-rest).'
