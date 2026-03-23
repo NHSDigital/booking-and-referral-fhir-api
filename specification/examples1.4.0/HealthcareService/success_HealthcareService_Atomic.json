@@ -1,5 +1,6 @@
 {
   "resourceType": "HealthcareService",
+  "id": "7ded9440-3543-4809-b834-25c9be211195",
   "meta": {
       "lastUpdated": "2021-11-26T15:00:00.8185338+00:00",
       "profile": [
@@ -18,11 +19,18 @@
       }
   ],
   "active": true,
-  "providedBy": {
-      "reference": "Organization/d5ffd0cd-ec7e-48a1-84f1-91f4c0eb8fc5"
-  },
-  "name": "Emergency Department A",
-  "endpoint":{
+  "providedBy": [
+        {
+			"identifier": {
+				"system": "https://fhir.nhs.uk/Id/ods-organization-code",
+				"value": "R778"
+			}
+		}
+  ],
+  "name": "Example Healthcare Service",
+  "endpoint":[
+    {
       "reference":"Endpoint/4e958d43-ad80-40c9-85ff-2be003d1ea86"
-  }
+    }
+  ]
 }
