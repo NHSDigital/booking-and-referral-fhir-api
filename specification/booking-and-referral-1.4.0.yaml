@@ -1481,7 +1481,23 @@ paths:
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
-          $ref: '#/components/responses/5XX-BARS' 
+          $ref: '#/components/responses/5XX-BARS'
+    post:
+      tags:
+        - Endpoint
+      summary: Create an Endpoint template
+      description: | 
+        Create a single Endpoint template resource.  
+      operationId: createEndpointTemplate
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicEndpoint'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Endpoint' 
   '/Endpoint/{id}':
     parameters:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
@@ -1536,6 +1552,49 @@ paths:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
           $ref: '#/components/responses/5XX-BARS'
+  '/Endpoint/{id}/$template':
+    parameters:
+      - $ref: '#/components/parameters/EndpointIdentifier_PParam'
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/Accept_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+      - $ref: '#/components/parameters/ConnectionType_QParam'
+      - $ref: '#/components/parameters/PayloadType_QParam'
+    put:
+      tags: 
+        - Endpoint
+      summary: Update a Specific Endpoint template
+      description: | 
+        Creates a new current version for an existing resource ([update](https://www.hl7.org/fhir/http.html#update)) or creates an initial version if no resource already exists for the given id ([new](https://www.hl7.org/fhir/http.html#upsert)).
+
+        Only the owner of an Endpoint can modify its template. 
+      operationId: replaceEndpointTemplate
+      responses:
+        '200':
+          $ref: '#/components/responses/200-AtomicEndpoint'
+        '201':
+          $ref: '#/components/responses/201-Created'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
+    delete:
+      tags: 
+        - Endpoint
+      summary: Delete a Specific Endpoint
+      description: | 
+        Delete a Specific Endpoint template.
+        
+        Only the owner of an Endpoint can delete its template. 
+      operationId: deleteEndpointTemplate
+      responses:
+        '200':
+           $ref: '#/components/responses/200-Delete'
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'          
 components:
   requestBodies:
     DocumentReference:
