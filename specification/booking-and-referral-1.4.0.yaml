@@ -1463,8 +1463,8 @@ paths:
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
         - $ref: '#/components/parameters/Accept_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/ConnectionType_HParam'
-        - $ref: '#/components/parameters/PayloadType_HParam'
+        - $ref: '#/components/parameters/ConnectionType_QParam'
+        - $ref: '#/components/parameters/PayloadType_QParam'
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointBundle'
@@ -1794,18 +1794,16 @@ components:
       schema:
         type: string
         example: application/fhir+json; version=1.4.0    
-    ConnectionType_HParam:
+    ConnectionType_QParam:
       name: ConnectionType
       description: 'The technical protocol (e.g., hl7-fhir-rest).'
-      in: header
-      required: true
+      in: query
       schema:
         $ref: '#/components/schemas/ConnectionType' 
-    PayloadType_HParam:
+    PayloadType_QParam:
       name: PayloadType
       description: 'Defines the specific message standard used (e.g., BaRS).'
-      in: header
-      required: true
+      in: query
       schema:
         $ref: '#/components/schemas/PayloadType' 
     use-context_HParam:
