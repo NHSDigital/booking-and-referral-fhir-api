@@ -7,11 +7,17 @@
         "http://hl7.org/fhir/StructureDefinition/Endpoint"
     ]
   },
-  "identifier":{
-    "value": "1000099999",
-    "system": "https://fhir.nhs.uk/Id/dos-service-id",
-    "display": "Directory of Services (DOS)"
-  },
+  "identifier":[
+    {
+      "value": "1000099999",
+      "system": "https://fhir.nhs.uk/Id/dos-service-id",
+      "display": "Directory of Services (DOS)"
+    },
+    {
+      "system": "https://fhir.nhs.uk/id/product-id",
+      "value": "PinnaclePharmOutcomes-v2024.12.12"
+    }
+  ],
   "status": "active",
   "name": "Service Endpoint Name",
   "connectionType":{
