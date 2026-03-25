@@ -1365,6 +1365,10 @@ paths:
       description: | 
         Create a single HealthcareService resource.  
       operationId: createHealthcareService
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-AtomicHealthcareService'
@@ -1450,6 +1454,10 @@ paths:
       description: | 
         Create a single Endpoint resource.  
       operationId: createEndpoint
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-AtomicEndpoint'
@@ -1489,9 +1497,13 @@ paths:
       description: | 
         Create a single Endpoint template resource.  
       operationId: createEndpointTemplate
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
-          $ref: '#/components/responses/200-AtomicEndpoint'
+          $ref: '#/components/responses/200-EndpointTemplate'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1908,13 +1920,15 @@ components:
       description: 'The technical protocol (e.g., hl7-fhir-rest).'
       in: query
       schema:
-        $ref: '#/components/schemas/ConnectionType' 
+        $ref: '#/components/schemas/ConnectionType'
+        example: hl7-fhir-rest
     PayloadType_QParam:
       name: PayloadType
       description: 'Defines the specific message standard used (e.g., BaRS).'
       in: query
       schema:
-        $ref: '#/components/schemas/PayloadType' 
+        $ref: '#/components/schemas/PayloadType'
+        example: BaRS
     use-context_HParam:
       name: use-context
       description: 'This header is for usage statistics for the BaRS Proxy for NHS England.'
@@ -2165,6 +2179,27 @@ components:
             $ref: '#/components/schemas/Endpoint'
           example:
             $ref: examples1.4.0/Endpoint/success_Endpoint_Atomic.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-EndpointTemplate:         
+      description: The Operation was Successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: examples1.4.0/Endpoint/success_Endpoint_template.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
