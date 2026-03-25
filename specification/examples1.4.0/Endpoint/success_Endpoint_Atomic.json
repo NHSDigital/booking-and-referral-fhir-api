@@ -15,7 +15,7 @@
     },
     {
       "system": "https://fhir.nhs.uk/id/product-id",
-      "value": "PinnaclePharmOutcomes-v2024.12.12"
+      "value": "SupplierProduct-v2024.12.12"
     }
   ],
   "status": "active",
@@ -39,9 +39,12 @@
     ]
   },
   "managingOrganization":[
-     {
-      "reference": "3e96763f-7969-404f-afac-c415f47dff42"
-    }
+      {
+        "identifier": {
+          "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+          "value": "X254"
+        }
+      }
   ],
   "address": "https://myService.nhs.uk/Base/Address",
   "header": "public",

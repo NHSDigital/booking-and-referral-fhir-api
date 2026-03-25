@@ -10,7 +10,7 @@
     "identifier": [
         {
             "system": "https://fhir.nhs.uk/id/product-id",
-            "value": "PinnaclePharmOutcomes-v2024.12.12"
+            "value": "SupplierProduct-v2024.12.12"
         }
     ],
     "status": "active",

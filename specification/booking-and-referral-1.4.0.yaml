@@ -1430,7 +1430,7 @@ paths:
     get:
       tags:
         - Endpoint
-      summary: Get the Endpoints based on an Organization identifier
+      summary: Get the Endpoints based on an Organization, HealthcareService and Endpoint identifiers
       description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
       operationId: findEndpointByOrg
       parameters:
@@ -1468,21 +1468,20 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Endpoint'
   '/Endpoint/$template':
-    get:
-      tags:
-        - Endpoint
-      summary: Get the Endpoint template based on an Organization identifier
-      description: Get the Endpoint template for an identifier. Its address will be omitted if the Endpoint.header is set to private, unless the requestor is the owner.
-      operationId: getEndpointTemplate
-      parameters:
+    parameters:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/EndpointHas_Qparam'
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
         - $ref: '#/components/parameters/AcceptEPC_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
         - $ref: '#/components/parameters/ConnectionType_QParam'
         - $ref: '#/components/parameters/PayloadType_QParam'
+    get:
+      tags:
+        - Endpoint
+      summary: Get the Endpoint template based on an Organization, Endpoint, ConnectionType and PayloadType identifiers
+      description: Get the Endpoint template for an identifier. Its address will be omitted if the Endpoint.header is set to private, unless the requestor is the owner.
+      operationId: getEndpointTemplate
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointBundle'
@@ -1497,10 +1496,6 @@ paths:
       description: | 
         Create a single Endpoint template resource.  
       operationId: createEndpointTemplate
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointTemplate'
