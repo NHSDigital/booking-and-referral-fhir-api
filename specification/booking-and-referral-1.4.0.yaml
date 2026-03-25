@@ -101,7 +101,7 @@ info:
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
-    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.3.1/Security-and-Authorisation).
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.4.0/Security-and-Authorisation).
     
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
@@ -110,7 +110,7 @@ info:
     * 400 to 499 if it failed because of a client error by your application
     * 500 to 599 if it failed because of an error on our server
     
-    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.3.1/Error-Handling) for further information on error handling within the BaRS Standard.
+    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.4.0/Error-Handling) for further information on error handling within the BaRS Standard.
     
     ## Environments and testing
     | Environment       | Base URL                                                               |
@@ -328,7 +328,7 @@ paths:
         | Respond to a booking              | POST /$process-message | A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA. Example [here.](https://simplifier.net/nhsbookingandreferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2)
         | Cancelling a booking (and rebook) | POST /$process-message | An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
 
-        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.3.1/End-to-end-workflow) documentation, examples of other bundle types can be found [here.](https://simplifier.net/nhsbookingandreferrals/~resources?category=Example&exampletype=Bundle&sortBy=DisplayName)
+        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.4.0/End-to-end-workflow) documentation, examples of other bundle types can be found [here.](https://simplifier.net/nhsbookingandreferrals/~resources?category=Example&exampletype=Bundle&sortBy=DisplayName)
 
       operationId: processMessage
       requestBody:
@@ -1761,7 +1761,7 @@ components:
       name: NHSD-Target-Identifier
       description: |
           The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.3.1/End-to-end-workflow).
+          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.4.0/End-to-end-workflow).
           
           **Example object before encoding** 
           ```json
@@ -1778,7 +1778,7 @@ components:
       name: NHSD-Target-Identifier
       description: |
         The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/home/core/1.3.1/End-to-end-workflow).
+         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/home/core/1.4.0/End-to-end-workflow).
           
         **Example object before encoding** 
         ```json
@@ -2072,7 +2072,7 @@ components:
     4XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.3.1/Error-Handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.4.0/Error-Handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
@@ -2119,7 +2119,7 @@ components:
     5XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.3.1/Error-Handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1.4.0/Error-Handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
