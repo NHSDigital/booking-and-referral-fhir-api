@@ -1427,19 +1427,19 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
   /Endpoint:
-    get:
-      tags:
-        - Endpoint
-      summary: Get the Endpoints based on an Organization, HealthcareService and Endpoint identifiers
-      description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
-      operationId: findEndpointByOrg
-      parameters:
+    parameters:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/EndpointHas_Qparam'
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
         - $ref: '#/components/parameters/AcceptEPC_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
+    get:
+      tags:
+        - Endpoint
+      summary: Get the Endpoints based on an Organization, HealthcareService and Endpoint identifiers
+      description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
+      operationId: findEndpointByOrg
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointBundle'
@@ -1454,10 +1454,6 @@ paths:
       description: | 
         Create a single Endpoint resource.  
       operationId: createEndpoint
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-AtomicEndpoint'
@@ -1484,7 +1480,7 @@ paths:
       operationId: getEndpointTemplate
       responses:
         '200':
-          $ref: '#/components/responses/200-EndpointBundle'
+          $ref: '#/components/responses/200-EndpointTemplate'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1504,7 +1500,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/Endpoint' 
+        $ref: '#/components/requestBodies/EndpointTemplate' 
   '/Endpoint/{id}':
     parameters:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
@@ -1579,7 +1575,7 @@ paths:
       operationId: replaceEndpointTemplate
       responses:
         '200':
-          $ref: '#/components/responses/200-AtomicEndpoint'
+          $ref: '#/components/responses/200-EndpointTemplate'
         '201':
           $ref: '#/components/responses/201-Created'
         4XX:
@@ -1630,6 +1626,17 @@ components:
         application/fhir+json;version=1.4.0:
           schema:
             $ref: '#/components/schemas/Endpoint'
+          examples:
+            successExample:
+              externalValue: examples1.4.0/Endpoint/success_Endpoint_Atomic.json
+    EndpointTemplate:
+      content:
+        application/fhir+json;version=1.4.0:
+          schema:
+            $ref: '#/components/schemas/EndpointTemplate'
+          examples:
+            successExample:
+              externalValue: examples1.4.0/Endpoint/success_Endpoint_Template.json
     Organization:
       content:
         application/fhir+json;version=1.4.0:
@@ -1640,6 +1647,9 @@ components:
         application/fhir+json;version=1.4.0:
           schema:
             $ref: '#/components/schemas/HealthcareService'
+          examples:
+            successExample:
+              externalValue: examples1.4.0/HealthcareService/success_HealthcareService_Atomic.json
       required: true
     ServiceRequest:
       content:
@@ -2218,7 +2228,7 @@ components:
       content:
         application/fhir+json:
           schema:
-            $ref: '#/components/schemas/Endpoint'
+            $ref: '#/components/schemas/EndpointTemplate'
           example:
             $ref: examples1.4.0/Endpoint/success_Endpoint_template.json
       headers:
@@ -2348,6 +2358,8 @@ components:
       $ref: schemas1.4.0/Appointment.yaml
     Endpoint:
       $ref: schemas1.4.0/Endpoint.yaml
+    EndpointTemplate:
+      $ref: schemas1.4.0/EndpointTemplate.yaml
     HealthcareService:
       $ref: schemas1.4.0/HealthcareService.yaml
     Organization:
