@@ -43,19 +43,6 @@
             }
         }
     ],
-    "extension": [
-        {
-            "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-Endpoint.environmentType",
-            "valueCodeableConcept": {
-                "coding": [
-                    {
-                        "system": "http://hl7.org/fhir/endpoint-environment",
-                        "code": "staging"
-                    }
-                ]
-            }
-        }
-    ],
     "address": "https://myService.nhs.uk/Base/Address",
     "header": [
         "public"
