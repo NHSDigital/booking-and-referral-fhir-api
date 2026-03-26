@@ -2,7 +2,7 @@ type: object
 properties:
   resourceType:
     type: string
-    example: EndpointTemplate
+    example: Endpoint
   id:
     type: string
     example: 91607239-b002-470a-8709-6b25bd50fdd1

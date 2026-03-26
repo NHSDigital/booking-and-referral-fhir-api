@@ -29,15 +29,17 @@
       }
     ]
   },
-  "payloadType":{
-    "coding":[
+  "payloadType": [
       {
-        "code":"tbc",
-        "system":"tbc",
-        "display":"tbc"
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/endpoint-payload-type-epc",
+            "code": "bars",
+            "display": "BaRS"
+          }
+        ]
       }
-    ]
-  },
+    ],
   "managingOrganization":[
       {
         "identifier": {

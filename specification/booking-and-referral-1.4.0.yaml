@@ -1073,6 +1073,10 @@ paths:
                 type: string
                 format: uuid
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
       description: |
         Retrieve the document pointers for a single patient.  Your request is constrained by the document pointer types
         agreed during onboarding.  The results can also be filtered to return documents by a given `type` and/or created
@@ -1115,6 +1119,10 @@ paths:
                 type: string
                 format: uuid
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
       requestBody:
         $ref: '#/components/requestBodies/DocumentReference'
       description: |
@@ -1252,6 +1260,10 @@ paths:
                 type: string
                 format: uuid
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
       description: |
         Read a single document pointer by specifying a `DocumentReference.id`.  Note that you will only be able to
         retrieve document pointers that have been created by the organisation specified in the `ODS-End-User-Organisation`
@@ -1300,6 +1312,10 @@ paths:
                 type: string
                 format: uuid
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
       requestBody:
         $ref: '#/components/requestBodies/DocumentReference'
     delete:      
@@ -1335,6 +1351,10 @@ paths:
                 type: string
                 format: uuid
                 example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+        4XX:
+          $ref: '#/components/responses/4XX-BARS'
+        5XX:
+          $ref: '#/components/responses/5XX-BARS'
       description: |
         Delete a single document pointer that you created. 
   /HealthcareService:
@@ -1405,7 +1425,7 @@ paths:
         '200':
           $ref: '#/components/responses/200-AtomicHealthcareService'
         '201':
-          $ref: '#/components/responses/201-Created'
+          $ref: '#/components/responses/201-AtomicHealthcareService'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1533,7 +1553,7 @@ paths:
         '200':
           $ref: '#/components/responses/200-AtomicEndpoint'
         '201':
-          $ref: '#/components/responses/201-Created'
+          $ref: '#/components/responses/201-AtomicEndpoint'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1574,7 +1594,7 @@ paths:
         '200':
           $ref: '#/components/responses/200-EndpointTemplate'
         '201':
-          $ref: '#/components/responses/201-Created'
+          $ref: '#/components/responses/201-EndpointTemplate'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1634,11 +1654,6 @@ components:
           examples:
             successExample:
               externalValue: examples1.4.0/Endpoint/success_Endpoint_Template.json
-    Organization:
-      content:
-        application/fhir+json;version=1.4.0:
-          schema:
-            $ref: '#/components/schemas/Organization'
     HealthcareService:
       content:
         application/fhir+json;version=1.4.0:
@@ -2024,16 +2039,6 @@ components:
       in: query
       schema:
         $ref: "#/components/schemas/NextPageToken"
-    Organization_QParam:
-      name: Organization.identifier
-      description: |
-        The identifier of the organization that is managing the endpoint(s).
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
-      in: query
-      required: false
-      allowEmptyValue: false
-      schema:
-        $ref: '#/components/schemas/ODS'  
     HealthcareServiceIdentifier_QParam:
       name: HealthcareService.identifier
       description: |
@@ -2220,6 +2225,27 @@ components:
             type: string
             format: uuid
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    201-AtomicEndpoint:         
+      description: Resource Created Successfully
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          example:
+            $ref: 'examples1.4.0/Endpoint/success_Endpoint_Atomic.json'
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     200-EndpointTemplate:         
       description: The Operation was Successful
       content:
@@ -2228,6 +2254,27 @@ components:
             $ref: '#/components/schemas/EndpointTemplate'
           example:
             $ref: examples1.4.0/Endpoint/success_Endpoint_template.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    201-EndpointTemplate:         
+      description: Resource Created Successfully
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/EndpointTemplate'
+          example:
+            $ref: 'examples1.4.0/Endpoint/success_Endpoint_template.json'
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2262,14 +2309,14 @@ components:
             type: string
             format: uuid
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-    200-AtomicOrganization:         
-      description: The Operation was Successful
+    201-AtomicHealthcareService:         
+      description: Resource Created Successfully
       content:
         application/fhir+json:
           schema:
-            $ref: '#/components/schemas/Endpoint'
+            $ref: '#/components/schemas/HealthcareService'
           example:
-            $ref: examples1.4.0/Organization/success_Organization_Atomic.json
+            $ref: 'examples1.4.0/HealthcareService/success_HealthcareService_Atomic.json'
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2312,48 +2359,6 @@ components:
             $ref: '#/components/schemas/HealthcareServiceBundle'
           example:
             $ref: examples1.4.0/HealthcareService/success_bundle.json
-      headers:
-        X-Correlation-Id:
-          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
-          schema:
-            type: string
-            format: uuid
-            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-        X-Request-Id:
-          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
-          schema:
-            type: string
-            format: uuid
-            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-    200-OrganizationBundle:         
-      description: The operation was successful
-      content:
-        application/fhir+json:
-          schema:
-            $ref: '#/components/schemas/OrganizationBundle'
-          example:
-            $ref: examples1.4.0/Endpoint/success_bundle.json
-      headers:
-        X-Correlation-Id:
-          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
-          schema:
-            type: string
-            format: uuid
-            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
-        X-Request-Id:
-          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
-          schema:
-            type: string
-            format: uuid
-            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
-    201-Created:         
-      description: Resource Created Successfully
-      content:
-        application/fhir+json:
-          schema:
-            $ref: '#/components/schemas/Endpoint'
-          example:
-            $ref: examples1.4.0/Endpoint/success_bundle.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'

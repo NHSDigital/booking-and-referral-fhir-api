@@ -44,19 +44,21 @@ properties:
   providedBy:
     type: array
     items:
-      identifier:
-        type: object
-        properties:
-          system:
-            type: string
-            format: url
-            example: "https://fhir.nhs.uk/Id/dos-service-id"
-          value:
-            type: string
-            example: "1000099999"
-          display:
-            type: string
-            example: "Directory of Services (DOS)"
+      type: object
+      properties:
+        identifier:
+          type: object
+          properties:
+            system:
+              type: string
+              format: url
+              example: "https://fhir.nhs.uk/Id/dos-service-id"
+            value:
+              type: string
+              example: "1000099999"
+            display:
+              type: string
+              example: "Directory of Services (DOS)"
   endpoint:
     type: array
     items:
