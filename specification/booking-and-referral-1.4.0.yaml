@@ -1427,19 +1427,19 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
   /Endpoint:
-    parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/EndpointHas_Qparam'
-        - $ref: '#/components/parameters/EndpointIdentifier_QParam'
-        - $ref: '#/components/parameters/AcceptEPC_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
     get:
       tags:
         - Endpoint
       summary: Get the Endpoints based on an Organization, HealthcareService and Endpoint identifiers
       description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
       operationId: findEndpointByOrg
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/EndpointHas_Qparam'
+        - $ref: '#/components/parameters/EndpointIdentifier_QParam'
+        - $ref: '#/components/parameters/AcceptEPC_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointBundle'
@@ -1454,6 +1454,11 @@ paths:
       description: | 
         Create a single Endpoint resource.  
       operationId: createEndpoint
+      parameters:
+        - $ref: '#/components/parameters/RequestId_HParam'
+        - $ref: '#/components/parameters/CorrelationId_HParam'
+        - $ref: '#/components/parameters/AcceptEPC_HParam'
+        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-AtomicEndpoint'
