@@ -1,0 +1,19 @@
+{
+  "resourceType": "OperationOutcome",
+  "issue": [
+      {
+          "severity": "information",
+          "code": "informational",
+          "details": {
+              "coding": [
+                  {
+                      "system": "https://fhir.nhs.uk/ValueSet/NRL-ResponseCode",
+                      "code": "RESOURCE_DELETED",
+                      "display": "Resource deleted"
+                  }
+              ]
+          },
+          "diagnostics": "The requested DocumentReference has been deleted"
+      }
+  ]
+}

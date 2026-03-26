@@ -1,0 +1,208 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: CapabilityStatement
+  id:
+    type: string
+    example: BaRS-FHIR-Server
+  url:
+    type: string
+    example: https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4
+    format: url
+  name:
+    type: string
+    example: BaRS FHIR Server CapabilityStatement
+  status:
+    type: string
+    example: active
+  version:
+    type: string
+    example: 1.2.0
+  experimental:
+    type: boolean
+    example: false
+  date:
+    type: string
+    example: '2022-09-16T15:00:00+01:00'
+    format: date-time
+  publisher:
+    type: string
+    example: NHS Digital
+  contact:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          example: NHS Booking and Referral Standard
+        telecom:
+          type: array
+          items:
+            type: object
+            properties:
+              system:
+                type: string
+                example: email
+              value:
+                type: string
+                example: bookingandreferralstandard@nhs.net
+      additionalProperties: false
+  kind:
+    type: string
+    example: instance
+  software:
+    type: object
+    properties:
+      name:
+        type: string
+        example: BaRS API
+      version:
+        type: string
+        example: 1.1.0
+    additionalProperties: false
+  implementation:
+    type: object
+    properties:
+      description:
+        type: string
+        example: BaRS FHIR Server
+      url:
+        type: string
+        example: https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4
+        format: url
+    additionalProperties: false
+  fhirVersion:
+    type: string
+    example: 4.0.1
+  format:
+    type: array
+    items:
+      type: string
+      example: xml
+  rest:
+    type: array
+    items:
+      type: object
+      properties:
+        mode:
+          type: string
+          example: server
+        interaction:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: transaction
+        security:
+          type: array
+          items:
+            type: object
+            properties:
+              service:
+                type: object
+                properties:
+                  coding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        service:
+                          type: object
+                          properties:
+                            coding:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  code:
+                                    type: string
+                                  system:
+                                    type: string
+                                    format: url
+                                  display:
+                                    type: string            
+        resource:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: CapabilityStatement
+              interaction:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+              versioning:
+                type: string
+                example: no-version
+              searchParam:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: start
+                    type:
+                      type: string
+                      example: date         
+              searchInclude:
+                type: array
+                items:
+                  type: string
+                  example: Slot:schedule
+        operation:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: $process-message
+              definition:
+                type: string
+                format: url
+                example: >-
+                  http://hl7.org/fhir/OperationDefinition/MessageHeader-process-message
+      additionalProperties: false
+  messaging:
+    type: array
+    items:
+      type: object
+      properties:
+        endpoint:
+          type: array
+          items:
+            type: object
+            properties:
+              protocol:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: http
+              address:
+                type: string
+                format: url
+                example: https://int.api.service.nhs.uk/booking-and-referral/FHIR/R4
+        supportedMessage:
+          type: array
+          items:
+            type: object
+            properties:
+              mode:
+                type: string
+                example: receiver
+              definition:
+                type: string
+                example: MessageDefinition/bars-message-booking-request
+      additionalProperties: false
+additionalProperties: false

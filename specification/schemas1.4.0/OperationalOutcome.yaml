@@ -1,0 +1,49 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: OperationOutcome
+  id:
+    type: string
+    example: 531e073a-3295-4e67-ae90-e00bd96a9cdd
+    format: uuid
+  meta:
+    type: object
+    properties:
+      profile:
+        type: array
+        items:
+          type: string
+          format: url
+          example: https://fhir.hl7.org.uk/StructureDefinition/UKCore-OperationOutcome
+    additionalProperties: false
+  issue:
+    type: array
+    items:
+      type: object
+      properties:
+        severity:
+          type: string
+          example: information
+        code:
+          type: string
+          example: informational
+        details:
+          type: object
+          properties:
+            coding:
+              type: array
+              items:
+                type: object
+                properties:
+                  system:
+                    type: string
+                    format: url
+                  code:
+                    type: string
+                  display:
+                    type: string
+          additionalProperties: false
+        diagnostics:
+          type: string
+          example: Resource updated
