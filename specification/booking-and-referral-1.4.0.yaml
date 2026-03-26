@@ -1338,6 +1338,11 @@ paths:
       description: |
         Delete a single document pointer that you created. 
   /HealthcareService:
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/AcceptEPC_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
     get:
       tags:
         - HealthcareService
@@ -1345,12 +1350,8 @@ paths:
       description: Get the HealthcareService for an identifier
       operationId: findHealthcareServiceByOrg
       parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/HCProvidedBy_QParam'
         - $ref: '#/components/parameters/HealthcareServiceIdentifier_QParam'
-        - $ref: '#/components/parameters/AcceptEPC_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-HealthcareServiceBundle'
@@ -1365,10 +1366,6 @@ paths:
       description: | 
         Create a single HealthcareService resource.  
       operationId: createHealthcareService
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-AtomicHealthcareService'
@@ -1427,6 +1424,11 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
   /Endpoint:
+    parameters:
+      - $ref: '#/components/parameters/RequestId_HParam'
+      - $ref: '#/components/parameters/CorrelationId_HParam'
+      - $ref: '#/components/parameters/AcceptEPC_HParam'
+      - $ref: '#/components/parameters/RequestingOrganisation_HParam'
     get:
       tags:
         - Endpoint
@@ -1434,12 +1436,8 @@ paths:
       description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
       operationId: findEndpointByOrg
       parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
         - $ref: '#/components/parameters/EndpointHas_Qparam'
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
-        - $ref: '#/components/parameters/AcceptEPC_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointBundle'
@@ -1454,11 +1452,6 @@ paths:
       description: | 
         Create a single Endpoint resource.  
       operationId: createEndpoint
-      parameters:
-        - $ref: '#/components/parameters/RequestId_HParam'
-        - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/AcceptEPC_HParam'
-        - $ref: '#/components/parameters/RequestingOrganisation_HParam'
       responses:
         '200':
           $ref: '#/components/responses/200-AtomicEndpoint'
@@ -1472,17 +1465,18 @@ paths:
     parameters:
         - $ref: '#/components/parameters/RequestId_HParam'
         - $ref: '#/components/parameters/CorrelationId_HParam'
-        - $ref: '#/components/parameters/EndpointIdentifier_QParam'
         - $ref: '#/components/parameters/AcceptEPC_HParam'
         - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-        - $ref: '#/components/parameters/ConnectionType_QParam'
-        - $ref: '#/components/parameters/PayloadType_QParam'
     get:
       tags:
         - Endpoint
       summary: Get the Endpoint template based on an Organization, Endpoint, ConnectionType and PayloadType identifiers
       description: Get the Endpoint template for an identifier. Its address will be omitted if the Endpoint.header is set to private, unless the requestor is the owner.
       operationId: getEndpointTemplate
+      parameters:
+        - $ref: '#/components/parameters/EndpointIdentifier_QParam'
+        - $ref: '#/components/parameters/ConnectionType_QParam'
+        - $ref: '#/components/parameters/PayloadType_QParam'
       responses:
         '200':
           $ref: '#/components/responses/200-EndpointTemplate'
@@ -1567,8 +1561,6 @@ paths:
       - $ref: '#/components/parameters/CorrelationId_HParam'
       - $ref: '#/components/parameters/AcceptEPC_HParam'
       - $ref: '#/components/parameters/RequestingOrganisation_HParam'
-      - $ref: '#/components/parameters/ConnectionType_QParam'
-      - $ref: '#/components/parameters/PayloadType_QParam'
     put:
       tags: 
         - Endpoint
