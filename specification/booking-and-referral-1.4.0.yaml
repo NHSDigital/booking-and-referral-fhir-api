@@ -1464,7 +1464,7 @@ paths:
       tags:
         - Endpoint
       summary: Get the Endpoints based on HealthcareService and Endpoint identifiers
-      description: Get the Endpoints for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
+      description: Get the Endpoints for an identifier, its address will be omitted if the Endpoint.header is set to private unless the requestor is the owner.
       operationId: getEndpoints
       parameters:
         - $ref: '#/components/parameters/EndpointHas_Qparam'
@@ -1501,7 +1501,7 @@ paths:
     get:
       tags:
         - Endpoint
-      summary: Get the Endpoint templates based on an Endpoint, ConnectionType and PayloadType identifiers
+      summary: Get the Endpoint templates based on Endpoint, ConnectionType and PayloadType identifiers
       description: Get the Endpoint templates for an identifier. Its address will be omitted if the Endpoint.header is set to private, unless the requestor is the owner.
       operationId: getEndpointTemplates
       parameters:

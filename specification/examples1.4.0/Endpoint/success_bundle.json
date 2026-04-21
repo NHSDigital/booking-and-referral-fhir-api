@@ -7,7 +7,7 @@
   "link": [
     {
       "relation": "self",
-      "url": "https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/Endpoint?organization=org-123"
+      "url": "https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/Endpoint?_has:HealthcareService.Id=95852b93-d1ab-4c51-8e7d-c24cf9b257a9&_has:HealthcareService.Identifier=https%3A%2F%2Ffhir.nhs.uk%2FId%2Fdos-service-id%7C1000099999&Endpoint.identifier=https%3A%2F%2Ffhir.nhs.uk%2Fid%2Fproduct-id%7CSupplierProduct-v2024.12.12"
     }
   ],
   "entry": [
@@ -65,9 +65,9 @@
         ],
         "address": "https://myService.nhs.uk/Base/Address",
         "header": "public",
-        "Period":{
-          "Start":"2021-10-11T15:23:30+00:00",
-          "End":"2021-10-11T15:23:30+00:00"
+        "period":{
+          "start":"2021-10-11T15:23:30+00:00",
+          "end":"2021-10-11T15:23:30+00:00"
         }
       }
     },
@@ -125,9 +125,9 @@
         ],
         "address": "https://myService.nhs.uk/Base/Address",
         "header": "public",
-        "Period":{
-          "Start":"2021-10-11T15:23:30+00:00",
-          "End":"2021-10-11T15:23:30+00:00"
+        "period":{
+          "start":"2021-10-11T15:23:30+00:00",
+          "end":"2021-10-11T15:23:30+00:00"
         }
       }
     }

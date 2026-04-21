@@ -7,7 +7,7 @@
   "link": [
     {
       "relation": "self",
-      "url": "https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/Endpoint?organization=org-123"
+      "url": "https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/Endpoint/$template?Endpoint.identifier=https%3A%2F%2Ffhir.nhs.uk%2Fid%2Fproduct-id%7CSupplierProduct-v2024.12.12&ConnectionType=https%3A%2F%2Fterminology.hl7.org%2FCodeSystem%2Fendpoint-connection-type%7Chl7-fhir-rest&PayloadType=https%3A%2F%2Fterminology.hl7.org%2FCodeSystem%2Fendpoint-payload-type%7Cbars"
     }
   ],
   "entry": [
@@ -115,11 +115,7 @@
             }
         ],
         "address": "https://myService.nhs.uk/Base/Address",
-        "header": "public",
-        "Period":{
-          "Start":"2021-10-11T15:23:30+00:00",
-          "End":"2021-10-11T15:23:30+00:00"
-        }
+        "header": "public"
       }
     }
   ]

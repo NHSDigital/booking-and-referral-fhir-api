@@ -101,14 +101,14 @@ properties:
   header:
     type: string
     example: public
-  Period:
+  period:
     type: object
     properties:
-      Start:
+      start:
         type: string
         example: '2021-10-11T15:01:30+00:00'
         format: date-time
-      End:
+      end:
         type: string
         example: '2021-10-12T15:01:30+00:00'
         format: date-time
