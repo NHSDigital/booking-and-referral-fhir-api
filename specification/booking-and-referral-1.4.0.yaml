@@ -1676,7 +1676,7 @@ components:
             $ref: '#/components/schemas/EndpointTemplate'
           examples:
             successExample:
-              externalValue: examples1.4.0/Endpoint/success_Endpoint_Template.json
+              externalValue: examples1.4.0/Endpoint/success_Endpoint_template.json
     EndpointTemplatePost:
       content:
         application/fhir+json;version=1.4.0:
@@ -1976,7 +1976,7 @@ components:
       name: ConnectionType
       description: |
         The URL encoded technical protocol used (e.g., hl7-fhir-rest).
-        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
+        This needs to be URL Encoded as it is passed as a query parameter and part of the URL.
         
         |Type           |Expression|
         |-------             | --------|
@@ -1994,7 +1994,7 @@ components:
         Defines the specific message standard used (e.g., BaRS).
 
         The URL encoded specific message standard used (e.g., BaRS).
-        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
+        This needs to be URL Encoded as it is passed as a query parameter and part of the URL.
         
         |Type           |Expression|
         |-------             | --------|
