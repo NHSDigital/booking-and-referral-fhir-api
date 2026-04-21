@@ -1,0 +1,137 @@
+type: object
+properties:
+  resourceType:
+    type: string
+  id:
+    type: string
+    example: "777a156c-af3c-4748-a8a3-7e95e4b0df9a"
+  type:
+    type: string
+    example: "searchset"
+  total:
+    type: integer
+    example: 2
+  timestamp:
+    type: string
+  link:
+    type: array
+    items:
+      type: object
+      properties:
+        relation:
+          type: string
+        url:
+          type: string
+  entry:
+    type: array
+    items:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+        resource:
+          type: object
+          properties:
+            resourceType:
+              type: string
+              example: Endpoint
+            id:
+              type: string
+              example: 91607239-b002-470a-8709-6b25bd50fdd1
+              format: uuid
+            meta:
+              type: object
+              properties:
+                lastUpdated:
+                  type: string
+                  example: '2021-10-11T15:01:30+00:00'
+                  format: date-time
+                profile:
+                  type: array
+                  items:
+                    type: string
+                    format: url
+                    example: http://hl7.org/fhir/structuredefinition/endpoint
+            identifier:
+              type: array
+              items:
+                type: object
+                properties:
+                  system:
+                    type: string
+                    format: url
+                    example: "https://fhir.nhs.uk/Id/dos-service-id"
+                  value:
+                    type: string
+                    example: "1000099999"
+                  display:
+                    type: string
+                    example: "Directory of Services (DOS)"
+            status:
+              type: string
+              example: active
+            name:
+              type: string
+              example: Service Endpoint name
+            connectionType:
+              type: object
+              properties:
+                coding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        system:
+                          type: string
+                          format: url
+                          example: "http://terminology.hl7.org/CodeSystem/endpoint-payload-type"
+                        code:
+                          type: string
+                          example: "hl7-fhir-msg"
+                        display:
+                          type: string
+                          example: "HL7 FHIR Messaging"
+            payloadType:
+              type: array
+              items:
+                type: object
+                properties:
+                  coding:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          system:
+                            type: string
+                            format: url
+                            example: "http://terminology.hl7.org/CodeSystem/endpoint-payload-type"
+                          code:
+                            type: string
+                            example: "bars"
+                          display:
+                            type: string
+                            example: "BaRS"
+            managingOrganization:
+              type: array
+              items:
+                type: object
+                properties:
+                  identifier:
+                    type: object
+                    properties:
+                      system:
+                        type: string
+                        format: url
+                        example: "https://fhir.nhs.uk/Id/ods-organization-code"
+                      value:
+                        type: string
+                        example: "X254"
+            address:
+              type: string
+              format: url
+              example: "https://myService.nhs.uk/Base/Address"
+            header:
+              type: string
+              example: public
+
+

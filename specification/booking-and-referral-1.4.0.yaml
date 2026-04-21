@@ -170,14 +170,23 @@ servers:
     description: Integration Server
 tags:
   - name: Booking
+    description: Operations related to booking appointments
   - name: DocumentReference
+    description: Operations related to document reference management
   - name: Endpoint
+    description: Operations related to endpoint management
   - name: HealthcareService
+    description: Operations related to healthcare service information
   - name: Message
+    description: Operations related to message processing
   - name: Metadata
+    description: Operations related to capability statement and metadata
   - name: Organization
+    description: Operations related to organization information
   - name: Referral
+    description: Operations related to referral management
   - name: Slots
+    description: Operations related to slot availability
 security:
   - OAuth_Token: []
 paths:
@@ -1106,7 +1115,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                example: '/producer/FHIR/R4/DocumentReference/V4T0L-3aeb90b0-7ffa-408a-babf-f20b80ce2c27'
+                example: 'https://int.api.service.nhs.uk/record-locator/consumer/FHIR/R4/DocumentReference/V4T0L-3aeb90b0-7ffa-408a-babf-f20b80ce2c27'
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
               schema:
@@ -1366,9 +1375,9 @@ paths:
     get:
       tags:
         - HealthcareService
-      summary: Get the HealthcareService for an identifier
-      description: Get the HealthcareService for an identifier
-      operationId: findHealthcareServiceByOrg
+      summary: Get the HealthcareServices for an identifier
+      description: Get the HealthcareServices for an identifier
+      operationId: getHealthcareServices
       parameters:
         - $ref: '#/components/parameters/HCProvidedBy_QParam'
         - $ref: '#/components/parameters/HealthcareServiceIdentifier_QParam'
@@ -1394,7 +1403,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/HealthcareService'
+        $ref: '#/components/requestBodies/HealthcareServicePost'
   '/HealthcareService/{id}':
     parameters:
       - $ref: '#/components/parameters/HealthcareServiceIdentifier_PParam'
@@ -1429,7 +1438,9 @@ paths:
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
-          $ref: '#/components/responses/5XX-BARS'          
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/HealthcareService'          
     delete:
       tags: 
         - HealthcareService
@@ -1452,9 +1463,9 @@ paths:
     get:
       tags:
         - Endpoint
-      summary: Get the Endpoints based on an Organization, HealthcareService and Endpoint identifiers
-      description: Get the Endpoint for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
-      operationId: findEndpointByOrg
+      summary: Get the Endpoints based on HealthcareService and Endpoint identifiers
+      description: Get the Endpoints for an identifier, its address will be omitted if it the Endpoint.header set to private unless the requestor is the owner.
+      operationId: getEndpoints
       parameters:
         - $ref: '#/components/parameters/EndpointHas_Qparam'
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
@@ -1480,7 +1491,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/Endpoint'
+        $ref: '#/components/requestBodies/EndpointPost'
   '/Endpoint/$template':
     parameters:
         - $ref: '#/components/parameters/RequestId_HParam'
@@ -1490,16 +1501,16 @@ paths:
     get:
       tags:
         - Endpoint
-      summary: Get the Endpoint template based on an Organization, Endpoint, ConnectionType and PayloadType identifiers
-      description: Get the Endpoint template for an identifier. Its address will be omitted if the Endpoint.header is set to private, unless the requestor is the owner.
-      operationId: getEndpointTemplate
+      summary: Get the Endpoint templates based on an Endpoint, ConnectionType and PayloadType identifiers
+      description: Get the Endpoint templates for an identifier. Its address will be omitted if the Endpoint.header is set to private, unless the requestor is the owner.
+      operationId: getEndpointTemplates
       parameters:
         - $ref: '#/components/parameters/EndpointIdentifier_QParam'
         - $ref: '#/components/parameters/ConnectionType_QParam'
         - $ref: '#/components/parameters/PayloadType_QParam'
       responses:
         '200':
-          $ref: '#/components/responses/200-EndpointTemplate'
+          $ref: '#/components/responses/200-EndpointTemplateBundle'
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
@@ -1519,7 +1530,7 @@ paths:
         5XX:
           $ref: '#/components/responses/5XX-BARS'
       requestBody:
-        $ref: '#/components/requestBodies/EndpointTemplate' 
+        $ref: '#/components/requestBodies/EndpointTemplatePost' 
   '/Endpoint/{id}':
     parameters:
       - $ref: '#/components/parameters/EndpointIdentifier_PParam'
@@ -1557,7 +1568,9 @@ paths:
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
-          $ref: '#/components/responses/5XX-BARS'          
+          $ref: '#/components/responses/5XX-BARS'
+      requestBody:
+        $ref: '#/components/requestBodies/Endpoint'          
     delete:
       tags: 
         - Endpoint
@@ -1598,7 +1611,9 @@ paths:
         4XX:
           $ref: '#/components/responses/4XX-BARS'
         5XX:
-          $ref: '#/components/responses/5XX-BARS'          
+          $ref: '#/components/responses/5XX-BARS'  
+      requestBody:
+        $ref: '#/components/requestBodies/EndpointTemplate'         
     delete:
       tags: 
         - Endpoint
@@ -1646,6 +1661,14 @@ components:
           examples:
             successExample:
               externalValue: examples1.4.0/Endpoint/success_Endpoint_Atomic.json
+    EndpointPost:
+      content:
+        application/fhir+json;version=1.4.0:
+          schema:
+            $ref: '#/components/schemas/Endpoint'
+          examples:
+            postExample:
+              externalValue: examples1.4.0/Endpoint/post_Endpoint_Atomic.json
     EndpointTemplate:
       content:
         application/fhir+json;version=1.4.0:
@@ -1654,6 +1677,14 @@ components:
           examples:
             successExample:
               externalValue: examples1.4.0/Endpoint/success_Endpoint_Template.json
+    EndpointTemplatePost:
+      content:
+        application/fhir+json;version=1.4.0:
+          schema:
+            $ref: '#/components/schemas/EndpointTemplate'
+          examples:
+            postExample:
+              externalValue: examples1.4.0/Endpoint/post_Endpoint_template.json
     HealthcareService:
       content:
         application/fhir+json;version=1.4.0:
@@ -1662,6 +1693,15 @@ components:
           examples:
             successExample:
               externalValue: examples1.4.0/HealthcareService/success_HealthcareService_Atomic.json
+      required: true
+    HealthcareServicePost:
+      content:
+        application/fhir+json;version=1.4.0:
+          schema:
+            $ref: '#/components/schemas/HealthcareService'
+          examples:
+            postExample:
+              externalValue: examples1.4.0/HealthcareService/post_HealthcareService_Atomic.json
       required: true
     ServiceRequest:
       content:
@@ -2345,6 +2385,27 @@ components:
             type: string
             format: uuid
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
+    200-EndpointTemplateBundle:         
+      description: The operation was successful
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/EndpointTemplateBundle'
+          example:
+            $ref: examples1.4.0/Endpoint/success_bundle_template.json
+      headers:
+        X-Correlation-Id:
+          description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: 9562466f-c982-4bd5-bb0e-255e9f5e6689
+        X-Request-Id:
+          description: 'The X-Request-Id from the request header, if supplied, mirrored back.'
+          schema:
+            type: string
+            format: uuid
+            example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
     200-HealthcareServiceBundle:         
       description: The operation was successful
       content:
@@ -2423,6 +2484,8 @@ components:
       example: https://fhir.nhs.uk/Id/ods-organization-code|A001
     EndpointBundle:
       $ref: schemas1.4.0/EndpointBundle.yaml
+    EndpointTemplateBundle:
+      $ref: schemas1.4.0/EndpointTemplateBundle.yaml
     HealthcareServiceBundle:
       $ref: schemas1.4.0/HealthcareServiceBundle.yaml
     OrganizationBundle:
