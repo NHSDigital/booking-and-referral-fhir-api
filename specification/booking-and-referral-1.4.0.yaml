@@ -1584,7 +1584,7 @@ paths:
     put:
       tags: 
         - Endpoint
-      summary: Update a Specific Endpoint template
+      summary: Update a Specific Endpoint Template
       description: | 
         Creates a new current version for an existing resource ([update](https://www.hl7.org/fhir/http.html#update)) or creates an initial version if no resource already exists for the given id ([new](https://www.hl7.org/fhir/http.html#upsert)).
 
@@ -1602,7 +1602,7 @@ paths:
     delete:
       tags: 
         - Endpoint
-      summary: Delete a Specific Endpoint
+      summary: Delete a Specific Endpoint Template
       description: | 
         Delete a Specific Endpoint template.
         
