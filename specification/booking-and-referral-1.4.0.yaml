@@ -456,7 +456,7 @@ paths:
             **Note**: Both _include and _revinclude share the same syntax - up to three components, separated by colon characters (:). 
             Unlike search queries, this is not a FHIRPath expression
 
-            The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the url reflecting this omission in the responses Bundle.link.url. 
+            The full list of applicable _includes are shown below. If any cannot be honored the Receiver will respond, ignoring the unsupported _include(s), with the URL reflecting this omission in the responses Bundle.link.url. 
 
             |Expression | Inclusion     |Description|
             |-------    |--------       |-------- |
@@ -1975,8 +1975,8 @@ components:
     ConnectionType_QParam:
       name: ConnectionType
       description: |
-        The Url encoded technical protocol used (e.g., hl7-fhir-rest).
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        The URL encoded technical protocol used (e.g., hl7-fhir-rest).
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
         
         |Type           |Expression|
         |-------             | --------|
@@ -1993,8 +1993,8 @@ components:
       description: |
         Defines the specific message standard used (e.g., BaRS).
 
-        The Url encoded specific message standard used (e.g., BaRS).
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        The URL encoded specific message standard used (e.g., BaRS).
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
         
         |Type           |Expression|
         |-------             | --------|
@@ -2018,8 +2018,8 @@ components:
     subject_QParam:
       name: subject:identifier
       description: |
-        The Url encoded patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales. 
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        The URL encoded patient's NHS number. The primary identifier of a patient across systems, unique to NHS England and Wales. 
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
         
         |Type           |Expression|
         |-------             | --------|
@@ -2035,7 +2035,7 @@ components:
     custodian_QParam:
       description: | 
         The custodian of the pointer
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
 
         **Endpoint without encoding**
         *https://fhir.nhs.uk/Id/ods-organization-code|Y05868*
@@ -2047,7 +2047,7 @@ components:
       name: type
       description: |
         The specified type of pointers to be returned.
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
 
         **Example query without encoding**
         *http://snomed.info/sct|749001000000101*
@@ -2077,7 +2077,7 @@ components:
       name: HealthcareService.identifier
       description: |
         The identifier of the HealthcareService.
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
       in: query
       required: false
       allowEmptyValue: false
@@ -2087,7 +2087,7 @@ components:
       name: HealthcareService.providedBy
       description: |
         The identifier of the organization that is managing the endpoint(s).
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
       in: query
       required: false
       allowEmptyValue: false
@@ -2106,7 +2106,7 @@ components:
       description: |
         The identifier of the *type* of Endpoint, usually the identifier set by the organisation/supplier that created the Endpoint. 
         It is important to note that this is **not** the same as **Endpoint.id**, which is the unique identifier for the Endpoint resource. The Endpoint.identifier can be shared across multiple Endpoint resources.
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
       in: query
       required: false
       allowEmptyValue: false
@@ -2116,7 +2116,7 @@ components:
       name: _has
       description: | 
         The healthcareService you want the Endpoints returned for.
-        This needs to be Url Encoded as its passed as a query parameter and part of the url.
+        This needs to be URL Encoded as its passed as a query parameter and part of the URL.
 
         |HealthcareService Property| Example|
         |-------             | --------|
