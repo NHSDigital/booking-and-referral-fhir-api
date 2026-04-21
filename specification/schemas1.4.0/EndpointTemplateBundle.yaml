@@ -51,7 +51,7 @@ properties:
                   items:
                     type: string
                     format: url
-                    example: http://hl7.org/fhir/structuredefinition/endpoint
+                    example: http://hl7.org/fhir/StructureDefinition/Endpoint
             identifier:
               type: array
               items:
