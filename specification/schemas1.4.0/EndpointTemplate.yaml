@@ -52,7 +52,7 @@ properties:
               system:
                 type: string
                 format: url
-                example: "http://terminology.hl7.org/CodeSystem/endpoint-payload-type"
+                example: "http://terminology.hl7.org/CodeSystem/endpoint-connection-type"
               code:
                 type: string
                 example: "hl7-fhir-msg"

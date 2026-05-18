@@ -1,0 +1,28 @@
+{
+  "resourceType": "HealthcareService",
+  "identifier": [
+    {
+      "system": "http://fhir.nhs.uk/Id/dos-service-id",
+      "value": "111111111"
+    },
+    {
+      "system": "http://fhir.nhs.uk/Id/product-id",
+      "value": "AAA000"
+    }
+  ],
+  "active": true,
+  "providedBy": [
+    {
+      "identifier": {
+        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+        "value": "R778"
+      }
+    }
+  ],
+  "name": "Example Healthcare Service",
+  "endpoint": [
+    {
+      "reference": "Endpoint/4e958d43-ad80-40c9-85ff-2be003d1ea86"
+    }
+  ]
+}

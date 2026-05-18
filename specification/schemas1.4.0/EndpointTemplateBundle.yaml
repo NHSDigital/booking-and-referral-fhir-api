@@ -51,7 +51,7 @@ properties:
                   items:
                     type: string
                     format: url
-                    example: http://hl7.org/fhir/structuredefinition/endpoint
+                    example: http://hl7.org/fhir/StructureDefinition/Endpoint
             identifier:
               type: array
               items:
@@ -84,7 +84,7 @@ properties:
                         system:
                           type: string
                           format: url
-                          example: "http://terminology.hl7.org/CodeSystem/endpoint-payload-type"
+                          example: "http://terminology.hl7.org/CodeSystem/endpoint-connection-type"
                         code:
                           type: string
                           example: "hl7-fhir-msg"
@@ -133,16 +133,5 @@ properties:
             header:
               type: string
               example: public
-            period:
-              type: object
-              properties:
-                start:
-                  type: string
-                  example: '2021-10-11T15:01:30+00:00'
-                  format: date-time
-                end:
-                  type: string
-                  example: '2021-10-12T15:01:30+00:00'
-                  format: date-time
 
 
