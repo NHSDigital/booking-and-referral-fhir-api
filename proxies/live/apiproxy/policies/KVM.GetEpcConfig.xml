@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM.GetEpcConfig" mapIdentifier="booking-and-referral-epc-config">
+    <DisplayName>KVM.GetEpcConfig</DisplayName>
+    <Get assignTo="private.epcBaseUrl">
+        <Key>
+            <Parameter>epc_base_url</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="private.epcOrganisation">
+        <Key>
+            <Parameter>epc_organisation</Parameter>
+        </Key>
+    </Get>
+</KeyValueMapOperations>

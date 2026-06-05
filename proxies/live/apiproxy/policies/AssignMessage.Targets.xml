@@ -1,7 +1,0 @@
-<AssignMessage name='AssignMessage.Targets'>
-  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
-  <AssignVariable>
-    <Name>targets</Name>
-    <Ref>s3CalloutResponse.content</Ref>
-  </AssignVariable>
-</AssignMessage>

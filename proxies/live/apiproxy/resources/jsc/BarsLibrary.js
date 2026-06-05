@@ -8,53 +8,6 @@
 
 */
 
-function set_variables(location, vars) {
-    /*
-      Unpacks the values from a kvm and publish them as context variables.
-      The kvm should be a JSON structure.
-      location: str
-      vars: JSON object
-
-    */
-    if (typeof vars !== 'object') {
-        return;
-    }
-
-    for (var key in vars)
-    {
-        if (!vars.hasOwnProperty(key))
-            continue;
-        variable = location + '.' + key;
-        value = vars[key];
-        if (typeof value === 'object' && value !== null) {
-            set_variables(variable, value);
-        }
-        else {
-            context.setVariable(variable, value);
-        }
-    }
-}
-
-
-function get_target_url_from_kvm_nhsd_target_identifier(system, value) {
-    /*
-      Get a url value from the booking-and-referral kvm.
-      the valid endpoints at the moment are:
-      - meta
-      - slots
-
-      If there is no value in the kvm it returns null
-    */
-      var NHSDTargetIdentifier = "NHSD-Target-Identifier"
-      var b64decodedTarget = JSON.parse(context.getVariable("b64decodedTarget"));
-      var url = b64decodedTarget[NHSDTargetIdentifier][system][value];
-      if(url && url.endsWith('/')){
-        url = url.replace(/\/$/,"")
-      }
-      return url
-  }
-
-
 function get_endpoint_from_pathsuffix(pathsuffix) {
 /*
     Get a the endpoint  value from the pathsuffix.

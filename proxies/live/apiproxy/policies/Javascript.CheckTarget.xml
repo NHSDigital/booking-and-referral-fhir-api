@@ -3,5 +3,4 @@
     <DisplayName>Javascript.CheckTarget</DisplayName>
     <Properties/>
     <ResourceURL>jsc://CheckTargets.js</ResourceURL>
-    <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
 </Javascript>

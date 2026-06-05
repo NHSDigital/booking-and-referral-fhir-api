@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM.PrepareEpcRequest">
+    <DisplayName>AM.PrepareEpcRequest</DisplayName>
+    <Properties/>
+    <Set>
+        <Verb>GET</Verb>
+        <Path>{epc.path}</Path>
+        <Headers>
+            <Header name="Accept">application/fhir+json</Header>
+            <Header name="x-request-id">{request.header.x-request-id}</Header>
+            <Header name="x-correlation-id">{request.header.x-correlation-id}</Header>
+            <Header name="NHSD-End-User-Organisation">{private.epcOrganisation}</Header>
+        </Headers>
+    </Set>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    <AssignTo createNew="true" transport="http" type="request">epcCallout</AssignTo>
+</AssignMessage>

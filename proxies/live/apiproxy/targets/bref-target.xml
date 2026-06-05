@@ -3,43 +3,44 @@
     <Flow name="Main">
       <Request>
         <Step>
-          <Name>KVM.GetS3Credentials</Name>
-        </Step>
-        <Step>
-          <Name>AM-S3Request</Name>
-        </Step>
-        <Step>
-          <Name>JC-AWSSignV4</Name>
-        </Step>
-        <Step>
-          <Name>SC-CallS3</Name>
-        </Step>
-        <Step>
-          <Name>AssignMessage.Targets</Name>
-          <Condition>targets = null</Condition>
-        </Step>
-        <Step>
-          <Name>Javascript.UnpackVars</Name>
-        </Step>
-        <Step>
           <Name>Python.DecodeBase64</Name>
         </Step>
         <Step>
           <Name>Javascript.CheckTarget</Name>
         </Step>
         <Step>
-          <Name>Javascript.SetTargetUrl</Name>
-        </Step>
-        <Step>
           <Name>RaiseFault.400MalformedTargetIdentifier</Name>
           <Condition>idMalformed = true</Condition>
+        </Step>
+        <Step>
+          <Name>KVM.GetEpcConfig</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.BuildEpcPath</Name>
+        </Step>
+        <Step>
+          <Name>AM.PrepareEpcRequest</Name>
+        </Step>
+        <Step>
+          <Name>SC.CallEpc</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.ParseEpcResponse</Name>
         </Step>
         <Step>
           <Name>RaiseFault.404ProxyNotFound</Name>
           <Condition>isError = true</Condition>
         </Step>
+        <Step>
+          <Name>RaiseFault.503EpcUnavailable</Name>
+          <Condition>epcUnavailable = true</Condition>
+        </Step>
+        <Step>
+          <Name>RaiseFault.500EpcInvalidResponse</Name>
+          <Condition>epcInvalidResponse = true</Condition>
+        </Step>
       </Request>
-      <Response/>      
+      <Response/>
     </Flow>
   </Flows>
   <DefaultFaultRule>
