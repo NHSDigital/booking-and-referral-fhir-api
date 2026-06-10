@@ -1,6 +1,3 @@
-[project]
-python = "^3.8"
-
 [tool.poetry]
 name = "booking-and-referral"
 version = "0.0.1-alpha"
