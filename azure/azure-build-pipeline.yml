@@ -28,6 +28,7 @@ extends:
   parameters:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
+    python_version: "3.10"
    
       
     
