@@ -8,7 +8,7 @@
     <Response>epcCalloutResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>{private.epcBaseUrl}</URL>
+        <URL>https://{private.epcHost}</URL>
         <SSLInfo>
             <Enabled>true</Enabled>
             <ClientAuthEnabled>true</ClientAuthEnabled>
