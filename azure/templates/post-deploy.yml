@@ -3,6 +3,11 @@ parameters:
     default: aws --profile=apim-dev
 
 steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.10"
+    displayName: Use Python 3.10
+
   - bash: |
       make install-python
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
