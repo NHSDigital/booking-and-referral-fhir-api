@@ -47,7 +47,7 @@ build-proxy:
 copy-examples:
 	cp -r  specification/examples sandbox/src/routes/examples
 
-_dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml Makefile build/. tests specification terraform infra"
+_dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml README.md Makefile build/. tests specification terraform infra"
 
 release: clean copy-examples publish build-proxy
 	mkdir -p dist
