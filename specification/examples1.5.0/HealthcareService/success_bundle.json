@@ -1,0 +1,93 @@
+{
+  "resourceType": "Bundle",
+  "id": "777a156c-af3c-4748-a8a3-7e95e4b0df9a",
+  "type": "searchset",
+  "total": 2,
+  "timestamp": "2026-03-26T10:30:00Z",
+  "link": [
+    {
+      "relation": "self",
+      "url": "https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/HealthcareService?organization=org-123"
+    }
+  ],
+  "entry": [
+    {
+      "fullUrl": "https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/HealthcareService/5fce3e6a-ba37-4289-84d1-cc3ebdb992f5",
+      "resource": {
+        "resourceType": "HealthcareService",
+        "id": "5fce3e6a-ba37-4289-84d1-cc3ebdb992f5",
+        "meta": {
+          "lastUpdated": "2021-11-26T15:00:00.8185338+00:00",
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/HealthcareService",
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-HealthcareService"
+          ]
+        },
+        "identifier": [
+            {
+                "system": "http://fhir.nhs.uk/Id/dos-service-id",
+                "value": "111111111"
+            },
+            {
+                "system": "http://fhir.nhs.uk/Id/product-id",
+                "value": "AAA000"
+            }
+        ],
+        "active": true,
+        "providedBy": [
+              {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "R778"
+            }
+          }
+        ],
+        "name": "Example Healthcare Service",
+        "endpoint":[
+          {
+            "reference":"Endpoint/4e958d43-ad80-40c9-85ff-2be003d1ea86"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "https://sandbox.api.service.nhs.uk/booking-and-referral/FHIR/R4/HealthcareService/c3f6145e-1a26-4345-b3f2-dccbcba62049",
+      "resource": {
+        "resourceType": "HealthcareService",
+        "id": "c3f6145e-1a26-4345-b3f2-dccbcba62049",
+        "meta": {
+          "lastUpdated": "2021-11-26T15:00:00.8185338+00:00",
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/HealthcareService",
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-HealthcareService"
+          ]
+        },
+        "identifier": [
+            {
+                "system": "http://fhir.nhs.uk/Id/dos-service-id",
+                "value": "111111111"
+            },
+            {
+                "system": "http://fhir.nhs.uk/Id/product-id",
+                "value": "AAA000"
+            }
+        ],
+        "active": true,
+        "providedBy": [
+              {
+            "identifier": {
+              "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+              "value": "R778"
+            }
+          }
+        ],
+        "name": "Example Healthcare Service",
+        "endpoint":[
+          {
+            "reference":"Endpoint/4e958d43-ad80-40c9-85ff-2be003d1ea86"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "ba1cf104-9900-43a5-b3ce-474dbcbc8682",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "forbidden",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_UNAUTHORIZED"
+					}
+				]
+			},
+			"diagnostics": "The Sending organisation/ software/ practitioner Role does is not allowed to access this information."
+		}
+	]
+}

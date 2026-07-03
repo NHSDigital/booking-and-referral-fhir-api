@@ -1,0 +1,73 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: Appointment
+  id:
+    type: string
+    example: 91607239-b002-470a-8709-6b25bd50fdd1
+    format: uuid
+  meta:
+    type: object
+    properties:
+      lastUpdated:
+        type: string
+        example: '2021-10-11T15:01:30+00:00'
+        format: date-time
+      profile:
+        type: array
+        items:
+          type: string
+          format: url
+          example: https://fhir.hl7.org.uk/StructureDefinition/UKCore-Appointment
+  status:
+    type: string
+    example: booked
+  description:
+    type: string
+    example: Reason for calling
+  start:
+    type: string
+    example: '2021-10-12T12:30:30+00:00'
+    format: date-time
+  end:
+    type: string
+    example: '2021-10-12T12:40:30+00:00'
+    format: date-time
+  slot:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+          example: urn:uuid:deb4c4b3-870b-4599-84df-5e54cef7afda
+  created:
+    type: string
+    example: '2021-10-11T15:01:30+00:00'
+    format: date-time
+  basedOn:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+          example: ServiceRequest/236bb75d-90ef-461f-b71e-fde7f899802c
+        type:
+          type: string
+          example: serviceRequest
+  participant:
+    type: array
+    items:
+      type: object
+      properties:
+        actor:
+          type: object
+          properties:
+            reference:
+              type: string
+              example: urn:uuid:788660eb-d2c9-4773-abd4-318484673fb2
+        status:
+          type: string
+          example: accepted

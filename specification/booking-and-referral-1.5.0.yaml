@@ -13,7 +13,7 @@ info:
       </div>
       <div class="nhsd-m-emphasis-box__content-box">
         <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
-        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home/About-BaRS/About-BaRS?version=1.6.0">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the  <a href="https://simplifier.net/guide/nhsbookingandreferralstandard" class="nhsd-a-link">BaRS implementation guide</a> for your use case.</p>
+        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the  <a href="https://simplifier.net/guide/nhsbookingandreferralstandard" class="nhsd-a-link">BaRS implementation guide</a> for your use case.</p>
         </div>
       </div>
       </div>
@@ -101,7 +101,7 @@ info:
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
-    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-4-1/Security-and-Authorisation).
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-5-0/Security-and-Authorisation).
     
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
@@ -110,7 +110,7 @@ info:
     * 400 to 499 if it failed because of a client error by your application
     * 500 to 599 if it failed because of an error on our server
     
-    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-4-1/Error-Handling) for further information on error handling within the BaRS Standard.
+    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-5-0/Error-Handling) for further information on error handling within the BaRS Standard.
     
     ## Environments and testing
     | Environment       | Base URL                                                               |
@@ -151,7 +151,7 @@ info:
     ## Contact us
     For help and support connecting to our APIs and to join our developer community, see [Help and support building healthcare software](https://digital.nhs.uk/developer/help-and-support).
        
-  version: 1.4.1-alpha
+  version: 1.5.0-alpha
   title: Booking and Referral API
   termsOfService: 'https://developer.nhs.uk/apis/uec-appointments'
   contact:
@@ -225,7 +225,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Capability'
               example:
-                $ref: examples1.4.0/metadata/BaRS_API_Capability_Statement.json
+                $ref: examples1.5.0/metadata/BaRS_API_Capability_Statement.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Capability'
@@ -287,7 +287,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
               example:
-                $ref: examples1.4.0/message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json
+                $ref: examples1.5.0/message_definition/MessageDefinition_ServiceRequest-request_CaseTransfer.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageDefinition'
@@ -337,7 +337,7 @@ paths:
         | Respond to a booking              | POST /$process-message | A sender may receive a response to a booking they've made, for example, where a patient fails to attend. The original receiver (now the sender, in effect) will respond to the original sender (now the receiver) with an updated payload to reflect the current state of the booking e.g. DNA. Example [here.](https://simplifier.net/nhsbookingandreferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2)
         | Cancelling a booking (and rebook) | POST /$process-message | An updated payload request ensuring the status of the appointment is set to 'cancelled', as a minimum.|
 
-        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-4-1/End-to-end-workflow) documentation, examples of other bundle types can be found [here.](https://simplifier.net/nhsbookingandreferrals/~resources?category=Example&exampletype=Bundle&sortBy=DisplayName)
+        for more information on processing requests, please see the guidance within our [End-to-End Workflow](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-5-0/End-to-end-workflow) documentation, examples of other bundle types can be found [here.](https://simplifier.net/nhsbookingandreferrals/~resources?category=Example&exampletype=Bundle&sortBy=DisplayName)
 
       operationId: processMessage
       requestBody:
@@ -348,7 +348,7 @@ paths:
             schema:
               $ref: '#/components/schemas/MessageBundle'
             example:
-              $ref: examples1.4.0/process_message/POST-body.json
+              $ref: examples1.5.0/process_message/POST-body.json
           application/fhir+xml:
             schema:
               $ref: '#/components/schemas/MessageBundle'
@@ -360,7 +360,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
               example:
-                $ref: examples1.4.0/process_message/POST-success.json
+                $ref: examples1.5.0/process_message/POST-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/MessageBundle'
@@ -488,7 +488,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleSlot'
               example:
-                $ref: examples1.4.0/slots/GET-success.json
+                $ref: examples1.5.0/slots/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleSlot'
@@ -542,7 +542,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
               example:
-                $ref: examples1.4.0/appointment/GET-success.json
+                $ref: examples1.5.0/appointment/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleAppt' 
@@ -580,7 +580,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.4.0/appointment/id/GET-success.json
+                $ref: examples1.5.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -633,7 +633,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.4.0/appointment/id/GET-success.json
+                $ref: examples1.5.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -679,7 +679,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.4.0/appointment/id/GET-success.json
+                $ref: examples1.5.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -719,7 +719,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Appointment'
               example:
-                $ref: examples1.4.0/appointment/id/GET-success.json
+                $ref: examples1.5.0/appointment/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/Appointment'
@@ -767,7 +767,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.4.0/200_PUT.json
+                $ref: examples1.5.0/200_PUT.json
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -820,7 +820,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
               example:
-                $ref: examples1.4.0/service_request/GET-success.json
+                $ref: examples1.5.0/service_request/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/SearchBundleRef'
@@ -858,7 +858,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.4.0/service_request/id/GET-success.json
+                $ref: examples1.5.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -911,7 +911,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.4.0/service_request/id/GET-success.json
+                $ref: examples1.5.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -949,7 +949,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.4.0/service_request/id/GET-success.json
+                $ref: examples1.5.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -989,7 +989,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
               example:
-                $ref: examples1.4.0/service_request/id/GET-success.json
+                $ref: examples1.5.0/service_request/id/GET-success.json
             application/fhir+xml:
               schema:
                 $ref: '#/components/schemas/ServiceRequest'
@@ -1029,7 +1029,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.4.0/200_DELETE.json
+                $ref: examples1.5.0/200_DELETE.json
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1066,7 +1066,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/fhir+json;version=1.4.0:
+            application/fhir+json;version=1.5.0:
               schema:
                 $ref: "#/components/schemas/DocumentReferenceBundle"
           headers:
@@ -1104,11 +1104,11 @@ paths:
         "201":
           description: Create / Supersede successful response
           content:
-            application/fhir+json;version=1.4.0:
+            application/fhir+json;version=1.5.0:
               schema: 
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.4.0/document_reference/POST-success.json
+                $ref: examples1.5.0/document_reference/POST-success.json
           headers:
             location:
               description: 'The location of the created resource.'
@@ -1251,11 +1251,11 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json;version=1.4.0:
+            application/fhir+json;version=1.5.0:
               schema:
                 $ref: '#/components/schemas/DocumentReference'
               example: 
-                $ref: examples1.4.0/document_reference/id/GET-success.json
+                $ref: examples1.5.0/document_reference/id/GET-success.json
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1303,11 +1303,11 @@ paths:
         "200":
           description: Successful response
           content:
-            application/fhir+json;version=1.4.0:
+            application/fhir+json;version=1.5.0:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.4.0/document_reference/POST-success.json
+                $ref: examples1.5.0/document_reference/POST-success.json
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1342,11 +1342,11 @@ paths:
         '200':
           description: Successful response
           content:
-            application/fhir+json;version=1.4.0:
+            application/fhir+json;version=1.5.0:
               schema:
                 $ref: '#/components/schemas/OperationalOutcome'
               example:
-                $ref: examples1.4.0/document_reference/id/DELETE-success.json
+                $ref: examples1.5.0/document_reference/id/DELETE-success.json
           headers:
             X-Correlation-Id:
               description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -1634,91 +1634,91 @@ components:
   requestBodies:
     DocumentReference:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/DocumentReferenceBundle'
     Appointment:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/Appointment'
           examples:
             successExample:
-              externalValue: examples1.4.0/appointment/PUT-body.json
+              externalValue: examples1.5.0/appointment/PUT-body.json
     AppointmentPatch:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/Appointment'
           examples:
             successExample:
-              externalValue: examples1.4.0/appointment/PATCH-body.json
+              externalValue: examples1.5.0/appointment/PATCH-body.json
     Endpoint:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/Endpoint'
           examples:
             successExample:
-              externalValue: examples1.4.0/Endpoint/success_Endpoint_Atomic.json
+              externalValue: examples1.5.0/Endpoint/success_Endpoint_Atomic.json
     EndpointPost:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/Endpoint'
           examples:
             postExample:
-              externalValue: examples1.4.0/Endpoint/post_Endpoint_Atomic.json
+              externalValue: examples1.5.0/Endpoint/post_Endpoint_Atomic.json
     EndpointTemplate:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/EndpointTemplate'
           examples:
             successExample:
-              externalValue: examples1.4.0/Endpoint/success_Endpoint_template.json
+              externalValue: examples1.5.0/Endpoint/success_Endpoint_template.json
     EndpointTemplatePost:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/EndpointTemplate'
           examples:
             postExample:
-              externalValue: examples1.4.0/Endpoint/post_Endpoint_template.json
+              externalValue: examples1.5.0/Endpoint/post_Endpoint_template.json
     HealthcareService:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/HealthcareService'
           examples:
             successExample:
-              externalValue: examples1.4.0/HealthcareService/success_HealthcareService_Atomic.json
+              externalValue: examples1.5.0/HealthcareService/success_HealthcareService_Atomic.json
       required: true
     HealthcareServicePost:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/HealthcareService'
           examples:
             postExample:
-              externalValue: examples1.4.0/HealthcareService/post_HealthcareService_Atomic.json
+              externalValue: examples1.5.0/HealthcareService/post_HealthcareService_Atomic.json
       required: true
     ServiceRequest:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/ServiceRequest'
           examples:
             successExample:
-              externalValue: examples1.4.0/service_request/PUT-body.json
+              externalValue: examples1.5.0/service_request/PUT-body.json
     ServiceRequestPatch:
       content:
-        application/fhir+json;version=1.4.0:
+        application/fhir+json;version=1.5.0:
           schema:
             $ref: '#/components/schemas/ServiceRequest'
           examples:
             successExample:
-              externalValue: examples1.4.0/service_request/PATCH-body.json
+              externalValue: examples1.5.0/service_request/PATCH-body.json
       required: true
   parameters:
     RegistryId_Param:
@@ -1818,7 +1818,7 @@ components:
       name: NHSD-Target-Identifier
       description: |
           The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-4-1/End-to-end-workflow).
+          More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-5-0/End-to-end-workflow).
           
           **Example object before encoding** 
           ```json
@@ -1835,7 +1835,7 @@ components:
       name: NHSD-Target-Identifier
       description: |
         The identifier of the Target system. A Base64 encoded object containing value and system properties. 
-         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/home/core/1-4-1/End-to-end-workflow).
+         More information for this can be found in our [implementation guidance](https://simplifier.net/guide/nhsbookingandreferralstandard/home/core/1-5-0/End-to-end-workflow).
           
         **Example object before encoding** 
         ```json
@@ -1963,7 +1963,7 @@ components:
       required: true
       schema:
         type: string
-        example: application/fhir+json; version=1.4.0 
+        example: application/fhir+json; version=1.5.0 
     AcceptEPC_HParam:
       name: Accept
       description: 'The Accept header must specify the type of content the requester can process.'
@@ -2139,7 +2139,7 @@ components:
     4XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-4-1/Error-Handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-5-0/Error-Handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
@@ -2169,7 +2169,7 @@ components:
           schema:
             $ref: '#/components/schemas/OperationalOutcome'
           example:
-            $ref: examples1.4.0/400-SEND.json
+            $ref: examples1.5.0/400-SEND.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2186,7 +2186,7 @@ components:
     5XX-BARS:
       description: |
         Below are examples of potential HTTP status codes and their associated error codes, which could be returned in the event of a fault. 
-        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-4-1/Error-Handling).
+        Guidance on error handling within BaRS can be found [here](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-5-0/Error-Handling).
 
         | HTTP status | Error code                 | Description |
         | ----------- | -------------------------- | --------------------------------------------- |
@@ -2203,7 +2203,7 @@ components:
           schema:
             $ref: '#/components/schemas/OperationalOutcome'
           example:
-            $ref: examples1.4.0/500-REC.json
+            $ref: examples1.5.0/500-REC.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2224,7 +2224,7 @@ components:
           schema:
             $ref: '#/components/schemas/OperationalOutcome'
           example:
-            $ref: examples1.4.0/OperationOutcome/200-Delete.json
+            $ref: examples1.5.0/OperationOutcome/200-Delete.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2245,7 +2245,7 @@ components:
           schema:
             $ref: '#/components/schemas/Endpoint'
           example:
-            $ref: examples1.4.0/Endpoint/success_Endpoint_Atomic.json
+            $ref: examples1.5.0/Endpoint/success_Endpoint_Atomic.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2266,7 +2266,7 @@ components:
           schema:
             $ref: '#/components/schemas/Endpoint'
           example:
-            $ref: 'examples1.4.0/Endpoint/success_Endpoint_Atomic.json'
+            $ref: 'examples1.5.0/Endpoint/success_Endpoint_Atomic.json'
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2287,7 +2287,7 @@ components:
           schema:
             $ref: '#/components/schemas/EndpointTemplate'
           example:
-            $ref: examples1.4.0/Endpoint/success_Endpoint_template.json
+            $ref: examples1.5.0/Endpoint/success_Endpoint_template.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2308,7 +2308,7 @@ components:
           schema:
             $ref: '#/components/schemas/EndpointTemplate'
           example:
-            $ref: 'examples1.4.0/Endpoint/success_Endpoint_template.json'
+            $ref: 'examples1.5.0/Endpoint/success_Endpoint_template.json'
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2329,7 +2329,7 @@ components:
           schema:
             $ref: '#/components/schemas/HealthcareService'
           example:
-            $ref: examples1.4.0/HealthcareService/success_HealthcareService_Atomic.json
+            $ref: examples1.5.0/HealthcareService/success_HealthcareService_Atomic.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2350,7 +2350,7 @@ components:
           schema:
             $ref: '#/components/schemas/HealthcareService'
           example:
-            $ref: 'examples1.4.0/HealthcareService/success_HealthcareService_Atomic.json'
+            $ref: 'examples1.5.0/HealthcareService/success_HealthcareService_Atomic.json'
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2371,7 +2371,7 @@ components:
           schema:
             $ref: '#/components/schemas/EndpointBundle'
           example:
-            $ref: examples1.4.0/Endpoint/success_bundle.json
+            $ref: examples1.5.0/Endpoint/success_bundle.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2392,7 +2392,7 @@ components:
           schema:
             $ref: '#/components/schemas/EndpointTemplateBundle'
           example:
-            $ref: examples1.4.0/Endpoint/success_bundle_template.json
+            $ref: examples1.5.0/Endpoint/success_bundle_template.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2413,7 +2413,7 @@ components:
           schema:
             $ref: '#/components/schemas/HealthcareServiceBundle'
           example:
-            $ref: examples1.4.0/HealthcareService/success_bundle.json
+            $ref: examples1.5.0/HealthcareService/success_bundle.json
       headers:
         X-Correlation-Id:
           description: 'The X-Correlation-Id from the request header, if supplied, mirrored back.'
@@ -2429,47 +2429,47 @@ components:
             example: c1ab3fba-6bae-4ba4-b257-5a87c44d4a91
   schemas:
     Capability:
-      $ref: schemas1.4.0/Capability.yaml
+      $ref: schemas1.5.0/Capability.yaml
     TargetIdentifier:
-      $ref: schemas1.4.0/TargetIdentifier.yaml
+      $ref: schemas1.5.0/TargetIdentifier.yaml
     Appointment:
-      $ref: schemas1.4.0/Appointment.yaml
+      $ref: schemas1.5.0/Appointment.yaml
     Endpoint:
-      $ref: schemas1.4.0/Endpoint.yaml
+      $ref: schemas1.5.0/Endpoint.yaml
     EndpointTemplate:
-      $ref: schemas1.4.0/EndpointTemplate.yaml
+      $ref: schemas1.5.0/EndpointTemplate.yaml
     HealthcareService:
-      $ref: schemas1.4.0/HealthcareService.yaml
+      $ref: schemas1.5.0/HealthcareService.yaml
     Organization:
-      $ref: schemas1.4.0/Organization.yaml
+      $ref: schemas1.5.0/Organization.yaml
     SearchBundleAppt:
-      $ref: schemas1.4.0/SearchBundleAppt.yaml
+      $ref: schemas1.5.0/SearchBundleAppt.yaml
     ServiceRequest:
-      $ref: schemas1.4.0/ServiceRequest.yaml
+      $ref: schemas1.5.0/ServiceRequest.yaml
     SearchBundleRef:
-      $ref: schemas1.4.0/SearchBundleRef.yaml
+      $ref: schemas1.5.0/SearchBundleRef.yaml
     SearchBundleSlot:
-      $ref: schemas1.4.0/SearchBundleSlot.yaml
+      $ref: schemas1.5.0/SearchBundleSlot.yaml
     MessageBundle:
-      $ref: schemas1.4.0/MessageBundle.yaml
+      $ref: schemas1.5.0/MessageBundle.yaml
     MessageDefinition:
-      $ref: schemas1.4.0/MessageDefinition.yaml
+      $ref: schemas1.5.0/MessageDefinition.yaml
     OperationalOutcome:
-      $ref: schemas1.4.0/OperationalOutcome.yaml
+      $ref: schemas1.5.0/OperationalOutcome.yaml
     RequestingOrganisationToken:
-      $ref: schemas1.4.0/RequestingOrganisation.yaml
+      $ref: schemas1.5.0/RequestingOrganisation.yaml
     RequestingPractitionerToken:
-      $ref: schemas1.4.0/RequestingPractitioner.yaml
+      $ref: schemas1.5.0/RequestingPractitioner.yaml
     ConnectionType:
-      $ref: schemas1.4.0/ConnectionType.yaml
+      $ref: schemas1.5.0/ConnectionType.yaml
     PayloadType:
-      $ref: schemas1.4.0/PayloadType.yaml
+      $ref: schemas1.5.0/PayloadType.yaml
     RequestingSoftwareToken:
-      $ref: schemas1.4.0/RequestingSoftware.yaml
+      $ref: schemas1.5.0/RequestingSoftware.yaml
     DocumentReferenceBundle:
-      $ref: schemas1.4.0/DocumentReferenceBundle.yaml
+      $ref: schemas1.5.0/DocumentReferenceBundle.yaml
     DocumentReference:
-      $ref: schemas1.4.0/DocumentReference.yaml
+      $ref: schemas1.5.0/DocumentReference.yaml
     RequestQueryCustodian:
       type: string
       pattern: ^(?:https:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code\|(\w+)|https%3A%2F%2Ffhir\.nhs\.uk%2FId%2Fods-organization-code%7C(\w+))$
@@ -2483,13 +2483,13 @@ components:
       type: string
       example: https://fhir.nhs.uk/Id/ods-organization-code|A001
     EndpointBundle:
-      $ref: schemas1.4.0/EndpointBundle.yaml
+      $ref: schemas1.5.0/EndpointBundle.yaml
     EndpointTemplateBundle:
-      $ref: schemas1.4.0/EndpointTemplateBundle.yaml
+      $ref: schemas1.5.0/EndpointTemplateBundle.yaml
     HealthcareServiceBundle:
-      $ref: schemas1.4.0/HealthcareServiceBundle.yaml
+      $ref: schemas1.5.0/HealthcareServiceBundle.yaml
     OrganizationBundle:
-      $ref: schemas1.4.0/OrganizationBundle.yaml
+      $ref: schemas1.5.0/OrganizationBundle.yaml
     Service:
       type: string
       example: https://fhir.nhs.uk/Id/dos-service-id|1000099999

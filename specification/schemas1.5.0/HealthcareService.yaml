@@ -1,0 +1,74 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: HealthcareService
+  id:
+    type: string
+    example: 7ded9440-3543-4809-b834-25c9be211195
+    format: uuid
+  meta:
+    type: object
+    properties:
+      lastUpdated:
+        type: string
+        example: '2021-10-11T15:01:30+00:00'
+        format: date-time
+      profile:
+        type: array
+        items:
+          type: string
+          format: url
+          example: https://fhir.hl7.org.uk/StructureDefinition/UKCore-HealthcareService
+  identifier:
+    type: array
+    items:
+      type: object
+      properties:
+        system:
+          type: string
+          format: url
+          example: "https://fhir.nhs.uk/Id/dos-service-id"
+        value:
+          type: string
+          example: "1000099999"
+        display:
+          type: string
+          example: "Directory of Services (DOS)"
+  active:
+    type: boolean
+    example: true
+  name:
+    type: string
+    example: Example Healthcare Service
+  providedBy:
+    type: array
+    items:
+      type: object
+      properties:
+        identifier:
+          type: object
+          properties:
+            system:
+              type: string
+              format: url
+              example: "https://fhir.nhs.uk/Id/dos-service-id"
+            value:
+              type: string
+              example: "1000099999"
+            display:
+              type: string
+              example: "Directory of Services (DOS)"
+  endpoint:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+          example: "Endpoint/7ded9440-3543-4809-b834-25c9be211195"
+x-examples:
+  example:
+    resourceType: Endpoint
+    meta: 
+      profile: https://fhir.hl7.org.uk/StructureDefinition/UKCore-HealthcareService

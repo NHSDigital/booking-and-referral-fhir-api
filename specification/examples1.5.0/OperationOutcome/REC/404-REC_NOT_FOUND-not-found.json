@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "4b1e944a-4598-437e-b79d-6c6d3a365a5c",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "not-found",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_NOT_FOUND"
+					}
+				]
+			},
+			"diagnostics": "the resource requested was not found."
+		}
+	]
+}
