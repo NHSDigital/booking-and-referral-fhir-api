@@ -2446,6 +2446,8 @@ components:
       $ref: schemas1.5.0/SearchBundleAppt.yaml
     ServiceRequest:
       $ref: schemas1.5.0/ServiceRequest.yaml
+    RelatedPerson:
+      $ref: schemas1.5.0/RelatedPerson.yaml
     SearchBundleRef:
       $ref: schemas1.5.0/SearchBundleRef.yaml
     SearchBundleSlot:

@@ -1,0 +1,166 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: RelatedPerson
+  id:
+    type: string
+    example: 3d1b5a5d-9a56-4fa6-8a74-8e79e2d5e3b2
+    format: uuid
+  meta:
+    type: object
+    properties:
+      lastUpdated:
+        type: string
+        example: '2021-10-11T15:01:30+00:00'
+        format: date-time
+      profile:
+        type: array
+        items:
+          type: string
+          format: url
+          example: https://fhir.hl7.org.uk/StructureDefinition/UKCore-RelatedPerson
+  active:
+    type: boolean
+    example: true
+  patient:
+    type: object
+    properties:
+      reference:
+        type: string
+        example: urn:uuid:788660eb-d2c9-4773-abd4-318484673fb2
+    required:
+      - reference
+  relationship:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      properties:
+        coding:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              system:
+                type: string
+                format: url
+                example: http://terminology.hl7.org/CodeSystem/v3-RoleCode
+              code:
+                type: string
+                example: NOK
+              display:
+                type: string
+                example: next of kin
+            required:
+              - system
+              - code
+      required:
+        - coding
+  name:
+    type: object
+    properties:
+      text:
+        type: string
+        example: Mr Jack Grayson
+      family:
+        type: string
+        example: Grayson
+      given:
+        type: array
+        items:
+          type: string
+          example: Jack
+      prefix:
+        type: array
+        items:
+          type: string
+          example: Mr
+  communication:
+    type: array
+    items:
+      type: object
+      properties:
+        language:
+          type: object
+          properties:
+            coding:
+              type: array
+              items:
+                type: object
+                properties:
+                  system:
+                    type: string
+                    format: url
+                    example: https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage
+                  code:
+                    type: string
+                    example: en
+                  display:
+                    type: string
+                    example: English
+        preferred:
+          type: boolean
+          example: true
+  address:
+    type: array
+    items:
+      type: object
+      properties:
+        use:
+          type: string
+          example: home
+        text:
+          type: string
+          example: 22 Brightside Crescent, Overtown, West Yorkshire, LS10 4YU
+        line:
+          type: array
+          items:
+            type: string
+            example: 22 Brightside Crescent
+        city:
+          type: string
+          example: Overtown
+        district:
+          type: string
+          example: West Yorkshire
+        postalCode:
+          type: string
+          example: LS10 4YU
+  birthDate:
+    type: string
+    format: date
+    example: '1986-04-03'
+  period:
+    type: object
+    properties:
+      start:
+        type: string
+        format: date-time
+        example: '2021-10-11T12:15:10+00:00'
+      end:
+        type: string
+        format: date-time
+        example: '2021-10-11T15:01:30+00:00'
+  telecom:
+    type: array
+    items:
+      type: object
+      properties:
+        system:
+          type: string
+          example: phone
+        value:
+          type: string
+          example: '0789 1234567'
+        rank:
+          type: integer
+          example: 1
+  gender:
+    type: string
+    example: male
+required:
+  - resourceType
+  - patient
+  - relationship

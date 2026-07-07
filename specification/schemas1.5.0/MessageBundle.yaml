@@ -240,13 +240,74 @@ properties:
                 - type: array
                 - type: string
                   example: Patient's Surgery
+                - type: object
+                  properties:
+                    text:
+                      type: string
+                    family:
+                      type: string
+                    given:
+                      type: array
+                      items:
+                        type: string
+                    prefix:
+                      type: array
+                      items:
+                        type: string
             gender:
               type: string
               example: male
+            active:
+              type: boolean
+            patient:
+              type: object
+              properties:
+                reference:
+                  type: string
+              additionalProperties: false
+            relationship:
+              type: array
+              items:
+                type: object
+                properties:
+                  coding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        system:
+                          type: string
+                          format: url
+                        code:
+                          type: string
+                        display:
+                          type: string
+            telecom:
+              type: array
+              items:
+                type: object
+                properties:
+                  system:
+                    type: string
+                  value:
+                    type: string
+                  use:
+                    type: string
+                  rank:
+                    type: integer
             birthDate:
               type: string
               format: date
               example: '1974-12-25'
+            period:
+              type: object
+              properties:
+                start:
+                  type: string
+                  format: date-time
+                end:
+                  type: string
+                  format: date-time
             address:
               type: array
               items:
@@ -261,6 +322,8 @@ properties:
                     items:
                       type: string
                   city:
+                    type: string
+                  district:
                     type: string
                   postalCode:
                     type: string
@@ -307,6 +370,17 @@ properties:
                           type: string
                         rank:
                           type: integer
+                  name:
+                    type: object
+                    properties:
+                      family:
+                        type: string
+                      given:
+                        type: array
+                        items:
+                          type: string
+                  gender:
+                    type: string
             communication:
               type: array
               items:
