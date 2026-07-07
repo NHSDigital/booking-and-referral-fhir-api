@@ -279,6 +279,14 @@ properties:
                           format: url
                         valuePositiveInt:
                           type: integer
+                  name:
+                    anyOf:
+                      - type: array
+                      - type: string
+                        example: Patient's Surgery
+                  gender:
+                    type: string
+                    example: male
                   relationship:
                     type: array
                     items:
@@ -307,6 +315,55 @@ properties:
                           type: string
                         rank:
                           type: integer
+            relatedPerson:
+              type: object
+              properties:
+                extension:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        format: url
+                      valuePositiveInt:
+                        type: integer
+                name:
+                  anyOf:
+                    - type: array
+                    - type: string
+                      example: Patient's Surgery
+                gender:
+                  type: string
+                  example: male
+                relationship:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      coding:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            system:
+                              type: string
+                              format: url
+                            code:
+                              type: string
+                telecom:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      system:
+                        type: string
+                      value:
+                        type: string
+                      use:
+                        type: string
+                      rank:
+                        type: integer
             communication:
               type: array
               items:
