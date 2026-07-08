@@ -3,6 +3,9 @@ SHELL=/bin/bash -euo pipefail
 install-python:
 	poetry install --no-root
 
+install-python-e2e:
+	poetry install --no-root --with e2e
+
 install-node:
 	npm install --legacy-peer-deps
 	cd sandbox && npm install --legacy-peer-deps
