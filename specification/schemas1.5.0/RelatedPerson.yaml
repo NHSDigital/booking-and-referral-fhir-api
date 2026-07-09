@@ -46,13 +46,13 @@ properties:
               system:
                 type: string
                 format: url
-                example: http://terminology.hl7.org/CodeSystem/v3-RoleCode
+                example: http://terminology.hl7.org/CodeSystem/v2-0131
               code:
                 type: string
-                example: NOK
+                example: N
               display:
                 type: string
-                example: next of kin
+                example: Next of kin
             required:
               - system
               - code
