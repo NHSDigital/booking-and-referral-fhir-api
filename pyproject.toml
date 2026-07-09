@@ -40,6 +40,6 @@ pytest-asyncio = "^0.14.0"
 optional = true
 
 [tool.poetry.group.e2e.dependencies]
-api-test-utils = {url = "https://github.com/NHSDigital/apim-test-utils/releases/download/v1.1.12-alpha/api_test_utils-1.1.12a0-py3-none-any.whl"}
+pytest-nhsd-apim = "3.0.1"
 
 [tool.poetry.scripts]
