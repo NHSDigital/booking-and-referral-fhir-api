@@ -30,6 +30,44 @@ def pytest_configure(config):
         config.option.API_NAME = os.environ.get("API_NAME") or API_NAME
 
 
+# Fixtures that mint an application-restricted (client-credentials) access token for
+# the BaRS product. Tests requesting one of these need the pytest-nhsd-apim
+# authorization marker (see pytest_collection_modifyitems below).
+_APP_RESTRICTED_TOKEN_FIXTURES = frozenset(
+    {
+        "get_token_client_credentials",
+        "get_token_client_credentials_document_reference",
+    }
+)
+
+
+def pytest_collection_modifyitems(config, items):
+    """Attach the application-restricted authorization marker to every test that
+    requests a client-credentials token.
+
+    pytest-nhsd-apim derives the OAuth product scope from a
+    ``@pytest.mark.nhsd_apim_authorization`` marker. Without it the ``_scope``
+    fixture is ``None``, the plugin falls back to the *first* product referencing
+    the proxy under test, and the mock identity service rejects the signed JWT with
+    ``401 Invalid 'iss'/'sub' claims in client_assertion JWT``. Selecting
+    ``access=application, level=level3`` yields the
+    ``urn:nhsd:apim:app:level3:booking-and-referral`` scope, matching the product
+    (carrying the identity-service proxy) that grants the client-credentials flow.
+
+    Applying it here keeps the token wiring in one place rather than repeating the
+    marker across every test module. Tests that already declare the marker (e.g. a
+    deliberately wrong-app case) are left untouched.
+    """
+    app_auth = pytest.mark.nhsd_apim_authorization(
+        access="application", level="level3", api_name=API_NAME
+    )
+    for item in items:
+        fixtures = getattr(item, "fixturenames", ())
+        if _APP_RESTRICTED_TOKEN_FIXTURES.intersection(fixtures):
+            if item.get_closest_marker("nhsd_apim_authorization") is None:
+                item.add_marker(app_auth)
+
+
 @pytest.fixture()
 def get_token_client_credentials(request):
     """Application-restricted access token (signed-JWT client-credentials flow).
