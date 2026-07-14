@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "99003a5d-3ce4-474d-acbc-8682a5abca2a",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "invalid",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_BAD_REQUEST"
+					}
+				]
+			},
+			"diagnostics": "the context parameter value was invalid (format)"
+		}
+	]
+}

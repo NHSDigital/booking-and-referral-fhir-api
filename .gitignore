@@ -29,3 +29,4 @@ __pycache__/
 smoketest-report.xml
 final_validation.txt
 validation_output.txt
+/.vscode

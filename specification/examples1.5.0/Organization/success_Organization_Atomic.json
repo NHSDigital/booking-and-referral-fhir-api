@@ -1,0 +1,17 @@
+{
+  "resourceType": "Organization",
+  "id": "3e96763f-7969-404f-afac-c415f47dff42",
+  "meta": {
+    "lastUpdated": "2021-10-11T15:23:30+00:00",
+    "profile":  [
+        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Organization"
+    ]
+  },
+  "identifier":  [
+    {
+        "system": "https://fhir.nhs.uk/id/ods-organization-code",
+        "value": "G82080"
+    }
+  ],
+  "name": "Patient's Surgery"
+}

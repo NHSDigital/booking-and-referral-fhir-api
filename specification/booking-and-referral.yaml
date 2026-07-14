@@ -13,7 +13,7 @@ info:
       </div>
       <div class="nhsd-m-emphasis-box__content-box">
         <div data-uipath="website.contentblock.emphasis.content" class="nhsd-t-word-break">
-        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home/About-BaRS/About-BaRS?version=1.6.0">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the <a href="https://simplifier.net/guide/nhsbookingandreferralstandard" class="nhsd-a-link">BaRS implementation guide</a> for your use case.</p>
+        <p class="nhsd-t-body">This API forms part of the &nbsp;<a href="https://simplifier.net/guide/nhsbookingandreferralstandard/Home">Booking and Referral Standard (BaRS)</a>.<br>This API specification should be used in conjunction with the <a href="https://simplifier.net/guide/nhsbookingandreferralstandard" class="nhsd-a-link">BaRS implementation guide</a> for your use case.</p>
         </div>
       </div>
       </div>
@@ -40,7 +40,7 @@ info:
     2. This API redirects the request to the service associated with the service identifier header.
     3. The target backend handles the request and sends a response back to this API.
     4. This API returns the response to your sender application.
-    5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-applications) the target may send a follow up request to indicate the outcome of a request.
+    5. In some [Applications](https://simplifier.net/guide/nhsbookingandreferralstandard/home/applications/bars-applications) the target may send a follow up request to indicate the outcome of a request.
 
     <section class="nhsd-m-emphasis-box nhsd-m-emphasis-box--important nhsd-!t-margin-bottom-6" aria-label="Important Information">
     <div class="nhsd-a-box nhsd-a-box--border-yellow">
@@ -102,7 +102,7 @@ info:
     To use this access mode, use the following security pattern:
     * [application-restricted RESTful API - signed JWT authentication](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication)
 
-    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#Security-and-authorisation).
+    For more details, see [BaRS Core - Security and authorisation](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-0-7/Security-and-Authorisation).
     
     ## Errors
     We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
@@ -111,7 +111,7 @@ info:
     * 400 to 499 if it failed because of a client error by your application
     * 500 to 599 if it failed because of an error on our server
     
-    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/home/design/bars-core#core-ErrorHandling) for further information on error handling within the BaRS Standard.
+    Example errors specific to each API are shown in the endpoints section, under Response. See the BaRS Core [Error Handling section](https://simplifier.net/guide/nhsbookingandreferralstandard/Home/Core/1-0-7/Error-Handling) for further information on error handling within the BaRS Standard.
     
 
     ## Environments and testing

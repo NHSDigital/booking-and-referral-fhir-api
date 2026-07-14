@@ -1,0 +1,20 @@
+type: object
+properties:
+  connectionType:
+    type: array
+    items:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            type: object
+            properties:
+              system:
+                type: string
+                format: url
+              code:
+                type: string
+              display:
+                type: string
+      additionalProperties: false

@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "937d4974-e111-42db-b7aa-f12e7b94ef6e",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "multiple-matches",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "NOT_FOUND"
+					}
+				]
+			},
+			"diagnostics": "The Target Identifier found two endpoints, this would be an issue with the management of the Endpoint catalogue."
+		}
+	]
+}
