@@ -1,6 +1,6 @@
 var b64 = JSON.parse(context.getVariable("b64decoded"));
 var identifier = encodeURIComponent(b64.system + "|" + b64.value);
-context.setVariable("epc.path", "/booking-and-referral/FHIR/R4/Endpoint?HealthcareService.identifier=" + identifier);
+context.setVariable("epc.path", "/booking-and-referral/FHIR/R4/Endpoint?HealthcareService.Identifier=" + identifier);
 
 // SC.CallEpc hardcodes the https:// scheme so Apigee can validate the bundle at
 // import time (a fully-variable URL fails with ProtocolMissingInURL). Strip any
