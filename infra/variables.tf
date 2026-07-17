@@ -71,7 +71,7 @@ variable "registries" {
 }
 
 variable "vpc_id" {
-    default = "vpc-0d79f2b39f53e14f0"
+    default = "vpc-043f1f70c29baa7cd"
 }
 
 variable "nlb_ports" {
