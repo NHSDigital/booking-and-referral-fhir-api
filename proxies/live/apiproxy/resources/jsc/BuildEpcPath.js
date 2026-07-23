@@ -5,10 +5,6 @@ context.setVariable("epc.path", "/booking-and-referral/FHIR/R4/Endpoint?Healthca
 // SC.CallEpc hardcodes the https:// scheme so Apigee can validate the bundle at
 // import time (a fully-variable URL fails with ProtocolMissingInURL). Strip any
 // scheme the KVM value may carry so we never end up with https://https://...
-// TEMP (RAA-7897): fallback to internal-dev EPC until booking-and-referral-epc-config KVM is provisioned
-var epcBaseUrl = context.getVariable("private.epcBaseUrl") || "2y2lu2de0m.execute-api.eu-west-2.amazonaws.com";
-context.setVariable("private.epcHost", epcBaseUrl.replace(/^https?:\/\//, ""));
-
-if (!context.getVariable("private.epcOrganisation")) {
-    context.setVariable("private.epcOrganisation", "eyJyZXNvdXJjZVR5cGUiOiJPcmdhbml6YXRpb24iLCJpZGVudGlmaWVyIjpbeyJ2YWx1ZSI6IlJSODEiLCJzeXN0ZW0iOiJodHRwczovL2ZoaXIubmhzLnVrL0lkL29kcy1vcmdhbml6YXRpb24tY29kZSJ9XSwibmFtZSI6Ik15IHNlcnZpY2UgcHJvdmlkZXIgbmFtZSJ9");
-}
+// TEMP (RAA-7897): hardcode internal-dev EPC while booking-and-referral-epc-config KVM is being provisioned
+context.setVariable("private.epcHost", "2y2lu2de0m.execute-api.eu-west-2.amazonaws.com");
+context.setVariable("private.epcOrganisation", "eyJyZXNvdXJjZVR5cGUiOiJPcmdhbml6YXRpb24iLCJpZGVudGlmaWVyIjpbeyJ2YWx1ZSI6IlJSODEiLCJzeXN0ZW0iOiJodHRwczovL2ZoaXIubmhzLnVrL0lkL29kcy1vcmdhbml6YXRpb24tY29kZSJ9XSwibmFtZSI6Ik15IHNlcnZpY2UgcHJvdmlkZXIgbmFtZSJ9");
