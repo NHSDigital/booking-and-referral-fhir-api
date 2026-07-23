@@ -5,6 +5,9 @@
     <Set>
         <Verb>GET</Verb>
         <Path>{epc.path}</Path>
+        <QueryParams>
+            <QueryParam name="HealthcareService.Identifier">{epc.identifier}</QueryParam>
+        </QueryParams>
         <Headers>
             <Header name="Accept">application/fhir+json</Header>
             <Header name="x-request-id">{request.header.x-request-id}</Header>

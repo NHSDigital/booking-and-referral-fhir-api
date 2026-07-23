@@ -1,6 +1,7 @@
 var b64 = JSON.parse(context.getVariable("b64decoded"));
-var identifier = encodeURIComponent(b64.system + "|" + b64.value);
-context.setVariable("epc.path", "/booking-and-referral/FHIR/R4/Endpoint?HealthcareService.Identifier=" + identifier);
+context.setVariable("epc.path", "/booking-and-referral/FHIR/R4/Endpoint");
+// Raw (unencoded) value — AM.PrepareEpcRequest passes it via <QueryParams> so Apigee handles encoding
+context.setVariable("epc.identifier", b64.system + "|" + b64.value);
 
 // SC.CallEpc hardcodes the https:// scheme so Apigee can validate the bundle at
 // import time (a fully-variable URL fails with ProtocolMissingInURL). Strip any
