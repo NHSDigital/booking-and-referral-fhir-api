@@ -6,13 +6,15 @@
         <Verb>GET</Verb>
         <Path>{epc.path}</Path>
         <QueryParams>
-            <QueryParam name="HealthcareService.Identifier">{epc.identifier}</QueryParam>
+            <QueryParam name="_has:HealthcareService:endpoint:identifier">{epc.identifier}</QueryParam>
+            <QueryParam name="payloadType">http://terminology.hl7.org/CodeSystem/endpoint-payload-type-epc|bars</QueryParam>
+            <QueryParam name="connectionType">http://terminology.hl7.org/CodeSystem/endpoint-connection-type|hl7-fhir-rest</QueryParam>
         </QueryParams>
         <Headers>
             <Header name="Accept">application/fhir+json</Header>
             <Header name="x-request-id">{request.header.x-request-id}</Header>
             <Header name="x-correlation-id">{request.header.x-correlation-id}</Header>
-            <Header name="NHSD-End-User-Organisation">{private.epcOrganisation}</Header>
+            <Header name="NHSD-End-User-Organisation-Ods">{private.epcOrganisation}</Header>
         </Headers>
     </Set>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
