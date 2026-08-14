@@ -17,7 +17,7 @@ steps:
     parameters:
         role: "auto-ops"
         profile: "apim-dev"
-        aws_account: "dev"
+        aws_account: "ptl"
 
   - bash: |
         echo "We run terraform when it's not any sandbox environment"
