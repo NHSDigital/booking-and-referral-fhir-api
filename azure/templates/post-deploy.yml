@@ -15,7 +15,7 @@ steps:
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
-        role: "arn:aws:iam::958002497996:role/auto-ops"
+        role: "arn:aws:iam::790083933819:role/auto-ops"
         profile: "apim-dev"
         aws_account: "dev"
 
