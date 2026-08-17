@@ -15,9 +15,9 @@ steps:
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
-        role: "auto-ops"
+        role: "arn:aws:iam::958002497996:role/auto-ops"
         profile: "apim-dev"
-        aws_account: "ptl"
+        aws_account: "dev"
 
   - bash: |
         echo "We run terraform when it's not any sandbox environment"
