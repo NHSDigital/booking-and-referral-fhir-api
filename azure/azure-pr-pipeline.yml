@@ -35,10 +35,10 @@ extends:
     enable_status_monitoring: false
     apigee_deployments:
       - environment: internal-dev
-        post_deploy:
-          - template: ./templates/post-deploy.yml
+        # post_deploy:
+        #   - template: ./templates/post-deploy.yml
       - environment: internal-dev-sandbox
         proxy_path: sandbox
-        post_deploy:
-          - template: ./templates/post-deploy.yml
+        # post_deploy:
+        #   - template: ./templates/post-deploy.yml
 
