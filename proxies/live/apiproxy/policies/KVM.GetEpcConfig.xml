@@ -6,9 +6,4 @@
             <Parameter>epc_base_url</Parameter>
         </Key>
     </Get>
-    <Get assignTo="private.epcOrganisation">
-        <Key>
-            <Parameter>epc_organisation</Parameter>
-        </Key>
-    </Get>
 </KeyValueMapOperations>

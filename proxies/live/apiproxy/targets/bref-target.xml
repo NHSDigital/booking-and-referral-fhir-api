@@ -16,6 +16,9 @@
           <Name>KVM.GetEpcConfig</Name>
         </Step>
         <Step>
+          <Name>Python.DecodeEndUserOrg</Name>
+        </Step>
+        <Step>
           <Name>Javascript.BuildEpcPath</Name>
         </Step>
         <Step>
