@@ -13,9 +13,9 @@ jobs:
           fetch-depth: 0  # This causes all history to be fetched, which is required for calculate-version to function
 
       - name: Install Python 3.10
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.10.20
+          python-version: "3.10"
 
       - name: Update apt repositories
         run: sudo apt update
