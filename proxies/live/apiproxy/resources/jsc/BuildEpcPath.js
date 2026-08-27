@@ -3,13 +3,12 @@ context.setVariable("epc.path", "/endpoint-catalogue/FHIR/R4/Endpoint");
 // Raw (unencoded) value — AM.PrepareEpcRequest passes it via <QueryParams> so Apigee handles encoding
 context.setVariable("epc.identifier", b64.system + "|" + b64.value);
 
-// EPC host: prefer the booking-and-referral-epc-config KVM value (epc_base_url, read by
-// KVM.GetEpcConfig into private.epcBaseUrl). SC.CallEpc hardcodes the https:// scheme so
-// Apigee can validate the bundle at import time (a fully-variable URL fails with
-// ProtocolMissingInURL), so strip any scheme the KVM value may carry to avoid https://https://...
-// TEMP (RAA-7897): fall back to the internal-dev EPC host until the KVM is provisioned.
-var epcBaseUrl = context.getVariable("private.epcBaseUrl") || "2y2lu2de0m.execute-api.eu-west-2.amazonaws.com";
-context.setVariable("private.epcHost", epcBaseUrl.replace(/^https?:\/\//, ""));
+// EPC host: read from the booking-and-referral-epc-config KVM (key: epc_base_url, loaded by
+// KVM.GetEpcConfig into private.epcBaseUrl). SC.CallEpc prepends https:// at the policy level
+// (a fully-variable URL fails Apigee import with ProtocolMissingInURL), so strip any scheme the
+// KVM value may carry to avoid https://https://...
+var epcBaseUrl = context.getVariable("private.epcBaseUrl");
+context.setVariable("private.epcHost", epcBaseUrl ? epcBaseUrl.replace(/^https?:\/\//, "") : "");
 
 // EPC organisation ODS is the *requesting* organisation's own ODS, taken per-request from the
 // caller's NHSD-End-User-Organisation header (base64 FHIR Organization, decoded into
