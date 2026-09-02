@@ -1,0 +1,259 @@
+type: object
+properties:
+  resourceType:
+    type: string
+    example: DocumentReference
+  identifier:
+    type: array
+    minItems: 3  # Ensure at least three items DosId, ProductId and BaRS Identifier
+    items:
+      type: object
+      properties:
+        system:
+          type: string
+          format: url
+          example: https://fhir.nhs.uk/Id/BaRS-Identifier
+        value:
+          type: string
+          example: GL0-DZOqD39
+      additionalProperties: false
+      required:
+        - system
+        - value
+  status:
+    type: string
+    example: current
+  type:
+    type: object
+    properties:
+      coding:
+        type: array
+        items:
+          type: object
+          properties:
+            system:
+              type: string
+              format: url
+              example: http://snomed.info/sct
+            code:
+              type: string
+              example: '749001000000101'
+            display:
+              type: string
+              example: Appointment (record artifact)
+          additionalProperties: false
+          required:
+            - system
+            - code
+    additionalProperties: false
+    required:
+      - coding
+  category:
+    type: array
+    minItems: 1 
+    items:
+      type: object
+      properties:
+        coding:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              system:
+                type: string
+                format: url
+                example: http://snomed.info/sct
+              code:
+                type: string
+                example: '419891008'
+              display:
+                type: string
+                example: Clinical notes
+            additionalProperties: false
+            required:
+              - system
+              - code
+      additionalProperties: false
+      required:
+        - coding
+  subject:
+    type: object
+    properties:
+      identifier:
+        type: object
+        properties:
+          system:
+            type: string
+            example: https://fhir.nhs.uk/Id/nhs-number
+            format: url
+            pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/nhs-number$
+          value:
+            type: string
+            example: '3495456481'
+            pattern: ^\d{10}$  # NHS number must be 10 digits
+        additionalProperties: false
+        required:
+          - system
+          - value
+    required:
+      - identifier
+  date:
+    type: string
+    example: '2025-02-05T08:25:13.136693+00:00'
+    format: date-time
+  author:
+    type: array
+    items:
+      type: object
+      properties:
+        identifier:
+          type: object
+          properties:
+            system:
+              type: string
+              format: url
+              example: https://fhir.nhs.uk/Id/ods-organization-code
+            value:
+              type: string
+              example: RGT
+          additionalProperties: false
+          required:
+            - system
+            - value
+      additionalProperties: false
+  custodian:
+    type: object
+    properties:
+      identifier:
+        type: object
+        properties:
+          system:
+            type: string
+            example: https://fhir.nhs.uk/Id/ods-organization-code
+            format: url
+            pattern: ^https:\/\/fhir\.nhs\.uk\/Id\/ods-organization-code$
+          value:
+            type: string
+            example: RGT
+        additionalProperties: false
+        required:
+          - system
+          - value
+    required: 
+      - identifier
+  content:
+    type: array
+    minItems: 1  # Ensure at least one entry
+    items:
+      type: object
+      properties:
+        extension:
+          type: array
+          items:
+            type: object
+            properties:
+              valueCodeableConcept:
+                type: object
+                properties:
+                  coding:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        system:
+                          type: string
+                        code:
+                          type: string
+                        display:
+                          type: string
+                      required:
+                        - system
+                        - code
+              url:
+                type: string
+        attachment:
+          type: object
+          properties:
+            contentType:
+              type: string
+              example: application/fhir+json
+            url:
+              type: string
+              format: url
+              example: https://server.fire.ly/r4/Appointment/GL0-DZOqD39
+          required:
+            - url
+        format:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              coding:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    system:
+                      type: string
+                      format: url
+                      example: 'https://fhir.nhs.uk/CodeSystem/message-events-bars'
+                    code:
+                      type: string
+                      example: 'referral'
+                    display:
+                      type: string
+                  required:
+                    - system
+                    - code
+      required:
+        - attachment
+        - format
+  context:
+    type: object
+    properties:
+      period:
+        type: object
+        properties:
+          start:
+            type: string
+            example: '2025-02-01T06:45:00+00:00'
+            format: date-time
+          end:
+            type: string
+            example: '2025-02-01T07:00:00+00:00'
+            format: date-time
+        required:
+          - start
+          - end
+        additionalProperties: false
+      practiceSetting:
+        type: object
+        properties:
+          coding:
+            type: array
+            items:
+              type: object
+              properties:
+                system:
+                  type: string
+                  format: url
+                  example: http://snomed.info/sct
+                code:
+                  type: string
+                  example: '394802001'
+                display:
+                  type: string
+                  example: General medicine (qualifier value)
+              additionalProperties: false
+        additionalProperties: false
+    additionalProperties: false
+required:
+  - subject
+  - type
+  - custodian
+  - content
+  - identifier
+  - category
+

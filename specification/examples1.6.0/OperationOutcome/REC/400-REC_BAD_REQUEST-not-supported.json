@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "589e558b-937d-4497-9e11-12dbd7aaf12e",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "not-supported",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_BAD_REQUEST"
+					}
+				]
+			},
+			"diagnostics": "in FOT for when a function or feature in the standard is not yet supported."
+		}
+	]
+}

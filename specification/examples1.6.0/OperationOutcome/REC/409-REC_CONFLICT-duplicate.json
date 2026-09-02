@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "d2f54b29-769e-43a6-a1e8-828ac936667e",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "duplicate",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_CONFLICT"
+					}
+				]
+			},
+			"diagnostics": "the message has been identified as having already been processed."
+		}
+	]
+}

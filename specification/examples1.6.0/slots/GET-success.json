@@ -1,0 +1,318 @@
+{
+    "resourceType": "Bundle",
+    "id": "777a156c-af3c-4748-a8a3-7e95e4b0df9a",
+    "meta": {
+        "versionId": "1.0.0-alpha",
+        "lastUpdated": "2021-10-11T15:01:30+00:00",
+        "profile":  [
+            "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Bundle"
+        ]
+    },
+    "type": "searchset",
+    "timestamp": "2021-10-11T12:15:10+00:00",
+    "total": 8,
+    "link":  [
+        {
+            "relation": "self",
+            "url": "https://simplifier.net/nhsbookingandreferrals/777a156c-af3c-4748-a8a3-7e95e4b0df9a-duplicate-2"
+        }
+    ],
+    "entry":  [
+        {
+            "fullUrl": "urn:uuid:73706f31-2578-4377-88c7-c8b8a5891c4a",
+            "resource": {
+                "resourceType": "Slot",
+                "id": "slot001",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Slot",
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
+                    ]
+                },
+                "extension":  [
+                    {
+                        "url": "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-DeliveryChannel",
+                        "valueCode": "Telephone"
+                    }
+                ],
+                "serviceCategory":  [
+                    {
+                        "coding":  [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/service-category",
+                                "code": "14",
+                                "display": "Emergency Department"
+                            }
+                        ]
+                    }
+                ],
+                "appointmentType": {
+                    "coding":  [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/v2-0276",
+                            "code": "EMERGENCY",
+                            "display": "Emergency appointment"
+                        }
+                    ]
+                },
+                "schedule": {
+                    "reference": "urn:uuid:a5fab26c-0dfd-424f-be1d-afc877c1afb0"
+                },
+                "status": "free",
+                "start": "2021-10-06T09:00:00.000+00:00",
+                "end": "2021-10-06T10:00:00.000+00:00"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:9f41ba91-d69a-4269-a558-54a20b79c4f2",
+            "resource": {
+                "resourceType": "Slot",
+                "id": "slot002",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Slot",
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
+                    ]
+                },
+                "extension":  [
+                    {
+                        "url": "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-DeliveryChannel",
+                        "valueCode": "Telephone"
+                    }
+                ],
+                "serviceCategory":  [
+                    {
+                        "coding":  [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/service-category",
+                                "code": "14",
+                                "display": "Emergency Department"
+                            }
+                        ]
+                    }
+                ],
+                "appointmentType": {
+                    "coding":  [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/v2-0276",
+                            "code": "EMERGENCY",
+                            "display": "Emergency appointment"
+                        }
+                    ]
+                },
+                "schedule": {
+                    "reference": "urn:uuid:a5fab26c-0dfd-424f-be1d-afc877c1afb0"
+                },
+                "status": "free",
+                "start": "2021-10-06T10:00:00.000+00:00",
+                "end": "2021-10-06T10:30:00.000+00:00"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:deb4c4b3-870b-4599-84df-5e54cef7afda",
+            "resource": {
+                "resourceType": "Slot",
+                "id": "deb4c4b3-870b-4599-84df-5e54cef7afda",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Slot",
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Slot"
+                    ]
+                },
+                "extension":  [
+                    {
+                        "url": "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-DeliveryChannel",
+                        "valueCode": "Telephone"
+                    }
+                ],
+                "serviceCategory":  [
+                    {
+                        "coding":  [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/service-category",
+                                "code": "14",
+                                "display": "Emergency Department"
+                            }
+                        ]
+                    }
+                ],
+                "appointmentType": {
+                    "coding":  [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/v2-0276",
+                            "code": "EMERGENCY",
+                            "display": "Emergency appointment"
+                        }
+                    ]
+                },
+                "schedule": {
+                    "reference": "urn:uuid:a5fab26c-0dfd-424f-be1d-afc877c1afb0"
+                },
+                "status": "free",
+                "start": "2021-10-06T11:00:00.000+00:00",
+                "end": "2021-10-06T11:30:00.000+00:00"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:a5fab26c-0dfd-424f-be1d-afc877c1afb0",
+            "resource": {
+                "resourceType": "Schedule",
+                "id": "sched1111",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/Schedule",
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Schedule"
+                    ]
+                },
+                "identifier":  [
+                    {
+                        "system": "https://system.supplier.co.uk/Diary/id",
+                        "value": "8622dfdb-dc6a-47b6-b3a7-2eb2829db287"
+                    }
+                ],
+                "serviceCategory":  [
+                    {
+                        "coding":  [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/service-category",
+                                "code": "14",
+                                "display": "Emergency Department"
+                            }
+                        ]
+                    }
+                ],
+                "serviceType":  [
+                    {
+                        "coding":  [
+                            {
+                                "system": "http://hl7.org/fhir/ValueSet/service-type",
+                                "code": "117",
+                                "display": "Emergency Medical"
+                            }
+                        ]
+                    }
+                ],
+                "actor":  [
+                    {
+                        "reference": "urn:uuid:7dfe2de5-abbe-4a3c-911f-1482e6fb34c3"
+                    },
+                    {
+                        "reference": "urn:uuid:9e895580-e649-4194-96f8-4a8a8d305fef"
+                    },
+                    {
+                        "reference": "urn:uuid:782bef0c-c90b-41bc-87c1-80f03c0046a5"
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:7dfe2de5-abbe-4a3c-911f-1482e6fb34c3",
+            "resource": {
+                "id": "2000099999",
+                "resourceType": "HealthcareService",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "http://hl7.org/fhir/StructureDefinition/HealthcareService",
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-HealthcareService"
+                    ]
+                },
+                "identifier":  [
+                    {
+                        "system": "https://system.supplier.co.uk/My/Healthcare/Services",
+                        "value": "100"
+                    }
+                ],
+                "location":  [
+                    {
+                        "reference": "urn:uuid:b3a27952-657e-49ab-9650-fc99094bfb1a"
+                    }
+                ],
+                "name": "Healthcare Service Name"
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:782bef0c-c90b-41bc-87c1-80f03c0046a5",
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "ABCD123456",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Practitioner"
+                    ]
+                },
+                "identifier":  [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "ABCD123456"
+                    },
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
+                        "value": "R0260"
+                    }
+                ],
+                "name":  [
+                    {
+                        "family": "Bloggs",
+                        "given":  [
+                            "Joe"
+                        ],
+                        "prefix":  [
+                            "Dr"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:9e895580-e649-4194-96f8-4a8a8d305fef",
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "R0260",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-PractitionerRole"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "urn:uuid:782bef0c-c90b-41bc-87c1-80f03c0046a5"
+                },
+                "code":  [
+                    {
+                        "coding":  [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/practitioner-role",
+                                "code": "doctor",
+                                "display": "Doctor"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "fullUrl": "urn:uuid:b3a27952-657e-49ab-9650-fc99094bfb1a",
+            "resource": {
+                "resourceType": "Location",
+                "id": "loc1111",
+                "meta": {
+                    "lastUpdated": "2021-10-11T15:01:30+00:00",
+                    "profile":  [
+                        "https://fhir.hl7.org.uk/StructureDefinition/UKCore-Location"
+                    ]
+                },
+                "name": "Healthcare Service Location",
+                "position": {
+                    "longitude": 143.20196,
+                    "latitude": -37.22866
+                }
+            }
+        }
+    ]
+}

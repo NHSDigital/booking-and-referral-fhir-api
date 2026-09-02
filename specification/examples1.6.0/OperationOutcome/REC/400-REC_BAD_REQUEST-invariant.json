@@ -1,0 +1,24 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "4eda1dae-2cc9-45d4-ac6b-791dca0f6c46",
+	"meta": {
+		"profile": [
+			"https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome"
+		]
+	},
+	"issue": [
+		{
+			"severity": "error",
+			"code": "invariant",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/Codesystem/http-error-codes",
+						"code": "REC_BAD_REQUEST"
+					}
+				]
+			},
+			"diagnostics": "A combination of workflow variables has lead to a non-standard or unknown workflow."
+		}
+	]
+}
