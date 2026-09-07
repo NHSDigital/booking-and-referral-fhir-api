@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- LEGACY: Unpack S3 routing table variables. TO BE REMOVED with the LegacyS3Routing flow. -->
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="Javascript.UnpackVars">
+    <DisplayName>Javascript.UnpackVars</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://UnpackVars.js</ResourceURL>
+    <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
+</Javascript>

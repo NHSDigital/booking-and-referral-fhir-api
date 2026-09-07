@@ -6,4 +6,11 @@
             <Parameter>epc_base_url</Parameter>
         </Key>
     </Get>
+    <!-- Feature flag: set epc_routing_enabled = "true" in KVM to activate EPC routing.
+         Default (key absent or any other value) keeps the legacy S3 routing active. -->
+    <Get assignTo="private.epcRoutingEnabled">
+        <Key>
+            <Parameter>epc_routing_enabled</Parameter>
+        </Key>
+    </Get>
 </KeyValueMapOperations>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- LEGACY: Resolve target URL from S3 routing table. TO BE REMOVED with the LegacyS3Routing flow. -->
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="Javascript.SetTargetUrl">
+    <DisplayName>Javascript.SetTargetUrl</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://SetTargetUrl.js</ResourceURL>
+    <IncludeURL>jsc://BarsLibrary.js</IncludeURL>
+</Javascript>

@@ -1,6 +1,18 @@
 <TargetEndpoint name="booking-and-referral-target">
+  <PreFlow name="PreFlow">
+    <Request>
+      <!-- Always read EPC config and feature flag before any flow executes.
+           Set epc_routing_enabled = "true" in KVM booking-and-referral-epc-config to activate EPC routing. -->
+      <Step>
+        <Name>KVM.GetEpcConfig</Name>
+      </Step>
+    </Request>
+    <Response/>
+  </PreFlow>
   <Flows>
-    <Flow name="Main">
+    <!-- EPC API Gateway routing — active when epc_routing_enabled = "true" in KVM -->
+    <Flow name="EpcRouting">
+      <Condition>private.epcRoutingEnabled = "true"</Condition>
       <Request>
         <Step>
           <Name>Python.DecodeBase64</Name>
@@ -11,9 +23,6 @@
         <Step>
           <Name>RaiseFault.400MalformedTargetIdentifier</Name>
           <Condition>idMalformed = true</Condition>
-        </Step>
-        <Step>
-          <Name>KVM.GetEpcConfig</Name>
         </Step>
         <Step>
           <Name>Python.DecodeEndUserOrg</Name>
@@ -41,6 +50,57 @@
         <Step>
           <Name>RaiseFault.500EpcInvalidResponse</Name>
           <Condition>epcInvalidResponse = true</Condition>
+        </Step>
+      </Request>
+      <Response/>
+    </Flow>
+    <!-- LEGACY: S3-based routing — default when epc_routing_enabled is absent or not "true".
+         TO BE REMOVED once EPC routing is confirmed stable in all environments.
+         Files to delete at that point:
+           policies/KVM.GetS3Credentials.xml, AM-S3Request.xml, JC-AWSSignV4.xml,
+           SC-CallS3.xml, AssignMessage.Targets.xml, Javascript.UnpackVars.xml,
+           Javascript.SetTargetUrl.xml
+           resources/jsc/BarsLibrary.js, SetTargetUrl.js, UnpackVars.js -->
+    <Flow name="LegacyS3Routing">
+      <Request>
+        <!-- LEGACY: fetch AWS credentials and retrieve routing table from S3 - TO BE REMOVED -->
+        <Step>
+          <Name>KVM.GetS3Credentials</Name>
+        </Step>
+        <Step>
+          <Name>AM-S3Request</Name>
+        </Step>
+        <Step>
+          <Name>JC-AWSSignV4</Name>
+        </Step>
+        <Step>
+          <Name>SC-CallS3</Name>
+        </Step>
+        <Step>
+          <Name>AssignMessage.Targets</Name>
+          <Condition>targets = null</Condition>
+        </Step>
+        <!-- LEGACY: unpack S3 routing table into context variables - TO BE REMOVED -->
+        <Step>
+          <Name>Javascript.UnpackVars</Name>
+        </Step>
+        <Step>
+          <Name>Python.DecodeBase64</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.CheckTarget</Name>
+        </Step>
+        <!-- LEGACY: resolve target URL from S3 routing table - TO BE REMOVED -->
+        <Step>
+          <Name>Javascript.SetTargetUrl</Name>
+        </Step>
+        <Step>
+          <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+          <Condition>idMalformed = true</Condition>
+        </Step>
+        <Step>
+          <Name>RaiseFault.404ProxyNotFound</Name>
+          <Condition>isError = true</Condition>
         </Step>
       </Request>
       <Response/>
