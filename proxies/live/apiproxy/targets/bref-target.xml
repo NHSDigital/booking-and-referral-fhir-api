@@ -11,8 +11,12 @@
   </PreFlow>
   <Flows>
     <!-- EPC API Gateway routing — active when epc_routing_enabled = "true" in KVM -->
+    <!-- TEMP (RAA-7897): epc_routing_enabled KVM key not yet provisioned by APIM.
+         Condition commented out so EPC routing is always active for end-to-end testing.
+         RESTORE the <Condition> below once APIM provisions epc_routing_enabled, so the
+         feature flag (and LegacyS3Routing fallback) works as designed. -->
     <Flow name="EpcRouting">
-      <Condition>private.epcRoutingEnabled = "true"</Condition>
+      <!-- <Condition>private.epcRoutingEnabled = "true"</Condition> -->
       <Request>
         <Step>
           <Name>Python.DecodeBase64</Name>
