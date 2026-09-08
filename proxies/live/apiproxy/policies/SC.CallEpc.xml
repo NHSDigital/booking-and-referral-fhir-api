@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="true" enabled="true" name="SC.CallEpc">
+    <DisplayName>SC.CallEpc</DisplayName>
+    <Properties/>
+    <Request clearPayload="false" variable="epcCallout">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>epcCalloutResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://{private.epcHost}</URL>
+        <SSLInfo>
+            <Enabled>true</Enabled>
+            <ClientAuthEnabled>true</ClientAuthEnabled>
+            <KeyStore>ref://bars-client</KeyStore>
+            <KeyAlias>cert</KeyAlias>
+        </SSLInfo>
+    </HTTPTargetConnection>
+</ServiceCallout>

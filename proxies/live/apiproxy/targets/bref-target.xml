@@ -1,7 +1,73 @@
 <TargetEndpoint name="booking-and-referral-target">
+  <PreFlow name="PreFlow">
+    <Request>
+      <!-- Always read EPC config and feature flag before any flow executes.
+           Set epc_routing_enabled = "true" in KVM booking-and-referral-epc-config to activate EPC routing. -->
+      <Step>
+        <Name>KVM.GetEpcConfig</Name>
+      </Step>
+    </Request>
+    <Response/>
+  </PreFlow>
   <Flows>
-    <Flow name="Main">
+    <!-- EPC API Gateway routing — active when epc_routing_enabled = "true" in KVM -->
+    <!-- TEMP (RAA-7897): epc_routing_enabled KVM key not yet provisioned by APIM.
+         Condition commented out so EPC routing is always active for end-to-end testing.
+         RESTORE the <Condition> below once APIM provisions epc_routing_enabled, so the
+         feature flag (and LegacyS3Routing fallback) works as designed. -->
+    <Flow name="EpcRouting">
+      <!-- <Condition>private.epcRoutingEnabled = "true"</Condition> -->
       <Request>
+        <Step>
+          <Name>Python.DecodeBase64</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.CheckTarget</Name>
+        </Step>
+        <Step>
+          <Name>RaiseFault.400MalformedTargetIdentifier</Name>
+          <Condition>idMalformed = true</Condition>
+        </Step>
+        <Step>
+          <Name>Python.DecodeEndUserOrg</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.BuildEpcPath</Name>
+        </Step>
+        <Step>
+          <Name>AM.PrepareEpcRequest</Name>
+        </Step>
+        <Step>
+          <Name>SC.CallEpc</Name>
+        </Step>
+        <Step>
+          <Name>Javascript.ParseEpcResponse</Name>
+        </Step>
+        <Step>
+          <Name>RaiseFault.404ProxyNotFound</Name>
+          <Condition>isError = true</Condition>
+        </Step>
+        <Step>
+          <Name>RaiseFault.503EpcUnavailable</Name>
+          <Condition>epcUnavailable = true</Condition>
+        </Step>
+        <Step>
+          <Name>RaiseFault.500EpcInvalidResponse</Name>
+          <Condition>epcInvalidResponse = true</Condition>
+        </Step>
+      </Request>
+      <Response/>
+    </Flow>
+    <!-- LEGACY: S3-based routing — default when epc_routing_enabled is absent or not "true".
+         TO BE REMOVED once EPC routing is confirmed stable in all environments.
+         Files to delete at that point:
+           policies/KVM.GetS3Credentials.xml, AM-S3Request.xml, JC-AWSSignV4.xml,
+           SC-CallS3.xml, AssignMessage.Targets.xml, Javascript.UnpackVars.xml,
+           Javascript.SetTargetUrl.xml
+           resources/jsc/BarsLibrary.js, SetTargetUrl.js, UnpackVars.js -->
+    <Flow name="LegacyS3Routing">
+      <Request>
+        <!-- LEGACY: fetch AWS credentials and retrieve routing table from S3 - TO BE REMOVED -->
         <Step>
           <Name>KVM.GetS3Credentials</Name>
         </Step>
@@ -18,6 +84,7 @@
           <Name>AssignMessage.Targets</Name>
           <Condition>targets = null</Condition>
         </Step>
+        <!-- LEGACY: unpack S3 routing table into context variables - TO BE REMOVED -->
         <Step>
           <Name>Javascript.UnpackVars</Name>
         </Step>
@@ -27,6 +94,7 @@
         <Step>
           <Name>Javascript.CheckTarget</Name>
         </Step>
+        <!-- LEGACY: resolve target URL from S3 routing table - TO BE REMOVED -->
         <Step>
           <Name>Javascript.SetTargetUrl</Name>
         </Step>
@@ -39,7 +107,7 @@
           <Condition>isError = true</Condition>
         </Step>
       </Request>
-      <Response/>      
+      <Response/>
     </Flow>
   </Flows>
   <DefaultFaultRule>

@@ -54,6 +54,14 @@ function handleError(context) {
         return makeResponse(errorRepository["408TimeoutError"], 408)
     }
 
+    // EPC API error handling
+    if (context.getVariable("epcUnavailable")) {
+        return makeResponse(errorRepository["503EpcUnavailable"], 503)
+    }
+    if (context.getVariable("epcInvalidResponse")) {
+        return makeResponse(errorRepository["500EpcInvalidResponse"], 500)
+    }
+
     if (context.getVariable("isError")) {
         return makeResponse(errorRepository["404ProxyNotFound"], 404)
     }

@@ -3,14 +3,19 @@ parameters:
     default: aws --profile=apim-dev
 
 steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.10"
+    displayName: Use Python 3.10
+
   - bash: |
-      make install-python
+      make install-python-e2e
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Setup pytests
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
-        role: "auto-ops"
+        role: "arn:aws:iam::790083933819:role/auto-ops"
         profile: "apim-dev"
         aws_account: "dev"
 

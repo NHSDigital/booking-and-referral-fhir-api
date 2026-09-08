@@ -1,7 +1,10 @@
 SHELL=/bin/bash -euo pipefail
 
 install-python:
-	poetry install
+	poetry install --no-root
+
+install-python-e2e:
+	poetry install --no-root --with e2e
 
 install-node:
 	npm install --legacy-peer-deps
@@ -14,7 +17,7 @@ install: install-node install-python pre-commit-hook
 
 lint:
 	npm run lint
-	find . -name '*.py' -not -path '**/.venv/*' -not -path './proxies/sandbox/apiproxy/resources/py/*' | xargs poetry run flake8
+	find . -name '*.py' -not -path '**/.venv/*' -not -path './proxies/sandbox/apiproxy/resources/py/*' -not -path './proxies/live/apiproxy/resources/py/*' | xargs poetry run flake8
 
 clean:
 	rm -rf build
@@ -47,7 +50,7 @@ build-proxy:
 copy-examples:
 	cp -r  specification/examples sandbox/src/routes/examples
 
-_dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml Makefile build/. tests specification terraform infra"
+_dist_include="pytest.ini poetry.lock poetry.toml sandbox pyproject.toml README.md Makefile build/. tests specification terraform infra"
 
 release: clean copy-examples publish build-proxy
 	mkdir -p dist

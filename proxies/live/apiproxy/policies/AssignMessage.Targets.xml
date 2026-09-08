@@ -1,3 +1,4 @@
+<!-- LEGACY: Assign S3 response content to targets variable. TO BE REMOVED with the LegacyS3Routing flow. -->
 <AssignMessage name='AssignMessage.Targets'>
   <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   <AssignVariable>

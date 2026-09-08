@@ -171,5 +171,23 @@ const errorRepository = {
     systemCode = "SERVER_ERROR",
     diagnostics = "A sub-service encountered an unhandled exception."
   ),
+  "503EpcUnavailable": makeError(
+    id = "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+    severity = "error",
+    code = "transient",
+    system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+    systemCode = "SEND_SERVICE_UNAVAILABLE",
+    diagnostics = "The EPC API Gateway is currently unavailable."
+  ),
+  "500EpcInvalidResponse": makeError(
+    id = "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    profile = "https://simplifier.net/guide/UKCoreDevelopment2/ProfileUKCore-OperationOutcome",
+    severity = "error",
+    code = "processing",
+    system = "https://fhir.nhs.uk/Codesystem/http-error-codes",
+    systemCode = "SERVER_ERROR",
+    diagnostics = "Invalid or malformed response received from EPC API Gateway."
+  ),
 }
 

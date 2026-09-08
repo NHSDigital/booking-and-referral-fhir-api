@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="Javascript.ParseEpcResponse">
+    <DisplayName>Javascript.ParseEpcResponse</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://ParseEpcResponse.js</ResourceURL>
+</Javascript>

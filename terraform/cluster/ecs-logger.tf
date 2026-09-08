@@ -47,7 +47,7 @@ resource "aws_lambda_function" "ecs_event_stream" {
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   handler          = "${local.lambda_file_name}.handler"
-  runtime          = "nodejs14.x"
+  runtime          = "nodejs16.x"
 }
 
 resource "aws_lambda_alias" "ecs_event_stream" {

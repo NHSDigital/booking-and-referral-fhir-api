@@ -1,3 +1,4 @@
+<!-- LEGACY: AWS SigV4 signing for S3 callout. TO BE REMOVED with the LegacyS3Routing flow. -->
 <JavaCallout async="false" continueOnError="false" enabled="true" name="JC-AWSSignV4">
     <DisplayName>JC-AWSSignV4</DisplayName>
     <Properties>

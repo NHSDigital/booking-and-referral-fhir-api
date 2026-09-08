@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="Javascript.BuildEpcPath">
+    <DisplayName>Javascript.BuildEpcPath</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://BuildEpcPath.js</ResourceURL>
+</Javascript>

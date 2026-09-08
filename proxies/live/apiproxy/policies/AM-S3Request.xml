@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- LEGACY: Build S3 request to fetch routing table. TO BE REMOVED with the LegacyS3Routing flow. -->
 <AssignMessage async="false" continueOnError="false" enabled="true" name="AM-S3Request">
     <DisplayName>AM-S3Req</DisplayName>
     <Properties/>
@@ -15,7 +16,7 @@
         <Path>{private.endpoint}</Path>
         <Headers>
             <Header name="content-type">application/octet-stream</Header>
-        </Headers>        
+        </Headers>
     </Set>
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
     <AssignTo createNew="new" transport="http" type="request">s3Callout</AssignTo>
